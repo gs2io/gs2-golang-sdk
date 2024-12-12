@@ -24,8 +24,6 @@ import (
 )
 
 type LoginRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffset      *int32  `json:"timeOffset"`
@@ -156,13 +154,11 @@ func (p LoginRequest) Pointer() *LoginRequest {
 }
 
 type LoginBySignatureRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	KeyId           *string `json:"keyId"`
-	Body            *string `json:"body"`
-	Signature       *string `json:"signature"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	KeyId        *string `json:"keyId"`
+	Body         *string `json:"body"`
+	Signature    *string `json:"signature"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *LoginBySignatureRequest) UnmarshalJSON(data []byte) error {
@@ -308,8 +304,6 @@ func (p LoginBySignatureRequest) Pointer() *LoginBySignatureRequest {
 }
 
 type FederationRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	OriginalUserId  *string `json:"originalUserId"`
 	UserId          *string `json:"userId"`
@@ -504,8 +498,6 @@ func (p FederationRequest) Pointer() *FederationRequest {
 }
 
 type IssueTimeOffsetTokenByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffset      *int32  `json:"timeOffset"`

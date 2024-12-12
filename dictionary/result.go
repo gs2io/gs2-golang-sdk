@@ -1909,6 +1909,532 @@ func (p VerifyEntryByStampTaskResult) Pointer() *VerifyEntryByStampTaskResult {
 	return &p
 }
 
+type DescribeLikesResult struct {
+	Items         []Like               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeLikesAsyncResult struct {
+	result *DescribeLikesResult
+	err    error
+}
+
+func NewDescribeLikesResultFromJson(data string) DescribeLikesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLikesResultFromDict(dict)
+}
+
+func NewDescribeLikesResultFromDict(data map[string]interface{}) DescribeLikesResult {
+	return DescribeLikesResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeLikesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeLikesResult) Pointer() *DescribeLikesResult {
+	return &p
+}
+
+type DescribeLikesByUserIdResult struct {
+	Items         []Like               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeLikesByUserIdAsyncResult struct {
+	result *DescribeLikesByUserIdResult
+	err    error
+}
+
+func NewDescribeLikesByUserIdResultFromJson(data string) DescribeLikesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLikesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeLikesByUserIdResultFromDict(data map[string]interface{}) DescribeLikesByUserIdResult {
+	return DescribeLikesByUserIdResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeLikesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeLikesByUserIdResult) Pointer() *DescribeLikesByUserIdResult {
+	return &p
+}
+
+type AddLikesResult struct {
+	Items    []Like               `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AddLikesAsyncResult struct {
+	result *AddLikesResult
+	err    error
+}
+
+func NewAddLikesResultFromJson(data string) AddLikesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddLikesResultFromDict(dict)
+}
+
+func NewAddLikesResultFromDict(data map[string]interface{}) AddLikesResult {
+	return AddLikesResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AddLikesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AddLikesResult) Pointer() *AddLikesResult {
+	return &p
+}
+
+type AddLikesByUserIdResult struct {
+	Items    []Like               `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AddLikesByUserIdAsyncResult struct {
+	result *AddLikesByUserIdResult
+	err    error
+}
+
+func NewAddLikesByUserIdResultFromJson(data string) AddLikesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddLikesByUserIdResultFromDict(dict)
+}
+
+func NewAddLikesByUserIdResultFromDict(data map[string]interface{}) AddLikesByUserIdResult {
+	return AddLikesByUserIdResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AddLikesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AddLikesByUserIdResult) Pointer() *AddLikesByUserIdResult {
+	return &p
+}
+
+type GetLikeResult struct {
+	Item     *Like                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetLikeAsyncResult struct {
+	result *GetLikeResult
+	err    error
+}
+
+func NewGetLikeResultFromJson(data string) GetLikeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLikeResultFromDict(dict)
+}
+
+func NewGetLikeResultFromDict(data map[string]interface{}) GetLikeResult {
+	return GetLikeResult{
+		Item: func() *Like {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLikeFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetLikeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetLikeResult) Pointer() *GetLikeResult {
+	return &p
+}
+
+type GetLikeByUserIdResult struct {
+	Item     *Like                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetLikeByUserIdAsyncResult struct {
+	result *GetLikeByUserIdResult
+	err    error
+}
+
+func NewGetLikeByUserIdResultFromJson(data string) GetLikeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLikeByUserIdResultFromDict(dict)
+}
+
+func NewGetLikeByUserIdResultFromDict(data map[string]interface{}) GetLikeByUserIdResult {
+	return GetLikeByUserIdResult{
+		Item: func() *Like {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLikeFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetLikeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetLikeByUserIdResult) Pointer() *GetLikeByUserIdResult {
+	return &p
+}
+
+type ResetLikesResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ResetLikesAsyncResult struct {
+	result *ResetLikesResult
+	err    error
+}
+
+func NewResetLikesResultFromJson(data string) ResetLikesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetLikesResultFromDict(dict)
+}
+
+func NewResetLikesResultFromDict(data map[string]interface{}) ResetLikesResult {
+	return ResetLikesResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ResetLikesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ResetLikesResult) Pointer() *ResetLikesResult {
+	return &p
+}
+
+type ResetLikesByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ResetLikesByUserIdAsyncResult struct {
+	result *ResetLikesByUserIdResult
+	err    error
+}
+
+func NewResetLikesByUserIdResultFromJson(data string) ResetLikesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetLikesByUserIdResultFromDict(dict)
+}
+
+func NewResetLikesByUserIdResultFromDict(data map[string]interface{}) ResetLikesByUserIdResult {
+	return ResetLikesByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ResetLikesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ResetLikesByUserIdResult) Pointer() *ResetLikesByUserIdResult {
+	return &p
+}
+
+type DeleteLikesResult struct {
+	Items    []Like               `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteLikesAsyncResult struct {
+	result *DeleteLikesResult
+	err    error
+}
+
+func NewDeleteLikesResultFromJson(data string) DeleteLikesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteLikesResultFromDict(dict)
+}
+
+func NewDeleteLikesResultFromDict(data map[string]interface{}) DeleteLikesResult {
+	return DeleteLikesResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteLikesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteLikesResult) Pointer() *DeleteLikesResult {
+	return &p
+}
+
+type DeleteLikesByUserIdResult struct {
+	Items    []Like               `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteLikesByUserIdAsyncResult struct {
+	result *DeleteLikesByUserIdResult
+	err    error
+}
+
+func NewDeleteLikesByUserIdResultFromJson(data string) DeleteLikesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteLikesByUserIdResultFromDict(dict)
+}
+
+func NewDeleteLikesByUserIdResultFromDict(data map[string]interface{}) DeleteLikesByUserIdResult {
+	return DeleteLikesByUserIdResult{
+		Items: func() []Like {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLikes(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteLikesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLikesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteLikesByUserIdResult) Pointer() *DeleteLikesByUserIdResult {
+	return &p
+}
+
 type ExportMasterResult struct {
 	Item     *CurrentEntryMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

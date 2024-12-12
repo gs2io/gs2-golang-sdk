@@ -24,19 +24,18 @@ import (
 )
 
 type GetChartRequest struct {
-	SourceRequestId *string   `json:"sourceRequestId"`
-	RequestId       *string   `json:"requestId"`
-	ContextStack    *string   `json:"contextStack"`
-	Measure         *string   `json:"measure"`
-	Grn             *string   `json:"grn"`
-	Round           *string   `json:"round"`
-	Filters         []Filter  `json:"filters"`
-	GroupBys        []*string `json:"groupBys"`
-	CountBy         *string   `json:"countBy"`
-	Begin           *int64    `json:"begin"`
-	End             *int64    `json:"end"`
-	PageToken       *string   `json:"pageToken"`
-	Limit           *int32    `json:"limit"`
+	ContextStack *string   `json:"contextStack"`
+	Measure      *string   `json:"measure"`
+	Grn          *string   `json:"grn"`
+	Round        *string   `json:"round"`
+	Filters      []Filter  `json:"filters"`
+	GroupBys     []*string `json:"groupBys"`
+	CountBy      *string   `json:"countBy"`
+	Begin        *int64    `json:"begin"`
+	End          *int64    `json:"end"`
+	PageToken    *string   `json:"pageToken"`
+	Limit        *int32    `json:"limit"`
+	DryRun       *bool     `json:"dryRun"`
 }
 
 func (p *GetChartRequest) UnmarshalJSON(data []byte) error {
@@ -229,16 +228,75 @@ func NewGetChartRequestFromJson(data string) (GetChartRequest, error) {
 
 func NewGetChartRequestFromDict(data map[string]interface{}) GetChartRequest {
 	return GetChartRequest{
-		Measure:   core.CastString(data["measure"]),
-		Grn:       core.CastString(data["grn"]),
-		Round:     core.CastString(data["round"]),
-		Filters:   CastFilters(core.CastArray(data["filters"])),
-		GroupBys:  core.CastStrings(core.CastArray(data["groupBys"])),
-		CountBy:   core.CastString(data["countBy"]),
-		Begin:     core.CastInt64(data["begin"]),
-		End:       core.CastInt64(data["end"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		Measure: func() *string {
+			v, ok := data["measure"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["measure"])
+		}(),
+		Grn: func() *string {
+			v, ok := data["grn"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["grn"])
+		}(),
+		Round: func() *string {
+			v, ok := data["round"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["round"])
+		}(),
+		Filters: func() []Filter {
+			if data["filters"] == nil {
+				return nil
+			}
+			return CastFilters(core.CastArray(data["filters"]))
+		}(),
+		GroupBys: func() []*string {
+			v, ok := data["groupBys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CountBy: func() *string {
+			v, ok := data["countBy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["countBy"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -266,17 +324,16 @@ func (p GetChartRequest) Pointer() *GetChartRequest {
 }
 
 type GetDistributionRequest struct {
-	SourceRequestId *string   `json:"sourceRequestId"`
-	RequestId       *string   `json:"requestId"`
-	ContextStack    *string   `json:"contextStack"`
-	Measure         *string   `json:"measure"`
-	Grn             *string   `json:"grn"`
-	Filters         []Filter  `json:"filters"`
-	GroupBys        []*string `json:"groupBys"`
-	Begin           *int64    `json:"begin"`
-	End             *int64    `json:"end"`
-	PageToken       *string   `json:"pageToken"`
-	Limit           *int32    `json:"limit"`
+	ContextStack *string   `json:"contextStack"`
+	Measure      *string   `json:"measure"`
+	Grn          *string   `json:"grn"`
+	Filters      []Filter  `json:"filters"`
+	GroupBys     []*string `json:"groupBys"`
+	Begin        *int64    `json:"begin"`
+	End          *int64    `json:"end"`
+	PageToken    *string   `json:"pageToken"`
+	Limit        *int32    `json:"limit"`
+	DryRun       *bool     `json:"dryRun"`
 }
 
 func (p *GetDistributionRequest) UnmarshalJSON(data []byte) error {
@@ -423,14 +480,61 @@ func NewGetDistributionRequestFromJson(data string) (GetDistributionRequest, err
 
 func NewGetDistributionRequestFromDict(data map[string]interface{}) GetDistributionRequest {
 	return GetDistributionRequest{
-		Measure:   core.CastString(data["measure"]),
-		Grn:       core.CastString(data["grn"]),
-		Filters:   CastFilters(core.CastArray(data["filters"])),
-		GroupBys:  core.CastStrings(core.CastArray(data["groupBys"])),
-		Begin:     core.CastInt64(data["begin"]),
-		End:       core.CastInt64(data["end"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		Measure: func() *string {
+			v, ok := data["measure"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["measure"])
+		}(),
+		Grn: func() *string {
+			v, ok := data["grn"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["grn"])
+		}(),
+		Filters: func() []Filter {
+			if data["filters"] == nil {
+				return nil
+			}
+			return CastFilters(core.CastArray(data["filters"]))
+		}(),
+		GroupBys: func() []*string {
+			v, ok := data["groupBys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -456,11 +560,10 @@ func (p GetDistributionRequest) Pointer() *GetDistributionRequest {
 }
 
 type GetCumulativeRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Name            *string `json:"name"`
-	ResourceGrn     *string `json:"resourceGrn"`
+	ContextStack *string `json:"contextStack"`
+	Name         *string `json:"name"`
+	ResourceGrn  *string `json:"resourceGrn"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetCumulativeRequest) UnmarshalJSON(data []byte) error {
@@ -546,8 +649,20 @@ func NewGetCumulativeRequestFromJson(data string) (GetCumulativeRequest, error) 
 
 func NewGetCumulativeRequestFromDict(data map[string]interface{}) GetCumulativeRequest {
 	return GetCumulativeRequest{
-		Name:        core.CastString(data["name"]),
-		ResourceGrn: core.CastString(data["resourceGrn"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		ResourceGrn: func() *string {
+			v, ok := data["resourceGrn"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceGrn"])
+		}(),
 	}
 }
 
@@ -563,14 +678,13 @@ func (p GetCumulativeRequest) Pointer() *GetCumulativeRequest {
 }
 
 type DescribeBillingActivitiesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Year            *int32  `json:"year"`
-	Month           *int32  `json:"month"`
-	Service         *string `json:"service"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
+	ContextStack *string `json:"contextStack"`
+	Year         *int32  `json:"year"`
+	Month        *int32  `json:"month"`
+	Service      *string `json:"service"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBillingActivitiesRequest) UnmarshalJSON(data []byte) error {
@@ -665,11 +779,41 @@ func NewDescribeBillingActivitiesRequestFromJson(data string) (DescribeBillingAc
 
 func NewDescribeBillingActivitiesRequestFromDict(data map[string]interface{}) DescribeBillingActivitiesRequest {
 	return DescribeBillingActivitiesRequest{
-		Year:      core.CastInt32(data["year"]),
-		Month:     core.CastInt32(data["month"]),
-		Service:   core.CastString(data["service"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -688,13 +832,12 @@ func (p DescribeBillingActivitiesRequest) Pointer() *DescribeBillingActivitiesRe
 }
 
 type GetBillingActivityRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Year            *int32  `json:"year"`
-	Month           *int32  `json:"month"`
-	Service         *string `json:"service"`
-	ActivityType    *string `json:"activityType"`
+	ContextStack *string `json:"contextStack"`
+	Year         *int32  `json:"year"`
+	Month        *int32  `json:"month"`
+	Service      *string `json:"service"`
+	ActivityType *string `json:"activityType"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetBillingActivityRequest) UnmarshalJSON(data []byte) error {
@@ -786,10 +929,34 @@ func NewGetBillingActivityRequestFromJson(data string) (GetBillingActivityReques
 
 func NewGetBillingActivityRequestFromDict(data map[string]interface{}) GetBillingActivityRequest {
 	return GetBillingActivityRequest{
-		Year:         core.CastInt32(data["year"]),
-		Month:        core.CastInt32(data["month"]),
-		Service:      core.CastString(data["service"]),
-		ActivityType: core.CastString(data["activityType"]),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		ActivityType: func() *string {
+			v, ok := data["activityType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["activityType"])
+		}(),
 	}
 }
 
@@ -807,9 +974,8 @@ func (p GetBillingActivityRequest) Pointer() *GetBillingActivityRequest {
 }
 
 type GetGeneralMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetGeneralMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -860,9 +1026,8 @@ func (p GetGeneralMetricsRequest) Pointer() *GetGeneralMetricsRequest {
 }
 
 type DescribeAccountNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAccountNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -913,10 +1078,9 @@ func (p DescribeAccountNamespaceMetricsRequest) Pointer() *DescribeAccountNamesp
 }
 
 type GetAccountNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetAccountNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -979,7 +1143,13 @@ func NewGetAccountNamespaceMetricsRequestFromJson(data string) (GetAccountNamesp
 
 func NewGetAccountNamespaceMetricsRequestFromDict(data map[string]interface{}) GetAccountNamespaceMetricsRequest {
 	return GetAccountNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -994,9 +1164,8 @@ func (p GetAccountNamespaceMetricsRequest) Pointer() *GetAccountNamespaceMetrics
 }
 
 type DescribeChatNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeChatNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1047,10 +1216,9 @@ func (p DescribeChatNamespaceMetricsRequest) Pointer() *DescribeChatNamespaceMet
 }
 
 type GetChatNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetChatNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1113,7 +1281,13 @@ func NewGetChatNamespaceMetricsRequestFromJson(data string) (GetChatNamespaceMet
 
 func NewGetChatNamespaceMetricsRequestFromDict(data map[string]interface{}) GetChatNamespaceMetricsRequest {
 	return GetChatNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1128,9 +1302,8 @@ func (p GetChatNamespaceMetricsRequest) Pointer() *GetChatNamespaceMetricsReques
 }
 
 type DescribeDatastoreNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeDatastoreNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1181,10 +1354,9 @@ func (p DescribeDatastoreNamespaceMetricsRequest) Pointer() *DescribeDatastoreNa
 }
 
 type GetDatastoreNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetDatastoreNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1247,7 +1419,13 @@ func NewGetDatastoreNamespaceMetricsRequestFromJson(data string) (GetDatastoreNa
 
 func NewGetDatastoreNamespaceMetricsRequestFromDict(data map[string]interface{}) GetDatastoreNamespaceMetricsRequest {
 	return GetDatastoreNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1262,9 +1440,8 @@ func (p GetDatastoreNamespaceMetricsRequest) Pointer() *GetDatastoreNamespaceMet
 }
 
 type DescribeDictionaryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeDictionaryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1315,10 +1492,9 @@ func (p DescribeDictionaryNamespaceMetricsRequest) Pointer() *DescribeDictionary
 }
 
 type GetDictionaryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetDictionaryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1381,7 +1557,13 @@ func NewGetDictionaryNamespaceMetricsRequestFromJson(data string) (GetDictionary
 
 func NewGetDictionaryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetDictionaryNamespaceMetricsRequest {
 	return GetDictionaryNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1396,10 +1578,9 @@ func (p GetDictionaryNamespaceMetricsRequest) Pointer() *GetDictionaryNamespaceM
 }
 
 type DescribeExchangeRateModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeExchangeRateModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1462,7 +1643,13 @@ func NewDescribeExchangeRateModelMetricsRequestFromJson(data string) (DescribeEx
 
 func NewDescribeExchangeRateModelMetricsRequestFromDict(data map[string]interface{}) DescribeExchangeRateModelMetricsRequest {
 	return DescribeExchangeRateModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1477,11 +1664,10 @@ func (p DescribeExchangeRateModelMetricsRequest) Pointer() *DescribeExchangeRate
 }
 
 type GetExchangeRateModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RateName        *string `json:"rateName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RateName      *string `json:"rateName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetExchangeRateModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1567,8 +1753,20 @@ func NewGetExchangeRateModelMetricsRequestFromJson(data string) (GetExchangeRate
 
 func NewGetExchangeRateModelMetricsRequestFromDict(data map[string]interface{}) GetExchangeRateModelMetricsRequest {
 	return GetExchangeRateModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RateName:      core.CastString(data["rateName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RateName: func() *string {
+			v, ok := data["rateName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rateName"])
+		}(),
 	}
 }
 
@@ -1584,9 +1782,8 @@ func (p GetExchangeRateModelMetricsRequest) Pointer() *GetExchangeRateModelMetri
 }
 
 type DescribeExchangeNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeExchangeNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1637,10 +1834,9 @@ func (p DescribeExchangeNamespaceMetricsRequest) Pointer() *DescribeExchangeName
 }
 
 type GetExchangeNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetExchangeNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1703,7 +1899,13 @@ func NewGetExchangeNamespaceMetricsRequestFromJson(data string) (GetExchangeName
 
 func NewGetExchangeNamespaceMetricsRequestFromDict(data map[string]interface{}) GetExchangeNamespaceMetricsRequest {
 	return GetExchangeNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1718,11 +1920,10 @@ func (p GetExchangeNamespaceMetricsRequest) Pointer() *GetExchangeNamespaceMetri
 }
 
 type DescribeExperienceStatusMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ExperienceName  *string `json:"experienceName"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	ExperienceName *string `json:"experienceName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeExperienceStatusMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1808,8 +2009,20 @@ func NewDescribeExperienceStatusMetricsRequestFromJson(data string) (DescribeExp
 
 func NewDescribeExperienceStatusMetricsRequestFromDict(data map[string]interface{}) DescribeExperienceStatusMetricsRequest {
 	return DescribeExperienceStatusMetricsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		ExperienceName: core.CastString(data["experienceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
 	}
 }
 
@@ -1825,10 +2038,9 @@ func (p DescribeExperienceStatusMetricsRequest) Pointer() *DescribeExperienceSta
 }
 
 type DescribeExperienceExperienceModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeExperienceExperienceModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1891,7 +2103,13 @@ func NewDescribeExperienceExperienceModelMetricsRequestFromJson(data string) (De
 
 func NewDescribeExperienceExperienceModelMetricsRequestFromDict(data map[string]interface{}) DescribeExperienceExperienceModelMetricsRequest {
 	return DescribeExperienceExperienceModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1906,11 +2124,10 @@ func (p DescribeExperienceExperienceModelMetricsRequest) Pointer() *DescribeExpe
 }
 
 type GetExperienceExperienceModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ExperienceName  *string `json:"experienceName"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	ExperienceName *string `json:"experienceName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetExperienceExperienceModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -1996,8 +2213,20 @@ func NewGetExperienceExperienceModelMetricsRequestFromJson(data string) (GetExpe
 
 func NewGetExperienceExperienceModelMetricsRequestFromDict(data map[string]interface{}) GetExperienceExperienceModelMetricsRequest {
 	return GetExperienceExperienceModelMetricsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		ExperienceName: core.CastString(data["experienceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
 	}
 }
 
@@ -2013,9 +2242,8 @@ func (p GetExperienceExperienceModelMetricsRequest) Pointer() *GetExperienceExpe
 }
 
 type DescribeExperienceNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeExperienceNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2066,10 +2294,9 @@ func (p DescribeExperienceNamespaceMetricsRequest) Pointer() *DescribeExperience
 }
 
 type GetExperienceNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetExperienceNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2132,7 +2359,13 @@ func NewGetExperienceNamespaceMetricsRequestFromJson(data string) (GetExperience
 
 func NewGetExperienceNamespaceMetricsRequestFromDict(data map[string]interface{}) GetExperienceNamespaceMetricsRequest {
 	return GetExperienceNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2147,11 +2380,10 @@ func (p GetExperienceNamespaceMetricsRequest) Pointer() *GetExperienceNamespaceM
 }
 
 type DescribeFormationFormMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormationFormMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2237,8 +2469,20 @@ func NewDescribeFormationFormMetricsRequestFromJson(data string) (DescribeFormat
 
 func NewDescribeFormationFormMetricsRequestFromDict(data map[string]interface{}) DescribeFormationFormMetricsRequest {
 	return DescribeFormationFormMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -2254,10 +2498,9 @@ func (p DescribeFormationFormMetricsRequest) Pointer() *DescribeFormationFormMet
 }
 
 type DescribeFormationMoldMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormationMoldMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2320,7 +2563,13 @@ func NewDescribeFormationMoldMetricsRequestFromJson(data string) (DescribeFormat
 
 func NewDescribeFormationMoldMetricsRequestFromDict(data map[string]interface{}) DescribeFormationMoldMetricsRequest {
 	return DescribeFormationMoldMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2335,9 +2584,8 @@ func (p DescribeFormationMoldMetricsRequest) Pointer() *DescribeFormationMoldMet
 }
 
 type DescribeFormationNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormationNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2388,10 +2636,9 @@ func (p DescribeFormationNamespaceMetricsRequest) Pointer() *DescribeFormationNa
 }
 
 type GetFormationNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFormationNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2454,7 +2701,13 @@ func NewGetFormationNamespaceMetricsRequestFromJson(data string) (GetFormationNa
 
 func NewGetFormationNamespaceMetricsRequestFromDict(data map[string]interface{}) GetFormationNamespaceMetricsRequest {
 	return GetFormationNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2469,9 +2722,8 @@ func (p GetFormationNamespaceMetricsRequest) Pointer() *GetFormationNamespaceMet
 }
 
 type DescribeFriendNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFriendNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2522,10 +2774,9 @@ func (p DescribeFriendNamespaceMetricsRequest) Pointer() *DescribeFriendNamespac
 }
 
 type GetFriendNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFriendNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2588,7 +2839,13 @@ func NewGetFriendNamespaceMetricsRequestFromJson(data string) (GetFriendNamespac
 
 func NewGetFriendNamespaceMetricsRequestFromDict(data map[string]interface{}) GetFriendNamespaceMetricsRequest {
 	return GetFriendNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2603,9 +2860,8 @@ func (p GetFriendNamespaceMetricsRequest) Pointer() *GetFriendNamespaceMetricsRe
 }
 
 type DescribeInboxNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeInboxNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2656,10 +2912,9 @@ func (p DescribeInboxNamespaceMetricsRequest) Pointer() *DescribeInboxNamespaceM
 }
 
 type GetInboxNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetInboxNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2722,7 +2977,13 @@ func NewGetInboxNamespaceMetricsRequestFromJson(data string) (GetInboxNamespaceM
 
 func NewGetInboxNamespaceMetricsRequestFromDict(data map[string]interface{}) GetInboxNamespaceMetricsRequest {
 	return GetInboxNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2737,11 +2998,10 @@ func (p GetInboxNamespaceMetricsRequest) Pointer() *GetInboxNamespaceMetricsRequ
 }
 
 type DescribeInventoryItemSetMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	InventoryName   *string `json:"inventoryName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	InventoryName *string `json:"inventoryName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeInventoryItemSetMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2827,8 +3087,20 @@ func NewDescribeInventoryItemSetMetricsRequestFromJson(data string) (DescribeInv
 
 func NewDescribeInventoryItemSetMetricsRequestFromDict(data map[string]interface{}) DescribeInventoryItemSetMetricsRequest {
 	return DescribeInventoryItemSetMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -2844,10 +3116,9 @@ func (p DescribeInventoryItemSetMetricsRequest) Pointer() *DescribeInventoryItem
 }
 
 type DescribeInventoryInventoryMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeInventoryInventoryMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2910,7 +3181,13 @@ func NewDescribeInventoryInventoryMetricsRequestFromJson(data string) (DescribeI
 
 func NewDescribeInventoryInventoryMetricsRequestFromDict(data map[string]interface{}) DescribeInventoryInventoryMetricsRequest {
 	return DescribeInventoryInventoryMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2925,9 +3202,8 @@ func (p DescribeInventoryInventoryMetricsRequest) Pointer() *DescribeInventoryIn
 }
 
 type DescribeInventoryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeInventoryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -2978,10 +3254,9 @@ func (p DescribeInventoryNamespaceMetricsRequest) Pointer() *DescribeInventoryNa
 }
 
 type GetInventoryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetInventoryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3044,7 +3319,13 @@ func NewGetInventoryNamespaceMetricsRequestFromJson(data string) (GetInventoryNa
 
 func NewGetInventoryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetInventoryNamespaceMetricsRequest {
 	return GetInventoryNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3059,9 +3340,8 @@ func (p GetInventoryNamespaceMetricsRequest) Pointer() *GetInventoryNamespaceMet
 }
 
 type DescribeKeyNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeKeyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3112,10 +3392,9 @@ func (p DescribeKeyNamespaceMetricsRequest) Pointer() *DescribeKeyNamespaceMetri
 }
 
 type GetKeyNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetKeyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3178,7 +3457,13 @@ func NewGetKeyNamespaceMetricsRequestFromJson(data string) (GetKeyNamespaceMetri
 
 func NewGetKeyNamespaceMetricsRequestFromDict(data map[string]interface{}) GetKeyNamespaceMetricsRequest {
 	return GetKeyNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3193,11 +3478,10 @@ func (p GetKeyNamespaceMetricsRequest) Pointer() *GetKeyNamespaceMetricsRequest 
 }
 
 type DescribeLimitCounterMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	LimitName       *string `json:"limitName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	LimitName     *string `json:"limitName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLimitCounterMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3283,8 +3567,20 @@ func NewDescribeLimitCounterMetricsRequestFromJson(data string) (DescribeLimitCo
 
 func NewDescribeLimitCounterMetricsRequestFromDict(data map[string]interface{}) DescribeLimitCounterMetricsRequest {
 	return DescribeLimitCounterMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		LimitName:     core.CastString(data["limitName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		LimitName: func() *string {
+			v, ok := data["limitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitName"])
+		}(),
 	}
 }
 
@@ -3300,10 +3596,9 @@ func (p DescribeLimitCounterMetricsRequest) Pointer() *DescribeLimitCounterMetri
 }
 
 type DescribeLimitLimitModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLimitLimitModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3366,7 +3661,13 @@ func NewDescribeLimitLimitModelMetricsRequestFromJson(data string) (DescribeLimi
 
 func NewDescribeLimitLimitModelMetricsRequestFromDict(data map[string]interface{}) DescribeLimitLimitModelMetricsRequest {
 	return DescribeLimitLimitModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3381,11 +3682,10 @@ func (p DescribeLimitLimitModelMetricsRequest) Pointer() *DescribeLimitLimitMode
 }
 
 type GetLimitLimitModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	LimitName       *string `json:"limitName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	LimitName     *string `json:"limitName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetLimitLimitModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3471,8 +3771,20 @@ func NewGetLimitLimitModelMetricsRequestFromJson(data string) (GetLimitLimitMode
 
 func NewGetLimitLimitModelMetricsRequestFromDict(data map[string]interface{}) GetLimitLimitModelMetricsRequest {
 	return GetLimitLimitModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		LimitName:     core.CastString(data["limitName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		LimitName: func() *string {
+			v, ok := data["limitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitName"])
+		}(),
 	}
 }
 
@@ -3488,9 +3800,8 @@ func (p GetLimitLimitModelMetricsRequest) Pointer() *GetLimitLimitModelMetricsRe
 }
 
 type DescribeLimitNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLimitNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3541,10 +3852,9 @@ func (p DescribeLimitNamespaceMetricsRequest) Pointer() *DescribeLimitNamespaceM
 }
 
 type GetLimitNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetLimitNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3607,7 +3917,13 @@ func NewGetLimitNamespaceMetricsRequestFromJson(data string) (GetLimitNamespaceM
 
 func NewGetLimitNamespaceMetricsRequestFromDict(data map[string]interface{}) GetLimitNamespaceMetricsRequest {
 	return GetLimitNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3622,10 +3938,9 @@ func (p GetLimitNamespaceMetricsRequest) Pointer() *GetLimitNamespaceMetricsRequ
 }
 
 type DescribeLotteryLotteryMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLotteryLotteryMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3688,7 +4003,13 @@ func NewDescribeLotteryLotteryMetricsRequestFromJson(data string) (DescribeLotte
 
 func NewDescribeLotteryLotteryMetricsRequestFromDict(data map[string]interface{}) DescribeLotteryLotteryMetricsRequest {
 	return DescribeLotteryLotteryMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3703,11 +4024,10 @@ func (p DescribeLotteryLotteryMetricsRequest) Pointer() *DescribeLotteryLotteryM
 }
 
 type GetLotteryLotteryMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	LotteryName     *string `json:"lotteryName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	LotteryName   *string `json:"lotteryName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetLotteryLotteryMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3793,8 +4113,20 @@ func NewGetLotteryLotteryMetricsRequestFromJson(data string) (GetLotteryLotteryM
 
 func NewGetLotteryLotteryMetricsRequestFromDict(data map[string]interface{}) GetLotteryLotteryMetricsRequest {
 	return GetLotteryLotteryMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		LotteryName:   core.CastString(data["lotteryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		LotteryName: func() *string {
+			v, ok := data["lotteryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryName"])
+		}(),
 	}
 }
 
@@ -3810,9 +4142,8 @@ func (p GetLotteryLotteryMetricsRequest) Pointer() *GetLotteryLotteryMetricsRequ
 }
 
 type DescribeLotteryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLotteryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3863,10 +4194,9 @@ func (p DescribeLotteryNamespaceMetricsRequest) Pointer() *DescribeLotteryNamesp
 }
 
 type GetLotteryNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetLotteryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3929,7 +4259,13 @@ func NewGetLotteryNamespaceMetricsRequestFromJson(data string) (GetLotteryNamesp
 
 func NewGetLotteryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetLotteryNamespaceMetricsRequest {
 	return GetLotteryNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3944,9 +4280,8 @@ func (p GetLotteryNamespaceMetricsRequest) Pointer() *GetLotteryNamespaceMetrics
 }
 
 type DescribeMatchmakingNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMatchmakingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -3997,10 +4332,9 @@ func (p DescribeMatchmakingNamespaceMetricsRequest) Pointer() *DescribeMatchmaki
 }
 
 type GetMatchmakingNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMatchmakingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4063,7 +4397,13 @@ func NewGetMatchmakingNamespaceMetricsRequestFromJson(data string) (GetMatchmaki
 
 func NewGetMatchmakingNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMatchmakingNamespaceMetricsRequest {
 	return GetMatchmakingNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4078,10 +4418,9 @@ func (p GetMatchmakingNamespaceMetricsRequest) Pointer() *GetMatchmakingNamespac
 }
 
 type DescribeMissionCounterMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMissionCounterMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4144,7 +4483,13 @@ func NewDescribeMissionCounterMetricsRequestFromJson(data string) (DescribeMissi
 
 func NewDescribeMissionCounterMetricsRequestFromDict(data map[string]interface{}) DescribeMissionCounterMetricsRequest {
 	return DescribeMissionCounterMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4159,10 +4504,9 @@ func (p DescribeMissionCounterMetricsRequest) Pointer() *DescribeMissionCounterM
 }
 
 type DescribeMissionMissionGroupModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMissionMissionGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4225,7 +4569,13 @@ func NewDescribeMissionMissionGroupModelMetricsRequestFromJson(data string) (Des
 
 func NewDescribeMissionMissionGroupModelMetricsRequestFromDict(data map[string]interface{}) DescribeMissionMissionGroupModelMetricsRequest {
 	return DescribeMissionMissionGroupModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4240,11 +4590,10 @@ func (p DescribeMissionMissionGroupModelMetricsRequest) Pointer() *DescribeMissi
 }
 
 type GetMissionMissionGroupModelMetricsRequest struct {
-	SourceRequestId  *string `json:"sourceRequestId"`
-	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	NamespaceName    *string `json:"namespaceName"`
 	MissionGroupName *string `json:"missionGroupName"`
+	DryRun           *bool   `json:"dryRun"`
 }
 
 func (p *GetMissionMissionGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4330,8 +4679,20 @@ func NewGetMissionMissionGroupModelMetricsRequestFromJson(data string) (GetMissi
 
 func NewGetMissionMissionGroupModelMetricsRequestFromDict(data map[string]interface{}) GetMissionMissionGroupModelMetricsRequest {
 	return GetMissionMissionGroupModelMetricsRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		MissionGroupName: core.CastString(data["missionGroupName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MissionGroupName: func() *string {
+			v, ok := data["missionGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupName"])
+		}(),
 	}
 }
 
@@ -4347,9 +4708,8 @@ func (p GetMissionMissionGroupModelMetricsRequest) Pointer() *GetMissionMissionG
 }
 
 type DescribeMissionNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMissionNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4400,10 +4760,9 @@ func (p DescribeMissionNamespaceMetricsRequest) Pointer() *DescribeMissionNamesp
 }
 
 type GetMissionNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMissionNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4466,7 +4825,13 @@ func NewGetMissionNamespaceMetricsRequestFromJson(data string) (GetMissionNamesp
 
 func NewGetMissionNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMissionNamespaceMetricsRequest {
 	return GetMissionNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4481,10 +4846,9 @@ func (p GetMissionNamespaceMetricsRequest) Pointer() *GetMissionNamespaceMetrics
 }
 
 type DescribeMoneyWalletMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoneyWalletMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4547,7 +4911,13 @@ func NewDescribeMoneyWalletMetricsRequestFromJson(data string) (DescribeMoneyWal
 
 func NewDescribeMoneyWalletMetricsRequestFromDict(data map[string]interface{}) DescribeMoneyWalletMetricsRequest {
 	return DescribeMoneyWalletMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4562,10 +4932,9 @@ func (p DescribeMoneyWalletMetricsRequest) Pointer() *DescribeMoneyWalletMetrics
 }
 
 type DescribeMoneyReceiptMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoneyReceiptMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4628,7 +4997,13 @@ func NewDescribeMoneyReceiptMetricsRequestFromJson(data string) (DescribeMoneyRe
 
 func NewDescribeMoneyReceiptMetricsRequestFromDict(data map[string]interface{}) DescribeMoneyReceiptMetricsRequest {
 	return DescribeMoneyReceiptMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4643,9 +5018,8 @@ func (p DescribeMoneyReceiptMetricsRequest) Pointer() *DescribeMoneyReceiptMetri
 }
 
 type DescribeMoneyNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoneyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4696,10 +5070,9 @@ func (p DescribeMoneyNamespaceMetricsRequest) Pointer() *DescribeMoneyNamespaceM
 }
 
 type GetMoneyNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMoneyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4762,7 +5135,13 @@ func NewGetMoneyNamespaceMetricsRequestFromJson(data string) (GetMoneyNamespaceM
 
 func NewGetMoneyNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMoneyNamespaceMetricsRequest {
 	return GetMoneyNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4777,11 +5156,10 @@ func (p GetMoneyNamespaceMetricsRequest) Pointer() *GetMoneyNamespaceMetricsRequ
 }
 
 type DescribeQuestQuestModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestQuestModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4867,8 +5245,20 @@ func NewDescribeQuestQuestModelMetricsRequestFromJson(data string) (DescribeQues
 
 func NewDescribeQuestQuestModelMetricsRequestFromDict(data map[string]interface{}) DescribeQuestQuestModelMetricsRequest {
 	return DescribeQuestQuestModelMetricsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		QuestGroupName: core.CastString(data["questGroupName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		QuestGroupName: func() *string {
+			v, ok := data["questGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupName"])
+		}(),
 	}
 }
 
@@ -4884,12 +5274,11 @@ func (p DescribeQuestQuestModelMetricsRequest) Pointer() *DescribeQuestQuestMode
 }
 
 type GetQuestQuestModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	QuestName       *string `json:"questName"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	QuestName      *string `json:"questName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestQuestModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -4998,9 +5387,27 @@ func NewGetQuestQuestModelMetricsRequestFromJson(data string) (GetQuestQuestMode
 
 func NewGetQuestQuestModelMetricsRequestFromDict(data map[string]interface{}) GetQuestQuestModelMetricsRequest {
 	return GetQuestQuestModelMetricsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		QuestGroupName: core.CastString(data["questGroupName"]),
-		QuestName:      core.CastString(data["questName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		QuestGroupName: func() *string {
+			v, ok := data["questGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupName"])
+		}(),
+		QuestName: func() *string {
+			v, ok := data["questName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questName"])
+		}(),
 	}
 }
 
@@ -5017,10 +5424,9 @@ func (p GetQuestQuestModelMetricsRequest) Pointer() *GetQuestQuestModelMetricsRe
 }
 
 type DescribeQuestQuestGroupModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestQuestGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5083,7 +5489,13 @@ func NewDescribeQuestQuestGroupModelMetricsRequestFromJson(data string) (Describ
 
 func NewDescribeQuestQuestGroupModelMetricsRequestFromDict(data map[string]interface{}) DescribeQuestQuestGroupModelMetricsRequest {
 	return DescribeQuestQuestGroupModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5098,11 +5510,10 @@ func (p DescribeQuestQuestGroupModelMetricsRequest) Pointer() *DescribeQuestQues
 }
 
 type GetQuestQuestGroupModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestQuestGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5188,8 +5599,20 @@ func NewGetQuestQuestGroupModelMetricsRequestFromJson(data string) (GetQuestQues
 
 func NewGetQuestQuestGroupModelMetricsRequestFromDict(data map[string]interface{}) GetQuestQuestGroupModelMetricsRequest {
 	return GetQuestQuestGroupModelMetricsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		QuestGroupName: core.CastString(data["questGroupName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		QuestGroupName: func() *string {
+			v, ok := data["questGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupName"])
+		}(),
 	}
 }
 
@@ -5205,9 +5628,8 @@ func (p GetQuestQuestGroupModelMetricsRequest) Pointer() *GetQuestQuestGroupMode
 }
 
 type DescribeQuestNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5258,10 +5680,9 @@ func (p DescribeQuestNamespaceMetricsRequest) Pointer() *DescribeQuestNamespaceM
 }
 
 type GetQuestNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5324,7 +5745,13 @@ func NewGetQuestNamespaceMetricsRequestFromJson(data string) (GetQuestNamespaceM
 
 func NewGetQuestNamespaceMetricsRequestFromDict(data map[string]interface{}) GetQuestNamespaceMetricsRequest {
 	return GetQuestNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5339,10 +5766,9 @@ func (p GetQuestNamespaceMetricsRequest) Pointer() *GetQuestNamespaceMetricsRequ
 }
 
 type DescribeRankingCategoryModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRankingCategoryModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5405,7 +5831,13 @@ func NewDescribeRankingCategoryModelMetricsRequestFromJson(data string) (Describ
 
 func NewDescribeRankingCategoryModelMetricsRequestFromDict(data map[string]interface{}) DescribeRankingCategoryModelMetricsRequest {
 	return DescribeRankingCategoryModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5420,11 +5852,10 @@ func (p DescribeRankingCategoryModelMetricsRequest) Pointer() *DescribeRankingCa
 }
 
 type GetRankingCategoryModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	CategoryName    *string `json:"categoryName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	CategoryName  *string `json:"categoryName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetRankingCategoryModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5510,8 +5941,20 @@ func NewGetRankingCategoryModelMetricsRequestFromJson(data string) (GetRankingCa
 
 func NewGetRankingCategoryModelMetricsRequestFromDict(data map[string]interface{}) GetRankingCategoryModelMetricsRequest {
 	return GetRankingCategoryModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		CategoryName:  core.CastString(data["categoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CategoryName: func() *string {
+			v, ok := data["categoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryName"])
+		}(),
 	}
 }
 
@@ -5527,9 +5970,8 @@ func (p GetRankingCategoryModelMetricsRequest) Pointer() *GetRankingCategoryMode
 }
 
 type DescribeRankingNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRankingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5580,10 +6022,9 @@ func (p DescribeRankingNamespaceMetricsRequest) Pointer() *DescribeRankingNamesp
 }
 
 type GetRankingNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetRankingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5646,7 +6087,13 @@ func NewGetRankingNamespaceMetricsRequestFromJson(data string) (GetRankingNamesp
 
 func NewGetRankingNamespaceMetricsRequestFromDict(data map[string]interface{}) GetRankingNamespaceMetricsRequest {
 	return GetRankingNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5661,11 +6108,10 @@ func (p GetRankingNamespaceMetricsRequest) Pointer() *GetRankingNamespaceMetrics
 }
 
 type DescribeShowcaseDisplayItemMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ShowcaseName    *string `json:"showcaseName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ShowcaseName  *string `json:"showcaseName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcaseDisplayItemMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5751,8 +6197,20 @@ func NewDescribeShowcaseDisplayItemMetricsRequestFromJson(data string) (Describe
 
 func NewDescribeShowcaseDisplayItemMetricsRequestFromDict(data map[string]interface{}) DescribeShowcaseDisplayItemMetricsRequest {
 	return DescribeShowcaseDisplayItemMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ShowcaseName:  core.CastString(data["showcaseName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
 	}
 }
 
@@ -5768,12 +6226,11 @@ func (p DescribeShowcaseDisplayItemMetricsRequest) Pointer() *DescribeShowcaseDi
 }
 
 type GetShowcaseDisplayItemMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ShowcaseName    *string `json:"showcaseName"`
-	DisplayItemId   *string `json:"displayItemId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ShowcaseName  *string `json:"showcaseName"`
+	DisplayItemId *string `json:"displayItemId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseDisplayItemMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5882,9 +6339,27 @@ func NewGetShowcaseDisplayItemMetricsRequestFromJson(data string) (GetShowcaseDi
 
 func NewGetShowcaseDisplayItemMetricsRequestFromDict(data map[string]interface{}) GetShowcaseDisplayItemMetricsRequest {
 	return GetShowcaseDisplayItemMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ShowcaseName:  core.CastString(data["showcaseName"]),
-		DisplayItemId: core.CastString(data["displayItemId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
+		DisplayItemId: func() *string {
+			v, ok := data["displayItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayItemId"])
+		}(),
 	}
 }
 
@@ -5901,10 +6376,9 @@ func (p GetShowcaseDisplayItemMetricsRequest) Pointer() *GetShowcaseDisplayItemM
 }
 
 type DescribeShowcaseShowcaseMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcaseShowcaseMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -5967,7 +6441,13 @@ func NewDescribeShowcaseShowcaseMetricsRequestFromJson(data string) (DescribeSho
 
 func NewDescribeShowcaseShowcaseMetricsRequestFromDict(data map[string]interface{}) DescribeShowcaseShowcaseMetricsRequest {
 	return DescribeShowcaseShowcaseMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5982,11 +6462,10 @@ func (p DescribeShowcaseShowcaseMetricsRequest) Pointer() *DescribeShowcaseShowc
 }
 
 type GetShowcaseShowcaseMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ShowcaseName    *string `json:"showcaseName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ShowcaseName  *string `json:"showcaseName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseShowcaseMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6072,8 +6551,20 @@ func NewGetShowcaseShowcaseMetricsRequestFromJson(data string) (GetShowcaseShowc
 
 func NewGetShowcaseShowcaseMetricsRequestFromDict(data map[string]interface{}) GetShowcaseShowcaseMetricsRequest {
 	return GetShowcaseShowcaseMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ShowcaseName:  core.CastString(data["showcaseName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
 	}
 }
 
@@ -6089,9 +6580,8 @@ func (p GetShowcaseShowcaseMetricsRequest) Pointer() *GetShowcaseShowcaseMetrics
 }
 
 type DescribeShowcaseNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcaseNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6142,10 +6632,9 @@ func (p DescribeShowcaseNamespaceMetricsRequest) Pointer() *DescribeShowcaseName
 }
 
 type GetShowcaseNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6208,7 +6697,13 @@ func NewGetShowcaseNamespaceMetricsRequestFromJson(data string) (GetShowcaseName
 
 func NewGetShowcaseNamespaceMetricsRequestFromDict(data map[string]interface{}) GetShowcaseNamespaceMetricsRequest {
 	return GetShowcaseNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -6223,10 +6718,9 @@ func (p GetShowcaseNamespaceMetricsRequest) Pointer() *GetShowcaseNamespaceMetri
 }
 
 type DescribeStaminaStaminaModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminaStaminaModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6289,7 +6783,13 @@ func NewDescribeStaminaStaminaModelMetricsRequestFromJson(data string) (Describe
 
 func NewDescribeStaminaStaminaModelMetricsRequestFromDict(data map[string]interface{}) DescribeStaminaStaminaModelMetricsRequest {
 	return DescribeStaminaStaminaModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -6304,11 +6804,10 @@ func (p DescribeStaminaStaminaModelMetricsRequest) Pointer() *DescribeStaminaSta
 }
 
 type GetStaminaStaminaModelMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	StaminaName     *string `json:"staminaName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	StaminaName   *string `json:"staminaName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaStaminaModelMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6394,8 +6893,20 @@ func NewGetStaminaStaminaModelMetricsRequestFromJson(data string) (GetStaminaSta
 
 func NewGetStaminaStaminaModelMetricsRequestFromDict(data map[string]interface{}) GetStaminaStaminaModelMetricsRequest {
 	return GetStaminaStaminaModelMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		StaminaName:   core.CastString(data["staminaName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
 	}
 }
 
@@ -6411,9 +6922,8 @@ func (p GetStaminaStaminaModelMetricsRequest) Pointer() *GetStaminaStaminaModelM
 }
 
 type DescribeStaminaNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminaNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6464,10 +6974,9 @@ func (p DescribeStaminaNamespaceMetricsRequest) Pointer() *DescribeStaminaNamesp
 }
 
 type GetStaminaNamespaceMetricsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
@@ -6530,7 +7039,13 @@ func NewGetStaminaNamespaceMetricsRequestFromJson(data string) (GetStaminaNamesp
 
 func NewGetStaminaNamespaceMetricsRequestFromDict(data map[string]interface{}) GetStaminaNamespaceMetricsRequest {
 	return GetStaminaNamespaceMetricsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 

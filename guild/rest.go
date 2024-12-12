@@ -91,12 +91,6 @@ func (p Gs2GuildRestClient) DescribeNamespacesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -225,12 +219,6 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -322,12 +310,6 @@ func (p Gs2GuildRestClient) GetNamespaceStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -419,12 +401,6 @@ func (p Gs2GuildRestClient) GetNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -555,12 +531,6 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -652,12 +622,6 @@ func (p Gs2GuildRestClient) DeleteNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -749,12 +713,6 @@ func (p Gs2GuildRestClient) DumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -849,12 +807,6 @@ func (p Gs2GuildRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -949,12 +901,6 @@ func (p Gs2GuildRestClient) CleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1049,12 +995,6 @@ func (p Gs2GuildRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1149,12 +1089,6 @@ func (p Gs2GuildRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1252,12 +1186,6 @@ func (p Gs2GuildRestClient) ImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1357,12 +1285,6 @@ func (p Gs2GuildRestClient) CheckImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1463,12 +1385,6 @@ func (p Gs2GuildRestClient) DescribeGuildModelMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1600,12 +1516,6 @@ func (p Gs2GuildRestClient) CreateGuildModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1702,12 +1612,6 @@ func (p Gs2GuildRestClient) GetGuildModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1841,12 +1745,6 @@ func (p Gs2GuildRestClient) UpdateGuildModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1943,12 +1841,6 @@ func (p Gs2GuildRestClient) DeleteGuildModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2040,12 +1932,6 @@ func (p Gs2GuildRestClient) DescribeGuildModelsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2142,12 +2028,6 @@ func (p Gs2GuildRestClient) GetGuildModelAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2301,12 +2181,6 @@ func (p Gs2GuildRestClient) SearchGuildsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -2471,12 +2345,6 @@ func (p Gs2GuildRestClient) SearchGuildsByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -2610,12 +2478,6 @@ func (p Gs2GuildRestClient) CreateGuildAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -2754,12 +2616,6 @@ func (p Gs2GuildRestClient) CreateGuildByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -2867,12 +2723,6 @@ func (p Gs2GuildRestClient) GetGuildAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -2982,12 +2832,6 @@ func (p Gs2GuildRestClient) GetGuildByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -3118,12 +2962,6 @@ func (p Gs2GuildRestClient) UpdateGuildAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3262,12 +3100,6 @@ func (p Gs2GuildRestClient) UpdateGuildByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3372,12 +3204,6 @@ func (p Gs2GuildRestClient) DeleteMemberAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3490,12 +3316,6 @@ func (p Gs2GuildRestClient) DeleteMemberByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3603,12 +3423,6 @@ func (p Gs2GuildRestClient) UpdateMemberRoleAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3724,12 +3538,6 @@ func (p Gs2GuildRestClient) UpdateMemberRoleByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3836,12 +3644,6 @@ func (p Gs2GuildRestClient) BatchUpdateMemberRoleAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3956,12 +3758,6 @@ func (p Gs2GuildRestClient) BatchUpdateMemberRoleByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4061,12 +3857,6 @@ func (p Gs2GuildRestClient) DeleteGuildAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4174,12 +3964,6 @@ func (p Gs2GuildRestClient) DeleteGuildByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4287,12 +4071,6 @@ func (p Gs2GuildRestClient) IncreaseMaximumCurrentMaximumMemberCountByGuildNameA
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4395,12 +4173,6 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4511,12 +4283,6 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountByGuildNameA
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4625,12 +4391,6 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4747,12 +4507,6 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4860,12 +4614,6 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4981,12 +4729,6 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5097,12 +4839,6 @@ func (p Gs2GuildRestClient) SetMaximumCurrentMaximumMemberCountByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5207,12 +4943,6 @@ func (p Gs2GuildRestClient) AssumeAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -5325,12 +5055,6 @@ func (p Gs2GuildRestClient) AssumeByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5429,12 +5153,6 @@ func (p Gs2GuildRestClient) IncreaseMaximumCurrentMaximumMemberCountByStampSheet
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5527,12 +5245,6 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountByStampTaskA
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5625,12 +5337,6 @@ func (p Gs2GuildRestClient) SetMaximumCurrentMaximumMemberCountByStampSheetAsync
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5723,12 +5429,6 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByStampTaskAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5821,12 +5521,6 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberByStampTaskAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5927,12 +5621,6 @@ func (p Gs2GuildRestClient) DescribeJoinedGuildsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6041,12 +5729,6 @@ func (p Gs2GuildRestClient) DescribeJoinedGuildsByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -6151,12 +5833,6 @@ func (p Gs2GuildRestClient) GetJoinedGuildAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6266,12 +5942,6 @@ func (p Gs2GuildRestClient) GetJoinedGuildByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -6376,12 +6046,6 @@ func (p Gs2GuildRestClient) WithdrawalAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6494,12 +6158,6 @@ func (p Gs2GuildRestClient) WithdrawalByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -6602,12 +6260,6 @@ func (p Gs2GuildRestClient) GetLastGuildMasterActivityAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6712,12 +6364,6 @@ func (p Gs2GuildRestClient) GetLastGuildMasterActivityByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6814,12 +6460,6 @@ func (p Gs2GuildRestClient) PromoteSeniorMemberAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6927,12 +6567,6 @@ func (p Gs2GuildRestClient) PromoteSeniorMemberByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -7027,12 +6661,6 @@ func (p Gs2GuildRestClient) ExportMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7124,12 +6752,6 @@ func (p Gs2GuildRestClient) GetCurrentGuildMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7224,12 +6846,6 @@ func (p Gs2GuildRestClient) UpdateCurrentGuildMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7324,12 +6940,6 @@ func (p Gs2GuildRestClient) UpdateCurrentGuildMasterFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7432,12 +7042,6 @@ func (p Gs2GuildRestClient) DescribeReceiveRequestsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -7548,12 +7152,6 @@ func (p Gs2GuildRestClient) DescribeReceiveRequestsByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7655,12 +7253,6 @@ func (p Gs2GuildRestClient) GetReceiveRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -7770,12 +7362,6 @@ func (p Gs2GuildRestClient) GetReceiveRequestByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -7877,12 +7463,6 @@ func (p Gs2GuildRestClient) AcceptRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -7995,12 +7575,6 @@ func (p Gs2GuildRestClient) AcceptRequestByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -8105,12 +7679,6 @@ func (p Gs2GuildRestClient) RejectRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -8223,12 +7791,6 @@ func (p Gs2GuildRestClient) RejectRequestByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -8334,12 +7896,6 @@ func (p Gs2GuildRestClient) DescribeSendRequestsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -8450,12 +8006,6 @@ func (p Gs2GuildRestClient) DescribeSendRequestsByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -8560,12 +8110,6 @@ func (p Gs2GuildRestClient) GetSendRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -8675,12 +8219,6 @@ func (p Gs2GuildRestClient) GetSendRequestByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -8785,12 +8323,6 @@ func (p Gs2GuildRestClient) SendRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -8903,12 +8435,6 @@ func (p Gs2GuildRestClient) SendRequestByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -9016,12 +8542,6 @@ func (p Gs2GuildRestClient) DeleteRequestAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -9134,12 +8654,6 @@ func (p Gs2GuildRestClient) DeleteRequestByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -9248,12 +8762,6 @@ func (p Gs2GuildRestClient) DescribeIgnoreUsersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -9364,12 +8872,6 @@ func (p Gs2GuildRestClient) DescribeIgnoreUsersByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -9471,12 +8973,6 @@ func (p Gs2GuildRestClient) GetIgnoreUserAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -9586,12 +9082,6 @@ func (p Gs2GuildRestClient) GetIgnoreUserByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -9696,12 +9186,6 @@ func (p Gs2GuildRestClient) AddIgnoreUserAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -9814,12 +9298,6 @@ func (p Gs2GuildRestClient) AddIgnoreUserByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -9927,12 +9405,6 @@ func (p Gs2GuildRestClient) DeleteIgnoreUserAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -10045,12 +9517,6 @@ func (p Gs2GuildRestClient) DeleteIgnoreUserByGuildNameAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}

@@ -91,12 +91,6 @@ func (p Gs2EnhanceRestClient) DescribeNamespacesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -207,12 +201,6 @@ func (p Gs2EnhanceRestClient) CreateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -304,12 +292,6 @@ func (p Gs2EnhanceRestClient) GetNamespaceStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -401,12 +383,6 @@ func (p Gs2EnhanceRestClient) GetNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -519,12 +495,6 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -616,12 +586,6 @@ func (p Gs2EnhanceRestClient) DeleteNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -713,12 +677,6 @@ func (p Gs2EnhanceRestClient) DumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -813,12 +771,6 @@ func (p Gs2EnhanceRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -913,12 +865,6 @@ func (p Gs2EnhanceRestClient) CleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1013,12 +959,6 @@ func (p Gs2EnhanceRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1113,12 +1053,6 @@ func (p Gs2EnhanceRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1216,12 +1150,6 @@ func (p Gs2EnhanceRestClient) ImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1321,12 +1249,6 @@ func (p Gs2EnhanceRestClient) CheckImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1421,12 +1343,6 @@ func (p Gs2EnhanceRestClient) DescribeRateModelsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1523,12 +1439,6 @@ func (p Gs2EnhanceRestClient) GetRateModelAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1626,12 +1536,6 @@ func (p Gs2EnhanceRestClient) DescribeRateModelMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1758,12 +1662,6 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1860,12 +1758,6 @@ func (p Gs2EnhanceRestClient) GetRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1994,12 +1886,6 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2096,12 +1982,6 @@ func (p Gs2EnhanceRestClient) DeleteRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2193,12 +2073,6 @@ func (p Gs2EnhanceRestClient) DescribeUnleashRateModelsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2295,12 +2169,6 @@ func (p Gs2EnhanceRestClient) GetUnleashRateModelAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2398,12 +2266,6 @@ func (p Gs2EnhanceRestClient) DescribeUnleashRateModelMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2517,12 +2379,6 @@ func (p Gs2EnhanceRestClient) CreateUnleashRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2619,12 +2475,6 @@ func (p Gs2EnhanceRestClient) GetUnleashRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2740,12 +2590,6 @@ func (p Gs2EnhanceRestClient) UpdateUnleashRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2842,12 +2686,6 @@ func (p Gs2EnhanceRestClient) DeleteUnleashRateModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2961,12 +2799,6 @@ func (p Gs2EnhanceRestClient) DirectEnhanceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3091,12 +2923,6 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3195,12 +3021,6 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3314,12 +3134,6 @@ func (p Gs2EnhanceRestClient) UnleashAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3444,12 +3258,6 @@ func (p Gs2EnhanceRestClient) UnleashByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3548,12 +3356,6 @@ func (p Gs2EnhanceRestClient) UnleashByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3666,12 +3468,6 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -3769,12 +3565,6 @@ func (p Gs2EnhanceRestClient) GetProgressAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -3874,12 +3664,6 @@ func (p Gs2EnhanceRestClient) GetProgressByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -3999,12 +3783,6 @@ func (p Gs2EnhanceRestClient) StartAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4132,12 +3910,6 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4242,12 +4014,6 @@ func (p Gs2EnhanceRestClient) EndAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4357,12 +4123,6 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4460,12 +4220,6 @@ func (p Gs2EnhanceRestClient) DeleteProgressAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4568,12 +4322,6 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4672,12 +4420,6 @@ func (p Gs2EnhanceRestClient) CreateProgressByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4770,12 +4512,6 @@ func (p Gs2EnhanceRestClient) DeleteProgressByStampTaskAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4867,12 +4603,6 @@ func (p Gs2EnhanceRestClient) ExportMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4964,12 +4694,6 @@ func (p Gs2EnhanceRestClient) GetCurrentRateMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5064,12 +4788,6 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -5164,12 +4882,6 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"

@@ -125,11 +125,12 @@ func (p Gs2WatchRestClient) GetChartAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getChartAsyncHandler(
@@ -244,11 +245,12 @@ func (p Gs2WatchRestClient) GetDistributionAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getDistributionAsyncHandler(
@@ -337,11 +339,12 @@ func (p Gs2WatchRestClient) GetCumulativeAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getCumulativeAsyncHandler(
@@ -441,11 +444,12 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeBillingActivitiesAsyncHandler(
@@ -546,11 +550,12 @@ func (p Gs2WatchRestClient) GetBillingActivityAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getBillingActivityAsyncHandler(
@@ -631,11 +636,12 @@ func (p Gs2WatchRestClient) GetGeneralMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getGeneralMetricsAsyncHandler(
@@ -716,11 +722,12 @@ func (p Gs2WatchRestClient) DescribeAccountNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeAccountNamespaceMetricsAsyncHandler(
@@ -806,11 +813,12 @@ func (p Gs2WatchRestClient) GetAccountNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getAccountNamespaceMetricsAsyncHandler(
@@ -891,11 +899,12 @@ func (p Gs2WatchRestClient) DescribeChatNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeChatNamespaceMetricsAsyncHandler(
@@ -981,11 +990,12 @@ func (p Gs2WatchRestClient) GetChatNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getChatNamespaceMetricsAsyncHandler(
@@ -1066,11 +1076,12 @@ func (p Gs2WatchRestClient) DescribeDatastoreNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeDatastoreNamespaceMetricsAsyncHandler(
@@ -1156,11 +1167,12 @@ func (p Gs2WatchRestClient) GetDatastoreNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getDatastoreNamespaceMetricsAsyncHandler(
@@ -1241,11 +1253,12 @@ func (p Gs2WatchRestClient) DescribeDictionaryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeDictionaryNamespaceMetricsAsyncHandler(
@@ -1331,11 +1344,12 @@ func (p Gs2WatchRestClient) GetDictionaryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getDictionaryNamespaceMetricsAsyncHandler(
@@ -1421,11 +1435,12 @@ func (p Gs2WatchRestClient) DescribeExchangeRateModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeExchangeRateModelMetricsAsyncHandler(
@@ -1516,11 +1531,12 @@ func (p Gs2WatchRestClient) GetExchangeRateModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getExchangeRateModelMetricsAsyncHandler(
@@ -1601,11 +1617,12 @@ func (p Gs2WatchRestClient) DescribeExchangeNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeExchangeNamespaceMetricsAsyncHandler(
@@ -1691,11 +1708,12 @@ func (p Gs2WatchRestClient) GetExchangeNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getExchangeNamespaceMetricsAsyncHandler(
@@ -1786,11 +1804,12 @@ func (p Gs2WatchRestClient) DescribeExperienceStatusMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeExperienceStatusMetricsAsyncHandler(
@@ -1876,11 +1895,12 @@ func (p Gs2WatchRestClient) DescribeExperienceExperienceModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeExperienceExperienceModelMetricsAsyncHandler(
@@ -1971,11 +1991,12 @@ func (p Gs2WatchRestClient) GetExperienceExperienceModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getExperienceExperienceModelMetricsAsyncHandler(
@@ -2056,11 +2077,12 @@ func (p Gs2WatchRestClient) DescribeExperienceNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeExperienceNamespaceMetricsAsyncHandler(
@@ -2146,11 +2168,12 @@ func (p Gs2WatchRestClient) GetExperienceNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getExperienceNamespaceMetricsAsyncHandler(
@@ -2241,11 +2264,12 @@ func (p Gs2WatchRestClient) DescribeFormationFormMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeFormationFormMetricsAsyncHandler(
@@ -2331,11 +2355,12 @@ func (p Gs2WatchRestClient) DescribeFormationMoldMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeFormationMoldMetricsAsyncHandler(
@@ -2416,11 +2441,12 @@ func (p Gs2WatchRestClient) DescribeFormationNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeFormationNamespaceMetricsAsyncHandler(
@@ -2506,11 +2532,12 @@ func (p Gs2WatchRestClient) GetFormationNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getFormationNamespaceMetricsAsyncHandler(
@@ -2591,11 +2618,12 @@ func (p Gs2WatchRestClient) DescribeFriendNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeFriendNamespaceMetricsAsyncHandler(
@@ -2681,11 +2709,12 @@ func (p Gs2WatchRestClient) GetFriendNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getFriendNamespaceMetricsAsyncHandler(
@@ -2766,11 +2795,12 @@ func (p Gs2WatchRestClient) DescribeInboxNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeInboxNamespaceMetricsAsyncHandler(
@@ -2856,11 +2886,12 @@ func (p Gs2WatchRestClient) GetInboxNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getInboxNamespaceMetricsAsyncHandler(
@@ -2951,11 +2982,12 @@ func (p Gs2WatchRestClient) DescribeInventoryItemSetMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeInventoryItemSetMetricsAsyncHandler(
@@ -3041,11 +3073,12 @@ func (p Gs2WatchRestClient) DescribeInventoryInventoryMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeInventoryInventoryMetricsAsyncHandler(
@@ -3126,11 +3159,12 @@ func (p Gs2WatchRestClient) DescribeInventoryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeInventoryNamespaceMetricsAsyncHandler(
@@ -3216,11 +3250,12 @@ func (p Gs2WatchRestClient) GetInventoryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getInventoryNamespaceMetricsAsyncHandler(
@@ -3301,11 +3336,12 @@ func (p Gs2WatchRestClient) DescribeKeyNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeKeyNamespaceMetricsAsyncHandler(
@@ -3391,11 +3427,12 @@ func (p Gs2WatchRestClient) GetKeyNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getKeyNamespaceMetricsAsyncHandler(
@@ -3486,11 +3523,12 @@ func (p Gs2WatchRestClient) DescribeLimitCounterMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeLimitCounterMetricsAsyncHandler(
@@ -3576,11 +3614,12 @@ func (p Gs2WatchRestClient) DescribeLimitLimitModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeLimitLimitModelMetricsAsyncHandler(
@@ -3671,11 +3710,12 @@ func (p Gs2WatchRestClient) GetLimitLimitModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getLimitLimitModelMetricsAsyncHandler(
@@ -3756,11 +3796,12 @@ func (p Gs2WatchRestClient) DescribeLimitNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeLimitNamespaceMetricsAsyncHandler(
@@ -3846,11 +3887,12 @@ func (p Gs2WatchRestClient) GetLimitNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getLimitNamespaceMetricsAsyncHandler(
@@ -3936,11 +3978,12 @@ func (p Gs2WatchRestClient) DescribeLotteryLotteryMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeLotteryLotteryMetricsAsyncHandler(
@@ -4031,11 +4074,12 @@ func (p Gs2WatchRestClient) GetLotteryLotteryMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getLotteryLotteryMetricsAsyncHandler(
@@ -4116,11 +4160,12 @@ func (p Gs2WatchRestClient) DescribeLotteryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeLotteryNamespaceMetricsAsyncHandler(
@@ -4206,11 +4251,12 @@ func (p Gs2WatchRestClient) GetLotteryNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getLotteryNamespaceMetricsAsyncHandler(
@@ -4291,11 +4337,12 @@ func (p Gs2WatchRestClient) DescribeMatchmakingNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMatchmakingNamespaceMetricsAsyncHandler(
@@ -4381,11 +4428,12 @@ func (p Gs2WatchRestClient) GetMatchmakingNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getMatchmakingNamespaceMetricsAsyncHandler(
@@ -4471,11 +4519,12 @@ func (p Gs2WatchRestClient) DescribeMissionCounterMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMissionCounterMetricsAsyncHandler(
@@ -4561,11 +4610,12 @@ func (p Gs2WatchRestClient) DescribeMissionMissionGroupModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMissionMissionGroupModelMetricsAsyncHandler(
@@ -4656,11 +4706,12 @@ func (p Gs2WatchRestClient) GetMissionMissionGroupModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getMissionMissionGroupModelMetricsAsyncHandler(
@@ -4741,11 +4792,12 @@ func (p Gs2WatchRestClient) DescribeMissionNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMissionNamespaceMetricsAsyncHandler(
@@ -4831,11 +4883,12 @@ func (p Gs2WatchRestClient) GetMissionNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getMissionNamespaceMetricsAsyncHandler(
@@ -4921,11 +4974,12 @@ func (p Gs2WatchRestClient) DescribeMoneyWalletMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMoneyWalletMetricsAsyncHandler(
@@ -5011,11 +5065,12 @@ func (p Gs2WatchRestClient) DescribeMoneyReceiptMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMoneyReceiptMetricsAsyncHandler(
@@ -5096,11 +5151,12 @@ func (p Gs2WatchRestClient) DescribeMoneyNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeMoneyNamespaceMetricsAsyncHandler(
@@ -5186,11 +5242,12 @@ func (p Gs2WatchRestClient) GetMoneyNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getMoneyNamespaceMetricsAsyncHandler(
@@ -5281,11 +5338,12 @@ func (p Gs2WatchRestClient) DescribeQuestQuestModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeQuestQuestModelMetricsAsyncHandler(
@@ -5381,11 +5439,12 @@ func (p Gs2WatchRestClient) GetQuestQuestModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getQuestQuestModelMetricsAsyncHandler(
@@ -5471,11 +5530,12 @@ func (p Gs2WatchRestClient) DescribeQuestQuestGroupModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeQuestQuestGroupModelMetricsAsyncHandler(
@@ -5566,11 +5626,12 @@ func (p Gs2WatchRestClient) GetQuestQuestGroupModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getQuestQuestGroupModelMetricsAsyncHandler(
@@ -5651,11 +5712,12 @@ func (p Gs2WatchRestClient) DescribeQuestNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeQuestNamespaceMetricsAsyncHandler(
@@ -5741,11 +5803,12 @@ func (p Gs2WatchRestClient) GetQuestNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getQuestNamespaceMetricsAsyncHandler(
@@ -5831,11 +5894,12 @@ func (p Gs2WatchRestClient) DescribeRankingCategoryModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeRankingCategoryModelMetricsAsyncHandler(
@@ -5926,11 +5990,12 @@ func (p Gs2WatchRestClient) GetRankingCategoryModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getRankingCategoryModelMetricsAsyncHandler(
@@ -6011,11 +6076,12 @@ func (p Gs2WatchRestClient) DescribeRankingNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeRankingNamespaceMetricsAsyncHandler(
@@ -6101,11 +6167,12 @@ func (p Gs2WatchRestClient) GetRankingNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getRankingNamespaceMetricsAsyncHandler(
@@ -6196,11 +6263,12 @@ func (p Gs2WatchRestClient) DescribeShowcaseDisplayItemMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeShowcaseDisplayItemMetricsAsyncHandler(
@@ -6296,11 +6364,12 @@ func (p Gs2WatchRestClient) GetShowcaseDisplayItemMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getShowcaseDisplayItemMetricsAsyncHandler(
@@ -6386,11 +6455,12 @@ func (p Gs2WatchRestClient) DescribeShowcaseShowcaseMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeShowcaseShowcaseMetricsAsyncHandler(
@@ -6481,11 +6551,12 @@ func (p Gs2WatchRestClient) GetShowcaseShowcaseMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getShowcaseShowcaseMetricsAsyncHandler(
@@ -6566,11 +6637,12 @@ func (p Gs2WatchRestClient) DescribeShowcaseNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeShowcaseNamespaceMetricsAsyncHandler(
@@ -6656,11 +6728,12 @@ func (p Gs2WatchRestClient) GetShowcaseNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getShowcaseNamespaceMetricsAsyncHandler(
@@ -6746,11 +6819,12 @@ func (p Gs2WatchRestClient) DescribeStaminaStaminaModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeStaminaStaminaModelMetricsAsyncHandler(
@@ -6841,11 +6915,12 @@ func (p Gs2WatchRestClient) GetStaminaStaminaModelMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getStaminaStaminaModelMetricsAsyncHandler(
@@ -6926,11 +7001,12 @@ func (p Gs2WatchRestClient) DescribeStaminaNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeStaminaNamespaceMetricsAsyncHandler(
@@ -7016,11 +7092,12 @@ func (p Gs2WatchRestClient) GetStaminaNamespaceMetricsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getStaminaNamespaceMetricsAsyncHandler(

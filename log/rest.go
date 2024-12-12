@@ -91,12 +91,6 @@ func (p Gs2LogRestClient) DescribeNamespacesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -213,12 +207,6 @@ func (p Gs2LogRestClient) CreateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -310,12 +298,6 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -407,12 +389,6 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -531,12 +507,6 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -628,12 +598,6 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -749,12 +713,6 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -873,12 +831,6 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1000,12 +952,6 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1127,12 +1073,6 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1254,12 +1194,6 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1381,12 +1315,6 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1508,12 +1436,6 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1635,12 +1557,6 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1760,12 +1676,6 @@ func (p Gs2LogRestClient) QueryInGameLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -1873,12 +1783,6 @@ func (p Gs2LogRestClient) SendInGameLogAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -1991,12 +1895,6 @@ func (p Gs2LogRestClient) SendInGameLogByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -2112,12 +2010,6 @@ func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -2218,12 +2110,6 @@ func (p Gs2LogRestClient) DescribeInsightsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2315,12 +2201,6 @@ func (p Gs2LogRestClient) CreateInsightAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2417,12 +2297,6 @@ func (p Gs2LogRestClient) GetInsightAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2519,12 +2393,6 @@ func (p Gs2LogRestClient) DeleteInsightAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"

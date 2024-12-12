@@ -91,12 +91,6 @@ func (p Gs2StaminaRestClient) DescribeNamespacesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -195,12 +189,6 @@ func (p Gs2StaminaRestClient) CreateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -292,12 +280,6 @@ func (p Gs2StaminaRestClient) GetNamespaceStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -389,12 +371,6 @@ func (p Gs2StaminaRestClient) GetNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -495,12 +471,6 @@ func (p Gs2StaminaRestClient) UpdateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -592,12 +562,6 @@ func (p Gs2StaminaRestClient) DeleteNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -689,12 +653,6 @@ func (p Gs2StaminaRestClient) DumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -789,12 +747,6 @@ func (p Gs2StaminaRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -889,12 +841,6 @@ func (p Gs2StaminaRestClient) CleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -989,12 +935,6 @@ func (p Gs2StaminaRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1089,12 +1029,6 @@ func (p Gs2StaminaRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1192,12 +1126,6 @@ func (p Gs2StaminaRestClient) ImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1297,12 +1225,6 @@ func (p Gs2StaminaRestClient) CheckImportUserDataByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1403,12 +1325,6 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1533,12 +1449,6 @@ func (p Gs2StaminaRestClient) CreateStaminaModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1635,12 +1545,6 @@ func (p Gs2StaminaRestClient) GetStaminaModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1767,12 +1671,6 @@ func (p Gs2StaminaRestClient) UpdateStaminaModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1869,12 +1767,6 @@ func (p Gs2StaminaRestClient) DeleteStaminaModelMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -1972,12 +1864,6 @@ func (p Gs2StaminaRestClient) DescribeMaxStaminaTableMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2088,12 +1974,6 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2190,12 +2070,6 @@ func (p Gs2StaminaRestClient) GetMaxStaminaTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2308,12 +2182,6 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2410,12 +2278,6 @@ func (p Gs2StaminaRestClient) DeleteMaxStaminaTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2513,12 +2375,6 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2629,12 +2485,6 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2731,12 +2581,6 @@ func (p Gs2StaminaRestClient) GetRecoverIntervalTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2849,12 +2693,6 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -2951,12 +2789,6 @@ func (p Gs2StaminaRestClient) DeleteRecoverIntervalTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3054,12 +2886,6 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3170,12 +2996,6 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3272,12 +3092,6 @@ func (p Gs2StaminaRestClient) GetRecoverValueTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3390,12 +3204,6 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3492,12 +3300,6 @@ func (p Gs2StaminaRestClient) DeleteRecoverValueTableMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3589,12 +3391,6 @@ func (p Gs2StaminaRestClient) ExportMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3686,12 +3482,6 @@ func (p Gs2StaminaRestClient) GetCurrentStaminaMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3786,12 +3576,6 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3886,12 +3670,6 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -3983,12 +3761,6 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4085,12 +3857,6 @@ func (p Gs2StaminaRestClient) GetStaminaModelAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4188,12 +3954,6 @@ func (p Gs2StaminaRestClient) DescribeStaminasAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4299,12 +4059,6 @@ func (p Gs2StaminaRestClient) DescribeStaminasByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -4404,12 +4158,6 @@ func (p Gs2StaminaRestClient) GetStaminaAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4514,12 +4262,6 @@ func (p Gs2StaminaRestClient) GetStaminaByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -4636,12 +4378,6 @@ func (p Gs2StaminaRestClient) UpdateStaminaByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4753,12 +4489,6 @@ func (p Gs2StaminaRestClient) ConsumeStaminaAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -4875,12 +4605,6 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -4991,12 +4715,6 @@ func (p Gs2StaminaRestClient) RecoverStaminaByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5107,12 +4825,6 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5218,12 +4930,6 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -5334,12 +5040,6 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5450,12 +5150,6 @@ func (p Gs2StaminaRestClient) SetMaxValueByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5566,12 +5260,6 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5682,12 +5370,6 @@ func (p Gs2StaminaRestClient) SetRecoverValueByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -5799,12 +5481,6 @@ func (p Gs2StaminaRestClient) SetMaxValueByStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -5916,12 +5592,6 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6033,12 +5703,6 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
@@ -6146,12 +5810,6 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
@@ -6250,12 +5908,6 @@ func (p Gs2StaminaRestClient) RecoverStaminaByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6348,12 +6000,6 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6446,12 +6092,6 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByStampTaskAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6544,12 +6184,6 @@ func (p Gs2StaminaRestClient) SetMaxValueByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6642,12 +6276,6 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6740,12 +6368,6 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStampSheetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -6838,12 +6460,6 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByStampTaskAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"

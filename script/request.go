@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId    *string             `json:"sourceRequestId"`
-	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	Name               *string             `json:"name"`
 	Description        *string             `json:"description"`
@@ -278,11 +274,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -366,11 +360,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -454,8 +446,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId    *string             `json:"sourceRequestId"`
-	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	NamespaceName      *string             `json:"namespaceName"`
 	Description        *string             `json:"description"`
@@ -608,11 +598,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -696,13 +684,11 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeScriptsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeScriptsRequest) UnmarshalJSON(data []byte) error {
@@ -828,8 +814,6 @@ func (p DescribeScriptsRequest) Pointer() *DescribeScriptsRequest {
 }
 
 type CreateScriptRequest struct {
-	SourceRequestId             *string `json:"sourceRequestId"`
-	RequestId                   *string `json:"requestId"`
 	ContextStack                *string `json:"contextStack"`
 	NamespaceName               *string `json:"namespaceName"`
 	Name                        *string `json:"name"`
@@ -1024,8 +1008,6 @@ func (p CreateScriptRequest) Pointer() *CreateScriptRequest {
 }
 
 type CreateScriptFromGitHubRequest struct {
-	SourceRequestId             *string                `json:"sourceRequestId"`
-	RequestId                   *string                `json:"requestId"`
 	ContextStack                *string                `json:"contextStack"`
 	NamespaceName               *string                `json:"namespaceName"`
 	Name                        *string                `json:"name"`
@@ -1205,12 +1187,10 @@ func (p CreateScriptFromGitHubRequest) Pointer() *CreateScriptFromGitHubRequest 
 }
 
 type GetScriptRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ScriptName      *string `json:"scriptName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ScriptName    *string `json:"scriptName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1325,8 +1305,6 @@ func (p GetScriptRequest) Pointer() *GetScriptRequest {
 }
 
 type UpdateScriptRequest struct {
-	SourceRequestId             *string `json:"sourceRequestId"`
-	RequestId                   *string `json:"requestId"`
 	ContextStack                *string `json:"contextStack"`
 	NamespaceName               *string `json:"namespaceName"`
 	ScriptName                  *string `json:"scriptName"`
@@ -1521,8 +1499,6 @@ func (p UpdateScriptRequest) Pointer() *UpdateScriptRequest {
 }
 
 type UpdateScriptFromGitHubRequest struct {
-	SourceRequestId             *string                `json:"sourceRequestId"`
-	RequestId                   *string                `json:"requestId"`
 	ContextStack                *string                `json:"contextStack"`
 	NamespaceName               *string                `json:"namespaceName"`
 	ScriptName                  *string                `json:"scriptName"`
@@ -1702,12 +1678,10 @@ func (p UpdateScriptFromGitHubRequest) Pointer() *UpdateScriptFromGitHubRequest 
 }
 
 type DeleteScriptRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ScriptName      *string `json:"scriptName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ScriptName    *string `json:"scriptName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1822,8 +1796,6 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	SourceRequestId    *string       `json:"sourceRequestId"`
-	RequestId          *string       `json:"requestId"`
 	ContextStack       *string       `json:"contextStack"`
 	DuplicationAvoider *string       `json:"duplicationAvoider"`
 	ScriptId           *string       `json:"scriptId"`
@@ -2024,8 +1996,6 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 }
 
 type DebugInvokeRequest struct {
-	SourceRequestId             *string       `json:"sourceRequestId"`
-	RequestId                   *string       `json:"requestId"`
 	ContextStack                *string       `json:"contextStack"`
 	Script                      *string       `json:"script"`
 	Args                        *string       `json:"args"`
@@ -2173,12 +2143,10 @@ func (p DebugInvokeRequest) Pointer() *DebugInvokeRequest {
 }
 
 type InvokeByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *InvokeByStampSheetRequest) UnmarshalJSON(data []byte) error {

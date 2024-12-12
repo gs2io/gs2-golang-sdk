@@ -24,15 +24,13 @@ import (
 )
 
 type CreateAccountRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Email           *string `json:"email"`
-	FullName        *string `json:"fullName"`
-	CompanyName     *string `json:"companyName"`
-	Password        *string `json:"password"`
-	Lang            *string `json:"lang"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Email        *string `json:"email"`
+	FullName     *string `json:"fullName"`
+	CompanyName  *string `json:"companyName"`
+	Password     *string `json:"password"`
+	Lang         *string `json:"lang"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreateAccountRequest) UnmarshalJSON(data []byte) error {
@@ -240,11 +238,9 @@ func (p CreateAccountRequest) Pointer() *CreateAccountRequest {
 }
 
 type VerifyRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	VerifyToken     *string `json:"verifyToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	VerifyToken  *string `json:"verifyToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *VerifyRequest) UnmarshalJSON(data []byte) error {
@@ -328,13 +324,11 @@ func (p VerifyRequest) Pointer() *VerifyRequest {
 }
 
 type SignInRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Email           *string `json:"email"`
-	Password        *string `json:"password"`
-	Otp             *string `json:"otp"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Email        *string `json:"email"`
+	Password     *string `json:"password"`
+	Otp          *string `json:"otp"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *SignInRequest) UnmarshalJSON(data []byte) error {
@@ -480,12 +474,10 @@ func (p SignInRequest) Pointer() *SignInRequest {
 }
 
 type ForgetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Email           *string `json:"email"`
-	Lang            *string `json:"lang"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Email        *string `json:"email"`
+	Lang         *string `json:"lang"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *ForgetRequest) UnmarshalJSON(data []byte) error {
@@ -600,8 +592,6 @@ func (p ForgetRequest) Pointer() *ForgetRequest {
 }
 
 type IssuePasswordRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	IssuePasswordToken *string `json:"issuePasswordToken"`
 	DryRun             *bool   `json:"dryRun"`
@@ -688,15 +678,13 @@ func (p IssuePasswordRequest) Pointer() *IssuePasswordRequest {
 }
 
 type UpdateAccountRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Email           *string `json:"email"`
-	FullName        *string `json:"fullName"`
-	CompanyName     *string `json:"companyName"`
-	Password        *string `json:"password"`
-	AccountToken    *string `json:"accountToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Email        *string `json:"email"`
+	FullName     *string `json:"fullName"`
+	CompanyName  *string `json:"companyName"`
+	Password     *string `json:"password"`
+	AccountToken *string `json:"accountToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *UpdateAccountRequest) UnmarshalJSON(data []byte) error {
@@ -904,11 +892,9 @@ func (p UpdateAccountRequest) Pointer() *UpdateAccountRequest {
 }
 
 type EnableMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *EnableMfaRequest) UnmarshalJSON(data []byte) error {
@@ -992,12 +978,10 @@ func (p EnableMfaRequest) Pointer() *EnableMfaRequest {
 }
 
 type ChallengeMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	Passcode        *string `json:"passcode"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	Passcode     *string `json:"passcode"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *ChallengeMfaRequest) UnmarshalJSON(data []byte) error {
@@ -1112,11 +1096,9 @@ func (p ChallengeMfaRequest) Pointer() *ChallengeMfaRequest {
 }
 
 type DisableMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DisableMfaRequest) UnmarshalJSON(data []byte) error {
@@ -1200,11 +1182,9 @@ func (p DisableMfaRequest) Pointer() *DisableMfaRequest {
 }
 
 type DeleteAccountRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeleteAccountRequest) UnmarshalJSON(data []byte) error {
@@ -1288,13 +1268,11 @@ func (p DeleteAccountRequest) Pointer() *DeleteAccountRequest {
 }
 
 type DescribeProjectsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeProjectsRequest) UnmarshalJSON(data []byte) error {
@@ -1420,8 +1398,6 @@ func (p DescribeProjectsRequest) Pointer() *DescribeProjectsRequest {
 }
 
 type CreateProjectRequest struct {
-	SourceRequestId         *string `json:"sourceRequestId"`
-	RequestId               *string `json:"requestId"`
 	ContextStack            *string `json:"contextStack"`
 	AccountToken            *string `json:"accountToken"`
 	Name                    *string `json:"name"`
@@ -1796,12 +1772,10 @@ func (p CreateProjectRequest) Pointer() *CreateProjectRequest {
 }
 
 type GetProjectRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	ProjectName     *string `json:"projectName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	ProjectName  *string `json:"projectName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetProjectRequest) UnmarshalJSON(data []byte) error {
@@ -1916,12 +1890,10 @@ func (p GetProjectRequest) Pointer() *GetProjectRequest {
 }
 
 type GetProjectTokenRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	ProjectName     *string `json:"projectName"`
-	AccountToken    *string `json:"accountToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	ProjectName  *string `json:"projectName"`
+	AccountToken *string `json:"accountToken"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetProjectTokenRequest) UnmarshalJSON(data []byte) error {
@@ -2036,15 +2008,13 @@ func (p GetProjectTokenRequest) Pointer() *GetProjectTokenRequest {
 }
 
 type GetProjectTokenByIdentifierRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountName     *string `json:"accountName"`
-	ProjectName     *string `json:"projectName"`
-	UserName        *string `json:"userName"`
-	Password        *string `json:"password"`
-	Otp             *string `json:"otp"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountName  *string `json:"accountName"`
+	ProjectName  *string `json:"projectName"`
+	UserName     *string `json:"userName"`
+	Password     *string `json:"password"`
+	Otp          *string `json:"otp"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetProjectTokenByIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -2252,8 +2222,6 @@ func (p GetProjectTokenByIdentifierRequest) Pointer() *GetProjectTokenByIdentifi
 }
 
 type UpdateProjectRequest struct {
-	SourceRequestId         *string `json:"sourceRequestId"`
-	RequestId               *string `json:"requestId"`
 	ContextStack            *string `json:"contextStack"`
 	AccountToken            *string `json:"accountToken"`
 	ProjectName             *string `json:"projectName"`
@@ -2564,13 +2532,11 @@ func (p UpdateProjectRequest) Pointer() *UpdateProjectRequest {
 }
 
 type ActivateRegionRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	ProjectName     *string `json:"projectName"`
-	RegionName      *string `json:"regionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	ProjectName  *string `json:"projectName"`
+	RegionName   *string `json:"regionName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *ActivateRegionRequest) UnmarshalJSON(data []byte) error {
@@ -2716,12 +2682,10 @@ func (p ActivateRegionRequest) Pointer() *ActivateRegionRequest {
 }
 
 type WaitActivateRegionRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	ProjectName     *string `json:"projectName"`
-	RegionName      *string `json:"regionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	ProjectName  *string `json:"projectName"`
+	RegionName   *string `json:"regionName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *WaitActivateRegionRequest) UnmarshalJSON(data []byte) error {
@@ -2836,12 +2800,10 @@ func (p WaitActivateRegionRequest) Pointer() *WaitActivateRegionRequest {
 }
 
 type DeleteProjectRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	ProjectName     *string `json:"projectName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	ProjectName  *string `json:"projectName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeleteProjectRequest) UnmarshalJSON(data []byte) error {
@@ -2956,13 +2918,11 @@ func (p DeleteProjectRequest) Pointer() *DeleteProjectRequest {
 }
 
 type DescribeBillingMethodsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBillingMethodsRequest) UnmarshalJSON(data []byte) error {
@@ -3088,15 +3048,13 @@ func (p DescribeBillingMethodsRequest) Pointer() *DescribeBillingMethodsRequest 
 }
 
 type CreateBillingMethodRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	Description     *string `json:"description"`
-	MethodType      *string `json:"methodType"`
-	CardCustomerId  *string `json:"cardCustomerId"`
-	PartnerId       *string `json:"partnerId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	AccountToken   *string `json:"accountToken"`
+	Description    *string `json:"description"`
+	MethodType     *string `json:"methodType"`
+	CardCustomerId *string `json:"cardCustomerId"`
+	PartnerId      *string `json:"partnerId"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *CreateBillingMethodRequest) UnmarshalJSON(data []byte) error {
@@ -3304,8 +3262,6 @@ func (p CreateBillingMethodRequest) Pointer() *CreateBillingMethodRequest {
 }
 
 type GetBillingMethodRequest struct {
-	SourceRequestId   *string `json:"sourceRequestId"`
-	RequestId         *string `json:"requestId"`
 	ContextStack      *string `json:"contextStack"`
 	AccountToken      *string `json:"accountToken"`
 	BillingMethodName *string `json:"billingMethodName"`
@@ -3424,8 +3380,6 @@ func (p GetBillingMethodRequest) Pointer() *GetBillingMethodRequest {
 }
 
 type UpdateBillingMethodRequest struct {
-	SourceRequestId   *string `json:"sourceRequestId"`
-	RequestId         *string `json:"requestId"`
 	ContextStack      *string `json:"contextStack"`
 	AccountToken      *string `json:"accountToken"`
 	BillingMethodName *string `json:"billingMethodName"`
@@ -3576,8 +3530,6 @@ func (p UpdateBillingMethodRequest) Pointer() *UpdateBillingMethodRequest {
 }
 
 type DeleteBillingMethodRequest struct {
-	SourceRequestId   *string `json:"sourceRequestId"`
-	RequestId         *string `json:"requestId"`
 	ContextStack      *string `json:"contextStack"`
 	AccountToken      *string `json:"accountToken"`
 	BillingMethodName *string `json:"billingMethodName"`
@@ -3696,13 +3648,11 @@ func (p DeleteBillingMethodRequest) Pointer() *DeleteBillingMethodRequest {
 }
 
 type DescribeReceiptsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiptsRequest) UnmarshalJSON(data []byte) error {
@@ -3828,16 +3778,14 @@ func (p DescribeReceiptsRequest) Pointer() *DescribeReceiptsRequest {
 }
 
 type DescribeBillingsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	AccountToken    *string `json:"accountToken"`
-	ProjectName     *string `json:"projectName"`
-	Year            *int32  `json:"year"`
-	Month           *int32  `json:"month"`
-	Region          *string `json:"region"`
-	Service         *string `json:"service"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	AccountToken *string `json:"accountToken"`
+	ProjectName  *string `json:"projectName"`
+	Year         *int32  `json:"year"`
+	Month        *int32  `json:"month"`
+	Region       *string `json:"region"`
+	Service      *string `json:"service"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBillingsRequest) UnmarshalJSON(data []byte) error {
@@ -4036,12 +3984,10 @@ func (p DescribeBillingsRequest) Pointer() *DescribeBillingsRequest {
 }
 
 type DescribeDumpProgressesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeDumpProgressesRequest) UnmarshalJSON(data []byte) error {
@@ -4136,11 +4082,9 @@ func (p DescribeDumpProgressesRequest) Pointer() *DescribeDumpProgressesRequest 
 }
 
 type GetDumpProgressRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetDumpProgressRequest) UnmarshalJSON(data []byte) error {
@@ -4224,8 +4168,6 @@ func (p GetDumpProgressRequest) Pointer() *GetDumpProgressRequest {
 }
 
 type WaitDumpUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	TransactionId      *string `json:"transactionId"`
@@ -4409,11 +4351,9 @@ func (p WaitDumpUserDataRequest) Pointer() *WaitDumpUserDataRequest {
 }
 
 type ArchiveDumpUserDataRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ArchiveDumpUserDataRequest) UnmarshalJSON(data []byte) error {
@@ -4497,8 +4437,6 @@ func (p ArchiveDumpUserDataRequest) Pointer() *ArchiveDumpUserDataRequest {
 }
 
 type DumpUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
@@ -4618,11 +4556,9 @@ func (p DumpUserDataRequest) Pointer() *DumpUserDataRequest {
 }
 
 type GetDumpUserDataRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetDumpUserDataRequest) UnmarshalJSON(data []byte) error {
@@ -4706,12 +4642,10 @@ func (p GetDumpUserDataRequest) Pointer() *GetDumpUserDataRequest {
 }
 
 type DescribeCleanProgressesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeCleanProgressesRequest) UnmarshalJSON(data []byte) error {
@@ -4806,11 +4740,9 @@ func (p DescribeCleanProgressesRequest) Pointer() *DescribeCleanProgressesReques
 }
 
 type GetCleanProgressRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetCleanProgressRequest) UnmarshalJSON(data []byte) error {
@@ -4894,8 +4826,6 @@ func (p GetCleanProgressRequest) Pointer() *GetCleanProgressRequest {
 }
 
 type WaitCleanUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	TransactionId      *string `json:"transactionId"`
@@ -5079,8 +5009,6 @@ func (p WaitCleanUserDataRequest) Pointer() *WaitCleanUserDataRequest {
 }
 
 type CleanUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
@@ -5200,12 +5128,10 @@ func (p CleanUserDataRequest) Pointer() *CleanUserDataRequest {
 }
 
 type DescribeImportProgressesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeImportProgressesRequest) UnmarshalJSON(data []byte) error {
@@ -5300,11 +5226,9 @@ func (p DescribeImportProgressesRequest) Pointer() *DescribeImportProgressesRequ
 }
 
 type GetImportProgressRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetImportProgressRequest) UnmarshalJSON(data []byte) error {
@@ -5388,8 +5312,6 @@ func (p GetImportProgressRequest) Pointer() *GetImportProgressRequest {
 }
 
 type WaitImportUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	TransactionId      *string `json:"transactionId"`
@@ -5573,8 +5495,6 @@ func (p WaitImportUserDataRequest) Pointer() *WaitImportUserDataRequest {
 }
 
 type PrepareImportUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
@@ -5694,8 +5614,6 @@ func (p PrepareImportUserDataRequest) Pointer() *PrepareImportUserDataRequest {
 }
 
 type ImportUserDataRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
@@ -5847,13 +5765,11 @@ func (p ImportUserDataRequest) Pointer() *ImportUserDataRequest {
 }
 
 type DescribeImportErrorLogsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeImportErrorLogsRequest) UnmarshalJSON(data []byte) error {
@@ -5979,12 +5895,10 @@ func (p DescribeImportErrorLogsRequest) Pointer() *DescribeImportErrorLogsReques
 }
 
 type GetImportErrorLogRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	TransactionId   *string `json:"transactionId"`
-	ErrorLogName    *string `json:"errorLogName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	TransactionId *string `json:"transactionId"`
+	ErrorLogName  *string `json:"errorLogName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetImportErrorLogRequest) UnmarshalJSON(data []byte) error {

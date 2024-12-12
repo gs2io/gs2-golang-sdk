@@ -23,8 +23,9 @@ import (
 )
 
 type GetChartResult struct {
-	Items         []Chart `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Chart              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type GetChartAsyncResult struct {
@@ -40,8 +41,26 @@ func NewGetChartResultFromJson(data string) GetChartResult {
 
 func NewGetChartResultFromDict(data map[string]interface{}) GetChartResult {
 	return GetChartResult{
-		Items:         CastCharts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Chart {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastCharts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -51,6 +70,12 @@ func (p GetChartResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -59,8 +84,9 @@ func (p GetChartResult) Pointer() *GetChartResult {
 }
 
 type GetDistributionResult struct {
-	Items         []Distribution `json:"items"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Items         []Distribution       `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDistributionAsyncResult struct {
@@ -76,8 +102,26 @@ func NewGetDistributionResultFromJson(data string) GetDistributionResult {
 
 func NewGetDistributionResultFromDict(data map[string]interface{}) GetDistributionResult {
 	return GetDistributionResult{
-		Items:         CastDistributions(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Distribution {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDistributions(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -87,6 +131,12 @@ func (p GetDistributionResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -95,7 +145,8 @@ func (p GetDistributionResult) Pointer() *GetDistributionResult {
 }
 
 type GetCumulativeResult struct {
-	Item *Cumulative `json:"item"`
+	Item     *Cumulative          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCumulativeAsyncResult struct {
@@ -111,13 +162,37 @@ func NewGetCumulativeResultFromJson(data string) GetCumulativeResult {
 
 func NewGetCumulativeResultFromDict(data map[string]interface{}) GetCumulativeResult {
 	return GetCumulativeResult{
-		Item: NewCumulativeFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Cumulative {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCumulativeFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetCumulativeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -126,8 +201,9 @@ func (p GetCumulativeResult) Pointer() *GetCumulativeResult {
 }
 
 type DescribeBillingActivitiesResult struct {
-	Items         []BillingActivity `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+	Items         []BillingActivity    `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeBillingActivitiesAsyncResult struct {
@@ -143,8 +219,26 @@ func NewDescribeBillingActivitiesResultFromJson(data string) DescribeBillingActi
 
 func NewDescribeBillingActivitiesResultFromDict(data map[string]interface{}) DescribeBillingActivitiesResult {
 	return DescribeBillingActivitiesResult{
-		Items:         CastBillingActivities(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []BillingActivity {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBillingActivities(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -154,6 +248,12 @@ func (p DescribeBillingActivitiesResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -162,7 +262,8 @@ func (p DescribeBillingActivitiesResult) Pointer() *DescribeBillingActivitiesRes
 }
 
 type GetBillingActivityResult struct {
-	Item *BillingActivity `json:"item"`
+	Item     *BillingActivity     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetBillingActivityAsyncResult struct {
@@ -178,13 +279,37 @@ func NewGetBillingActivityResultFromJson(data string) GetBillingActivityResult {
 
 func NewGetBillingActivityResultFromDict(data map[string]interface{}) GetBillingActivityResult {
 	return GetBillingActivityResult{
-		Item: NewBillingActivityFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BillingActivity {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBillingActivityFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetBillingActivityResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -193,7 +318,8 @@ func (p GetBillingActivityResult) Pointer() *GetBillingActivityResult {
 }
 
 type GetGeneralMetricsResult struct {
-	Item *GeneralMetrics `json:"item"`
+	Item     *GeneralMetrics      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGeneralMetricsAsyncResult struct {
@@ -209,13 +335,37 @@ func NewGetGeneralMetricsResultFromJson(data string) GetGeneralMetricsResult {
 
 func NewGetGeneralMetricsResultFromDict(data map[string]interface{}) GetGeneralMetricsResult {
 	return GetGeneralMetricsResult{
-		Item: NewGeneralMetricsFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GeneralMetrics {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGeneralMetricsFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetGeneralMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -224,7 +374,8 @@ func (p GetGeneralMetricsResult) Pointer() *GetGeneralMetricsResult {
 }
 
 type DescribeAccountNamespaceMetricsResult struct {
-	Items []AccountNamespace `json:"items"`
+	Items    []AccountNamespace   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeAccountNamespaceMetricsAsyncResult struct {
@@ -240,7 +391,19 @@ func NewDescribeAccountNamespaceMetricsResultFromJson(data string) DescribeAccou
 
 func NewDescribeAccountNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeAccountNamespaceMetricsResult {
 	return DescribeAccountNamespaceMetricsResult{
-		Items: CastAccountNamespaces(core.CastArray(data["items"])),
+		Items: func() []AccountNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAccountNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -249,6 +412,12 @@ func (p DescribeAccountNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastAccountNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -257,7 +426,8 @@ func (p DescribeAccountNamespaceMetricsResult) Pointer() *DescribeAccountNamespa
 }
 
 type GetAccountNamespaceMetricsResult struct {
-	Item *AccountNamespace `json:"item"`
+	Item     *AccountNamespace    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetAccountNamespaceMetricsAsyncResult struct {
@@ -273,13 +443,37 @@ func NewGetAccountNamespaceMetricsResultFromJson(data string) GetAccountNamespac
 
 func NewGetAccountNamespaceMetricsResultFromDict(data map[string]interface{}) GetAccountNamespaceMetricsResult {
 	return GetAccountNamespaceMetricsResult{
-		Item: NewAccountNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AccountNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetAccountNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -288,7 +482,8 @@ func (p GetAccountNamespaceMetricsResult) Pointer() *GetAccountNamespaceMetricsR
 }
 
 type DescribeChatNamespaceMetricsResult struct {
-	Items []ChatNamespace `json:"items"`
+	Items    []ChatNamespace      `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeChatNamespaceMetricsAsyncResult struct {
@@ -304,7 +499,19 @@ func NewDescribeChatNamespaceMetricsResultFromJson(data string) DescribeChatName
 
 func NewDescribeChatNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeChatNamespaceMetricsResult {
 	return DescribeChatNamespaceMetricsResult{
-		Items: CastChatNamespaces(core.CastArray(data["items"])),
+		Items: func() []ChatNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastChatNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -313,6 +520,12 @@ func (p DescribeChatNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastChatNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -321,7 +534,8 @@ func (p DescribeChatNamespaceMetricsResult) Pointer() *DescribeChatNamespaceMetr
 }
 
 type GetChatNamespaceMetricsResult struct {
-	Item *ChatNamespace `json:"item"`
+	Item     *ChatNamespace       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetChatNamespaceMetricsAsyncResult struct {
@@ -337,13 +551,37 @@ func NewGetChatNamespaceMetricsResultFromJson(data string) GetChatNamespaceMetri
 
 func NewGetChatNamespaceMetricsResultFromDict(data map[string]interface{}) GetChatNamespaceMetricsResult {
 	return GetChatNamespaceMetricsResult{
-		Item: NewChatNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ChatNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetChatNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -352,7 +590,8 @@ func (p GetChatNamespaceMetricsResult) Pointer() *GetChatNamespaceMetricsResult 
 }
 
 type DescribeDatastoreNamespaceMetricsResult struct {
-	Items []DatastoreNamespace `json:"items"`
+	Items    []DatastoreNamespace `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDatastoreNamespaceMetricsAsyncResult struct {
@@ -368,7 +607,19 @@ func NewDescribeDatastoreNamespaceMetricsResultFromJson(data string) DescribeDat
 
 func NewDescribeDatastoreNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeDatastoreNamespaceMetricsResult {
 	return DescribeDatastoreNamespaceMetricsResult{
-		Items: CastDatastoreNamespaces(core.CastArray(data["items"])),
+		Items: func() []DatastoreNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDatastoreNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -377,6 +628,12 @@ func (p DescribeDatastoreNamespaceMetricsResult) ToDict() map[string]interface{}
 		"items": CastDatastoreNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -385,7 +642,8 @@ func (p DescribeDatastoreNamespaceMetricsResult) Pointer() *DescribeDatastoreNam
 }
 
 type GetDatastoreNamespaceMetricsResult struct {
-	Item *DatastoreNamespace `json:"item"`
+	Item     *DatastoreNamespace  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDatastoreNamespaceMetricsAsyncResult struct {
@@ -401,13 +659,37 @@ func NewGetDatastoreNamespaceMetricsResultFromJson(data string) GetDatastoreName
 
 func NewGetDatastoreNamespaceMetricsResultFromDict(data map[string]interface{}) GetDatastoreNamespaceMetricsResult {
 	return GetDatastoreNamespaceMetricsResult{
-		Item: NewDatastoreNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DatastoreNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetDatastoreNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -416,7 +698,8 @@ func (p GetDatastoreNamespaceMetricsResult) Pointer() *GetDatastoreNamespaceMetr
 }
 
 type DescribeDictionaryNamespaceMetricsResult struct {
-	Items []DictionaryNamespace `json:"items"`
+	Items    []DictionaryNamespace `json:"items"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeDictionaryNamespaceMetricsAsyncResult struct {
@@ -432,7 +715,19 @@ func NewDescribeDictionaryNamespaceMetricsResultFromJson(data string) DescribeDi
 
 func NewDescribeDictionaryNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeDictionaryNamespaceMetricsResult {
 	return DescribeDictionaryNamespaceMetricsResult{
-		Items: CastDictionaryNamespaces(core.CastArray(data["items"])),
+		Items: func() []DictionaryNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDictionaryNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -441,6 +736,12 @@ func (p DescribeDictionaryNamespaceMetricsResult) ToDict() map[string]interface{
 		"items": CastDictionaryNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -449,7 +750,8 @@ func (p DescribeDictionaryNamespaceMetricsResult) Pointer() *DescribeDictionaryN
 }
 
 type GetDictionaryNamespaceMetricsResult struct {
-	Item *DictionaryNamespace `json:"item"`
+	Item     *DictionaryNamespace `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDictionaryNamespaceMetricsAsyncResult struct {
@@ -465,13 +767,37 @@ func NewGetDictionaryNamespaceMetricsResultFromJson(data string) GetDictionaryNa
 
 func NewGetDictionaryNamespaceMetricsResultFromDict(data map[string]interface{}) GetDictionaryNamespaceMetricsResult {
 	return GetDictionaryNamespaceMetricsResult{
-		Item: NewDictionaryNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DictionaryNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetDictionaryNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -480,7 +806,8 @@ func (p GetDictionaryNamespaceMetricsResult) Pointer() *GetDictionaryNamespaceMe
 }
 
 type DescribeExchangeRateModelMetricsResult struct {
-	Items []ExchangeRateModel `json:"items"`
+	Items    []ExchangeRateModel  `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeExchangeRateModelMetricsAsyncResult struct {
@@ -496,7 +823,19 @@ func NewDescribeExchangeRateModelMetricsResultFromJson(data string) DescribeExch
 
 func NewDescribeExchangeRateModelMetricsResultFromDict(data map[string]interface{}) DescribeExchangeRateModelMetricsResult {
 	return DescribeExchangeRateModelMetricsResult{
-		Items: CastExchangeRateModels(core.CastArray(data["items"])),
+		Items: func() []ExchangeRateModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExchangeRateModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -505,6 +844,12 @@ func (p DescribeExchangeRateModelMetricsResult) ToDict() map[string]interface{} 
 		"items": CastExchangeRateModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -513,7 +858,8 @@ func (p DescribeExchangeRateModelMetricsResult) Pointer() *DescribeExchangeRateM
 }
 
 type GetExchangeRateModelMetricsResult struct {
-	Item *ExchangeRateModel `json:"item"`
+	Item     *ExchangeRateModel   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetExchangeRateModelMetricsAsyncResult struct {
@@ -529,13 +875,37 @@ func NewGetExchangeRateModelMetricsResultFromJson(data string) GetExchangeRateMo
 
 func NewGetExchangeRateModelMetricsResultFromDict(data map[string]interface{}) GetExchangeRateModelMetricsResult {
 	return GetExchangeRateModelMetricsResult{
-		Item: NewExchangeRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ExchangeRateModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeRateModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetExchangeRateModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -544,7 +914,8 @@ func (p GetExchangeRateModelMetricsResult) Pointer() *GetExchangeRateModelMetric
 }
 
 type DescribeExchangeNamespaceMetricsResult struct {
-	Items []ExchangeNamespace `json:"items"`
+	Items    []ExchangeNamespace  `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeExchangeNamespaceMetricsAsyncResult struct {
@@ -560,7 +931,19 @@ func NewDescribeExchangeNamespaceMetricsResultFromJson(data string) DescribeExch
 
 func NewDescribeExchangeNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeExchangeNamespaceMetricsResult {
 	return DescribeExchangeNamespaceMetricsResult{
-		Items: CastExchangeNamespaces(core.CastArray(data["items"])),
+		Items: func() []ExchangeNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExchangeNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -569,6 +952,12 @@ func (p DescribeExchangeNamespaceMetricsResult) ToDict() map[string]interface{} 
 		"items": CastExchangeNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -577,7 +966,8 @@ func (p DescribeExchangeNamespaceMetricsResult) Pointer() *DescribeExchangeNames
 }
 
 type GetExchangeNamespaceMetricsResult struct {
-	Item *ExchangeNamespace `json:"item"`
+	Item     *ExchangeNamespace   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetExchangeNamespaceMetricsAsyncResult struct {
@@ -593,13 +983,37 @@ func NewGetExchangeNamespaceMetricsResultFromJson(data string) GetExchangeNamesp
 
 func NewGetExchangeNamespaceMetricsResultFromDict(data map[string]interface{}) GetExchangeNamespaceMetricsResult {
 	return GetExchangeNamespaceMetricsResult{
-		Item: NewExchangeNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ExchangeNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetExchangeNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -608,7 +1022,8 @@ func (p GetExchangeNamespaceMetricsResult) Pointer() *GetExchangeNamespaceMetric
 }
 
 type DescribeExperienceStatusMetricsResult struct {
-	Items []ExperienceStatus `json:"items"`
+	Items    []ExperienceStatus   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeExperienceStatusMetricsAsyncResult struct {
@@ -624,7 +1039,19 @@ func NewDescribeExperienceStatusMetricsResultFromJson(data string) DescribeExper
 
 func NewDescribeExperienceStatusMetricsResultFromDict(data map[string]interface{}) DescribeExperienceStatusMetricsResult {
 	return DescribeExperienceStatusMetricsResult{
-		Items: CastExperienceStatuses(core.CastArray(data["items"])),
+		Items: func() []ExperienceStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExperienceStatuses(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -633,6 +1060,12 @@ func (p DescribeExperienceStatusMetricsResult) ToDict() map[string]interface{} {
 		"items": CastExperienceStatusesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -641,7 +1074,8 @@ func (p DescribeExperienceStatusMetricsResult) Pointer() *DescribeExperienceStat
 }
 
 type DescribeExperienceExperienceModelMetricsResult struct {
-	Items []ExperienceExperienceModel `json:"items"`
+	Items    []ExperienceExperienceModel `json:"items"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type DescribeExperienceExperienceModelMetricsAsyncResult struct {
@@ -657,7 +1091,19 @@ func NewDescribeExperienceExperienceModelMetricsResultFromJson(data string) Desc
 
 func NewDescribeExperienceExperienceModelMetricsResultFromDict(data map[string]interface{}) DescribeExperienceExperienceModelMetricsResult {
 	return DescribeExperienceExperienceModelMetricsResult{
-		Items: CastExperienceExperienceModels(core.CastArray(data["items"])),
+		Items: func() []ExperienceExperienceModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -666,6 +1112,12 @@ func (p DescribeExperienceExperienceModelMetricsResult) ToDict() map[string]inte
 		"items": CastExperienceExperienceModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -674,7 +1126,8 @@ func (p DescribeExperienceExperienceModelMetricsResult) Pointer() *DescribeExper
 }
 
 type GetExperienceExperienceModelMetricsResult struct {
-	Item *ExperienceExperienceModel `json:"item"`
+	Item     *ExperienceExperienceModel `json:"item"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type GetExperienceExperienceModelMetricsAsyncResult struct {
@@ -690,13 +1143,37 @@ func NewGetExperienceExperienceModelMetricsResultFromJson(data string) GetExperi
 
 func NewGetExperienceExperienceModelMetricsResultFromDict(data map[string]interface{}) GetExperienceExperienceModelMetricsResult {
 	return GetExperienceExperienceModelMetricsResult{
-		Item: NewExperienceExperienceModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ExperienceExperienceModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetExperienceExperienceModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -705,7 +1182,8 @@ func (p GetExperienceExperienceModelMetricsResult) Pointer() *GetExperienceExper
 }
 
 type DescribeExperienceNamespaceMetricsResult struct {
-	Items []ExperienceNamespace `json:"items"`
+	Items    []ExperienceNamespace `json:"items"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeExperienceNamespaceMetricsAsyncResult struct {
@@ -721,7 +1199,19 @@ func NewDescribeExperienceNamespaceMetricsResultFromJson(data string) DescribeEx
 
 func NewDescribeExperienceNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeExperienceNamespaceMetricsResult {
 	return DescribeExperienceNamespaceMetricsResult{
-		Items: CastExperienceNamespaces(core.CastArray(data["items"])),
+		Items: func() []ExperienceNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExperienceNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -730,6 +1220,12 @@ func (p DescribeExperienceNamespaceMetricsResult) ToDict() map[string]interface{
 		"items": CastExperienceNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -738,7 +1234,8 @@ func (p DescribeExperienceNamespaceMetricsResult) Pointer() *DescribeExperienceN
 }
 
 type GetExperienceNamespaceMetricsResult struct {
-	Item *ExperienceNamespace `json:"item"`
+	Item     *ExperienceNamespace `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetExperienceNamespaceMetricsAsyncResult struct {
@@ -754,13 +1251,37 @@ func NewGetExperienceNamespaceMetricsResultFromJson(data string) GetExperienceNa
 
 func NewGetExperienceNamespaceMetricsResultFromDict(data map[string]interface{}) GetExperienceNamespaceMetricsResult {
 	return GetExperienceNamespaceMetricsResult{
-		Item: NewExperienceNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ExperienceNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetExperienceNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -769,7 +1290,8 @@ func (p GetExperienceNamespaceMetricsResult) Pointer() *GetExperienceNamespaceMe
 }
 
 type DescribeFormationFormMetricsResult struct {
-	Items []FormationForm `json:"items"`
+	Items    []FormationForm      `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormationFormMetricsAsyncResult struct {
@@ -785,7 +1307,19 @@ func NewDescribeFormationFormMetricsResultFromJson(data string) DescribeFormatio
 
 func NewDescribeFormationFormMetricsResultFromDict(data map[string]interface{}) DescribeFormationFormMetricsResult {
 	return DescribeFormationFormMetricsResult{
-		Items: CastFormationForms(core.CastArray(data["items"])),
+		Items: func() []FormationForm {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFormationForms(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -794,6 +1328,12 @@ func (p DescribeFormationFormMetricsResult) ToDict() map[string]interface{} {
 		"items": CastFormationFormsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -802,7 +1342,8 @@ func (p DescribeFormationFormMetricsResult) Pointer() *DescribeFormationFormMetr
 }
 
 type DescribeFormationMoldMetricsResult struct {
-	Items []FormationMold `json:"items"`
+	Items    []FormationMold      `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormationMoldMetricsAsyncResult struct {
@@ -818,7 +1359,19 @@ func NewDescribeFormationMoldMetricsResultFromJson(data string) DescribeFormatio
 
 func NewDescribeFormationMoldMetricsResultFromDict(data map[string]interface{}) DescribeFormationMoldMetricsResult {
 	return DescribeFormationMoldMetricsResult{
-		Items: CastFormationMolds(core.CastArray(data["items"])),
+		Items: func() []FormationMold {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFormationMolds(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -827,6 +1380,12 @@ func (p DescribeFormationMoldMetricsResult) ToDict() map[string]interface{} {
 		"items": CastFormationMoldsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -835,7 +1394,8 @@ func (p DescribeFormationMoldMetricsResult) Pointer() *DescribeFormationMoldMetr
 }
 
 type DescribeFormationNamespaceMetricsResult struct {
-	Items []FormationNamespace `json:"items"`
+	Items    []FormationNamespace `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormationNamespaceMetricsAsyncResult struct {
@@ -851,7 +1411,19 @@ func NewDescribeFormationNamespaceMetricsResultFromJson(data string) DescribeFor
 
 func NewDescribeFormationNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeFormationNamespaceMetricsResult {
 	return DescribeFormationNamespaceMetricsResult{
-		Items: CastFormationNamespaces(core.CastArray(data["items"])),
+		Items: func() []FormationNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFormationNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -860,6 +1432,12 @@ func (p DescribeFormationNamespaceMetricsResult) ToDict() map[string]interface{}
 		"items": CastFormationNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -868,7 +1446,8 @@ func (p DescribeFormationNamespaceMetricsResult) Pointer() *DescribeFormationNam
 }
 
 type GetFormationNamespaceMetricsResult struct {
-	Item *FormationNamespace `json:"item"`
+	Item     *FormationNamespace  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormationNamespaceMetricsAsyncResult struct {
@@ -884,13 +1463,37 @@ func NewGetFormationNamespaceMetricsResultFromJson(data string) GetFormationName
 
 func NewGetFormationNamespaceMetricsResultFromDict(data map[string]interface{}) GetFormationNamespaceMetricsResult {
 	return GetFormationNamespaceMetricsResult{
-		Item: NewFormationNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormationNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetFormationNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -899,7 +1502,8 @@ func (p GetFormationNamespaceMetricsResult) Pointer() *GetFormationNamespaceMetr
 }
 
 type DescribeFriendNamespaceMetricsResult struct {
-	Items []FriendNamespace `json:"items"`
+	Items    []FriendNamespace    `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFriendNamespaceMetricsAsyncResult struct {
@@ -915,7 +1519,19 @@ func NewDescribeFriendNamespaceMetricsResultFromJson(data string) DescribeFriend
 
 func NewDescribeFriendNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeFriendNamespaceMetricsResult {
 	return DescribeFriendNamespaceMetricsResult{
-		Items: CastFriendNamespaces(core.CastArray(data["items"])),
+		Items: func() []FriendNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -924,6 +1540,12 @@ func (p DescribeFriendNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastFriendNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -932,7 +1554,8 @@ func (p DescribeFriendNamespaceMetricsResult) Pointer() *DescribeFriendNamespace
 }
 
 type GetFriendNamespaceMetricsResult struct {
-	Item *FriendNamespace `json:"item"`
+	Item     *FriendNamespace     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFriendNamespaceMetricsAsyncResult struct {
@@ -948,13 +1571,37 @@ func NewGetFriendNamespaceMetricsResultFromJson(data string) GetFriendNamespaceM
 
 func NewGetFriendNamespaceMetricsResultFromDict(data map[string]interface{}) GetFriendNamespaceMetricsResult {
 	return GetFriendNamespaceMetricsResult{
-		Item: NewFriendNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetFriendNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -963,7 +1610,8 @@ func (p GetFriendNamespaceMetricsResult) Pointer() *GetFriendNamespaceMetricsRes
 }
 
 type DescribeInboxNamespaceMetricsResult struct {
-	Items []InboxNamespace `json:"items"`
+	Items    []InboxNamespace     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeInboxNamespaceMetricsAsyncResult struct {
@@ -979,7 +1627,19 @@ func NewDescribeInboxNamespaceMetricsResultFromJson(data string) DescribeInboxNa
 
 func NewDescribeInboxNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeInboxNamespaceMetricsResult {
 	return DescribeInboxNamespaceMetricsResult{
-		Items: CastInboxNamespaces(core.CastArray(data["items"])),
+		Items: func() []InboxNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInboxNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -988,6 +1648,12 @@ func (p DescribeInboxNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastInboxNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -996,7 +1662,8 @@ func (p DescribeInboxNamespaceMetricsResult) Pointer() *DescribeInboxNamespaceMe
 }
 
 type GetInboxNamespaceMetricsResult struct {
-	Item *InboxNamespace `json:"item"`
+	Item     *InboxNamespace      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetInboxNamespaceMetricsAsyncResult struct {
@@ -1012,13 +1679,37 @@ func NewGetInboxNamespaceMetricsResultFromJson(data string) GetInboxNamespaceMet
 
 func NewGetInboxNamespaceMetricsResultFromDict(data map[string]interface{}) GetInboxNamespaceMetricsResult {
 	return GetInboxNamespaceMetricsResult{
-		Item: NewInboxNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *InboxNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetInboxNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1027,7 +1718,8 @@ func (p GetInboxNamespaceMetricsResult) Pointer() *GetInboxNamespaceMetricsResul
 }
 
 type DescribeInventoryItemSetMetricsResult struct {
-	Items []InventoryItemSet `json:"items"`
+	Items    []InventoryItemSet   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeInventoryItemSetMetricsAsyncResult struct {
@@ -1043,7 +1735,19 @@ func NewDescribeInventoryItemSetMetricsResultFromJson(data string) DescribeInven
 
 func NewDescribeInventoryItemSetMetricsResultFromDict(data map[string]interface{}) DescribeInventoryItemSetMetricsResult {
 	return DescribeInventoryItemSetMetricsResult{
-		Items: CastInventoryItemSets(core.CastArray(data["items"])),
+		Items: func() []InventoryItemSet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInventoryItemSets(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1052,6 +1756,12 @@ func (p DescribeInventoryItemSetMetricsResult) ToDict() map[string]interface{} {
 		"items": CastInventoryItemSetsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1060,7 +1770,8 @@ func (p DescribeInventoryItemSetMetricsResult) Pointer() *DescribeInventoryItemS
 }
 
 type DescribeInventoryInventoryMetricsResult struct {
-	Items []InventoryInventory `json:"items"`
+	Items    []InventoryInventory `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeInventoryInventoryMetricsAsyncResult struct {
@@ -1076,7 +1787,19 @@ func NewDescribeInventoryInventoryMetricsResultFromJson(data string) DescribeInv
 
 func NewDescribeInventoryInventoryMetricsResultFromDict(data map[string]interface{}) DescribeInventoryInventoryMetricsResult {
 	return DescribeInventoryInventoryMetricsResult{
-		Items: CastInventoryInventories(core.CastArray(data["items"])),
+		Items: func() []InventoryInventory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInventoryInventories(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1085,6 +1808,12 @@ func (p DescribeInventoryInventoryMetricsResult) ToDict() map[string]interface{}
 		"items": CastInventoryInventoriesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1093,7 +1822,8 @@ func (p DescribeInventoryInventoryMetricsResult) Pointer() *DescribeInventoryInv
 }
 
 type DescribeInventoryNamespaceMetricsResult struct {
-	Items []InventoryNamespace `json:"items"`
+	Items    []InventoryNamespace `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeInventoryNamespaceMetricsAsyncResult struct {
@@ -1109,7 +1839,19 @@ func NewDescribeInventoryNamespaceMetricsResultFromJson(data string) DescribeInv
 
 func NewDescribeInventoryNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeInventoryNamespaceMetricsResult {
 	return DescribeInventoryNamespaceMetricsResult{
-		Items: CastInventoryNamespaces(core.CastArray(data["items"])),
+		Items: func() []InventoryNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1118,6 +1860,12 @@ func (p DescribeInventoryNamespaceMetricsResult) ToDict() map[string]interface{}
 		"items": CastInventoryNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1126,7 +1874,8 @@ func (p DescribeInventoryNamespaceMetricsResult) Pointer() *DescribeInventoryNam
 }
 
 type GetInventoryNamespaceMetricsResult struct {
-	Item *InventoryNamespace `json:"item"`
+	Item     *InventoryNamespace  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetInventoryNamespaceMetricsAsyncResult struct {
@@ -1142,13 +1891,37 @@ func NewGetInventoryNamespaceMetricsResultFromJson(data string) GetInventoryName
 
 func NewGetInventoryNamespaceMetricsResultFromDict(data map[string]interface{}) GetInventoryNamespaceMetricsResult {
 	return GetInventoryNamespaceMetricsResult{
-		Item: NewInventoryNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *InventoryNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetInventoryNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1157,7 +1930,8 @@ func (p GetInventoryNamespaceMetricsResult) Pointer() *GetInventoryNamespaceMetr
 }
 
 type DescribeKeyNamespaceMetricsResult struct {
-	Items []KeyNamespace `json:"items"`
+	Items    []KeyNamespace       `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeKeyNamespaceMetricsAsyncResult struct {
@@ -1173,7 +1947,19 @@ func NewDescribeKeyNamespaceMetricsResultFromJson(data string) DescribeKeyNamesp
 
 func NewDescribeKeyNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeKeyNamespaceMetricsResult {
 	return DescribeKeyNamespaceMetricsResult{
-		Items: CastKeyNamespaces(core.CastArray(data["items"])),
+		Items: func() []KeyNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastKeyNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1182,6 +1968,12 @@ func (p DescribeKeyNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastKeyNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1190,7 +1982,8 @@ func (p DescribeKeyNamespaceMetricsResult) Pointer() *DescribeKeyNamespaceMetric
 }
 
 type GetKeyNamespaceMetricsResult struct {
-	Item *KeyNamespace `json:"item"`
+	Item     *KeyNamespace        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetKeyNamespaceMetricsAsyncResult struct {
@@ -1206,13 +1999,37 @@ func NewGetKeyNamespaceMetricsResultFromJson(data string) GetKeyNamespaceMetrics
 
 func NewGetKeyNamespaceMetricsResultFromDict(data map[string]interface{}) GetKeyNamespaceMetricsResult {
 	return GetKeyNamespaceMetricsResult{
-		Item: NewKeyNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *KeyNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetKeyNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1221,7 +2038,8 @@ func (p GetKeyNamespaceMetricsResult) Pointer() *GetKeyNamespaceMetricsResult {
 }
 
 type DescribeLimitCounterMetricsResult struct {
-	Items []LimitCounter `json:"items"`
+	Items    []LimitCounter       `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLimitCounterMetricsAsyncResult struct {
@@ -1237,7 +2055,19 @@ func NewDescribeLimitCounterMetricsResultFromJson(data string) DescribeLimitCoun
 
 func NewDescribeLimitCounterMetricsResultFromDict(data map[string]interface{}) DescribeLimitCounterMetricsResult {
 	return DescribeLimitCounterMetricsResult{
-		Items: CastLimitCounters(core.CastArray(data["items"])),
+		Items: func() []LimitCounter {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLimitCounters(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1246,6 +2076,12 @@ func (p DescribeLimitCounterMetricsResult) ToDict() map[string]interface{} {
 		"items": CastLimitCountersFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1254,7 +2090,8 @@ func (p DescribeLimitCounterMetricsResult) Pointer() *DescribeLimitCounterMetric
 }
 
 type DescribeLimitLimitModelMetricsResult struct {
-	Items []LimitLimitModel `json:"items"`
+	Items    []LimitLimitModel    `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLimitLimitModelMetricsAsyncResult struct {
@@ -1270,7 +2107,19 @@ func NewDescribeLimitLimitModelMetricsResultFromJson(data string) DescribeLimitL
 
 func NewDescribeLimitLimitModelMetricsResultFromDict(data map[string]interface{}) DescribeLimitLimitModelMetricsResult {
 	return DescribeLimitLimitModelMetricsResult{
-		Items: CastLimitLimitModels(core.CastArray(data["items"])),
+		Items: func() []LimitLimitModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLimitLimitModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1279,6 +2128,12 @@ func (p DescribeLimitLimitModelMetricsResult) ToDict() map[string]interface{} {
 		"items": CastLimitLimitModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1287,7 +2142,8 @@ func (p DescribeLimitLimitModelMetricsResult) Pointer() *DescribeLimitLimitModel
 }
 
 type GetLimitLimitModelMetricsResult struct {
-	Item *LimitLimitModel `json:"item"`
+	Item     *LimitLimitModel     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLimitLimitModelMetricsAsyncResult struct {
@@ -1303,13 +2159,37 @@ func NewGetLimitLimitModelMetricsResultFromJson(data string) GetLimitLimitModelM
 
 func NewGetLimitLimitModelMetricsResultFromDict(data map[string]interface{}) GetLimitLimitModelMetricsResult {
 	return GetLimitLimitModelMetricsResult{
-		Item: NewLimitLimitModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LimitLimitModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetLimitLimitModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1318,7 +2198,8 @@ func (p GetLimitLimitModelMetricsResult) Pointer() *GetLimitLimitModelMetricsRes
 }
 
 type DescribeLimitNamespaceMetricsResult struct {
-	Items []LimitNamespace `json:"items"`
+	Items    []LimitNamespace     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLimitNamespaceMetricsAsyncResult struct {
@@ -1334,7 +2215,19 @@ func NewDescribeLimitNamespaceMetricsResultFromJson(data string) DescribeLimitNa
 
 func NewDescribeLimitNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeLimitNamespaceMetricsResult {
 	return DescribeLimitNamespaceMetricsResult{
-		Items: CastLimitNamespaces(core.CastArray(data["items"])),
+		Items: func() []LimitNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLimitNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1343,6 +2236,12 @@ func (p DescribeLimitNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastLimitNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1351,7 +2250,8 @@ func (p DescribeLimitNamespaceMetricsResult) Pointer() *DescribeLimitNamespaceMe
 }
 
 type GetLimitNamespaceMetricsResult struct {
-	Item *LimitNamespace `json:"item"`
+	Item     *LimitNamespace      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLimitNamespaceMetricsAsyncResult struct {
@@ -1367,13 +2267,37 @@ func NewGetLimitNamespaceMetricsResultFromJson(data string) GetLimitNamespaceMet
 
 func NewGetLimitNamespaceMetricsResultFromDict(data map[string]interface{}) GetLimitNamespaceMetricsResult {
 	return GetLimitNamespaceMetricsResult{
-		Item: NewLimitNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LimitNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetLimitNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1382,7 +2306,8 @@ func (p GetLimitNamespaceMetricsResult) Pointer() *GetLimitNamespaceMetricsResul
 }
 
 type DescribeLotteryLotteryMetricsResult struct {
-	Items []LotteryLottery `json:"items"`
+	Items    []LotteryLottery     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLotteryLotteryMetricsAsyncResult struct {
@@ -1398,7 +2323,19 @@ func NewDescribeLotteryLotteryMetricsResultFromJson(data string) DescribeLottery
 
 func NewDescribeLotteryLotteryMetricsResultFromDict(data map[string]interface{}) DescribeLotteryLotteryMetricsResult {
 	return DescribeLotteryLotteryMetricsResult{
-		Items: CastLotteryLotteries(core.CastArray(data["items"])),
+		Items: func() []LotteryLottery {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLotteryLotteries(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1407,6 +2344,12 @@ func (p DescribeLotteryLotteryMetricsResult) ToDict() map[string]interface{} {
 		"items": CastLotteryLotteriesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1415,7 +2358,8 @@ func (p DescribeLotteryLotteryMetricsResult) Pointer() *DescribeLotteryLotteryMe
 }
 
 type GetLotteryLotteryMetricsResult struct {
-	Item *LotteryLottery `json:"item"`
+	Item     *LotteryLottery      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLotteryLotteryMetricsAsyncResult struct {
@@ -1431,13 +2375,37 @@ func NewGetLotteryLotteryMetricsResultFromJson(data string) GetLotteryLotteryMet
 
 func NewGetLotteryLotteryMetricsResultFromDict(data map[string]interface{}) GetLotteryLotteryMetricsResult {
 	return GetLotteryLotteryMetricsResult{
-		Item: NewLotteryLotteryFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LotteryLottery {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryLotteryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetLotteryLotteryMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1446,7 +2414,8 @@ func (p GetLotteryLotteryMetricsResult) Pointer() *GetLotteryLotteryMetricsResul
 }
 
 type DescribeLotteryNamespaceMetricsResult struct {
-	Items []LotteryNamespace `json:"items"`
+	Items    []LotteryNamespace   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLotteryNamespaceMetricsAsyncResult struct {
@@ -1462,7 +2431,19 @@ func NewDescribeLotteryNamespaceMetricsResultFromJson(data string) DescribeLotte
 
 func NewDescribeLotteryNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeLotteryNamespaceMetricsResult {
 	return DescribeLotteryNamespaceMetricsResult{
-		Items: CastLotteryNamespaces(core.CastArray(data["items"])),
+		Items: func() []LotteryNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLotteryNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1471,6 +2452,12 @@ func (p DescribeLotteryNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastLotteryNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1479,7 +2466,8 @@ func (p DescribeLotteryNamespaceMetricsResult) Pointer() *DescribeLotteryNamespa
 }
 
 type GetLotteryNamespaceMetricsResult struct {
-	Item *LotteryNamespace `json:"item"`
+	Item     *LotteryNamespace    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLotteryNamespaceMetricsAsyncResult struct {
@@ -1495,13 +2483,37 @@ func NewGetLotteryNamespaceMetricsResultFromJson(data string) GetLotteryNamespac
 
 func NewGetLotteryNamespaceMetricsResultFromDict(data map[string]interface{}) GetLotteryNamespaceMetricsResult {
 	return GetLotteryNamespaceMetricsResult{
-		Item: NewLotteryNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LotteryNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetLotteryNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1510,7 +2522,8 @@ func (p GetLotteryNamespaceMetricsResult) Pointer() *GetLotteryNamespaceMetricsR
 }
 
 type DescribeMatchmakingNamespaceMetricsResult struct {
-	Items []MatchmakingNamespace `json:"items"`
+	Items    []MatchmakingNamespace `json:"items"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeMatchmakingNamespaceMetricsAsyncResult struct {
@@ -1526,7 +2539,19 @@ func NewDescribeMatchmakingNamespaceMetricsResultFromJson(data string) DescribeM
 
 func NewDescribeMatchmakingNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeMatchmakingNamespaceMetricsResult {
 	return DescribeMatchmakingNamespaceMetricsResult{
-		Items: CastMatchmakingNamespaces(core.CastArray(data["items"])),
+		Items: func() []MatchmakingNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMatchmakingNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1535,6 +2560,12 @@ func (p DescribeMatchmakingNamespaceMetricsResult) ToDict() map[string]interface
 		"items": CastMatchmakingNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1543,7 +2574,8 @@ func (p DescribeMatchmakingNamespaceMetricsResult) Pointer() *DescribeMatchmakin
 }
 
 type GetMatchmakingNamespaceMetricsResult struct {
-	Item *MatchmakingNamespace `json:"item"`
+	Item     *MatchmakingNamespace `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetMatchmakingNamespaceMetricsAsyncResult struct {
@@ -1559,13 +2591,37 @@ func NewGetMatchmakingNamespaceMetricsResultFromJson(data string) GetMatchmaking
 
 func NewGetMatchmakingNamespaceMetricsResultFromDict(data map[string]interface{}) GetMatchmakingNamespaceMetricsResult {
 	return GetMatchmakingNamespaceMetricsResult{
-		Item: NewMatchmakingNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MatchmakingNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetMatchmakingNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1574,7 +2630,8 @@ func (p GetMatchmakingNamespaceMetricsResult) Pointer() *GetMatchmakingNamespace
 }
 
 type DescribeMissionCounterMetricsResult struct {
-	Items []MissionCounter `json:"items"`
+	Items    []MissionCounter     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMissionCounterMetricsAsyncResult struct {
@@ -1590,7 +2647,19 @@ func NewDescribeMissionCounterMetricsResultFromJson(data string) DescribeMission
 
 func NewDescribeMissionCounterMetricsResultFromDict(data map[string]interface{}) DescribeMissionCounterMetricsResult {
 	return DescribeMissionCounterMetricsResult{
-		Items: CastMissionCounters(core.CastArray(data["items"])),
+		Items: func() []MissionCounter {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMissionCounters(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1599,6 +2668,12 @@ func (p DescribeMissionCounterMetricsResult) ToDict() map[string]interface{} {
 		"items": CastMissionCountersFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1607,7 +2682,8 @@ func (p DescribeMissionCounterMetricsResult) Pointer() *DescribeMissionCounterMe
 }
 
 type DescribeMissionMissionGroupModelMetricsResult struct {
-	Items []MissionMissionGroupModel `json:"items"`
+	Items    []MissionMissionGroupModel `json:"items"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type DescribeMissionMissionGroupModelMetricsAsyncResult struct {
@@ -1623,7 +2699,19 @@ func NewDescribeMissionMissionGroupModelMetricsResultFromJson(data string) Descr
 
 func NewDescribeMissionMissionGroupModelMetricsResultFromDict(data map[string]interface{}) DescribeMissionMissionGroupModelMetricsResult {
 	return DescribeMissionMissionGroupModelMetricsResult{
-		Items: CastMissionMissionGroupModels(core.CastArray(data["items"])),
+		Items: func() []MissionMissionGroupModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMissionMissionGroupModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1632,6 +2720,12 @@ func (p DescribeMissionMissionGroupModelMetricsResult) ToDict() map[string]inter
 		"items": CastMissionMissionGroupModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1640,7 +2734,8 @@ func (p DescribeMissionMissionGroupModelMetricsResult) Pointer() *DescribeMissio
 }
 
 type GetMissionMissionGroupModelMetricsResult struct {
-	Item *MissionMissionGroupModel `json:"item"`
+	Item     *MissionMissionGroupModel `json:"item"`
+	Metadata *core.ResultMetadata      `json:"metadata"`
 }
 
 type GetMissionMissionGroupModelMetricsAsyncResult struct {
@@ -1656,13 +2751,37 @@ func NewGetMissionMissionGroupModelMetricsResultFromJson(data string) GetMission
 
 func NewGetMissionMissionGroupModelMetricsResultFromDict(data map[string]interface{}) GetMissionMissionGroupModelMetricsResult {
 	return GetMissionMissionGroupModelMetricsResult{
-		Item: NewMissionMissionGroupModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MissionMissionGroupModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionMissionGroupModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetMissionMissionGroupModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1671,7 +2790,8 @@ func (p GetMissionMissionGroupModelMetricsResult) Pointer() *GetMissionMissionGr
 }
 
 type DescribeMissionNamespaceMetricsResult struct {
-	Items []MissionNamespace `json:"items"`
+	Items    []MissionNamespace   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMissionNamespaceMetricsAsyncResult struct {
@@ -1687,7 +2807,19 @@ func NewDescribeMissionNamespaceMetricsResultFromJson(data string) DescribeMissi
 
 func NewDescribeMissionNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeMissionNamespaceMetricsResult {
 	return DescribeMissionNamespaceMetricsResult{
-		Items: CastMissionNamespaces(core.CastArray(data["items"])),
+		Items: func() []MissionNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMissionNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1696,6 +2828,12 @@ func (p DescribeMissionNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastMissionNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1704,7 +2842,8 @@ func (p DescribeMissionNamespaceMetricsResult) Pointer() *DescribeMissionNamespa
 }
 
 type GetMissionNamespaceMetricsResult struct {
-	Item *MissionNamespace `json:"item"`
+	Item     *MissionNamespace    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMissionNamespaceMetricsAsyncResult struct {
@@ -1720,13 +2859,37 @@ func NewGetMissionNamespaceMetricsResultFromJson(data string) GetMissionNamespac
 
 func NewGetMissionNamespaceMetricsResultFromDict(data map[string]interface{}) GetMissionNamespaceMetricsResult {
 	return GetMissionNamespaceMetricsResult{
-		Item: NewMissionNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MissionNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetMissionNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1735,7 +2898,8 @@ func (p GetMissionNamespaceMetricsResult) Pointer() *GetMissionNamespaceMetricsR
 }
 
 type DescribeMoneyWalletMetricsResult struct {
-	Items []MoneyWallet `json:"items"`
+	Items    []MoneyWallet        `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoneyWalletMetricsAsyncResult struct {
@@ -1751,7 +2915,19 @@ func NewDescribeMoneyWalletMetricsResultFromJson(data string) DescribeMoneyWalle
 
 func NewDescribeMoneyWalletMetricsResultFromDict(data map[string]interface{}) DescribeMoneyWalletMetricsResult {
 	return DescribeMoneyWalletMetricsResult{
-		Items: CastMoneyWallets(core.CastArray(data["items"])),
+		Items: func() []MoneyWallet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMoneyWallets(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1760,6 +2936,12 @@ func (p DescribeMoneyWalletMetricsResult) ToDict() map[string]interface{} {
 		"items": CastMoneyWalletsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1768,7 +2950,8 @@ func (p DescribeMoneyWalletMetricsResult) Pointer() *DescribeMoneyWalletMetricsR
 }
 
 type DescribeMoneyReceiptMetricsResult struct {
-	Items []MoneyReceipt `json:"items"`
+	Items    []MoneyReceipt       `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoneyReceiptMetricsAsyncResult struct {
@@ -1784,7 +2967,19 @@ func NewDescribeMoneyReceiptMetricsResultFromJson(data string) DescribeMoneyRece
 
 func NewDescribeMoneyReceiptMetricsResultFromDict(data map[string]interface{}) DescribeMoneyReceiptMetricsResult {
 	return DescribeMoneyReceiptMetricsResult{
-		Items: CastMoneyReceipts(core.CastArray(data["items"])),
+		Items: func() []MoneyReceipt {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMoneyReceipts(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1793,6 +2988,12 @@ func (p DescribeMoneyReceiptMetricsResult) ToDict() map[string]interface{} {
 		"items": CastMoneyReceiptsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1801,7 +3002,8 @@ func (p DescribeMoneyReceiptMetricsResult) Pointer() *DescribeMoneyReceiptMetric
 }
 
 type DescribeMoneyNamespaceMetricsResult struct {
-	Items []MoneyNamespace `json:"items"`
+	Items    []MoneyNamespace     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoneyNamespaceMetricsAsyncResult struct {
@@ -1817,7 +3019,19 @@ func NewDescribeMoneyNamespaceMetricsResultFromJson(data string) DescribeMoneyNa
 
 func NewDescribeMoneyNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeMoneyNamespaceMetricsResult {
 	return DescribeMoneyNamespaceMetricsResult{
-		Items: CastMoneyNamespaces(core.CastArray(data["items"])),
+		Items: func() []MoneyNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMoneyNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1826,6 +3040,12 @@ func (p DescribeMoneyNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastMoneyNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1834,7 +3054,8 @@ func (p DescribeMoneyNamespaceMetricsResult) Pointer() *DescribeMoneyNamespaceMe
 }
 
 type GetMoneyNamespaceMetricsResult struct {
-	Item *MoneyNamespace `json:"item"`
+	Item     *MoneyNamespace      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMoneyNamespaceMetricsAsyncResult struct {
@@ -1850,13 +3071,37 @@ func NewGetMoneyNamespaceMetricsResultFromJson(data string) GetMoneyNamespaceMet
 
 func NewGetMoneyNamespaceMetricsResultFromDict(data map[string]interface{}) GetMoneyNamespaceMetricsResult {
 	return GetMoneyNamespaceMetricsResult{
-		Item: NewMoneyNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoneyNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetMoneyNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1865,7 +3110,8 @@ func (p GetMoneyNamespaceMetricsResult) Pointer() *GetMoneyNamespaceMetricsResul
 }
 
 type DescribeQuestQuestModelMetricsResult struct {
-	Items []QuestQuestModel `json:"items"`
+	Items    []QuestQuestModel    `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeQuestQuestModelMetricsAsyncResult struct {
@@ -1881,7 +3127,19 @@ func NewDescribeQuestQuestModelMetricsResultFromJson(data string) DescribeQuestQ
 
 func NewDescribeQuestQuestModelMetricsResultFromDict(data map[string]interface{}) DescribeQuestQuestModelMetricsResult {
 	return DescribeQuestQuestModelMetricsResult{
-		Items: CastQuestQuestModels(core.CastArray(data["items"])),
+		Items: func() []QuestQuestModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastQuestQuestModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1890,6 +3148,12 @@ func (p DescribeQuestQuestModelMetricsResult) ToDict() map[string]interface{} {
 		"items": CastQuestQuestModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1898,7 +3162,8 @@ func (p DescribeQuestQuestModelMetricsResult) Pointer() *DescribeQuestQuestModel
 }
 
 type GetQuestQuestModelMetricsResult struct {
-	Item *QuestQuestModel `json:"item"`
+	Item     *QuestQuestModel     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetQuestQuestModelMetricsAsyncResult struct {
@@ -1914,13 +3179,37 @@ func NewGetQuestQuestModelMetricsResultFromJson(data string) GetQuestQuestModelM
 
 func NewGetQuestQuestModelMetricsResultFromDict(data map[string]interface{}) GetQuestQuestModelMetricsResult {
 	return GetQuestQuestModelMetricsResult{
-		Item: NewQuestQuestModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *QuestQuestModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetQuestQuestModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1929,7 +3218,8 @@ func (p GetQuestQuestModelMetricsResult) Pointer() *GetQuestQuestModelMetricsRes
 }
 
 type DescribeQuestQuestGroupModelMetricsResult struct {
-	Items []QuestQuestGroupModel `json:"items"`
+	Items    []QuestQuestGroupModel `json:"items"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeQuestQuestGroupModelMetricsAsyncResult struct {
@@ -1945,7 +3235,19 @@ func NewDescribeQuestQuestGroupModelMetricsResultFromJson(data string) DescribeQ
 
 func NewDescribeQuestQuestGroupModelMetricsResultFromDict(data map[string]interface{}) DescribeQuestQuestGroupModelMetricsResult {
 	return DescribeQuestQuestGroupModelMetricsResult{
-		Items: CastQuestQuestGroupModels(core.CastArray(data["items"])),
+		Items: func() []QuestQuestGroupModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastQuestQuestGroupModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1954,6 +3256,12 @@ func (p DescribeQuestQuestGroupModelMetricsResult) ToDict() map[string]interface
 		"items": CastQuestQuestGroupModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1962,7 +3270,8 @@ func (p DescribeQuestQuestGroupModelMetricsResult) Pointer() *DescribeQuestQuest
 }
 
 type GetQuestQuestGroupModelMetricsResult struct {
-	Item *QuestQuestGroupModel `json:"item"`
+	Item     *QuestQuestGroupModel `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetQuestQuestGroupModelMetricsAsyncResult struct {
@@ -1978,13 +3287,37 @@ func NewGetQuestQuestGroupModelMetricsResultFromJson(data string) GetQuestQuestG
 
 func NewGetQuestQuestGroupModelMetricsResultFromDict(data map[string]interface{}) GetQuestQuestGroupModelMetricsResult {
 	return GetQuestQuestGroupModelMetricsResult{
-		Item: NewQuestQuestGroupModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *QuestQuestGroupModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestGroupModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetQuestQuestGroupModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -1993,7 +3326,8 @@ func (p GetQuestQuestGroupModelMetricsResult) Pointer() *GetQuestQuestGroupModel
 }
 
 type DescribeQuestNamespaceMetricsResult struct {
-	Items []QuestNamespace `json:"items"`
+	Items    []QuestNamespace     `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeQuestNamespaceMetricsAsyncResult struct {
@@ -2009,7 +3343,19 @@ func NewDescribeQuestNamespaceMetricsResultFromJson(data string) DescribeQuestNa
 
 func NewDescribeQuestNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeQuestNamespaceMetricsResult {
 	return DescribeQuestNamespaceMetricsResult{
-		Items: CastQuestNamespaces(core.CastArray(data["items"])),
+		Items: func() []QuestNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastQuestNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2018,6 +3364,12 @@ func (p DescribeQuestNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastQuestNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2026,7 +3378,8 @@ func (p DescribeQuestNamespaceMetricsResult) Pointer() *DescribeQuestNamespaceMe
 }
 
 type GetQuestNamespaceMetricsResult struct {
-	Item *QuestNamespace `json:"item"`
+	Item     *QuestNamespace      `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetQuestNamespaceMetricsAsyncResult struct {
@@ -2042,13 +3395,37 @@ func NewGetQuestNamespaceMetricsResultFromJson(data string) GetQuestNamespaceMet
 
 func NewGetQuestNamespaceMetricsResultFromDict(data map[string]interface{}) GetQuestNamespaceMetricsResult {
 	return GetQuestNamespaceMetricsResult{
-		Item: NewQuestNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *QuestNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetQuestNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2057,7 +3434,8 @@ func (p GetQuestNamespaceMetricsResult) Pointer() *GetQuestNamespaceMetricsResul
 }
 
 type DescribeRankingCategoryModelMetricsResult struct {
-	Items []RankingCategoryModel `json:"items"`
+	Items    []RankingCategoryModel `json:"items"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeRankingCategoryModelMetricsAsyncResult struct {
@@ -2073,7 +3451,19 @@ func NewDescribeRankingCategoryModelMetricsResultFromJson(data string) DescribeR
 
 func NewDescribeRankingCategoryModelMetricsResultFromDict(data map[string]interface{}) DescribeRankingCategoryModelMetricsResult {
 	return DescribeRankingCategoryModelMetricsResult{
-		Items: CastRankingCategoryModels(core.CastArray(data["items"])),
+		Items: func() []RankingCategoryModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRankingCategoryModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2082,6 +3472,12 @@ func (p DescribeRankingCategoryModelMetricsResult) ToDict() map[string]interface
 		"items": CastRankingCategoryModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2090,7 +3486,8 @@ func (p DescribeRankingCategoryModelMetricsResult) Pointer() *DescribeRankingCat
 }
 
 type GetRankingCategoryModelMetricsResult struct {
-	Item *RankingCategoryModel `json:"item"`
+	Item     *RankingCategoryModel `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetRankingCategoryModelMetricsAsyncResult struct {
@@ -2106,13 +3503,37 @@ func NewGetRankingCategoryModelMetricsResultFromJson(data string) GetRankingCate
 
 func NewGetRankingCategoryModelMetricsResultFromDict(data map[string]interface{}) GetRankingCategoryModelMetricsResult {
 	return GetRankingCategoryModelMetricsResult{
-		Item: NewRankingCategoryModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RankingCategoryModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingCategoryModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetRankingCategoryModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2121,7 +3542,8 @@ func (p GetRankingCategoryModelMetricsResult) Pointer() *GetRankingCategoryModel
 }
 
 type DescribeRankingNamespaceMetricsResult struct {
-	Items []RankingNamespace `json:"items"`
+	Items    []RankingNamespace   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeRankingNamespaceMetricsAsyncResult struct {
@@ -2137,7 +3559,19 @@ func NewDescribeRankingNamespaceMetricsResultFromJson(data string) DescribeRanki
 
 func NewDescribeRankingNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeRankingNamespaceMetricsResult {
 	return DescribeRankingNamespaceMetricsResult{
-		Items: CastRankingNamespaces(core.CastArray(data["items"])),
+		Items: func() []RankingNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRankingNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2146,6 +3580,12 @@ func (p DescribeRankingNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastRankingNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2154,7 +3594,8 @@ func (p DescribeRankingNamespaceMetricsResult) Pointer() *DescribeRankingNamespa
 }
 
 type GetRankingNamespaceMetricsResult struct {
-	Item *RankingNamespace `json:"item"`
+	Item     *RankingNamespace    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetRankingNamespaceMetricsAsyncResult struct {
@@ -2170,13 +3611,37 @@ func NewGetRankingNamespaceMetricsResultFromJson(data string) GetRankingNamespac
 
 func NewGetRankingNamespaceMetricsResultFromDict(data map[string]interface{}) GetRankingNamespaceMetricsResult {
 	return GetRankingNamespaceMetricsResult{
-		Item: NewRankingNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RankingNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetRankingNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2185,7 +3650,8 @@ func (p GetRankingNamespaceMetricsResult) Pointer() *GetRankingNamespaceMetricsR
 }
 
 type DescribeShowcaseDisplayItemMetricsResult struct {
-	Items []ShowcaseDisplayItem `json:"items"`
+	Items    []ShowcaseDisplayItem `json:"items"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeShowcaseDisplayItemMetricsAsyncResult struct {
@@ -2201,7 +3667,19 @@ func NewDescribeShowcaseDisplayItemMetricsResultFromJson(data string) DescribeSh
 
 func NewDescribeShowcaseDisplayItemMetricsResultFromDict(data map[string]interface{}) DescribeShowcaseDisplayItemMetricsResult {
 	return DescribeShowcaseDisplayItemMetricsResult{
-		Items: CastShowcaseDisplayItems(core.CastArray(data["items"])),
+		Items: func() []ShowcaseDisplayItem {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastShowcaseDisplayItems(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2210,6 +3688,12 @@ func (p DescribeShowcaseDisplayItemMetricsResult) ToDict() map[string]interface{
 		"items": CastShowcaseDisplayItemsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2218,7 +3702,8 @@ func (p DescribeShowcaseDisplayItemMetricsResult) Pointer() *DescribeShowcaseDis
 }
 
 type GetShowcaseDisplayItemMetricsResult struct {
-	Item *ShowcaseDisplayItem `json:"item"`
+	Item     *ShowcaseDisplayItem `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetShowcaseDisplayItemMetricsAsyncResult struct {
@@ -2234,13 +3719,37 @@ func NewGetShowcaseDisplayItemMetricsResultFromJson(data string) GetShowcaseDisp
 
 func NewGetShowcaseDisplayItemMetricsResultFromDict(data map[string]interface{}) GetShowcaseDisplayItemMetricsResult {
 	return GetShowcaseDisplayItemMetricsResult{
-		Item: NewShowcaseDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ShowcaseDisplayItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseDisplayItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetShowcaseDisplayItemMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2249,7 +3758,8 @@ func (p GetShowcaseDisplayItemMetricsResult) Pointer() *GetShowcaseDisplayItemMe
 }
 
 type DescribeShowcaseShowcaseMetricsResult struct {
-	Items []ShowcaseShowcase `json:"items"`
+	Items    []ShowcaseShowcase   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeShowcaseShowcaseMetricsAsyncResult struct {
@@ -2265,7 +3775,19 @@ func NewDescribeShowcaseShowcaseMetricsResultFromJson(data string) DescribeShowc
 
 func NewDescribeShowcaseShowcaseMetricsResultFromDict(data map[string]interface{}) DescribeShowcaseShowcaseMetricsResult {
 	return DescribeShowcaseShowcaseMetricsResult{
-		Items: CastShowcaseShowcases(core.CastArray(data["items"])),
+		Items: func() []ShowcaseShowcase {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastShowcaseShowcases(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2274,6 +3796,12 @@ func (p DescribeShowcaseShowcaseMetricsResult) ToDict() map[string]interface{} {
 		"items": CastShowcaseShowcasesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2282,7 +3810,8 @@ func (p DescribeShowcaseShowcaseMetricsResult) Pointer() *DescribeShowcaseShowca
 }
 
 type GetShowcaseShowcaseMetricsResult struct {
-	Item *ShowcaseShowcase `json:"item"`
+	Item     *ShowcaseShowcase    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetShowcaseShowcaseMetricsAsyncResult struct {
@@ -2298,13 +3827,37 @@ func NewGetShowcaseShowcaseMetricsResultFromJson(data string) GetShowcaseShowcas
 
 func NewGetShowcaseShowcaseMetricsResultFromDict(data map[string]interface{}) GetShowcaseShowcaseMetricsResult {
 	return GetShowcaseShowcaseMetricsResult{
-		Item: NewShowcaseShowcaseFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ShowcaseShowcase {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseShowcaseFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetShowcaseShowcaseMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2313,7 +3866,8 @@ func (p GetShowcaseShowcaseMetricsResult) Pointer() *GetShowcaseShowcaseMetricsR
 }
 
 type DescribeShowcaseNamespaceMetricsResult struct {
-	Items []ShowcaseNamespace `json:"items"`
+	Items    []ShowcaseNamespace  `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeShowcaseNamespaceMetricsAsyncResult struct {
@@ -2329,7 +3883,19 @@ func NewDescribeShowcaseNamespaceMetricsResultFromJson(data string) DescribeShow
 
 func NewDescribeShowcaseNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeShowcaseNamespaceMetricsResult {
 	return DescribeShowcaseNamespaceMetricsResult{
-		Items: CastShowcaseNamespaces(core.CastArray(data["items"])),
+		Items: func() []ShowcaseNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastShowcaseNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2338,6 +3904,12 @@ func (p DescribeShowcaseNamespaceMetricsResult) ToDict() map[string]interface{} 
 		"items": CastShowcaseNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2346,7 +3918,8 @@ func (p DescribeShowcaseNamespaceMetricsResult) Pointer() *DescribeShowcaseNames
 }
 
 type GetShowcaseNamespaceMetricsResult struct {
-	Item *ShowcaseNamespace `json:"item"`
+	Item     *ShowcaseNamespace   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetShowcaseNamespaceMetricsAsyncResult struct {
@@ -2362,13 +3935,37 @@ func NewGetShowcaseNamespaceMetricsResultFromJson(data string) GetShowcaseNamesp
 
 func NewGetShowcaseNamespaceMetricsResultFromDict(data map[string]interface{}) GetShowcaseNamespaceMetricsResult {
 	return GetShowcaseNamespaceMetricsResult{
-		Item: NewShowcaseNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ShowcaseNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetShowcaseNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2377,7 +3974,8 @@ func (p GetShowcaseNamespaceMetricsResult) Pointer() *GetShowcaseNamespaceMetric
 }
 
 type DescribeStaminaStaminaModelMetricsResult struct {
-	Items []StaminaStaminaModel `json:"items"`
+	Items    []StaminaStaminaModel `json:"items"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeStaminaStaminaModelMetricsAsyncResult struct {
@@ -2393,7 +3991,19 @@ func NewDescribeStaminaStaminaModelMetricsResultFromJson(data string) DescribeSt
 
 func NewDescribeStaminaStaminaModelMetricsResultFromDict(data map[string]interface{}) DescribeStaminaStaminaModelMetricsResult {
 	return DescribeStaminaStaminaModelMetricsResult{
-		Items: CastStaminaStaminaModels(core.CastArray(data["items"])),
+		Items: func() []StaminaStaminaModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminaStaminaModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2402,6 +4012,12 @@ func (p DescribeStaminaStaminaModelMetricsResult) ToDict() map[string]interface{
 		"items": CastStaminaStaminaModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2410,7 +4026,8 @@ func (p DescribeStaminaStaminaModelMetricsResult) Pointer() *DescribeStaminaStam
 }
 
 type GetStaminaStaminaModelMetricsResult struct {
-	Item *StaminaStaminaModel `json:"item"`
+	Item     *StaminaStaminaModel `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaStaminaModelMetricsAsyncResult struct {
@@ -2426,13 +4043,37 @@ func NewGetStaminaStaminaModelMetricsResultFromJson(data string) GetStaminaStami
 
 func NewGetStaminaStaminaModelMetricsResultFromDict(data map[string]interface{}) GetStaminaStaminaModelMetricsResult {
 	return GetStaminaStaminaModelMetricsResult{
-		Item: NewStaminaStaminaModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaStaminaModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetStaminaStaminaModelMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2441,7 +4082,8 @@ func (p GetStaminaStaminaModelMetricsResult) Pointer() *GetStaminaStaminaModelMe
 }
 
 type DescribeStaminaNamespaceMetricsResult struct {
-	Items []StaminaNamespace `json:"items"`
+	Items    []StaminaNamespace   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStaminaNamespaceMetricsAsyncResult struct {
@@ -2457,7 +4099,19 @@ func NewDescribeStaminaNamespaceMetricsResultFromJson(data string) DescribeStami
 
 func NewDescribeStaminaNamespaceMetricsResultFromDict(data map[string]interface{}) DescribeStaminaNamespaceMetricsResult {
 	return DescribeStaminaNamespaceMetricsResult{
-		Items: CastStaminaNamespaces(core.CastArray(data["items"])),
+		Items: func() []StaminaNamespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminaNamespaces(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2466,6 +4120,12 @@ func (p DescribeStaminaNamespaceMetricsResult) ToDict() map[string]interface{} {
 		"items": CastStaminaNamespacesFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 
@@ -2474,7 +4134,8 @@ func (p DescribeStaminaNamespaceMetricsResult) Pointer() *DescribeStaminaNamespa
 }
 
 type GetStaminaNamespaceMetricsResult struct {
-	Item *StaminaNamespace `json:"item"`
+	Item     *StaminaNamespace    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaNamespaceMetricsAsyncResult struct {
@@ -2490,13 +4151,37 @@ func NewGetStaminaNamespaceMetricsResultFromJson(data string) GetStaminaNamespac
 
 func NewGetStaminaNamespaceMetricsResultFromDict(data map[string]interface{}) GetStaminaNamespaceMetricsResult {
 	return GetStaminaNamespaceMetricsResult{
-		Item: NewStaminaNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaNamespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetStaminaNamespaceMetricsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
 	}
 }
 

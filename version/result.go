@@ -1315,6 +1315,118 @@ func (p AcceptByUserIdResult) Pointer() *AcceptByUserIdResult {
 	return &p
 }
 
+type RejectResult struct {
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type RejectAsyncResult struct {
+	result *RejectResult
+	err    error
+}
+
+func NewRejectResultFromJson(data string) RejectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRejectResultFromDict(dict)
+}
+
+func NewRejectResultFromDict(data map[string]interface{}) RejectResult {
+	return RejectResult{
+		Item: func() *AcceptVersion {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p RejectResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p RejectResult) Pointer() *RejectResult {
+	return &p
+}
+
+type RejectByUserIdResult struct {
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type RejectByUserIdAsyncResult struct {
+	result *RejectByUserIdResult
+	err    error
+}
+
+func NewRejectByUserIdResultFromJson(data string) RejectByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRejectByUserIdResultFromDict(dict)
+}
+
+func NewRejectByUserIdResultFromDict(data map[string]interface{}) RejectByUserIdResult {
+	return RejectByUserIdResult{
+		Item: func() *AcceptVersion {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAcceptVersionFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p RejectByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p RejectByUserIdResult) Pointer() *RejectByUserIdResult {
+	return &p
+}
+
 type GetAcceptVersionResult struct {
 	Item     *AcceptVersion       `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

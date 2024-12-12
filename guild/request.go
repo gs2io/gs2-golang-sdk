@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId            *string              `json:"sourceRequestId"`
-	RequestId                  *string              `json:"requestId"`
 	ContextStack               *string              `json:"contextStack"`
 	Name                       *string              `json:"name"`
 	Description                *string              `json:"description"`
@@ -448,11 +444,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -536,11 +530,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -624,8 +616,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId            *string              `json:"sourceRequestId"`
-	RequestId                  *string              `json:"requestId"`
 	ContextStack               *string              `json:"contextStack"`
 	NamespaceName              *string              `json:"namespaceName"`
 	Description                *string              `json:"description"`
@@ -948,11 +938,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -1036,8 +1024,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1156,8 +1142,6 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1276,8 +1260,6 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1396,8 +1378,6 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1516,8 +1496,6 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1636,8 +1614,6 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1788,8 +1764,6 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1940,13 +1914,11 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeGuildModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeGuildModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2072,8 +2044,6 @@ func (p DescribeGuildModelMastersRequest) Pointer() *DescribeGuildModelMastersRe
 }
 
 type CreateGuildModelMasterRequest struct {
-	SourceRequestId               *string     `json:"sourceRequestId"`
-	RequestId                     *string     `json:"requestId"`
 	ContextStack                  *string     `json:"contextStack"`
 	NamespaceName                 *string     `json:"namespaceName"`
 	Name                          *string     `json:"name"`
@@ -2405,12 +2375,10 @@ func (p CreateGuildModelMasterRequest) Pointer() *CreateGuildModelMasterRequest 
 }
 
 type GetGuildModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2525,8 +2493,6 @@ func (p GetGuildModelMasterRequest) Pointer() *GetGuildModelMasterRequest {
 }
 
 type UpdateGuildModelMasterRequest struct {
-	SourceRequestId               *string     `json:"sourceRequestId"`
-	RequestId                     *string     `json:"requestId"`
 	ContextStack                  *string     `json:"contextStack"`
 	NamespaceName                 *string     `json:"namespaceName"`
 	GuildModelName                *string     `json:"guildModelName"`
@@ -2858,12 +2824,10 @@ func (p UpdateGuildModelMasterRequest) Pointer() *UpdateGuildModelMasterRequest 
 }
 
 type DeleteGuildModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DeleteGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2978,11 +2942,9 @@ func (p DeleteGuildModelMasterRequest) Pointer() *DeleteGuildModelMasterRequest 
 }
 
 type DescribeGuildModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeGuildModelsRequest) UnmarshalJSON(data []byte) error {
@@ -3066,12 +3028,10 @@ func (p DescribeGuildModelsRequest) Pointer() *DescribeGuildModelsRequest {
 }
 
 type GetGuildModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildModelRequest) UnmarshalJSON(data []byte) error {
@@ -3186,8 +3146,6 @@ func (p GetGuildModelRequest) Pointer() *GetGuildModelRequest {
 }
 
 type SearchGuildsRequest struct {
-	SourceRequestId         *string   `json:"sourceRequestId"`
-	RequestId               *string   `json:"requestId"`
 	ContextStack            *string   `json:"contextStack"`
 	DuplicationAvoider      *string   `json:"duplicationAvoider"`
 	NamespaceName           *string   `json:"namespaceName"`
@@ -3566,8 +3524,6 @@ func (p SearchGuildsRequest) Pointer() *SearchGuildsRequest {
 }
 
 type SearchGuildsByUserIdRequest struct {
-	SourceRequestId         *string   `json:"sourceRequestId"`
-	RequestId               *string   `json:"requestId"`
 	ContextStack            *string   `json:"contextStack"`
 	DuplicationAvoider      *string   `json:"duplicationAvoider"`
 	NamespaceName           *string   `json:"namespaceName"`
@@ -3978,8 +3934,6 @@ func (p SearchGuildsByUserIdRequest) Pointer() *SearchGuildsByUserIdRequest {
 }
 
 type CreateGuildRequest struct {
-	SourceRequestId        *string     `json:"sourceRequestId"`
-	RequestId              *string     `json:"requestId"`
 	ContextStack           *string     `json:"contextStack"`
 	DuplicationAvoider     *string     `json:"duplicationAvoider"`
 	NamespaceName          *string     `json:"namespaceName"`
@@ -4300,8 +4254,6 @@ func (p CreateGuildRequest) Pointer() *CreateGuildRequest {
 }
 
 type CreateGuildByUserIdRequest struct {
-	SourceRequestId        *string     `json:"sourceRequestId"`
-	RequestId              *string     `json:"requestId"`
 	ContextStack           *string     `json:"contextStack"`
 	DuplicationAvoider     *string     `json:"duplicationAvoider"`
 	NamespaceName          *string     `json:"namespaceName"`
@@ -4654,14 +4606,12 @@ func (p CreateGuildByUserIdRequest) Pointer() *CreateGuildByUserIdRequest {
 }
 
 type GetGuildRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	AccessToken    *string `json:"accessToken"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildRequest) UnmarshalJSON(data []byte) error {
@@ -4838,8 +4788,6 @@ func (p GetGuildRequest) Pointer() *GetGuildRequest {
 }
 
 type GetGuildByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -5054,8 +5002,6 @@ func (p GetGuildByUserIdRequest) Pointer() *GetGuildByUserIdRequest {
 }
 
 type UpdateGuildRequest struct {
-	SourceRequestId        *string     `json:"sourceRequestId"`
-	RequestId              *string     `json:"requestId"`
 	ContextStack           *string     `json:"contextStack"`
 	DuplicationAvoider     *string     `json:"duplicationAvoider"`
 	NamespaceName          *string     `json:"namespaceName"`
@@ -5376,8 +5322,6 @@ func (p UpdateGuildRequest) Pointer() *UpdateGuildRequest {
 }
 
 type UpdateGuildByGuildNameRequest struct {
-	SourceRequestId        *string     `json:"sourceRequestId"`
-	RequestId              *string     `json:"requestId"`
 	ContextStack           *string     `json:"contextStack"`
 	DuplicationAvoider     *string     `json:"duplicationAvoider"`
 	NamespaceName          *string     `json:"namespaceName"`
@@ -5698,8 +5642,6 @@ func (p UpdateGuildByGuildNameRequest) Pointer() *UpdateGuildByGuildNameRequest 
 }
 
 type DeleteMemberRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -5883,8 +5825,6 @@ func (p DeleteMemberRequest) Pointer() *DeleteMemberRequest {
 }
 
 type DeleteMemberByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6068,8 +6008,6 @@ func (p DeleteMemberByGuildNameRequest) Pointer() *DeleteMemberByGuildNameReques
 }
 
 type UpdateMemberRoleRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6285,8 +6223,6 @@ func (p UpdateMemberRoleRequest) Pointer() *UpdateMemberRoleRequest {
 }
 
 type UpdateMemberRoleByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6502,8 +6438,6 @@ func (p UpdateMemberRoleByGuildNameRequest) Pointer() *UpdateMemberRoleByGuildNa
 }
 
 type BatchUpdateMemberRoleRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -6668,8 +6602,6 @@ func (p BatchUpdateMemberRoleRequest) Pointer() *BatchUpdateMemberRoleRequest {
 }
 
 type BatchUpdateMemberRoleByGuildNameRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -6834,8 +6766,6 @@ func (p BatchUpdateMemberRoleByGuildNameRequest) Pointer() *BatchUpdateMemberRol
 }
 
 type DeleteGuildRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6987,8 +6917,6 @@ func (p DeleteGuildRequest) Pointer() *DeleteGuildRequest {
 }
 
 type DeleteGuildByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7140,8 +7068,6 @@ func (p DeleteGuildByGuildNameRequest) Pointer() *DeleteGuildByGuildNameRequest 
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7305,8 +7231,6 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) Pointer() *I
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7470,8 +7394,6 @@ func (p DecreaseMaximumCurrentMaximumMemberCountRequest) Pointer() *DecreaseMaxi
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7635,8 +7557,6 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) Pointer() *D
 }
 
 type VerifyCurrentMaximumMemberCountRequest struct {
-	SourceRequestId                 *string `json:"sourceRequestId"`
-	RequestId                       *string `json:"requestId"`
 	ContextStack                    *string `json:"contextStack"`
 	DuplicationAvoider              *string `json:"duplicationAvoider"`
 	NamespaceName                   *string `json:"namespaceName"`
@@ -7844,8 +7764,6 @@ func (p VerifyCurrentMaximumMemberCountRequest) Pointer() *VerifyCurrentMaximumM
 }
 
 type VerifyCurrentMaximumMemberCountByGuildNameRequest struct {
-	SourceRequestId                 *string `json:"sourceRequestId"`
-	RequestId                       *string `json:"requestId"`
 	ContextStack                    *string `json:"contextStack"`
 	DuplicationAvoider              *string `json:"duplicationAvoider"`
 	NamespaceName                   *string `json:"namespaceName"`
@@ -8053,8 +7971,6 @@ func (p VerifyCurrentMaximumMemberCountByGuildNameRequest) Pointer() *VerifyCurr
 }
 
 type VerifyIncludeMemberRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -8270,8 +8186,6 @@ func (p VerifyIncludeMemberRequest) Pointer() *VerifyIncludeMemberRequest {
 }
 
 type VerifyIncludeMemberByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -8519,8 +8433,6 @@ func (p VerifyIncludeMemberByUserIdRequest) Pointer() *VerifyIncludeMemberByUser
 }
 
 type SetMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -8684,8 +8596,6 @@ func (p SetMaximumCurrentMaximumMemberCountByGuildNameRequest) Pointer() *SetMax
 }
 
 type AssumeRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -8869,8 +8779,6 @@ func (p AssumeRequest) Pointer() *AssumeRequest {
 }
 
 type AssumeByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -9086,12 +8994,10 @@ func (p AssumeByUserIdRequest) Pointer() *AssumeByUserIdRequest {
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9206,12 +9112,10 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest) Pointer() *
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampTask       *string `json:"stampTask"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9326,12 +9230,10 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest) Pointer() *D
 }
 
 type SetMaximumCurrentMaximumMemberCountByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *SetMaximumCurrentMaximumMemberCountByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9446,12 +9348,10 @@ func (p SetMaximumCurrentMaximumMemberCountByStampSheetRequest) Pointer() *SetMa
 }
 
 type VerifyCurrentMaximumMemberCountByStampTaskRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampTask       *string `json:"stampTask"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *VerifyCurrentMaximumMemberCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9566,12 +9466,10 @@ func (p VerifyCurrentMaximumMemberCountByStampTaskRequest) Pointer() *VerifyCurr
 }
 
 type VerifyIncludeMemberByStampTaskRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampTask       *string `json:"stampTask"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *VerifyIncludeMemberByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9686,15 +9584,13 @@ func (p VerifyIncludeMemberByStampTaskRequest) Pointer() *VerifyIncludeMemberByS
 }
 
 type DescribeJoinedGuildsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	GuildModelName  *string `json:"guildModelName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	AccessToken    *string `json:"accessToken"`
+	GuildModelName *string `json:"guildModelName"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeJoinedGuildsRequest) UnmarshalJSON(data []byte) error {
@@ -9882,8 +9778,6 @@ func (p DescribeJoinedGuildsRequest) Pointer() *DescribeJoinedGuildsRequest {
 }
 
 type DescribeJoinedGuildsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -10110,14 +10004,12 @@ func (p DescribeJoinedGuildsByUserIdRequest) Pointer() *DescribeJoinedGuildsByUs
 }
 
 type GetJoinedGuildRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	AccessToken    *string `json:"accessToken"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetJoinedGuildRequest) UnmarshalJSON(data []byte) error {
@@ -10294,8 +10186,6 @@ func (p GetJoinedGuildRequest) Pointer() *GetJoinedGuildRequest {
 }
 
 type GetJoinedGuildByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -10510,8 +10400,6 @@ func (p GetJoinedGuildByUserIdRequest) Pointer() *GetJoinedGuildByUserIdRequest 
 }
 
 type WithdrawalRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -10695,8 +10583,6 @@ func (p WithdrawalRequest) Pointer() *WithdrawalRequest {
 }
 
 type WithdrawalByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -10912,13 +10798,11 @@ func (p WithdrawalByUserIdRequest) Pointer() *WithdrawalByUserIdRequest {
 }
 
 type GetLastGuildMasterActivityRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	AccessToken     *string `json:"accessToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	AccessToken    *string `json:"accessToken"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetLastGuildMasterActivityRequest) UnmarshalJSON(data []byte) error {
@@ -11064,13 +10948,11 @@ func (p GetLastGuildMasterActivityRequest) Pointer() *GetLastGuildMasterActivity
 }
 
 type GetLastGuildMasterActivityByGuildNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetLastGuildMasterActivityByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -11216,8 +11098,6 @@ func (p GetLastGuildMasterActivityByGuildNameRequest) Pointer() *GetLastGuildMas
 }
 
 type PromoteSeniorMemberRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -11369,8 +11249,6 @@ func (p PromoteSeniorMemberRequest) Pointer() *PromoteSeniorMemberRequest {
 }
 
 type PromoteSeniorMemberByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -11522,11 +11400,9 @@ func (p PromoteSeniorMemberByGuildNameRequest) Pointer() *PromoteSeniorMemberByG
 }
 
 type ExportMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11610,11 +11486,9 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentGuildMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentGuildMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11698,12 +11572,10 @@ func (p GetCurrentGuildMasterRequest) Pointer() *GetCurrentGuildMasterRequest {
 }
 
 type UpdateCurrentGuildMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Settings        *string `json:"settings"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Settings      *string `json:"settings"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentGuildMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11818,8 +11690,6 @@ func (p UpdateCurrentGuildMasterRequest) Pointer() *UpdateCurrentGuildMasterRequ
 }
 
 type UpdateCurrentGuildMasterFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
@@ -11923,15 +11793,13 @@ func (p UpdateCurrentGuildMasterFromGitHubRequest) Pointer() *UpdateCurrentGuild
 }
 
 type DescribeReceiveRequestsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	AccessToken    *string `json:"accessToken"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveRequestsRequest) UnmarshalJSON(data []byte) error {
@@ -12119,15 +11987,13 @@ func (p DescribeReceiveRequestsRequest) Pointer() *DescribeReceiveRequestsReques
 }
 
 type DescribeReceiveRequestsByGuildNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveRequestsByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -12315,14 +12181,12 @@ func (p DescribeReceiveRequestsByGuildNameRequest) Pointer() *DescribeReceiveReq
 }
 
 type GetReceiveRequestRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	AccessToken     *string `json:"accessToken"`
-	FromUserId      *string `json:"fromUserId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	AccessToken    *string `json:"accessToken"`
+	FromUserId     *string `json:"fromUserId"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveRequestRequest) UnmarshalJSON(data []byte) error {
@@ -12499,14 +12363,12 @@ func (p GetReceiveRequestRequest) Pointer() *GetReceiveRequestRequest {
 }
 
 type GetReceiveRequestByGuildNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	FromUserId      *string `json:"fromUserId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	FromUserId     *string `json:"fromUserId"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveRequestByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -12683,8 +12545,6 @@ func (p GetReceiveRequestByGuildNameRequest) Pointer() *GetReceiveRequestByGuild
 }
 
 type AcceptRequestRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -12868,8 +12728,6 @@ func (p AcceptRequestRequest) Pointer() *AcceptRequestRequest {
 }
 
 type AcceptRequestByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -13053,8 +12911,6 @@ func (p AcceptRequestByGuildNameRequest) Pointer() *AcceptRequestByGuildNameRequ
 }
 
 type RejectRequestRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -13238,8 +13094,6 @@ func (p RejectRequestRequest) Pointer() *RejectRequestRequest {
 }
 
 type RejectRequestByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -13423,15 +13277,13 @@ func (p RejectRequestByGuildNameRequest) Pointer() *RejectRequestByGuildNameRequ
 }
 
 type DescribeSendRequestsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	GuildModelName  *string `json:"guildModelName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	AccessToken    *string `json:"accessToken"`
+	GuildModelName *string `json:"guildModelName"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSendRequestsRequest) UnmarshalJSON(data []byte) error {
@@ -13619,8 +13471,6 @@ func (p DescribeSendRequestsRequest) Pointer() *DescribeSendRequestsRequest {
 }
 
 type DescribeSendRequestsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -13847,8 +13697,6 @@ func (p DescribeSendRequestsByUserIdRequest) Pointer() *DescribeSendRequestsByUs
 }
 
 type GetSendRequestRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
@@ -14031,8 +13879,6 @@ func (p GetSendRequestRequest) Pointer() *GetSendRequestRequest {
 }
 
 type GetSendRequestByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -14247,8 +14093,6 @@ func (p GetSendRequestByUserIdRequest) Pointer() *GetSendRequestByUserIdRequest 
 }
 
 type SendRequestRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -14432,8 +14276,6 @@ func (p SendRequestRequest) Pointer() *SendRequestRequest {
 }
 
 type SendRequestByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -14649,8 +14491,6 @@ func (p SendRequestByUserIdRequest) Pointer() *SendRequestByUserIdRequest {
 }
 
 type DeleteRequestRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -14834,8 +14674,6 @@ func (p DeleteRequestRequest) Pointer() *DeleteRequestRequest {
 }
 
 type DeleteRequestByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -15051,15 +14889,13 @@ func (p DeleteRequestByUserIdRequest) Pointer() *DeleteRequestByUserIdRequest {
 }
 
 type DescribeIgnoreUsersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	AccessToken    *string `json:"accessToken"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeIgnoreUsersRequest) UnmarshalJSON(data []byte) error {
@@ -15247,15 +15083,13 @@ func (p DescribeIgnoreUsersRequest) Pointer() *DescribeIgnoreUsersRequest {
 }
 
 type DescribeIgnoreUsersByGuildNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	GuildName       *string `json:"guildName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	GuildName      *string `json:"guildName"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeIgnoreUsersByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -15443,14 +15277,12 @@ func (p DescribeIgnoreUsersByGuildNameRequest) Pointer() *DescribeIgnoreUsersByG
 }
 
 type GetIgnoreUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	GuildModelName  *string `json:"guildModelName"`
-	AccessToken     *string `json:"accessToken"`
-	UserId          *string `json:"userId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	GuildModelName *string `json:"guildModelName"`
+	AccessToken    *string `json:"accessToken"`
+	UserId         *string `json:"userId"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetIgnoreUserRequest) UnmarshalJSON(data []byte) error {
@@ -15627,8 +15459,6 @@ func (p GetIgnoreUserRequest) Pointer() *GetIgnoreUserRequest {
 }
 
 type GetIgnoreUserByGuildNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
@@ -15843,8 +15673,6 @@ func (p GetIgnoreUserByGuildNameRequest) Pointer() *GetIgnoreUserByGuildNameRequ
 }
 
 type AddIgnoreUserRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -16028,8 +15856,6 @@ func (p AddIgnoreUserRequest) Pointer() *AddIgnoreUserRequest {
 }
 
 type AddIgnoreUserByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -16245,8 +16071,6 @@ func (p AddIgnoreUserByGuildNameRequest) Pointer() *AddIgnoreUserByGuildNameRequ
 }
 
 type DeleteIgnoreUserRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -16430,8 +16254,6 @@ func (p DeleteIgnoreUserRequest) Pointer() *DeleteIgnoreUserRequest {
 }
 
 type DeleteIgnoreUserByGuildNameRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`

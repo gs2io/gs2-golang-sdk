@@ -125,6 +125,13 @@ func (p Gs2WatchWebSocketClient) GetChartAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getChartAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -235,6 +242,13 @@ func (p Gs2WatchWebSocketClient) GetDistributionAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getDistributionAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -318,6 +332,13 @@ func (p Gs2WatchWebSocketClient) GetCumulativeAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCumulativeAsyncHandler(
@@ -412,6 +433,13 @@ func (p Gs2WatchWebSocketClient) DescribeBillingActivitiesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeBillingActivitiesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -502,6 +530,13 @@ func (p Gs2WatchWebSocketClient) GetBillingActivityAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getBillingActivityAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -580,6 +615,13 @@ func (p Gs2WatchWebSocketClient) GetGeneralMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getGeneralMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -657,6 +699,13 @@ func (p Gs2WatchWebSocketClient) DescribeAccountNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeAccountNamespaceMetricsAsyncHandler(
@@ -739,6 +788,13 @@ func (p Gs2WatchWebSocketClient) GetAccountNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getAccountNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -816,6 +872,13 @@ func (p Gs2WatchWebSocketClient) DescribeChatNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeChatNamespaceMetricsAsyncHandler(
@@ -898,6 +961,13 @@ func (p Gs2WatchWebSocketClient) GetChatNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getChatNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -975,6 +1045,13 @@ func (p Gs2WatchWebSocketClient) DescribeDatastoreNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeDatastoreNamespaceMetricsAsyncHandler(
@@ -1057,6 +1134,13 @@ func (p Gs2WatchWebSocketClient) GetDatastoreNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getDatastoreNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1134,6 +1218,13 @@ func (p Gs2WatchWebSocketClient) DescribeDictionaryNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeDictionaryNamespaceMetricsAsyncHandler(
@@ -1216,6 +1307,13 @@ func (p Gs2WatchWebSocketClient) GetDictionaryNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getDictionaryNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1296,6 +1394,13 @@ func (p Gs2WatchWebSocketClient) DescribeExchangeRateModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeExchangeRateModelMetricsAsyncHandler(
@@ -1381,6 +1486,13 @@ func (p Gs2WatchWebSocketClient) GetExchangeRateModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getExchangeRateModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1458,6 +1570,13 @@ func (p Gs2WatchWebSocketClient) DescribeExchangeNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeExchangeNamespaceMetricsAsyncHandler(
@@ -1539,6 +1658,13 @@ func (p Gs2WatchWebSocketClient) GetExchangeNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getExchangeNamespaceMetricsAsyncHandler(
@@ -1624,6 +1750,13 @@ func (p Gs2WatchWebSocketClient) DescribeExperienceStatusMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeExperienceStatusMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1704,6 +1837,13 @@ func (p Gs2WatchWebSocketClient) DescribeExperienceExperienceModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeExperienceExperienceModelMetricsAsyncHandler(
@@ -1789,6 +1929,13 @@ func (p Gs2WatchWebSocketClient) GetExperienceExperienceModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getExperienceExperienceModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1866,6 +2013,13 @@ func (p Gs2WatchWebSocketClient) DescribeExperienceNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeExperienceNamespaceMetricsAsyncHandler(
@@ -1947,6 +2101,13 @@ func (p Gs2WatchWebSocketClient) GetExperienceNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getExperienceNamespaceMetricsAsyncHandler(
@@ -2032,6 +2193,13 @@ func (p Gs2WatchWebSocketClient) DescribeFormationFormMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeFormationFormMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2113,6 +2281,13 @@ func (p Gs2WatchWebSocketClient) DescribeFormationMoldMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeFormationMoldMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2190,6 +2365,13 @@ func (p Gs2WatchWebSocketClient) DescribeFormationNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeFormationNamespaceMetricsAsyncHandler(
@@ -2272,6 +2454,13 @@ func (p Gs2WatchWebSocketClient) GetFormationNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getFormationNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2349,6 +2538,13 @@ func (p Gs2WatchWebSocketClient) DescribeFriendNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeFriendNamespaceMetricsAsyncHandler(
@@ -2431,6 +2627,13 @@ func (p Gs2WatchWebSocketClient) GetFriendNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getFriendNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2508,6 +2711,13 @@ func (p Gs2WatchWebSocketClient) DescribeInboxNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeInboxNamespaceMetricsAsyncHandler(
@@ -2589,6 +2799,13 @@ func (p Gs2WatchWebSocketClient) GetInboxNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getInboxNamespaceMetricsAsyncHandler(
@@ -2674,6 +2891,13 @@ func (p Gs2WatchWebSocketClient) DescribeInventoryItemSetMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeInventoryItemSetMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2755,6 +2979,13 @@ func (p Gs2WatchWebSocketClient) DescribeInventoryInventoryMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeInventoryInventoryMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2832,6 +3063,13 @@ func (p Gs2WatchWebSocketClient) DescribeInventoryNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeInventoryNamespaceMetricsAsyncHandler(
@@ -2914,6 +3152,13 @@ func (p Gs2WatchWebSocketClient) GetInventoryNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getInventoryNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2991,6 +3236,13 @@ func (p Gs2WatchWebSocketClient) DescribeKeyNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeKeyNamespaceMetricsAsyncHandler(
@@ -3072,6 +3324,13 @@ func (p Gs2WatchWebSocketClient) GetKeyNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getKeyNamespaceMetricsAsyncHandler(
@@ -3157,6 +3416,13 @@ func (p Gs2WatchWebSocketClient) DescribeLimitCounterMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeLimitCounterMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3237,6 +3503,13 @@ func (p Gs2WatchWebSocketClient) DescribeLimitLimitModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeLimitLimitModelMetricsAsyncHandler(
@@ -3322,6 +3595,13 @@ func (p Gs2WatchWebSocketClient) GetLimitLimitModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getLimitLimitModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3399,6 +3679,13 @@ func (p Gs2WatchWebSocketClient) DescribeLimitNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeLimitNamespaceMetricsAsyncHandler(
@@ -3481,6 +3768,13 @@ func (p Gs2WatchWebSocketClient) GetLimitNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getLimitNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3561,6 +3855,13 @@ func (p Gs2WatchWebSocketClient) DescribeLotteryLotteryMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeLotteryLotteryMetricsAsyncHandler(
@@ -3646,6 +3947,13 @@ func (p Gs2WatchWebSocketClient) GetLotteryLotteryMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getLotteryLotteryMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3723,6 +4031,13 @@ func (p Gs2WatchWebSocketClient) DescribeLotteryNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeLotteryNamespaceMetricsAsyncHandler(
@@ -3805,6 +4120,13 @@ func (p Gs2WatchWebSocketClient) GetLotteryNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getLotteryNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3882,6 +4204,13 @@ func (p Gs2WatchWebSocketClient) DescribeMatchmakingNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMatchmakingNamespaceMetricsAsyncHandler(
@@ -3964,6 +4293,13 @@ func (p Gs2WatchWebSocketClient) GetMatchmakingNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getMatchmakingNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4045,6 +4381,13 @@ func (p Gs2WatchWebSocketClient) DescribeMissionCounterMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeMissionCounterMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4125,6 +4468,13 @@ func (p Gs2WatchWebSocketClient) DescribeMissionMissionGroupModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMissionMissionGroupModelMetricsAsyncHandler(
@@ -4210,6 +4560,13 @@ func (p Gs2WatchWebSocketClient) GetMissionMissionGroupModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getMissionMissionGroupModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4287,6 +4644,13 @@ func (p Gs2WatchWebSocketClient) DescribeMissionNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMissionNamespaceMetricsAsyncHandler(
@@ -4369,6 +4733,13 @@ func (p Gs2WatchWebSocketClient) GetMissionNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getMissionNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4449,6 +4820,13 @@ func (p Gs2WatchWebSocketClient) DescribeMoneyWalletMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMoneyWalletMetricsAsyncHandler(
@@ -4531,6 +4909,13 @@ func (p Gs2WatchWebSocketClient) DescribeMoneyReceiptMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeMoneyReceiptMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4608,6 +4993,13 @@ func (p Gs2WatchWebSocketClient) DescribeMoneyNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMoneyNamespaceMetricsAsyncHandler(
@@ -4689,6 +5081,13 @@ func (p Gs2WatchWebSocketClient) GetMoneyNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getMoneyNamespaceMetricsAsyncHandler(
@@ -4773,6 +5172,13 @@ func (p Gs2WatchWebSocketClient) DescribeQuestQuestModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeQuestQuestModelMetricsAsyncHandler(
@@ -4861,6 +5267,13 @@ func (p Gs2WatchWebSocketClient) GetQuestQuestModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getQuestQuestModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4941,6 +5354,13 @@ func (p Gs2WatchWebSocketClient) DescribeQuestQuestGroupModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeQuestQuestGroupModelMetricsAsyncHandler(
@@ -5026,6 +5446,13 @@ func (p Gs2WatchWebSocketClient) GetQuestQuestGroupModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getQuestQuestGroupModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5103,6 +5530,13 @@ func (p Gs2WatchWebSocketClient) DescribeQuestNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeQuestNamespaceMetricsAsyncHandler(
@@ -5185,6 +5619,13 @@ func (p Gs2WatchWebSocketClient) GetQuestNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getQuestNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5265,6 +5706,13 @@ func (p Gs2WatchWebSocketClient) DescribeRankingCategoryModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRankingCategoryModelMetricsAsyncHandler(
@@ -5350,6 +5798,13 @@ func (p Gs2WatchWebSocketClient) GetRankingCategoryModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getRankingCategoryModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5427,6 +5882,13 @@ func (p Gs2WatchWebSocketClient) DescribeRankingNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRankingNamespaceMetricsAsyncHandler(
@@ -5508,6 +5970,13 @@ func (p Gs2WatchWebSocketClient) GetRankingNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRankingNamespaceMetricsAsyncHandler(
@@ -5592,6 +6061,13 @@ func (p Gs2WatchWebSocketClient) DescribeShowcaseDisplayItemMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeShowcaseDisplayItemMetricsAsyncHandler(
@@ -5680,6 +6156,13 @@ func (p Gs2WatchWebSocketClient) GetShowcaseDisplayItemMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getShowcaseDisplayItemMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5760,6 +6243,13 @@ func (p Gs2WatchWebSocketClient) DescribeShowcaseShowcaseMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeShowcaseShowcaseMetricsAsyncHandler(
@@ -5845,6 +6335,13 @@ func (p Gs2WatchWebSocketClient) GetShowcaseShowcaseMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getShowcaseShowcaseMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5922,6 +6419,13 @@ func (p Gs2WatchWebSocketClient) DescribeShowcaseNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeShowcaseNamespaceMetricsAsyncHandler(
@@ -6004,6 +6508,13 @@ func (p Gs2WatchWebSocketClient) GetShowcaseNamespaceMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getShowcaseNamespaceMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6084,6 +6595,13 @@ func (p Gs2WatchWebSocketClient) DescribeStaminaStaminaModelMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeStaminaStaminaModelMetricsAsyncHandler(
@@ -6169,6 +6687,13 @@ func (p Gs2WatchWebSocketClient) GetStaminaStaminaModelMetricsAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getStaminaStaminaModelMetricsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6246,6 +6771,13 @@ func (p Gs2WatchWebSocketClient) DescribeStaminaNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeStaminaNamespaceMetricsAsyncHandler(
@@ -6327,6 +6859,13 @@ func (p Gs2WatchWebSocketClient) GetStaminaNamespaceMetricsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getStaminaNamespaceMetricsAsyncHandler(

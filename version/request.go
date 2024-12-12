@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId             *string        `json:"sourceRequestId"`
-	RequestId                   *string        `json:"requestId"`
 	ContextStack                *string        `json:"contextStack"`
 	Name                        *string        `json:"name"`
 	Description                 *string        `json:"description"`
@@ -342,11 +338,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -430,11 +424,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -518,8 +510,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId             *string        `json:"sourceRequestId"`
-	RequestId                   *string        `json:"requestId"`
 	ContextStack                *string        `json:"contextStack"`
 	NamespaceName               *string        `json:"namespaceName"`
 	Description                 *string        `json:"description"`
@@ -736,11 +726,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -824,8 +812,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -944,8 +930,6 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1064,8 +1048,6 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1184,8 +1166,6 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1304,8 +1284,6 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1424,8 +1402,6 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1576,8 +1552,6 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1728,13 +1702,11 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeVersionModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeVersionModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1860,22 +1832,21 @@ func (p DescribeVersionModelMastersRequest) Pointer() *DescribeVersionModelMaste
 }
 
 type CreateVersionModelMasterRequest struct {
-	SourceRequestId  *string           `json:"sourceRequestId"`
-	RequestId        *string           `json:"requestId"`
-	ContextStack     *string           `json:"contextStack"`
-	NamespaceName    *string           `json:"namespaceName"`
-	Name             *string           `json:"name"`
-	Description      *string           `json:"description"`
-	Metadata         *string           `json:"metadata"`
-	Scope            *string           `json:"scope"`
-	Type             *string           `json:"type"`
-	CurrentVersion   *Version          `json:"currentVersion"`
-	WarningVersion   *Version          `json:"warningVersion"`
-	ErrorVersion     *Version          `json:"errorVersion"`
-	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
-	NeedSignature    *bool             `json:"needSignature"`
-	SignatureKeyId   *string           `json:"signatureKeyId"`
-	DryRun           *bool             `json:"dryRun"`
+	ContextStack       *string           `json:"contextStack"`
+	NamespaceName      *string           `json:"namespaceName"`
+	Name               *string           `json:"name"`
+	Description        *string           `json:"description"`
+	Metadata           *string           `json:"metadata"`
+	Scope              *string           `json:"scope"`
+	Type               *string           `json:"type"`
+	CurrentVersion     *Version          `json:"currentVersion"`
+	WarningVersion     *Version          `json:"warningVersion"`
+	ErrorVersion       *Version          `json:"errorVersion"`
+	ScheduleVersions   []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature      *bool             `json:"needSignature"`
+	SignatureKeyId     *string           `json:"signatureKeyId"`
+	ApproveRequirement *string           `json:"approveRequirement"`
+	DryRun             *bool             `json:"dryRun"`
 }
 
 func (p *CreateVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2076,6 +2047,29 @@ func (p *CreateVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["approveRequirement"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApproveRequirement = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApproveRequirement = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApproveRequirement = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApproveRequirement)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2174,6 +2168,13 @@ func NewCreateVersionModelMasterRequestFromDict(data map[string]interface{}) Cre
 			}
 			return core.CastString(data["signatureKeyId"])
 		}(),
+		ApproveRequirement: func() *string {
+			v, ok := data["approveRequirement"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["approveRequirement"])
+		}(),
 	}
 }
 
@@ -2206,8 +2207,9 @@ func (p CreateVersionModelMasterRequest) ToDict() map[string]interface{} {
 		"scheduleVersions": CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		),
-		"needSignature":  p.NeedSignature,
-		"signatureKeyId": p.SignatureKeyId,
+		"needSignature":      p.NeedSignature,
+		"signatureKeyId":     p.SignatureKeyId,
+		"approveRequirement": p.ApproveRequirement,
 	}
 }
 
@@ -2216,12 +2218,10 @@ func (p CreateVersionModelMasterRequest) Pointer() *CreateVersionModelMasterRequ
 }
 
 type GetVersionModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	VersionName     *string `json:"versionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	VersionName   *string `json:"versionName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2336,22 +2336,21 @@ func (p GetVersionModelMasterRequest) Pointer() *GetVersionModelMasterRequest {
 }
 
 type UpdateVersionModelMasterRequest struct {
-	SourceRequestId  *string           `json:"sourceRequestId"`
-	RequestId        *string           `json:"requestId"`
-	ContextStack     *string           `json:"contextStack"`
-	NamespaceName    *string           `json:"namespaceName"`
-	VersionName      *string           `json:"versionName"`
-	Description      *string           `json:"description"`
-	Metadata         *string           `json:"metadata"`
-	Scope            *string           `json:"scope"`
-	Type             *string           `json:"type"`
-	CurrentVersion   *Version          `json:"currentVersion"`
-	WarningVersion   *Version          `json:"warningVersion"`
-	ErrorVersion     *Version          `json:"errorVersion"`
-	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
-	NeedSignature    *bool             `json:"needSignature"`
-	SignatureKeyId   *string           `json:"signatureKeyId"`
-	DryRun           *bool             `json:"dryRun"`
+	ContextStack       *string           `json:"contextStack"`
+	NamespaceName      *string           `json:"namespaceName"`
+	VersionName        *string           `json:"versionName"`
+	Description        *string           `json:"description"`
+	Metadata           *string           `json:"metadata"`
+	Scope              *string           `json:"scope"`
+	Type               *string           `json:"type"`
+	CurrentVersion     *Version          `json:"currentVersion"`
+	WarningVersion     *Version          `json:"warningVersion"`
+	ErrorVersion       *Version          `json:"errorVersion"`
+	ScheduleVersions   []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature      *bool             `json:"needSignature"`
+	SignatureKeyId     *string           `json:"signatureKeyId"`
+	ApproveRequirement *string           `json:"approveRequirement"`
+	DryRun             *bool             `json:"dryRun"`
 }
 
 func (p *UpdateVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2552,6 +2551,29 @@ func (p *UpdateVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["approveRequirement"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApproveRequirement = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApproveRequirement = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApproveRequirement = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApproveRequirement)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2650,6 +2672,13 @@ func NewUpdateVersionModelMasterRequestFromDict(data map[string]interface{}) Upd
 			}
 			return core.CastString(data["signatureKeyId"])
 		}(),
+		ApproveRequirement: func() *string {
+			v, ok := data["approveRequirement"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["approveRequirement"])
+		}(),
 	}
 }
 
@@ -2682,8 +2711,9 @@ func (p UpdateVersionModelMasterRequest) ToDict() map[string]interface{} {
 		"scheduleVersions": CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		),
-		"needSignature":  p.NeedSignature,
-		"signatureKeyId": p.SignatureKeyId,
+		"needSignature":      p.NeedSignature,
+		"signatureKeyId":     p.SignatureKeyId,
+		"approveRequirement": p.ApproveRequirement,
 	}
 }
 
@@ -2692,12 +2722,10 @@ func (p UpdateVersionModelMasterRequest) Pointer() *UpdateVersionModelMasterRequ
 }
 
 type DeleteVersionModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	VersionName     *string `json:"versionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	VersionName   *string `json:"versionName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteVersionModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2812,11 +2840,9 @@ func (p DeleteVersionModelMasterRequest) Pointer() *DeleteVersionModelMasterRequ
 }
 
 type DescribeVersionModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeVersionModelsRequest) UnmarshalJSON(data []byte) error {
@@ -2900,12 +2926,10 @@ func (p DescribeVersionModelsRequest) Pointer() *DescribeVersionModelsRequest {
 }
 
 type GetVersionModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	VersionName     *string `json:"versionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	VersionName   *string `json:"versionName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetVersionModelRequest) UnmarshalJSON(data []byte) error {
@@ -3020,14 +3044,12 @@ func (p GetVersionModelRequest) Pointer() *GetVersionModelRequest {
 }
 
 type DescribeAcceptVersionsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAcceptVersionsRequest) UnmarshalJSON(data []byte) error {
@@ -3184,8 +3206,6 @@ func (p DescribeAcceptVersionsRequest) Pointer() *DescribeAcceptVersionsRequest 
 }
 
 type DescribeAcceptVersionsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -3380,8 +3400,6 @@ func (p DescribeAcceptVersionsByUserIdRequest) Pointer() *DescribeAcceptVersions
 }
 
 type AcceptRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -3550,8 +3568,6 @@ func (p AcceptRequest) Pointer() *AcceptRequest {
 }
 
 type AcceptByUserIdRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -3751,14 +3767,380 @@ func (p AcceptByUserIdRequest) Pointer() *AcceptByUserIdRequest {
 	return &p
 }
 
+type RejectRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	VersionName        *string  `json:"versionName"`
+	AccessToken        *string  `json:"accessToken"`
+	Version            *Version `json:"version"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *RejectRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RejectRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RejectRequest{}
+	} else {
+		*p = RejectRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["versionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VersionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VersionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VersionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VersionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VersionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VersionName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["version"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Version)
+		}
+	}
+	return nil
+}
+
+func NewRejectRequestFromJson(data string) (RejectRequest, error) {
+	req := RejectRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RejectRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRejectRequestFromDict(data map[string]interface{}) RejectRequest {
+	return RejectRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		VersionName: func() *string {
+			v, ok := data["versionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Version: func() *Version {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
+		}(),
+	}
+}
+
+func (p RejectRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"versionName":   p.VersionName,
+		"accessToken":   p.AccessToken,
+		"version": func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}(),
+	}
+}
+
+func (p RejectRequest) Pointer() *RejectRequest {
+	return &p
+}
+
+type RejectByUserIdRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	VersionName        *string  `json:"versionName"`
+	UserId             *string  `json:"userId"`
+	Version            *Version `json:"version"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *RejectByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RejectByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RejectByUserIdRequest{}
+	} else {
+		*p = RejectByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["versionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VersionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VersionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VersionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VersionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VersionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VersionName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["version"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Version)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRejectByUserIdRequestFromJson(data string) (RejectByUserIdRequest, error) {
+	req := RejectByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RejectByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRejectByUserIdRequestFromDict(data map[string]interface{}) RejectByUserIdRequest {
+	return RejectByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		VersionName: func() *string {
+			v, ok := data["versionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Version: func() *Version {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p RejectByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"versionName":   p.VersionName,
+		"userId":        p.UserId,
+		"version": func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p RejectByUserIdRequest) Pointer() *RejectByUserIdRequest {
+	return &p
+}
+
 type GetAcceptVersionRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	VersionName     *string `json:"versionName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	VersionName   *string `json:"versionName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetAcceptVersionRequest) UnmarshalJSON(data []byte) error {
@@ -3904,8 +4286,6 @@ func (p GetAcceptVersionRequest) Pointer() *GetAcceptVersionRequest {
 }
 
 type GetAcceptVersionByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -4088,8 +4468,6 @@ func (p GetAcceptVersionByUserIdRequest) Pointer() *GetAcceptVersionByUserIdRequ
 }
 
 type DeleteAcceptVersionRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -4241,8 +4619,6 @@ func (p DeleteAcceptVersionRequest) Pointer() *DeleteAcceptVersionRequest {
 }
 
 type DeleteAcceptVersionByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -4426,8 +4802,6 @@ func (p DeleteAcceptVersionByUserIdRequest) Pointer() *DeleteAcceptVersionByUser
 }
 
 type CheckVersionRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
 	ContextStack       *string         `json:"contextStack"`
 	DuplicationAvoider *string         `json:"duplicationAvoider"`
 	NamespaceName      *string         `json:"namespaceName"`
@@ -4560,8 +4934,6 @@ func (p CheckVersionRequest) Pointer() *CheckVersionRequest {
 }
 
 type CheckVersionByUserIdRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
 	ContextStack       *string         `json:"contextStack"`
 	DuplicationAvoider *string         `json:"duplicationAvoider"`
 	NamespaceName      *string         `json:"namespaceName"`
@@ -4726,13 +5098,11 @@ func (p CheckVersionByUserIdRequest) Pointer() *CheckVersionByUserIdRequest {
 }
 
 type CalculateSignatureRequest struct {
-	SourceRequestId *string  `json:"sourceRequestId"`
-	RequestId       *string  `json:"requestId"`
-	ContextStack    *string  `json:"contextStack"`
-	NamespaceName   *string  `json:"namespaceName"`
-	VersionName     *string  `json:"versionName"`
-	Version         *Version `json:"version"`
-	DryRun          *bool    `json:"dryRun"`
+	ContextStack  *string  `json:"contextStack"`
+	NamespaceName *string  `json:"namespaceName"`
+	VersionName   *string  `json:"versionName"`
+	Version       *Version `json:"version"`
+	DryRun        *bool    `json:"dryRun"`
 }
 
 func (p *CalculateSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -4863,11 +5233,9 @@ func (p CalculateSignatureRequest) Pointer() *CalculateSignatureRequest {
 }
 
 type ExportMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4951,11 +5319,9 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentVersionMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentVersionMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5039,12 +5405,10 @@ func (p GetCurrentVersionMasterRequest) Pointer() *GetCurrentVersionMasterReques
 }
 
 type UpdateCurrentVersionMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Settings        *string `json:"settings"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Settings      *string `json:"settings"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentVersionMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5159,8 +5523,6 @@ func (p UpdateCurrentVersionMasterRequest) Pointer() *UpdateCurrentVersionMaster
 }
 
 type UpdateCurrentVersionMasterFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`

@@ -339,21 +339,22 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type VersionModelMaster struct {
-	VersionModelId   *string           `json:"versionModelId"`
-	Name             *string           `json:"name"`
-	Description      *string           `json:"description"`
-	Metadata         *string           `json:"metadata"`
-	Scope            *string           `json:"scope"`
-	Type             *string           `json:"type"`
-	CurrentVersion   *Version          `json:"currentVersion"`
-	WarningVersion   *Version          `json:"warningVersion"`
-	ErrorVersion     *Version          `json:"errorVersion"`
-	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
-	NeedSignature    *bool             `json:"needSignature"`
-	SignatureKeyId   *string           `json:"signatureKeyId"`
-	CreatedAt        *int64            `json:"createdAt"`
-	UpdatedAt        *int64            `json:"updatedAt"`
-	Revision         *int64            `json:"revision"`
+	VersionModelId     *string           `json:"versionModelId"`
+	Name               *string           `json:"name"`
+	Description        *string           `json:"description"`
+	Metadata           *string           `json:"metadata"`
+	Scope              *string           `json:"scope"`
+	Type               *string           `json:"type"`
+	CurrentVersion     *Version          `json:"currentVersion"`
+	WarningVersion     *Version          `json:"warningVersion"`
+	ErrorVersion       *Version          `json:"errorVersion"`
+	ScheduleVersions   []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature      *bool             `json:"needSignature"`
+	SignatureKeyId     *string           `json:"signatureKeyId"`
+	ApproveRequirement *string           `json:"approveRequirement"`
+	CreatedAt          *int64            `json:"createdAt"`
+	UpdatedAt          *int64            `json:"updatedAt"`
+	Revision           *int64            `json:"revision"`
 }
 
 func (p *VersionModelMaster) UnmarshalJSON(data []byte) error {
@@ -554,6 +555,29 @@ func (p *VersionModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["approveRequirement"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApproveRequirement = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApproveRequirement = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApproveRequirement = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApproveRequirement)
+				}
+			}
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -658,6 +682,13 @@ func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMast
 			}
 			return core.CastString(data["signatureKeyId"])
 		}(),
+		ApproveRequirement: func() *string {
+			v, ok := data["approveRequirement"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["approveRequirement"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -737,6 +768,9 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
 	if p.SignatureKeyId != nil {
 		m["signatureKeyId"] = p.SignatureKeyId
 	}
+	if p.ApproveRequirement != nil {
+		m["approveRequirement"] = p.ApproveRequirement
+	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
 	}
@@ -770,17 +804,18 @@ func CastVersionModelMastersFromDict(data []VersionModelMaster) []interface{} {
 }
 
 type VersionModel struct {
-	VersionModelId   *string           `json:"versionModelId"`
-	Name             *string           `json:"name"`
-	Metadata         *string           `json:"metadata"`
-	Scope            *string           `json:"scope"`
-	Type             *string           `json:"type"`
-	CurrentVersion   *Version          `json:"currentVersion"`
-	WarningVersion   *Version          `json:"warningVersion"`
-	ErrorVersion     *Version          `json:"errorVersion"`
-	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
-	NeedSignature    *bool             `json:"needSignature"`
-	SignatureKeyId   *string           `json:"signatureKeyId"`
+	VersionModelId     *string           `json:"versionModelId"`
+	Name               *string           `json:"name"`
+	Metadata           *string           `json:"metadata"`
+	Scope              *string           `json:"scope"`
+	Type               *string           `json:"type"`
+	CurrentVersion     *Version          `json:"currentVersion"`
+	WarningVersion     *Version          `json:"warningVersion"`
+	ErrorVersion       *Version          `json:"errorVersion"`
+	ScheduleVersions   []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature      *bool             `json:"needSignature"`
+	SignatureKeyId     *string           `json:"signatureKeyId"`
+	ApproveRequirement *string           `json:"approveRequirement"`
 }
 
 func (p *VersionModel) UnmarshalJSON(data []byte) error {
@@ -958,6 +993,29 @@ func (p *VersionModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["approveRequirement"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApproveRequirement = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApproveRequirement = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApproveRequirement = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApproveRequirement = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApproveRequirement)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1046,6 +1104,13 @@ func NewVersionModelFromDict(data map[string]interface{}) VersionModel {
 			}
 			return core.CastString(data["signatureKeyId"])
 		}(),
+		ApproveRequirement: func() *string {
+			v, ok := data["approveRequirement"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["approveRequirement"])
+		}(),
 	}
 }
 
@@ -1101,6 +1166,9 @@ func (p VersionModel) ToDict() map[string]interface{} {
 	if p.SignatureKeyId != nil {
 		m["signatureKeyId"] = p.SignatureKeyId
 	}
+	if p.ApproveRequirement != nil {
+		m["approveRequirement"] = p.ApproveRequirement
+	}
 	return m
 }
 
@@ -1129,6 +1197,7 @@ type AcceptVersion struct {
 	VersionName     *string  `json:"versionName"`
 	UserId          *string  `json:"userId"`
 	Version         *Version `json:"version"`
+	Status          *string  `json:"status"`
 	CreatedAt       *int64   `json:"createdAt"`
 	UpdatedAt       *int64   `json:"updatedAt"`
 	Revision        *int64   `json:"revision"`
@@ -1228,6 +1297,29 @@ func (p *AcceptVersion) UnmarshalJSON(data []byte) error {
 		if v, ok := d["version"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Version)
 		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -1277,6 +1369,13 @@ func NewAcceptVersionFromDict(data map[string]interface{}) AcceptVersion {
 			}
 			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
 		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -1319,6 +1418,9 @@ func (p AcceptVersion) ToDict() map[string]interface{} {
 			}
 			return p.Version.ToDict()
 		}()
+	}
+	if p.Status != nil {
+		m["status"] = p.Status
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt

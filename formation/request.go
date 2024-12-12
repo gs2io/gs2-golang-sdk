@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId          *string             `json:"sourceRequestId"`
-	RequestId                *string             `json:"requestId"`
 	ContextStack             *string             `json:"contextStack"`
 	Name                     *string             `json:"name"`
 	Description              *string             `json:"description"`
@@ -329,11 +325,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -417,11 +411,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -505,8 +497,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId          *string             `json:"sourceRequestId"`
-	RequestId                *string             `json:"requestId"`
 	ContextStack             *string             `json:"contextStack"`
 	NamespaceName            *string             `json:"namespaceName"`
 	Description              *string             `json:"description"`
@@ -710,11 +700,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -798,8 +786,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -918,8 +904,6 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1038,8 +1022,6 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1158,8 +1140,6 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1278,8 +1258,6 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1398,8 +1376,6 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1550,8 +1526,6 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1702,12 +1676,10 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type GetFormModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFormModelRequest) UnmarshalJSON(data []byte) error {
@@ -1822,13 +1794,11 @@ func (p GetFormModelRequest) Pointer() *GetFormModelRequest {
 }
 
 type DescribeFormModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1954,15 +1924,13 @@ func (p DescribeFormModelMastersRequest) Pointer() *DescribeFormModelMastersRequ
 }
 
 type CreateFormModelMasterRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	NamespaceName   *string     `json:"namespaceName"`
-	Name            *string     `json:"name"`
-	Description     *string     `json:"description"`
-	Metadata        *string     `json:"metadata"`
-	Slots           []SlotModel `json:"slots"`
-	DryRun          *bool       `json:"dryRun"`
+	ContextStack  *string     `json:"contextStack"`
+	NamespaceName *string     `json:"namespaceName"`
+	Name          *string     `json:"name"`
+	Description   *string     `json:"description"`
+	Metadata      *string     `json:"metadata"`
+	Slots         []SlotModel `json:"slots"`
+	DryRun        *bool       `json:"dryRun"`
 }
 
 func (p *CreateFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2151,12 +2119,10 @@ func (p CreateFormModelMasterRequest) Pointer() *CreateFormModelMasterRequest {
 }
 
 type GetFormModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	FormModelName   *string `json:"formModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	FormModelName *string `json:"formModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2271,15 +2237,13 @@ func (p GetFormModelMasterRequest) Pointer() *GetFormModelMasterRequest {
 }
 
 type UpdateFormModelMasterRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	NamespaceName   *string     `json:"namespaceName"`
-	FormModelName   *string     `json:"formModelName"`
-	Description     *string     `json:"description"`
-	Metadata        *string     `json:"metadata"`
-	Slots           []SlotModel `json:"slots"`
-	DryRun          *bool       `json:"dryRun"`
+	ContextStack  *string     `json:"contextStack"`
+	NamespaceName *string     `json:"namespaceName"`
+	FormModelName *string     `json:"formModelName"`
+	Description   *string     `json:"description"`
+	Metadata      *string     `json:"metadata"`
+	Slots         []SlotModel `json:"slots"`
+	DryRun        *bool       `json:"dryRun"`
 }
 
 func (p *UpdateFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2468,12 +2432,10 @@ func (p UpdateFormModelMasterRequest) Pointer() *UpdateFormModelMasterRequest {
 }
 
 type DeleteFormModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	FormModelName   *string `json:"formModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	FormModelName *string `json:"formModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2588,11 +2550,9 @@ func (p DeleteFormModelMasterRequest) Pointer() *DeleteFormModelMasterRequest {
 }
 
 type DescribeMoldModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldModelsRequest) UnmarshalJSON(data []byte) error {
@@ -2676,12 +2636,10 @@ func (p DescribeMoldModelsRequest) Pointer() *DescribeMoldModelsRequest {
 }
 
 type GetMoldModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldModelRequest) UnmarshalJSON(data []byte) error {
@@ -2796,13 +2754,11 @@ func (p GetMoldModelRequest) Pointer() *GetMoldModelRequest {
 }
 
 type DescribeMoldModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2928,8 +2884,6 @@ func (p DescribeMoldModelMastersRequest) Pointer() *DescribeMoldModelMastersRequ
 }
 
 type CreateMoldModelMasterRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	NamespaceName      *string `json:"namespaceName"`
 	Name               *string `json:"name"`
@@ -3168,12 +3122,10 @@ func (p CreateMoldModelMasterRequest) Pointer() *CreateMoldModelMasterRequest {
 }
 
 type GetMoldModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3288,8 +3240,6 @@ func (p GetMoldModelMasterRequest) Pointer() *GetMoldModelMasterRequest {
 }
 
 type UpdateMoldModelMasterRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	NamespaceName      *string `json:"namespaceName"`
 	MoldModelName      *string `json:"moldModelName"`
@@ -3528,12 +3478,10 @@ func (p UpdateMoldModelMasterRequest) Pointer() *UpdateMoldModelMasterRequest {
 }
 
 type DeleteMoldModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3648,11 +3596,9 @@ func (p DeleteMoldModelMasterRequest) Pointer() *DeleteMoldModelMasterRequest {
 }
 
 type DescribePropertyFormModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormModelsRequest) UnmarshalJSON(data []byte) error {
@@ -3736,8 +3682,6 @@ func (p DescribePropertyFormModelsRequest) Pointer() *DescribePropertyFormModels
 }
 
 type GetPropertyFormModelRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
@@ -3856,13 +3800,11 @@ func (p GetPropertyFormModelRequest) Pointer() *GetPropertyFormModelRequest {
 }
 
 type DescribePropertyFormModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -3988,15 +3930,13 @@ func (p DescribePropertyFormModelMastersRequest) Pointer() *DescribePropertyForm
 }
 
 type CreatePropertyFormModelMasterRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	NamespaceName   *string     `json:"namespaceName"`
-	Name            *string     `json:"name"`
-	Description     *string     `json:"description"`
-	Metadata        *string     `json:"metadata"`
-	Slots           []SlotModel `json:"slots"`
-	DryRun          *bool       `json:"dryRun"`
+	ContextStack  *string     `json:"contextStack"`
+	NamespaceName *string     `json:"namespaceName"`
+	Name          *string     `json:"name"`
+	Description   *string     `json:"description"`
+	Metadata      *string     `json:"metadata"`
+	Slots         []SlotModel `json:"slots"`
+	DryRun        *bool       `json:"dryRun"`
 }
 
 func (p *CreatePropertyFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4185,8 +4125,6 @@ func (p CreatePropertyFormModelMasterRequest) Pointer() *CreatePropertyFormModel
 }
 
 type GetPropertyFormModelMasterRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
@@ -4305,8 +4243,6 @@ func (p GetPropertyFormModelMasterRequest) Pointer() *GetPropertyFormModelMaster
 }
 
 type UpdatePropertyFormModelMasterRequest struct {
-	SourceRequestId       *string     `json:"sourceRequestId"`
-	RequestId             *string     `json:"requestId"`
 	ContextStack          *string     `json:"contextStack"`
 	NamespaceName         *string     `json:"namespaceName"`
 	PropertyFormModelName *string     `json:"propertyFormModelName"`
@@ -4502,8 +4438,6 @@ func (p UpdatePropertyFormModelMasterRequest) Pointer() *UpdatePropertyFormModel
 }
 
 type DeletePropertyFormModelMasterRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
@@ -4622,11 +4556,9 @@ func (p DeletePropertyFormModelMasterRequest) Pointer() *DeletePropertyFormModel
 }
 
 type ExportMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4710,11 +4642,9 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentFormMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentFormMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4798,12 +4728,10 @@ func (p GetCurrentFormMasterRequest) Pointer() *GetCurrentFormMasterRequest {
 }
 
 type UpdateCurrentFormMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Settings        *string `json:"settings"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Settings      *string `json:"settings"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentFormMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4918,8 +4846,6 @@ func (p UpdateCurrentFormMasterRequest) Pointer() *UpdateCurrentFormMasterReques
 }
 
 type UpdateCurrentFormMasterFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
@@ -5023,14 +4949,12 @@ func (p UpdateCurrentFormMasterFromGitHubRequest) Pointer() *UpdateCurrentFormMa
 }
 
 type DescribeMoldsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldsRequest) UnmarshalJSON(data []byte) error {
@@ -5187,8 +5111,6 @@ func (p DescribeMoldsRequest) Pointer() *DescribeMoldsRequest {
 }
 
 type DescribeMoldsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -5383,13 +5305,11 @@ func (p DescribeMoldsByUserIdRequest) Pointer() *DescribeMoldsByUserIdRequest {
 }
 
 type GetMoldRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	MoldModelName   *string `json:"moldModelName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	MoldModelName *string `json:"moldModelName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldRequest) UnmarshalJSON(data []byte) error {
@@ -5535,8 +5455,6 @@ func (p GetMoldRequest) Pointer() *GetMoldRequest {
 }
 
 type GetMoldByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -5719,8 +5637,6 @@ func (p GetMoldByUserIdRequest) Pointer() *GetMoldByUserIdRequest {
 }
 
 type SetMoldCapacityByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -5916,8 +5832,6 @@ func (p SetMoldCapacityByUserIdRequest) Pointer() *SetMoldCapacityByUserIdReques
 }
 
 type AddMoldCapacityByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6113,8 +6027,6 @@ func (p AddMoldCapacityByUserIdRequest) Pointer() *AddMoldCapacityByUserIdReques
 }
 
 type SubMoldCapacityRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6278,8 +6190,6 @@ func (p SubMoldCapacityRequest) Pointer() *SubMoldCapacityRequest {
 }
 
 type SubMoldCapacityByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6475,8 +6385,6 @@ func (p SubMoldCapacityByUserIdRequest) Pointer() *SubMoldCapacityByUserIdReques
 }
 
 type DeleteMoldRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6628,8 +6536,6 @@ func (p DeleteMoldRequest) Pointer() *DeleteMoldRequest {
 }
 
 type DeleteMoldByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -6813,12 +6719,10 @@ func (p DeleteMoldByUserIdRequest) Pointer() *DeleteMoldByUserIdRequest {
 }
 
 type AddCapacityByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *AddCapacityByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -6933,12 +6837,10 @@ func (p AddCapacityByStampSheetRequest) Pointer() *AddCapacityByStampSheetReques
 }
 
 type SubCapacityByStampTaskRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampTask       *string `json:"stampTask"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *SubCapacityByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -7053,12 +6955,10 @@ func (p SubCapacityByStampTaskRequest) Pointer() *SubCapacityByStampTaskRequest 
 }
 
 type SetCapacityByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *SetCapacityByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7173,15 +7073,13 @@ func (p SetCapacityByStampSheetRequest) Pointer() *SetCapacityByStampSheetReques
 }
 
 type DescribeFormsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	MoldModelName   *string `json:"moldModelName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	MoldModelName *string `json:"moldModelName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormsRequest) UnmarshalJSON(data []byte) error {
@@ -7369,8 +7267,6 @@ func (p DescribeFormsRequest) Pointer() *DescribeFormsRequest {
 }
 
 type DescribeFormsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	MoldModelName   *string `json:"moldModelName"`
@@ -7597,14 +7493,12 @@ func (p DescribeFormsByUserIdRequest) Pointer() *DescribeFormsByUserIdRequest {
 }
 
 type GetFormRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	MoldModelName   *string `json:"moldModelName"`
-	Index           *int32  `json:"index"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	MoldModelName *string `json:"moldModelName"`
+	Index         *int32  `json:"index"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFormRequest) UnmarshalJSON(data []byte) error {
@@ -7761,8 +7655,6 @@ func (p GetFormRequest) Pointer() *GetFormRequest {
 }
 
 type GetFormByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -7957,15 +7849,13 @@ func (p GetFormByUserIdRequest) Pointer() *GetFormByUserIdRequest {
 }
 
 type GetFormWithSignatureRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	MoldModelName   *string `json:"moldModelName"`
-	Index           *int32  `json:"index"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	MoldModelName *string `json:"moldModelName"`
+	Index         *int32  `json:"index"`
+	KeyId         *string `json:"keyId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetFormWithSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -8153,8 +8043,6 @@ func (p GetFormWithSignatureRequest) Pointer() *GetFormWithSignatureRequest {
 }
 
 type GetFormWithSignatureByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -8381,8 +8269,6 @@ func (p GetFormWithSignatureByUserIdRequest) Pointer() *GetFormWithSignatureByUs
 }
 
 type SetFormByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -8591,8 +8477,6 @@ func (p SetFormByUserIdRequest) Pointer() *SetFormByUserIdRequest {
 }
 
 type SetFormWithSignatureRequest struct {
-	SourceRequestId    *string             `json:"sourceRequestId"`
-	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	DuplicationAvoider *string             `json:"duplicationAvoider"`
 	NamespaceName      *string             `json:"namespaceName"`
@@ -8801,8 +8685,6 @@ func (p SetFormWithSignatureRequest) Pointer() *SetFormWithSignatureRequest {
 }
 
 type AcquireActionsToFormPropertiesRequest struct {
-	SourceRequestId    *string        `json:"sourceRequestId"`
-	RequestId          *string        `json:"requestId"`
 	ContextStack       *string        `json:"contextStack"`
 	DuplicationAvoider *string        `json:"duplicationAvoider"`
 	NamespaceName      *string        `json:"namespaceName"`
@@ -9028,8 +8910,6 @@ func (p AcquireActionsToFormPropertiesRequest) Pointer() *AcquireActionsToFormPr
 }
 
 type DeleteFormRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -9193,8 +9073,6 @@ func (p DeleteFormRequest) Pointer() *DeleteFormRequest {
 }
 
 type DeleteFormByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -9390,12 +9268,10 @@ func (p DeleteFormByUserIdRequest) Pointer() *DeleteFormByUserIdRequest {
 }
 
 type AcquireActionToFormPropertiesByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *AcquireActionToFormPropertiesByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9510,12 +9386,10 @@ func (p AcquireActionToFormPropertiesByStampSheetRequest) Pointer() *AcquireActi
 }
 
 type SetFormByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *SetFormByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9630,8 +9504,6 @@ func (p SetFormByStampSheetRequest) Pointer() *SetFormByStampSheetRequest {
 }
 
 type DescribePropertyFormsRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	AccessToken           *string `json:"accessToken"`
@@ -9826,8 +9698,6 @@ func (p DescribePropertyFormsRequest) Pointer() *DescribePropertyFormsRequest {
 }
 
 type DescribePropertyFormsByUserIdRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
@@ -10054,8 +9924,6 @@ func (p DescribePropertyFormsByUserIdRequest) Pointer() *DescribePropertyFormsBy
 }
 
 type GetPropertyFormRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	AccessToken           *string `json:"accessToken"`
@@ -10238,8 +10106,6 @@ func (p GetPropertyFormRequest) Pointer() *GetPropertyFormRequest {
 }
 
 type GetPropertyFormByUserIdRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
@@ -10454,8 +10320,6 @@ func (p GetPropertyFormByUserIdRequest) Pointer() *GetPropertyFormByUserIdReques
 }
 
 type GetPropertyFormWithSignatureRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	AccessToken           *string `json:"accessToken"`
@@ -10670,8 +10534,6 @@ func (p GetPropertyFormWithSignatureRequest) Pointer() *GetPropertyFormWithSigna
 }
 
 type GetPropertyFormWithSignatureByUserIdRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
@@ -10918,8 +10780,6 @@ func (p GetPropertyFormWithSignatureByUserIdRequest) Pointer() *GetPropertyFormW
 }
 
 type SetPropertyFormByUserIdRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	DuplicationAvoider    *string `json:"duplicationAvoider"`
 	NamespaceName         *string `json:"namespaceName"`
@@ -11148,8 +11008,6 @@ func (p SetPropertyFormByUserIdRequest) Pointer() *SetPropertyFormByUserIdReques
 }
 
 type SetPropertyFormWithSignatureRequest struct {
-	SourceRequestId       *string             `json:"sourceRequestId"`
-	RequestId             *string             `json:"requestId"`
 	ContextStack          *string             `json:"contextStack"`
 	DuplicationAvoider    *string             `json:"duplicationAvoider"`
 	NamespaceName         *string             `json:"namespaceName"`
@@ -11378,8 +11236,6 @@ func (p SetPropertyFormWithSignatureRequest) Pointer() *SetPropertyFormWithSigna
 }
 
 type AcquireActionsToPropertyFormPropertiesRequest struct {
-	SourceRequestId       *string        `json:"sourceRequestId"`
-	RequestId             *string        `json:"requestId"`
 	ContextStack          *string        `json:"contextStack"`
 	DuplicationAvoider    *string        `json:"duplicationAvoider"`
 	NamespaceName         *string        `json:"namespaceName"`
@@ -11625,8 +11481,6 @@ func (p AcquireActionsToPropertyFormPropertiesRequest) Pointer() *AcquireActions
 }
 
 type DeletePropertyFormRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	DuplicationAvoider    *string `json:"duplicationAvoider"`
 	NamespaceName         *string `json:"namespaceName"`
@@ -11810,8 +11664,6 @@ func (p DeletePropertyFormRequest) Pointer() *DeletePropertyFormRequest {
 }
 
 type DeletePropertyFormByUserIdRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	DuplicationAvoider    *string `json:"duplicationAvoider"`
 	NamespaceName         *string `json:"namespaceName"`
@@ -12027,12 +11879,10 @@ func (p DeletePropertyFormByUserIdRequest) Pointer() *DeletePropertyFormByUserId
 }
 
 type AcquireActionToPropertyFormPropertiesByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *AcquireActionToPropertyFormPropertiesByStampSheetRequest) UnmarshalJSON(data []byte) error {

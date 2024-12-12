@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeUsersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeUsersRequest) UnmarshalJSON(data []byte) error {
@@ -124,12 +122,10 @@ func (p DescribeUsersRequest) Pointer() *DescribeUsersRequest {
 }
 
 type CreateUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Name            *string `json:"name"`
-	Description     *string `json:"description"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Name         *string `json:"name"`
+	Description  *string `json:"description"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreateUserRequest) UnmarshalJSON(data []byte) error {
@@ -244,12 +240,10 @@ func (p CreateUserRequest) Pointer() *CreateUserRequest {
 }
 
 type UpdateUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	Description     *string `json:"description"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	Description  *string `json:"description"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *UpdateUserRequest) UnmarshalJSON(data []byte) error {
@@ -364,11 +358,9 @@ func (p UpdateUserRequest) Pointer() *UpdateUserRequest {
 }
 
 type GetUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetUserRequest) UnmarshalJSON(data []byte) error {
@@ -452,11 +444,9 @@ func (p GetUserRequest) Pointer() *GetUserRequest {
 }
 
 type DeleteUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeleteUserRequest) UnmarshalJSON(data []byte) error {
@@ -540,12 +530,10 @@ func (p DeleteUserRequest) Pointer() *DeleteUserRequest {
 }
 
 type DescribeSecurityPoliciesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSecurityPoliciesRequest) UnmarshalJSON(data []byte) error {
@@ -640,12 +628,10 @@ func (p DescribeSecurityPoliciesRequest) Pointer() *DescribeSecurityPoliciesRequ
 }
 
 type DescribeCommonSecurityPoliciesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeCommonSecurityPoliciesRequest) UnmarshalJSON(data []byte) error {
@@ -740,13 +726,11 @@ func (p DescribeCommonSecurityPoliciesRequest) Pointer() *DescribeCommonSecurity
 }
 
 type CreateSecurityPolicyRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	Name            *string `json:"name"`
-	Description     *string `json:"description"`
-	Policy          *string `json:"policy"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Name         *string `json:"name"`
+	Description  *string `json:"description"`
+	Policy       *string `json:"policy"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreateSecurityPolicyRequest) UnmarshalJSON(data []byte) error {
@@ -892,8 +876,6 @@ func (p CreateSecurityPolicyRequest) Pointer() *CreateSecurityPolicyRequest {
 }
 
 type UpdateSecurityPolicyRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
 	Description        *string `json:"description"`
@@ -1044,8 +1026,6 @@ func (p UpdateSecurityPolicyRequest) Pointer() *UpdateSecurityPolicyRequest {
 }
 
 type GetSecurityPolicyRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
 	DryRun             *bool   `json:"dryRun"`
@@ -1132,8 +1112,6 @@ func (p GetSecurityPolicyRequest) Pointer() *GetSecurityPolicyRequest {
 }
 
 type DeleteSecurityPolicyRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
 	DryRun             *bool   `json:"dryRun"`
@@ -1220,13 +1198,11 @@ func (p DeleteSecurityPolicyRequest) Pointer() *DeleteSecurityPolicyRequest {
 }
 
 type DescribeIdentifiersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeIdentifiersRequest) UnmarshalJSON(data []byte) error {
@@ -1352,11 +1328,9 @@ func (p DescribeIdentifiersRequest) Pointer() *DescribeIdentifiersRequest {
 }
 
 type CreateIdentifierRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreateIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -1440,12 +1414,10 @@ func (p CreateIdentifierRequest) Pointer() *CreateIdentifierRequest {
 }
 
 type GetIdentifierRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	ClientId        *string `json:"clientId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	ClientId     *string `json:"clientId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -1560,12 +1532,10 @@ func (p GetIdentifierRequest) Pointer() *GetIdentifierRequest {
 }
 
 type DeleteIdentifierRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	ClientId        *string `json:"clientId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	ClientId     *string `json:"clientId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeleteIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -1680,12 +1650,10 @@ func (p DeleteIdentifierRequest) Pointer() *DeleteIdentifierRequest {
 }
 
 type DescribeAttachedGuardsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	ClientId        *string `json:"clientId"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	ClientId     *string `json:"clientId"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAttachedGuardsRequest) UnmarshalJSON(data []byte) error {
@@ -1800,8 +1768,6 @@ func (p DescribeAttachedGuardsRequest) Pointer() *DescribeAttachedGuardsRequest 
 }
 
 type AttachGuardRequest struct {
-	SourceRequestId  *string `json:"sourceRequestId"`
-	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
 	ClientId         *string `json:"clientId"`
@@ -1952,8 +1918,6 @@ func (p AttachGuardRequest) Pointer() *AttachGuardRequest {
 }
 
 type DetachGuardRequest struct {
-	SourceRequestId  *string `json:"sourceRequestId"`
-	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
 	ClientId         *string `json:"clientId"`
@@ -2104,12 +2068,10 @@ func (p DetachGuardRequest) Pointer() *DetachGuardRequest {
 }
 
 type CreatePasswordRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	Password        *string `json:"password"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	Password     *string `json:"password"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreatePasswordRequest) UnmarshalJSON(data []byte) error {
@@ -2224,11 +2186,9 @@ func (p CreatePasswordRequest) Pointer() *CreatePasswordRequest {
 }
 
 type GetPasswordRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetPasswordRequest) UnmarshalJSON(data []byte) error {
@@ -2312,11 +2272,9 @@ func (p GetPasswordRequest) Pointer() *GetPasswordRequest {
 }
 
 type EnableMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *EnableMfaRequest) UnmarshalJSON(data []byte) error {
@@ -2400,12 +2358,10 @@ func (p EnableMfaRequest) Pointer() *EnableMfaRequest {
 }
 
 type ChallengeMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	Passcode        *string `json:"passcode"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	Passcode     *string `json:"passcode"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *ChallengeMfaRequest) UnmarshalJSON(data []byte) error {
@@ -2520,11 +2476,9 @@ func (p ChallengeMfaRequest) Pointer() *ChallengeMfaRequest {
 }
 
 type DisableMfaRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DisableMfaRequest) UnmarshalJSON(data []byte) error {
@@ -2608,11 +2562,9 @@ func (p DisableMfaRequest) Pointer() *DisableMfaRequest {
 }
 
 type DeletePasswordRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeletePasswordRequest) UnmarshalJSON(data []byte) error {
@@ -2696,11 +2648,9 @@ func (p DeletePasswordRequest) Pointer() *DeletePasswordRequest {
 }
 
 type GetHasSecurityPolicyRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *GetHasSecurityPolicyRequest) UnmarshalJSON(data []byte) error {
@@ -2784,8 +2734,6 @@ func (p GetHasSecurityPolicyRequest) Pointer() *GetHasSecurityPolicyRequest {
 }
 
 type AttachSecurityPolicyRequest struct {
-	SourceRequestId  *string `json:"sourceRequestId"`
-	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
 	SecurityPolicyId *string `json:"securityPolicyId"`
@@ -2904,8 +2852,6 @@ func (p AttachSecurityPolicyRequest) Pointer() *AttachSecurityPolicyRequest {
 }
 
 type DetachSecurityPolicyRequest struct {
-	SourceRequestId  *string `json:"sourceRequestId"`
-	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
 	SecurityPolicyId *string `json:"securityPolicyId"`
@@ -3024,12 +2970,10 @@ func (p DetachSecurityPolicyRequest) Pointer() *DetachSecurityPolicyRequest {
 }
 
 type LoginRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	ClientId        *string `json:"clientId"`
-	ClientSecret    *string `json:"clientSecret"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	ClientId     *string `json:"clientId"`
+	ClientSecret *string `json:"clientSecret"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *LoginRequest) UnmarshalJSON(data []byte) error {
@@ -3144,13 +3088,11 @@ func (p LoginRequest) Pointer() *LoginRequest {
 }
 
 type LoginByUserRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	UserName        *string `json:"userName"`
-	Password        *string `json:"password"`
-	Otp             *string `json:"otp"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	UserName     *string `json:"userName"`
+	Password     *string `json:"password"`
+	Otp          *string `json:"otp"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *LoginByUserRequest) UnmarshalJSON(data []byte) error {

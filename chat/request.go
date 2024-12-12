@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId       *string              `json:"sourceRequestId"`
-	RequestId             *string              `json:"requestId"`
 	ContextStack          *string              `json:"contextStack"`
 	Name                  *string              `json:"name"`
 	Description           *string              `json:"description"`
@@ -387,11 +383,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -475,11 +469,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -563,8 +555,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId       *string              `json:"sourceRequestId"`
-	RequestId             *string              `json:"requestId"`
 	ContextStack          *string              `json:"contextStack"`
 	NamespaceName         *string              `json:"namespaceName"`
 	Description           *string              `json:"description"`
@@ -826,11 +816,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -914,8 +902,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1034,8 +1020,6 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1154,8 +1138,6 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1274,8 +1256,6 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1394,8 +1374,6 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1514,8 +1492,6 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1666,8 +1642,6 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1818,13 +1792,11 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeRoomsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRoomsRequest) UnmarshalJSON(data []byte) error {
@@ -1950,8 +1922,6 @@ func (p DescribeRoomsRequest) Pointer() *DescribeRoomsRequest {
 }
 
 type CreateRoomRequest struct {
-	SourceRequestId    *string   `json:"sourceRequestId"`
-	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
@@ -2204,8 +2174,6 @@ func (p CreateRoomRequest) Pointer() *CreateRoomRequest {
 }
 
 type CreateRoomFromBackendRequest struct {
-	SourceRequestId    *string   `json:"sourceRequestId"`
-	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
@@ -2490,12 +2458,10 @@ func (p CreateRoomFromBackendRequest) Pointer() *CreateRoomFromBackendRequest {
 }
 
 type GetRoomRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetRoomRequest) UnmarshalJSON(data []byte) error {
@@ -2610,8 +2576,6 @@ func (p GetRoomRequest) Pointer() *GetRoomRequest {
 }
 
 type UpdateRoomRequest struct {
-	SourceRequestId    *string   `json:"sourceRequestId"`
-	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
@@ -2864,8 +2828,6 @@ func (p UpdateRoomRequest) Pointer() *UpdateRoomRequest {
 }
 
 type UpdateRoomFromBackendRequest struct {
-	SourceRequestId    *string   `json:"sourceRequestId"`
-	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
@@ -3150,8 +3112,6 @@ func (p UpdateRoomFromBackendRequest) Pointer() *UpdateRoomFromBackendRequest {
 }
 
 type DeleteRoomRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -3303,8 +3263,6 @@ func (p DeleteRoomRequest) Pointer() *DeleteRoomRequest {
 }
 
 type DeleteRoomFromBackendRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -3488,16 +3446,14 @@ func (p DeleteRoomFromBackendRequest) Pointer() *DeleteRoomFromBackendRequest {
 }
 
 type DescribeMessagesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	Password        *string `json:"password"`
-	AccessToken     *string `json:"accessToken"`
-	StartAt         *int64  `json:"startAt"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	Password      *string `json:"password"`
+	AccessToken   *string `json:"accessToken"`
+	StartAt       *int64  `json:"startAt"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMessagesRequest) UnmarshalJSON(data []byte) error {
@@ -3696,8 +3652,6 @@ func (p DescribeMessagesRequest) Pointer() *DescribeMessagesRequest {
 }
 
 type DescribeMessagesByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
@@ -3936,15 +3890,13 @@ func (p DescribeMessagesByUserIdRequest) Pointer() *DescribeMessagesByUserIdRequ
 }
 
 type DescribeLatestMessagesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	Password        *string `json:"password"`
-	AccessToken     *string `json:"accessToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	Password      *string `json:"password"`
+	AccessToken   *string `json:"accessToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLatestMessagesRequest) UnmarshalJSON(data []byte) error {
@@ -4132,8 +4084,6 @@ func (p DescribeLatestMessagesRequest) Pointer() *DescribeLatestMessagesRequest 
 }
 
 type DescribeLatestMessagesByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
@@ -4360,8 +4310,6 @@ func (p DescribeLatestMessagesByUserIdRequest) Pointer() *DescribeLatestMessages
 }
 
 type PostRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -4589,8 +4537,6 @@ func (p PostRequest) Pointer() *PostRequest {
 }
 
 type PostByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -4850,15 +4796,13 @@ func (p PostByUserIdRequest) Pointer() *PostByUserIdRequest {
 }
 
 type GetMessageRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	MessageName     *string `json:"messageName"`
-	Password        *string `json:"password"`
-	AccessToken     *string `json:"accessToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	MessageName   *string `json:"messageName"`
+	Password      *string `json:"password"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetMessageRequest) UnmarshalJSON(data []byte) error {
@@ -5066,8 +5010,6 @@ func (p GetMessageRequest) Pointer() *GetMessageRequest {
 }
 
 type GetMessageByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
@@ -5314,8 +5256,6 @@ func (p GetMessageByUserIdRequest) Pointer() *GetMessageByUserIdRequest {
 }
 
 type DeleteMessageRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -5531,14 +5471,12 @@ func (p DeleteMessageRequest) Pointer() *DeleteMessageRequest {
 }
 
 type DescribeSubscribesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesRequest) UnmarshalJSON(data []byte) error {
@@ -5695,8 +5633,6 @@ func (p DescribeSubscribesRequest) Pointer() *DescribeSubscribesRequest {
 }
 
 type DescribeSubscribesByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -5891,14 +5827,12 @@ func (p DescribeSubscribesByUserIdRequest) Pointer() *DescribeSubscribesByUserId
 }
 
 type DescribeSubscribesByRoomNameRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesByRoomNameRequest) UnmarshalJSON(data []byte) error {
@@ -6055,8 +5989,6 @@ func (p DescribeSubscribesByRoomNameRequest) Pointer() *DescribeSubscribesByRoom
 }
 
 type SubscribeRequest struct {
-	SourceRequestId    *string            `json:"sourceRequestId"`
-	RequestId          *string            `json:"requestId"`
 	ContextStack       *string            `json:"contextStack"`
 	DuplicationAvoider *string            `json:"duplicationAvoider"`
 	NamespaceName      *string            `json:"namespaceName"`
@@ -6221,8 +6153,6 @@ func (p SubscribeRequest) Pointer() *SubscribeRequest {
 }
 
 type SubscribeByUserIdRequest struct {
-	SourceRequestId    *string            `json:"sourceRequestId"`
-	RequestId          *string            `json:"requestId"`
 	ContextStack       *string            `json:"contextStack"`
 	DuplicationAvoider *string            `json:"duplicationAvoider"`
 	NamespaceName      *string            `json:"namespaceName"`
@@ -6419,13 +6349,11 @@ func (p SubscribeByUserIdRequest) Pointer() *SubscribeByUserIdRequest {
 }
 
 type GetSubscribeRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RoomName        *string `json:"roomName"`
-	AccessToken     *string `json:"accessToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RoomName      *string `json:"roomName"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetSubscribeRequest) UnmarshalJSON(data []byte) error {
@@ -6571,8 +6499,6 @@ func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
 }
 
 type GetSubscribeByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
@@ -6755,8 +6681,6 @@ func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
 }
 
 type UpdateNotificationTypeRequest struct {
-	SourceRequestId    *string            `json:"sourceRequestId"`
-	RequestId          *string            `json:"requestId"`
 	ContextStack       *string            `json:"contextStack"`
 	DuplicationAvoider *string            `json:"duplicationAvoider"`
 	NamespaceName      *string            `json:"namespaceName"`
@@ -6921,8 +6845,6 @@ func (p UpdateNotificationTypeRequest) Pointer() *UpdateNotificationTypeRequest 
 }
 
 type UpdateNotificationTypeByUserIdRequest struct {
-	SourceRequestId    *string            `json:"sourceRequestId"`
-	RequestId          *string            `json:"requestId"`
 	ContextStack       *string            `json:"contextStack"`
 	DuplicationAvoider *string            `json:"duplicationAvoider"`
 	NamespaceName      *string            `json:"namespaceName"`
@@ -7119,8 +7041,6 @@ func (p UpdateNotificationTypeByUserIdRequest) Pointer() *UpdateNotificationType
 }
 
 type UnsubscribeRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7272,8 +7192,6 @@ func (p UnsubscribeRequest) Pointer() *UnsubscribeRequest {
 }
 
 type UnsubscribeByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`

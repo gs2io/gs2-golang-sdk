@@ -1422,6 +1422,9 @@ func (p Gs2VersionWebSocketClient) CreateVersionModelMasterAsync(
 	if request.SignatureKeyId != nil && *request.SignatureKeyId != "" {
 		bodies["signatureKeyId"] = *request.SignatureKeyId
 	}
+	if request.ApproveRequirement != nil && *request.ApproveRequirement != "" {
+		bodies["approveRequirement"] = *request.ApproveRequirement
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1637,6 +1640,9 @@ func (p Gs2VersionWebSocketClient) UpdateVersionModelMasterAsync(
 	}
 	if request.SignatureKeyId != nil && *request.SignatureKeyId != "" {
 		bodies["signatureKeyId"] = *request.SignatureKeyId
+	}
+	if request.ApproveRequirement != nil && *request.ApproveRequirement != "" {
+		bodies["approveRequirement"] = *request.ApproveRequirement
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2351,6 +2357,224 @@ func (p Gs2VersionWebSocketClient) AcceptByUserId(
 ) (*AcceptByUserIdResult, error) {
 	callback := make(chan AcceptByUserIdAsyncResult, 1)
 	go p.AcceptByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2VersionWebSocketClient) rejectAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RejectAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RejectAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RejectResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RejectAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
+	}
+	callback <- RejectAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2VersionWebSocketClient) RejectAsync(
+	request *RejectRequest,
+	callback chan<- RejectAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "version",
+			"component":   "acceptVersion",
+			"function":    "reject",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.VersionName != nil && *request.VersionName != "" {
+		bodies["versionName"] = *request.VersionName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.rejectAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2VersionWebSocketClient) Reject(
+	request *RejectRequest,
+) (*RejectResult, error) {
+	callback := make(chan RejectAsyncResult, 1)
+	go p.RejectAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2VersionWebSocketClient) rejectByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RejectByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RejectByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RejectByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RejectByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
+	}
+	callback <- RejectByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2VersionWebSocketClient) RejectByUserIdAsync(
+	request *RejectByUserIdRequest,
+	callback chan<- RejectByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "version",
+			"component":   "acceptVersion",
+			"function":    "rejectByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.VersionName != nil && *request.VersionName != "" {
+		bodies["versionName"] = *request.VersionName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.rejectByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2VersionWebSocketClient) RejectByUserId(
+	request *RejectByUserIdRequest,
+) (*RejectByUserIdResult, error) {
+	callback := make(chan RejectByUserIdAsyncResult, 1)
+	go p.RejectByUserIdAsync(
 		request,
 		callback,
 	)

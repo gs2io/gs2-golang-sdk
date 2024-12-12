@@ -895,6 +895,173 @@ func CastEntriesFromDict(data []Entry) []interface{} {
 	return v
 }
 
+type Like struct {
+	LikeId *string `json:"likeId"`
+	UserId *string `json:"userId"`
+	Name   *string `json:"name"`
+}
+
+func (p *Like) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Like{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Like{}
+	} else {
+		*p = Like{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["likeId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LikeId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LikeId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LikeId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LikeId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LikeId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LikeId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewLikeFromJson(data string) Like {
+	req := Like{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLikeFromDict(data map[string]interface{}) Like {
+	return Like{
+		LikeId: func() *string {
+			v, ok := data["likeId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["likeId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+	}
+}
+
+func (p Like) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.LikeId != nil {
+		m["likeId"] = p.LikeId
+	}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	return m
+}
+
+func (p Like) Pointer() *Like {
+	return &p
+}
+
+func CastLikes(data []interface{}) []Like {
+	v := make([]Like, 0)
+	for _, d := range data {
+		v = append(v, NewLikeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLikesFromDict(data []Like) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type CurrentEntryMaster struct {
 	NamespaceId *string `json:"namespaceId"`
 	Settings    *string `json:"settings"`

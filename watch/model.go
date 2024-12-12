@@ -95,33 +95,44 @@ func NewChartFromJson(data string) Chart {
 
 func NewChartFromDict(data map[string]interface{}) Chart {
 	return Chart{
-		Timestamp: core.CastInt64(data["timestamp"]),
-		Value:     core.CastInt64(data["value"]),
-		GroupBys:  core.CastStrings(core.CastArray(data["groupBys"])),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		Value: func() *int64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["value"])
+		}(),
+		GroupBys: func() []*string {
+			v, ok := data["groupBys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
 func (p Chart) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var groupBys []interface{}
 	if p.GroupBys != nil {
-		groupBys = core.CastStringsFromDict(
+		m["groupBys"] = core.CastStringsFromDict(
 			p.GroupBys,
 		)
 	}
-	return map[string]interface{}{
-		"timestamp": timestamp,
-		"value":     value,
-		"groupBys":  groupBys,
-	}
+	return m
 }
 
 func (p Chart) Pointer() *Chart {
@@ -216,33 +227,44 @@ func NewDistributionFromJson(data string) Distribution {
 
 func NewDistributionFromDict(data map[string]interface{}) Distribution {
 	return Distribution{
-		Value:    core.CastInt64(data["value"]),
-		Count:    core.CastInt64(data["count"]),
-		GroupBys: core.CastStrings(core.CastArray(data["groupBys"])),
+		Value: func() *int64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["value"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		GroupBys: func() []*string {
+			v, ok := data["groupBys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
 func (p Distribution) ToDict() map[string]interface{} {
-
-	var value *int64
+	m := map[string]interface{}{}
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var groupBys []interface{}
 	if p.GroupBys != nil {
-		groupBys = core.CastStringsFromDict(
+		m["groupBys"] = core.CastStringsFromDict(
 			p.GroupBys,
 		)
 	}
-	return map[string]interface{}{
-		"value":    value,
-		"count":    count,
-		"groupBys": groupBys,
-	}
+	return m
 }
 
 func (p Distribution) Pointer() *Distribution {
@@ -386,49 +408,72 @@ func NewCumulativeFromJson(data string) Cumulative {
 
 func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
 	return Cumulative{
-		CumulativeId: core.CastString(data["cumulativeId"]),
-		ResourceGrn:  core.CastString(data["resourceGrn"]),
-		Name:         core.CastString(data["name"]),
-		Value:        core.CastInt64(data["value"]),
-		UpdatedAt:    core.CastInt64(data["updatedAt"]),
-		Revision:     core.CastInt64(data["revision"]),
+		CumulativeId: func() *string {
+			v, ok := data["cumulativeId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cumulativeId"])
+		}(),
+		ResourceGrn: func() *string {
+			v, ok := data["resourceGrn"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceGrn"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Value: func() *int64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["value"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
 func (p Cumulative) ToDict() map[string]interface{} {
-
-	var cumulativeId *string
+	m := map[string]interface{}{}
 	if p.CumulativeId != nil {
-		cumulativeId = p.CumulativeId
+		m["cumulativeId"] = p.CumulativeId
 	}
-	var resourceGrn *string
 	if p.ResourceGrn != nil {
-		resourceGrn = p.ResourceGrn
+		m["resourceGrn"] = p.ResourceGrn
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"cumulativeId": cumulativeId,
-		"resourceGrn":  resourceGrn,
-		"name":         name,
-		"value":        value,
-		"updatedAt":    updatedAt,
-		"revision":     revision,
-	}
+	return m
 }
 
 func (p Cumulative) Pointer() *Cumulative {
@@ -576,55 +621,82 @@ func NewBillingActivityFromJson(data string) BillingActivity {
 
 func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {
 	return BillingActivity{
-		BillingActivityId: core.CastString(data["billingActivityId"]),
-		Year:              core.CastInt32(data["year"]),
-		Month:             core.CastInt32(data["month"]),
-		Service:           core.CastString(data["service"]),
-		ActivityType:      core.CastString(data["activityType"]),
-		Value:             core.CastInt64(data["value"]),
-		Revision:          core.CastInt64(data["revision"]),
+		BillingActivityId: func() *string {
+			v, ok := data["billingActivityId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingActivityId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		ActivityType: func() *string {
+			v, ok := data["activityType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["activityType"])
+		}(),
+		Value: func() *int64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["value"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
 func (p BillingActivity) ToDict() map[string]interface{} {
-
-	var billingActivityId *string
+	m := map[string]interface{}{}
 	if p.BillingActivityId != nil {
-		billingActivityId = p.BillingActivityId
+		m["billingActivityId"] = p.BillingActivityId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var activityType *string
 	if p.ActivityType != nil {
-		activityType = p.ActivityType
+		m["activityType"] = p.ActivityType
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"billingActivityId": billingActivityId,
-		"year":              year,
-		"month":             month,
-		"service":           service,
-		"activityType":      activityType,
-		"value":             value,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p BillingActivity) Pointer() *BillingActivity {
@@ -819,63 +891,94 @@ func NewStatsEventFromJson(data string) StatsEvent {
 
 func NewStatsEventFromDict(data map[string]interface{}) StatsEvent {
 	return StatsEvent{
-		Grn:        core.CastString(data["grn"]),
-		Service:    core.CastString(data["service"]),
-		Method:     core.CastString(data["method"]),
-		Metric:     core.CastString(data["metric"]),
-		Cumulative: core.CastBool(data["cumulative"]),
-		Value:      core.CastFloat64(data["value"]),
-		Tags:       core.CastStrings(core.CastArray(data["tags"])),
-		CallAt:     core.CastInt64(data["callAt"]),
+		Grn: func() *string {
+			v, ok := data["grn"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["grn"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		Metric: func() *string {
+			v, ok := data["metric"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metric"])
+		}(),
+		Cumulative: func() *bool {
+			v, ok := data["cumulative"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["cumulative"])
+		}(),
+		Value: func() *float64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["value"])
+		}(),
+		Tags: func() []*string {
+			v, ok := data["tags"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CallAt: func() *int64 {
+			v, ok := data["callAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["callAt"])
+		}(),
 	}
 }
 
 func (p StatsEvent) ToDict() map[string]interface{} {
-
-	var grn *string
+	m := map[string]interface{}{}
 	if p.Grn != nil {
-		grn = p.Grn
+		m["grn"] = p.Grn
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var metric *string
 	if p.Metric != nil {
-		metric = p.Metric
+		m["metric"] = p.Metric
 	}
-	var cumulative *bool
 	if p.Cumulative != nil {
-		cumulative = p.Cumulative
+		m["cumulative"] = p.Cumulative
 	}
-	var value *float64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var tags []interface{}
 	if p.Tags != nil {
-		tags = core.CastStringsFromDict(
+		m["tags"] = core.CastStringsFromDict(
 			p.Tags,
 		)
 	}
-	var callAt *int64
 	if p.CallAt != nil {
-		callAt = p.CallAt
+		m["callAt"] = p.CallAt
 	}
-	return map[string]interface{}{
-		"grn":        grn,
-		"service":    service,
-		"method":     method,
-		"metric":     metric,
-		"cumulative": cumulative,
-		"value":      value,
-		"tags":       tags,
-		"callAt":     callAt,
-	}
+	return m
 }
 
 func (p StatsEvent) Pointer() *StatsEvent {
@@ -983,25 +1086,32 @@ func NewFilterFromJson(data string) Filter {
 
 func NewFilterFromDict(data map[string]interface{}) Filter {
 	return Filter{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
 func (p Filter) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Filter) Pointer() *Filter {
@@ -1109,55 +1219,82 @@ func NewGeneralDauWauMauHistoryFromJson(data string) GeneralDauWauMauHistory {
 
 func NewGeneralDauWauMauHistoryFromDict(data map[string]interface{}) GeneralDauWauMauHistory {
 	return GeneralDauWauMauHistory{
-		Date:                core.CastString(data["date"]),
-		Dau:                 core.CastInt64(data["dau"]),
-		WauLast7Days:        core.CastInt64(data["wauLast7Days"]),
-		WauTargetWeekSunday: core.CastInt64(data["wauTargetWeekSunday"]),
-		WauTargetWeekMonday: core.CastInt64(data["wauTargetWeekMonday"]),
-		MauLast30Days:       core.CastInt64(data["mauLast30Days"]),
-		MauTargetMonth:      core.CastInt64(data["mauTargetMonth"]),
+		Date: func() *string {
+			v, ok := data["date"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["date"])
+		}(),
+		Dau: func() *int64 {
+			v, ok := data["dau"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["dau"])
+		}(),
+		WauLast7Days: func() *int64 {
+			v, ok := data["wauLast7Days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["wauLast7Days"])
+		}(),
+		WauTargetWeekSunday: func() *int64 {
+			v, ok := data["wauTargetWeekSunday"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["wauTargetWeekSunday"])
+		}(),
+		WauTargetWeekMonday: func() *int64 {
+			v, ok := data["wauTargetWeekMonday"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["wauTargetWeekMonday"])
+		}(),
+		MauLast30Days: func() *int64 {
+			v, ok := data["mauLast30Days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["mauLast30Days"])
+		}(),
+		MauTargetMonth: func() *int64 {
+			v, ok := data["mauTargetMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["mauTargetMonth"])
+		}(),
 	}
 }
 
 func (p GeneralDauWauMauHistory) ToDict() map[string]interface{} {
-
-	var date *string
+	m := map[string]interface{}{}
 	if p.Date != nil {
-		date = p.Date
+		m["date"] = p.Date
 	}
-	var dau *int64
 	if p.Dau != nil {
-		dau = p.Dau
+		m["dau"] = p.Dau
 	}
-	var wauLast7Days *int64
 	if p.WauLast7Days != nil {
-		wauLast7Days = p.WauLast7Days
+		m["wauLast7Days"] = p.WauLast7Days
 	}
-	var wauTargetWeekSunday *int64
 	if p.WauTargetWeekSunday != nil {
-		wauTargetWeekSunday = p.WauTargetWeekSunday
+		m["wauTargetWeekSunday"] = p.WauTargetWeekSunday
 	}
-	var wauTargetWeekMonday *int64
 	if p.WauTargetWeekMonday != nil {
-		wauTargetWeekMonday = p.WauTargetWeekMonday
+		m["wauTargetWeekMonday"] = p.WauTargetWeekMonday
 	}
-	var mauLast30Days *int64
 	if p.MauLast30Days != nil {
-		mauLast30Days = p.MauLast30Days
+		m["mauLast30Days"] = p.MauLast30Days
 	}
-	var mauTargetMonth *int64
 	if p.MauTargetMonth != nil {
-		mauTargetMonth = p.MauTargetMonth
+		m["mauTargetMonth"] = p.MauTargetMonth
 	}
-	return map[string]interface{}{
-		"date":                date,
-		"dau":                 dau,
-		"wauLast7Days":        wauLast7Days,
-		"wauTargetWeekSunday": wauTargetWeekSunday,
-		"wauTargetWeekMonday": wauTargetWeekMonday,
-		"mauLast30Days":       mauLast30Days,
-		"mauTargetMonth":      mauTargetMonth,
-	}
+	return m
 }
 
 func (p GeneralDauWauMauHistory) Pointer() *GeneralDauWauMauHistory {
@@ -1229,31 +1366,42 @@ func NewGeneralDauWauMauAverageFromJson(data string) GeneralDauWauMauAverage {
 
 func NewGeneralDauWauMauAverageFromDict(data map[string]interface{}) GeneralDauWauMauAverage {
 	return GeneralDauWauMauAverage{
-		Dau: core.CastFloat32(data["dau"]),
-		Wau: core.CastFloat32(data["wau"]),
-		Mau: core.CastFloat32(data["mau"]),
+		Dau: func() *float32 {
+			v, ok := data["dau"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["dau"])
+		}(),
+		Wau: func() *float32 {
+			v, ok := data["wau"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["wau"])
+		}(),
+		Mau: func() *float32 {
+			v, ok := data["mau"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["mau"])
+		}(),
 	}
 }
 
 func (p GeneralDauWauMauAverage) ToDict() map[string]interface{} {
-
-	var dau *float32
+	m := map[string]interface{}{}
 	if p.Dau != nil {
-		dau = p.Dau
+		m["dau"] = p.Dau
 	}
-	var wau *float32
 	if p.Wau != nil {
-		wau = p.Wau
+		m["wau"] = p.Wau
 	}
-	var mau *float32
 	if p.Mau != nil {
-		mau = p.Mau
+		m["mau"] = p.Mau
 	}
-	return map[string]interface{}{
-		"dau": dau,
-		"wau": wau,
-		"mau": mau,
-	}
+	return m
 }
 
 func (p GeneralDauWauMauAverage) Pointer() *GeneralDauWauMauAverage {
@@ -1321,27 +1469,38 @@ func NewGeneralDauWauMauFromJson(data string) GeneralDauWauMau {
 
 func NewGeneralDauWauMauFromDict(data map[string]interface{}) GeneralDauWauMau {
 	return GeneralDauWauMau{
-		History: CastGeneralDauWauMauHistories(core.CastArray(data["history"])),
-		Avg:     NewGeneralDauWauMauAverageFromDict(core.CastMap(data["avg"])).Pointer(),
+		History: func() []GeneralDauWauMauHistory {
+			if data["history"] == nil {
+				return nil
+			}
+			return CastGeneralDauWauMauHistories(core.CastArray(data["history"]))
+		}(),
+		Avg: func() *GeneralDauWauMauAverage {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGeneralDauWauMauAverageFromDict(core.CastMap(data["avg"])).Pointer()
+		}(),
 	}
 }
 
 func (p GeneralDauWauMau) ToDict() map[string]interface{} {
-
-	var history []interface{}
+	m := map[string]interface{}{}
 	if p.History != nil {
-		history = CastGeneralDauWauMauHistoriesFromDict(
+		m["history"] = CastGeneralDauWauMauHistoriesFromDict(
 			p.History,
 		)
 	}
-	var avg map[string]interface{}
 	if p.Avg != nil {
-		avg = p.Avg.ToDict()
+		m["avg"] = func() map[string]interface{} {
+			if p.Avg == nil {
+				return nil
+			}
+			return p.Avg.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"history": history,
-		"avg":     avg,
-	}
+	return m
 }
 
 func (p GeneralDauWauMau) Pointer() *GeneralDauWauMau {
@@ -1421,43 +1580,62 @@ func NewFirstEngagementStatisticsLoginDaysFromJson(data string) FirstEngagementS
 
 func NewFirstEngagementStatisticsLoginDaysFromDict(data map[string]interface{}) FirstEngagementStatisticsLoginDays {
 	return FirstEngagementStatisticsLoginDays{
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FirstEngagementStatisticsLoginDays) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FirstEngagementStatisticsLoginDays) Pointer() *FirstEngagementStatisticsLoginDays {
@@ -1521,19 +1699,27 @@ func NewFirstEngagementStatisticsFromJson(data string) FirstEngagementStatistics
 
 func NewFirstEngagementStatisticsFromDict(data map[string]interface{}) FirstEngagementStatistics {
 	return FirstEngagementStatistics{
-		LoginDays: NewFirstEngagementStatisticsLoginDaysFromDict(core.CastMap(data["loginDays"])).Pointer(),
+		LoginDays: func() *FirstEngagementStatisticsLoginDays {
+			v, ok := data["loginDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirstEngagementStatisticsLoginDaysFromDict(core.CastMap(data["loginDays"])).Pointer()
+		}(),
 	}
 }
 
 func (p FirstEngagementStatistics) ToDict() map[string]interface{} {
-
-	var loginDays map[string]interface{}
+	m := map[string]interface{}{}
 	if p.LoginDays != nil {
-		loginDays = p.LoginDays.ToDict()
+		m["loginDays"] = func() map[string]interface{} {
+			if p.LoginDays == nil {
+				return nil
+			}
+			return p.LoginDays.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"loginDays": loginDays,
-	}
+	return m
 }
 
 func (p FirstEngagementStatistics) Pointer() *FirstEngagementStatistics {
@@ -1605,31 +1791,42 @@ func NewFirstEngagementDistributionSegmentFromJson(data string) FirstEngagementD
 
 func NewFirstEngagementDistributionSegmentFromDict(data map[string]interface{}) FirstEngagementDistributionSegment {
 	return FirstEngagementDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FirstEngagementDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FirstEngagementDistributionSegment) Pointer() *FirstEngagementDistributionSegment {
@@ -1697,27 +1894,38 @@ func NewFirstEngagementFromJson(data string) FirstEngagement {
 
 func NewFirstEngagementFromDict(data map[string]interface{}) FirstEngagement {
 	return FirstEngagement{
-		Statistics:   NewFirstEngagementStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFirstEngagementDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FirstEngagementStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirstEngagementStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FirstEngagementDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFirstEngagementDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FirstEngagement) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFirstEngagementDistributionSegmentsFromDict(
+		m["distribution"] = CastFirstEngagementDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FirstEngagement) Pointer() *FirstEngagement {
@@ -1797,43 +2005,62 @@ func NewSessionDurationStatisticsFromJson(data string) SessionDurationStatistics
 
 func NewSessionDurationStatisticsFromDict(data map[string]interface{}) SessionDurationStatistics {
 	return SessionDurationStatistics{
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p SessionDurationStatistics) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p SessionDurationStatistics) Pointer() *SessionDurationStatistics {
@@ -1905,31 +2132,42 @@ func NewSessionDurationDistributionSegmentFromJson(data string) SessionDurationD
 
 func NewSessionDurationDistributionSegmentFromDict(data map[string]interface{}) SessionDurationDistributionSegment {
 	return SessionDurationDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p SessionDurationDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p SessionDurationDistributionSegment) Pointer() *SessionDurationDistributionSegment {
@@ -1945,6 +2183,113 @@ func CastSessionDurationDistributionSegments(data []interface{}) []SessionDurati
 }
 
 func CastSessionDurationDistributionSegmentsFromDict(data []SessionDurationDistributionSegment) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type SessionDurationDistribution struct {
+	Min   *int64 `json:"min"`
+	Max   *int64 `json:"max"`
+	Count *int64 `json:"count"`
+}
+
+func (p *SessionDurationDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SessionDurationDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SessionDurationDistribution{}
+	} else {
+		*p = SessionDurationDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewSessionDurationDistributionFromJson(data string) SessionDurationDistribution {
+	req := SessionDurationDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewSessionDurationDistributionFromDict(data map[string]interface{}) SessionDurationDistribution {
+	return SessionDurationDistribution{
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+	}
+}
+
+func (p SessionDurationDistribution) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Min != nil {
+		m["min"] = p.Min
+	}
+	if p.Max != nil {
+		m["max"] = p.Max
+	}
+	if p.Count != nil {
+		m["count"] = p.Count
+	}
+	return m
+}
+
+func (p SessionDurationDistribution) Pointer() *SessionDurationDistribution {
+	return &p
+}
+
+func CastSessionDurationDistributions(data []interface{}) []SessionDurationDistribution {
+	v := make([]SessionDurationDistribution, 0)
+	for _, d := range data {
+		v = append(v, NewSessionDurationDistributionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSessionDurationDistributionsFromDict(data []SessionDurationDistribution) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2025,37 +2370,52 @@ func NewEngagementHistoryFromJson(data string) EngagementHistory {
 
 func NewEngagementHistoryFromDict(data map[string]interface{}) EngagementHistory {
 	return EngagementHistory{
-		Date:            core.CastString(data["date"]),
-		NewUserRate:     core.CastFloat32(data["newUserRate"]),
-		ReturnUserRate:  core.CastFloat32(data["returnUserRate"]),
-		EngagedUserRate: core.CastFloat32(data["engagedUserRate"]),
+		Date: func() *string {
+			v, ok := data["date"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["date"])
+		}(),
+		NewUserRate: func() *float32 {
+			v, ok := data["newUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["newUserRate"])
+		}(),
+		ReturnUserRate: func() *float32 {
+			v, ok := data["returnUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["returnUserRate"])
+		}(),
+		EngagedUserRate: func() *float32 {
+			v, ok := data["engagedUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["engagedUserRate"])
+		}(),
 	}
 }
 
 func (p EngagementHistory) ToDict() map[string]interface{} {
-
-	var date *string
+	m := map[string]interface{}{}
 	if p.Date != nil {
-		date = p.Date
+		m["date"] = p.Date
 	}
-	var newUserRate *float32
 	if p.NewUserRate != nil {
-		newUserRate = p.NewUserRate
+		m["newUserRate"] = p.NewUserRate
 	}
-	var returnUserRate *float32
 	if p.ReturnUserRate != nil {
-		returnUserRate = p.ReturnUserRate
+		m["returnUserRate"] = p.ReturnUserRate
 	}
-	var engagedUserRate *float32
 	if p.EngagedUserRate != nil {
-		engagedUserRate = p.EngagedUserRate
+		m["engagedUserRate"] = p.EngagedUserRate
 	}
-	return map[string]interface{}{
-		"date":            date,
-		"newUserRate":     newUserRate,
-		"returnUserRate":  returnUserRate,
-		"engagedUserRate": engagedUserRate,
-	}
+	return m
 }
 
 func (p EngagementHistory) Pointer() *EngagementHistory {
@@ -2127,31 +2487,42 @@ func NewEngagementAverageFromJson(data string) EngagementAverage {
 
 func NewEngagementAverageFromDict(data map[string]interface{}) EngagementAverage {
 	return EngagementAverage{
-		NewUserRate:     core.CastFloat32(data["newUserRate"]),
-		ReturnUserRate:  core.CastFloat32(data["returnUserRate"]),
-		EngagedUserRate: core.CastFloat32(data["engagedUserRate"]),
+		NewUserRate: func() *float32 {
+			v, ok := data["newUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["newUserRate"])
+		}(),
+		ReturnUserRate: func() *float32 {
+			v, ok := data["returnUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["returnUserRate"])
+		}(),
+		EngagedUserRate: func() *float32 {
+			v, ok := data["engagedUserRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["engagedUserRate"])
+		}(),
 	}
 }
 
 func (p EngagementAverage) ToDict() map[string]interface{} {
-
-	var newUserRate *float32
+	m := map[string]interface{}{}
 	if p.NewUserRate != nil {
-		newUserRate = p.NewUserRate
+		m["newUserRate"] = p.NewUserRate
 	}
-	var returnUserRate *float32
 	if p.ReturnUserRate != nil {
-		returnUserRate = p.ReturnUserRate
+		m["returnUserRate"] = p.ReturnUserRate
 	}
-	var engagedUserRate *float32
 	if p.EngagedUserRate != nil {
-		engagedUserRate = p.EngagedUserRate
+		m["engagedUserRate"] = p.EngagedUserRate
 	}
-	return map[string]interface{}{
-		"newUserRate":     newUserRate,
-		"returnUserRate":  returnUserRate,
-		"engagedUserRate": engagedUserRate,
-	}
+	return m
 }
 
 func (p EngagementAverage) Pointer() *EngagementAverage {
@@ -2219,27 +2590,38 @@ func NewEngagementsFromJson(data string) Engagements {
 
 func NewEngagementsFromDict(data map[string]interface{}) Engagements {
 	return Engagements{
-		History: CastEngagementHistories(core.CastArray(data["history"])),
-		Avg:     NewEngagementAverageFromDict(core.CastMap(data["avg"])).Pointer(),
+		History: func() []EngagementHistory {
+			if data["history"] == nil {
+				return nil
+			}
+			return CastEngagementHistories(core.CastArray(data["history"]))
+		}(),
+		Avg: func() *EngagementAverage {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEngagementAverageFromDict(core.CastMap(data["avg"])).Pointer()
+		}(),
 	}
 }
 
 func (p Engagements) ToDict() map[string]interface{} {
-
-	var history []interface{}
+	m := map[string]interface{}{}
 	if p.History != nil {
-		history = CastEngagementHistoriesFromDict(
+		m["history"] = CastEngagementHistoriesFromDict(
 			p.History,
 		)
 	}
-	var avg map[string]interface{}
 	if p.Avg != nil {
-		avg = p.Avg.ToDict()
+		m["avg"] = func() map[string]interface{} {
+			if p.Avg == nil {
+				return nil
+			}
+			return p.Avg.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"history": history,
-		"avg":     avg,
-	}
+	return m
 }
 
 func (p Engagements) Pointer() *Engagements {
@@ -2327,25 +2709,32 @@ func NewChurnRateHistoryFromJson(data string) ChurnRateHistory {
 
 func NewChurnRateHistoryFromDict(data map[string]interface{}) ChurnRateHistory {
 	return ChurnRateHistory{
-		Date:      core.CastString(data["date"]),
-		ChurnRate: core.CastFloat32(data["churnRate"]),
+		Date: func() *string {
+			v, ok := data["date"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["date"])
+		}(),
+		ChurnRate: func() *float32 {
+			v, ok := data["churnRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["churnRate"])
+		}(),
 	}
 }
 
 func (p ChurnRateHistory) ToDict() map[string]interface{} {
-
-	var date *string
+	m := map[string]interface{}{}
 	if p.Date != nil {
-		date = p.Date
+		m["date"] = p.Date
 	}
-	var churnRate *float32
 	if p.ChurnRate != nil {
-		churnRate = p.ChurnRate
+		m["churnRate"] = p.ChurnRate
 	}
-	return map[string]interface{}{
-		"date":      date,
-		"churnRate": churnRate,
-	}
+	return m
 }
 
 func (p ChurnRateHistory) Pointer() *ChurnRateHistory {
@@ -2409,19 +2798,22 @@ func NewChurnRateAverageFromJson(data string) ChurnRateAverage {
 
 func NewChurnRateAverageFromDict(data map[string]interface{}) ChurnRateAverage {
 	return ChurnRateAverage{
-		ChurnRate: core.CastFloat32(data["churnRate"]),
+		ChurnRate: func() *float32 {
+			v, ok := data["churnRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["churnRate"])
+		}(),
 	}
 }
 
 func (p ChurnRateAverage) ToDict() map[string]interface{} {
-
-	var churnRate *float32
+	m := map[string]interface{}{}
 	if p.ChurnRate != nil {
-		churnRate = p.ChurnRate
+		m["churnRate"] = p.ChurnRate
 	}
-	return map[string]interface{}{
-		"churnRate": churnRate,
-	}
+	return m
 }
 
 func (p ChurnRateAverage) Pointer() *ChurnRateAverage {
@@ -2489,27 +2881,38 @@ func NewChurnRateAggregateFromJson(data string) ChurnRateAggregate {
 
 func NewChurnRateAggregateFromDict(data map[string]interface{}) ChurnRateAggregate {
 	return ChurnRateAggregate{
-		History: CastChurnRateHistories(core.CastArray(data["history"])),
-		Avg:     NewChurnRateAverageFromDict(core.CastMap(data["avg"])).Pointer(),
+		History: func() []ChurnRateHistory {
+			if data["history"] == nil {
+				return nil
+			}
+			return CastChurnRateHistories(core.CastArray(data["history"]))
+		}(),
+		Avg: func() *ChurnRateAverage {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChurnRateAverageFromDict(core.CastMap(data["avg"])).Pointer()
+		}(),
 	}
 }
 
 func (p ChurnRateAggregate) ToDict() map[string]interface{} {
-
-	var history []interface{}
+	m := map[string]interface{}{}
 	if p.History != nil {
-		history = CastChurnRateHistoriesFromDict(
+		m["history"] = CastChurnRateHistoriesFromDict(
 			p.History,
 		)
 	}
-	var avg map[string]interface{}
 	if p.Avg != nil {
-		avg = p.Avg.ToDict()
+		m["avg"] = func() map[string]interface{} {
+			if p.Avg == nil {
+				return nil
+			}
+			return p.Avg.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"history": history,
-		"avg":     avg,
-	}
+	return m
 }
 
 func (p ChurnRateAggregate) Pointer() *ChurnRateAggregate {
@@ -2533,8 +2936,8 @@ func CastChurnRateAggregatesFromDict(data []ChurnRateAggregate) []interface{} {
 }
 
 type SessionDuration struct {
-	Statistics   *SessionDurationStatistics           `json:"statistics"`
-	Distribution []SessionDurationDistributionSegment `json:"distribution"`
+	Statistics   *SessionDurationStatistics    `json:"statistics"`
+	Distribution []SessionDurationDistribution `json:"distribution"`
 }
 
 func (p *SessionDuration) UnmarshalJSON(data []byte) error {
@@ -2577,27 +2980,38 @@ func NewSessionDurationFromJson(data string) SessionDuration {
 
 func NewSessionDurationFromDict(data map[string]interface{}) SessionDuration {
 	return SessionDuration{
-		Statistics:   NewSessionDurationStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastSessionDurationDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *SessionDurationStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSessionDurationStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []SessionDurationDistribution {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastSessionDurationDistributions(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p SessionDuration) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastSessionDurationDistributionSegmentsFromDict(
+		m["distribution"] = CastSessionDurationDistributionsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p SessionDuration) Pointer() *SessionDuration {
@@ -2737,133 +3151,212 @@ func NewUseServicesFromJson(data string) UseServices {
 
 func NewUseServicesFromDict(data map[string]interface{}) UseServices {
 	return UseServices{
-		Account:     core.CastBool(data["account"]),
-		Chat:        core.CastBool(data["chat"]),
-		Datastore:   core.CastBool(data["datastore"]),
-		Dictionary:  core.CastBool(data["dictionary"]),
-		Exchange:    core.CastBool(data["exchange"]),
-		Experience:  core.CastBool(data["experience"]),
-		Formation:   core.CastBool(data["formation"]),
-		Friend:      core.CastBool(data["friend"]),
-		Inbox:       core.CastBool(data["inbox"]),
-		Inventory:   core.CastBool(data["inventory"]),
-		Key:         core.CastBool(data["key"]),
-		Limit:       core.CastBool(data["limit"]),
-		Lottery:     core.CastBool(data["lottery"]),
-		Matchmaking: core.CastBool(data["matchmaking"]),
-		Mission:     core.CastBool(data["mission"]),
-		Money:       core.CastBool(data["money"]),
-		Quest:       core.CastBool(data["quest"]),
-		Ranking:     core.CastBool(data["ranking"]),
-		Showcase:    core.CastBool(data["showcase"]),
-		Stamina:     core.CastBool(data["stamina"]),
+		Account: func() *bool {
+			v, ok := data["account"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["account"])
+		}(),
+		Chat: func() *bool {
+			v, ok := data["chat"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["chat"])
+		}(),
+		Datastore: func() *bool {
+			v, ok := data["datastore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["datastore"])
+		}(),
+		Dictionary: func() *bool {
+			v, ok := data["dictionary"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["dictionary"])
+		}(),
+		Exchange: func() *bool {
+			v, ok := data["exchange"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["exchange"])
+		}(),
+		Experience: func() *bool {
+			v, ok := data["experience"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["experience"])
+		}(),
+		Formation: func() *bool {
+			v, ok := data["formation"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["formation"])
+		}(),
+		Friend: func() *bool {
+			v, ok := data["friend"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["friend"])
+		}(),
+		Inbox: func() *bool {
+			v, ok := data["inbox"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["inbox"])
+		}(),
+		Inventory: func() *bool {
+			v, ok := data["inventory"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["inventory"])
+		}(),
+		Key: func() *bool {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["key"])
+		}(),
+		Limit: func() *bool {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["limit"])
+		}(),
+		Lottery: func() *bool {
+			v, ok := data["lottery"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["lottery"])
+		}(),
+		Matchmaking: func() *bool {
+			v, ok := data["matchmaking"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["matchmaking"])
+		}(),
+		Mission: func() *bool {
+			v, ok := data["mission"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["mission"])
+		}(),
+		Money: func() *bool {
+			v, ok := data["money"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["money"])
+		}(),
+		Quest: func() *bool {
+			v, ok := data["quest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["quest"])
+		}(),
+		Ranking: func() *bool {
+			v, ok := data["ranking"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["ranking"])
+		}(),
+		Showcase: func() *bool {
+			v, ok := data["showcase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["showcase"])
+		}(),
+		Stamina: func() *bool {
+			v, ok := data["stamina"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["stamina"])
+		}(),
 	}
 }
 
 func (p UseServices) ToDict() map[string]interface{} {
-
-	var account *bool
+	m := map[string]interface{}{}
 	if p.Account != nil {
-		account = p.Account
+		m["account"] = p.Account
 	}
-	var chat *bool
 	if p.Chat != nil {
-		chat = p.Chat
+		m["chat"] = p.Chat
 	}
-	var datastore *bool
 	if p.Datastore != nil {
-		datastore = p.Datastore
+		m["datastore"] = p.Datastore
 	}
-	var dictionary *bool
 	if p.Dictionary != nil {
-		dictionary = p.Dictionary
+		m["dictionary"] = p.Dictionary
 	}
-	var exchange *bool
 	if p.Exchange != nil {
-		exchange = p.Exchange
+		m["exchange"] = p.Exchange
 	}
-	var experience *bool
 	if p.Experience != nil {
-		experience = p.Experience
+		m["experience"] = p.Experience
 	}
-	var formation *bool
 	if p.Formation != nil {
-		formation = p.Formation
+		m["formation"] = p.Formation
 	}
-	var friend *bool
 	if p.Friend != nil {
-		friend = p.Friend
+		m["friend"] = p.Friend
 	}
-	var inbox *bool
 	if p.Inbox != nil {
-		inbox = p.Inbox
+		m["inbox"] = p.Inbox
 	}
-	var inventory *bool
 	if p.Inventory != nil {
-		inventory = p.Inventory
+		m["inventory"] = p.Inventory
 	}
-	var key *bool
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var limit *bool
 	if p.Limit != nil {
-		limit = p.Limit
+		m["limit"] = p.Limit
 	}
-	var lottery *bool
 	if p.Lottery != nil {
-		lottery = p.Lottery
+		m["lottery"] = p.Lottery
 	}
-	var matchmaking *bool
 	if p.Matchmaking != nil {
-		matchmaking = p.Matchmaking
+		m["matchmaking"] = p.Matchmaking
 	}
-	var mission *bool
 	if p.Mission != nil {
-		mission = p.Mission
+		m["mission"] = p.Mission
 	}
-	var money *bool
 	if p.Money != nil {
-		money = p.Money
+		m["money"] = p.Money
 	}
-	var quest *bool
 	if p.Quest != nil {
-		quest = p.Quest
+		m["quest"] = p.Quest
 	}
-	var ranking *bool
 	if p.Ranking != nil {
-		ranking = p.Ranking
+		m["ranking"] = p.Ranking
 	}
-	var showcase *bool
 	if p.Showcase != nil {
-		showcase = p.Showcase
+		m["showcase"] = p.Showcase
 	}
-	var stamina *bool
 	if p.Stamina != nil {
-		stamina = p.Stamina
+		m["stamina"] = p.Stamina
 	}
-	return map[string]interface{}{
-		"account":     account,
-		"chat":        chat,
-		"datastore":   datastore,
-		"dictionary":  dictionary,
-		"exchange":    exchange,
-		"experience":  experience,
-		"formation":   formation,
-		"friend":      friend,
-		"inbox":       inbox,
-		"inventory":   inventory,
-		"key":         key,
-		"limit":       limit,
-		"lottery":     lottery,
-		"matchmaking": matchmaking,
-		"mission":     mission,
-		"money":       money,
-		"quest":       quest,
-		"ranking":     ranking,
-		"showcase":    showcase,
-		"stamina":     stamina,
-	}
+	return m
 }
 
 func (p UseServices) Pointer() *UseServices {
@@ -2947,49 +3440,102 @@ func NewGeneralMetricsFromJson(data string) GeneralMetrics {
 
 func NewGeneralMetricsFromDict(data map[string]interface{}) GeneralMetrics {
 	return GeneralMetrics{
-		DauWauMau:       NewGeneralDauWauMauFromDict(core.CastMap(data["dauWauMau"])).Pointer(),
-		SessionDuration: NewSessionDurationFromDict(core.CastMap(data["sessionDuration"])).Pointer(),
-		FirstEngagement: NewFirstEngagementFromDict(core.CastMap(data["firstEngagement"])).Pointer(),
-		Engagements:     NewEngagementsFromDict(core.CastMap(data["engagements"])).Pointer(),
-		ChurnRates:      NewChurnRateAggregateFromDict(core.CastMap(data["churnRates"])).Pointer(),
-		UseServices:     NewUseServicesFromDict(core.CastMap(data["useServices"])).Pointer(),
+		DauWauMau: func() *GeneralDauWauMau {
+			v, ok := data["dauWauMau"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGeneralDauWauMauFromDict(core.CastMap(data["dauWauMau"])).Pointer()
+		}(),
+		SessionDuration: func() *SessionDuration {
+			v, ok := data["sessionDuration"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSessionDurationFromDict(core.CastMap(data["sessionDuration"])).Pointer()
+		}(),
+		FirstEngagement: func() *FirstEngagement {
+			v, ok := data["firstEngagement"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirstEngagementFromDict(core.CastMap(data["firstEngagement"])).Pointer()
+		}(),
+		Engagements: func() *Engagements {
+			v, ok := data["engagements"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEngagementsFromDict(core.CastMap(data["engagements"])).Pointer()
+		}(),
+		ChurnRates: func() *ChurnRateAggregate {
+			v, ok := data["churnRates"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChurnRateAggregateFromDict(core.CastMap(data["churnRates"])).Pointer()
+		}(),
+		UseServices: func() *UseServices {
+			v, ok := data["useServices"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUseServicesFromDict(core.CastMap(data["useServices"])).Pointer()
+		}(),
 	}
 }
 
 func (p GeneralMetrics) ToDict() map[string]interface{} {
-
-	var dauWauMau map[string]interface{}
+	m := map[string]interface{}{}
 	if p.DauWauMau != nil {
-		dauWauMau = p.DauWauMau.ToDict()
+		m["dauWauMau"] = func() map[string]interface{} {
+			if p.DauWauMau == nil {
+				return nil
+			}
+			return p.DauWauMau.ToDict()
+		}()
 	}
-	var sessionDuration map[string]interface{}
 	if p.SessionDuration != nil {
-		sessionDuration = p.SessionDuration.ToDict()
+		m["sessionDuration"] = func() map[string]interface{} {
+			if p.SessionDuration == nil {
+				return nil
+			}
+			return p.SessionDuration.ToDict()
+		}()
 	}
-	var firstEngagement map[string]interface{}
 	if p.FirstEngagement != nil {
-		firstEngagement = p.FirstEngagement.ToDict()
+		m["firstEngagement"] = func() map[string]interface{} {
+			if p.FirstEngagement == nil {
+				return nil
+			}
+			return p.FirstEngagement.ToDict()
+		}()
 	}
-	var engagements map[string]interface{}
 	if p.Engagements != nil {
-		engagements = p.Engagements.ToDict()
+		m["engagements"] = func() map[string]interface{} {
+			if p.Engagements == nil {
+				return nil
+			}
+			return p.Engagements.ToDict()
+		}()
 	}
-	var churnRates map[string]interface{}
 	if p.ChurnRates != nil {
-		churnRates = p.ChurnRates.ToDict()
+		m["churnRates"] = func() map[string]interface{} {
+			if p.ChurnRates == nil {
+				return nil
+			}
+			return p.ChurnRates.ToDict()
+		}()
 	}
-	var useServices map[string]interface{}
 	if p.UseServices != nil {
-		useServices = p.UseServices.ToDict()
+		m["useServices"] = func() map[string]interface{} {
+			if p.UseServices == nil {
+				return nil
+			}
+			return p.UseServices.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"dauWauMau":       dauWauMau,
-		"sessionDuration": sessionDuration,
-		"firstEngagement": firstEngagement,
-		"engagements":     engagements,
-		"churnRates":      churnRates,
-		"useServices":     useServices,
-	}
+	return m
 }
 
 func (p GeneralMetrics) Pointer() *GeneralMetrics {
@@ -3069,43 +3615,62 @@ func NewAccountNamespaceStatisticsFromJson(data string) AccountNamespaceStatisti
 
 func NewAccountNamespaceStatisticsFromDict(data map[string]interface{}) AccountNamespaceStatistics {
 	return AccountNamespaceStatistics{
-		Signup:             core.CastInt64(data["signup"]),
-		Authentication:     core.CastInt64(data["authentication"]),
-		RegisteredTakeOver: core.CastInt64(data["registeredTakeOver"]),
-		RemoveTakeOver:     core.CastInt64(data["removeTakeOver"]),
-		ExecuteTakeOver:    core.CastInt64(data["executeTakeOver"]),
+		Signup: func() *int64 {
+			v, ok := data["signup"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["signup"])
+		}(),
+		Authentication: func() *int64 {
+			v, ok := data["authentication"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["authentication"])
+		}(),
+		RegisteredTakeOver: func() *int64 {
+			v, ok := data["registeredTakeOver"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["registeredTakeOver"])
+		}(),
+		RemoveTakeOver: func() *int64 {
+			v, ok := data["removeTakeOver"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["removeTakeOver"])
+		}(),
+		ExecuteTakeOver: func() *int64 {
+			v, ok := data["executeTakeOver"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["executeTakeOver"])
+		}(),
 	}
 }
 
 func (p AccountNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var signup *int64
+	m := map[string]interface{}{}
 	if p.Signup != nil {
-		signup = p.Signup
+		m["signup"] = p.Signup
 	}
-	var authentication *int64
 	if p.Authentication != nil {
-		authentication = p.Authentication
+		m["authentication"] = p.Authentication
 	}
-	var registeredTakeOver *int64
 	if p.RegisteredTakeOver != nil {
-		registeredTakeOver = p.RegisteredTakeOver
+		m["registeredTakeOver"] = p.RegisteredTakeOver
 	}
-	var removeTakeOver *int64
 	if p.RemoveTakeOver != nil {
-		removeTakeOver = p.RemoveTakeOver
+		m["removeTakeOver"] = p.RemoveTakeOver
 	}
-	var executeTakeOver *int64
 	if p.ExecuteTakeOver != nil {
-		executeTakeOver = p.ExecuteTakeOver
+		m["executeTakeOver"] = p.ExecuteTakeOver
 	}
-	return map[string]interface{}{
-		"signup":             signup,
-		"authentication":     authentication,
-		"registeredTakeOver": registeredTakeOver,
-		"removeTakeOver":     removeTakeOver,
-		"executeTakeOver":    executeTakeOver,
-	}
+	return m
 }
 
 func (p AccountNamespaceStatistics) Pointer() *AccountNamespaceStatistics {
@@ -3189,49 +3754,72 @@ func NewAccountNamespaceTypeDistributionStatisticsFromJson(data string) AccountN
 
 func NewAccountNamespaceTypeDistributionStatisticsFromDict(data map[string]interface{}) AccountNamespaceTypeDistributionStatistics {
 	return AccountNamespaceTypeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p AccountNamespaceTypeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p AccountNamespaceTypeDistributionStatistics) Pointer() *AccountNamespaceTypeDistributionStatistics {
@@ -3299,25 +3887,32 @@ func NewAccountNamespaceTypeDistributionSegmentFromJson(data string) AccountName
 
 func NewAccountNamespaceTypeDistributionSegmentFromDict(data map[string]interface{}) AccountNamespaceTypeDistributionSegment {
 	return AccountNamespaceTypeDistributionSegment{
-		Type:  core.CastInt64(data["type"]),
-		Count: core.CastInt64(data["count"]),
+		Type: func() *int64 {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["type"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p AccountNamespaceTypeDistributionSegment) ToDict() map[string]interface{} {
-
-	var _type *int64
+	m := map[string]interface{}{}
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"type":  _type,
-		"count": count,
-	}
+	return m
 }
 
 func (p AccountNamespaceTypeDistributionSegment) Pointer() *AccountNamespaceTypeDistributionSegment {
@@ -3385,27 +3980,38 @@ func NewAccountNamespaceTypeDistributionFromJson(data string) AccountNamespaceTy
 
 func NewAccountNamespaceTypeDistributionFromDict(data map[string]interface{}) AccountNamespaceTypeDistribution {
 	return AccountNamespaceTypeDistribution{
-		Statistics:   NewAccountNamespaceTypeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastAccountNamespaceTypeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *AccountNamespaceTypeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountNamespaceTypeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []AccountNamespaceTypeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastAccountNamespaceTypeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p AccountNamespaceTypeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastAccountNamespaceTypeDistributionSegmentsFromDict(
+		m["distribution"] = CastAccountNamespaceTypeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p AccountNamespaceTypeDistribution) Pointer() *AccountNamespaceTypeDistribution {
@@ -3469,19 +4075,27 @@ func NewAccountNamespaceDistributionsFromJson(data string) AccountNamespaceDistr
 
 func NewAccountNamespaceDistributionsFromDict(data map[string]interface{}) AccountNamespaceDistributions {
 	return AccountNamespaceDistributions{
-		Type: NewAccountNamespaceTypeDistributionFromDict(core.CastMap(data["type"])).Pointer(),
+		Type: func() *AccountNamespaceTypeDistribution {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountNamespaceTypeDistributionFromDict(core.CastMap(data["type"])).Pointer()
+		}(),
 	}
 }
 
 func (p AccountNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var _type map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Type != nil {
-		_type = p.Type.ToDict()
+		m["type"] = func() map[string]interface{} {
+			if p.Type == nil {
+				return nil
+			}
+			return p.Type.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"type": _type,
-	}
+	return m
 }
 
 func (p AccountNamespaceDistributions) Pointer() *AccountNamespaceDistributions {
@@ -3609,55 +4223,92 @@ func NewAccountNamespaceFromJson(data string) AccountNamespace {
 
 func NewAccountNamespaceFromDict(data map[string]interface{}) AccountNamespace {
 	return AccountNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewAccountNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewAccountNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *AccountNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *AccountNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p AccountNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p AccountNamespace) Pointer() *AccountNamespace {
@@ -3737,43 +4388,62 @@ func NewChatNamespaceStatisticsFromJson(data string) ChatNamespaceStatistics {
 
 func NewChatNamespaceStatisticsFromDict(data map[string]interface{}) ChatNamespaceStatistics {
 	return ChatNamespaceStatistics{
-		Post:            core.CastInt64(data["post"]),
-		CreateRoom:      core.CastInt64(data["createRoom"]),
-		DeleteRoom:      core.CastInt64(data["deleteRoom"]),
-		CreateSubscribe: core.CastInt64(data["createSubscribe"]),
-		DeleteSubscribe: core.CastInt64(data["deleteSubscribe"]),
+		Post: func() *int64 {
+			v, ok := data["post"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["post"])
+		}(),
+		CreateRoom: func() *int64 {
+			v, ok := data["createRoom"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createRoom"])
+		}(),
+		DeleteRoom: func() *int64 {
+			v, ok := data["deleteRoom"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deleteRoom"])
+		}(),
+		CreateSubscribe: func() *int64 {
+			v, ok := data["createSubscribe"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createSubscribe"])
+		}(),
+		DeleteSubscribe: func() *int64 {
+			v, ok := data["deleteSubscribe"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deleteSubscribe"])
+		}(),
 	}
 }
 
 func (p ChatNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var post *int64
+	m := map[string]interface{}{}
 	if p.Post != nil {
-		post = p.Post
+		m["post"] = p.Post
 	}
-	var createRoom *int64
 	if p.CreateRoom != nil {
-		createRoom = p.CreateRoom
+		m["createRoom"] = p.CreateRoom
 	}
-	var deleteRoom *int64
 	if p.DeleteRoom != nil {
-		deleteRoom = p.DeleteRoom
+		m["deleteRoom"] = p.DeleteRoom
 	}
-	var createSubscribe *int64
 	if p.CreateSubscribe != nil {
-		createSubscribe = p.CreateSubscribe
+		m["createSubscribe"] = p.CreateSubscribe
 	}
-	var deleteSubscribe *int64
 	if p.DeleteSubscribe != nil {
-		deleteSubscribe = p.DeleteSubscribe
+		m["deleteSubscribe"] = p.DeleteSubscribe
 	}
-	return map[string]interface{}{
-		"post":            post,
-		"createRoom":      createRoom,
-		"deleteRoom":      deleteRoom,
-		"createSubscribe": createSubscribe,
-		"deleteSubscribe": deleteSubscribe,
-	}
+	return m
 }
 
 func (p ChatNamespaceStatistics) Pointer() *ChatNamespaceStatistics {
@@ -3857,49 +4527,72 @@ func NewChatNamespacePostByRoomDistributionStatisticsFromJson(data string) ChatN
 
 func NewChatNamespacePostByRoomDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistributionStatistics {
 	return ChatNamespacePostByRoomDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByRoomDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByRoomDistributionStatistics) Pointer() *ChatNamespacePostByRoomDistributionStatistics {
@@ -3971,31 +4664,42 @@ func NewChatNamespacePostByRoomDistributionSegmentFromJson(data string) ChatName
 
 func NewChatNamespacePostByRoomDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistributionSegment {
 	return ChatNamespacePostByRoomDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByRoomDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByRoomDistributionSegment) Pointer() *ChatNamespacePostByRoomDistributionSegment {
@@ -4063,27 +4767,38 @@ func NewChatNamespacePostByRoomDistributionFromJson(data string) ChatNamespacePo
 
 func NewChatNamespacePostByRoomDistributionFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistribution {
 	return ChatNamespacePostByRoomDistribution{
-		Statistics:   NewChatNamespacePostByRoomDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastChatNamespacePostByRoomDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ChatNamespacePostByRoomDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByRoomDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ChatNamespacePostByRoomDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastChatNamespacePostByRoomDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByRoomDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastChatNamespacePostByRoomDistributionSegmentsFromDict(
+		m["distribution"] = CastChatNamespacePostByRoomDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByRoomDistribution) Pointer() *ChatNamespacePostByRoomDistribution {
@@ -4167,49 +4882,72 @@ func NewChatNamespacePostByUserDistributionStatisticsFromJson(data string) ChatN
 
 func NewChatNamespacePostByUserDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByUserDistributionStatistics {
 	return ChatNamespacePostByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByUserDistributionStatistics) Pointer() *ChatNamespacePostByUserDistributionStatistics {
@@ -4281,31 +5019,42 @@ func NewChatNamespacePostByUserDistributionSegmentFromJson(data string) ChatName
 
 func NewChatNamespacePostByUserDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByUserDistributionSegment {
 	return ChatNamespacePostByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByUserDistributionSegment) Pointer() *ChatNamespacePostByUserDistributionSegment {
@@ -4373,27 +5122,38 @@ func NewChatNamespacePostByUserDistributionFromJson(data string) ChatNamespacePo
 
 func NewChatNamespacePostByUserDistributionFromDict(data map[string]interface{}) ChatNamespacePostByUserDistribution {
 	return ChatNamespacePostByUserDistribution{
-		Statistics:   NewChatNamespacePostByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastChatNamespacePostByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ChatNamespacePostByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ChatNamespacePostByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastChatNamespacePostByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastChatNamespacePostByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastChatNamespacePostByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByUserDistribution) Pointer() *ChatNamespacePostByUserDistribution {
@@ -4477,49 +5237,72 @@ func NewChatNamespacePostByCategoryDistributionStatisticsFromJson(data string) C
 
 func NewChatNamespacePostByCategoryDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistributionStatistics {
 	return ChatNamespacePostByCategoryDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByCategoryDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByCategoryDistributionStatistics) Pointer() *ChatNamespacePostByCategoryDistributionStatistics {
@@ -4587,25 +5370,32 @@ func NewChatNamespacePostByCategoryDistributionSegmentFromJson(data string) Chat
 
 func NewChatNamespacePostByCategoryDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistributionSegment {
 	return ChatNamespacePostByCategoryDistributionSegment{
-		Category: core.CastInt64(data["category"]),
-		Count:    core.CastInt64(data["count"]),
+		Category: func() *int64 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["category"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByCategoryDistributionSegment) ToDict() map[string]interface{} {
-
-	var category *int64
+	m := map[string]interface{}{}
 	if p.Category != nil {
-		category = p.Category
+		m["category"] = p.Category
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"category": category,
-		"count":    count,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByCategoryDistributionSegment) Pointer() *ChatNamespacePostByCategoryDistributionSegment {
@@ -4673,27 +5463,38 @@ func NewChatNamespacePostByCategoryDistributionFromJson(data string) ChatNamespa
 
 func NewChatNamespacePostByCategoryDistributionFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistribution {
 	return ChatNamespacePostByCategoryDistribution{
-		Statistics:   NewChatNamespacePostByCategoryDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastChatNamespacePostByCategoryDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ChatNamespacePostByCategoryDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByCategoryDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ChatNamespacePostByCategoryDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastChatNamespacePostByCategoryDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ChatNamespacePostByCategoryDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastChatNamespacePostByCategoryDistributionSegmentsFromDict(
+		m["distribution"] = CastChatNamespacePostByCategoryDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ChatNamespacePostByCategoryDistribution) Pointer() *ChatNamespacePostByCategoryDistribution {
@@ -4765,31 +5566,57 @@ func NewChatNamespaceDistributionsFromJson(data string) ChatNamespaceDistributio
 
 func NewChatNamespaceDistributionsFromDict(data map[string]interface{}) ChatNamespaceDistributions {
 	return ChatNamespaceDistributions{
-		PostByRoom:     NewChatNamespacePostByRoomDistributionFromDict(core.CastMap(data["postByRoom"])).Pointer(),
-		PostByUser:     NewChatNamespacePostByUserDistributionFromDict(core.CastMap(data["postByUser"])).Pointer(),
-		PostByCategory: NewChatNamespacePostByCategoryDistributionFromDict(core.CastMap(data["postByCategory"])).Pointer(),
+		PostByRoom: func() *ChatNamespacePostByRoomDistribution {
+			v, ok := data["postByRoom"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByRoomDistributionFromDict(core.CastMap(data["postByRoom"])).Pointer()
+		}(),
+		PostByUser: func() *ChatNamespacePostByUserDistribution {
+			v, ok := data["postByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByUserDistributionFromDict(core.CastMap(data["postByUser"])).Pointer()
+		}(),
+		PostByCategory: func() *ChatNamespacePostByCategoryDistribution {
+			v, ok := data["postByCategory"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespacePostByCategoryDistributionFromDict(core.CastMap(data["postByCategory"])).Pointer()
+		}(),
 	}
 }
 
 func (p ChatNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var postByRoom map[string]interface{}
+	m := map[string]interface{}{}
 	if p.PostByRoom != nil {
-		postByRoom = p.PostByRoom.ToDict()
+		m["postByRoom"] = func() map[string]interface{} {
+			if p.PostByRoom == nil {
+				return nil
+			}
+			return p.PostByRoom.ToDict()
+		}()
 	}
-	var postByUser map[string]interface{}
 	if p.PostByUser != nil {
-		postByUser = p.PostByUser.ToDict()
+		m["postByUser"] = func() map[string]interface{} {
+			if p.PostByUser == nil {
+				return nil
+			}
+			return p.PostByUser.ToDict()
+		}()
 	}
-	var postByCategory map[string]interface{}
 	if p.PostByCategory != nil {
-		postByCategory = p.PostByCategory.ToDict()
+		m["postByCategory"] = func() map[string]interface{} {
+			if p.PostByCategory == nil {
+				return nil
+			}
+			return p.PostByCategory.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"postByRoom":     postByRoom,
-		"postByUser":     postByUser,
-		"postByCategory": postByCategory,
-	}
+	return m
 }
 
 func (p ChatNamespaceDistributions) Pointer() *ChatNamespaceDistributions {
@@ -4917,55 +5744,92 @@ func NewChatNamespaceFromJson(data string) ChatNamespace {
 
 func NewChatNamespaceFromDict(data map[string]interface{}) ChatNamespace {
 	return ChatNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewChatNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewChatNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *ChatNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ChatNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChatNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p ChatNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p ChatNamespace) Pointer() *ChatNamespace {
@@ -5033,25 +5897,32 @@ func NewDatastoreNamespaceStatisticsFromJson(data string) DatastoreNamespaceStat
 
 func NewDatastoreNamespaceStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceStatistics {
 	return DatastoreNamespaceStatistics{
-		Upload:   core.CastInt64(data["upload"]),
-		Download: core.CastInt64(data["download"]),
+		Upload: func() *int64 {
+			v, ok := data["upload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["upload"])
+		}(),
+		Download: func() *int64 {
+			v, ok := data["download"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["download"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var upload *int64
+	m := map[string]interface{}{}
 	if p.Upload != nil {
-		upload = p.Upload
+		m["upload"] = p.Upload
 	}
-	var download *int64
 	if p.Download != nil {
-		download = p.Download
+		m["download"] = p.Download
 	}
-	return map[string]interface{}{
-		"upload":   upload,
-		"download": download,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceStatistics) Pointer() *DatastoreNamespaceStatistics {
@@ -5135,49 +6006,72 @@ func NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromJson(data stri
 
 func NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistributionStatistics {
 	return DatastoreNamespaceDownloadByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDownloadByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDownloadByUserDistributionStatistics) Pointer() *DatastoreNamespaceDownloadByUserDistributionStatistics {
@@ -5249,31 +6143,42 @@ func NewDatastoreNamespaceDownloadByUserDistributionSegmentFromJson(data string)
 
 func NewDatastoreNamespaceDownloadByUserDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistributionSegment {
 	return DatastoreNamespaceDownloadByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDownloadByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDownloadByUserDistributionSegment) Pointer() *DatastoreNamespaceDownloadByUserDistributionSegment {
@@ -5341,27 +6246,38 @@ func NewDatastoreNamespaceDownloadByUserDistributionFromJson(data string) Datast
 
 func NewDatastoreNamespaceDownloadByUserDistributionFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistribution {
 	return DatastoreNamespaceDownloadByUserDistribution{
-		Statistics:   NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastDatastoreNamespaceDownloadByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *DatastoreNamespaceDownloadByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []DatastoreNamespaceDownloadByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastDatastoreNamespaceDownloadByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDownloadByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastDatastoreNamespaceDownloadByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastDatastoreNamespaceDownloadByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDownloadByUserDistribution) Pointer() *DatastoreNamespaceDownloadByUserDistribution {
@@ -5445,49 +6361,72 @@ func NewDatastoreNamespaceUploadByUserDistributionStatisticsFromJson(data string
 
 func NewDatastoreNamespaceUploadByUserDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistributionStatistics {
 	return DatastoreNamespaceUploadByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceUploadByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceUploadByUserDistributionStatistics) Pointer() *DatastoreNamespaceUploadByUserDistributionStatistics {
@@ -5559,31 +6498,42 @@ func NewDatastoreNamespaceUploadByUserDistributionSegmentFromJson(data string) D
 
 func NewDatastoreNamespaceUploadByUserDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistributionSegment {
 	return DatastoreNamespaceUploadByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceUploadByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceUploadByUserDistributionSegment) Pointer() *DatastoreNamespaceUploadByUserDistributionSegment {
@@ -5651,27 +6601,38 @@ func NewDatastoreNamespaceUploadByUserDistributionFromJson(data string) Datastor
 
 func NewDatastoreNamespaceUploadByUserDistributionFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistribution {
 	return DatastoreNamespaceUploadByUserDistribution{
-		Statistics:   NewDatastoreNamespaceUploadByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastDatastoreNamespaceUploadByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *DatastoreNamespaceUploadByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceUploadByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []DatastoreNamespaceUploadByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastDatastoreNamespaceUploadByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceUploadByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastDatastoreNamespaceUploadByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastDatastoreNamespaceUploadByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceUploadByUserDistribution) Pointer() *DatastoreNamespaceUploadByUserDistribution {
@@ -5755,49 +6716,72 @@ func NewDatastoreNamespaceDataSizeDistributionStatisticsFromJson(data string) Da
 
 func NewDatastoreNamespaceDataSizeDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistributionStatistics {
 	return DatastoreNamespaceDataSizeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDataSizeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDataSizeDistributionStatistics) Pointer() *DatastoreNamespaceDataSizeDistributionStatistics {
@@ -5869,31 +6853,42 @@ func NewDatastoreNamespaceDataSizeDistributionSegmentFromJson(data string) Datas
 
 func NewDatastoreNamespaceDataSizeDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistributionSegment {
 	return DatastoreNamespaceDataSizeDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDataSizeDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDataSizeDistributionSegment) Pointer() *DatastoreNamespaceDataSizeDistributionSegment {
@@ -5961,27 +6956,38 @@ func NewDatastoreNamespaceDataSizeDistributionFromJson(data string) DatastoreNam
 
 func NewDatastoreNamespaceDataSizeDistributionFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistribution {
 	return DatastoreNamespaceDataSizeDistribution{
-		Statistics:   NewDatastoreNamespaceDataSizeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastDatastoreNamespaceDataSizeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *DatastoreNamespaceDataSizeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceDataSizeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []DatastoreNamespaceDataSizeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastDatastoreNamespaceDataSizeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDataSizeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastDatastoreNamespaceDataSizeDistributionSegmentsFromDict(
+		m["distribution"] = CastDatastoreNamespaceDataSizeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDataSizeDistribution) Pointer() *DatastoreNamespaceDataSizeDistribution {
@@ -6053,31 +7059,57 @@ func NewDatastoreNamespaceDistributionsFromJson(data string) DatastoreNamespaceD
 
 func NewDatastoreNamespaceDistributionsFromDict(data map[string]interface{}) DatastoreNamespaceDistributions {
 	return DatastoreNamespaceDistributions{
-		DownloadByUser: NewDatastoreNamespaceDownloadByUserDistributionFromDict(core.CastMap(data["downloadByUser"])).Pointer(),
-		UploadByUser:   NewDatastoreNamespaceUploadByUserDistributionFromDict(core.CastMap(data["uploadByUser"])).Pointer(),
-		DataSize:       NewDatastoreNamespaceDataSizeDistributionFromDict(core.CastMap(data["dataSize"])).Pointer(),
+		DownloadByUser: func() *DatastoreNamespaceDownloadByUserDistribution {
+			v, ok := data["downloadByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceDownloadByUserDistributionFromDict(core.CastMap(data["downloadByUser"])).Pointer()
+		}(),
+		UploadByUser: func() *DatastoreNamespaceUploadByUserDistribution {
+			v, ok := data["uploadByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceUploadByUserDistributionFromDict(core.CastMap(data["uploadByUser"])).Pointer()
+		}(),
+		DataSize: func() *DatastoreNamespaceDataSizeDistribution {
+			v, ok := data["dataSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceDataSizeDistributionFromDict(core.CastMap(data["dataSize"])).Pointer()
+		}(),
 	}
 }
 
 func (p DatastoreNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var downloadByUser map[string]interface{}
+	m := map[string]interface{}{}
 	if p.DownloadByUser != nil {
-		downloadByUser = p.DownloadByUser.ToDict()
+		m["downloadByUser"] = func() map[string]interface{} {
+			if p.DownloadByUser == nil {
+				return nil
+			}
+			return p.DownloadByUser.ToDict()
+		}()
 	}
-	var uploadByUser map[string]interface{}
 	if p.UploadByUser != nil {
-		uploadByUser = p.UploadByUser.ToDict()
+		m["uploadByUser"] = func() map[string]interface{} {
+			if p.UploadByUser == nil {
+				return nil
+			}
+			return p.UploadByUser.ToDict()
+		}()
 	}
-	var dataSize map[string]interface{}
 	if p.DataSize != nil {
-		dataSize = p.DataSize.ToDict()
+		m["dataSize"] = func() map[string]interface{} {
+			if p.DataSize == nil {
+				return nil
+			}
+			return p.DataSize.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"downloadByUser": downloadByUser,
-		"uploadByUser":   uploadByUser,
-		"dataSize":       dataSize,
-	}
+	return m
 }
 
 func (p DatastoreNamespaceDistributions) Pointer() *DatastoreNamespaceDistributions {
@@ -6205,55 +7237,92 @@ func NewDatastoreNamespaceFromJson(data string) DatastoreNamespace {
 
 func NewDatastoreNamespaceFromDict(data map[string]interface{}) DatastoreNamespace {
 	return DatastoreNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewDatastoreNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewDatastoreNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *DatastoreNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *DatastoreNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDatastoreNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p DatastoreNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p DatastoreNamespace) Pointer() *DatastoreNamespace {
@@ -6317,19 +7386,22 @@ func NewDictionaryNamespaceStatisticsFromJson(data string) DictionaryNamespaceSt
 
 func NewDictionaryNamespaceStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceStatistics {
 	return DictionaryNamespaceStatistics{
-		Register: core.CastInt64(data["register"]),
+		Register: func() *int64 {
+			v, ok := data["register"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["register"])
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var register *int64
+	m := map[string]interface{}{}
 	if p.Register != nil {
-		register = p.Register
+		m["register"] = p.Register
 	}
-	return map[string]interface{}{
-		"register": register,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceStatistics) Pointer() *DictionaryNamespaceStatistics {
@@ -6413,49 +7485,72 @@ func NewDictionaryNamespaceEntryByNameDistributionStatisticsFromJson(data string
 
 func NewDictionaryNamespaceEntryByNameDistributionStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistributionStatistics {
 	return DictionaryNamespaceEntryByNameDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByNameDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByNameDistributionStatistics) Pointer() *DictionaryNamespaceEntryByNameDistributionStatistics {
@@ -6543,25 +7638,32 @@ func NewDictionaryNamespaceEntryByNameDistributionSegmentFromJson(data string) D
 
 func NewDictionaryNamespaceEntryByNameDistributionSegmentFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistributionSegment {
 	return DictionaryNamespaceEntryByNameDistributionSegment{
-		EntryModelName: core.CastString(data["entryModelName"]),
-		Count:          core.CastInt64(data["count"]),
+		EntryModelName: func() *string {
+			v, ok := data["entryModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["entryModelName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByNameDistributionSegment) ToDict() map[string]interface{} {
-
-	var entryModelName *string
+	m := map[string]interface{}{}
 	if p.EntryModelName != nil {
-		entryModelName = p.EntryModelName
+		m["entryModelName"] = p.EntryModelName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"entryModelName": entryModelName,
-		"count":          count,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByNameDistributionSegment) Pointer() *DictionaryNamespaceEntryByNameDistributionSegment {
@@ -6629,27 +7731,38 @@ func NewDictionaryNamespaceEntryByNameDistributionFromJson(data string) Dictiona
 
 func NewDictionaryNamespaceEntryByNameDistributionFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistribution {
 	return DictionaryNamespaceEntryByNameDistribution{
-		Statistics:   NewDictionaryNamespaceEntryByNameDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastDictionaryNamespaceEntryByNameDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *DictionaryNamespaceEntryByNameDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceEntryByNameDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []DictionaryNamespaceEntryByNameDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastDictionaryNamespaceEntryByNameDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByNameDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastDictionaryNamespaceEntryByNameDistributionSegmentsFromDict(
+		m["distribution"] = CastDictionaryNamespaceEntryByNameDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByNameDistribution) Pointer() *DictionaryNamespaceEntryByNameDistribution {
@@ -6733,49 +7846,72 @@ func NewDictionaryNamespaceEntryByUserDistributionStatisticsFromJson(data string
 
 func NewDictionaryNamespaceEntryByUserDistributionStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistributionStatistics {
 	return DictionaryNamespaceEntryByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByUserDistributionStatistics) Pointer() *DictionaryNamespaceEntryByUserDistributionStatistics {
@@ -6847,31 +7983,42 @@ func NewDictionaryNamespaceEntryByUserDistributionSegmentFromJson(data string) D
 
 func NewDictionaryNamespaceEntryByUserDistributionSegmentFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistributionSegment {
 	return DictionaryNamespaceEntryByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByUserDistributionSegment) Pointer() *DictionaryNamespaceEntryByUserDistributionSegment {
@@ -6939,27 +8086,38 @@ func NewDictionaryNamespaceEntryByUserDistributionFromJson(data string) Dictiona
 
 func NewDictionaryNamespaceEntryByUserDistributionFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistribution {
 	return DictionaryNamespaceEntryByUserDistribution{
-		Statistics:   NewDictionaryNamespaceEntryByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastDictionaryNamespaceEntryByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *DictionaryNamespaceEntryByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceEntryByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []DictionaryNamespaceEntryByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastDictionaryNamespaceEntryByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceEntryByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastDictionaryNamespaceEntryByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastDictionaryNamespaceEntryByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceEntryByUserDistribution) Pointer() *DictionaryNamespaceEntryByUserDistribution {
@@ -7027,25 +8185,42 @@ func NewDictionaryNamespaceDistributionsFromJson(data string) DictionaryNamespac
 
 func NewDictionaryNamespaceDistributionsFromDict(data map[string]interface{}) DictionaryNamespaceDistributions {
 	return DictionaryNamespaceDistributions{
-		EntryByName: NewDictionaryNamespaceEntryByNameDistributionFromDict(core.CastMap(data["entryByName"])).Pointer(),
-		EntryByUser: NewDictionaryNamespaceEntryByUserDistributionFromDict(core.CastMap(data["entryByUser"])).Pointer(),
+		EntryByName: func() *DictionaryNamespaceEntryByNameDistribution {
+			v, ok := data["entryByName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceEntryByNameDistributionFromDict(core.CastMap(data["entryByName"])).Pointer()
+		}(),
+		EntryByUser: func() *DictionaryNamespaceEntryByUserDistribution {
+			v, ok := data["entryByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceEntryByUserDistributionFromDict(core.CastMap(data["entryByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p DictionaryNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var entryByName map[string]interface{}
+	m := map[string]interface{}{}
 	if p.EntryByName != nil {
-		entryByName = p.EntryByName.ToDict()
+		m["entryByName"] = func() map[string]interface{} {
+			if p.EntryByName == nil {
+				return nil
+			}
+			return p.EntryByName.ToDict()
+		}()
 	}
-	var entryByUser map[string]interface{}
 	if p.EntryByUser != nil {
-		entryByUser = p.EntryByUser.ToDict()
+		m["entryByUser"] = func() map[string]interface{} {
+			if p.EntryByUser == nil {
+				return nil
+			}
+			return p.EntryByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"entryByName": entryByName,
-		"entryByUser": entryByUser,
-	}
+	return m
 }
 
 func (p DictionaryNamespaceDistributions) Pointer() *DictionaryNamespaceDistributions {
@@ -7173,55 +8348,92 @@ func NewDictionaryNamespaceFromJson(data string) DictionaryNamespace {
 
 func NewDictionaryNamespaceFromDict(data map[string]interface{}) DictionaryNamespace {
 	return DictionaryNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewDictionaryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewDictionaryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *DictionaryNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *DictionaryNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDictionaryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p DictionaryNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p DictionaryNamespace) Pointer() *DictionaryNamespace {
@@ -7329,25 +8541,32 @@ func NewDictionaryEntryModelFromJson(data string) DictionaryEntryModel {
 
 func NewDictionaryEntryModelFromDict(data map[string]interface{}) DictionaryEntryModel {
 	return DictionaryEntryModel{
-		EntryModelModelId: core.CastString(data["entryModelModelId"]),
-		EntryName:         core.CastString(data["entryName"]),
+		EntryModelModelId: func() *string {
+			v, ok := data["entryModelModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["entryModelModelId"])
+		}(),
+		EntryName: func() *string {
+			v, ok := data["entryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["entryName"])
+		}(),
 	}
 }
 
 func (p DictionaryEntryModel) ToDict() map[string]interface{} {
-
-	var entryModelModelId *string
+	m := map[string]interface{}{}
 	if p.EntryModelModelId != nil {
-		entryModelModelId = p.EntryModelModelId
+		m["entryModelModelId"] = p.EntryModelModelId
 	}
-	var entryName *string
 	if p.EntryName != nil {
-		entryName = p.EntryName
+		m["entryName"] = p.EntryName
 	}
-	return map[string]interface{}{
-		"entryModelModelId": entryModelModelId,
-		"entryName":         entryName,
-	}
+	return m
 }
 
 func (p DictionaryEntryModel) Pointer() *DictionaryEntryModel {
@@ -7415,25 +8634,32 @@ func NewExchangeRateModelStatisticsFromJson(data string) ExchangeRateModelStatis
 
 func NewExchangeRateModelStatisticsFromDict(data map[string]interface{}) ExchangeRateModelStatistics {
 	return ExchangeRateModelStatistics{
-		Exchange: core.CastInt64(data["exchange"]),
-		Amount:   core.CastInt64(data["amount"]),
+		Exchange: func() *int64 {
+			v, ok := data["exchange"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["exchange"])
+		}(),
+		Amount: func() *int64 {
+			v, ok := data["amount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["amount"])
+		}(),
 	}
 }
 
 func (p ExchangeRateModelStatistics) ToDict() map[string]interface{} {
-
-	var exchange *int64
+	m := map[string]interface{}{}
 	if p.Exchange != nil {
-		exchange = p.Exchange
+		m["exchange"] = p.Exchange
 	}
-	var amount *int64
 	if p.Amount != nil {
-		amount = p.Amount
+		m["amount"] = p.Amount
 	}
-	return map[string]interface{}{
-		"exchange": exchange,
-		"amount":   amount,
-	}
+	return m
 }
 
 func (p ExchangeRateModelStatistics) Pointer() *ExchangeRateModelStatistics {
@@ -7517,49 +8743,72 @@ func NewExchangeRateModelAmountDistributionStatisticsFromJson(data string) Excha
 
 func NewExchangeRateModelAmountDistributionStatisticsFromDict(data map[string]interface{}) ExchangeRateModelAmountDistributionStatistics {
 	return ExchangeRateModelAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExchangeRateModelAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExchangeRateModelAmountDistributionStatistics) Pointer() *ExchangeRateModelAmountDistributionStatistics {
@@ -7631,31 +8880,42 @@ func NewExchangeRateModelAmountDistributionSegmentFromJson(data string) Exchange
 
 func NewExchangeRateModelAmountDistributionSegmentFromDict(data map[string]interface{}) ExchangeRateModelAmountDistributionSegment {
 	return ExchangeRateModelAmountDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExchangeRateModelAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExchangeRateModelAmountDistributionSegment) Pointer() *ExchangeRateModelAmountDistributionSegment {
@@ -7723,27 +8983,38 @@ func NewExchangeRateModelAmountDistributionFromJson(data string) ExchangeRateMod
 
 func NewExchangeRateModelAmountDistributionFromDict(data map[string]interface{}) ExchangeRateModelAmountDistribution {
 	return ExchangeRateModelAmountDistribution{
-		Statistics:   NewExchangeRateModelAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExchangeRateModelAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExchangeRateModelAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeRateModelAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExchangeRateModelAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExchangeRateModelAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExchangeRateModelAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExchangeRateModelAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastExchangeRateModelAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExchangeRateModelAmountDistribution) Pointer() *ExchangeRateModelAmountDistribution {
@@ -7807,19 +9078,27 @@ func NewExchangeRateModelDistributionsFromJson(data string) ExchangeRateModelDis
 
 func NewExchangeRateModelDistributionsFromDict(data map[string]interface{}) ExchangeRateModelDistributions {
 	return ExchangeRateModelDistributions{
-		Amount: NewExchangeRateModelAmountDistributionFromDict(core.CastMap(data["amount"])).Pointer(),
+		Amount: func() *ExchangeRateModelAmountDistribution {
+			v, ok := data["amount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeRateModelAmountDistributionFromDict(core.CastMap(data["amount"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExchangeRateModelDistributions) ToDict() map[string]interface{} {
-
-	var amount map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Amount != nil {
-		amount = p.Amount.ToDict()
+		m["amount"] = func() map[string]interface{} {
+			if p.Amount == nil {
+				return nil
+			}
+			return p.Amount.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"amount": amount,
-	}
+	return m
 }
 
 func (p ExchangeRateModelDistributions) Pointer() *ExchangeRateModelDistributions {
@@ -7935,37 +9214,62 @@ func NewExchangeRateModelFromJson(data string) ExchangeRateModel {
 
 func NewExchangeRateModelFromDict(data map[string]interface{}) ExchangeRateModel {
 	return ExchangeRateModel{
-		RateModelId:   core.CastString(data["rateModelId"]),
-		RateName:      core.CastString(data["rateName"]),
-		Statistics:    NewExchangeRateModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewExchangeRateModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		RateModelId: func() *string {
+			v, ok := data["rateModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rateModelId"])
+		}(),
+		RateName: func() *string {
+			v, ok := data["rateName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rateName"])
+		}(),
+		Statistics: func() *ExchangeRateModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeRateModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ExchangeRateModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeRateModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExchangeRateModel) ToDict() map[string]interface{} {
-
-	var rateModelId *string
+	m := map[string]interface{}{}
 	if p.RateModelId != nil {
-		rateModelId = p.RateModelId
+		m["rateModelId"] = p.RateModelId
 	}
-	var rateName *string
 	if p.RateName != nil {
-		rateName = p.RateName
+		m["rateName"] = p.RateName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"rateModelId":   rateModelId,
-		"rateName":      rateName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p ExchangeRateModel) Pointer() *ExchangeRateModel {
@@ -8033,25 +9337,32 @@ func NewExchangeNamespaceStatisticsFromJson(data string) ExchangeNamespaceStatis
 
 func NewExchangeNamespaceStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceStatistics {
 	return ExchangeNamespaceStatistics{
-		Exchange: core.CastInt64(data["exchange"]),
-		Amount:   core.CastInt64(data["amount"]),
+		Exchange: func() *int64 {
+			v, ok := data["exchange"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["exchange"])
+		}(),
+		Amount: func() *int64 {
+			v, ok := data["amount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["amount"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var exchange *int64
+	m := map[string]interface{}{}
 	if p.Exchange != nil {
-		exchange = p.Exchange
+		m["exchange"] = p.Exchange
 	}
-	var amount *int64
 	if p.Amount != nil {
-		amount = p.Amount
+		m["amount"] = p.Amount
 	}
-	return map[string]interface{}{
-		"exchange": exchange,
-		"amount":   amount,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceStatistics) Pointer() *ExchangeNamespaceStatistics {
@@ -8135,49 +9446,72 @@ func NewExchangeNamespaceExchangeDistributionStatisticsFromJson(data string) Exc
 
 func NewExchangeNamespaceExchangeDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistributionStatistics {
 	return ExchangeNamespaceExchangeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeDistributionStatistics) Pointer() *ExchangeNamespaceExchangeDistributionStatistics {
@@ -8265,25 +9599,32 @@ func NewExchangeNamespaceExchangeDistributionSegmentFromJson(data string) Exchan
 
 func NewExchangeNamespaceExchangeDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistributionSegment {
 	return ExchangeNamespaceExchangeDistributionSegment{
-		RateName: core.CastString(data["rateName"]),
-		Count:    core.CastInt64(data["count"]),
+		RateName: func() *string {
+			v, ok := data["rateName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rateName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeDistributionSegment) ToDict() map[string]interface{} {
-
-	var rateName *string
+	m := map[string]interface{}{}
 	if p.RateName != nil {
-		rateName = p.RateName
+		m["rateName"] = p.RateName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"rateName": rateName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeDistributionSegment) Pointer() *ExchangeNamespaceExchangeDistributionSegment {
@@ -8351,27 +9692,38 @@ func NewExchangeNamespaceExchangeDistributionFromJson(data string) ExchangeNames
 
 func NewExchangeNamespaceExchangeDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistribution {
 	return ExchangeNamespaceExchangeDistribution{
-		Statistics:   NewExchangeNamespaceExchangeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExchangeNamespaceExchangeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExchangeNamespaceExchangeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExchangeNamespaceExchangeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExchangeNamespaceExchangeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExchangeNamespaceExchangeDistributionSegmentsFromDict(
+		m["distribution"] = CastExchangeNamespaceExchangeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeDistribution) Pointer() *ExchangeNamespaceExchangeDistribution {
@@ -8455,49 +9807,72 @@ func NewExchangeNamespaceExchangeAmountDistributionStatisticsFromJson(data strin
 
 func NewExchangeNamespaceExchangeAmountDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistributionStatistics {
 	return ExchangeNamespaceExchangeAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountDistributionStatistics) Pointer() *ExchangeNamespaceExchangeAmountDistributionStatistics {
@@ -8585,25 +9960,32 @@ func NewExchangeNamespaceExchangeAmountDistributionSegmentFromJson(data string) 
 
 func NewExchangeNamespaceExchangeAmountDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistributionSegment {
 	return ExchangeNamespaceExchangeAmountDistributionSegment{
-		RateName: core.CastString(data["rateName"]),
-		Sum:      core.CastInt64(data["sum"]),
+		RateName: func() *string {
+			v, ok := data["rateName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rateName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var rateName *string
+	m := map[string]interface{}{}
 	if p.RateName != nil {
-		rateName = p.RateName
+		m["rateName"] = p.RateName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"rateName": rateName,
-		"sum":      sum,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountDistributionSegment) Pointer() *ExchangeNamespaceExchangeAmountDistributionSegment {
@@ -8671,27 +10053,38 @@ func NewExchangeNamespaceExchangeAmountDistributionFromJson(data string) Exchang
 
 func NewExchangeNamespaceExchangeAmountDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistribution {
 	return ExchangeNamespaceExchangeAmountDistribution{
-		Statistics:   NewExchangeNamespaceExchangeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExchangeNamespaceExchangeAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExchangeNamespaceExchangeAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExchangeNamespaceExchangeAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExchangeNamespaceExchangeAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExchangeNamespaceExchangeAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastExchangeNamespaceExchangeAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountDistribution) Pointer() *ExchangeNamespaceExchangeAmountDistribution {
@@ -8775,49 +10168,72 @@ func NewExchangeNamespaceExchangeByUserDistributionStatisticsFromJson(data strin
 
 func NewExchangeNamespaceExchangeByUserDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistributionStatistics {
 	return ExchangeNamespaceExchangeByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeByUserDistributionStatistics) Pointer() *ExchangeNamespaceExchangeByUserDistributionStatistics {
@@ -8889,31 +10305,42 @@ func NewExchangeNamespaceExchangeByUserDistributionSegmentFromJson(data string) 
 
 func NewExchangeNamespaceExchangeByUserDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistributionSegment {
 	return ExchangeNamespaceExchangeByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeByUserDistributionSegment) Pointer() *ExchangeNamespaceExchangeByUserDistributionSegment {
@@ -8981,27 +10408,38 @@ func NewExchangeNamespaceExchangeByUserDistributionFromJson(data string) Exchang
 
 func NewExchangeNamespaceExchangeByUserDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistribution {
 	return ExchangeNamespaceExchangeByUserDistribution{
-		Statistics:   NewExchangeNamespaceExchangeByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExchangeNamespaceExchangeByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExchangeNamespaceExchangeByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExchangeNamespaceExchangeByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExchangeNamespaceExchangeByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExchangeNamespaceExchangeByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExchangeNamespaceExchangeByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeByUserDistribution) Pointer() *ExchangeNamespaceExchangeByUserDistribution {
@@ -9085,49 +10523,72 @@ func NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromJson(data
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistributionStatistics {
 	return ExchangeNamespaceExchangeAmountByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistributionStatistics) Pointer() *ExchangeNamespaceExchangeAmountByUserDistributionStatistics {
@@ -9199,31 +10660,42 @@ func NewExchangeNamespaceExchangeAmountByUserDistributionSegmentFromJson(data st
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistributionSegment {
 	return ExchangeNamespaceExchangeAmountByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistributionSegment) Pointer() *ExchangeNamespaceExchangeAmountByUserDistributionSegment {
@@ -9291,27 +10763,38 @@ func NewExchangeNamespaceExchangeAmountByUserDistributionFromJson(data string) E
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistribution {
 	return ExchangeNamespaceExchangeAmountByUserDistribution{
-		Statistics:   NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExchangeNamespaceExchangeAmountByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExchangeNamespaceExchangeAmountByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExchangeNamespaceExchangeAmountByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExchangeNamespaceExchangeAmountByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExchangeNamespaceExchangeAmountByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExchangeNamespaceExchangeAmountByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceExchangeAmountByUserDistribution) Pointer() *ExchangeNamespaceExchangeAmountByUserDistribution {
@@ -9387,37 +10870,72 @@ func NewExchangeNamespaceDistributionsFromJson(data string) ExchangeNamespaceDis
 
 func NewExchangeNamespaceDistributionsFromDict(data map[string]interface{}) ExchangeNamespaceDistributions {
 	return ExchangeNamespaceDistributions{
-		Exchange:             NewExchangeNamespaceExchangeDistributionFromDict(core.CastMap(data["exchange"])).Pointer(),
-		ExchangeAmount:       NewExchangeNamespaceExchangeAmountDistributionFromDict(core.CastMap(data["exchangeAmount"])).Pointer(),
-		ExchangeByUser:       NewExchangeNamespaceExchangeByUserDistributionFromDict(core.CastMap(data["exchangeByUser"])).Pointer(),
-		ExchangeAmountByUser: NewExchangeNamespaceExchangeAmountByUserDistributionFromDict(core.CastMap(data["exchangeAmountByUser"])).Pointer(),
+		Exchange: func() *ExchangeNamespaceExchangeDistribution {
+			v, ok := data["exchange"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeDistributionFromDict(core.CastMap(data["exchange"])).Pointer()
+		}(),
+		ExchangeAmount: func() *ExchangeNamespaceExchangeAmountDistribution {
+			v, ok := data["exchangeAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeAmountDistributionFromDict(core.CastMap(data["exchangeAmount"])).Pointer()
+		}(),
+		ExchangeByUser: func() *ExchangeNamespaceExchangeByUserDistribution {
+			v, ok := data["exchangeByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeByUserDistributionFromDict(core.CastMap(data["exchangeByUser"])).Pointer()
+		}(),
+		ExchangeAmountByUser: func() *ExchangeNamespaceExchangeAmountByUserDistribution {
+			v, ok := data["exchangeAmountByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceExchangeAmountByUserDistributionFromDict(core.CastMap(data["exchangeAmountByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExchangeNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var exchange map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Exchange != nil {
-		exchange = p.Exchange.ToDict()
+		m["exchange"] = func() map[string]interface{} {
+			if p.Exchange == nil {
+				return nil
+			}
+			return p.Exchange.ToDict()
+		}()
 	}
-	var exchangeAmount map[string]interface{}
 	if p.ExchangeAmount != nil {
-		exchangeAmount = p.ExchangeAmount.ToDict()
+		m["exchangeAmount"] = func() map[string]interface{} {
+			if p.ExchangeAmount == nil {
+				return nil
+			}
+			return p.ExchangeAmount.ToDict()
+		}()
 	}
-	var exchangeByUser map[string]interface{}
 	if p.ExchangeByUser != nil {
-		exchangeByUser = p.ExchangeByUser.ToDict()
+		m["exchangeByUser"] = func() map[string]interface{} {
+			if p.ExchangeByUser == nil {
+				return nil
+			}
+			return p.ExchangeByUser.ToDict()
+		}()
 	}
-	var exchangeAmountByUser map[string]interface{}
 	if p.ExchangeAmountByUser != nil {
-		exchangeAmountByUser = p.ExchangeAmountByUser.ToDict()
+		m["exchangeAmountByUser"] = func() map[string]interface{} {
+			if p.ExchangeAmountByUser == nil {
+				return nil
+			}
+			return p.ExchangeAmountByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"exchange":             exchange,
-		"exchangeAmount":       exchangeAmount,
-		"exchangeByUser":       exchangeByUser,
-		"exchangeAmountByUser": exchangeAmountByUser,
-	}
+	return m
 }
 
 func (p ExchangeNamespaceDistributions) Pointer() *ExchangeNamespaceDistributions {
@@ -9549,63 +11067,103 @@ func NewExchangeNamespaceFromJson(data string) ExchangeNamespace {
 
 func NewExchangeNamespaceFromDict(data map[string]interface{}) ExchangeNamespace {
 	return ExchangeNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewExchangeNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewExchangeNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		RateModels:    CastExchangeRateModels(core.CastArray(data["rateModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *ExchangeNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ExchangeNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExchangeNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		RateModels: func() []ExchangeRateModel {
+			if data["rateModels"] == nil {
+				return nil
+			}
+			return CastExchangeRateModels(core.CastArray(data["rateModels"]))
+		}(),
 	}
 }
 
 func (p ExchangeNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var rateModels []interface{}
 	if p.RateModels != nil {
-		rateModels = CastExchangeRateModelsFromDict(
+		m["rateModels"] = CastExchangeRateModelsFromDict(
 			p.RateModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"rateModels":    rateModels,
-	}
+	return m
 }
 
 func (p ExchangeNamespace) Pointer() *ExchangeNamespace {
@@ -9689,49 +11247,72 @@ func NewExperienceStatusRankDistributionStatisticsFromJson(data string) Experien
 
 func NewExperienceStatusRankDistributionStatisticsFromDict(data map[string]interface{}) ExperienceStatusRankDistributionStatistics {
 	return ExperienceStatusRankDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankDistributionStatistics) Pointer() *ExperienceStatusRankDistributionStatistics {
@@ -9803,31 +11384,42 @@ func NewExperienceStatusRankDistributionSegmentFromJson(data string) ExperienceS
 
 func NewExperienceStatusRankDistributionSegmentFromDict(data map[string]interface{}) ExperienceStatusRankDistributionSegment {
 	return ExperienceStatusRankDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankDistributionSegment) Pointer() *ExperienceStatusRankDistributionSegment {
@@ -9895,27 +11487,38 @@ func NewExperienceStatusRankDistributionFromJson(data string) ExperienceStatusRa
 
 func NewExperienceStatusRankDistributionFromDict(data map[string]interface{}) ExperienceStatusRankDistribution {
 	return ExperienceStatusRankDistribution{
-		Statistics:   NewExperienceStatusRankDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceStatusRankDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceStatusRankDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceStatusRankDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceStatusRankDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceStatusRankDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceStatusRankDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceStatusRankDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankDistribution) Pointer() *ExperienceStatusRankDistribution {
@@ -9999,49 +11602,72 @@ func NewExperienceStatusRankCapDistributionStatisticsFromJson(data string) Exper
 
 func NewExperienceStatusRankCapDistributionStatisticsFromDict(data map[string]interface{}) ExperienceStatusRankCapDistributionStatistics {
 	return ExperienceStatusRankCapDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankCapDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankCapDistributionStatistics) Pointer() *ExperienceStatusRankCapDistributionStatistics {
@@ -10113,31 +11739,42 @@ func NewExperienceStatusRankCapDistributionSegmentFromJson(data string) Experien
 
 func NewExperienceStatusRankCapDistributionSegmentFromDict(data map[string]interface{}) ExperienceStatusRankCapDistributionSegment {
 	return ExperienceStatusRankCapDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankCapDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankCapDistributionSegment) Pointer() *ExperienceStatusRankCapDistributionSegment {
@@ -10205,27 +11842,38 @@ func NewExperienceStatusRankCapDistributionFromJson(data string) ExperienceStatu
 
 func NewExperienceStatusRankCapDistributionFromDict(data map[string]interface{}) ExperienceStatusRankCapDistribution {
 	return ExperienceStatusRankCapDistribution{
-		Statistics:   NewExperienceStatusRankCapDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceStatusRankCapDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceStatusRankCapDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceStatusRankCapDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceStatusRankCapDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceStatusRankCapDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceStatusRankCapDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceStatusRankCapDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceStatusRankCapDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceStatusRankCapDistribution) Pointer() *ExperienceStatusRankCapDistribution {
@@ -10293,25 +11941,42 @@ func NewExperienceStatusDistributionsFromJson(data string) ExperienceStatusDistr
 
 func NewExperienceStatusDistributionsFromDict(data map[string]interface{}) ExperienceStatusDistributions {
 	return ExperienceStatusDistributions{
-		Rank:    NewExperienceStatusRankDistributionFromDict(core.CastMap(data["rank"])).Pointer(),
-		RankCap: NewExperienceStatusRankCapDistributionFromDict(core.CastMap(data["rankCap"])).Pointer(),
+		Rank: func() *ExperienceStatusRankDistribution {
+			v, ok := data["rank"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceStatusRankDistributionFromDict(core.CastMap(data["rank"])).Pointer()
+		}(),
+		RankCap: func() *ExperienceStatusRankCapDistribution {
+			v, ok := data["rankCap"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceStatusRankCapDistributionFromDict(core.CastMap(data["rankCap"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExperienceStatusDistributions) ToDict() map[string]interface{} {
-
-	var rank map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Rank != nil {
-		rank = p.Rank.ToDict()
+		m["rank"] = func() map[string]interface{} {
+			if p.Rank == nil {
+				return nil
+			}
+			return p.Rank.ToDict()
+		}()
 	}
-	var rankCap map[string]interface{}
 	if p.RankCap != nil {
-		rankCap = p.RankCap.ToDict()
+		m["rankCap"] = func() map[string]interface{} {
+			if p.RankCap == nil {
+				return nil
+			}
+			return p.RankCap.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"rank":    rank,
-		"rankCap": rankCap,
-	}
+	return m
 }
 
 func (p ExperienceStatusDistributions) Pointer() *ExperienceStatusDistributions {
@@ -10447,37 +12112,57 @@ func NewExperienceStatusFromJson(data string) ExperienceStatus {
 
 func NewExperienceStatusFromDict(data map[string]interface{}) ExperienceStatus {
 	return ExperienceStatus{
-		StatusId:       core.CastString(data["statusId"]),
-		ExperienceName: core.CastString(data["experienceName"]),
-		PropertyId:     core.CastString(data["propertyId"]),
-		Distributions:  NewExperienceStatusDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		StatusId: func() *string {
+			v, ok := data["statusId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["statusId"])
+		}(),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Distributions: func() *ExperienceStatusDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceStatusDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExperienceStatus) ToDict() map[string]interface{} {
-
-	var statusId *string
+	m := map[string]interface{}{}
 	if p.StatusId != nil {
-		statusId = p.StatusId
+		m["statusId"] = p.StatusId
 	}
-	var experienceName *string
 	if p.ExperienceName != nil {
-		experienceName = p.ExperienceName
+		m["experienceName"] = p.ExperienceName
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"statusId":       statusId,
-		"experienceName": experienceName,
-		"propertyId":     propertyId,
-		"distributions":  distributions,
-	}
+	return m
 }
 
 func (p ExperienceStatus) Pointer() *ExperienceStatus {
@@ -10553,37 +12238,52 @@ func NewExperienceExperienceModelStatisticsFromJson(data string) ExperienceExper
 
 func NewExperienceExperienceModelStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelStatistics {
 	return ExperienceExperienceModelStatistics{
-		Experience:       core.CastInt64(data["experience"]),
-		ExperienceAmount: core.CastInt64(data["experienceAmount"]),
-		RankCap:          core.CastInt64(data["rankCap"]),
-		RankCapAmount:    core.CastInt64(data["rankCapAmount"]),
+		Experience: func() *int64 {
+			v, ok := data["experience"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["experience"])
+		}(),
+		ExperienceAmount: func() *int64 {
+			v, ok := data["experienceAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["experienceAmount"])
+		}(),
+		RankCap: func() *int64 {
+			v, ok := data["rankCap"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["rankCap"])
+		}(),
+		RankCapAmount: func() *int64 {
+			v, ok := data["rankCapAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["rankCapAmount"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelStatistics) ToDict() map[string]interface{} {
-
-	var experience *int64
+	m := map[string]interface{}{}
 	if p.Experience != nil {
-		experience = p.Experience
+		m["experience"] = p.Experience
 	}
-	var experienceAmount *int64
 	if p.ExperienceAmount != nil {
-		experienceAmount = p.ExperienceAmount
+		m["experienceAmount"] = p.ExperienceAmount
 	}
-	var rankCap *int64
 	if p.RankCap != nil {
-		rankCap = p.RankCap
+		m["rankCap"] = p.RankCap
 	}
-	var rankCapAmount *int64
 	if p.RankCapAmount != nil {
-		rankCapAmount = p.RankCapAmount
+		m["rankCapAmount"] = p.RankCapAmount
 	}
-	return map[string]interface{}{
-		"experience":       experience,
-		"experienceAmount": experienceAmount,
-		"rankCap":          rankCap,
-		"rankCapAmount":    rankCapAmount,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelStatistics) Pointer() *ExperienceExperienceModelStatistics {
@@ -10667,49 +12367,72 @@ func NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromJs
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistributionStatistics {
 	return ExperienceExperienceModelAddExperienceByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistributionStatistics) Pointer() *ExperienceExperienceModelAddExperienceByUserDistributionStatistics {
@@ -10781,31 +12504,42 @@ func NewExperienceExperienceModelAddExperienceByUserDistributionSegmentFromJson(
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistributionSegment {
 	return ExperienceExperienceModelAddExperienceByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistributionSegment) Pointer() *ExperienceExperienceModelAddExperienceByUserDistributionSegment {
@@ -10873,27 +12607,38 @@ func NewExperienceExperienceModelAddExperienceByUserDistributionFromJson(data st
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistribution {
 	return ExperienceExperienceModelAddExperienceByUserDistribution{
-		Statistics:   NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceExperienceModelAddExperienceByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceExperienceModelAddExperienceByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceExperienceModelAddExperienceByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModelAddExperienceByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceExperienceModelAddExperienceByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceExperienceModelAddExperienceByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceByUserDistribution) Pointer() *ExperienceExperienceModelAddExperienceByUserDistribution {
@@ -10977,49 +12722,72 @@ func NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics {
 	return ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics) Pointer() *ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics {
@@ -11091,31 +12859,42 @@ func NewExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentFro
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment {
 	return ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment) Pointer() *ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment {
@@ -11183,27 +12962,38 @@ func NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromJson(d
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistribution {
 	return ExperienceExperienceModelAddExperienceAmountByUserDistribution{
-		Statistics:   NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceExperienceModelAddExperienceAmountByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModelAddExperienceAmountByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddExperienceAmountByUserDistribution) Pointer() *ExperienceExperienceModelAddExperienceAmountByUserDistribution {
@@ -11287,49 +13077,72 @@ func NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromJson(
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistributionStatistics {
 	return ExperienceExperienceModelAddRankCapByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistributionStatistics) Pointer() *ExperienceExperienceModelAddRankCapByUserDistributionStatistics {
@@ -11401,31 +13214,42 @@ func NewExperienceExperienceModelAddRankCapByUserDistributionSegmentFromJson(dat
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistributionSegment {
 	return ExperienceExperienceModelAddRankCapByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistributionSegment) Pointer() *ExperienceExperienceModelAddRankCapByUserDistributionSegment {
@@ -11493,27 +13317,38 @@ func NewExperienceExperienceModelAddRankCapByUserDistributionFromJson(data strin
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistribution {
 	return ExperienceExperienceModelAddRankCapByUserDistribution{
-		Statistics:   NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceExperienceModelAddRankCapByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceExperienceModelAddRankCapByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceExperienceModelAddRankCapByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModelAddRankCapByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceExperienceModelAddRankCapByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceExperienceModelAddRankCapByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapByUserDistribution) Pointer() *ExperienceExperienceModelAddRankCapByUserDistribution {
@@ -11597,49 +13432,72 @@ func NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFro
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics {
 	return ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics) Pointer() *ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics {
@@ -11711,31 +13569,42 @@ func NewExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentFromJs
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment {
 	return ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment) Pointer() *ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment {
@@ -11803,27 +13672,38 @@ func NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromJson(data
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistribution {
 	return ExperienceExperienceModelAddRankCapAmountByUserDistribution{
-		Statistics:   NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceExperienceModelAddRankCapAmountByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModelAddRankCapAmountByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelAddRankCapAmountByUserDistribution) Pointer() *ExperienceExperienceModelAddRankCapAmountByUserDistribution {
@@ -11899,37 +13779,72 @@ func NewExperienceExperienceModelDistributionsFromJson(data string) ExperienceEx
 
 func NewExperienceExperienceModelDistributionsFromDict(data map[string]interface{}) ExperienceExperienceModelDistributions {
 	return ExperienceExperienceModelDistributions{
-		AddExperienceByUser:       NewExperienceExperienceModelAddExperienceByUserDistributionFromDict(core.CastMap(data["addExperienceByUser"])).Pointer(),
-		AddExperienceAmountByUser: NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromDict(core.CastMap(data["addExperienceAmountByUser"])).Pointer(),
-		AddRankCapByUser:          NewExperienceExperienceModelAddRankCapByUserDistributionFromDict(core.CastMap(data["addRankCapByUser"])).Pointer(),
-		AddRankCapAmountByUser:    NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromDict(core.CastMap(data["addRankCapAmountByUser"])).Pointer(),
+		AddExperienceByUser: func() *ExperienceExperienceModelAddExperienceByUserDistribution {
+			v, ok := data["addExperienceByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddExperienceByUserDistributionFromDict(core.CastMap(data["addExperienceByUser"])).Pointer()
+		}(),
+		AddExperienceAmountByUser: func() *ExperienceExperienceModelAddExperienceAmountByUserDistribution {
+			v, ok := data["addExperienceAmountByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromDict(core.CastMap(data["addExperienceAmountByUser"])).Pointer()
+		}(),
+		AddRankCapByUser: func() *ExperienceExperienceModelAddRankCapByUserDistribution {
+			v, ok := data["addRankCapByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddRankCapByUserDistributionFromDict(core.CastMap(data["addRankCapByUser"])).Pointer()
+		}(),
+		AddRankCapAmountByUser: func() *ExperienceExperienceModelAddRankCapAmountByUserDistribution {
+			v, ok := data["addRankCapAmountByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromDict(core.CastMap(data["addRankCapAmountByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModelDistributions) ToDict() map[string]interface{} {
-
-	var addExperienceByUser map[string]interface{}
+	m := map[string]interface{}{}
 	if p.AddExperienceByUser != nil {
-		addExperienceByUser = p.AddExperienceByUser.ToDict()
+		m["addExperienceByUser"] = func() map[string]interface{} {
+			if p.AddExperienceByUser == nil {
+				return nil
+			}
+			return p.AddExperienceByUser.ToDict()
+		}()
 	}
-	var addExperienceAmountByUser map[string]interface{}
 	if p.AddExperienceAmountByUser != nil {
-		addExperienceAmountByUser = p.AddExperienceAmountByUser.ToDict()
+		m["addExperienceAmountByUser"] = func() map[string]interface{} {
+			if p.AddExperienceAmountByUser == nil {
+				return nil
+			}
+			return p.AddExperienceAmountByUser.ToDict()
+		}()
 	}
-	var addRankCapByUser map[string]interface{}
 	if p.AddRankCapByUser != nil {
-		addRankCapByUser = p.AddRankCapByUser.ToDict()
+		m["addRankCapByUser"] = func() map[string]interface{} {
+			if p.AddRankCapByUser == nil {
+				return nil
+			}
+			return p.AddRankCapByUser.ToDict()
+		}()
 	}
-	var addRankCapAmountByUser map[string]interface{}
 	if p.AddRankCapAmountByUser != nil {
-		addRankCapAmountByUser = p.AddRankCapAmountByUser.ToDict()
+		m["addRankCapAmountByUser"] = func() map[string]interface{} {
+			if p.AddRankCapAmountByUser == nil {
+				return nil
+			}
+			return p.AddRankCapAmountByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"addExperienceByUser":       addExperienceByUser,
-		"addExperienceAmountByUser": addExperienceAmountByUser,
-		"addRankCapByUser":          addRankCapByUser,
-		"addRankCapAmountByUser":    addRankCapAmountByUser,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModelDistributions) Pointer() *ExperienceExperienceModelDistributions {
@@ -12049,45 +13964,73 @@ func NewExperienceExperienceModelFromJson(data string) ExperienceExperienceModel
 
 func NewExperienceExperienceModelFromDict(data map[string]interface{}) ExperienceExperienceModel {
 	return ExperienceExperienceModel{
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		ExperienceName:    core.CastString(data["experienceName"]),
-		Statistics:        NewExperienceExperienceModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:     NewExperienceExperienceModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Statuses:          CastExperienceStatuses(core.CastArray(data["statuses"])),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
+		Statistics: func() *ExperienceExperienceModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ExperienceExperienceModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceExperienceModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Statuses: func() []ExperienceStatus {
+			if data["statuses"] == nil {
+				return nil
+			}
+			return CastExperienceStatuses(core.CastArray(data["statuses"]))
+		}(),
 	}
 }
 
 func (p ExperienceExperienceModel) ToDict() map[string]interface{} {
-
-	var experienceModelId *string
+	m := map[string]interface{}{}
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var experienceName *string
 	if p.ExperienceName != nil {
-		experienceName = p.ExperienceName
+		m["experienceName"] = p.ExperienceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var statuses []interface{}
 	if p.Statuses != nil {
-		statuses = CastExperienceStatusesFromDict(
+		m["statuses"] = CastExperienceStatusesFromDict(
 			p.Statuses,
 		)
 	}
-	return map[string]interface{}{
-		"experienceModelId": experienceModelId,
-		"experienceName":    experienceName,
-		"statistics":        statistics,
-		"distributions":     distributions,
-		"statuses":          statuses,
-	}
+	return m
 }
 
 func (p ExperienceExperienceModel) Pointer() *ExperienceExperienceModel {
@@ -12155,25 +14098,32 @@ func NewExperienceNamespaceStatisticsFromJson(data string) ExperienceNamespaceSt
 
 func NewExperienceNamespaceStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceStatistics {
 	return ExperienceNamespaceStatistics{
-		Experience: core.CastInt64(data["experience"]),
-		RankCap:    core.CastInt64(data["rankCap"]),
+		Experience: func() *int64 {
+			v, ok := data["experience"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["experience"])
+		}(),
+		RankCap: func() *int64 {
+			v, ok := data["rankCap"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["rankCap"])
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var experience *int64
+	m := map[string]interface{}{}
 	if p.Experience != nil {
-		experience = p.Experience
+		m["experience"] = p.Experience
 	}
-	var rankCap *int64
 	if p.RankCap != nil {
-		rankCap = p.RankCap
+		m["rankCap"] = p.RankCap
 	}
-	return map[string]interface{}{
-		"experience": experience,
-		"rankCap":    rankCap,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceStatistics) Pointer() *ExperienceNamespaceStatistics {
@@ -12257,49 +14207,72 @@ func NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromJs
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistributionStatistics {
 	return ExperienceNamespaceAddExperienceByExperienceDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistributionStatistics) Pointer() *ExperienceNamespaceAddExperienceByExperienceDistributionStatistics {
@@ -12387,25 +14360,32 @@ func NewExperienceNamespaceAddExperienceByExperienceDistributionSegmentFromJson(
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionSegmentFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistributionSegment {
 	return ExperienceNamespaceAddExperienceByExperienceDistributionSegment{
-		ExperienceName: core.CastString(data["experienceName"]),
-		Count:          core.CastInt64(data["count"]),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistributionSegment) ToDict() map[string]interface{} {
-
-	var experienceName *string
+	m := map[string]interface{}{}
 	if p.ExperienceName != nil {
-		experienceName = p.ExperienceName
+		m["experienceName"] = p.ExperienceName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"experienceName": experienceName,
-		"count":          count,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistributionSegment) Pointer() *ExperienceNamespaceAddExperienceByExperienceDistributionSegment {
@@ -12473,27 +14453,38 @@ func NewExperienceNamespaceAddExperienceByExperienceDistributionFromJson(data st
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistribution {
 	return ExperienceNamespaceAddExperienceByExperienceDistribution{
-		Statistics:   NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceNamespaceAddExperienceByExperienceDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceNamespaceAddExperienceByExperienceDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceNamespaceAddExperienceByExperienceDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceNamespaceAddExperienceByExperienceDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceNamespaceAddExperienceByExperienceDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceNamespaceAddExperienceByExperienceDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddExperienceByExperienceDistribution) Pointer() *ExperienceNamespaceAddExperienceByExperienceDistribution {
@@ -12577,49 +14568,72 @@ func NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromJson(
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistributionStatistics {
 	return ExperienceNamespaceAddRankCapByExperienceDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistributionStatistics) Pointer() *ExperienceNamespaceAddRankCapByExperienceDistributionStatistics {
@@ -12707,25 +14721,32 @@ func NewExperienceNamespaceAddRankCapByExperienceDistributionSegmentFromJson(dat
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionSegmentFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistributionSegment {
 	return ExperienceNamespaceAddRankCapByExperienceDistributionSegment{
-		ExperienceName: core.CastString(data["experienceName"]),
-		Count:          core.CastInt64(data["count"]),
+		ExperienceName: func() *string {
+			v, ok := data["experienceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistributionSegment) ToDict() map[string]interface{} {
-
-	var experienceName *string
+	m := map[string]interface{}{}
 	if p.ExperienceName != nil {
-		experienceName = p.ExperienceName
+		m["experienceName"] = p.ExperienceName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"experienceName": experienceName,
-		"count":          count,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistributionSegment) Pointer() *ExperienceNamespaceAddRankCapByExperienceDistributionSegment {
@@ -12793,27 +14814,38 @@ func NewExperienceNamespaceAddRankCapByExperienceDistributionFromJson(data strin
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistribution {
 	return ExperienceNamespaceAddRankCapByExperienceDistribution{
-		Statistics:   NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastExperienceNamespaceAddRankCapByExperienceDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ExperienceNamespaceAddRankCapByExperienceDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ExperienceNamespaceAddRankCapByExperienceDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastExperienceNamespaceAddRankCapByExperienceDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastExperienceNamespaceAddRankCapByExperienceDistributionSegmentsFromDict(
+		m["distribution"] = CastExperienceNamespaceAddRankCapByExperienceDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceAddRankCapByExperienceDistribution) Pointer() *ExperienceNamespaceAddRankCapByExperienceDistribution {
@@ -12881,25 +14913,42 @@ func NewExperienceNamespaceDistributionsFromJson(data string) ExperienceNamespac
 
 func NewExperienceNamespaceDistributionsFromDict(data map[string]interface{}) ExperienceNamespaceDistributions {
 	return ExperienceNamespaceDistributions{
-		AddExperienceByExperience: NewExperienceNamespaceAddExperienceByExperienceDistributionFromDict(core.CastMap(data["addExperienceByExperience"])).Pointer(),
-		AddRankCapByExperience:    NewExperienceNamespaceAddRankCapByExperienceDistributionFromDict(core.CastMap(data["addRankCapByExperience"])).Pointer(),
+		AddExperienceByExperience: func() *ExperienceNamespaceAddExperienceByExperienceDistribution {
+			v, ok := data["addExperienceByExperience"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceAddExperienceByExperienceDistributionFromDict(core.CastMap(data["addExperienceByExperience"])).Pointer()
+		}(),
+		AddRankCapByExperience: func() *ExperienceNamespaceAddRankCapByExperienceDistribution {
+			v, ok := data["addRankCapByExperience"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceAddRankCapByExperienceDistributionFromDict(core.CastMap(data["addRankCapByExperience"])).Pointer()
+		}(),
 	}
 }
 
 func (p ExperienceNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var addExperienceByExperience map[string]interface{}
+	m := map[string]interface{}{}
 	if p.AddExperienceByExperience != nil {
-		addExperienceByExperience = p.AddExperienceByExperience.ToDict()
+		m["addExperienceByExperience"] = func() map[string]interface{} {
+			if p.AddExperienceByExperience == nil {
+				return nil
+			}
+			return p.AddExperienceByExperience.ToDict()
+		}()
 	}
-	var addRankCapByExperience map[string]interface{}
 	if p.AddRankCapByExperience != nil {
-		addRankCapByExperience = p.AddRankCapByExperience.ToDict()
+		m["addRankCapByExperience"] = func() map[string]interface{} {
+			if p.AddRankCapByExperience == nil {
+				return nil
+			}
+			return p.AddRankCapByExperience.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"addExperienceByExperience": addExperienceByExperience,
-		"addRankCapByExperience":    addRankCapByExperience,
-	}
+	return m
 }
 
 func (p ExperienceNamespaceDistributions) Pointer() *ExperienceNamespaceDistributions {
@@ -13031,63 +15080,103 @@ func NewExperienceNamespaceFromJson(data string) ExperienceNamespace {
 
 func NewExperienceNamespaceFromDict(data map[string]interface{}) ExperienceNamespace {
 	return ExperienceNamespace{
-		NamespaceId:      core.CastString(data["namespaceId"]),
-		Year:             core.CastInt32(data["year"]),
-		Month:            core.CastInt32(data["month"]),
-		Day:              core.CastInt32(data["day"]),
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		Statistics:       NewExperienceNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:    NewExperienceNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		ExperienceModels: CastExperienceExperienceModels(core.CastArray(data["experienceModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *ExperienceNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ExperienceNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewExperienceNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		ExperienceModels: func() []ExperienceExperienceModel {
+			if data["experienceModels"] == nil {
+				return nil
+			}
+			return CastExperienceExperienceModels(core.CastArray(data["experienceModels"]))
+		}(),
 	}
 }
 
 func (p ExperienceNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var experienceModels []interface{}
 	if p.ExperienceModels != nil {
-		experienceModels = CastExperienceExperienceModelsFromDict(
+		m["experienceModels"] = CastExperienceExperienceModelsFromDict(
 			p.ExperienceModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":      namespaceId,
-		"year":             year,
-		"month":            month,
-		"day":              day,
-		"namespaceName":    namespaceName,
-		"statistics":       statistics,
-		"distributions":    distributions,
-		"experienceModels": experienceModels,
-	}
+	return m
 }
 
 func (p ExperienceNamespace) Pointer() *ExperienceNamespace {
@@ -13151,19 +15240,22 @@ func NewFormationFormStatisticsFromJson(data string) FormationFormStatistics {
 
 func NewFormationFormStatisticsFromDict(data map[string]interface{}) FormationFormStatistics {
 	return FormationFormStatistics{
-		Update: core.CastInt64(data["update"]),
+		Update: func() *int64 {
+			v, ok := data["update"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["update"])
+		}(),
 	}
 }
 
 func (p FormationFormStatistics) ToDict() map[string]interface{} {
-
-	var update *int64
+	m := map[string]interface{}{}
 	if p.Update != nil {
-		update = p.Update
+		m["update"] = p.Update
 	}
-	return map[string]interface{}{
-		"update": update,
-	}
+	return m
 }
 
 func (p FormationFormStatistics) Pointer() *FormationFormStatistics {
@@ -13247,49 +15339,72 @@ func NewFormationFormSlotDistributionStatisticsFromJson(data string) FormationFo
 
 func NewFormationFormSlotDistributionStatisticsFromDict(data map[string]interface{}) FormationFormSlotDistributionStatistics {
 	return FormationFormSlotDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationFormSlotDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationFormSlotDistributionStatistics) Pointer() *FormationFormSlotDistributionStatistics {
@@ -13361,31 +15476,42 @@ func NewFormationFormSlotDistributionSegmentFromJson(data string) FormationFormS
 
 func NewFormationFormSlotDistributionSegmentFromDict(data map[string]interface{}) FormationFormSlotDistributionSegment {
 	return FormationFormSlotDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationFormSlotDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FormationFormSlotDistributionSegment) Pointer() *FormationFormSlotDistributionSegment {
@@ -13453,27 +15579,38 @@ func NewFormationFormSlotDistributionFromJson(data string) FormationFormSlotDist
 
 func NewFormationFormSlotDistributionFromDict(data map[string]interface{}) FormationFormSlotDistribution {
 	return FormationFormSlotDistribution{
-		Statistics:   NewFormationFormSlotDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationFormSlotDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationFormSlotDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormSlotDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationFormSlotDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationFormSlotDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationFormSlotDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationFormSlotDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationFormSlotDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationFormSlotDistribution) Pointer() *FormationFormSlotDistribution {
@@ -13557,49 +15694,72 @@ func NewFormationFormUsageDistributionStatisticsFromJson(data string) FormationF
 
 func NewFormationFormUsageDistributionStatisticsFromDict(data map[string]interface{}) FormationFormUsageDistributionStatistics {
 	return FormationFormUsageDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationFormUsageDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationFormUsageDistributionStatistics) Pointer() *FormationFormUsageDistributionStatistics {
@@ -13671,31 +15831,42 @@ func NewFormationFormUsageDistributionSegmentFromJson(data string) FormationForm
 
 func NewFormationFormUsageDistributionSegmentFromDict(data map[string]interface{}) FormationFormUsageDistributionSegment {
 	return FormationFormUsageDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationFormUsageDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FormationFormUsageDistributionSegment) Pointer() *FormationFormUsageDistributionSegment {
@@ -13763,27 +15934,38 @@ func NewFormationFormUsageDistributionFromJson(data string) FormationFormUsageDi
 
 func NewFormationFormUsageDistributionFromDict(data map[string]interface{}) FormationFormUsageDistribution {
 	return FormationFormUsageDistribution{
-		Statistics:   NewFormationFormUsageDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationFormUsageDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationFormUsageDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormUsageDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationFormUsageDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationFormUsageDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationFormUsageDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationFormUsageDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationFormUsageDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationFormUsageDistribution) Pointer() *FormationFormUsageDistribution {
@@ -13851,25 +16033,42 @@ func NewFormationFormDistributionsFromJson(data string) FormationFormDistributio
 
 func NewFormationFormDistributionsFromDict(data map[string]interface{}) FormationFormDistributions {
 	return FormationFormDistributions{
-		Slot:  NewFormationFormSlotDistributionFromDict(core.CastMap(data["slot"])).Pointer(),
-		Usage: NewFormationFormUsageDistributionFromDict(core.CastMap(data["usage"])).Pointer(),
+		Slot: func() *FormationFormSlotDistribution {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormSlotDistributionFromDict(core.CastMap(data["slot"])).Pointer()
+		}(),
+		Usage: func() *FormationFormUsageDistribution {
+			v, ok := data["usage"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormUsageDistributionFromDict(core.CastMap(data["usage"])).Pointer()
+		}(),
 	}
 }
 
 func (p FormationFormDistributions) ToDict() map[string]interface{} {
-
-	var slot map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot.ToDict()
+		m["slot"] = func() map[string]interface{} {
+			if p.Slot == nil {
+				return nil
+			}
+			return p.Slot.ToDict()
+		}()
 	}
-	var usage map[string]interface{}
 	if p.Usage != nil {
-		usage = p.Usage.ToDict()
+		m["usage"] = func() map[string]interface{} {
+			if p.Usage == nil {
+				return nil
+			}
+			return p.Usage.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"slot":  slot,
-		"usage": usage,
-	}
+	return m
 }
 
 func (p FormationFormDistributions) Pointer() *FormationFormDistributions {
@@ -13965,37 +16164,62 @@ func NewFormationFormFromJson(data string) FormationForm {
 
 func NewFormationFormFromDict(data map[string]interface{}) FormationForm {
 	return FormationForm{
-		FormId:        core.CastString(data["formId"]),
-		Index:         core.CastInt32(data["index"]),
-		Statistics:    NewFormationFormStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewFormationFormDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		FormId: func() *string {
+			v, ok := data["formId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formId"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		Statistics: func() *FormationFormStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *FormationFormDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationFormDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p FormationForm) ToDict() map[string]interface{} {
-
-	var formId *string
+	m := map[string]interface{}{}
 	if p.FormId != nil {
-		formId = p.FormId
+		m["formId"] = p.FormId
 	}
-	var index *int32
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"formId":        formId,
-		"index":         index,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p FormationForm) Pointer() *FormationForm {
@@ -14063,25 +16287,32 @@ func NewFormationMoldStatisticsFromJson(data string) FormationMoldStatistics {
 
 func NewFormationMoldStatisticsFromDict(data map[string]interface{}) FormationMoldStatistics {
 	return FormationMoldStatistics{
-		IncreaseCapacity:       core.CastInt64(data["increaseCapacity"]),
-		IncreaseCapacityAmount: core.CastInt64(data["increaseCapacityAmount"]),
+		IncreaseCapacity: func() *int64 {
+			v, ok := data["increaseCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseCapacity"])
+		}(),
+		IncreaseCapacityAmount: func() *int64 {
+			v, ok := data["increaseCapacityAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseCapacityAmount"])
+		}(),
 	}
 }
 
 func (p FormationMoldStatistics) ToDict() map[string]interface{} {
-
-	var increaseCapacity *int64
+	m := map[string]interface{}{}
 	if p.IncreaseCapacity != nil {
-		increaseCapacity = p.IncreaseCapacity
+		m["increaseCapacity"] = p.IncreaseCapacity
 	}
-	var increaseCapacityAmount *int64
 	if p.IncreaseCapacityAmount != nil {
-		increaseCapacityAmount = p.IncreaseCapacityAmount
+		m["increaseCapacityAmount"] = p.IncreaseCapacityAmount
 	}
-	return map[string]interface{}{
-		"increaseCapacity":       increaseCapacity,
-		"increaseCapacityAmount": increaseCapacityAmount,
-	}
+	return m
 }
 
 func (p FormationMoldStatistics) Pointer() *FormationMoldStatistics {
@@ -14165,49 +16396,72 @@ func NewFormationMoldCapacityDistributionStatisticsFromJson(data string) Formati
 
 func NewFormationMoldCapacityDistributionStatisticsFromDict(data map[string]interface{}) FormationMoldCapacityDistributionStatistics {
 	return FormationMoldCapacityDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationMoldCapacityDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationMoldCapacityDistributionStatistics) Pointer() *FormationMoldCapacityDistributionStatistics {
@@ -14279,31 +16533,42 @@ func NewFormationMoldCapacityDistributionSegmentFromJson(data string) FormationM
 
 func NewFormationMoldCapacityDistributionSegmentFromDict(data map[string]interface{}) FormationMoldCapacityDistributionSegment {
 	return FormationMoldCapacityDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationMoldCapacityDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FormationMoldCapacityDistributionSegment) Pointer() *FormationMoldCapacityDistributionSegment {
@@ -14371,27 +16636,38 @@ func NewFormationMoldCapacityDistributionFromJson(data string) FormationMoldCapa
 
 func NewFormationMoldCapacityDistributionFromDict(data map[string]interface{}) FormationMoldCapacityDistribution {
 	return FormationMoldCapacityDistribution{
-		Statistics:   NewFormationMoldCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationMoldCapacityDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationMoldCapacityDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationMoldCapacityDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationMoldCapacityDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationMoldCapacityDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationMoldCapacityDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationMoldCapacityDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationMoldCapacityDistribution) Pointer() *FormationMoldCapacityDistribution {
@@ -14475,49 +16751,72 @@ func NewFormationMoldUpdateByIndexDistributionStatisticsFromJson(data string) Fo
 
 func NewFormationMoldUpdateByIndexDistributionStatisticsFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistributionStatistics {
 	return FormationMoldUpdateByIndexDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationMoldUpdateByIndexDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationMoldUpdateByIndexDistributionStatistics) Pointer() *FormationMoldUpdateByIndexDistributionStatistics {
@@ -14585,25 +16884,32 @@ func NewFormationMoldUpdateByIndexDistributionSegmentFromJson(data string) Forma
 
 func NewFormationMoldUpdateByIndexDistributionSegmentFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistributionSegment {
 	return FormationMoldUpdateByIndexDistributionSegment{
-		Index: core.CastInt64(data["index"]),
-		Count: core.CastInt64(data["count"]),
+		Index: func() *int64 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["index"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationMoldUpdateByIndexDistributionSegment) ToDict() map[string]interface{} {
-
-	var index *int64
+	m := map[string]interface{}{}
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"index": index,
-		"count": count,
-	}
+	return m
 }
 
 func (p FormationMoldUpdateByIndexDistributionSegment) Pointer() *FormationMoldUpdateByIndexDistributionSegment {
@@ -14671,27 +16977,38 @@ func NewFormationMoldUpdateByIndexDistributionFromJson(data string) FormationMol
 
 func NewFormationMoldUpdateByIndexDistributionFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistribution {
 	return FormationMoldUpdateByIndexDistribution{
-		Statistics:   NewFormationMoldUpdateByIndexDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationMoldUpdateByIndexDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationMoldUpdateByIndexDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldUpdateByIndexDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationMoldUpdateByIndexDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationMoldUpdateByIndexDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationMoldUpdateByIndexDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationMoldUpdateByIndexDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationMoldUpdateByIndexDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationMoldUpdateByIndexDistribution) Pointer() *FormationMoldUpdateByIndexDistribution {
@@ -14759,25 +17076,42 @@ func NewFormationMoldDistributionsFromJson(data string) FormationMoldDistributio
 
 func NewFormationMoldDistributionsFromDict(data map[string]interface{}) FormationMoldDistributions {
 	return FormationMoldDistributions{
-		Capacity:      NewFormationMoldCapacityDistributionFromDict(core.CastMap(data["capacity"])).Pointer(),
-		UpdateByIndex: NewFormationMoldUpdateByIndexDistributionFromDict(core.CastMap(data["updateByIndex"])).Pointer(),
+		Capacity: func() *FormationMoldCapacityDistribution {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldCapacityDistributionFromDict(core.CastMap(data["capacity"])).Pointer()
+		}(),
+		UpdateByIndex: func() *FormationMoldUpdateByIndexDistribution {
+			v, ok := data["updateByIndex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldUpdateByIndexDistributionFromDict(core.CastMap(data["updateByIndex"])).Pointer()
+		}(),
 	}
 }
 
 func (p FormationMoldDistributions) ToDict() map[string]interface{} {
-
-	var capacity map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Capacity != nil {
-		capacity = p.Capacity.ToDict()
+		m["capacity"] = func() map[string]interface{} {
+			if p.Capacity == nil {
+				return nil
+			}
+			return p.Capacity.ToDict()
+		}()
 	}
-	var updateByIndex map[string]interface{}
 	if p.UpdateByIndex != nil {
-		updateByIndex = p.UpdateByIndex.ToDict()
+		m["updateByIndex"] = func() map[string]interface{} {
+			if p.UpdateByIndex == nil {
+				return nil
+			}
+			return p.UpdateByIndex.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"capacity":      capacity,
-		"updateByIndex": updateByIndex,
-	}
+	return m
 }
 
 func (p FormationMoldDistributions) Pointer() *FormationMoldDistributions {
@@ -14897,45 +17231,73 @@ func NewFormationMoldFromJson(data string) FormationMold {
 
 func NewFormationMoldFromDict(data map[string]interface{}) FormationMold {
 	return FormationMold{
-		MoldId:        core.CastString(data["moldId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Statistics:    NewFormationMoldStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewFormationMoldDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Forms:         CastFormationForms(core.CastArray(data["forms"])),
+		MoldId: func() *string {
+			v, ok := data["moldId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Statistics: func() *FormationMoldStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *FormationMoldDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationMoldDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Forms: func() []FormationForm {
+			if data["forms"] == nil {
+				return nil
+			}
+			return CastFormationForms(core.CastArray(data["forms"]))
+		}(),
 	}
 }
 
 func (p FormationMold) ToDict() map[string]interface{} {
-
-	var moldId *string
+	m := map[string]interface{}{}
 	if p.MoldId != nil {
-		moldId = p.MoldId
+		m["moldId"] = p.MoldId
 	}
-	var moldModelName *string
 	if p.MoldModelName != nil {
-		moldModelName = p.MoldModelName
+		m["moldModelName"] = p.MoldModelName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var forms []interface{}
 	if p.Forms != nil {
-		forms = CastFormationFormsFromDict(
+		m["forms"] = CastFormationFormsFromDict(
 			p.Forms,
 		)
 	}
-	return map[string]interface{}{
-		"moldId":        moldId,
-		"moldModelName": moldModelName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"forms":         forms,
-	}
+	return m
 }
 
 func (p FormationMold) Pointer() *FormationMold {
@@ -15003,25 +17365,32 @@ func NewFormationNamespaceStatisticsFromJson(data string) FormationNamespaceStat
 
 func NewFormationNamespaceStatisticsFromDict(data map[string]interface{}) FormationNamespaceStatistics {
 	return FormationNamespaceStatistics{
-		Update:   core.CastInt64(data["update"]),
-		Increase: core.CastInt64(data["increase"]),
+		Update: func() *int64 {
+			v, ok := data["update"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["update"])
+		}(),
+		Increase: func() *int64 {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increase"])
+		}(),
 	}
 }
 
 func (p FormationNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var update *int64
+	m := map[string]interface{}{}
 	if p.Update != nil {
-		update = p.Update
+		m["update"] = p.Update
 	}
-	var increase *int64
 	if p.Increase != nil {
-		increase = p.Increase
+		m["increase"] = p.Increase
 	}
-	return map[string]interface{}{
-		"update":   update,
-		"increase": increase,
-	}
+	return m
 }
 
 func (p FormationNamespaceStatistics) Pointer() *FormationNamespaceStatistics {
@@ -15105,49 +17474,72 @@ func NewFormationNamespaceUpdateByMoldDistributionStatisticsFromJson(data string
 
 func NewFormationNamespaceUpdateByMoldDistributionStatisticsFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistributionStatistics {
 	return FormationNamespaceUpdateByMoldDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationNamespaceUpdateByMoldDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationNamespaceUpdateByMoldDistributionStatistics) Pointer() *FormationNamespaceUpdateByMoldDistributionStatistics {
@@ -15235,25 +17627,32 @@ func NewFormationNamespaceUpdateByMoldDistributionSegmentFromJson(data string) F
 
 func NewFormationNamespaceUpdateByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistributionSegment {
 	return FormationNamespaceUpdateByMoldDistributionSegment{
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Count:         core.CastInt64(data["count"]),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationNamespaceUpdateByMoldDistributionSegment) ToDict() map[string]interface{} {
-
-	var moldModelName *string
+	m := map[string]interface{}{}
 	if p.MoldModelName != nil {
-		moldModelName = p.MoldModelName
+		m["moldModelName"] = p.MoldModelName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"moldModelName": moldModelName,
-		"count":         count,
-	}
+	return m
 }
 
 func (p FormationNamespaceUpdateByMoldDistributionSegment) Pointer() *FormationNamespaceUpdateByMoldDistributionSegment {
@@ -15321,27 +17720,38 @@ func NewFormationNamespaceUpdateByMoldDistributionFromJson(data string) Formatio
 
 func NewFormationNamespaceUpdateByMoldDistributionFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistribution {
 	return FormationNamespaceUpdateByMoldDistribution{
-		Statistics:   NewFormationNamespaceUpdateByMoldDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationNamespaceUpdateByMoldDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationNamespaceUpdateByMoldDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceUpdateByMoldDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationNamespaceUpdateByMoldDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationNamespaceUpdateByMoldDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationNamespaceUpdateByMoldDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationNamespaceUpdateByMoldDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationNamespaceUpdateByMoldDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationNamespaceUpdateByMoldDistribution) Pointer() *FormationNamespaceUpdateByMoldDistribution {
@@ -15425,49 +17835,72 @@ func NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromJson(d
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistributionStatistics {
 	return FormationNamespaceIncreaseCapacityByMoldDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistributionStatistics) Pointer() *FormationNamespaceIncreaseCapacityByMoldDistributionStatistics {
@@ -15555,25 +17988,32 @@ func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromJson(data
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
 	return FormationNamespaceIncreaseCapacityByMoldDistributionSegment{
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Count:         core.CastInt64(data["count"]),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistributionSegment) ToDict() map[string]interface{} {
-
-	var moldModelName *string
+	m := map[string]interface{}{}
 	if p.MoldModelName != nil {
-		moldModelName = p.MoldModelName
+		m["moldModelName"] = p.MoldModelName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"moldModelName": moldModelName,
-		"count":         count,
-	}
+	return m
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistributionSegment) Pointer() *FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
@@ -15641,27 +18081,38 @@ func NewFormationNamespaceIncreaseCapacityByMoldDistributionFromJson(data string
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistribution {
 	return FormationNamespaceIncreaseCapacityByMoldDistribution{
-		Statistics:   NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFormationNamespaceIncreaseCapacityByMoldDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FormationNamespaceIncreaseCapacityByMoldDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFormationNamespaceIncreaseCapacityByMoldDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFormationNamespaceIncreaseCapacityByMoldDistributionSegmentsFromDict(
+		m["distribution"] = CastFormationNamespaceIncreaseCapacityByMoldDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistribution) Pointer() *FormationNamespaceIncreaseCapacityByMoldDistribution {
@@ -15729,25 +18180,42 @@ func NewFormationNamespaceDistributionsFromJson(data string) FormationNamespaceD
 
 func NewFormationNamespaceDistributionsFromDict(data map[string]interface{}) FormationNamespaceDistributions {
 	return FormationNamespaceDistributions{
-		UpdateByMold:           NewFormationNamespaceUpdateByMoldDistributionFromDict(core.CastMap(data["updateByMold"])).Pointer(),
-		IncreaseCapacityByMold: NewFormationNamespaceIncreaseCapacityByMoldDistributionFromDict(core.CastMap(data["increaseCapacityByMold"])).Pointer(),
+		UpdateByMold: func() *FormationNamespaceUpdateByMoldDistribution {
+			v, ok := data["updateByMold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceUpdateByMoldDistributionFromDict(core.CastMap(data["updateByMold"])).Pointer()
+		}(),
+		IncreaseCapacityByMold: func() *FormationNamespaceIncreaseCapacityByMoldDistribution {
+			v, ok := data["increaseCapacityByMold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceIncreaseCapacityByMoldDistributionFromDict(core.CastMap(data["increaseCapacityByMold"])).Pointer()
+		}(),
 	}
 }
 
 func (p FormationNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var updateByMold map[string]interface{}
+	m := map[string]interface{}{}
 	if p.UpdateByMold != nil {
-		updateByMold = p.UpdateByMold.ToDict()
+		m["updateByMold"] = func() map[string]interface{} {
+			if p.UpdateByMold == nil {
+				return nil
+			}
+			return p.UpdateByMold.ToDict()
+		}()
 	}
-	var increaseCapacityByMold map[string]interface{}
 	if p.IncreaseCapacityByMold != nil {
-		increaseCapacityByMold = p.IncreaseCapacityByMold.ToDict()
+		m["increaseCapacityByMold"] = func() map[string]interface{} {
+			if p.IncreaseCapacityByMold == nil {
+				return nil
+			}
+			return p.IncreaseCapacityByMold.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"updateByMold":           updateByMold,
-		"increaseCapacityByMold": increaseCapacityByMold,
-	}
+	return m
 }
 
 func (p FormationNamespaceDistributions) Pointer() *FormationNamespaceDistributions {
@@ -15879,63 +18347,103 @@ func NewFormationNamespaceFromJson(data string) FormationNamespace {
 
 func NewFormationNamespaceFromDict(data map[string]interface{}) FormationNamespace {
 	return FormationNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewFormationNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewFormationNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Molds:         CastFormationMolds(core.CastArray(data["molds"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *FormationNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *FormationNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormationNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Molds: func() []FormationMold {
+			if data["molds"] == nil {
+				return nil
+			}
+			return CastFormationMolds(core.CastArray(data["molds"]))
+		}(),
 	}
 }
 
 func (p FormationNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var molds []interface{}
 	if p.Molds != nil {
-		molds = CastFormationMoldsFromDict(
+		m["molds"] = CastFormationMoldsFromDict(
 			p.Molds,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"molds":         molds,
-	}
+	return m
 }
 
 func (p FormationNamespace) Pointer() *FormationNamespace {
@@ -16011,37 +18519,52 @@ func NewFriendNamespaceStatisticsFromJson(data string) FriendNamespaceStatistics
 
 func NewFriendNamespaceStatisticsFromDict(data map[string]interface{}) FriendNamespaceStatistics {
 	return FriendNamespaceStatistics{
-		Accept:      core.CastInt64(data["accept"]),
-		Reject:      core.CastInt64(data["reject"]),
-		SendRequest: core.CastInt64(data["sendRequest"]),
-		Follow:      core.CastInt64(data["follow"]),
+		Accept: func() *int64 {
+			v, ok := data["accept"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["accept"])
+		}(),
+		Reject: func() *int64 {
+			v, ok := data["reject"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["reject"])
+		}(),
+		SendRequest: func() *int64 {
+			v, ok := data["sendRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sendRequest"])
+		}(),
+		Follow: func() *int64 {
+			v, ok := data["follow"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["follow"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var accept *int64
+	m := map[string]interface{}{}
 	if p.Accept != nil {
-		accept = p.Accept
+		m["accept"] = p.Accept
 	}
-	var reject *int64
 	if p.Reject != nil {
-		reject = p.Reject
+		m["reject"] = p.Reject
 	}
-	var sendRequest *int64
 	if p.SendRequest != nil {
-		sendRequest = p.SendRequest
+		m["sendRequest"] = p.SendRequest
 	}
-	var follow *int64
 	if p.Follow != nil {
-		follow = p.Follow
+		m["follow"] = p.Follow
 	}
-	return map[string]interface{}{
-		"accept":      accept,
-		"reject":      reject,
-		"sendRequest": sendRequest,
-		"follow":      follow,
-	}
+	return m
 }
 
 func (p FriendNamespaceStatistics) Pointer() *FriendNamespaceStatistics {
@@ -16125,49 +18648,72 @@ func NewFriendNamespaceAcceptByUserDistributionStatisticsFromJson(data string) F
 
 func NewFriendNamespaceAcceptByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistributionStatistics {
 	return FriendNamespaceAcceptByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceAcceptByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FriendNamespaceAcceptByUserDistributionStatistics) Pointer() *FriendNamespaceAcceptByUserDistributionStatistics {
@@ -16239,31 +18785,42 @@ func NewFriendNamespaceAcceptByUserDistributionSegmentFromJson(data string) Frie
 
 func NewFriendNamespaceAcceptByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistributionSegment {
 	return FriendNamespaceAcceptByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceAcceptByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FriendNamespaceAcceptByUserDistributionSegment) Pointer() *FriendNamespaceAcceptByUserDistributionSegment {
@@ -16331,27 +18888,38 @@ func NewFriendNamespaceAcceptByUserDistributionFromJson(data string) FriendNames
 
 func NewFriendNamespaceAcceptByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistribution {
 	return FriendNamespaceAcceptByUserDistribution{
-		Statistics:   NewFriendNamespaceAcceptByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFriendNamespaceAcceptByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FriendNamespaceAcceptByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceAcceptByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FriendNamespaceAcceptByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFriendNamespaceAcceptByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FriendNamespaceAcceptByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFriendNamespaceAcceptByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastFriendNamespaceAcceptByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FriendNamespaceAcceptByUserDistribution) Pointer() *FriendNamespaceAcceptByUserDistribution {
@@ -16435,49 +19003,72 @@ func NewFriendNamespaceRejectByUserDistributionStatisticsFromJson(data string) F
 
 func NewFriendNamespaceRejectByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistributionStatistics {
 	return FriendNamespaceRejectByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceRejectByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FriendNamespaceRejectByUserDistributionStatistics) Pointer() *FriendNamespaceRejectByUserDistributionStatistics {
@@ -16549,31 +19140,42 @@ func NewFriendNamespaceRejectByUserDistributionSegmentFromJson(data string) Frie
 
 func NewFriendNamespaceRejectByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistributionSegment {
 	return FriendNamespaceRejectByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceRejectByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FriendNamespaceRejectByUserDistributionSegment) Pointer() *FriendNamespaceRejectByUserDistributionSegment {
@@ -16641,27 +19243,38 @@ func NewFriendNamespaceRejectByUserDistributionFromJson(data string) FriendNames
 
 func NewFriendNamespaceRejectByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistribution {
 	return FriendNamespaceRejectByUserDistribution{
-		Statistics:   NewFriendNamespaceRejectByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFriendNamespaceRejectByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FriendNamespaceRejectByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceRejectByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FriendNamespaceRejectByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFriendNamespaceRejectByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FriendNamespaceRejectByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFriendNamespaceRejectByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastFriendNamespaceRejectByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FriendNamespaceRejectByUserDistribution) Pointer() *FriendNamespaceRejectByUserDistribution {
@@ -16745,49 +19358,72 @@ func NewFriendNamespaceSendRequestByUserDistributionStatisticsFromJson(data stri
 
 func NewFriendNamespaceSendRequestByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistributionStatistics {
 	return FriendNamespaceSendRequestByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceSendRequestByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FriendNamespaceSendRequestByUserDistributionStatistics) Pointer() *FriendNamespaceSendRequestByUserDistributionStatistics {
@@ -16859,31 +19495,42 @@ func NewFriendNamespaceSendRequestByUserDistributionSegmentFromJson(data string)
 
 func NewFriendNamespaceSendRequestByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistributionSegment {
 	return FriendNamespaceSendRequestByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceSendRequestByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FriendNamespaceSendRequestByUserDistributionSegment) Pointer() *FriendNamespaceSendRequestByUserDistributionSegment {
@@ -16951,27 +19598,38 @@ func NewFriendNamespaceSendRequestByUserDistributionFromJson(data string) Friend
 
 func NewFriendNamespaceSendRequestByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistribution {
 	return FriendNamespaceSendRequestByUserDistribution{
-		Statistics:   NewFriendNamespaceSendRequestByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFriendNamespaceSendRequestByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FriendNamespaceSendRequestByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceSendRequestByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FriendNamespaceSendRequestByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFriendNamespaceSendRequestByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FriendNamespaceSendRequestByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFriendNamespaceSendRequestByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastFriendNamespaceSendRequestByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FriendNamespaceSendRequestByUserDistribution) Pointer() *FriendNamespaceSendRequestByUserDistribution {
@@ -17055,49 +19713,72 @@ func NewFriendNamespaceNewFollowByUserDistributionStatisticsFromJson(data string
 
 func NewFriendNamespaceNewFollowByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistributionStatistics {
 	return FriendNamespaceNewFollowByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceNewFollowByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p FriendNamespaceNewFollowByUserDistributionStatistics) Pointer() *FriendNamespaceNewFollowByUserDistributionStatistics {
@@ -17169,31 +19850,42 @@ func NewFriendNamespaceNewFollowByUserDistributionSegmentFromJson(data string) F
 
 func NewFriendNamespaceNewFollowByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistributionSegment {
 	return FriendNamespaceNewFollowByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p FriendNamespaceNewFollowByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p FriendNamespaceNewFollowByUserDistributionSegment) Pointer() *FriendNamespaceNewFollowByUserDistributionSegment {
@@ -17261,27 +19953,38 @@ func NewFriendNamespaceNewFollowByUserDistributionFromJson(data string) FriendNa
 
 func NewFriendNamespaceNewFollowByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistribution {
 	return FriendNamespaceNewFollowByUserDistribution{
-		Statistics:   NewFriendNamespaceNewFollowByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastFriendNamespaceNewFollowByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *FriendNamespaceNewFollowByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceNewFollowByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []FriendNamespaceNewFollowByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastFriendNamespaceNewFollowByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p FriendNamespaceNewFollowByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastFriendNamespaceNewFollowByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastFriendNamespaceNewFollowByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p FriendNamespaceNewFollowByUserDistribution) Pointer() *FriendNamespaceNewFollowByUserDistribution {
@@ -17357,37 +20060,72 @@ func NewFriendNamespaceDistributionsFromJson(data string) FriendNamespaceDistrib
 
 func NewFriendNamespaceDistributionsFromDict(data map[string]interface{}) FriendNamespaceDistributions {
 	return FriendNamespaceDistributions{
-		AcceptByUser:      NewFriendNamespaceAcceptByUserDistributionFromDict(core.CastMap(data["acceptByUser"])).Pointer(),
-		RejectByUser:      NewFriendNamespaceRejectByUserDistributionFromDict(core.CastMap(data["rejectByUser"])).Pointer(),
-		SendRequestByUser: NewFriendNamespaceSendRequestByUserDistributionFromDict(core.CastMap(data["sendRequestByUser"])).Pointer(),
-		NewFollowByUser:   NewFriendNamespaceNewFollowByUserDistributionFromDict(core.CastMap(data["newFollowByUser"])).Pointer(),
+		AcceptByUser: func() *FriendNamespaceAcceptByUserDistribution {
+			v, ok := data["acceptByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceAcceptByUserDistributionFromDict(core.CastMap(data["acceptByUser"])).Pointer()
+		}(),
+		RejectByUser: func() *FriendNamespaceRejectByUserDistribution {
+			v, ok := data["rejectByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceRejectByUserDistributionFromDict(core.CastMap(data["rejectByUser"])).Pointer()
+		}(),
+		SendRequestByUser: func() *FriendNamespaceSendRequestByUserDistribution {
+			v, ok := data["sendRequestByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceSendRequestByUserDistributionFromDict(core.CastMap(data["sendRequestByUser"])).Pointer()
+		}(),
+		NewFollowByUser: func() *FriendNamespaceNewFollowByUserDistribution {
+			v, ok := data["newFollowByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceNewFollowByUserDistributionFromDict(core.CastMap(data["newFollowByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p FriendNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var acceptByUser map[string]interface{}
+	m := map[string]interface{}{}
 	if p.AcceptByUser != nil {
-		acceptByUser = p.AcceptByUser.ToDict()
+		m["acceptByUser"] = func() map[string]interface{} {
+			if p.AcceptByUser == nil {
+				return nil
+			}
+			return p.AcceptByUser.ToDict()
+		}()
 	}
-	var rejectByUser map[string]interface{}
 	if p.RejectByUser != nil {
-		rejectByUser = p.RejectByUser.ToDict()
+		m["rejectByUser"] = func() map[string]interface{} {
+			if p.RejectByUser == nil {
+				return nil
+			}
+			return p.RejectByUser.ToDict()
+		}()
 	}
-	var sendRequestByUser map[string]interface{}
 	if p.SendRequestByUser != nil {
-		sendRequestByUser = p.SendRequestByUser.ToDict()
+		m["sendRequestByUser"] = func() map[string]interface{} {
+			if p.SendRequestByUser == nil {
+				return nil
+			}
+			return p.SendRequestByUser.ToDict()
+		}()
 	}
-	var newFollowByUser map[string]interface{}
 	if p.NewFollowByUser != nil {
-		newFollowByUser = p.NewFollowByUser.ToDict()
+		m["newFollowByUser"] = func() map[string]interface{} {
+			if p.NewFollowByUser == nil {
+				return nil
+			}
+			return p.NewFollowByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"acceptByUser":      acceptByUser,
-		"rejectByUser":      rejectByUser,
-		"sendRequestByUser": sendRequestByUser,
-		"newFollowByUser":   newFollowByUser,
-	}
+	return m
 }
 
 func (p FriendNamespaceDistributions) Pointer() *FriendNamespaceDistributions {
@@ -17515,55 +20253,92 @@ func NewFriendNamespaceFromJson(data string) FriendNamespace {
 
 func NewFriendNamespaceFromDict(data map[string]interface{}) FriendNamespace {
 	return FriendNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewFriendNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewFriendNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *FriendNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *FriendNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p FriendNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p FriendNamespace) Pointer() *FriendNamespace {
@@ -17635,31 +20410,42 @@ func NewInboxNamespaceStatisticsFromJson(data string) InboxNamespaceStatistics {
 
 func NewInboxNamespaceStatisticsFromDict(data map[string]interface{}) InboxNamespaceStatistics {
 	return InboxNamespaceStatistics{
-		Sent:     core.CastInt64(data["sent"]),
-		Open:     core.CastInt64(data["open"]),
-		OpenRate: core.CastFloat32(data["openRate"]),
+		Sent: func() *int64 {
+			v, ok := data["sent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sent"])
+		}(),
+		Open: func() *int64 {
+			v, ok := data["open"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["open"])
+		}(),
+		OpenRate: func() *float32 {
+			v, ok := data["openRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["openRate"])
+		}(),
 	}
 }
 
 func (p InboxNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var sent *int64
+	m := map[string]interface{}{}
 	if p.Sent != nil {
-		sent = p.Sent
+		m["sent"] = p.Sent
 	}
-	var open *int64
 	if p.Open != nil {
-		open = p.Open
+		m["open"] = p.Open
 	}
-	var openRate *float32
 	if p.OpenRate != nil {
-		openRate = p.OpenRate
+		m["openRate"] = p.OpenRate
 	}
-	return map[string]interface{}{
-		"sent":     sent,
-		"open":     open,
-		"openRate": openRate,
-	}
+	return m
 }
 
 func (p InboxNamespaceStatistics) Pointer() *InboxNamespaceStatistics {
@@ -17743,49 +20529,72 @@ func NewInboxNamespaceSendByUserDistributionStatisticsFromJson(data string) Inbo
 
 func NewInboxNamespaceSendByUserDistributionStatisticsFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistributionStatistics {
 	return InboxNamespaceSendByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InboxNamespaceSendByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InboxNamespaceSendByUserDistributionStatistics) Pointer() *InboxNamespaceSendByUserDistributionStatistics {
@@ -17857,31 +20666,42 @@ func NewInboxNamespaceSendByUserDistributionSegmentFromJson(data string) InboxNa
 
 func NewInboxNamespaceSendByUserDistributionSegmentFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistributionSegment {
 	return InboxNamespaceSendByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InboxNamespaceSendByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p InboxNamespaceSendByUserDistributionSegment) Pointer() *InboxNamespaceSendByUserDistributionSegment {
@@ -17949,27 +20769,38 @@ func NewInboxNamespaceSendByUserDistributionFromJson(data string) InboxNamespace
 
 func NewInboxNamespaceSendByUserDistributionFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistribution {
 	return InboxNamespaceSendByUserDistribution{
-		Statistics:   NewInboxNamespaceSendByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInboxNamespaceSendByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InboxNamespaceSendByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceSendByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InboxNamespaceSendByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInboxNamespaceSendByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InboxNamespaceSendByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInboxNamespaceSendByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastInboxNamespaceSendByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InboxNamespaceSendByUserDistribution) Pointer() *InboxNamespaceSendByUserDistribution {
@@ -18053,49 +20884,72 @@ func NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromJson(data stri
 
 func NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistributionStatistics {
 	return InboxNamespaceReadElapsedMinutesDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistributionStatistics) Pointer() *InboxNamespaceReadElapsedMinutesDistributionStatistics {
@@ -18167,31 +21021,42 @@ func NewInboxNamespaceReadElapsedMinutesDistributionSegmentFromJson(data string)
 
 func NewInboxNamespaceReadElapsedMinutesDistributionSegmentFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistributionSegment {
 	return InboxNamespaceReadElapsedMinutesDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistributionSegment) Pointer() *InboxNamespaceReadElapsedMinutesDistributionSegment {
@@ -18259,27 +21124,38 @@ func NewInboxNamespaceReadElapsedMinutesDistributionFromJson(data string) InboxN
 
 func NewInboxNamespaceReadElapsedMinutesDistributionFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistribution {
 	return InboxNamespaceReadElapsedMinutesDistribution{
-		Statistics:   NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInboxNamespaceReadElapsedMinutesDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InboxNamespaceReadElapsedMinutesDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InboxNamespaceReadElapsedMinutesDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInboxNamespaceReadElapsedMinutesDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInboxNamespaceReadElapsedMinutesDistributionSegmentsFromDict(
+		m["distribution"] = CastInboxNamespaceReadElapsedMinutesDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InboxNamespaceReadElapsedMinutesDistribution) Pointer() *InboxNamespaceReadElapsedMinutesDistribution {
@@ -18347,25 +21223,42 @@ func NewInboxNamespaceDistributionsFromJson(data string) InboxNamespaceDistribut
 
 func NewInboxNamespaceDistributionsFromDict(data map[string]interface{}) InboxNamespaceDistributions {
 	return InboxNamespaceDistributions{
-		SendByUser:         NewInboxNamespaceSendByUserDistributionFromDict(core.CastMap(data["sendByUser"])).Pointer(),
-		ReadElapsedMinutes: NewInboxNamespaceReadElapsedMinutesDistributionFromDict(core.CastMap(data["readElapsedMinutes"])).Pointer(),
+		SendByUser: func() *InboxNamespaceSendByUserDistribution {
+			v, ok := data["sendByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceSendByUserDistributionFromDict(core.CastMap(data["sendByUser"])).Pointer()
+		}(),
+		ReadElapsedMinutes: func() *InboxNamespaceReadElapsedMinutesDistribution {
+			v, ok := data["readElapsedMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceReadElapsedMinutesDistributionFromDict(core.CastMap(data["readElapsedMinutes"])).Pointer()
+		}(),
 	}
 }
 
 func (p InboxNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var sendByUser map[string]interface{}
+	m := map[string]interface{}{}
 	if p.SendByUser != nil {
-		sendByUser = p.SendByUser.ToDict()
+		m["sendByUser"] = func() map[string]interface{} {
+			if p.SendByUser == nil {
+				return nil
+			}
+			return p.SendByUser.ToDict()
+		}()
 	}
-	var readElapsedMinutes map[string]interface{}
 	if p.ReadElapsedMinutes != nil {
-		readElapsedMinutes = p.ReadElapsedMinutes.ToDict()
+		m["readElapsedMinutes"] = func() map[string]interface{} {
+			if p.ReadElapsedMinutes == nil {
+				return nil
+			}
+			return p.ReadElapsedMinutes.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"sendByUser":         sendByUser,
-		"readElapsedMinutes": readElapsedMinutes,
-	}
+	return m
 }
 
 func (p InboxNamespaceDistributions) Pointer() *InboxNamespaceDistributions {
@@ -18493,55 +21386,92 @@ func NewInboxNamespaceFromJson(data string) InboxNamespace {
 
 func NewInboxNamespaceFromDict(data map[string]interface{}) InboxNamespace {
 	return InboxNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewInboxNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewInboxNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *InboxNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *InboxNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInboxNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p InboxNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p InboxNamespace) Pointer() *InboxNamespace {
@@ -18621,43 +21551,62 @@ func NewInventoryItemSetStatisticsFromJson(data string) InventoryItemSetStatisti
 
 func NewInventoryItemSetStatisticsFromDict(data map[string]interface{}) InventoryItemSetStatistics {
 	return InventoryItemSetStatistics{
-		Acquired:       core.CastInt64(data["acquired"]),
-		AcquiredAmount: core.CastInt64(data["acquiredAmount"]),
-		Consumed:       core.CastInt64(data["consumed"]),
-		ConsumedAmount: core.CastInt64(data["consumedAmount"]),
-		ConsumedRate:   core.CastFloat32(data["consumedRate"]),
+		Acquired: func() *int64 {
+			v, ok := data["acquired"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["acquired"])
+		}(),
+		AcquiredAmount: func() *int64 {
+			v, ok := data["acquiredAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["acquiredAmount"])
+		}(),
+		Consumed: func() *int64 {
+			v, ok := data["consumed"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumed"])
+		}(),
+		ConsumedAmount: func() *int64 {
+			v, ok := data["consumedAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumedAmount"])
+		}(),
+		ConsumedRate: func() *float32 {
+			v, ok := data["consumedRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["consumedRate"])
+		}(),
 	}
 }
 
 func (p InventoryItemSetStatistics) ToDict() map[string]interface{} {
-
-	var acquired *int64
+	m := map[string]interface{}{}
 	if p.Acquired != nil {
-		acquired = p.Acquired
+		m["acquired"] = p.Acquired
 	}
-	var acquiredAmount *int64
 	if p.AcquiredAmount != nil {
-		acquiredAmount = p.AcquiredAmount
+		m["acquiredAmount"] = p.AcquiredAmount
 	}
-	var consumed *int64
 	if p.Consumed != nil {
-		consumed = p.Consumed
+		m["consumed"] = p.Consumed
 	}
-	var consumedAmount *int64
 	if p.ConsumedAmount != nil {
-		consumedAmount = p.ConsumedAmount
+		m["consumedAmount"] = p.ConsumedAmount
 	}
-	var consumedRate *float32
 	if p.ConsumedRate != nil {
-		consumedRate = p.ConsumedRate
+		m["consumedRate"] = p.ConsumedRate
 	}
-	return map[string]interface{}{
-		"acquired":       acquired,
-		"acquiredAmount": acquiredAmount,
-		"consumed":       consumed,
-		"consumedAmount": consumedAmount,
-		"consumedRate":   consumedRate,
-	}
+	return m
 }
 
 func (p InventoryItemSetStatistics) Pointer() *InventoryItemSetStatistics {
@@ -18741,49 +21690,72 @@ func NewInventoryItemSetCountDistributionStatisticsFromJson(data string) Invento
 
 func NewInventoryItemSetCountDistributionStatisticsFromDict(data map[string]interface{}) InventoryItemSetCountDistributionStatistics {
 	return InventoryItemSetCountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryItemSetCountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryItemSetCountDistributionStatistics) Pointer() *InventoryItemSetCountDistributionStatistics {
@@ -18855,31 +21827,42 @@ func NewInventoryItemSetCountDistributionSegmentFromJson(data string) InventoryI
 
 func NewInventoryItemSetCountDistributionSegmentFromDict(data map[string]interface{}) InventoryItemSetCountDistributionSegment {
 	return InventoryItemSetCountDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryItemSetCountDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p InventoryItemSetCountDistributionSegment) Pointer() *InventoryItemSetCountDistributionSegment {
@@ -18947,27 +21930,38 @@ func NewInventoryItemSetCountDistributionFromJson(data string) InventoryItemSetC
 
 func NewInventoryItemSetCountDistributionFromDict(data map[string]interface{}) InventoryItemSetCountDistribution {
 	return InventoryItemSetCountDistribution{
-		Statistics:   NewInventoryItemSetCountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryItemSetCountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryItemSetCountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryItemSetCountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryItemSetCountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryItemSetCountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryItemSetCountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryItemSetCountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryItemSetCountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryItemSetCountDistribution) Pointer() *InventoryItemSetCountDistribution {
@@ -19031,19 +22025,27 @@ func NewInventoryItemSetDistributionsFromJson(data string) InventoryItemSetDistr
 
 func NewInventoryItemSetDistributionsFromDict(data map[string]interface{}) InventoryItemSetDistributions {
 	return InventoryItemSetDistributions{
-		Count: NewInventoryItemSetCountDistributionFromDict(core.CastMap(data["count"])).Pointer(),
+		Count: func() *InventoryItemSetCountDistribution {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryItemSetCountDistributionFromDict(core.CastMap(data["count"])).Pointer()
+		}(),
 	}
 }
 
 func (p InventoryItemSetDistributions) ToDict() map[string]interface{} {
-
-	var count map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count.ToDict()
+		m["count"] = func() map[string]interface{} {
+			if p.Count == nil {
+				return nil
+			}
+			return p.Count.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"count": count,
-	}
+	return m
 }
 
 func (p InventoryItemSetDistributions) Pointer() *InventoryItemSetDistributions {
@@ -19183,43 +22185,72 @@ func NewInventoryItemSetFromJson(data string) InventoryItemSet {
 
 func NewInventoryItemSetFromDict(data map[string]interface{}) InventoryItemSet {
 	return InventoryItemSet{
-		ItemSetId:     core.CastString(data["itemSetId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		Statistics:    NewInventoryItemSetStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewInventoryItemSetDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		ItemSetId: func() *string {
+			v, ok := data["itemSetId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		Statistics: func() *InventoryItemSetStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryItemSetStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *InventoryItemSetDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryItemSetDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p InventoryItemSet) ToDict() map[string]interface{} {
-
-	var itemSetId *string
+	m := map[string]interface{}{}
 	if p.ItemSetId != nil {
-		itemSetId = p.ItemSetId
+		m["itemSetId"] = p.ItemSetId
 	}
-	var itemName *string
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var itemSetName *string
 	if p.ItemSetName != nil {
-		itemSetName = p.ItemSetName
+		m["itemSetName"] = p.ItemSetName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"itemSetId":     itemSetId,
-		"itemName":      itemName,
-		"itemSetName":   itemSetName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p InventoryItemSet) Pointer() *InventoryItemSet {
@@ -19295,37 +22326,52 @@ func NewInventoryInventoryStatisticsFromJson(data string) InventoryInventoryStat
 
 func NewInventoryInventoryStatisticsFromDict(data map[string]interface{}) InventoryInventoryStatistics {
 	return InventoryInventoryStatistics{
-		Acquired:               core.CastInt64(data["acquired"]),
-		Consume:                core.CastInt64(data["consume"]),
-		IncreaseCapacity:       core.CastInt64(data["increaseCapacity"]),
-		IncreaseCapacityAmount: core.CastInt64(data["increaseCapacityAmount"]),
+		Acquired: func() *int64 {
+			v, ok := data["acquired"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["acquired"])
+		}(),
+		Consume: func() *int64 {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consume"])
+		}(),
+		IncreaseCapacity: func() *int64 {
+			v, ok := data["increaseCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseCapacity"])
+		}(),
+		IncreaseCapacityAmount: func() *int64 {
+			v, ok := data["increaseCapacityAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseCapacityAmount"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryStatistics) ToDict() map[string]interface{} {
-
-	var acquired *int64
+	m := map[string]interface{}{}
 	if p.Acquired != nil {
-		acquired = p.Acquired
+		m["acquired"] = p.Acquired
 	}
-	var consume *int64
 	if p.Consume != nil {
-		consume = p.Consume
+		m["consume"] = p.Consume
 	}
-	var increaseCapacity *int64
 	if p.IncreaseCapacity != nil {
-		increaseCapacity = p.IncreaseCapacity
+		m["increaseCapacity"] = p.IncreaseCapacity
 	}
-	var increaseCapacityAmount *int64
 	if p.IncreaseCapacityAmount != nil {
-		increaseCapacityAmount = p.IncreaseCapacityAmount
+		m["increaseCapacityAmount"] = p.IncreaseCapacityAmount
 	}
-	return map[string]interface{}{
-		"acquired":               acquired,
-		"consume":                consume,
-		"increaseCapacity":       increaseCapacity,
-		"increaseCapacityAmount": increaseCapacityAmount,
-	}
+	return m
 }
 
 func (p InventoryInventoryStatistics) Pointer() *InventoryInventoryStatistics {
@@ -19409,49 +22455,72 @@ func NewInventoryInventoryCapacityDistributionStatisticsFromJson(data string) In
 
 func NewInventoryInventoryCapacityDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryCapacityDistributionStatistics {
 	return InventoryInventoryCapacityDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryCapacityDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryInventoryCapacityDistributionStatistics) Pointer() *InventoryInventoryCapacityDistributionStatistics {
@@ -19523,31 +22592,42 @@ func NewInventoryInventoryCapacityDistributionSegmentFromJson(data string) Inven
 
 func NewInventoryInventoryCapacityDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryCapacityDistributionSegment {
 	return InventoryInventoryCapacityDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryCapacityDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p InventoryInventoryCapacityDistributionSegment) Pointer() *InventoryInventoryCapacityDistributionSegment {
@@ -19615,27 +22695,38 @@ func NewInventoryInventoryCapacityDistributionFromJson(data string) InventoryInv
 
 func NewInventoryInventoryCapacityDistributionFromDict(data map[string]interface{}) InventoryInventoryCapacityDistribution {
 	return InventoryInventoryCapacityDistribution{
-		Statistics:   NewInventoryInventoryCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryInventoryCapacityDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryInventoryCapacityDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryInventoryCapacityDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryInventoryCapacityDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryInventoryCapacityDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryInventoryCapacityDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryInventoryCapacityDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryInventoryCapacityDistribution) Pointer() *InventoryInventoryCapacityDistribution {
@@ -19719,49 +22810,72 @@ func NewInventoryInventoryAcquireDistributionStatisticsFromJson(data string) Inv
 
 func NewInventoryInventoryAcquireDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryAcquireDistributionStatistics {
 	return InventoryInventoryAcquireDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireDistributionStatistics) Pointer() *InventoryInventoryAcquireDistributionStatistics {
@@ -19849,25 +22963,32 @@ func NewInventoryInventoryAcquireDistributionSegmentFromJson(data string) Invent
 
 func NewInventoryInventoryAcquireDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryAcquireDistributionSegment {
 	return InventoryInventoryAcquireDistributionSegment{
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireDistributionSegment) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireDistributionSegment) Pointer() *InventoryInventoryAcquireDistributionSegment {
@@ -19935,27 +23056,38 @@ func NewInventoryInventoryAcquireDistributionFromJson(data string) InventoryInve
 
 func NewInventoryInventoryAcquireDistributionFromDict(data map[string]interface{}) InventoryInventoryAcquireDistribution {
 	return InventoryInventoryAcquireDistribution{
-		Statistics:   NewInventoryInventoryAcquireDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryInventoryAcquireDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryInventoryAcquireDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryAcquireDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryInventoryAcquireDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryInventoryAcquireDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryInventoryAcquireDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryInventoryAcquireDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireDistribution) Pointer() *InventoryInventoryAcquireDistribution {
@@ -20039,49 +23171,72 @@ func NewInventoryInventoryAcquireAmountDistributionStatisticsFromJson(data strin
 
 func NewInventoryInventoryAcquireAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistributionStatistics {
 	return InventoryInventoryAcquireAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireAmountDistributionStatistics) Pointer() *InventoryInventoryAcquireAmountDistributionStatistics {
@@ -20169,25 +23324,32 @@ func NewInventoryInventoryAcquireAmountDistributionSegmentFromJson(data string) 
 
 func NewInventoryInventoryAcquireAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistributionSegment {
 	return InventoryInventoryAcquireAmountDistributionSegment{
-		ItemName: core.CastString(data["itemName"]),
-		Sum:      core.CastInt64(data["sum"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"sum":      sum,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireAmountDistributionSegment) Pointer() *InventoryInventoryAcquireAmountDistributionSegment {
@@ -20255,27 +23417,38 @@ func NewInventoryInventoryAcquireAmountDistributionFromJson(data string) Invento
 
 func NewInventoryInventoryAcquireAmountDistributionFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistribution {
 	return InventoryInventoryAcquireAmountDistribution{
-		Statistics:   NewInventoryInventoryAcquireAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryInventoryAcquireAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryInventoryAcquireAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryAcquireAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryInventoryAcquireAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryInventoryAcquireAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryInventoryAcquireAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryInventoryAcquireAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryInventoryAcquireAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryInventoryAcquireAmountDistribution) Pointer() *InventoryInventoryAcquireAmountDistribution {
@@ -20359,49 +23532,72 @@ func NewInventoryInventoryConsumeDistributionStatisticsFromJson(data string) Inv
 
 func NewInventoryInventoryConsumeDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryConsumeDistributionStatistics {
 	return InventoryInventoryConsumeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeDistributionStatistics) Pointer() *InventoryInventoryConsumeDistributionStatistics {
@@ -20489,25 +23685,32 @@ func NewInventoryInventoryConsumeDistributionSegmentFromJson(data string) Invent
 
 func NewInventoryInventoryConsumeDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryConsumeDistributionSegment {
 	return InventoryInventoryConsumeDistributionSegment{
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeDistributionSegment) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeDistributionSegment) Pointer() *InventoryInventoryConsumeDistributionSegment {
@@ -20575,27 +23778,38 @@ func NewInventoryInventoryConsumeDistributionFromJson(data string) InventoryInve
 
 func NewInventoryInventoryConsumeDistributionFromDict(data map[string]interface{}) InventoryInventoryConsumeDistribution {
 	return InventoryInventoryConsumeDistribution{
-		Statistics:   NewInventoryInventoryConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryInventoryConsumeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryInventoryConsumeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryInventoryConsumeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryInventoryConsumeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryInventoryConsumeDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryInventoryConsumeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeDistribution) Pointer() *InventoryInventoryConsumeDistribution {
@@ -20679,49 +23893,72 @@ func NewInventoryInventoryConsumeAmountDistributionStatisticsFromJson(data strin
 
 func NewInventoryInventoryConsumeAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistributionStatistics {
 	return InventoryInventoryConsumeAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeAmountDistributionStatistics) Pointer() *InventoryInventoryConsumeAmountDistributionStatistics {
@@ -20809,25 +24046,32 @@ func NewInventoryInventoryConsumeAmountDistributionSegmentFromJson(data string) 
 
 func NewInventoryInventoryConsumeAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistributionSegment {
 	return InventoryInventoryConsumeAmountDistributionSegment{
-		ItemName: core.CastString(data["itemName"]),
-		Sum:      core.CastInt64(data["sum"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"sum":      sum,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeAmountDistributionSegment) Pointer() *InventoryInventoryConsumeAmountDistributionSegment {
@@ -20895,27 +24139,38 @@ func NewInventoryInventoryConsumeAmountDistributionFromJson(data string) Invento
 
 func NewInventoryInventoryConsumeAmountDistributionFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistribution {
 	return InventoryInventoryConsumeAmountDistribution{
-		Statistics:   NewInventoryInventoryConsumeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryInventoryConsumeAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryInventoryConsumeAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryConsumeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryInventoryConsumeAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryInventoryConsumeAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryInventoryConsumeAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryInventoryConsumeAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryInventoryConsumeAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryInventoryConsumeAmountDistribution) Pointer() *InventoryInventoryConsumeAmountDistribution {
@@ -20995,43 +24250,87 @@ func NewInventoryInventoryDistributionsFromJson(data string) InventoryInventoryD
 
 func NewInventoryInventoryDistributionsFromDict(data map[string]interface{}) InventoryInventoryDistributions {
 	return InventoryInventoryDistributions{
-		Capacity:      NewInventoryInventoryCapacityDistributionFromDict(core.CastMap(data["capacity"])).Pointer(),
-		Acquire:       NewInventoryInventoryAcquireDistributionFromDict(core.CastMap(data["acquire"])).Pointer(),
-		AcquireAmount: NewInventoryInventoryAcquireAmountDistributionFromDict(core.CastMap(data["acquireAmount"])).Pointer(),
-		Consume:       NewInventoryInventoryConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer(),
-		ConsumeAmount: NewInventoryInventoryConsumeAmountDistributionFromDict(core.CastMap(data["consumeAmount"])).Pointer(),
+		Capacity: func() *InventoryInventoryCapacityDistribution {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryCapacityDistributionFromDict(core.CastMap(data["capacity"])).Pointer()
+		}(),
+		Acquire: func() *InventoryInventoryAcquireDistribution {
+			v, ok := data["acquire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryAcquireDistributionFromDict(core.CastMap(data["acquire"])).Pointer()
+		}(),
+		AcquireAmount: func() *InventoryInventoryAcquireAmountDistribution {
+			v, ok := data["acquireAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryAcquireAmountDistributionFromDict(core.CastMap(data["acquireAmount"])).Pointer()
+		}(),
+		Consume: func() *InventoryInventoryConsumeDistribution {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer()
+		}(),
+		ConsumeAmount: func() *InventoryInventoryConsumeAmountDistribution {
+			v, ok := data["consumeAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryConsumeAmountDistributionFromDict(core.CastMap(data["consumeAmount"])).Pointer()
+		}(),
 	}
 }
 
 func (p InventoryInventoryDistributions) ToDict() map[string]interface{} {
-
-	var capacity map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Capacity != nil {
-		capacity = p.Capacity.ToDict()
+		m["capacity"] = func() map[string]interface{} {
+			if p.Capacity == nil {
+				return nil
+			}
+			return p.Capacity.ToDict()
+		}()
 	}
-	var acquire map[string]interface{}
 	if p.Acquire != nil {
-		acquire = p.Acquire.ToDict()
+		m["acquire"] = func() map[string]interface{} {
+			if p.Acquire == nil {
+				return nil
+			}
+			return p.Acquire.ToDict()
+		}()
 	}
-	var acquireAmount map[string]interface{}
 	if p.AcquireAmount != nil {
-		acquireAmount = p.AcquireAmount.ToDict()
+		m["acquireAmount"] = func() map[string]interface{} {
+			if p.AcquireAmount == nil {
+				return nil
+			}
+			return p.AcquireAmount.ToDict()
+		}()
 	}
-	var consume map[string]interface{}
 	if p.Consume != nil {
-		consume = p.Consume.ToDict()
+		m["consume"] = func() map[string]interface{} {
+			if p.Consume == nil {
+				return nil
+			}
+			return p.Consume.ToDict()
+		}()
 	}
-	var consumeAmount map[string]interface{}
 	if p.ConsumeAmount != nil {
-		consumeAmount = p.ConsumeAmount.ToDict()
+		m["consumeAmount"] = func() map[string]interface{} {
+			if p.ConsumeAmount == nil {
+				return nil
+			}
+			return p.ConsumeAmount.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"capacity":      capacity,
-		"acquire":       acquire,
-		"acquireAmount": acquireAmount,
-		"consume":       consume,
-		"consumeAmount": consumeAmount,
-	}
+	return m
 }
 
 func (p InventoryInventoryDistributions) Pointer() *InventoryInventoryDistributions {
@@ -21151,45 +24450,73 @@ func NewInventoryInventoryFromJson(data string) InventoryInventory {
 
 func NewInventoryInventoryFromDict(data map[string]interface{}) InventoryInventory {
 	return InventoryInventory{
-		InventoryId:   core.CastString(data["inventoryId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		Statistics:    NewInventoryInventoryStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewInventoryInventoryDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		ItemSets:      CastInventoryItemSets(core.CastArray(data["itemSets"])),
+		InventoryId: func() *string {
+			v, ok := data["inventoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Statistics: func() *InventoryInventoryStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *InventoryInventoryDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryInventoryDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		ItemSets: func() []InventoryItemSet {
+			if data["itemSets"] == nil {
+				return nil
+			}
+			return CastInventoryItemSets(core.CastArray(data["itemSets"]))
+		}(),
 	}
 }
 
 func (p InventoryInventory) ToDict() map[string]interface{} {
-
-	var inventoryId *string
+	m := map[string]interface{}{}
 	if p.InventoryId != nil {
-		inventoryId = p.InventoryId
+		m["inventoryId"] = p.InventoryId
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var itemSets []interface{}
 	if p.ItemSets != nil {
-		itemSets = CastInventoryItemSetsFromDict(
+		m["itemSets"] = CastInventoryItemSetsFromDict(
 			p.ItemSets,
 		)
 	}
-	return map[string]interface{}{
-		"inventoryId":   inventoryId,
-		"inventoryName": inventoryName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"itemSets":      itemSets,
-	}
+	return m
 }
 
 func (p InventoryInventory) Pointer() *InventoryInventory {
@@ -21261,31 +24588,42 @@ func NewInventoryNamespaceStatisticsFromJson(data string) InventoryNamespaceStat
 
 func NewInventoryNamespaceStatisticsFromDict(data map[string]interface{}) InventoryNamespaceStatistics {
 	return InventoryNamespaceStatistics{
-		Acquire:          core.CastInt64(data["acquire"]),
-		Consume:          core.CastInt64(data["consume"]),
-		IncreaseCapacity: core.CastInt64(data["increaseCapacity"]),
+		Acquire: func() *int64 {
+			v, ok := data["acquire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["acquire"])
+		}(),
+		Consume: func() *int64 {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consume"])
+		}(),
+		IncreaseCapacity: func() *int64 {
+			v, ok := data["increaseCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseCapacity"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var acquire *int64
+	m := map[string]interface{}{}
 	if p.Acquire != nil {
-		acquire = p.Acquire
+		m["acquire"] = p.Acquire
 	}
-	var consume *int64
 	if p.Consume != nil {
-		consume = p.Consume
+		m["consume"] = p.Consume
 	}
-	var increaseCapacity *int64
 	if p.IncreaseCapacity != nil {
-		increaseCapacity = p.IncreaseCapacity
+		m["increaseCapacity"] = p.IncreaseCapacity
 	}
-	return map[string]interface{}{
-		"acquire":          acquire,
-		"consume":          consume,
-		"increaseCapacity": increaseCapacity,
-	}
+	return m
 }
 
 func (p InventoryNamespaceStatistics) Pointer() *InventoryNamespaceStatistics {
@@ -21369,49 +24707,72 @@ func NewInventoryNamespaceAcquireDistributionStatisticsFromJson(data string) Inv
 
 func NewInventoryNamespaceAcquireDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistributionStatistics {
 	return InventoryNamespaceAcquireDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireDistributionStatistics) Pointer() *InventoryNamespaceAcquireDistributionStatistics {
@@ -21499,25 +24860,32 @@ func NewInventoryNamespaceAcquireDistributionSegmentFromJson(data string) Invent
 
 func NewInventoryNamespaceAcquireDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistributionSegment {
 	return InventoryNamespaceAcquireDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Count:         core.CastInt64(data["count"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"count":         count,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireDistributionSegment) Pointer() *InventoryNamespaceAcquireDistributionSegment {
@@ -21585,27 +24953,38 @@ func NewInventoryNamespaceAcquireDistributionFromJson(data string) InventoryName
 
 func NewInventoryNamespaceAcquireDistributionFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistribution {
 	return InventoryNamespaceAcquireDistribution{
-		Statistics:   NewInventoryNamespaceAcquireDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceAcquireDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceAcquireDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceAcquireDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceAcquireDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceAcquireDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceAcquireDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceAcquireDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireDistribution) Pointer() *InventoryNamespaceAcquireDistribution {
@@ -21689,49 +25068,72 @@ func NewInventoryNamespaceAcquireAmountDistributionStatisticsFromJson(data strin
 
 func NewInventoryNamespaceAcquireAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistributionStatistics {
 	return InventoryNamespaceAcquireAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireAmountDistributionStatistics) Pointer() *InventoryNamespaceAcquireAmountDistributionStatistics {
@@ -21819,25 +25221,32 @@ func NewInventoryNamespaceAcquireAmountDistributionSegmentFromJson(data string) 
 
 func NewInventoryNamespaceAcquireAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistributionSegment {
 	return InventoryNamespaceAcquireAmountDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Sum:           core.CastInt64(data["sum"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"sum":           sum,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireAmountDistributionSegment) Pointer() *InventoryNamespaceAcquireAmountDistributionSegment {
@@ -21905,27 +25314,38 @@ func NewInventoryNamespaceAcquireAmountDistributionFromJson(data string) Invento
 
 func NewInventoryNamespaceAcquireAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistribution {
 	return InventoryNamespaceAcquireAmountDistribution{
-		Statistics:   NewInventoryNamespaceAcquireAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceAcquireAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceAcquireAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceAcquireAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceAcquireAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceAcquireAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceAcquireAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceAcquireAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceAcquireAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceAcquireAmountDistribution) Pointer() *InventoryNamespaceAcquireAmountDistribution {
@@ -22009,49 +25429,72 @@ func NewInventoryNamespaceConsumeDistributionStatisticsFromJson(data string) Inv
 
 func NewInventoryNamespaceConsumeDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistributionStatistics {
 	return InventoryNamespaceConsumeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeDistributionStatistics) Pointer() *InventoryNamespaceConsumeDistributionStatistics {
@@ -22139,25 +25582,32 @@ func NewInventoryNamespaceConsumeDistributionSegmentFromJson(data string) Invent
 
 func NewInventoryNamespaceConsumeDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistributionSegment {
 	return InventoryNamespaceConsumeDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Count:         core.CastInt64(data["count"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"count":         count,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeDistributionSegment) Pointer() *InventoryNamespaceConsumeDistributionSegment {
@@ -22225,27 +25675,38 @@ func NewInventoryNamespaceConsumeDistributionFromJson(data string) InventoryName
 
 func NewInventoryNamespaceConsumeDistributionFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistribution {
 	return InventoryNamespaceConsumeDistribution{
-		Statistics:   NewInventoryNamespaceConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceConsumeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceConsumeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceConsumeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceConsumeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceConsumeDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceConsumeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeDistribution) Pointer() *InventoryNamespaceConsumeDistribution {
@@ -22329,49 +25790,72 @@ func NewInventoryNamespaceConsumeAmountDistributionStatisticsFromJson(data strin
 
 func NewInventoryNamespaceConsumeAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistributionStatistics {
 	return InventoryNamespaceConsumeAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeAmountDistributionStatistics) Pointer() *InventoryNamespaceConsumeAmountDistributionStatistics {
@@ -22459,25 +25943,32 @@ func NewInventoryNamespaceConsumeAmountDistributionSegmentFromJson(data string) 
 
 func NewInventoryNamespaceConsumeAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistributionSegment {
 	return InventoryNamespaceConsumeAmountDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Sum:           core.CastInt64(data["sum"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"sum":           sum,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeAmountDistributionSegment) Pointer() *InventoryNamespaceConsumeAmountDistributionSegment {
@@ -22545,27 +26036,38 @@ func NewInventoryNamespaceConsumeAmountDistributionFromJson(data string) Invento
 
 func NewInventoryNamespaceConsumeAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistribution {
 	return InventoryNamespaceConsumeAmountDistribution{
-		Statistics:   NewInventoryNamespaceConsumeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceConsumeAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceConsumeAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceConsumeAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceConsumeAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceConsumeAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceConsumeAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceConsumeAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceConsumeAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceConsumeAmountDistribution) Pointer() *InventoryNamespaceConsumeAmountDistribution {
@@ -22649,49 +26151,72 @@ func NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromJson(data st
 
 func NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistributionStatistics {
 	return InventoryNamespaceIncreaseCapacityDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistributionStatistics) Pointer() *InventoryNamespaceIncreaseCapacityDistributionStatistics {
@@ -22779,25 +26304,32 @@ func NewInventoryNamespaceIncreaseCapacityDistributionSegmentFromJson(data strin
 
 func NewInventoryNamespaceIncreaseCapacityDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistributionSegment {
 	return InventoryNamespaceIncreaseCapacityDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Count:         core.CastInt64(data["count"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"count":         count,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistributionSegment) Pointer() *InventoryNamespaceIncreaseCapacityDistributionSegment {
@@ -22865,27 +26397,38 @@ func NewInventoryNamespaceIncreaseCapacityDistributionFromJson(data string) Inve
 
 func NewInventoryNamespaceIncreaseCapacityDistributionFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistribution {
 	return InventoryNamespaceIncreaseCapacityDistribution{
-		Statistics:   NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceIncreaseCapacityDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceIncreaseCapacityDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceIncreaseCapacityDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceIncreaseCapacityDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceIncreaseCapacityDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceIncreaseCapacityDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityDistribution) Pointer() *InventoryNamespaceIncreaseCapacityDistribution {
@@ -22969,49 +26512,72 @@ func NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromJson(d
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistributionStatistics {
 	return InventoryNamespaceIncreaseCapacityAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistributionStatistics) Pointer() *InventoryNamespaceIncreaseCapacityAmountDistributionStatistics {
@@ -23099,25 +26665,32 @@ func NewInventoryNamespaceIncreaseCapacityAmountDistributionSegmentFromJson(data
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistributionSegment {
 	return InventoryNamespaceIncreaseCapacityAmountDistributionSegment{
-		InventoryName: core.CastString(data["inventoryName"]),
-		Sum:           core.CastInt64(data["sum"]),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var inventoryName *string
+	m := map[string]interface{}{}
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"inventoryName": inventoryName,
-		"sum":           sum,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistributionSegment) Pointer() *InventoryNamespaceIncreaseCapacityAmountDistributionSegment {
@@ -23185,27 +26758,38 @@ func NewInventoryNamespaceIncreaseCapacityAmountDistributionFromJson(data string
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistribution {
 	return InventoryNamespaceIncreaseCapacityAmountDistribution{
-		Statistics:   NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastInventoryNamespaceIncreaseCapacityAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *InventoryNamespaceIncreaseCapacityAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []InventoryNamespaceIncreaseCapacityAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastInventoryNamespaceIncreaseCapacityAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastInventoryNamespaceIncreaseCapacityAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastInventoryNamespaceIncreaseCapacityAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p InventoryNamespaceIncreaseCapacityAmountDistribution) Pointer() *InventoryNamespaceIncreaseCapacityAmountDistribution {
@@ -23289,49 +26873,102 @@ func NewInventoryNamespaceDistributionsFromJson(data string) InventoryNamespaceD
 
 func NewInventoryNamespaceDistributionsFromDict(data map[string]interface{}) InventoryNamespaceDistributions {
 	return InventoryNamespaceDistributions{
-		Acquire:                NewInventoryNamespaceAcquireDistributionFromDict(core.CastMap(data["acquire"])).Pointer(),
-		AcquireAmount:          NewInventoryNamespaceAcquireAmountDistributionFromDict(core.CastMap(data["acquireAmount"])).Pointer(),
-		Consume:                NewInventoryNamespaceConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer(),
-		ConsumeAmount:          NewInventoryNamespaceConsumeAmountDistributionFromDict(core.CastMap(data["consumeAmount"])).Pointer(),
-		IncreaseCapacity:       NewInventoryNamespaceIncreaseCapacityDistributionFromDict(core.CastMap(data["increaseCapacity"])).Pointer(),
-		IncreaseCapacityAmount: NewInventoryNamespaceIncreaseCapacityAmountDistributionFromDict(core.CastMap(data["increaseCapacityAmount"])).Pointer(),
+		Acquire: func() *InventoryNamespaceAcquireDistribution {
+			v, ok := data["acquire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceAcquireDistributionFromDict(core.CastMap(data["acquire"])).Pointer()
+		}(),
+		AcquireAmount: func() *InventoryNamespaceAcquireAmountDistribution {
+			v, ok := data["acquireAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceAcquireAmountDistributionFromDict(core.CastMap(data["acquireAmount"])).Pointer()
+		}(),
+		Consume: func() *InventoryNamespaceConsumeDistribution {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer()
+		}(),
+		ConsumeAmount: func() *InventoryNamespaceConsumeAmountDistribution {
+			v, ok := data["consumeAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceConsumeAmountDistributionFromDict(core.CastMap(data["consumeAmount"])).Pointer()
+		}(),
+		IncreaseCapacity: func() *InventoryNamespaceIncreaseCapacityDistribution {
+			v, ok := data["increaseCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceIncreaseCapacityDistributionFromDict(core.CastMap(data["increaseCapacity"])).Pointer()
+		}(),
+		IncreaseCapacityAmount: func() *InventoryNamespaceIncreaseCapacityAmountDistribution {
+			v, ok := data["increaseCapacityAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceIncreaseCapacityAmountDistributionFromDict(core.CastMap(data["increaseCapacityAmount"])).Pointer()
+		}(),
 	}
 }
 
 func (p InventoryNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var acquire map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Acquire != nil {
-		acquire = p.Acquire.ToDict()
+		m["acquire"] = func() map[string]interface{} {
+			if p.Acquire == nil {
+				return nil
+			}
+			return p.Acquire.ToDict()
+		}()
 	}
-	var acquireAmount map[string]interface{}
 	if p.AcquireAmount != nil {
-		acquireAmount = p.AcquireAmount.ToDict()
+		m["acquireAmount"] = func() map[string]interface{} {
+			if p.AcquireAmount == nil {
+				return nil
+			}
+			return p.AcquireAmount.ToDict()
+		}()
 	}
-	var consume map[string]interface{}
 	if p.Consume != nil {
-		consume = p.Consume.ToDict()
+		m["consume"] = func() map[string]interface{} {
+			if p.Consume == nil {
+				return nil
+			}
+			return p.Consume.ToDict()
+		}()
 	}
-	var consumeAmount map[string]interface{}
 	if p.ConsumeAmount != nil {
-		consumeAmount = p.ConsumeAmount.ToDict()
+		m["consumeAmount"] = func() map[string]interface{} {
+			if p.ConsumeAmount == nil {
+				return nil
+			}
+			return p.ConsumeAmount.ToDict()
+		}()
 	}
-	var increaseCapacity map[string]interface{}
 	if p.IncreaseCapacity != nil {
-		increaseCapacity = p.IncreaseCapacity.ToDict()
+		m["increaseCapacity"] = func() map[string]interface{} {
+			if p.IncreaseCapacity == nil {
+				return nil
+			}
+			return p.IncreaseCapacity.ToDict()
+		}()
 	}
-	var increaseCapacityAmount map[string]interface{}
 	if p.IncreaseCapacityAmount != nil {
-		increaseCapacityAmount = p.IncreaseCapacityAmount.ToDict()
+		m["increaseCapacityAmount"] = func() map[string]interface{} {
+			if p.IncreaseCapacityAmount == nil {
+				return nil
+			}
+			return p.IncreaseCapacityAmount.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"acquire":                acquire,
-		"acquireAmount":          acquireAmount,
-		"consume":                consume,
-		"consumeAmount":          consumeAmount,
-		"increaseCapacity":       increaseCapacity,
-		"increaseCapacityAmount": increaseCapacityAmount,
-	}
+	return m
 }
 
 func (p InventoryNamespaceDistributions) Pointer() *InventoryNamespaceDistributions {
@@ -23463,63 +27100,103 @@ func NewInventoryNamespaceFromJson(data string) InventoryNamespace {
 
 func NewInventoryNamespaceFromDict(data map[string]interface{}) InventoryNamespace {
 	return InventoryNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewInventoryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewInventoryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Inventories:   CastInventoryInventories(core.CastArray(data["inventories"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *InventoryNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *InventoryNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Inventories: func() []InventoryInventory {
+			if data["inventories"] == nil {
+				return nil
+			}
+			return CastInventoryInventories(core.CastArray(data["inventories"]))
+		}(),
 	}
 }
 
 func (p InventoryNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var inventories []interface{}
 	if p.Inventories != nil {
-		inventories = CastInventoryInventoriesFromDict(
+		m["inventories"] = CastInventoryInventoriesFromDict(
 			p.Inventories,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"inventories":   inventories,
-	}
+	return m
 }
 
 func (p InventoryNamespace) Pointer() *InventoryNamespace {
@@ -23587,25 +27264,32 @@ func NewKeyNamespaceStatisticsFromJson(data string) KeyNamespaceStatistics {
 
 func NewKeyNamespaceStatisticsFromDict(data map[string]interface{}) KeyNamespaceStatistics {
 	return KeyNamespaceStatistics{
-		Encrypt: core.CastInt64(data["encrypt"]),
-		Decrypt: core.CastInt64(data["decrypt"]),
+		Encrypt: func() *int64 {
+			v, ok := data["encrypt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["encrypt"])
+		}(),
+		Decrypt: func() *int64 {
+			v, ok := data["decrypt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["decrypt"])
+		}(),
 	}
 }
 
 func (p KeyNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var encrypt *int64
+	m := map[string]interface{}{}
 	if p.Encrypt != nil {
-		encrypt = p.Encrypt
+		m["encrypt"] = p.Encrypt
 	}
-	var decrypt *int64
 	if p.Decrypt != nil {
-		decrypt = p.Decrypt
+		m["decrypt"] = p.Decrypt
 	}
-	return map[string]interface{}{
-		"encrypt": encrypt,
-		"decrypt": decrypt,
-	}
+	return m
 }
 
 func (p KeyNamespaceStatistics) Pointer() *KeyNamespaceStatistics {
@@ -23689,49 +27373,72 @@ func NewKeyNamespaceEncryptDistributionStatisticsFromJson(data string) KeyNamesp
 
 func NewKeyNamespaceEncryptDistributionStatisticsFromDict(data map[string]interface{}) KeyNamespaceEncryptDistributionStatistics {
 	return KeyNamespaceEncryptDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p KeyNamespaceEncryptDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p KeyNamespaceEncryptDistributionStatistics) Pointer() *KeyNamespaceEncryptDistributionStatistics {
@@ -23819,25 +27526,32 @@ func NewKeyNamespaceEncryptDistributionSegmentFromJson(data string) KeyNamespace
 
 func NewKeyNamespaceEncryptDistributionSegmentFromDict(data map[string]interface{}) KeyNamespaceEncryptDistributionSegment {
 	return KeyNamespaceEncryptDistributionSegment{
-		KeyName: core.CastString(data["keyName"]),
-		Count:   core.CastInt64(data["count"]),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p KeyNamespaceEncryptDistributionSegment) ToDict() map[string]interface{} {
-
-	var keyName *string
+	m := map[string]interface{}{}
 	if p.KeyName != nil {
-		keyName = p.KeyName
+		m["keyName"] = p.KeyName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"keyName": keyName,
-		"count":   count,
-	}
+	return m
 }
 
 func (p KeyNamespaceEncryptDistributionSegment) Pointer() *KeyNamespaceEncryptDistributionSegment {
@@ -23905,27 +27619,38 @@ func NewKeyNamespaceEncryptDistributionFromJson(data string) KeyNamespaceEncrypt
 
 func NewKeyNamespaceEncryptDistributionFromDict(data map[string]interface{}) KeyNamespaceEncryptDistribution {
 	return KeyNamespaceEncryptDistribution{
-		Statistics:   NewKeyNamespaceEncryptDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastKeyNamespaceEncryptDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *KeyNamespaceEncryptDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceEncryptDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []KeyNamespaceEncryptDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastKeyNamespaceEncryptDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p KeyNamespaceEncryptDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastKeyNamespaceEncryptDistributionSegmentsFromDict(
+		m["distribution"] = CastKeyNamespaceEncryptDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p KeyNamespaceEncryptDistribution) Pointer() *KeyNamespaceEncryptDistribution {
@@ -24009,49 +27734,72 @@ func NewKeyNamespaceDecryptDistributionStatisticsFromJson(data string) KeyNamesp
 
 func NewKeyNamespaceDecryptDistributionStatisticsFromDict(data map[string]interface{}) KeyNamespaceDecryptDistributionStatistics {
 	return KeyNamespaceDecryptDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p KeyNamespaceDecryptDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p KeyNamespaceDecryptDistributionStatistics) Pointer() *KeyNamespaceDecryptDistributionStatistics {
@@ -24139,25 +27887,32 @@ func NewKeyNamespaceDecryptDistributionSegmentFromJson(data string) KeyNamespace
 
 func NewKeyNamespaceDecryptDistributionSegmentFromDict(data map[string]interface{}) KeyNamespaceDecryptDistributionSegment {
 	return KeyNamespaceDecryptDistributionSegment{
-		KeyName: core.CastString(data["keyName"]),
-		Count:   core.CastInt64(data["count"]),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p KeyNamespaceDecryptDistributionSegment) ToDict() map[string]interface{} {
-
-	var keyName *string
+	m := map[string]interface{}{}
 	if p.KeyName != nil {
-		keyName = p.KeyName
+		m["keyName"] = p.KeyName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"keyName": keyName,
-		"count":   count,
-	}
+	return m
 }
 
 func (p KeyNamespaceDecryptDistributionSegment) Pointer() *KeyNamespaceDecryptDistributionSegment {
@@ -24225,27 +27980,38 @@ func NewKeyNamespaceDecryptDistributionFromJson(data string) KeyNamespaceDecrypt
 
 func NewKeyNamespaceDecryptDistributionFromDict(data map[string]interface{}) KeyNamespaceDecryptDistribution {
 	return KeyNamespaceDecryptDistribution{
-		Statistics:   NewKeyNamespaceDecryptDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastKeyNamespaceDecryptDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *KeyNamespaceDecryptDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceDecryptDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []KeyNamespaceDecryptDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastKeyNamespaceDecryptDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p KeyNamespaceDecryptDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastKeyNamespaceDecryptDistributionSegmentsFromDict(
+		m["distribution"] = CastKeyNamespaceDecryptDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p KeyNamespaceDecryptDistribution) Pointer() *KeyNamespaceDecryptDistribution {
@@ -24313,25 +28079,42 @@ func NewKeyNamespaceDistributionsFromJson(data string) KeyNamespaceDistributions
 
 func NewKeyNamespaceDistributionsFromDict(data map[string]interface{}) KeyNamespaceDistributions {
 	return KeyNamespaceDistributions{
-		Encrypt: NewKeyNamespaceEncryptDistributionFromDict(core.CastMap(data["encrypt"])).Pointer(),
-		Decrypt: NewKeyNamespaceDecryptDistributionFromDict(core.CastMap(data["decrypt"])).Pointer(),
+		Encrypt: func() *KeyNamespaceEncryptDistribution {
+			v, ok := data["encrypt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceEncryptDistributionFromDict(core.CastMap(data["encrypt"])).Pointer()
+		}(),
+		Decrypt: func() *KeyNamespaceDecryptDistribution {
+			v, ok := data["decrypt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceDecryptDistributionFromDict(core.CastMap(data["decrypt"])).Pointer()
+		}(),
 	}
 }
 
 func (p KeyNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var encrypt map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Encrypt != nil {
-		encrypt = p.Encrypt.ToDict()
+		m["encrypt"] = func() map[string]interface{} {
+			if p.Encrypt == nil {
+				return nil
+			}
+			return p.Encrypt.ToDict()
+		}()
 	}
-	var decrypt map[string]interface{}
 	if p.Decrypt != nil {
-		decrypt = p.Decrypt.ToDict()
+		m["decrypt"] = func() map[string]interface{} {
+			if p.Decrypt == nil {
+				return nil
+			}
+			return p.Decrypt.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"encrypt": encrypt,
-		"decrypt": decrypt,
-	}
+	return m
 }
 
 func (p KeyNamespaceDistributions) Pointer() *KeyNamespaceDistributions {
@@ -24459,55 +28242,92 @@ func NewKeyNamespaceFromJson(data string) KeyNamespace {
 
 func NewKeyNamespaceFromDict(data map[string]interface{}) KeyNamespace {
 	return KeyNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewKeyNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewKeyNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *KeyNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *KeyNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewKeyNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p KeyNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p KeyNamespace) Pointer() *KeyNamespace {
@@ -24615,25 +28435,32 @@ func NewKeyKeyFromJson(data string) KeyKey {
 
 func NewKeyKeyFromDict(data map[string]interface{}) KeyKey {
 	return KeyKey{
-		KeyId:   core.CastString(data["keyId"]),
-		KeyName: core.CastString(data["keyName"]),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
 	}
 }
 
 func (p KeyKey) ToDict() map[string]interface{} {
-
-	var keyId *string
+	m := map[string]interface{}{}
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var keyName *string
 	if p.KeyName != nil {
-		keyName = p.KeyName
+		m["keyName"] = p.KeyName
 	}
-	return map[string]interface{}{
-		"keyId":   keyId,
-		"keyName": keyName,
-	}
+	return m
 }
 
 func (p KeyKey) Pointer() *KeyKey {
@@ -24701,25 +28528,32 @@ func NewLimitCounterStatisticsFromJson(data string) LimitCounterStatistics {
 
 func NewLimitCounterStatisticsFromDict(data map[string]interface{}) LimitCounterStatistics {
 	return LimitCounterStatistics{
-		Increase:       core.CastInt64(data["increase"]),
-		IncreaseAmount: core.CastInt64(data["increaseAmount"]),
+		Increase: func() *int64 {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increase"])
+		}(),
+		IncreaseAmount: func() *int64 {
+			v, ok := data["increaseAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseAmount"])
+		}(),
 	}
 }
 
 func (p LimitCounterStatistics) ToDict() map[string]interface{} {
-
-	var increase *int64
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase
+		m["increase"] = p.Increase
 	}
-	var increaseAmount *int64
 	if p.IncreaseAmount != nil {
-		increaseAmount = p.IncreaseAmount
+		m["increaseAmount"] = p.IncreaseAmount
 	}
-	return map[string]interface{}{
-		"increase":       increase,
-		"increaseAmount": increaseAmount,
-	}
+	return m
 }
 
 func (p LimitCounterStatistics) Pointer() *LimitCounterStatistics {
@@ -24803,49 +28637,72 @@ func NewLimitCounterCounterDistributionStatisticsFromJson(data string) LimitCoun
 
 func NewLimitCounterCounterDistributionStatisticsFromDict(data map[string]interface{}) LimitCounterCounterDistributionStatistics {
 	return LimitCounterCounterDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitCounterCounterDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitCounterCounterDistributionStatistics) Pointer() *LimitCounterCounterDistributionStatistics {
@@ -24917,31 +28774,42 @@ func NewLimitCounterCounterDistributionSegmentFromJson(data string) LimitCounter
 
 func NewLimitCounterCounterDistributionSegmentFromDict(data map[string]interface{}) LimitCounterCounterDistributionSegment {
 	return LimitCounterCounterDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LimitCounterCounterDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p LimitCounterCounterDistributionSegment) Pointer() *LimitCounterCounterDistributionSegment {
@@ -25009,27 +28877,38 @@ func NewLimitCounterCounterDistributionFromJson(data string) LimitCounterCounter
 
 func NewLimitCounterCounterDistributionFromDict(data map[string]interface{}) LimitCounterCounterDistribution {
 	return LimitCounterCounterDistribution{
-		Statistics:   NewLimitCounterCounterDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitCounterCounterDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitCounterCounterDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitCounterCounterDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitCounterCounterDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitCounterCounterDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitCounterCounterDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitCounterCounterDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitCounterCounterDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitCounterCounterDistribution) Pointer() *LimitCounterCounterDistribution {
@@ -25093,19 +28972,27 @@ func NewLimitCounterDistributionsFromJson(data string) LimitCounterDistributions
 
 func NewLimitCounterDistributionsFromDict(data map[string]interface{}) LimitCounterDistributions {
 	return LimitCounterDistributions{
-		Counter: NewLimitCounterCounterDistributionFromDict(core.CastMap(data["counter"])).Pointer(),
+		Counter: func() *LimitCounterCounterDistribution {
+			v, ok := data["counter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitCounterCounterDistributionFromDict(core.CastMap(data["counter"])).Pointer()
+		}(),
 	}
 }
 
 func (p LimitCounterDistributions) ToDict() map[string]interface{} {
-
-	var counter map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Counter != nil {
-		counter = p.Counter.ToDict()
+		m["counter"] = func() map[string]interface{} {
+			if p.Counter == nil {
+				return nil
+			}
+			return p.Counter.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"counter": counter,
-	}
+	return m
 }
 
 func (p LimitCounterDistributions) Pointer() *LimitCounterDistributions {
@@ -25245,43 +29132,72 @@ func NewLimitCounterFromJson(data string) LimitCounter {
 
 func NewLimitCounterFromDict(data map[string]interface{}) LimitCounter {
 	return LimitCounter{
-		CounterId:     core.CastString(data["counterId"]),
-		LimitName:     core.CastString(data["limitName"]),
-		CounterName:   core.CastString(data["counterName"]),
-		Statistics:    NewLimitCounterStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewLimitCounterDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		CounterId: func() *string {
+			v, ok := data["counterId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterId"])
+		}(),
+		LimitName: func() *string {
+			v, ok := data["limitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitName"])
+		}(),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Statistics: func() *LimitCounterStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitCounterStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *LimitCounterDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitCounterDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p LimitCounter) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var limitName *string
 	if p.LimitName != nil {
-		limitName = p.LimitName
+		m["limitName"] = p.LimitName
 	}
-	var counterName *string
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"counterId":     counterId,
-		"limitName":     limitName,
-		"counterName":   counterName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p LimitCounter) Pointer() *LimitCounter {
@@ -25349,25 +29265,32 @@ func NewLimitLimitModelStatisticsFromJson(data string) LimitLimitModelStatistics
 
 func NewLimitLimitModelStatisticsFromDict(data map[string]interface{}) LimitLimitModelStatistics {
 	return LimitLimitModelStatistics{
-		Increase:       core.CastInt64(data["increase"]),
-		IncreaseAmount: core.CastInt64(data["increaseAmount"]),
+		Increase: func() *int64 {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increase"])
+		}(),
+		IncreaseAmount: func() *int64 {
+			v, ok := data["increaseAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseAmount"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelStatistics) ToDict() map[string]interface{} {
-
-	var increase *int64
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase
+		m["increase"] = p.Increase
 	}
-	var increaseAmount *int64
 	if p.IncreaseAmount != nil {
-		increaseAmount = p.IncreaseAmount
+		m["increaseAmount"] = p.IncreaseAmount
 	}
-	return map[string]interface{}{
-		"increase":       increase,
-		"increaseAmount": increaseAmount,
-	}
+	return m
 }
 
 func (p LimitLimitModelStatistics) Pointer() *LimitLimitModelStatistics {
@@ -25451,49 +29374,72 @@ func NewLimitLimitModelIncreaseDistributionStatisticsFromJson(data string) Limit
 
 func NewLimitLimitModelIncreaseDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistributionStatistics {
 	return LimitLimitModelIncreaseDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseDistributionStatistics) Pointer() *LimitLimitModelIncreaseDistributionStatistics {
@@ -25581,25 +29527,32 @@ func NewLimitLimitModelIncreaseDistributionSegmentFromJson(data string) LimitLim
 
 func NewLimitLimitModelIncreaseDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistributionSegment {
 	return LimitLimitModelIncreaseDistributionSegment{
-		CounterName: core.CastString(data["counterName"]),
-		Count:       core.CastInt64(data["count"]),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseDistributionSegment) ToDict() map[string]interface{} {
-
-	var counterName *string
+	m := map[string]interface{}{}
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"counterName": counterName,
-		"count":       count,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseDistributionSegment) Pointer() *LimitLimitModelIncreaseDistributionSegment {
@@ -25667,27 +29620,38 @@ func NewLimitLimitModelIncreaseDistributionFromJson(data string) LimitLimitModel
 
 func NewLimitLimitModelIncreaseDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistribution {
 	return LimitLimitModelIncreaseDistribution{
-		Statistics:   NewLimitLimitModelIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitLimitModelIncreaseDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitLimitModelIncreaseDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitLimitModelIncreaseDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitLimitModelIncreaseDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitLimitModelIncreaseDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitLimitModelIncreaseDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseDistribution) Pointer() *LimitLimitModelIncreaseDistribution {
@@ -25771,49 +29735,72 @@ func NewLimitLimitModelIncreaseAmountDistributionStatisticsFromJson(data string)
 
 func NewLimitLimitModelIncreaseAmountDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistributionStatistics {
 	return LimitLimitModelIncreaseAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountDistributionStatistics) Pointer() *LimitLimitModelIncreaseAmountDistributionStatistics {
@@ -25901,25 +29888,32 @@ func NewLimitLimitModelIncreaseAmountDistributionSegmentFromJson(data string) Li
 
 func NewLimitLimitModelIncreaseAmountDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistributionSegment {
 	return LimitLimitModelIncreaseAmountDistributionSegment{
-		CounterName: core.CastString(data["counterName"]),
-		Sum:         core.CastInt64(data["sum"]),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var counterName *string
+	m := map[string]interface{}{}
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"counterName": counterName,
-		"sum":         sum,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountDistributionSegment) Pointer() *LimitLimitModelIncreaseAmountDistributionSegment {
@@ -25987,27 +29981,38 @@ func NewLimitLimitModelIncreaseAmountDistributionFromJson(data string) LimitLimi
 
 func NewLimitLimitModelIncreaseAmountDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistribution {
 	return LimitLimitModelIncreaseAmountDistribution{
-		Statistics:   NewLimitLimitModelIncreaseAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitLimitModelIncreaseAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitLimitModelIncreaseAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitLimitModelIncreaseAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitLimitModelIncreaseAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitLimitModelIncreaseAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitLimitModelIncreaseAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountDistribution) Pointer() *LimitLimitModelIncreaseAmountDistribution {
@@ -26091,49 +30096,72 @@ func NewLimitLimitModelIncreaseByUserDistributionStatisticsFromJson(data string)
 
 func NewLimitLimitModelIncreaseByUserDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistributionStatistics {
 	return LimitLimitModelIncreaseByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseByUserDistributionStatistics) Pointer() *LimitLimitModelIncreaseByUserDistributionStatistics {
@@ -26205,31 +30233,42 @@ func NewLimitLimitModelIncreaseByUserDistributionSegmentFromJson(data string) Li
 
 func NewLimitLimitModelIncreaseByUserDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistributionSegment {
 	return LimitLimitModelIncreaseByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseByUserDistributionSegment) Pointer() *LimitLimitModelIncreaseByUserDistributionSegment {
@@ -26297,27 +30336,38 @@ func NewLimitLimitModelIncreaseByUserDistributionFromJson(data string) LimitLimi
 
 func NewLimitLimitModelIncreaseByUserDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistribution {
 	return LimitLimitModelIncreaseByUserDistribution{
-		Statistics:   NewLimitLimitModelIncreaseByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitLimitModelIncreaseByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitLimitModelIncreaseByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitLimitModelIncreaseByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitLimitModelIncreaseByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitLimitModelIncreaseByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitLimitModelIncreaseByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseByUserDistribution) Pointer() *LimitLimitModelIncreaseByUserDistribution {
@@ -26401,49 +30451,72 @@ func NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromJson(data s
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistributionStatistics {
 	return LimitLimitModelIncreaseAmountByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistributionStatistics) Pointer() *LimitLimitModelIncreaseAmountByUserDistributionStatistics {
@@ -26515,31 +30588,42 @@ func NewLimitLimitModelIncreaseAmountByUserDistributionSegmentFromJson(data stri
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistributionSegment {
 	return LimitLimitModelIncreaseAmountByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistributionSegment) Pointer() *LimitLimitModelIncreaseAmountByUserDistributionSegment {
@@ -26607,27 +30691,38 @@ func NewLimitLimitModelIncreaseAmountByUserDistributionFromJson(data string) Lim
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistribution {
 	return LimitLimitModelIncreaseAmountByUserDistribution{
-		Statistics:   NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitLimitModelIncreaseAmountByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitLimitModelIncreaseAmountByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitLimitModelIncreaseAmountByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitLimitModelIncreaseAmountByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitLimitModelIncreaseAmountByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitLimitModelIncreaseAmountByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitLimitModelIncreaseAmountByUserDistribution) Pointer() *LimitLimitModelIncreaseAmountByUserDistribution {
@@ -26703,37 +30798,72 @@ func NewLimitLimitModelDistributionsFromJson(data string) LimitLimitModelDistrib
 
 func NewLimitLimitModelDistributionsFromDict(data map[string]interface{}) LimitLimitModelDistributions {
 	return LimitLimitModelDistributions{
-		Increase:             NewLimitLimitModelIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer(),
-		IncreaseAmount:       NewLimitLimitModelIncreaseAmountDistributionFromDict(core.CastMap(data["increaseAmount"])).Pointer(),
-		IncreaseByUser:       NewLimitLimitModelIncreaseByUserDistributionFromDict(core.CastMap(data["increaseByUser"])).Pointer(),
-		IncreaseAmountByUser: NewLimitLimitModelIncreaseAmountByUserDistributionFromDict(core.CastMap(data["increaseAmountByUser"])).Pointer(),
+		Increase: func() *LimitLimitModelIncreaseDistribution {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer()
+		}(),
+		IncreaseAmount: func() *LimitLimitModelIncreaseAmountDistribution {
+			v, ok := data["increaseAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseAmountDistributionFromDict(core.CastMap(data["increaseAmount"])).Pointer()
+		}(),
+		IncreaseByUser: func() *LimitLimitModelIncreaseByUserDistribution {
+			v, ok := data["increaseByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseByUserDistributionFromDict(core.CastMap(data["increaseByUser"])).Pointer()
+		}(),
+		IncreaseAmountByUser: func() *LimitLimitModelIncreaseAmountByUserDistribution {
+			v, ok := data["increaseAmountByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelIncreaseAmountByUserDistributionFromDict(core.CastMap(data["increaseAmountByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p LimitLimitModelDistributions) ToDict() map[string]interface{} {
-
-	var increase map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase.ToDict()
+		m["increase"] = func() map[string]interface{} {
+			if p.Increase == nil {
+				return nil
+			}
+			return p.Increase.ToDict()
+		}()
 	}
-	var increaseAmount map[string]interface{}
 	if p.IncreaseAmount != nil {
-		increaseAmount = p.IncreaseAmount.ToDict()
+		m["increaseAmount"] = func() map[string]interface{} {
+			if p.IncreaseAmount == nil {
+				return nil
+			}
+			return p.IncreaseAmount.ToDict()
+		}()
 	}
-	var increaseByUser map[string]interface{}
 	if p.IncreaseByUser != nil {
-		increaseByUser = p.IncreaseByUser.ToDict()
+		m["increaseByUser"] = func() map[string]interface{} {
+			if p.IncreaseByUser == nil {
+				return nil
+			}
+			return p.IncreaseByUser.ToDict()
+		}()
 	}
-	var increaseAmountByUser map[string]interface{}
 	if p.IncreaseAmountByUser != nil {
-		increaseAmountByUser = p.IncreaseAmountByUser.ToDict()
+		m["increaseAmountByUser"] = func() map[string]interface{} {
+			if p.IncreaseAmountByUser == nil {
+				return nil
+			}
+			return p.IncreaseAmountByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"increase":             increase,
-		"increaseAmount":       increaseAmount,
-		"increaseByUser":       increaseByUser,
-		"increaseAmountByUser": increaseAmountByUser,
-	}
+	return m
 }
 
 func (p LimitLimitModelDistributions) Pointer() *LimitLimitModelDistributions {
@@ -26853,45 +30983,73 @@ func NewLimitLimitModelFromJson(data string) LimitLimitModel {
 
 func NewLimitLimitModelFromDict(data map[string]interface{}) LimitLimitModel {
 	return LimitLimitModel{
-		LimitModelId:  core.CastString(data["limitModelId"]),
-		LimitName:     core.CastString(data["limitName"]),
-		Statistics:    NewLimitLimitModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewLimitLimitModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Counters:      CastLimitCounters(core.CastArray(data["counters"])),
+		LimitModelId: func() *string {
+			v, ok := data["limitModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitModelId"])
+		}(),
+		LimitName: func() *string {
+			v, ok := data["limitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitName"])
+		}(),
+		Statistics: func() *LimitLimitModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *LimitLimitModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitLimitModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Counters: func() []LimitCounter {
+			if data["counters"] == nil {
+				return nil
+			}
+			return CastLimitCounters(core.CastArray(data["counters"]))
+		}(),
 	}
 }
 
 func (p LimitLimitModel) ToDict() map[string]interface{} {
-
-	var limitModelId *string
+	m := map[string]interface{}{}
 	if p.LimitModelId != nil {
-		limitModelId = p.LimitModelId
+		m["limitModelId"] = p.LimitModelId
 	}
-	var limitName *string
 	if p.LimitName != nil {
-		limitName = p.LimitName
+		m["limitName"] = p.LimitName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var counters []interface{}
 	if p.Counters != nil {
-		counters = CastLimitCountersFromDict(
+		m["counters"] = CastLimitCountersFromDict(
 			p.Counters,
 		)
 	}
-	return map[string]interface{}{
-		"limitModelId":  limitModelId,
-		"limitName":     limitName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"counters":      counters,
-	}
+	return m
 }
 
 func (p LimitLimitModel) Pointer() *LimitLimitModel {
@@ -26955,19 +31113,22 @@ func NewLimitNamespaceStatisticsFromJson(data string) LimitNamespaceStatistics {
 
 func NewLimitNamespaceStatisticsFromDict(data map[string]interface{}) LimitNamespaceStatistics {
 	return LimitNamespaceStatistics{
-		Increase: core.CastInt64(data["increase"]),
+		Increase: func() *int64 {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increase"])
+		}(),
 	}
 }
 
 func (p LimitNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var increase *int64
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase
+		m["increase"] = p.Increase
 	}
-	return map[string]interface{}{
-		"increase": increase,
-	}
+	return m
 }
 
 func (p LimitNamespaceStatistics) Pointer() *LimitNamespaceStatistics {
@@ -27051,49 +31212,72 @@ func NewLimitNamespaceIncreaseDistributionStatisticsFromJson(data string) LimitN
 
 func NewLimitNamespaceIncreaseDistributionStatisticsFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistributionStatistics {
 	return LimitNamespaceIncreaseDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LimitNamespaceIncreaseDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LimitNamespaceIncreaseDistributionStatistics) Pointer() *LimitNamespaceIncreaseDistributionStatistics {
@@ -27181,25 +31365,32 @@ func NewLimitNamespaceIncreaseDistributionSegmentFromJson(data string) LimitName
 
 func NewLimitNamespaceIncreaseDistributionSegmentFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistributionSegment {
 	return LimitNamespaceIncreaseDistributionSegment{
-		LimitName: core.CastString(data["limitName"]),
-		Count:     core.CastInt64(data["count"]),
+		LimitName: func() *string {
+			v, ok := data["limitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["limitName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LimitNamespaceIncreaseDistributionSegment) ToDict() map[string]interface{} {
-
-	var limitName *string
+	m := map[string]interface{}{}
 	if p.LimitName != nil {
-		limitName = p.LimitName
+		m["limitName"] = p.LimitName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"limitName": limitName,
-		"count":     count,
-	}
+	return m
 }
 
 func (p LimitNamespaceIncreaseDistributionSegment) Pointer() *LimitNamespaceIncreaseDistributionSegment {
@@ -27267,27 +31458,38 @@ func NewLimitNamespaceIncreaseDistributionFromJson(data string) LimitNamespaceIn
 
 func NewLimitNamespaceIncreaseDistributionFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistribution {
 	return LimitNamespaceIncreaseDistribution{
-		Statistics:   NewLimitNamespaceIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLimitNamespaceIncreaseDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LimitNamespaceIncreaseDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitNamespaceIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LimitNamespaceIncreaseDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLimitNamespaceIncreaseDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LimitNamespaceIncreaseDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLimitNamespaceIncreaseDistributionSegmentsFromDict(
+		m["distribution"] = CastLimitNamespaceIncreaseDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LimitNamespaceIncreaseDistribution) Pointer() *LimitNamespaceIncreaseDistribution {
@@ -27351,19 +31553,27 @@ func NewLimitNamespaceDistributionsFromJson(data string) LimitNamespaceDistribut
 
 func NewLimitNamespaceDistributionsFromDict(data map[string]interface{}) LimitNamespaceDistributions {
 	return LimitNamespaceDistributions{
-		Increase: NewLimitNamespaceIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer(),
+		Increase: func() *LimitNamespaceIncreaseDistribution {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitNamespaceIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer()
+		}(),
 	}
 }
 
 func (p LimitNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var increase map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase.ToDict()
+		m["increase"] = func() map[string]interface{} {
+			if p.Increase == nil {
+				return nil
+			}
+			return p.Increase.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"increase": increase,
-	}
+	return m
 }
 
 func (p LimitNamespaceDistributions) Pointer() *LimitNamespaceDistributions {
@@ -27495,63 +31705,103 @@ func NewLimitNamespaceFromJson(data string) LimitNamespace {
 
 func NewLimitNamespaceFromDict(data map[string]interface{}) LimitNamespace {
 	return LimitNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewLimitNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewLimitNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		LimitModels:   CastLimitLimitModels(core.CastArray(data["limitModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *LimitNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *LimitNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLimitNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		LimitModels: func() []LimitLimitModel {
+			if data["limitModels"] == nil {
+				return nil
+			}
+			return CastLimitLimitModels(core.CastArray(data["limitModels"]))
+		}(),
 	}
 }
 
 func (p LimitNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var limitModels []interface{}
 	if p.LimitModels != nil {
-		limitModels = CastLimitLimitModelsFromDict(
+		m["limitModels"] = CastLimitLimitModelsFromDict(
 			p.LimitModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"limitModels":   limitModels,
-	}
+	return m
 }
 
 func (p LimitNamespace) Pointer() *LimitNamespace {
@@ -27619,25 +31869,32 @@ func NewLotteryLotteryStatisticsFromJson(data string) LotteryLotteryStatistics {
 
 func NewLotteryLotteryStatisticsFromDict(data map[string]interface{}) LotteryLotteryStatistics {
 	return LotteryLotteryStatistics{
-		Draw:       core.CastInt64(data["draw"]),
-		DrawAmount: core.CastInt64(data["drawAmount"]),
+		Draw: func() *int64 {
+			v, ok := data["draw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["draw"])
+		}(),
+		DrawAmount: func() *int64 {
+			v, ok := data["drawAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["drawAmount"])
+		}(),
 	}
 }
 
 func (p LotteryLotteryStatistics) ToDict() map[string]interface{} {
-
-	var draw *int64
+	m := map[string]interface{}{}
 	if p.Draw != nil {
-		draw = p.Draw
+		m["draw"] = p.Draw
 	}
-	var drawAmount *int64
 	if p.DrawAmount != nil {
-		drawAmount = p.DrawAmount
+		m["drawAmount"] = p.DrawAmount
 	}
-	return map[string]interface{}{
-		"draw":       draw,
-		"drawAmount": drawAmount,
-	}
+	return m
 }
 
 func (p LotteryLotteryStatistics) Pointer() *LotteryLotteryStatistics {
@@ -27721,49 +31978,72 @@ func NewLotteryLotteryDrawResultDistributionStatisticsFromJson(data string) Lott
 
 func NewLotteryLotteryDrawResultDistributionStatisticsFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistributionStatistics {
 	return LotteryLotteryDrawResultDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LotteryLotteryDrawResultDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LotteryLotteryDrawResultDistributionStatistics) Pointer() *LotteryLotteryDrawResultDistributionStatistics {
@@ -27851,25 +32131,32 @@ func NewLotteryLotteryDrawResultDistributionSegmentFromJson(data string) Lottery
 
 func NewLotteryLotteryDrawResultDistributionSegmentFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistributionSegment {
 	return LotteryLotteryDrawResultDistributionSegment{
-		PrizeId: core.CastString(data["prizeId"]),
-		Count:   core.CastInt64(data["count"]),
+		PrizeId: func() *string {
+			v, ok := data["prizeId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["prizeId"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LotteryLotteryDrawResultDistributionSegment) ToDict() map[string]interface{} {
-
-	var prizeId *string
+	m := map[string]interface{}{}
 	if p.PrizeId != nil {
-		prizeId = p.PrizeId
+		m["prizeId"] = p.PrizeId
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"prizeId": prizeId,
-		"count":   count,
-	}
+	return m
 }
 
 func (p LotteryLotteryDrawResultDistributionSegment) Pointer() *LotteryLotteryDrawResultDistributionSegment {
@@ -27937,27 +32224,38 @@ func NewLotteryLotteryDrawResultDistributionFromJson(data string) LotteryLottery
 
 func NewLotteryLotteryDrawResultDistributionFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistribution {
 	return LotteryLotteryDrawResultDistribution{
-		Statistics:   NewLotteryLotteryDrawResultDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLotteryLotteryDrawResultDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LotteryLotteryDrawResultDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryLotteryDrawResultDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LotteryLotteryDrawResultDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLotteryLotteryDrawResultDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LotteryLotteryDrawResultDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLotteryLotteryDrawResultDistributionSegmentsFromDict(
+		m["distribution"] = CastLotteryLotteryDrawResultDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LotteryLotteryDrawResultDistribution) Pointer() *LotteryLotteryDrawResultDistribution {
@@ -28021,19 +32319,27 @@ func NewLotteryLotteryDistributionsFromJson(data string) LotteryLotteryDistribut
 
 func NewLotteryLotteryDistributionsFromDict(data map[string]interface{}) LotteryLotteryDistributions {
 	return LotteryLotteryDistributions{
-		DrawResult: NewLotteryLotteryDrawResultDistributionFromDict(core.CastMap(data["drawResult"])).Pointer(),
+		DrawResult: func() *LotteryLotteryDrawResultDistribution {
+			v, ok := data["drawResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryLotteryDrawResultDistributionFromDict(core.CastMap(data["drawResult"])).Pointer()
+		}(),
 	}
 }
 
 func (p LotteryLotteryDistributions) ToDict() map[string]interface{} {
-
-	var drawResult map[string]interface{}
+	m := map[string]interface{}{}
 	if p.DrawResult != nil {
-		drawResult = p.DrawResult.ToDict()
+		m["drawResult"] = func() map[string]interface{} {
+			if p.DrawResult == nil {
+				return nil
+			}
+			return p.DrawResult.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"drawResult": drawResult,
-	}
+	return m
 }
 
 func (p LotteryLotteryDistributions) Pointer() *LotteryLotteryDistributions {
@@ -28149,37 +32455,62 @@ func NewLotteryLotteryFromJson(data string) LotteryLottery {
 
 func NewLotteryLotteryFromDict(data map[string]interface{}) LotteryLottery {
 	return LotteryLottery{
-		LotteryId:     core.CastString(data["lotteryId"]),
-		LotteryName:   core.CastString(data["lotteryName"]),
-		Statistics:    NewLotteryLotteryStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewLotteryLotteryDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		LotteryId: func() *string {
+			v, ok := data["lotteryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryId"])
+		}(),
+		LotteryName: func() *string {
+			v, ok := data["lotteryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryName"])
+		}(),
+		Statistics: func() *LotteryLotteryStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryLotteryStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *LotteryLotteryDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryLotteryDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p LotteryLottery) ToDict() map[string]interface{} {
-
-	var lotteryId *string
+	m := map[string]interface{}{}
 	if p.LotteryId != nil {
-		lotteryId = p.LotteryId
+		m["lotteryId"] = p.LotteryId
 	}
-	var lotteryName *string
 	if p.LotteryName != nil {
-		lotteryName = p.LotteryName
+		m["lotteryName"] = p.LotteryName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"lotteryId":     lotteryId,
-		"lotteryName":   lotteryName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p LotteryLottery) Pointer() *LotteryLottery {
@@ -28247,25 +32578,32 @@ func NewLotteryNamespaceStatisticsFromJson(data string) LotteryNamespaceStatisti
 
 func NewLotteryNamespaceStatisticsFromDict(data map[string]interface{}) LotteryNamespaceStatistics {
 	return LotteryNamespaceStatistics{
-		Draw:       core.CastInt64(data["draw"]),
-		DrawAmount: core.CastInt64(data["drawAmount"]),
+		Draw: func() *int64 {
+			v, ok := data["draw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["draw"])
+		}(),
+		DrawAmount: func() *int64 {
+			v, ok := data["drawAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["drawAmount"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var draw *int64
+	m := map[string]interface{}{}
 	if p.Draw != nil {
-		draw = p.Draw
+		m["draw"] = p.Draw
 	}
-	var drawAmount *int64
 	if p.DrawAmount != nil {
-		drawAmount = p.DrawAmount
+		m["drawAmount"] = p.DrawAmount
 	}
-	return map[string]interface{}{
-		"draw":       draw,
-		"drawAmount": drawAmount,
-	}
+	return m
 }
 
 func (p LotteryNamespaceStatistics) Pointer() *LotteryNamespaceStatistics {
@@ -28349,49 +32687,72 @@ func NewLotteryNamespaceDrawDistributionStatisticsFromJson(data string) LotteryN
 
 func NewLotteryNamespaceDrawDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawDistributionStatistics {
 	return LotteryNamespaceDrawDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawDistributionStatistics) Pointer() *LotteryNamespaceDrawDistributionStatistics {
@@ -28479,25 +32840,32 @@ func NewLotteryNamespaceDrawDistributionSegmentFromJson(data string) LotteryName
 
 func NewLotteryNamespaceDrawDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawDistributionSegment {
 	return LotteryNamespaceDrawDistributionSegment{
-		LotteryName: core.CastString(data["lotteryName"]),
-		Count:       core.CastInt64(data["count"]),
+		LotteryName: func() *string {
+			v, ok := data["lotteryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawDistributionSegment) ToDict() map[string]interface{} {
-
-	var lotteryName *string
+	m := map[string]interface{}{}
 	if p.LotteryName != nil {
-		lotteryName = p.LotteryName
+		m["lotteryName"] = p.LotteryName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"lotteryName": lotteryName,
-		"count":       count,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawDistributionSegment) Pointer() *LotteryNamespaceDrawDistributionSegment {
@@ -28565,27 +32933,38 @@ func NewLotteryNamespaceDrawDistributionFromJson(data string) LotteryNamespaceDr
 
 func NewLotteryNamespaceDrawDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawDistribution {
 	return LotteryNamespaceDrawDistribution{
-		Statistics:   NewLotteryNamespaceDrawDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLotteryNamespaceDrawDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LotteryNamespaceDrawDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LotteryNamespaceDrawDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLotteryNamespaceDrawDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLotteryNamespaceDrawDistributionSegmentsFromDict(
+		m["distribution"] = CastLotteryNamespaceDrawDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawDistribution) Pointer() *LotteryNamespaceDrawDistribution {
@@ -28669,49 +33048,72 @@ func NewLotteryNamespaceDrawAmountDistributionStatisticsFromJson(data string) Lo
 
 func NewLotteryNamespaceDrawAmountDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistributionStatistics {
 	return LotteryNamespaceDrawAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountDistributionStatistics) Pointer() *LotteryNamespaceDrawAmountDistributionStatistics {
@@ -28799,25 +33201,32 @@ func NewLotteryNamespaceDrawAmountDistributionSegmentFromJson(data string) Lotte
 
 func NewLotteryNamespaceDrawAmountDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistributionSegment {
 	return LotteryNamespaceDrawAmountDistributionSegment{
-		LotteryName: core.CastString(data["lotteryName"]),
-		Sum:         core.CastInt64(data["sum"]),
+		LotteryName: func() *string {
+			v, ok := data["lotteryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var lotteryName *string
+	m := map[string]interface{}{}
 	if p.LotteryName != nil {
-		lotteryName = p.LotteryName
+		m["lotteryName"] = p.LotteryName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"lotteryName": lotteryName,
-		"sum":         sum,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountDistributionSegment) Pointer() *LotteryNamespaceDrawAmountDistributionSegment {
@@ -28885,27 +33294,38 @@ func NewLotteryNamespaceDrawAmountDistributionFromJson(data string) LotteryNames
 
 func NewLotteryNamespaceDrawAmountDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistribution {
 	return LotteryNamespaceDrawAmountDistribution{
-		Statistics:   NewLotteryNamespaceDrawAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLotteryNamespaceDrawAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LotteryNamespaceDrawAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LotteryNamespaceDrawAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLotteryNamespaceDrawAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLotteryNamespaceDrawAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastLotteryNamespaceDrawAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountDistribution) Pointer() *LotteryNamespaceDrawAmountDistribution {
@@ -28989,49 +33409,72 @@ func NewLotteryNamespaceDrawByUserDistributionStatisticsFromJson(data string) Lo
 
 func NewLotteryNamespaceDrawByUserDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistributionStatistics {
 	return LotteryNamespaceDrawByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawByUserDistributionStatistics) Pointer() *LotteryNamespaceDrawByUserDistributionStatistics {
@@ -29103,31 +33546,42 @@ func NewLotteryNamespaceDrawByUserDistributionSegmentFromJson(data string) Lotte
 
 func NewLotteryNamespaceDrawByUserDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistributionSegment {
 	return LotteryNamespaceDrawByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawByUserDistributionSegment) Pointer() *LotteryNamespaceDrawByUserDistributionSegment {
@@ -29195,27 +33649,38 @@ func NewLotteryNamespaceDrawByUserDistributionFromJson(data string) LotteryNames
 
 func NewLotteryNamespaceDrawByUserDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistribution {
 	return LotteryNamespaceDrawByUserDistribution{
-		Statistics:   NewLotteryNamespaceDrawByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLotteryNamespaceDrawByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LotteryNamespaceDrawByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LotteryNamespaceDrawByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLotteryNamespaceDrawByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLotteryNamespaceDrawByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastLotteryNamespaceDrawByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawByUserDistribution) Pointer() *LotteryNamespaceDrawByUserDistribution {
@@ -29299,49 +33764,72 @@ func NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromJson(data stri
 
 func NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistributionStatistics {
 	return LotteryNamespaceDrawAmountByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistributionStatistics) Pointer() *LotteryNamespaceDrawAmountByUserDistributionStatistics {
@@ -29413,31 +33901,42 @@ func NewLotteryNamespaceDrawAmountByUserDistributionSegmentFromJson(data string)
 
 func NewLotteryNamespaceDrawAmountByUserDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistributionSegment {
 	return LotteryNamespaceDrawAmountByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistributionSegment) Pointer() *LotteryNamespaceDrawAmountByUserDistributionSegment {
@@ -29505,27 +34004,38 @@ func NewLotteryNamespaceDrawAmountByUserDistributionFromJson(data string) Lotter
 
 func NewLotteryNamespaceDrawAmountByUserDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistribution {
 	return LotteryNamespaceDrawAmountByUserDistribution{
-		Statistics:   NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastLotteryNamespaceDrawAmountByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *LotteryNamespaceDrawAmountByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []LotteryNamespaceDrawAmountByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastLotteryNamespaceDrawAmountByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastLotteryNamespaceDrawAmountByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastLotteryNamespaceDrawAmountByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDrawAmountByUserDistribution) Pointer() *LotteryNamespaceDrawAmountByUserDistribution {
@@ -29601,37 +34111,72 @@ func NewLotteryNamespaceDistributionsFromJson(data string) LotteryNamespaceDistr
 
 func NewLotteryNamespaceDistributionsFromDict(data map[string]interface{}) LotteryNamespaceDistributions {
 	return LotteryNamespaceDistributions{
-		Draw:             NewLotteryNamespaceDrawDistributionFromDict(core.CastMap(data["draw"])).Pointer(),
-		DrawAmount:       NewLotteryNamespaceDrawAmountDistributionFromDict(core.CastMap(data["drawAmount"])).Pointer(),
-		DrawByUser:       NewLotteryNamespaceDrawByUserDistributionFromDict(core.CastMap(data["drawByUser"])).Pointer(),
-		DrawAmountByUser: NewLotteryNamespaceDrawAmountByUserDistributionFromDict(core.CastMap(data["drawAmountByUser"])).Pointer(),
+		Draw: func() *LotteryNamespaceDrawDistribution {
+			v, ok := data["draw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawDistributionFromDict(core.CastMap(data["draw"])).Pointer()
+		}(),
+		DrawAmount: func() *LotteryNamespaceDrawAmountDistribution {
+			v, ok := data["drawAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawAmountDistributionFromDict(core.CastMap(data["drawAmount"])).Pointer()
+		}(),
+		DrawByUser: func() *LotteryNamespaceDrawByUserDistribution {
+			v, ok := data["drawByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawByUserDistributionFromDict(core.CastMap(data["drawByUser"])).Pointer()
+		}(),
+		DrawAmountByUser: func() *LotteryNamespaceDrawAmountByUserDistribution {
+			v, ok := data["drawAmountByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDrawAmountByUserDistributionFromDict(core.CastMap(data["drawAmountByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p LotteryNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var draw map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Draw != nil {
-		draw = p.Draw.ToDict()
+		m["draw"] = func() map[string]interface{} {
+			if p.Draw == nil {
+				return nil
+			}
+			return p.Draw.ToDict()
+		}()
 	}
-	var drawAmount map[string]interface{}
 	if p.DrawAmount != nil {
-		drawAmount = p.DrawAmount.ToDict()
+		m["drawAmount"] = func() map[string]interface{} {
+			if p.DrawAmount == nil {
+				return nil
+			}
+			return p.DrawAmount.ToDict()
+		}()
 	}
-	var drawByUser map[string]interface{}
 	if p.DrawByUser != nil {
-		drawByUser = p.DrawByUser.ToDict()
+		m["drawByUser"] = func() map[string]interface{} {
+			if p.DrawByUser == nil {
+				return nil
+			}
+			return p.DrawByUser.ToDict()
+		}()
 	}
-	var drawAmountByUser map[string]interface{}
 	if p.DrawAmountByUser != nil {
-		drawAmountByUser = p.DrawAmountByUser.ToDict()
+		m["drawAmountByUser"] = func() map[string]interface{} {
+			if p.DrawAmountByUser == nil {
+				return nil
+			}
+			return p.DrawAmountByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"draw":             draw,
-		"drawAmount":       drawAmount,
-		"drawByUser":       drawByUser,
-		"drawAmountByUser": drawAmountByUser,
-	}
+	return m
 }
 
 func (p LotteryNamespaceDistributions) Pointer() *LotteryNamespaceDistributions {
@@ -29763,63 +34308,103 @@ func NewLotteryNamespaceFromJson(data string) LotteryNamespace {
 
 func NewLotteryNamespaceFromDict(data map[string]interface{}) LotteryNamespace {
 	return LotteryNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewLotteryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewLotteryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Lotteries:     CastLotteryLotteries(core.CastArray(data["lotteries"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *LotteryNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *LotteryNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLotteryNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Lotteries: func() []LotteryLottery {
+			if data["lotteries"] == nil {
+				return nil
+			}
+			return CastLotteryLotteries(core.CastArray(data["lotteries"]))
+		}(),
 	}
 }
 
 func (p LotteryNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var lotteries []interface{}
 	if p.Lotteries != nil {
-		lotteries = CastLotteryLotteriesFromDict(
+		m["lotteries"] = CastLotteryLotteriesFromDict(
 			p.Lotteries,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"lotteries":     lotteries,
-	}
+	return m
 }
 
 func (p LotteryNamespace) Pointer() *LotteryNamespace {
@@ -29927,25 +34512,32 @@ func NewLotteryLotteryModelFromJson(data string) LotteryLotteryModel {
 
 func NewLotteryLotteryModelFromDict(data map[string]interface{}) LotteryLotteryModel {
 	return LotteryLotteryModel{
-		LotteryModelId: core.CastString(data["lotteryModelId"]),
-		LotteryName:    core.CastString(data["lotteryName"]),
+		LotteryModelId: func() *string {
+			v, ok := data["lotteryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryModelId"])
+		}(),
+		LotteryName: func() *string {
+			v, ok := data["lotteryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lotteryName"])
+		}(),
 	}
 }
 
 func (p LotteryLotteryModel) ToDict() map[string]interface{} {
-
-	var lotteryModelId *string
+	m := map[string]interface{}{}
 	if p.LotteryModelId != nil {
-		lotteryModelId = p.LotteryModelId
+		m["lotteryModelId"] = p.LotteryModelId
 	}
-	var lotteryName *string
 	if p.LotteryName != nil {
-		lotteryName = p.LotteryName
+		m["lotteryName"] = p.LotteryName
 	}
-	return map[string]interface{}{
-		"lotteryModelId": lotteryModelId,
-		"lotteryName":    lotteryName,
-	}
+	return m
 }
 
 func (p LotteryLotteryModel) Pointer() *LotteryLotteryModel {
@@ -30017,31 +34609,42 @@ func NewMatchmakingNamespaceStatisticsFromJson(data string) MatchmakingNamespace
 
 func NewMatchmakingNamespaceStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceStatistics {
 	return MatchmakingNamespaceStatistics{
-		CreateGathering: core.CastInt64(data["createGathering"]),
-		Matchmaking:     core.CastInt64(data["matchmaking"]),
-		CompleteRate:    core.CastFloat32(data["completeRate"]),
+		CreateGathering: func() *int64 {
+			v, ok := data["createGathering"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createGathering"])
+		}(),
+		Matchmaking: func() *int64 {
+			v, ok := data["matchmaking"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["matchmaking"])
+		}(),
+		CompleteRate: func() *float32 {
+			v, ok := data["completeRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["completeRate"])
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var createGathering *int64
+	m := map[string]interface{}{}
 	if p.CreateGathering != nil {
-		createGathering = p.CreateGathering
+		m["createGathering"] = p.CreateGathering
 	}
-	var matchmaking *int64
 	if p.Matchmaking != nil {
-		matchmaking = p.Matchmaking
+		m["matchmaking"] = p.Matchmaking
 	}
-	var completeRate *float32
 	if p.CompleteRate != nil {
-		completeRate = p.CompleteRate
+		m["completeRate"] = p.CompleteRate
 	}
-	return map[string]interface{}{
-		"createGathering": createGathering,
-		"matchmaking":     matchmaking,
-		"completeRate":    completeRate,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceStatistics) Pointer() *MatchmakingNamespaceStatistics {
@@ -30125,49 +34728,72 @@ func NewMatchmakingNamespaceResultDistributionStatisticsFromJson(data string) Ma
 
 func NewMatchmakingNamespaceResultDistributionStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistributionStatistics {
 	return MatchmakingNamespaceResultDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceResultDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceResultDistributionStatistics) Pointer() *MatchmakingNamespaceResultDistributionStatistics {
@@ -30255,25 +34881,32 @@ func NewMatchmakingNamespaceResultDistributionSegmentFromJson(data string) Match
 
 func NewMatchmakingNamespaceResultDistributionSegmentFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistributionSegment {
 	return MatchmakingNamespaceResultDistributionSegment{
-		Result: core.CastString(data["result"]),
-		Count:  core.CastInt64(data["count"]),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceResultDistributionSegment) ToDict() map[string]interface{} {
-
-	var result *string
+	m := map[string]interface{}{}
 	if p.Result != nil {
-		result = p.Result
+		m["result"] = p.Result
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"result": result,
-		"count":  count,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceResultDistributionSegment) Pointer() *MatchmakingNamespaceResultDistributionSegment {
@@ -30341,27 +34974,38 @@ func NewMatchmakingNamespaceResultDistributionFromJson(data string) MatchmakingN
 
 func NewMatchmakingNamespaceResultDistributionFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistribution {
 	return MatchmakingNamespaceResultDistribution{
-		Statistics:   NewMatchmakingNamespaceResultDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMatchmakingNamespaceResultDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MatchmakingNamespaceResultDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceResultDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MatchmakingNamespaceResultDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMatchmakingNamespaceResultDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceResultDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMatchmakingNamespaceResultDistributionSegmentsFromDict(
+		m["distribution"] = CastMatchmakingNamespaceResultDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceResultDistribution) Pointer() *MatchmakingNamespaceResultDistribution {
@@ -30445,49 +35089,72 @@ func NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromJson(dat
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics {
 	return MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics) Pointer() *MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics {
@@ -30559,31 +35226,42 @@ func NewMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentFromJson(data s
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistributionSegment {
 	return MatchmakingNamespaceWaitElapsedSecondsDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistributionSegment) Pointer() *MatchmakingNamespaceWaitElapsedSecondsDistributionSegment {
@@ -30651,27 +35329,38 @@ func NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromJson(data string) 
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistribution {
 	return MatchmakingNamespaceWaitElapsedSecondsDistribution{
-		Statistics:   NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMatchmakingNamespaceWaitElapsedSecondsDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MatchmakingNamespaceWaitElapsedSecondsDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMatchmakingNamespaceWaitElapsedSecondsDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentsFromDict(
+		m["distribution"] = CastMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceWaitElapsedSecondsDistribution) Pointer() *MatchmakingNamespaceWaitElapsedSecondsDistribution {
@@ -30739,25 +35428,42 @@ func NewMatchmakingNamespaceDistributionsFromJson(data string) MatchmakingNamesp
 
 func NewMatchmakingNamespaceDistributionsFromDict(data map[string]interface{}) MatchmakingNamespaceDistributions {
 	return MatchmakingNamespaceDistributions{
-		Result:             NewMatchmakingNamespaceResultDistributionFromDict(core.CastMap(data["result"])).Pointer(),
-		WaitElapsedSeconds: NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromDict(core.CastMap(data["waitElapsedSeconds"])).Pointer(),
+		Result: func() *MatchmakingNamespaceResultDistribution {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceResultDistributionFromDict(core.CastMap(data["result"])).Pointer()
+		}(),
+		WaitElapsedSeconds: func() *MatchmakingNamespaceWaitElapsedSecondsDistribution {
+			v, ok := data["waitElapsedSeconds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromDict(core.CastMap(data["waitElapsedSeconds"])).Pointer()
+		}(),
 	}
 }
 
 func (p MatchmakingNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var result map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Result != nil {
-		result = p.Result.ToDict()
+		m["result"] = func() map[string]interface{} {
+			if p.Result == nil {
+				return nil
+			}
+			return p.Result.ToDict()
+		}()
 	}
-	var waitElapsedSeconds map[string]interface{}
 	if p.WaitElapsedSeconds != nil {
-		waitElapsedSeconds = p.WaitElapsedSeconds.ToDict()
+		m["waitElapsedSeconds"] = func() map[string]interface{} {
+			if p.WaitElapsedSeconds == nil {
+				return nil
+			}
+			return p.WaitElapsedSeconds.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"result":             result,
-		"waitElapsedSeconds": waitElapsedSeconds,
-	}
+	return m
 }
 
 func (p MatchmakingNamespaceDistributions) Pointer() *MatchmakingNamespaceDistributions {
@@ -30885,55 +35591,92 @@ func NewMatchmakingNamespaceFromJson(data string) MatchmakingNamespace {
 
 func NewMatchmakingNamespaceFromDict(data map[string]interface{}) MatchmakingNamespace {
 	return MatchmakingNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewMatchmakingNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewMatchmakingNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *MatchmakingNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MatchmakingNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMatchmakingNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p MatchmakingNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p MatchmakingNamespace) Pointer() *MatchmakingNamespace {
@@ -31017,49 +35760,72 @@ func NewMissionCounterCounterDistributionStatisticsFromJson(data string) Mission
 
 func NewMissionCounterCounterDistributionStatisticsFromDict(data map[string]interface{}) MissionCounterCounterDistributionStatistics {
 	return MissionCounterCounterDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MissionCounterCounterDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MissionCounterCounterDistributionStatistics) Pointer() *MissionCounterCounterDistributionStatistics {
@@ -31131,31 +35897,42 @@ func NewMissionCounterCounterDistributionSegmentFromJson(data string) MissionCou
 
 func NewMissionCounterCounterDistributionSegmentFromDict(data map[string]interface{}) MissionCounterCounterDistributionSegment {
 	return MissionCounterCounterDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MissionCounterCounterDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p MissionCounterCounterDistributionSegment) Pointer() *MissionCounterCounterDistributionSegment {
@@ -31223,27 +36000,38 @@ func NewMissionCounterCounterDistributionFromJson(data string) MissionCounterCou
 
 func NewMissionCounterCounterDistributionFromDict(data map[string]interface{}) MissionCounterCounterDistribution {
 	return MissionCounterCounterDistribution{
-		Statistics:   NewMissionCounterCounterDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMissionCounterCounterDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MissionCounterCounterDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionCounterCounterDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MissionCounterCounterDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMissionCounterCounterDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MissionCounterCounterDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMissionCounterCounterDistributionSegmentsFromDict(
+		m["distribution"] = CastMissionCounterCounterDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MissionCounterCounterDistribution) Pointer() *MissionCounterCounterDistribution {
@@ -31307,19 +36095,27 @@ func NewMissionCounterDistributionsFromJson(data string) MissionCounterDistribut
 
 func NewMissionCounterDistributionsFromDict(data map[string]interface{}) MissionCounterDistributions {
 	return MissionCounterDistributions{
-		Counter: NewMissionCounterCounterDistributionFromDict(core.CastMap(data["counter"])).Pointer(),
+		Counter: func() *MissionCounterCounterDistribution {
+			v, ok := data["counter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionCounterCounterDistributionFromDict(core.CastMap(data["counter"])).Pointer()
+		}(),
 	}
 }
 
 func (p MissionCounterDistributions) ToDict() map[string]interface{} {
-
-	var counter map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Counter != nil {
-		counter = p.Counter.ToDict()
+		m["counter"] = func() map[string]interface{} {
+			if p.Counter == nil {
+				return nil
+			}
+			return p.Counter.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"counter": counter,
-	}
+	return m
 }
 
 func (p MissionCounterDistributions) Pointer() *MissionCounterDistributions {
@@ -31431,31 +36227,47 @@ func NewMissionCounterFromJson(data string) MissionCounter {
 
 func NewMissionCounterFromDict(data map[string]interface{}) MissionCounter {
 	return MissionCounter{
-		CounterId:     core.CastString(data["counterId"]),
-		CounterName:   core.CastString(data["counterName"]),
-		Distributions: NewMissionCounterDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		CounterId: func() *string {
+			v, ok := data["counterId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterId"])
+		}(),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Distributions: func() *MissionCounterDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionCounterDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p MissionCounter) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var counterName *string
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"counterId":     counterId,
-		"counterName":   counterName,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p MissionCounter) Pointer() *MissionCounter {
@@ -31519,19 +36331,22 @@ func NewMissionMissionGroupModelStatisticsFromJson(data string) MissionMissionGr
 
 func NewMissionMissionGroupModelStatisticsFromDict(data map[string]interface{}) MissionMissionGroupModelStatistics {
 	return MissionMissionGroupModelStatistics{
-		Receive: core.CastInt64(data["receive"]),
+		Receive: func() *int64 {
+			v, ok := data["receive"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["receive"])
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModelStatistics) ToDict() map[string]interface{} {
-
-	var receive *int64
+	m := map[string]interface{}{}
 	if p.Receive != nil {
-		receive = p.Receive
+		m["receive"] = p.Receive
 	}
-	return map[string]interface{}{
-		"receive": receive,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModelStatistics) Pointer() *MissionMissionGroupModelStatistics {
@@ -31615,49 +36430,72 @@ func NewMissionMissionGroupModelReceiveDistributionStatisticsFromJson(data strin
 
 func NewMissionMissionGroupModelReceiveDistributionStatisticsFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistributionStatistics {
 	return MissionMissionGroupModelReceiveDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModelReceiveDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModelReceiveDistributionStatistics) Pointer() *MissionMissionGroupModelReceiveDistributionStatistics {
@@ -31745,25 +36583,32 @@ func NewMissionMissionGroupModelReceiveDistributionSegmentFromJson(data string) 
 
 func NewMissionMissionGroupModelReceiveDistributionSegmentFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistributionSegment {
 	return MissionMissionGroupModelReceiveDistributionSegment{
-		MissionTaskName: core.CastString(data["missionTaskName"]),
-		Count:           core.CastInt64(data["count"]),
+		MissionTaskName: func() *string {
+			v, ok := data["missionTaskName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionTaskName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModelReceiveDistributionSegment) ToDict() map[string]interface{} {
-
-	var missionTaskName *string
+	m := map[string]interface{}{}
 	if p.MissionTaskName != nil {
-		missionTaskName = p.MissionTaskName
+		m["missionTaskName"] = p.MissionTaskName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"missionTaskName": missionTaskName,
-		"count":           count,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModelReceiveDistributionSegment) Pointer() *MissionMissionGroupModelReceiveDistributionSegment {
@@ -31831,27 +36676,38 @@ func NewMissionMissionGroupModelReceiveDistributionFromJson(data string) Mission
 
 func NewMissionMissionGroupModelReceiveDistributionFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistribution {
 	return MissionMissionGroupModelReceiveDistribution{
-		Statistics:   NewMissionMissionGroupModelReceiveDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMissionMissionGroupModelReceiveDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MissionMissionGroupModelReceiveDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionMissionGroupModelReceiveDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MissionMissionGroupModelReceiveDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMissionMissionGroupModelReceiveDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModelReceiveDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMissionMissionGroupModelReceiveDistributionSegmentsFromDict(
+		m["distribution"] = CastMissionMissionGroupModelReceiveDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModelReceiveDistribution) Pointer() *MissionMissionGroupModelReceiveDistribution {
@@ -31915,19 +36771,27 @@ func NewMissionMissionGroupModelDistributionsFromJson(data string) MissionMissio
 
 func NewMissionMissionGroupModelDistributionsFromDict(data map[string]interface{}) MissionMissionGroupModelDistributions {
 	return MissionMissionGroupModelDistributions{
-		Receive: NewMissionMissionGroupModelReceiveDistributionFromDict(core.CastMap(data["receive"])).Pointer(),
+		Receive: func() *MissionMissionGroupModelReceiveDistribution {
+			v, ok := data["receive"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionMissionGroupModelReceiveDistributionFromDict(core.CastMap(data["receive"])).Pointer()
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModelDistributions) ToDict() map[string]interface{} {
-
-	var receive map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Receive != nil {
-		receive = p.Receive.ToDict()
+		m["receive"] = func() map[string]interface{} {
+			if p.Receive == nil {
+				return nil
+			}
+			return p.Receive.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"receive": receive,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModelDistributions) Pointer() *MissionMissionGroupModelDistributions {
@@ -32043,37 +36907,62 @@ func NewMissionMissionGroupModelFromJson(data string) MissionMissionGroupModel {
 
 func NewMissionMissionGroupModelFromDict(data map[string]interface{}) MissionMissionGroupModel {
 	return MissionMissionGroupModel{
-		MissionGroupModelId: core.CastString(data["missionGroupModelId"]),
-		MissionGroupName:    core.CastString(data["missionGroupName"]),
-		Statistics:          NewMissionMissionGroupModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:       NewMissionMissionGroupModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		MissionGroupModelId: func() *string {
+			v, ok := data["missionGroupModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupModelId"])
+		}(),
+		MissionGroupName: func() *string {
+			v, ok := data["missionGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupName"])
+		}(),
+		Statistics: func() *MissionMissionGroupModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionMissionGroupModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MissionMissionGroupModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionMissionGroupModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p MissionMissionGroupModel) ToDict() map[string]interface{} {
-
-	var missionGroupModelId *string
+	m := map[string]interface{}{}
 	if p.MissionGroupModelId != nil {
-		missionGroupModelId = p.MissionGroupModelId
+		m["missionGroupModelId"] = p.MissionGroupModelId
 	}
-	var missionGroupName *string
 	if p.MissionGroupName != nil {
-		missionGroupName = p.MissionGroupName
+		m["missionGroupName"] = p.MissionGroupName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"missionGroupModelId": missionGroupModelId,
-		"missionGroupName":    missionGroupName,
-		"statistics":          statistics,
-		"distributions":       distributions,
-	}
+	return m
 }
 
 func (p MissionMissionGroupModel) Pointer() *MissionMissionGroupModel {
@@ -32181,25 +37070,32 @@ func NewMissionMissionTaskModelFromJson(data string) MissionMissionTaskModel {
 
 func NewMissionMissionTaskModelFromDict(data map[string]interface{}) MissionMissionTaskModel {
 	return MissionMissionTaskModel{
-		MissionTaskModelId: core.CastString(data["missionTaskModelId"]),
-		MissionTaskName:    core.CastString(data["missionTaskName"]),
+		MissionTaskModelId: func() *string {
+			v, ok := data["missionTaskModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionTaskModelId"])
+		}(),
+		MissionTaskName: func() *string {
+			v, ok := data["missionTaskName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionTaskName"])
+		}(),
 	}
 }
 
 func (p MissionMissionTaskModel) ToDict() map[string]interface{} {
-
-	var missionTaskModelId *string
+	m := map[string]interface{}{}
 	if p.MissionTaskModelId != nil {
-		missionTaskModelId = p.MissionTaskModelId
+		m["missionTaskModelId"] = p.MissionTaskModelId
 	}
-	var missionTaskName *string
 	if p.MissionTaskName != nil {
-		missionTaskName = p.MissionTaskName
+		m["missionTaskName"] = p.MissionTaskName
 	}
-	return map[string]interface{}{
-		"missionTaskModelId": missionTaskModelId,
-		"missionTaskName":    missionTaskName,
-	}
+	return m
 }
 
 func (p MissionMissionTaskModel) Pointer() *MissionMissionTaskModel {
@@ -32271,31 +37167,42 @@ func NewMissionNamespaceStatisticsFromJson(data string) MissionNamespaceStatisti
 
 func NewMissionNamespaceStatisticsFromDict(data map[string]interface{}) MissionNamespaceStatistics {
 	return MissionNamespaceStatistics{
-		Increase:       core.CastInt64(data["increase"]),
-		IncreaseAmount: core.CastInt64(data["increaseAmount"]),
-		Receive:        core.CastInt64(data["receive"]),
+		Increase: func() *int64 {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increase"])
+		}(),
+		IncreaseAmount: func() *int64 {
+			v, ok := data["increaseAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["increaseAmount"])
+		}(),
+		Receive: func() *int64 {
+			v, ok := data["receive"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["receive"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var increase *int64
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase
+		m["increase"] = p.Increase
 	}
-	var increaseAmount *int64
 	if p.IncreaseAmount != nil {
-		increaseAmount = p.IncreaseAmount
+		m["increaseAmount"] = p.IncreaseAmount
 	}
-	var receive *int64
 	if p.Receive != nil {
-		receive = p.Receive
+		m["receive"] = p.Receive
 	}
-	return map[string]interface{}{
-		"increase":       increase,
-		"increaseAmount": increaseAmount,
-		"receive":        receive,
-	}
+	return m
 }
 
 func (p MissionNamespaceStatistics) Pointer() *MissionNamespaceStatistics {
@@ -32379,49 +37286,72 @@ func NewMissionNamespaceIncreaseDistributionStatisticsFromJson(data string) Miss
 
 func NewMissionNamespaceIncreaseDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistributionStatistics {
 	return MissionNamespaceIncreaseDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseDistributionStatistics) Pointer() *MissionNamespaceIncreaseDistributionStatistics {
@@ -32509,25 +37439,32 @@ func NewMissionNamespaceIncreaseDistributionSegmentFromJson(data string) Mission
 
 func NewMissionNamespaceIncreaseDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistributionSegment {
 	return MissionNamespaceIncreaseDistributionSegment{
-		CounterName: core.CastString(data["counterName"]),
-		Count:       core.CastInt64(data["count"]),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseDistributionSegment) ToDict() map[string]interface{} {
-
-	var counterName *string
+	m := map[string]interface{}{}
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"counterName": counterName,
-		"count":       count,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseDistributionSegment) Pointer() *MissionNamespaceIncreaseDistributionSegment {
@@ -32595,27 +37532,38 @@ func NewMissionNamespaceIncreaseDistributionFromJson(data string) MissionNamespa
 
 func NewMissionNamespaceIncreaseDistributionFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistribution {
 	return MissionNamespaceIncreaseDistribution{
-		Statistics:   NewMissionNamespaceIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMissionNamespaceIncreaseDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MissionNamespaceIncreaseDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceIncreaseDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MissionNamespaceIncreaseDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMissionNamespaceIncreaseDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMissionNamespaceIncreaseDistributionSegmentsFromDict(
+		m["distribution"] = CastMissionNamespaceIncreaseDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseDistribution) Pointer() *MissionNamespaceIncreaseDistribution {
@@ -32699,49 +37647,72 @@ func NewMissionNamespaceIncreaseAmountDistributionStatisticsFromJson(data string
 
 func NewMissionNamespaceIncreaseAmountDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistributionStatistics {
 	return MissionNamespaceIncreaseAmountDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseAmountDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseAmountDistributionStatistics) Pointer() *MissionNamespaceIncreaseAmountDistributionStatistics {
@@ -32829,25 +37800,32 @@ func NewMissionNamespaceIncreaseAmountDistributionSegmentFromJson(data string) M
 
 func NewMissionNamespaceIncreaseAmountDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistributionSegment {
 	return MissionNamespaceIncreaseAmountDistributionSegment{
-		CounterName: core.CastString(data["counterName"]),
-		Sum:         core.CastInt64(data["sum"]),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseAmountDistributionSegment) ToDict() map[string]interface{} {
-
-	var counterName *string
+	m := map[string]interface{}{}
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"counterName": counterName,
-		"sum":         sum,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseAmountDistributionSegment) Pointer() *MissionNamespaceIncreaseAmountDistributionSegment {
@@ -32915,27 +37893,38 @@ func NewMissionNamespaceIncreaseAmountDistributionFromJson(data string) MissionN
 
 func NewMissionNamespaceIncreaseAmountDistributionFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistribution {
 	return MissionNamespaceIncreaseAmountDistribution{
-		Statistics:   NewMissionNamespaceIncreaseAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMissionNamespaceIncreaseAmountDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MissionNamespaceIncreaseAmountDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceIncreaseAmountDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MissionNamespaceIncreaseAmountDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMissionNamespaceIncreaseAmountDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MissionNamespaceIncreaseAmountDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMissionNamespaceIncreaseAmountDistributionSegmentsFromDict(
+		m["distribution"] = CastMissionNamespaceIncreaseAmountDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MissionNamespaceIncreaseAmountDistribution) Pointer() *MissionNamespaceIncreaseAmountDistribution {
@@ -33019,49 +38008,72 @@ func NewMissionNamespaceReceiveDistributionStatisticsFromJson(data string) Missi
 
 func NewMissionNamespaceReceiveDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceReceiveDistributionStatistics {
 	return MissionNamespaceReceiveDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceReceiveDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MissionNamespaceReceiveDistributionStatistics) Pointer() *MissionNamespaceReceiveDistributionStatistics {
@@ -33149,25 +38161,32 @@ func NewMissionNamespaceReceiveDistributionSegmentFromJson(data string) MissionN
 
 func NewMissionNamespaceReceiveDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceReceiveDistributionSegment {
 	return MissionNamespaceReceiveDistributionSegment{
-		MissionGroupName: core.CastString(data["missionGroupName"]),
-		Count:            core.CastInt64(data["count"]),
+		MissionGroupName: func() *string {
+			v, ok := data["missionGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MissionNamespaceReceiveDistributionSegment) ToDict() map[string]interface{} {
-
-	var missionGroupName *string
+	m := map[string]interface{}{}
 	if p.MissionGroupName != nil {
-		missionGroupName = p.MissionGroupName
+		m["missionGroupName"] = p.MissionGroupName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"missionGroupName": missionGroupName,
-		"count":            count,
-	}
+	return m
 }
 
 func (p MissionNamespaceReceiveDistributionSegment) Pointer() *MissionNamespaceReceiveDistributionSegment {
@@ -33235,27 +38254,38 @@ func NewMissionNamespaceReceiveDistributionFromJson(data string) MissionNamespac
 
 func NewMissionNamespaceReceiveDistributionFromDict(data map[string]interface{}) MissionNamespaceReceiveDistribution {
 	return MissionNamespaceReceiveDistribution{
-		Statistics:   NewMissionNamespaceReceiveDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMissionNamespaceReceiveDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MissionNamespaceReceiveDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceReceiveDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MissionNamespaceReceiveDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMissionNamespaceReceiveDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MissionNamespaceReceiveDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMissionNamespaceReceiveDistributionSegmentsFromDict(
+		m["distribution"] = CastMissionNamespaceReceiveDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MissionNamespaceReceiveDistribution) Pointer() *MissionNamespaceReceiveDistribution {
@@ -33327,31 +38357,57 @@ func NewMissionNamespaceDistributionsFromJson(data string) MissionNamespaceDistr
 
 func NewMissionNamespaceDistributionsFromDict(data map[string]interface{}) MissionNamespaceDistributions {
 	return MissionNamespaceDistributions{
-		Increase:       NewMissionNamespaceIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer(),
-		IncreaseAmount: NewMissionNamespaceIncreaseAmountDistributionFromDict(core.CastMap(data["increaseAmount"])).Pointer(),
-		Receive:        NewMissionNamespaceReceiveDistributionFromDict(core.CastMap(data["receive"])).Pointer(),
+		Increase: func() *MissionNamespaceIncreaseDistribution {
+			v, ok := data["increase"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceIncreaseDistributionFromDict(core.CastMap(data["increase"])).Pointer()
+		}(),
+		IncreaseAmount: func() *MissionNamespaceIncreaseAmountDistribution {
+			v, ok := data["increaseAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceIncreaseAmountDistributionFromDict(core.CastMap(data["increaseAmount"])).Pointer()
+		}(),
+		Receive: func() *MissionNamespaceReceiveDistribution {
+			v, ok := data["receive"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceReceiveDistributionFromDict(core.CastMap(data["receive"])).Pointer()
+		}(),
 	}
 }
 
 func (p MissionNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var increase map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Increase != nil {
-		increase = p.Increase.ToDict()
+		m["increase"] = func() map[string]interface{} {
+			if p.Increase == nil {
+				return nil
+			}
+			return p.Increase.ToDict()
+		}()
 	}
-	var increaseAmount map[string]interface{}
 	if p.IncreaseAmount != nil {
-		increaseAmount = p.IncreaseAmount.ToDict()
+		m["increaseAmount"] = func() map[string]interface{} {
+			if p.IncreaseAmount == nil {
+				return nil
+			}
+			return p.IncreaseAmount.ToDict()
+		}()
 	}
-	var receive map[string]interface{}
 	if p.Receive != nil {
-		receive = p.Receive.ToDict()
+		m["receive"] = func() map[string]interface{} {
+			if p.Receive == nil {
+				return nil
+			}
+			return p.Receive.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"increase":       increase,
-		"increaseAmount": increaseAmount,
-		"receive":        receive,
-	}
+	return m
 }
 
 func (p MissionNamespaceDistributions) Pointer() *MissionNamespaceDistributions {
@@ -33487,71 +38543,114 @@ func NewMissionNamespaceFromJson(data string) MissionNamespace {
 
 func NewMissionNamespaceFromDict(data map[string]interface{}) MissionNamespace {
 	return MissionNamespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Year:               core.CastInt32(data["year"]),
-		Month:              core.CastInt32(data["month"]),
-		Day:                core.CastInt32(data["day"]),
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Statistics:         NewMissionNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:      NewMissionNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		MissionGroupModels: CastMissionMissionGroupModels(core.CastArray(data["missionGroupModels"])),
-		Counters:           CastMissionCounters(core.CastArray(data["counters"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *MissionNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MissionNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMissionNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		MissionGroupModels: func() []MissionMissionGroupModel {
+			if data["missionGroupModels"] == nil {
+				return nil
+			}
+			return CastMissionMissionGroupModels(core.CastArray(data["missionGroupModels"]))
+		}(),
+		Counters: func() []MissionCounter {
+			if data["counters"] == nil {
+				return nil
+			}
+			return CastMissionCounters(core.CastArray(data["counters"]))
+		}(),
 	}
 }
 
 func (p MissionNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var missionGroupModels []interface{}
 	if p.MissionGroupModels != nil {
-		missionGroupModels = CastMissionMissionGroupModelsFromDict(
+		m["missionGroupModels"] = CastMissionMissionGroupModelsFromDict(
 			p.MissionGroupModels,
 		)
 	}
-	var counters []interface{}
 	if p.Counters != nil {
-		counters = CastMissionCountersFromDict(
+		m["counters"] = CastMissionCountersFromDict(
 			p.Counters,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"year":               year,
-		"month":              month,
-		"day":                day,
-		"namespaceName":      namespaceName,
-		"statistics":         statistics,
-		"distributions":      distributions,
-		"missionGroupModels": missionGroupModels,
-		"counters":           counters,
-	}
+	return m
 }
 
 func (p MissionNamespace) Pointer() *MissionNamespace {
@@ -33631,43 +38730,62 @@ func NewMoneyWalletStatisticsFromJson(data string) MoneyWalletStatistics {
 
 func NewMoneyWalletStatisticsFromDict(data map[string]interface{}) MoneyWalletStatistics {
 	return MoneyWalletStatistics{
-		Deposit:        core.CastInt64(data["deposit"]),
-		DepositAmount:  core.CastInt64(data["depositAmount"]),
-		Withdraw:       core.CastInt64(data["withdraw"]),
-		WithdrawAmount: core.CastInt64(data["withdrawAmount"]),
-		Revenue:        core.CastInt64(data["revenue"]),
+		Deposit: func() *int64 {
+			v, ok := data["deposit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deposit"])
+		}(),
+		DepositAmount: func() *int64 {
+			v, ok := data["depositAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["depositAmount"])
+		}(),
+		Withdraw: func() *int64 {
+			v, ok := data["withdraw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["withdraw"])
+		}(),
+		WithdrawAmount: func() *int64 {
+			v, ok := data["withdrawAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["withdrawAmount"])
+		}(),
+		Revenue: func() *int64 {
+			v, ok := data["revenue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revenue"])
+		}(),
 	}
 }
 
 func (p MoneyWalletStatistics) ToDict() map[string]interface{} {
-
-	var deposit *int64
+	m := map[string]interface{}{}
 	if p.Deposit != nil {
-		deposit = p.Deposit
+		m["deposit"] = p.Deposit
 	}
-	var depositAmount *int64
 	if p.DepositAmount != nil {
-		depositAmount = p.DepositAmount
+		m["depositAmount"] = p.DepositAmount
 	}
-	var withdraw *int64
 	if p.Withdraw != nil {
-		withdraw = p.Withdraw
+		m["withdraw"] = p.Withdraw
 	}
-	var withdrawAmount *int64
 	if p.WithdrawAmount != nil {
-		withdrawAmount = p.WithdrawAmount
+		m["withdrawAmount"] = p.WithdrawAmount
 	}
-	var revenue *int64
 	if p.Revenue != nil {
-		revenue = p.Revenue
+		m["revenue"] = p.Revenue
 	}
-	return map[string]interface{}{
-		"deposit":        deposit,
-		"depositAmount":  depositAmount,
-		"withdraw":       withdraw,
-		"withdrawAmount": withdrawAmount,
-		"revenue":        revenue,
-	}
+	return m
 }
 
 func (p MoneyWalletStatistics) Pointer() *MoneyWalletStatistics {
@@ -33751,49 +38869,72 @@ func NewMoneyWalletFreeDistributionStatisticsFromJson(data string) MoneyWalletFr
 
 func NewMoneyWalletFreeDistributionStatisticsFromDict(data map[string]interface{}) MoneyWalletFreeDistributionStatistics {
 	return MoneyWalletFreeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyWalletFreeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyWalletFreeDistributionStatistics) Pointer() *MoneyWalletFreeDistributionStatistics {
@@ -33865,31 +39006,42 @@ func NewMoneyWalletFreeDistributionSegmentFromJson(data string) MoneyWalletFreeD
 
 func NewMoneyWalletFreeDistributionSegmentFromDict(data map[string]interface{}) MoneyWalletFreeDistributionSegment {
 	return MoneyWalletFreeDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyWalletFreeDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p MoneyWalletFreeDistributionSegment) Pointer() *MoneyWalletFreeDistributionSegment {
@@ -33957,27 +39109,38 @@ func NewMoneyWalletFreeDistributionFromJson(data string) MoneyWalletFreeDistribu
 
 func NewMoneyWalletFreeDistributionFromDict(data map[string]interface{}) MoneyWalletFreeDistribution {
 	return MoneyWalletFreeDistribution{
-		Statistics:   NewMoneyWalletFreeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyWalletFreeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyWalletFreeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletFreeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyWalletFreeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyWalletFreeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyWalletFreeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyWalletFreeDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyWalletFreeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyWalletFreeDistribution) Pointer() *MoneyWalletFreeDistribution {
@@ -34061,49 +39224,72 @@ func NewMoneyWalletPaidDistributionStatisticsFromJson(data string) MoneyWalletPa
 
 func NewMoneyWalletPaidDistributionStatisticsFromDict(data map[string]interface{}) MoneyWalletPaidDistributionStatistics {
 	return MoneyWalletPaidDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyWalletPaidDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyWalletPaidDistributionStatistics) Pointer() *MoneyWalletPaidDistributionStatistics {
@@ -34175,31 +39361,42 @@ func NewMoneyWalletPaidDistributionSegmentFromJson(data string) MoneyWalletPaidD
 
 func NewMoneyWalletPaidDistributionSegmentFromDict(data map[string]interface{}) MoneyWalletPaidDistributionSegment {
 	return MoneyWalletPaidDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyWalletPaidDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p MoneyWalletPaidDistributionSegment) Pointer() *MoneyWalletPaidDistributionSegment {
@@ -34267,27 +39464,38 @@ func NewMoneyWalletPaidDistributionFromJson(data string) MoneyWalletPaidDistribu
 
 func NewMoneyWalletPaidDistributionFromDict(data map[string]interface{}) MoneyWalletPaidDistribution {
 	return MoneyWalletPaidDistribution{
-		Statistics:   NewMoneyWalletPaidDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyWalletPaidDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyWalletPaidDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletPaidDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyWalletPaidDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyWalletPaidDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyWalletPaidDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyWalletPaidDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyWalletPaidDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyWalletPaidDistribution) Pointer() *MoneyWalletPaidDistribution {
@@ -34355,25 +39563,42 @@ func NewMoneyWalletDistributionsFromJson(data string) MoneyWalletDistributions {
 
 func NewMoneyWalletDistributionsFromDict(data map[string]interface{}) MoneyWalletDistributions {
 	return MoneyWalletDistributions{
-		Free: NewMoneyWalletFreeDistributionFromDict(core.CastMap(data["free"])).Pointer(),
-		Paid: NewMoneyWalletPaidDistributionFromDict(core.CastMap(data["paid"])).Pointer(),
+		Free: func() *MoneyWalletFreeDistribution {
+			v, ok := data["free"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletFreeDistributionFromDict(core.CastMap(data["free"])).Pointer()
+		}(),
+		Paid: func() *MoneyWalletPaidDistribution {
+			v, ok := data["paid"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletPaidDistributionFromDict(core.CastMap(data["paid"])).Pointer()
+		}(),
 	}
 }
 
 func (p MoneyWalletDistributions) ToDict() map[string]interface{} {
-
-	var free map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Free != nil {
-		free = p.Free.ToDict()
+		m["free"] = func() map[string]interface{} {
+			if p.Free == nil {
+				return nil
+			}
+			return p.Free.ToDict()
+		}()
 	}
-	var paid map[string]interface{}
 	if p.Paid != nil {
-		paid = p.Paid.ToDict()
+		m["paid"] = func() map[string]interface{} {
+			if p.Paid == nil {
+				return nil
+			}
+			return p.Paid.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"free": free,
-		"paid": paid,
-	}
+	return m
 }
 
 func (p MoneyWalletDistributions) Pointer() *MoneyWalletDistributions {
@@ -34469,37 +39694,62 @@ func NewMoneyWalletFromJson(data string) MoneyWallet {
 
 func NewMoneyWalletFromDict(data map[string]interface{}) MoneyWallet {
 	return MoneyWallet{
-		WalletId:      core.CastString(data["walletId"]),
-		Slot:          core.CastInt32(data["slot"]),
-		Statistics:    NewMoneyWalletStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewMoneyWalletDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		WalletId: func() *string {
+			v, ok := data["walletId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["walletId"])
+		}(),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		Statistics: func() *MoneyWalletStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MoneyWalletDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyWalletDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p MoneyWallet) ToDict() map[string]interface{} {
-
-	var walletId *string
+	m := map[string]interface{}{}
 	if p.WalletId != nil {
-		walletId = p.WalletId
+		m["walletId"] = p.WalletId
 	}
-	var slot *int32
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"walletId":      walletId,
-		"slot":          slot,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p MoneyWallet) Pointer() *MoneyWallet {
@@ -34563,19 +39813,22 @@ func NewMoneyReceiptStatisticsFromJson(data string) MoneyReceiptStatistics {
 
 func NewMoneyReceiptStatisticsFromDict(data map[string]interface{}) MoneyReceiptStatistics {
 	return MoneyReceiptStatistics{
-		Verification: core.CastInt64(data["verification"]),
+		Verification: func() *int64 {
+			v, ok := data["verification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["verification"])
+		}(),
 	}
 }
 
 func (p MoneyReceiptStatistics) ToDict() map[string]interface{} {
-
-	var verification *int64
+	m := map[string]interface{}{}
 	if p.Verification != nil {
-		verification = p.Verification
+		m["verification"] = p.Verification
 	}
-	return map[string]interface{}{
-		"verification": verification,
-	}
+	return m
 }
 
 func (p MoneyReceiptStatistics) Pointer() *MoneyReceiptStatistics {
@@ -34659,49 +39912,72 @@ func NewMoneyReceiptVerificationByUserDistributionStatisticsFromJson(data string
 
 func NewMoneyReceiptVerificationByUserDistributionStatisticsFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistributionStatistics {
 	return MoneyReceiptVerificationByUserDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyReceiptVerificationByUserDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyReceiptVerificationByUserDistributionStatistics) Pointer() *MoneyReceiptVerificationByUserDistributionStatistics {
@@ -34773,31 +40049,42 @@ func NewMoneyReceiptVerificationByUserDistributionSegmentFromJson(data string) M
 
 func NewMoneyReceiptVerificationByUserDistributionSegmentFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistributionSegment {
 	return MoneyReceiptVerificationByUserDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyReceiptVerificationByUserDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p MoneyReceiptVerificationByUserDistributionSegment) Pointer() *MoneyReceiptVerificationByUserDistributionSegment {
@@ -34865,27 +40152,38 @@ func NewMoneyReceiptVerificationByUserDistributionFromJson(data string) MoneyRec
 
 func NewMoneyReceiptVerificationByUserDistributionFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistribution {
 	return MoneyReceiptVerificationByUserDistribution{
-		Statistics:   NewMoneyReceiptVerificationByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyReceiptVerificationByUserDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyReceiptVerificationByUserDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyReceiptVerificationByUserDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyReceiptVerificationByUserDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyReceiptVerificationByUserDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyReceiptVerificationByUserDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyReceiptVerificationByUserDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyReceiptVerificationByUserDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyReceiptVerificationByUserDistribution) Pointer() *MoneyReceiptVerificationByUserDistribution {
@@ -34949,19 +40247,27 @@ func NewMoneyReceiptDistributionsFromJson(data string) MoneyReceiptDistributions
 
 func NewMoneyReceiptDistributionsFromDict(data map[string]interface{}) MoneyReceiptDistributions {
 	return MoneyReceiptDistributions{
-		VerificationByUser: NewMoneyReceiptVerificationByUserDistributionFromDict(core.CastMap(data["verificationByUser"])).Pointer(),
+		VerificationByUser: func() *MoneyReceiptVerificationByUserDistribution {
+			v, ok := data["verificationByUser"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyReceiptVerificationByUserDistributionFromDict(core.CastMap(data["verificationByUser"])).Pointer()
+		}(),
 	}
 }
 
 func (p MoneyReceiptDistributions) ToDict() map[string]interface{} {
-
-	var verificationByUser map[string]interface{}
+	m := map[string]interface{}{}
 	if p.VerificationByUser != nil {
-		verificationByUser = p.VerificationByUser.ToDict()
+		m["verificationByUser"] = func() map[string]interface{} {
+			if p.VerificationByUser == nil {
+				return nil
+			}
+			return p.VerificationByUser.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"verificationByUser": verificationByUser,
-	}
+	return m
 }
 
 func (p MoneyReceiptDistributions) Pointer() *MoneyReceiptDistributions {
@@ -35077,37 +40383,62 @@ func NewMoneyReceiptFromJson(data string) MoneyReceipt {
 
 func NewMoneyReceiptFromDict(data map[string]interface{}) MoneyReceipt {
 	return MoneyReceipt{
-		ReceiptId:     core.CastString(data["receiptId"]),
-		ContentsId:    core.CastString(data["contentsId"]),
-		Statistics:    NewMoneyReceiptStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewMoneyReceiptDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		ReceiptId: func() *string {
+			v, ok := data["receiptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["receiptId"])
+		}(),
+		ContentsId: func() *string {
+			v, ok := data["contentsId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentsId"])
+		}(),
+		Statistics: func() *MoneyReceiptStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyReceiptStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MoneyReceiptDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyReceiptDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p MoneyReceipt) ToDict() map[string]interface{} {
-
-	var receiptId *string
+	m := map[string]interface{}{}
 	if p.ReceiptId != nil {
-		receiptId = p.ReceiptId
+		m["receiptId"] = p.ReceiptId
 	}
-	var contentsId *string
 	if p.ContentsId != nil {
-		contentsId = p.ContentsId
+		m["contentsId"] = p.ContentsId
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"receiptId":     receiptId,
-		"contentsId":    contentsId,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p MoneyReceipt) Pointer() *MoneyReceipt {
@@ -35183,37 +40514,52 @@ func NewMoneyNamespaceStatisticsFromJson(data string) MoneyNamespaceStatistics {
 
 func NewMoneyNamespaceStatisticsFromDict(data map[string]interface{}) MoneyNamespaceStatistics {
 	return MoneyNamespaceStatistics{
-		Verification: core.CastInt64(data["verification"]),
-		Deposit:      core.CastInt64(data["deposit"]),
-		Withdraw:     core.CastInt64(data["withdraw"]),
-		Revenue:      core.CastInt64(data["revenue"]),
+		Verification: func() *int64 {
+			v, ok := data["verification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["verification"])
+		}(),
+		Deposit: func() *int64 {
+			v, ok := data["deposit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deposit"])
+		}(),
+		Withdraw: func() *int64 {
+			v, ok := data["withdraw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["withdraw"])
+		}(),
+		Revenue: func() *int64 {
+			v, ok := data["revenue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revenue"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var verification *int64
+	m := map[string]interface{}{}
 	if p.Verification != nil {
-		verification = p.Verification
+		m["verification"] = p.Verification
 	}
-	var deposit *int64
 	if p.Deposit != nil {
-		deposit = p.Deposit
+		m["deposit"] = p.Deposit
 	}
-	var withdraw *int64
 	if p.Withdraw != nil {
-		withdraw = p.Withdraw
+		m["withdraw"] = p.Withdraw
 	}
-	var revenue *int64
 	if p.Revenue != nil {
-		revenue = p.Revenue
+		m["revenue"] = p.Revenue
 	}
-	return map[string]interface{}{
-		"verification": verification,
-		"deposit":      deposit,
-		"withdraw":     withdraw,
-		"revenue":      revenue,
-	}
+	return m
 }
 
 func (p MoneyNamespaceStatistics) Pointer() *MoneyNamespaceStatistics {
@@ -35297,49 +40643,72 @@ func NewMoneyNamespaceVerificationDistributionStatisticsFromJson(data string) Mo
 
 func NewMoneyNamespaceVerificationDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistributionStatistics {
 	return MoneyNamespaceVerificationDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceVerificationDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyNamespaceVerificationDistributionStatistics) Pointer() *MoneyNamespaceVerificationDistributionStatistics {
@@ -35427,25 +40796,32 @@ func NewMoneyNamespaceVerificationDistributionSegmentFromJson(data string) Money
 
 func NewMoneyNamespaceVerificationDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistributionSegment {
 	return MoneyNamespaceVerificationDistributionSegment{
-		ContentsId: core.CastString(data["contentsId"]),
-		Count:      core.CastInt64(data["count"]),
+		ContentsId: func() *string {
+			v, ok := data["contentsId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentsId"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceVerificationDistributionSegment) ToDict() map[string]interface{} {
-
-	var contentsId *string
+	m := map[string]interface{}{}
 	if p.ContentsId != nil {
-		contentsId = p.ContentsId
+		m["contentsId"] = p.ContentsId
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"contentsId": contentsId,
-		"count":      count,
-	}
+	return m
 }
 
 func (p MoneyNamespaceVerificationDistributionSegment) Pointer() *MoneyNamespaceVerificationDistributionSegment {
@@ -35513,27 +40889,38 @@ func NewMoneyNamespaceVerificationDistributionFromJson(data string) MoneyNamespa
 
 func NewMoneyNamespaceVerificationDistributionFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistribution {
 	return MoneyNamespaceVerificationDistribution{
-		Statistics:   NewMoneyNamespaceVerificationDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyNamespaceVerificationDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyNamespaceVerificationDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceVerificationDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyNamespaceVerificationDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyNamespaceVerificationDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyNamespaceVerificationDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyNamespaceVerificationDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyNamespaceVerificationDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyNamespaceVerificationDistribution) Pointer() *MoneyNamespaceVerificationDistribution {
@@ -35617,49 +41004,72 @@ func NewMoneyNamespaceDepositDistributionStatisticsFromJson(data string) MoneyNa
 
 func NewMoneyNamespaceDepositDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceDepositDistributionStatistics {
 	return MoneyNamespaceDepositDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceDepositDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyNamespaceDepositDistributionStatistics) Pointer() *MoneyNamespaceDepositDistributionStatistics {
@@ -35727,25 +41137,32 @@ func NewMoneyNamespaceDepositDistributionSegmentFromJson(data string) MoneyNames
 
 func NewMoneyNamespaceDepositDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceDepositDistributionSegment {
 	return MoneyNamespaceDepositDistributionSegment{
-		Slot:  core.CastInt32(data["slot"]),
-		Count: core.CastInt64(data["count"]),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceDepositDistributionSegment) ToDict() map[string]interface{} {
-
-	var slot *int32
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"slot":  slot,
-		"count": count,
-	}
+	return m
 }
 
 func (p MoneyNamespaceDepositDistributionSegment) Pointer() *MoneyNamespaceDepositDistributionSegment {
@@ -35813,27 +41230,38 @@ func NewMoneyNamespaceDepositDistributionFromJson(data string) MoneyNamespaceDep
 
 func NewMoneyNamespaceDepositDistributionFromDict(data map[string]interface{}) MoneyNamespaceDepositDistribution {
 	return MoneyNamespaceDepositDistribution{
-		Statistics:   NewMoneyNamespaceDepositDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyNamespaceDepositDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyNamespaceDepositDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceDepositDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyNamespaceDepositDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyNamespaceDepositDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyNamespaceDepositDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyNamespaceDepositDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyNamespaceDepositDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyNamespaceDepositDistribution) Pointer() *MoneyNamespaceDepositDistribution {
@@ -35917,49 +41345,72 @@ func NewMoneyNamespaceWithdrawDistributionStatisticsFromJson(data string) MoneyN
 
 func NewMoneyNamespaceWithdrawDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistributionStatistics {
 	return MoneyNamespaceWithdrawDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceWithdrawDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyNamespaceWithdrawDistributionStatistics) Pointer() *MoneyNamespaceWithdrawDistributionStatistics {
@@ -36027,25 +41478,32 @@ func NewMoneyNamespaceWithdrawDistributionSegmentFromJson(data string) MoneyName
 
 func NewMoneyNamespaceWithdrawDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistributionSegment {
 	return MoneyNamespaceWithdrawDistributionSegment{
-		Slot:  core.CastInt32(data["slot"]),
-		Count: core.CastInt64(data["count"]),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceWithdrawDistributionSegment) ToDict() map[string]interface{} {
-
-	var slot *int32
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"slot":  slot,
-		"count": count,
-	}
+	return m
 }
 
 func (p MoneyNamespaceWithdrawDistributionSegment) Pointer() *MoneyNamespaceWithdrawDistributionSegment {
@@ -36113,27 +41571,38 @@ func NewMoneyNamespaceWithdrawDistributionFromJson(data string) MoneyNamespaceWi
 
 func NewMoneyNamespaceWithdrawDistributionFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistribution {
 	return MoneyNamespaceWithdrawDistribution{
-		Statistics:   NewMoneyNamespaceWithdrawDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyNamespaceWithdrawDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyNamespaceWithdrawDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceWithdrawDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyNamespaceWithdrawDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyNamespaceWithdrawDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyNamespaceWithdrawDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyNamespaceWithdrawDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyNamespaceWithdrawDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyNamespaceWithdrawDistribution) Pointer() *MoneyNamespaceWithdrawDistribution {
@@ -36217,49 +41686,72 @@ func NewMoneyNamespaceRevenueDistributionStatisticsFromJson(data string) MoneyNa
 
 func NewMoneyNamespaceRevenueDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistributionStatistics {
 	return MoneyNamespaceRevenueDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceRevenueDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p MoneyNamespaceRevenueDistributionStatistics) Pointer() *MoneyNamespaceRevenueDistributionStatistics {
@@ -36327,25 +41819,32 @@ func NewMoneyNamespaceRevenueDistributionSegmentFromJson(data string) MoneyNames
 
 func NewMoneyNamespaceRevenueDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistributionSegment {
 	return MoneyNamespaceRevenueDistributionSegment{
-		Slot: core.CastInt32(data["slot"]),
-		Sum:  core.CastInt64(data["sum"]),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		Sum: func() *int64 {
+			v, ok := data["sum"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["sum"])
+		}(),
 	}
 }
 
 func (p MoneyNamespaceRevenueDistributionSegment) ToDict() map[string]interface{} {
-
-	var slot *int32
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var sum *int64
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	return map[string]interface{}{
-		"slot": slot,
-		"sum":  sum,
-	}
+	return m
 }
 
 func (p MoneyNamespaceRevenueDistributionSegment) Pointer() *MoneyNamespaceRevenueDistributionSegment {
@@ -36413,27 +41912,38 @@ func NewMoneyNamespaceRevenueDistributionFromJson(data string) MoneyNamespaceRev
 
 func NewMoneyNamespaceRevenueDistributionFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistribution {
 	return MoneyNamespaceRevenueDistribution{
-		Statistics:   NewMoneyNamespaceRevenueDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastMoneyNamespaceRevenueDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *MoneyNamespaceRevenueDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceRevenueDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []MoneyNamespaceRevenueDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastMoneyNamespaceRevenueDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p MoneyNamespaceRevenueDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastMoneyNamespaceRevenueDistributionSegmentsFromDict(
+		m["distribution"] = CastMoneyNamespaceRevenueDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p MoneyNamespaceRevenueDistribution) Pointer() *MoneyNamespaceRevenueDistribution {
@@ -36509,37 +42019,72 @@ func NewMoneyNamespaceDistributionsFromJson(data string) MoneyNamespaceDistribut
 
 func NewMoneyNamespaceDistributionsFromDict(data map[string]interface{}) MoneyNamespaceDistributions {
 	return MoneyNamespaceDistributions{
-		Verification: NewMoneyNamespaceVerificationDistributionFromDict(core.CastMap(data["verification"])).Pointer(),
-		Deposit:      NewMoneyNamespaceDepositDistributionFromDict(core.CastMap(data["deposit"])).Pointer(),
-		Withdraw:     NewMoneyNamespaceWithdrawDistributionFromDict(core.CastMap(data["withdraw"])).Pointer(),
-		Revenue:      NewMoneyNamespaceRevenueDistributionFromDict(core.CastMap(data["revenue"])).Pointer(),
+		Verification: func() *MoneyNamespaceVerificationDistribution {
+			v, ok := data["verification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceVerificationDistributionFromDict(core.CastMap(data["verification"])).Pointer()
+		}(),
+		Deposit: func() *MoneyNamespaceDepositDistribution {
+			v, ok := data["deposit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceDepositDistributionFromDict(core.CastMap(data["deposit"])).Pointer()
+		}(),
+		Withdraw: func() *MoneyNamespaceWithdrawDistribution {
+			v, ok := data["withdraw"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceWithdrawDistributionFromDict(core.CastMap(data["withdraw"])).Pointer()
+		}(),
+		Revenue: func() *MoneyNamespaceRevenueDistribution {
+			v, ok := data["revenue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceRevenueDistributionFromDict(core.CastMap(data["revenue"])).Pointer()
+		}(),
 	}
 }
 
 func (p MoneyNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var verification map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Verification != nil {
-		verification = p.Verification.ToDict()
+		m["verification"] = func() map[string]interface{} {
+			if p.Verification == nil {
+				return nil
+			}
+			return p.Verification.ToDict()
+		}()
 	}
-	var deposit map[string]interface{}
 	if p.Deposit != nil {
-		deposit = p.Deposit.ToDict()
+		m["deposit"] = func() map[string]interface{} {
+			if p.Deposit == nil {
+				return nil
+			}
+			return p.Deposit.ToDict()
+		}()
 	}
-	var withdraw map[string]interface{}
 	if p.Withdraw != nil {
-		withdraw = p.Withdraw.ToDict()
+		m["withdraw"] = func() map[string]interface{} {
+			if p.Withdraw == nil {
+				return nil
+			}
+			return p.Withdraw.ToDict()
+		}()
 	}
-	var revenue map[string]interface{}
 	if p.Revenue != nil {
-		revenue = p.Revenue.ToDict()
+		m["revenue"] = func() map[string]interface{} {
+			if p.Revenue == nil {
+				return nil
+			}
+			return p.Revenue.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"verification": verification,
-		"deposit":      deposit,
-		"withdraw":     withdraw,
-		"revenue":      revenue,
-	}
+	return m
 }
 
 func (p MoneyNamespaceDistributions) Pointer() *MoneyNamespaceDistributions {
@@ -36675,71 +42220,114 @@ func NewMoneyNamespaceFromJson(data string) MoneyNamespace {
 
 func NewMoneyNamespaceFromDict(data map[string]interface{}) MoneyNamespace {
 	return MoneyNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewMoneyNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewMoneyNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Wallets:       CastMoneyWallets(core.CastArray(data["wallets"])),
-		Receipts:      CastMoneyReceipts(core.CastArray(data["receipts"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *MoneyNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *MoneyNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoneyNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Wallets: func() []MoneyWallet {
+			if data["wallets"] == nil {
+				return nil
+			}
+			return CastMoneyWallets(core.CastArray(data["wallets"]))
+		}(),
+		Receipts: func() []MoneyReceipt {
+			if data["receipts"] == nil {
+				return nil
+			}
+			return CastMoneyReceipts(core.CastArray(data["receipts"]))
+		}(),
 	}
 }
 
 func (p MoneyNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var wallets []interface{}
 	if p.Wallets != nil {
-		wallets = CastMoneyWalletsFromDict(
+		m["wallets"] = CastMoneyWalletsFromDict(
 			p.Wallets,
 		)
 	}
-	var receipts []interface{}
 	if p.Receipts != nil {
-		receipts = CastMoneyReceiptsFromDict(
+		m["receipts"] = CastMoneyReceiptsFromDict(
 			p.Receipts,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"wallets":       wallets,
-		"receipts":      receipts,
-	}
+	return m
 }
 
 func (p MoneyNamespace) Pointer() *MoneyNamespace {
@@ -36815,37 +42403,52 @@ func NewQuestQuestModelStatisticsFromJson(data string) QuestQuestModelStatistics
 
 func NewQuestQuestModelStatisticsFromDict(data map[string]interface{}) QuestQuestModelStatistics {
 	return QuestQuestModelStatistics{
-		StartQuest:     core.CastInt64(data["startQuest"]),
-		EndQuest:       core.CastInt64(data["endQuest"]),
-		Successful:     core.CastInt64(data["successful"]),
-		SuccessfulRate: core.CastFloat32(data["successfulRate"]),
+		StartQuest: func() *int64 {
+			v, ok := data["startQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["startQuest"])
+		}(),
+		EndQuest: func() *int64 {
+			v, ok := data["endQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["endQuest"])
+		}(),
+		Successful: func() *int64 {
+			v, ok := data["successful"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["successful"])
+		}(),
+		SuccessfulRate: func() *float32 {
+			v, ok := data["successfulRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["successfulRate"])
+		}(),
 	}
 }
 
 func (p QuestQuestModelStatistics) ToDict() map[string]interface{} {
-
-	var startQuest *int64
+	m := map[string]interface{}{}
 	if p.StartQuest != nil {
-		startQuest = p.StartQuest
+		m["startQuest"] = p.StartQuest
 	}
-	var endQuest *int64
 	if p.EndQuest != nil {
-		endQuest = p.EndQuest
+		m["endQuest"] = p.EndQuest
 	}
-	var successful *int64
 	if p.Successful != nil {
-		successful = p.Successful
+		m["successful"] = p.Successful
 	}
-	var successfulRate *float32
 	if p.SuccessfulRate != nil {
-		successfulRate = p.SuccessfulRate
+		m["successfulRate"] = p.SuccessfulRate
 	}
-	return map[string]interface{}{
-		"startQuest":     startQuest,
-		"endQuest":       endQuest,
-		"successful":     successful,
-		"successfulRate": successfulRate,
-	}
+	return m
 }
 
 func (p QuestQuestModelStatistics) Pointer() *QuestQuestModelStatistics {
@@ -36929,49 +42532,72 @@ func NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromJson(data string
 
 func NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistributionStatistics {
 	return QuestQuestModelPlayTimeSecondsDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistributionStatistics) Pointer() *QuestQuestModelPlayTimeSecondsDistributionStatistics {
@@ -37043,31 +42669,42 @@ func NewQuestQuestModelPlayTimeSecondsDistributionSegmentFromJson(data string) Q
 
 func NewQuestQuestModelPlayTimeSecondsDistributionSegmentFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistributionSegment {
 	return QuestQuestModelPlayTimeSecondsDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistributionSegment) Pointer() *QuestQuestModelPlayTimeSecondsDistributionSegment {
@@ -37135,27 +42772,38 @@ func NewQuestQuestModelPlayTimeSecondsDistributionFromJson(data string) QuestQue
 
 func NewQuestQuestModelPlayTimeSecondsDistributionFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistribution {
 	return QuestQuestModelPlayTimeSecondsDistribution{
-		Statistics:   NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastQuestQuestModelPlayTimeSecondsDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *QuestQuestModelPlayTimeSecondsDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []QuestQuestModelPlayTimeSecondsDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastQuestQuestModelPlayTimeSecondsDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastQuestQuestModelPlayTimeSecondsDistributionSegmentsFromDict(
+		m["distribution"] = CastQuestQuestModelPlayTimeSecondsDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p QuestQuestModelPlayTimeSecondsDistribution) Pointer() *QuestQuestModelPlayTimeSecondsDistribution {
@@ -37219,19 +42867,27 @@ func NewQuestQuestModelDistributionsFromJson(data string) QuestQuestModelDistrib
 
 func NewQuestQuestModelDistributionsFromDict(data map[string]interface{}) QuestQuestModelDistributions {
 	return QuestQuestModelDistributions{
-		PlayTimeSeconds: NewQuestQuestModelPlayTimeSecondsDistributionFromDict(core.CastMap(data["playTimeSeconds"])).Pointer(),
+		PlayTimeSeconds: func() *QuestQuestModelPlayTimeSecondsDistribution {
+			v, ok := data["playTimeSeconds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestModelPlayTimeSecondsDistributionFromDict(core.CastMap(data["playTimeSeconds"])).Pointer()
+		}(),
 	}
 }
 
 func (p QuestQuestModelDistributions) ToDict() map[string]interface{} {
-
-	var playTimeSeconds map[string]interface{}
+	m := map[string]interface{}{}
 	if p.PlayTimeSeconds != nil {
-		playTimeSeconds = p.PlayTimeSeconds.ToDict()
+		m["playTimeSeconds"] = func() map[string]interface{} {
+			if p.PlayTimeSeconds == nil {
+				return nil
+			}
+			return p.PlayTimeSeconds.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"playTimeSeconds": playTimeSeconds,
-	}
+	return m
 }
 
 func (p QuestQuestModelDistributions) Pointer() *QuestQuestModelDistributions {
@@ -37347,37 +43003,62 @@ func NewQuestQuestModelFromJson(data string) QuestQuestModel {
 
 func NewQuestQuestModelFromDict(data map[string]interface{}) QuestQuestModel {
 	return QuestQuestModel{
-		QuestModelId:  core.CastString(data["questModelId"]),
-		QuestName:     core.CastString(data["questName"]),
-		Statistics:    NewQuestQuestModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewQuestQuestModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		QuestModelId: func() *string {
+			v, ok := data["questModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questModelId"])
+		}(),
+		QuestName: func() *string {
+			v, ok := data["questName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questName"])
+		}(),
+		Statistics: func() *QuestQuestModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *QuestQuestModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p QuestQuestModel) ToDict() map[string]interface{} {
-
-	var questModelId *string
+	m := map[string]interface{}{}
 	if p.QuestModelId != nil {
-		questModelId = p.QuestModelId
+		m["questModelId"] = p.QuestModelId
 	}
-	var questName *string
 	if p.QuestName != nil {
-		questName = p.QuestName
+		m["questName"] = p.QuestName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"questModelId":  questModelId,
-		"questName":     questName,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p QuestQuestModel) Pointer() *QuestQuestModel {
@@ -37453,37 +43134,52 @@ func NewQuestQuestGroupModelStatisticsFromJson(data string) QuestQuestGroupModel
 
 func NewQuestQuestGroupModelStatisticsFromDict(data map[string]interface{}) QuestQuestGroupModelStatistics {
 	return QuestQuestGroupModelStatistics{
-		StartQuest:     core.CastInt64(data["startQuest"]),
-		EndQuest:       core.CastInt64(data["endQuest"]),
-		Successful:     core.CastInt64(data["successful"]),
-		SuccessfulRate: core.CastFloat32(data["successfulRate"]),
+		StartQuest: func() *int64 {
+			v, ok := data["startQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["startQuest"])
+		}(),
+		EndQuest: func() *int64 {
+			v, ok := data["endQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["endQuest"])
+		}(),
+		Successful: func() *int64 {
+			v, ok := data["successful"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["successful"])
+		}(),
+		SuccessfulRate: func() *float32 {
+			v, ok := data["successfulRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["successfulRate"])
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModelStatistics) ToDict() map[string]interface{} {
-
-	var startQuest *int64
+	m := map[string]interface{}{}
 	if p.StartQuest != nil {
-		startQuest = p.StartQuest
+		m["startQuest"] = p.StartQuest
 	}
-	var endQuest *int64
 	if p.EndQuest != nil {
-		endQuest = p.EndQuest
+		m["endQuest"] = p.EndQuest
 	}
-	var successful *int64
 	if p.Successful != nil {
-		successful = p.Successful
+		m["successful"] = p.Successful
 	}
-	var successfulRate *float32
 	if p.SuccessfulRate != nil {
-		successfulRate = p.SuccessfulRate
+		m["successfulRate"] = p.SuccessfulRate
 	}
-	return map[string]interface{}{
-		"startQuest":     startQuest,
-		"endQuest":       endQuest,
-		"successful":     successful,
-		"successfulRate": successfulRate,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModelStatistics) Pointer() *QuestQuestGroupModelStatistics {
@@ -37567,49 +43263,72 @@ func NewQuestQuestGroupModelQuestDistributionStatisticsFromJson(data string) Que
 
 func NewQuestQuestGroupModelQuestDistributionStatisticsFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistributionStatistics {
 	return QuestQuestGroupModelQuestDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModelQuestDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModelQuestDistributionStatistics) Pointer() *QuestQuestGroupModelQuestDistributionStatistics {
@@ -37697,25 +43416,32 @@ func NewQuestQuestGroupModelQuestDistributionSegmentFromJson(data string) QuestQ
 
 func NewQuestQuestGroupModelQuestDistributionSegmentFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistributionSegment {
 	return QuestQuestGroupModelQuestDistributionSegment{
-		QuestName: core.CastString(data["questName"]),
-		Count:     core.CastInt64(data["count"]),
+		QuestName: func() *string {
+			v, ok := data["questName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModelQuestDistributionSegment) ToDict() map[string]interface{} {
-
-	var questName *string
+	m := map[string]interface{}{}
 	if p.QuestName != nil {
-		questName = p.QuestName
+		m["questName"] = p.QuestName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"questName": questName,
-		"count":     count,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModelQuestDistributionSegment) Pointer() *QuestQuestGroupModelQuestDistributionSegment {
@@ -37783,27 +43509,38 @@ func NewQuestQuestGroupModelQuestDistributionFromJson(data string) QuestQuestGro
 
 func NewQuestQuestGroupModelQuestDistributionFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistribution {
 	return QuestQuestGroupModelQuestDistribution{
-		Statistics:   NewQuestQuestGroupModelQuestDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastQuestQuestGroupModelQuestDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *QuestQuestGroupModelQuestDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestGroupModelQuestDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []QuestQuestGroupModelQuestDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastQuestQuestGroupModelQuestDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModelQuestDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastQuestQuestGroupModelQuestDistributionSegmentsFromDict(
+		m["distribution"] = CastQuestQuestGroupModelQuestDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModelQuestDistribution) Pointer() *QuestQuestGroupModelQuestDistribution {
@@ -37867,19 +43604,27 @@ func NewQuestQuestGroupModelDistributionsFromJson(data string) QuestQuestGroupMo
 
 func NewQuestQuestGroupModelDistributionsFromDict(data map[string]interface{}) QuestQuestGroupModelDistributions {
 	return QuestQuestGroupModelDistributions{
-		Quest: NewQuestQuestGroupModelQuestDistributionFromDict(core.CastMap(data["quest"])).Pointer(),
+		Quest: func() *QuestQuestGroupModelQuestDistribution {
+			v, ok := data["quest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestGroupModelQuestDistributionFromDict(core.CastMap(data["quest"])).Pointer()
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModelDistributions) ToDict() map[string]interface{} {
-
-	var quest map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Quest != nil {
-		quest = p.Quest.ToDict()
+		m["quest"] = func() map[string]interface{} {
+			if p.Quest == nil {
+				return nil
+			}
+			return p.Quest.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"quest": quest,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModelDistributions) Pointer() *QuestQuestGroupModelDistributions {
@@ -37999,45 +43744,73 @@ func NewQuestQuestGroupModelFromJson(data string) QuestQuestGroupModel {
 
 func NewQuestQuestGroupModelFromDict(data map[string]interface{}) QuestQuestGroupModel {
 	return QuestQuestGroupModel{
-		QuestGroupModelId: core.CastString(data["questGroupModelId"]),
-		QuestGroupName:    core.CastString(data["questGroupName"]),
-		Statistics:        NewQuestQuestGroupModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:     NewQuestQuestGroupModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		QuestModels:       CastQuestQuestModels(core.CastArray(data["questModels"])),
+		QuestGroupModelId: func() *string {
+			v, ok := data["questGroupModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupModelId"])
+		}(),
+		QuestGroupName: func() *string {
+			v, ok := data["questGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupName"])
+		}(),
+		Statistics: func() *QuestQuestGroupModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestGroupModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *QuestQuestGroupModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestQuestGroupModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		QuestModels: func() []QuestQuestModel {
+			if data["questModels"] == nil {
+				return nil
+			}
+			return CastQuestQuestModels(core.CastArray(data["questModels"]))
+		}(),
 	}
 }
 
 func (p QuestQuestGroupModel) ToDict() map[string]interface{} {
-
-	var questGroupModelId *string
+	m := map[string]interface{}{}
 	if p.QuestGroupModelId != nil {
-		questGroupModelId = p.QuestGroupModelId
+		m["questGroupModelId"] = p.QuestGroupModelId
 	}
-	var questGroupName *string
 	if p.QuestGroupName != nil {
-		questGroupName = p.QuestGroupName
+		m["questGroupName"] = p.QuestGroupName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var questModels []interface{}
 	if p.QuestModels != nil {
-		questModels = CastQuestQuestModelsFromDict(
+		m["questModels"] = CastQuestQuestModelsFromDict(
 			p.QuestModels,
 		)
 	}
-	return map[string]interface{}{
-		"questGroupModelId": questGroupModelId,
-		"questGroupName":    questGroupName,
-		"statistics":        statistics,
-		"distributions":     distributions,
-		"questModels":       questModels,
-	}
+	return m
 }
 
 func (p QuestQuestGroupModel) Pointer() *QuestQuestGroupModel {
@@ -38113,37 +43886,52 @@ func NewQuestNamespaceStatisticsFromJson(data string) QuestNamespaceStatistics {
 
 func NewQuestNamespaceStatisticsFromDict(data map[string]interface{}) QuestNamespaceStatistics {
 	return QuestNamespaceStatistics{
-		StartQuest:     core.CastInt64(data["startQuest"]),
-		EndQuest:       core.CastInt64(data["endQuest"]),
-		Successful:     core.CastInt64(data["successful"]),
-		SuccessfulRate: core.CastFloat32(data["successfulRate"]),
+		StartQuest: func() *int64 {
+			v, ok := data["startQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["startQuest"])
+		}(),
+		EndQuest: func() *int64 {
+			v, ok := data["endQuest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["endQuest"])
+		}(),
+		Successful: func() *int64 {
+			v, ok := data["successful"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["successful"])
+		}(),
+		SuccessfulRate: func() *float32 {
+			v, ok := data["successfulRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["successfulRate"])
+		}(),
 	}
 }
 
 func (p QuestNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var startQuest *int64
+	m := map[string]interface{}{}
 	if p.StartQuest != nil {
-		startQuest = p.StartQuest
+		m["startQuest"] = p.StartQuest
 	}
-	var endQuest *int64
 	if p.EndQuest != nil {
-		endQuest = p.EndQuest
+		m["endQuest"] = p.EndQuest
 	}
-	var successful *int64
 	if p.Successful != nil {
-		successful = p.Successful
+		m["successful"] = p.Successful
 	}
-	var successfulRate *float32
 	if p.SuccessfulRate != nil {
-		successfulRate = p.SuccessfulRate
+		m["successfulRate"] = p.SuccessfulRate
 	}
-	return map[string]interface{}{
-		"startQuest":     startQuest,
-		"endQuest":       endQuest,
-		"successful":     successful,
-		"successfulRate": successfulRate,
-	}
+	return m
 }
 
 func (p QuestNamespaceStatistics) Pointer() *QuestNamespaceStatistics {
@@ -38227,49 +44015,72 @@ func NewQuestNamespaceQuestDistributionStatisticsFromJson(data string) QuestName
 
 func NewQuestNamespaceQuestDistributionStatisticsFromDict(data map[string]interface{}) QuestNamespaceQuestDistributionStatistics {
 	return QuestNamespaceQuestDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p QuestNamespaceQuestDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p QuestNamespaceQuestDistributionStatistics) Pointer() *QuestNamespaceQuestDistributionStatistics {
@@ -38357,25 +44168,32 @@ func NewQuestNamespaceQuestDistributionSegmentFromJson(data string) QuestNamespa
 
 func NewQuestNamespaceQuestDistributionSegmentFromDict(data map[string]interface{}) QuestNamespaceQuestDistributionSegment {
 	return QuestNamespaceQuestDistributionSegment{
-		QuestGroupName: core.CastString(data["questGroupName"]),
-		Count:          core.CastInt64(data["count"]),
+		QuestGroupName: func() *string {
+			v, ok := data["questGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["questGroupName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p QuestNamespaceQuestDistributionSegment) ToDict() map[string]interface{} {
-
-	var questGroupName *string
+	m := map[string]interface{}{}
 	if p.QuestGroupName != nil {
-		questGroupName = p.QuestGroupName
+		m["questGroupName"] = p.QuestGroupName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"questGroupName": questGroupName,
-		"count":          count,
-	}
+	return m
 }
 
 func (p QuestNamespaceQuestDistributionSegment) Pointer() *QuestNamespaceQuestDistributionSegment {
@@ -38443,27 +44261,38 @@ func NewQuestNamespaceQuestDistributionFromJson(data string) QuestNamespaceQuest
 
 func NewQuestNamespaceQuestDistributionFromDict(data map[string]interface{}) QuestNamespaceQuestDistribution {
 	return QuestNamespaceQuestDistribution{
-		Statistics:   NewQuestNamespaceQuestDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastQuestNamespaceQuestDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *QuestNamespaceQuestDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestNamespaceQuestDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []QuestNamespaceQuestDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastQuestNamespaceQuestDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p QuestNamespaceQuestDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastQuestNamespaceQuestDistributionSegmentsFromDict(
+		m["distribution"] = CastQuestNamespaceQuestDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p QuestNamespaceQuestDistribution) Pointer() *QuestNamespaceQuestDistribution {
@@ -38527,19 +44356,27 @@ func NewQuestNamespaceDistributionsFromJson(data string) QuestNamespaceDistribut
 
 func NewQuestNamespaceDistributionsFromDict(data map[string]interface{}) QuestNamespaceDistributions {
 	return QuestNamespaceDistributions{
-		Quest: NewQuestNamespaceQuestDistributionFromDict(core.CastMap(data["quest"])).Pointer(),
+		Quest: func() *QuestNamespaceQuestDistribution {
+			v, ok := data["quest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestNamespaceQuestDistributionFromDict(core.CastMap(data["quest"])).Pointer()
+		}(),
 	}
 }
 
 func (p QuestNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var quest map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Quest != nil {
-		quest = p.Quest.ToDict()
+		m["quest"] = func() map[string]interface{} {
+			if p.Quest == nil {
+				return nil
+			}
+			return p.Quest.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"quest": quest,
-	}
+	return m
 }
 
 func (p QuestNamespaceDistributions) Pointer() *QuestNamespaceDistributions {
@@ -38671,63 +44508,103 @@ func NewQuestNamespaceFromJson(data string) QuestNamespace {
 
 func NewQuestNamespaceFromDict(data map[string]interface{}) QuestNamespace {
 	return QuestNamespace{
-		NamespaceId:      core.CastString(data["namespaceId"]),
-		Year:             core.CastInt32(data["year"]),
-		Month:            core.CastInt32(data["month"]),
-		Day:              core.CastInt32(data["day"]),
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		Statistics:       NewQuestNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:    NewQuestNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		QuestGroupModels: CastQuestQuestGroupModels(core.CastArray(data["questGroupModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *QuestNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *QuestNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewQuestNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		QuestGroupModels: func() []QuestQuestGroupModel {
+			if data["questGroupModels"] == nil {
+				return nil
+			}
+			return CastQuestQuestGroupModels(core.CastArray(data["questGroupModels"]))
+		}(),
 	}
 }
 
 func (p QuestNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var questGroupModels []interface{}
 	if p.QuestGroupModels != nil {
-		questGroupModels = CastQuestQuestGroupModelsFromDict(
+		m["questGroupModels"] = CastQuestQuestGroupModelsFromDict(
 			p.QuestGroupModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":      namespaceId,
-		"year":             year,
-		"month":            month,
-		"day":              day,
-		"namespaceName":    namespaceName,
-		"statistics":       statistics,
-		"distributions":    distributions,
-		"questGroupModels": questGroupModels,
-	}
+	return m
 }
 
 func (p QuestNamespace) Pointer() *QuestNamespace {
@@ -38791,19 +44668,22 @@ func NewRankingCategoryModelStatisticsFromJson(data string) RankingCategoryModel
 
 func NewRankingCategoryModelStatisticsFromDict(data map[string]interface{}) RankingCategoryModelStatistics {
 	return RankingCategoryModelStatistics{
-		Put: core.CastInt64(data["put"]),
+		Put: func() *int64 {
+			v, ok := data["put"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["put"])
+		}(),
 	}
 }
 
 func (p RankingCategoryModelStatistics) ToDict() map[string]interface{} {
-
-	var put *int64
+	m := map[string]interface{}{}
 	if p.Put != nil {
-		put = p.Put
+		m["put"] = p.Put
 	}
-	return map[string]interface{}{
-		"put": put,
-	}
+	return m
 }
 
 func (p RankingCategoryModelStatistics) Pointer() *RankingCategoryModelStatistics {
@@ -38887,49 +44767,72 @@ func NewRankingCategoryModelScoreDistributionStatisticsFromJson(data string) Ran
 
 func NewRankingCategoryModelScoreDistributionStatisticsFromDict(data map[string]interface{}) RankingCategoryModelScoreDistributionStatistics {
 	return RankingCategoryModelScoreDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p RankingCategoryModelScoreDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p RankingCategoryModelScoreDistributionStatistics) Pointer() *RankingCategoryModelScoreDistributionStatistics {
@@ -39001,31 +44904,42 @@ func NewRankingCategoryModelScoreDistributionSegmentFromJson(data string) Rankin
 
 func NewRankingCategoryModelScoreDistributionSegmentFromDict(data map[string]interface{}) RankingCategoryModelScoreDistributionSegment {
 	return RankingCategoryModelScoreDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p RankingCategoryModelScoreDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p RankingCategoryModelScoreDistributionSegment) Pointer() *RankingCategoryModelScoreDistributionSegment {
@@ -39093,27 +45007,38 @@ func NewRankingCategoryModelScoreDistributionFromJson(data string) RankingCatego
 
 func NewRankingCategoryModelScoreDistributionFromDict(data map[string]interface{}) RankingCategoryModelScoreDistribution {
 	return RankingCategoryModelScoreDistribution{
-		Statistics:   NewRankingCategoryModelScoreDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastRankingCategoryModelScoreDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *RankingCategoryModelScoreDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingCategoryModelScoreDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []RankingCategoryModelScoreDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastRankingCategoryModelScoreDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p RankingCategoryModelScoreDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastRankingCategoryModelScoreDistributionSegmentsFromDict(
+		m["distribution"] = CastRankingCategoryModelScoreDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p RankingCategoryModelScoreDistribution) Pointer() *RankingCategoryModelScoreDistribution {
@@ -39177,19 +45102,27 @@ func NewRankingCategoryModelDistributionsFromJson(data string) RankingCategoryMo
 
 func NewRankingCategoryModelDistributionsFromDict(data map[string]interface{}) RankingCategoryModelDistributions {
 	return RankingCategoryModelDistributions{
-		Score: NewRankingCategoryModelScoreDistributionFromDict(core.CastMap(data["score"])).Pointer(),
+		Score: func() *RankingCategoryModelScoreDistribution {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingCategoryModelScoreDistributionFromDict(core.CastMap(data["score"])).Pointer()
+		}(),
 	}
 }
 
 func (p RankingCategoryModelDistributions) ToDict() map[string]interface{} {
-
-	var score map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Score != nil {
-		score = p.Score.ToDict()
+		m["score"] = func() map[string]interface{} {
+			if p.Score == nil {
+				return nil
+			}
+			return p.Score.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"score": score,
-	}
+	return m
 }
 
 func (p RankingCategoryModelDistributions) Pointer() *RankingCategoryModelDistributions {
@@ -39305,37 +45238,62 @@ func NewRankingCategoryModelFromJson(data string) RankingCategoryModel {
 
 func NewRankingCategoryModelFromDict(data map[string]interface{}) RankingCategoryModel {
 	return RankingCategoryModel{
-		CategoryModelId: core.CastString(data["categoryModelId"]),
-		CategoryName:    core.CastString(data["categoryName"]),
-		Statistics:      NewRankingCategoryModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:   NewRankingCategoryModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		CategoryModelId: func() *string {
+			v, ok := data["categoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryModelId"])
+		}(),
+		CategoryName: func() *string {
+			v, ok := data["categoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryName"])
+		}(),
+		Statistics: func() *RankingCategoryModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingCategoryModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *RankingCategoryModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingCategoryModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p RankingCategoryModel) ToDict() map[string]interface{} {
-
-	var categoryModelId *string
+	m := map[string]interface{}{}
 	if p.CategoryModelId != nil {
-		categoryModelId = p.CategoryModelId
+		m["categoryModelId"] = p.CategoryModelId
 	}
-	var categoryName *string
 	if p.CategoryName != nil {
-		categoryName = p.CategoryName
+		m["categoryName"] = p.CategoryName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"categoryModelId": categoryModelId,
-		"categoryName":    categoryName,
-		"statistics":      statistics,
-		"distributions":   distributions,
-	}
+	return m
 }
 
 func (p RankingCategoryModel) Pointer() *RankingCategoryModel {
@@ -39399,19 +45357,22 @@ func NewRankingNamespaceStatisticsFromJson(data string) RankingNamespaceStatisti
 
 func NewRankingNamespaceStatisticsFromDict(data map[string]interface{}) RankingNamespaceStatistics {
 	return RankingNamespaceStatistics{
-		Put: core.CastInt64(data["put"]),
+		Put: func() *int64 {
+			v, ok := data["put"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["put"])
+		}(),
 	}
 }
 
 func (p RankingNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var put *int64
+	m := map[string]interface{}{}
 	if p.Put != nil {
-		put = p.Put
+		m["put"] = p.Put
 	}
-	return map[string]interface{}{
-		"put": put,
-	}
+	return m
 }
 
 func (p RankingNamespaceStatistics) Pointer() *RankingNamespaceStatistics {
@@ -39495,49 +45456,72 @@ func NewRankingNamespacePutDistributionStatisticsFromJson(data string) RankingNa
 
 func NewRankingNamespacePutDistributionStatisticsFromDict(data map[string]interface{}) RankingNamespacePutDistributionStatistics {
 	return RankingNamespacePutDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p RankingNamespacePutDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p RankingNamespacePutDistributionStatistics) Pointer() *RankingNamespacePutDistributionStatistics {
@@ -39625,25 +45609,32 @@ func NewRankingNamespacePutDistributionSegmentFromJson(data string) RankingNames
 
 func NewRankingNamespacePutDistributionSegmentFromDict(data map[string]interface{}) RankingNamespacePutDistributionSegment {
 	return RankingNamespacePutDistributionSegment{
-		CategoryName: core.CastString(data["categoryName"]),
-		Count:        core.CastInt64(data["count"]),
+		CategoryName: func() *string {
+			v, ok := data["categoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p RankingNamespacePutDistributionSegment) ToDict() map[string]interface{} {
-
-	var categoryName *string
+	m := map[string]interface{}{}
 	if p.CategoryName != nil {
-		categoryName = p.CategoryName
+		m["categoryName"] = p.CategoryName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"categoryName": categoryName,
-		"count":        count,
-	}
+	return m
 }
 
 func (p RankingNamespacePutDistributionSegment) Pointer() *RankingNamespacePutDistributionSegment {
@@ -39711,27 +45702,38 @@ func NewRankingNamespacePutDistributionFromJson(data string) RankingNamespacePut
 
 func NewRankingNamespacePutDistributionFromDict(data map[string]interface{}) RankingNamespacePutDistribution {
 	return RankingNamespacePutDistribution{
-		Statistics:   NewRankingNamespacePutDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastRankingNamespacePutDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *RankingNamespacePutDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingNamespacePutDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []RankingNamespacePutDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastRankingNamespacePutDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p RankingNamespacePutDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastRankingNamespacePutDistributionSegmentsFromDict(
+		m["distribution"] = CastRankingNamespacePutDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p RankingNamespacePutDistribution) Pointer() *RankingNamespacePutDistribution {
@@ -39795,19 +45797,27 @@ func NewRankingNamespaceDistributionsFromJson(data string) RankingNamespaceDistr
 
 func NewRankingNamespaceDistributionsFromDict(data map[string]interface{}) RankingNamespaceDistributions {
 	return RankingNamespaceDistributions{
-		Put: NewRankingNamespacePutDistributionFromDict(core.CastMap(data["put"])).Pointer(),
+		Put: func() *RankingNamespacePutDistribution {
+			v, ok := data["put"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingNamespacePutDistributionFromDict(core.CastMap(data["put"])).Pointer()
+		}(),
 	}
 }
 
 func (p RankingNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var put map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Put != nil {
-		put = p.Put.ToDict()
+		m["put"] = func() map[string]interface{} {
+			if p.Put == nil {
+				return nil
+			}
+			return p.Put.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"put": put,
-	}
+	return m
 }
 
 func (p RankingNamespaceDistributions) Pointer() *RankingNamespaceDistributions {
@@ -39939,63 +45949,103 @@ func NewRankingNamespaceFromJson(data string) RankingNamespace {
 
 func NewRankingNamespaceFromDict(data map[string]interface{}) RankingNamespace {
 	return RankingNamespace{
-		NamespaceId:    core.CastString(data["namespaceId"]),
-		Year:           core.CastInt32(data["year"]),
-		Month:          core.CastInt32(data["month"]),
-		Day:            core.CastInt32(data["day"]),
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		Statistics:     NewRankingNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:  NewRankingNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		CategoryModels: CastRankingCategoryModels(core.CastArray(data["categoryModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *RankingNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *RankingNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRankingNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		CategoryModels: func() []RankingCategoryModel {
+			if data["categoryModels"] == nil {
+				return nil
+			}
+			return CastRankingCategoryModels(core.CastArray(data["categoryModels"]))
+		}(),
 	}
 }
 
 func (p RankingNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var categoryModels []interface{}
 	if p.CategoryModels != nil {
-		categoryModels = CastRankingCategoryModelsFromDict(
+		m["categoryModels"] = CastRankingCategoryModelsFromDict(
 			p.CategoryModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":    namespaceId,
-		"year":           year,
-		"month":          month,
-		"day":            day,
-		"namespaceName":  namespaceName,
-		"statistics":     statistics,
-		"distributions":  distributions,
-		"categoryModels": categoryModels,
-	}
+	return m
 }
 
 func (p RankingNamespace) Pointer() *RankingNamespace {
@@ -40059,19 +46109,22 @@ func NewShowcaseDisplayItemStatisticsFromJson(data string) ShowcaseDisplayItemSt
 
 func NewShowcaseDisplayItemStatisticsFromDict(data map[string]interface{}) ShowcaseDisplayItemStatistics {
 	return ShowcaseDisplayItemStatistics{
-		Buy: core.CastInt64(data["buy"]),
+		Buy: func() *int64 {
+			v, ok := data["buy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["buy"])
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItemStatistics) ToDict() map[string]interface{} {
-
-	var buy *int64
+	m := map[string]interface{}{}
 	if p.Buy != nil {
-		buy = p.Buy
+		m["buy"] = p.Buy
 	}
-	return map[string]interface{}{
-		"buy": buy,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItemStatistics) Pointer() *ShowcaseDisplayItemStatistics {
@@ -40155,49 +46208,72 @@ func NewShowcaseDisplayItemQuantityDistributionStatisticsFromJson(data string) S
 
 func NewShowcaseDisplayItemQuantityDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistributionStatistics {
 	return ShowcaseDisplayItemQuantityDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItemQuantityDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItemQuantityDistributionStatistics) Pointer() *ShowcaseDisplayItemQuantityDistributionStatistics {
@@ -40269,31 +46345,42 @@ func NewShowcaseDisplayItemQuantityDistributionSegmentFromJson(data string) Show
 
 func NewShowcaseDisplayItemQuantityDistributionSegmentFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistributionSegment {
 	return ShowcaseDisplayItemQuantityDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItemQuantityDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItemQuantityDistributionSegment) Pointer() *ShowcaseDisplayItemQuantityDistributionSegment {
@@ -40361,27 +46448,38 @@ func NewShowcaseDisplayItemQuantityDistributionFromJson(data string) ShowcaseDis
 
 func NewShowcaseDisplayItemQuantityDistributionFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistribution {
 	return ShowcaseDisplayItemQuantityDistribution{
-		Statistics:   NewShowcaseDisplayItemQuantityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastShowcaseDisplayItemQuantityDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ShowcaseDisplayItemQuantityDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseDisplayItemQuantityDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ShowcaseDisplayItemQuantityDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastShowcaseDisplayItemQuantityDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItemQuantityDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastShowcaseDisplayItemQuantityDistributionSegmentsFromDict(
+		m["distribution"] = CastShowcaseDisplayItemQuantityDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItemQuantityDistribution) Pointer() *ShowcaseDisplayItemQuantityDistribution {
@@ -40445,19 +46543,27 @@ func NewShowcaseDisplayItemDistributionsFromJson(data string) ShowcaseDisplayIte
 
 func NewShowcaseDisplayItemDistributionsFromDict(data map[string]interface{}) ShowcaseDisplayItemDistributions {
 	return ShowcaseDisplayItemDistributions{
-		Quantity: NewShowcaseDisplayItemQuantityDistributionFromDict(core.CastMap(data["quantity"])).Pointer(),
+		Quantity: func() *ShowcaseDisplayItemQuantityDistribution {
+			v, ok := data["quantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseDisplayItemQuantityDistributionFromDict(core.CastMap(data["quantity"])).Pointer()
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItemDistributions) ToDict() map[string]interface{} {
-
-	var quantity map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Quantity != nil {
-		quantity = p.Quantity.ToDict()
+		m["quantity"] = func() map[string]interface{} {
+			if p.Quantity == nil {
+				return nil
+			}
+			return p.Quantity.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"quantity": quantity,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItemDistributions) Pointer() *ShowcaseDisplayItemDistributions {
@@ -40549,31 +46655,52 @@ func NewShowcaseDisplayItemFromJson(data string) ShowcaseDisplayItem {
 
 func NewShowcaseDisplayItemFromDict(data map[string]interface{}) ShowcaseDisplayItem {
 	return ShowcaseDisplayItem{
-		DisplayItemId: core.CastString(data["displayItemId"]),
-		Statistics:    NewShowcaseDisplayItemStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewShowcaseDisplayItemDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		DisplayItemId: func() *string {
+			v, ok := data["displayItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayItemId"])
+		}(),
+		Statistics: func() *ShowcaseDisplayItemStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseDisplayItemStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ShowcaseDisplayItemDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseDisplayItemDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p ShowcaseDisplayItem) ToDict() map[string]interface{} {
-
-	var displayItemId *string
+	m := map[string]interface{}{}
 	if p.DisplayItemId != nil {
-		displayItemId = p.DisplayItemId
+		m["displayItemId"] = p.DisplayItemId
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"displayItemId": displayItemId,
-		"statistics":    statistics,
-		"distributions": distributions,
-	}
+	return m
 }
 
 func (p ShowcaseDisplayItem) Pointer() *ShowcaseDisplayItem {
@@ -40637,19 +46764,22 @@ func NewShowcaseShowcaseStatisticsFromJson(data string) ShowcaseShowcaseStatisti
 
 func NewShowcaseShowcaseStatisticsFromDict(data map[string]interface{}) ShowcaseShowcaseStatistics {
 	return ShowcaseShowcaseStatistics{
-		Buy: core.CastInt64(data["buy"]),
+		Buy: func() *int64 {
+			v, ok := data["buy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["buy"])
+		}(),
 	}
 }
 
 func (p ShowcaseShowcaseStatistics) ToDict() map[string]interface{} {
-
-	var buy *int64
+	m := map[string]interface{}{}
 	if p.Buy != nil {
-		buy = p.Buy
+		m["buy"] = p.Buy
 	}
-	return map[string]interface{}{
-		"buy": buy,
-	}
+	return m
 }
 
 func (p ShowcaseShowcaseStatistics) Pointer() *ShowcaseShowcaseStatistics {
@@ -40733,49 +46863,72 @@ func NewShowcaseShowcaseBuyDistributionStatisticsFromJson(data string) ShowcaseS
 
 func NewShowcaseShowcaseBuyDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistributionStatistics {
 	return ShowcaseShowcaseBuyDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ShowcaseShowcaseBuyDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ShowcaseShowcaseBuyDistributionStatistics) Pointer() *ShowcaseShowcaseBuyDistributionStatistics {
@@ -40863,25 +47016,32 @@ func NewShowcaseShowcaseBuyDistributionSegmentFromJson(data string) ShowcaseShow
 
 func NewShowcaseShowcaseBuyDistributionSegmentFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistributionSegment {
 	return ShowcaseShowcaseBuyDistributionSegment{
-		DisplayItemId: core.CastString(data["displayItemId"]),
-		Count:         core.CastInt64(data["count"]),
+		DisplayItemId: func() *string {
+			v, ok := data["displayItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayItemId"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ShowcaseShowcaseBuyDistributionSegment) ToDict() map[string]interface{} {
-
-	var displayItemId *string
+	m := map[string]interface{}{}
 	if p.DisplayItemId != nil {
-		displayItemId = p.DisplayItemId
+		m["displayItemId"] = p.DisplayItemId
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"displayItemId": displayItemId,
-		"count":         count,
-	}
+	return m
 }
 
 func (p ShowcaseShowcaseBuyDistributionSegment) Pointer() *ShowcaseShowcaseBuyDistributionSegment {
@@ -40949,27 +47109,38 @@ func NewShowcaseShowcaseBuyDistributionFromJson(data string) ShowcaseShowcaseBuy
 
 func NewShowcaseShowcaseBuyDistributionFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistribution {
 	return ShowcaseShowcaseBuyDistribution{
-		Statistics:   NewShowcaseShowcaseBuyDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastShowcaseShowcaseBuyDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ShowcaseShowcaseBuyDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseShowcaseBuyDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ShowcaseShowcaseBuyDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastShowcaseShowcaseBuyDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ShowcaseShowcaseBuyDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastShowcaseShowcaseBuyDistributionSegmentsFromDict(
+		m["distribution"] = CastShowcaseShowcaseBuyDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ShowcaseShowcaseBuyDistribution) Pointer() *ShowcaseShowcaseBuyDistribution {
@@ -41033,19 +47204,27 @@ func NewShowcaseShowcaseDistributionsFromJson(data string) ShowcaseShowcaseDistr
 
 func NewShowcaseShowcaseDistributionsFromDict(data map[string]interface{}) ShowcaseShowcaseDistributions {
 	return ShowcaseShowcaseDistributions{
-		Buy: NewShowcaseShowcaseBuyDistributionFromDict(core.CastMap(data["buy"])).Pointer(),
+		Buy: func() *ShowcaseShowcaseBuyDistribution {
+			v, ok := data["buy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseShowcaseBuyDistributionFromDict(core.CastMap(data["buy"])).Pointer()
+		}(),
 	}
 }
 
 func (p ShowcaseShowcaseDistributions) ToDict() map[string]interface{} {
-
-	var buy map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Buy != nil {
-		buy = p.Buy.ToDict()
+		m["buy"] = func() map[string]interface{} {
+			if p.Buy == nil {
+				return nil
+			}
+			return p.Buy.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"buy": buy,
-	}
+	return m
 }
 
 func (p ShowcaseShowcaseDistributions) Pointer() *ShowcaseShowcaseDistributions {
@@ -41165,45 +47344,73 @@ func NewShowcaseShowcaseFromJson(data string) ShowcaseShowcase {
 
 func NewShowcaseShowcaseFromDict(data map[string]interface{}) ShowcaseShowcase {
 	return ShowcaseShowcase{
-		ShowcaseId:    core.CastString(data["showcaseId"]),
-		ShowcaseName:  core.CastString(data["showcaseName"]),
-		Statistics:    NewShowcaseShowcaseStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewShowcaseShowcaseDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		DisplayItems:  CastShowcaseDisplayItems(core.CastArray(data["displayItems"])),
+		ShowcaseId: func() *string {
+			v, ok := data["showcaseId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseId"])
+		}(),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
+		Statistics: func() *ShowcaseShowcaseStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseShowcaseStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ShowcaseShowcaseDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseShowcaseDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		DisplayItems: func() []ShowcaseDisplayItem {
+			if data["displayItems"] == nil {
+				return nil
+			}
+			return CastShowcaseDisplayItems(core.CastArray(data["displayItems"]))
+		}(),
 	}
 }
 
 func (p ShowcaseShowcase) ToDict() map[string]interface{} {
-
-	var showcaseId *string
+	m := map[string]interface{}{}
 	if p.ShowcaseId != nil {
-		showcaseId = p.ShowcaseId
+		m["showcaseId"] = p.ShowcaseId
 	}
-	var showcaseName *string
 	if p.ShowcaseName != nil {
-		showcaseName = p.ShowcaseName
+		m["showcaseName"] = p.ShowcaseName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var displayItems []interface{}
 	if p.DisplayItems != nil {
-		displayItems = CastShowcaseDisplayItemsFromDict(
+		m["displayItems"] = CastShowcaseDisplayItemsFromDict(
 			p.DisplayItems,
 		)
 	}
-	return map[string]interface{}{
-		"showcaseId":    showcaseId,
-		"showcaseName":  showcaseName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"displayItems":  displayItems,
-	}
+	return m
 }
 
 func (p ShowcaseShowcase) Pointer() *ShowcaseShowcase {
@@ -41267,19 +47474,22 @@ func NewShowcaseNamespaceStatisticsFromJson(data string) ShowcaseNamespaceStatis
 
 func NewShowcaseNamespaceStatisticsFromDict(data map[string]interface{}) ShowcaseNamespaceStatistics {
 	return ShowcaseNamespaceStatistics{
-		Buy: core.CastInt64(data["buy"]),
+		Buy: func() *int64 {
+			v, ok := data["buy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["buy"])
+		}(),
 	}
 }
 
 func (p ShowcaseNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var buy *int64
+	m := map[string]interface{}{}
 	if p.Buy != nil {
-		buy = p.Buy
+		m["buy"] = p.Buy
 	}
-	return map[string]interface{}{
-		"buy": buy,
-	}
+	return m
 }
 
 func (p ShowcaseNamespaceStatistics) Pointer() *ShowcaseNamespaceStatistics {
@@ -41363,49 +47573,72 @@ func NewShowcaseNamespaceBuyDistributionStatisticsFromJson(data string) Showcase
 
 func NewShowcaseNamespaceBuyDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistributionStatistics {
 	return ShowcaseNamespaceBuyDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p ShowcaseNamespaceBuyDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p ShowcaseNamespaceBuyDistributionStatistics) Pointer() *ShowcaseNamespaceBuyDistributionStatistics {
@@ -41493,25 +47726,32 @@ func NewShowcaseNamespaceBuyDistributionSegmentFromJson(data string) ShowcaseNam
 
 func NewShowcaseNamespaceBuyDistributionSegmentFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistributionSegment {
 	return ShowcaseNamespaceBuyDistributionSegment{
-		ShowcaseName: core.CastString(data["showcaseName"]),
-		Count:        core.CastInt64(data["count"]),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p ShowcaseNamespaceBuyDistributionSegment) ToDict() map[string]interface{} {
-
-	var showcaseName *string
+	m := map[string]interface{}{}
 	if p.ShowcaseName != nil {
-		showcaseName = p.ShowcaseName
+		m["showcaseName"] = p.ShowcaseName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"showcaseName": showcaseName,
-		"count":        count,
-	}
+	return m
 }
 
 func (p ShowcaseNamespaceBuyDistributionSegment) Pointer() *ShowcaseNamespaceBuyDistributionSegment {
@@ -41579,27 +47819,38 @@ func NewShowcaseNamespaceBuyDistributionFromJson(data string) ShowcaseNamespaceB
 
 func NewShowcaseNamespaceBuyDistributionFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistribution {
 	return ShowcaseNamespaceBuyDistribution{
-		Statistics:   NewShowcaseNamespaceBuyDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastShowcaseNamespaceBuyDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *ShowcaseNamespaceBuyDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseNamespaceBuyDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []ShowcaseNamespaceBuyDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastShowcaseNamespaceBuyDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p ShowcaseNamespaceBuyDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastShowcaseNamespaceBuyDistributionSegmentsFromDict(
+		m["distribution"] = CastShowcaseNamespaceBuyDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p ShowcaseNamespaceBuyDistribution) Pointer() *ShowcaseNamespaceBuyDistribution {
@@ -41663,19 +47914,27 @@ func NewShowcaseNamespaceDistributionsFromJson(data string) ShowcaseNamespaceDis
 
 func NewShowcaseNamespaceDistributionsFromDict(data map[string]interface{}) ShowcaseNamespaceDistributions {
 	return ShowcaseNamespaceDistributions{
-		Buy: NewShowcaseNamespaceBuyDistributionFromDict(core.CastMap(data["buy"])).Pointer(),
+		Buy: func() *ShowcaseNamespaceBuyDistribution {
+			v, ok := data["buy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseNamespaceBuyDistributionFromDict(core.CastMap(data["buy"])).Pointer()
+		}(),
 	}
 }
 
 func (p ShowcaseNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var buy map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Buy != nil {
-		buy = p.Buy.ToDict()
+		m["buy"] = func() map[string]interface{} {
+			if p.Buy == nil {
+				return nil
+			}
+			return p.Buy.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"buy": buy,
-	}
+	return m
 }
 
 func (p ShowcaseNamespaceDistributions) Pointer() *ShowcaseNamespaceDistributions {
@@ -41807,63 +48066,103 @@ func NewShowcaseNamespaceFromJson(data string) ShowcaseNamespace {
 
 func NewShowcaseNamespaceFromDict(data map[string]interface{}) ShowcaseNamespace {
 	return ShowcaseNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewShowcaseNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewShowcaseNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		Showcases:     CastShowcaseShowcases(core.CastArray(data["showcases"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *ShowcaseNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *ShowcaseNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewShowcaseNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		Showcases: func() []ShowcaseShowcase {
+			if data["showcases"] == nil {
+				return nil
+			}
+			return CastShowcaseShowcases(core.CastArray(data["showcases"]))
+		}(),
 	}
 }
 
 func (p ShowcaseNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var showcases []interface{}
 	if p.Showcases != nil {
-		showcases = CastShowcaseShowcasesFromDict(
+		m["showcases"] = CastShowcaseShowcasesFromDict(
 			p.Showcases,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"showcases":     showcases,
-	}
+	return m
 }
 
 func (p ShowcaseNamespace) Pointer() *ShowcaseNamespace {
@@ -41939,37 +48238,52 @@ func NewStaminaStaminaModelStatisticsFromJson(data string) StaminaStaminaModelSt
 
 func NewStaminaStaminaModelStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelStatistics {
 	return StaminaStaminaModelStatistics{
-		Consume:       core.CastInt64(data["consume"]),
-		ConsumeAmount: core.CastInt64(data["consumeAmount"]),
-		Recover:       core.CastInt64(data["recover"]),
-		RecoverAmount: core.CastInt64(data["recoverAmount"]),
+		Consume: func() *int64 {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consume"])
+		}(),
+		ConsumeAmount: func() *int64 {
+			v, ok := data["consumeAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumeAmount"])
+		}(),
+		Recover: func() *int64 {
+			v, ok := data["recover"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["recover"])
+		}(),
+		RecoverAmount: func() *int64 {
+			v, ok := data["recoverAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["recoverAmount"])
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelStatistics) ToDict() map[string]interface{} {
-
-	var consume *int64
+	m := map[string]interface{}{}
 	if p.Consume != nil {
-		consume = p.Consume
+		m["consume"] = p.Consume
 	}
-	var consumeAmount *int64
 	if p.ConsumeAmount != nil {
-		consumeAmount = p.ConsumeAmount
+		m["consumeAmount"] = p.ConsumeAmount
 	}
-	var recover *int64
 	if p.Recover != nil {
-		recover = p.Recover
+		m["recover"] = p.Recover
 	}
-	var recoverAmount *int64
 	if p.RecoverAmount != nil {
-		recoverAmount = p.RecoverAmount
+		m["recoverAmount"] = p.RecoverAmount
 	}
-	return map[string]interface{}{
-		"consume":       consume,
-		"consumeAmount": consumeAmount,
-		"recover":       recover,
-		"recoverAmount": recoverAmount,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelStatistics) Pointer() *StaminaStaminaModelStatistics {
@@ -42053,49 +48367,72 @@ func NewStaminaStaminaModelConsumeDistributionStatisticsFromJson(data string) St
 
 func NewStaminaStaminaModelConsumeDistributionStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistributionStatistics {
 	return StaminaStaminaModelConsumeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelConsumeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelConsumeDistributionStatistics) Pointer() *StaminaStaminaModelConsumeDistributionStatistics {
@@ -42167,31 +48504,42 @@ func NewStaminaStaminaModelConsumeDistributionSegmentFromJson(data string) Stami
 
 func NewStaminaStaminaModelConsumeDistributionSegmentFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistributionSegment {
 	return StaminaStaminaModelConsumeDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelConsumeDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelConsumeDistributionSegment) Pointer() *StaminaStaminaModelConsumeDistributionSegment {
@@ -42259,27 +48607,38 @@ func NewStaminaStaminaModelConsumeDistributionFromJson(data string) StaminaStami
 
 func NewStaminaStaminaModelConsumeDistributionFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistribution {
 	return StaminaStaminaModelConsumeDistribution{
-		Statistics:   NewStaminaStaminaModelConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastStaminaStaminaModelConsumeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *StaminaStaminaModelConsumeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []StaminaStaminaModelConsumeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastStaminaStaminaModelConsumeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelConsumeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastStaminaStaminaModelConsumeDistributionSegmentsFromDict(
+		m["distribution"] = CastStaminaStaminaModelConsumeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelConsumeDistribution) Pointer() *StaminaStaminaModelConsumeDistribution {
@@ -42363,49 +48722,72 @@ func NewStaminaStaminaModelRecoverDistributionStatisticsFromJson(data string) St
 
 func NewStaminaStaminaModelRecoverDistributionStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistributionStatistics {
 	return StaminaStaminaModelRecoverDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelRecoverDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelRecoverDistributionStatistics) Pointer() *StaminaStaminaModelRecoverDistributionStatistics {
@@ -42477,31 +48859,42 @@ func NewStaminaStaminaModelRecoverDistributionSegmentFromJson(data string) Stami
 
 func NewStaminaStaminaModelRecoverDistributionSegmentFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistributionSegment {
 	return StaminaStaminaModelRecoverDistributionSegment{
-		Min:   core.CastInt64(data["min"]),
-		Max:   core.CastInt64(data["max"]),
-		Count: core.CastInt64(data["count"]),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelRecoverDistributionSegment) ToDict() map[string]interface{} {
-
-	var min *int64
+	m := map[string]interface{}{}
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"min":   min,
-		"max":   max,
-		"count": count,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelRecoverDistributionSegment) Pointer() *StaminaStaminaModelRecoverDistributionSegment {
@@ -42569,27 +48962,38 @@ func NewStaminaStaminaModelRecoverDistributionFromJson(data string) StaminaStami
 
 func NewStaminaStaminaModelRecoverDistributionFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistribution {
 	return StaminaStaminaModelRecoverDistribution{
-		Statistics:   NewStaminaStaminaModelRecoverDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastStaminaStaminaModelRecoverDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *StaminaStaminaModelRecoverDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelRecoverDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []StaminaStaminaModelRecoverDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastStaminaStaminaModelRecoverDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelRecoverDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastStaminaStaminaModelRecoverDistributionSegmentsFromDict(
+		m["distribution"] = CastStaminaStaminaModelRecoverDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelRecoverDistribution) Pointer() *StaminaStaminaModelRecoverDistribution {
@@ -42657,25 +49061,42 @@ func NewStaminaStaminaModelDistributionsFromJson(data string) StaminaStaminaMode
 
 func NewStaminaStaminaModelDistributionsFromDict(data map[string]interface{}) StaminaStaminaModelDistributions {
 	return StaminaStaminaModelDistributions{
-		Consume: NewStaminaStaminaModelConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer(),
-		Recover: NewStaminaStaminaModelRecoverDistributionFromDict(core.CastMap(data["recover"])).Pointer(),
+		Consume: func() *StaminaStaminaModelConsumeDistribution {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer()
+		}(),
+		Recover: func() *StaminaStaminaModelRecoverDistribution {
+			v, ok := data["recover"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelRecoverDistributionFromDict(core.CastMap(data["recover"])).Pointer()
+		}(),
 	}
 }
 
 func (p StaminaStaminaModelDistributions) ToDict() map[string]interface{} {
-
-	var consume map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Consume != nil {
-		consume = p.Consume.ToDict()
+		m["consume"] = func() map[string]interface{} {
+			if p.Consume == nil {
+				return nil
+			}
+			return p.Consume.ToDict()
+		}()
 	}
-	var recover map[string]interface{}
 	if p.Recover != nil {
-		recover = p.Recover.ToDict()
+		m["recover"] = func() map[string]interface{} {
+			if p.Recover == nil {
+				return nil
+			}
+			return p.Recover.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"consume": consume,
-		"recover": recover,
-	}
+	return m
 }
 
 func (p StaminaStaminaModelDistributions) Pointer() *StaminaStaminaModelDistributions {
@@ -42791,37 +49212,62 @@ func NewStaminaStaminaModelFromJson(data string) StaminaStaminaModel {
 
 func NewStaminaStaminaModelFromDict(data map[string]interface{}) StaminaStaminaModel {
 	return StaminaStaminaModel{
-		StaminaModelId: core.CastString(data["staminaModelId"]),
-		StaminaName:    core.CastString(data["staminaName"]),
-		Statistics:     NewStaminaStaminaModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions:  NewStaminaStaminaModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
+		StaminaModelId: func() *string {
+			v, ok := data["staminaModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaModelId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		Statistics: func() *StaminaStaminaModelStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *StaminaStaminaModelDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaStaminaModelDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
 	}
 }
 
 func (p StaminaStaminaModel) ToDict() map[string]interface{} {
-
-	var staminaModelId *string
+	m := map[string]interface{}{}
 	if p.StaminaModelId != nil {
-		staminaModelId = p.StaminaModelId
+		m["staminaModelId"] = p.StaminaModelId
 	}
-	var staminaName *string
 	if p.StaminaName != nil {
-		staminaName = p.StaminaName
+		m["staminaName"] = p.StaminaName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"staminaModelId": staminaModelId,
-		"staminaName":    staminaName,
-		"statistics":     statistics,
-		"distributions":  distributions,
-	}
+	return m
 }
 
 func (p StaminaStaminaModel) Pointer() *StaminaStaminaModel {
@@ -42889,25 +49335,32 @@ func NewStaminaNamespaceStatisticsFromJson(data string) StaminaNamespaceStatisti
 
 func NewStaminaNamespaceStatisticsFromDict(data map[string]interface{}) StaminaNamespaceStatistics {
 	return StaminaNamespaceStatistics{
-		Consume: core.CastInt64(data["consume"]),
-		Recover: core.CastInt64(data["recover"]),
+		Consume: func() *int64 {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consume"])
+		}(),
+		Recover: func() *int64 {
+			v, ok := data["recover"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["recover"])
+		}(),
 	}
 }
 
 func (p StaminaNamespaceStatistics) ToDict() map[string]interface{} {
-
-	var consume *int64
+	m := map[string]interface{}{}
 	if p.Consume != nil {
-		consume = p.Consume
+		m["consume"] = p.Consume
 	}
-	var recover *int64
 	if p.Recover != nil {
-		recover = p.Recover
+		m["recover"] = p.Recover
 	}
-	return map[string]interface{}{
-		"consume": consume,
-		"recover": recover,
-	}
+	return m
 }
 
 func (p StaminaNamespaceStatistics) Pointer() *StaminaNamespaceStatistics {
@@ -42991,49 +49444,72 @@ func NewStaminaNamespaceConsumeDistributionStatisticsFromJson(data string) Stami
 
 func NewStaminaNamespaceConsumeDistributionStatisticsFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistributionStatistics {
 	return StaminaNamespaceConsumeDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p StaminaNamespaceConsumeDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p StaminaNamespaceConsumeDistributionStatistics) Pointer() *StaminaNamespaceConsumeDistributionStatistics {
@@ -43121,25 +49597,32 @@ func NewStaminaNamespaceConsumeDistributionSegmentFromJson(data string) StaminaN
 
 func NewStaminaNamespaceConsumeDistributionSegmentFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistributionSegment {
 	return StaminaNamespaceConsumeDistributionSegment{
-		StaminaName: core.CastString(data["staminaName"]),
-		Count:       core.CastInt64(data["count"]),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p StaminaNamespaceConsumeDistributionSegment) ToDict() map[string]interface{} {
-
-	var staminaName *string
+	m := map[string]interface{}{}
 	if p.StaminaName != nil {
-		staminaName = p.StaminaName
+		m["staminaName"] = p.StaminaName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"staminaName": staminaName,
-		"count":       count,
-	}
+	return m
 }
 
 func (p StaminaNamespaceConsumeDistributionSegment) Pointer() *StaminaNamespaceConsumeDistributionSegment {
@@ -43207,27 +49690,38 @@ func NewStaminaNamespaceConsumeDistributionFromJson(data string) StaminaNamespac
 
 func NewStaminaNamespaceConsumeDistributionFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistribution {
 	return StaminaNamespaceConsumeDistribution{
-		Statistics:   NewStaminaNamespaceConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastStaminaNamespaceConsumeDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *StaminaNamespaceConsumeDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceConsumeDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []StaminaNamespaceConsumeDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastStaminaNamespaceConsumeDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p StaminaNamespaceConsumeDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastStaminaNamespaceConsumeDistributionSegmentsFromDict(
+		m["distribution"] = CastStaminaNamespaceConsumeDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p StaminaNamespaceConsumeDistribution) Pointer() *StaminaNamespaceConsumeDistribution {
@@ -43311,49 +49805,72 @@ func NewStaminaNamespaceRecoverDistributionStatisticsFromJson(data string) Stami
 
 func NewStaminaNamespaceRecoverDistributionStatisticsFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistributionStatistics {
 	return StaminaNamespaceRecoverDistributionStatistics{
-		Count:  core.CastInt64(data["count"]),
-		Min:    core.CastInt64(data["min"]),
-		Max:    core.CastInt64(data["max"]),
-		Avg:    core.CastFloat32(data["avg"]),
-		Median: core.CastInt64(data["median"]),
-		Stddev: core.CastFloat32(data["stddev"]),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Min: func() *int64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["min"])
+		}(),
+		Max: func() *int64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["max"])
+		}(),
+		Avg: func() *float32 {
+			v, ok := data["avg"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["avg"])
+		}(),
+		Median: func() *int64 {
+			v, ok := data["median"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["median"])
+		}(),
+		Stddev: func() *float32 {
+			v, ok := data["stddev"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["stddev"])
+		}(),
 	}
 }
 
 func (p StaminaNamespaceRecoverDistributionStatistics) ToDict() map[string]interface{} {
-
-	var count *int64
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var min *int64
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int64
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	var avg *float32
 	if p.Avg != nil {
-		avg = p.Avg
+		m["avg"] = p.Avg
 	}
-	var median *int64
 	if p.Median != nil {
-		median = p.Median
+		m["median"] = p.Median
 	}
-	var stddev *float32
 	if p.Stddev != nil {
-		stddev = p.Stddev
+		m["stddev"] = p.Stddev
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"min":    min,
-		"max":    max,
-		"avg":    avg,
-		"median": median,
-		"stddev": stddev,
-	}
+	return m
 }
 
 func (p StaminaNamespaceRecoverDistributionStatistics) Pointer() *StaminaNamespaceRecoverDistributionStatistics {
@@ -43441,25 +49958,32 @@ func NewStaminaNamespaceRecoverDistributionSegmentFromJson(data string) StaminaN
 
 func NewStaminaNamespaceRecoverDistributionSegmentFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistributionSegment {
 	return StaminaNamespaceRecoverDistributionSegment{
-		StaminaName: core.CastString(data["staminaName"]),
-		Count:       core.CastInt64(data["count"]),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
 func (p StaminaNamespaceRecoverDistributionSegment) ToDict() map[string]interface{} {
-
-	var staminaName *string
+	m := map[string]interface{}{}
 	if p.StaminaName != nil {
-		staminaName = p.StaminaName
+		m["staminaName"] = p.StaminaName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"staminaName": staminaName,
-		"count":       count,
-	}
+	return m
 }
 
 func (p StaminaNamespaceRecoverDistributionSegment) Pointer() *StaminaNamespaceRecoverDistributionSegment {
@@ -43527,27 +50051,38 @@ func NewStaminaNamespaceRecoverDistributionFromJson(data string) StaminaNamespac
 
 func NewStaminaNamespaceRecoverDistributionFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistribution {
 	return StaminaNamespaceRecoverDistribution{
-		Statistics:   NewStaminaNamespaceRecoverDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distribution: CastStaminaNamespaceRecoverDistributionSegments(core.CastArray(data["distribution"])),
+		Statistics: func() *StaminaNamespaceRecoverDistributionStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceRecoverDistributionStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distribution: func() []StaminaNamespaceRecoverDistributionSegment {
+			if data["distribution"] == nil {
+				return nil
+			}
+			return CastStaminaNamespaceRecoverDistributionSegments(core.CastArray(data["distribution"]))
+		}(),
 	}
 }
 
 func (p StaminaNamespaceRecoverDistribution) ToDict() map[string]interface{} {
-
-	var statistics map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distribution []interface{}
 	if p.Distribution != nil {
-		distribution = CastStaminaNamespaceRecoverDistributionSegmentsFromDict(
+		m["distribution"] = CastStaminaNamespaceRecoverDistributionSegmentsFromDict(
 			p.Distribution,
 		)
 	}
-	return map[string]interface{}{
-		"statistics":   statistics,
-		"distribution": distribution,
-	}
+	return m
 }
 
 func (p StaminaNamespaceRecoverDistribution) Pointer() *StaminaNamespaceRecoverDistribution {
@@ -43615,25 +50150,42 @@ func NewStaminaNamespaceDistributionsFromJson(data string) StaminaNamespaceDistr
 
 func NewStaminaNamespaceDistributionsFromDict(data map[string]interface{}) StaminaNamespaceDistributions {
 	return StaminaNamespaceDistributions{
-		Consume: NewStaminaNamespaceConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer(),
-		Recover: NewStaminaNamespaceRecoverDistributionFromDict(core.CastMap(data["recover"])).Pointer(),
+		Consume: func() *StaminaNamespaceConsumeDistribution {
+			v, ok := data["consume"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceConsumeDistributionFromDict(core.CastMap(data["consume"])).Pointer()
+		}(),
+		Recover: func() *StaminaNamespaceRecoverDistribution {
+			v, ok := data["recover"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceRecoverDistributionFromDict(core.CastMap(data["recover"])).Pointer()
+		}(),
 	}
 }
 
 func (p StaminaNamespaceDistributions) ToDict() map[string]interface{} {
-
-	var consume map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Consume != nil {
-		consume = p.Consume.ToDict()
+		m["consume"] = func() map[string]interface{} {
+			if p.Consume == nil {
+				return nil
+			}
+			return p.Consume.ToDict()
+		}()
 	}
-	var recover map[string]interface{}
 	if p.Recover != nil {
-		recover = p.Recover.ToDict()
+		m["recover"] = func() map[string]interface{} {
+			if p.Recover == nil {
+				return nil
+			}
+			return p.Recover.ToDict()
+		}()
 	}
-	return map[string]interface{}{
-		"consume": consume,
-		"recover": recover,
-	}
+	return m
 }
 
 func (p StaminaNamespaceDistributions) Pointer() *StaminaNamespaceDistributions {
@@ -43765,63 +50317,103 @@ func NewStaminaNamespaceFromJson(data string) StaminaNamespace {
 
 func NewStaminaNamespaceFromDict(data map[string]interface{}) StaminaNamespace {
 	return StaminaNamespace{
-		NamespaceId:   core.CastString(data["namespaceId"]),
-		Year:          core.CastInt32(data["year"]),
-		Month:         core.CastInt32(data["month"]),
-		Day:           core.CastInt32(data["day"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Statistics:    NewStaminaNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
-		Distributions: NewStaminaNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
-		StaminaModels: CastStaminaStaminaModels(core.CastArray(data["staminaModels"])),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Statistics: func() *StaminaNamespaceStatistics {
+			v, ok := data["statistics"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceStatisticsFromDict(core.CastMap(data["statistics"])).Pointer()
+		}(),
+		Distributions: func() *StaminaNamespaceDistributions {
+			v, ok := data["distributions"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaNamespaceDistributionsFromDict(core.CastMap(data["distributions"])).Pointer()
+		}(),
+		StaminaModels: func() []StaminaStaminaModel {
+			if data["staminaModels"] == nil {
+				return nil
+			}
+			return CastStaminaStaminaModels(core.CastArray(data["staminaModels"]))
+		}(),
 	}
 }
 
 func (p StaminaNamespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var statistics map[string]interface{}
 	if p.Statistics != nil {
-		statistics = p.Statistics.ToDict()
+		m["statistics"] = func() map[string]interface{} {
+			if p.Statistics == nil {
+				return nil
+			}
+			return p.Statistics.ToDict()
+		}()
 	}
-	var distributions map[string]interface{}
 	if p.Distributions != nil {
-		distributions = p.Distributions.ToDict()
+		m["distributions"] = func() map[string]interface{} {
+			if p.Distributions == nil {
+				return nil
+			}
+			return p.Distributions.ToDict()
+		}()
 	}
-	var staminaModels []interface{}
 	if p.StaminaModels != nil {
-		staminaModels = CastStaminaStaminaModelsFromDict(
+		m["staminaModels"] = CastStaminaStaminaModelsFromDict(
 			p.StaminaModels,
 		)
 	}
-	return map[string]interface{}{
-		"namespaceId":   namespaceId,
-		"year":          year,
-		"month":         month,
-		"day":           day,
-		"namespaceName": namespaceName,
-		"statistics":    statistics,
-		"distributions": distributions,
-		"staminaModels": staminaModels,
-	}
+	return m
 }
 
 func (p StaminaNamespace) Pointer() *StaminaNamespace {

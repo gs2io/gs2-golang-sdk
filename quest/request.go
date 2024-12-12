@@ -24,12 +24,10 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -124,8 +122,6 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId     *string             `json:"sourceRequestId"`
-	RequestId           *string             `json:"requestId"`
 	ContextStack        *string             `json:"contextStack"`
 	Name                *string             `json:"name"`
 	Description         *string             `json:"description"`
@@ -395,11 +391,9 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -483,11 +477,9 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -571,8 +563,6 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId     *string             `json:"sourceRequestId"`
-	RequestId           *string             `json:"requestId"`
 	ContextStack        *string             `json:"contextStack"`
 	NamespaceName       *string             `json:"namespaceName"`
 	Description         *string             `json:"description"`
@@ -842,11 +832,9 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -930,8 +918,6 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1050,8 +1036,6 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1170,8 +1154,6 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1290,8 +1272,6 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1410,8 +1390,6 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -1530,8 +1508,6 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1682,8 +1658,6 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
@@ -1834,13 +1808,11 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeQuestGroupModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestGroupModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1966,8 +1938,6 @@ func (p DescribeQuestGroupModelMastersRequest) Pointer() *DescribeQuestGroupMode
 }
 
 type CreateQuestGroupModelMasterRequest struct {
-	SourceRequestId        *string `json:"sourceRequestId"`
-	RequestId              *string `json:"requestId"`
 	ContextStack           *string `json:"contextStack"`
 	NamespaceName          *string `json:"namespaceName"`
 	Name                   *string `json:"name"`
@@ -2182,12 +2152,10 @@ func (p CreateQuestGroupModelMasterRequest) Pointer() *CreateQuestGroupModelMast
 }
 
 type GetQuestGroupModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2302,8 +2270,6 @@ func (p GetQuestGroupModelMasterRequest) Pointer() *GetQuestGroupModelMasterRequ
 }
 
 type UpdateQuestGroupModelMasterRequest struct {
-	SourceRequestId        *string `json:"sourceRequestId"`
-	RequestId              *string `json:"requestId"`
 	ContextStack           *string `json:"contextStack"`
 	NamespaceName          *string `json:"namespaceName"`
 	QuestGroupName         *string `json:"questGroupName"`
@@ -2518,12 +2484,10 @@ func (p UpdateQuestGroupModelMasterRequest) Pointer() *UpdateQuestGroupModelMast
 }
 
 type DeleteQuestGroupModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DeleteQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2638,14 +2602,12 @@ func (p DeleteQuestGroupModelMasterRequest) Pointer() *DeleteQuestGroupModelMast
 }
 
 type DescribeQuestModelMastersRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2802,8 +2764,6 @@ func (p DescribeQuestModelMastersRequest) Pointer() *DescribeQuestModelMastersRe
 }
 
 type CreateQuestModelMasterRequest struct {
-	SourceRequestId             *string         `json:"sourceRequestId"`
-	RequestId                   *string         `json:"requestId"`
 	ContextStack                *string         `json:"contextStack"`
 	NamespaceName               *string         `json:"namespaceName"`
 	QuestGroupName              *string         `json:"questGroupName"`
@@ -3152,13 +3112,11 @@ func (p CreateQuestModelMasterRequest) Pointer() *CreateQuestModelMasterRequest 
 }
 
 type GetQuestModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	QuestName       *string `json:"questName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	QuestName      *string `json:"questName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3304,8 +3262,6 @@ func (p GetQuestModelMasterRequest) Pointer() *GetQuestModelMasterRequest {
 }
 
 type UpdateQuestModelMasterRequest struct {
-	SourceRequestId             *string         `json:"sourceRequestId"`
-	RequestId                   *string         `json:"requestId"`
 	ContextStack                *string         `json:"contextStack"`
 	NamespaceName               *string         `json:"namespaceName"`
 	QuestGroupName              *string         `json:"questGroupName"`
@@ -3654,13 +3610,11 @@ func (p UpdateQuestModelMasterRequest) Pointer() *UpdateQuestModelMasterRequest 
 }
 
 type DeleteQuestModelMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	QuestName       *string `json:"questName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	QuestName      *string `json:"questName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DeleteQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3806,11 +3760,9 @@ func (p DeleteQuestModelMasterRequest) Pointer() *DeleteQuestModelMasterRequest 
 }
 
 type ExportMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3894,11 +3846,9 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentQuestMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3982,12 +3932,10 @@ func (p GetCurrentQuestMasterRequest) Pointer() *GetCurrentQuestMasterRequest {
 }
 
 type UpdateCurrentQuestMasterRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Settings        *string `json:"settings"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Settings      *string `json:"settings"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4102,8 +4050,6 @@ func (p UpdateCurrentQuestMasterRequest) Pointer() *UpdateCurrentQuestMasterRequ
 }
 
 type UpdateCurrentQuestMasterFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
@@ -4207,8 +4153,6 @@ func (p UpdateCurrentQuestMasterFromGitHubRequest) Pointer() *UpdateCurrentQuest
 }
 
 type DescribeProgressesByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -4403,8 +4347,6 @@ func (p DescribeProgressesByUserIdRequest) Pointer() *DescribeProgressesByUserId
 }
 
 type CreateProgressByUserIdRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -4613,12 +4555,10 @@ func (p CreateProgressByUserIdRequest) Pointer() *CreateProgressByUserIdRequest 
 }
 
 type GetProgressRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *GetProgressRequest) UnmarshalJSON(data []byte) error {
@@ -4733,8 +4673,6 @@ func (p GetProgressRequest) Pointer() *GetProgressRequest {
 }
 
 type GetProgressByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -4885,8 +4823,6 @@ func (p GetProgressByUserIdRequest) Pointer() *GetProgressByUserIdRequest {
 }
 
 type StartRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -5095,8 +5031,6 @@ func (p StartRequest) Pointer() *StartRequest {
 }
 
 type StartByUserIdRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -5337,8 +5271,6 @@ func (p StartByUserIdRequest) Pointer() *StartByUserIdRequest {
 }
 
 type EndRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -5496,8 +5428,6 @@ func (p EndRequest) Pointer() *EndRequest {
 }
 
 type EndByUserIdRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
@@ -5687,8 +5617,6 @@ func (p EndByUserIdRequest) Pointer() *EndByUserIdRequest {
 }
 
 type DeleteProgressRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -5808,8 +5736,6 @@ func (p DeleteProgressRequest) Pointer() *DeleteProgressRequest {
 }
 
 type DeleteProgressByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -5961,12 +5887,10 @@ func (p DeleteProgressByUserIdRequest) Pointer() *DeleteProgressByUserIdRequest 
 }
 
 type CreateProgressByStampSheetRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampSheet      *string `json:"stampSheet"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *CreateProgressByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -6081,12 +6005,10 @@ func (p CreateProgressByStampSheetRequest) Pointer() *CreateProgressByStampSheet
 }
 
 type DeleteProgressByStampTaskRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	StampTask       *string `json:"stampTask"`
-	KeyId           *string `json:"keyId"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
 }
 
 func (p *DeleteProgressByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -6201,14 +6123,12 @@ func (p DeleteProgressByStampTaskRequest) Pointer() *DeleteProgressByStampTaskRe
 }
 
 type DescribeCompletedQuestListsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	AccessToken     *string `json:"accessToken"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeCompletedQuestListsRequest) UnmarshalJSON(data []byte) error {
@@ -6365,8 +6285,6 @@ func (p DescribeCompletedQuestListsRequest) Pointer() *DescribeCompletedQuestLis
 }
 
 type DescribeCompletedQuestListsByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
@@ -6561,13 +6479,11 @@ func (p DescribeCompletedQuestListsByUserIdRequest) Pointer() *DescribeCompleted
 }
 
 type GetCompletedQuestListRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	AccessToken     *string `json:"accessToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	AccessToken    *string `json:"accessToken"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetCompletedQuestListRequest) UnmarshalJSON(data []byte) error {
@@ -6713,8 +6629,6 @@ func (p GetCompletedQuestListRequest) Pointer() *GetCompletedQuestListRequest {
 }
 
 type GetCompletedQuestListByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
@@ -6897,8 +6811,6 @@ func (p GetCompletedQuestListByUserIdRequest) Pointer() *GetCompletedQuestListBy
 }
 
 type DeleteCompletedQuestListByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
@@ -7082,11 +6994,9 @@ func (p DeleteCompletedQuestListByUserIdRequest) Pointer() *DeleteCompletedQuest
 }
 
 type DescribeQuestGroupModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestGroupModelsRequest) UnmarshalJSON(data []byte) error {
@@ -7170,12 +7080,10 @@ func (p DescribeQuestGroupModelsRequest) Pointer() *DescribeQuestGroupModelsRequ
 }
 
 type GetQuestGroupModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestGroupModelRequest) UnmarshalJSON(data []byte) error {
@@ -7290,12 +7198,10 @@ func (p GetQuestGroupModelRequest) Pointer() *GetQuestGroupModelRequest {
 }
 
 type DescribeQuestModelsRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestModelsRequest) UnmarshalJSON(data []byte) error {
@@ -7410,13 +7316,11 @@ func (p DescribeQuestModelsRequest) Pointer() *DescribeQuestModelsRequest {
 }
 
 type GetQuestModelRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	QuestGroupName  *string `json:"questGroupName"`
-	QuestName       *string `json:"questName"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	QuestGroupName *string `json:"questGroupName"`
+	QuestName      *string `json:"questName"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestModelRequest) UnmarshalJSON(data []byte) error {
