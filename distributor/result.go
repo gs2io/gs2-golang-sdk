@@ -1922,6 +1922,117 @@ func (p FreezeMasterDataByUserIdResult) Pointer() *FreezeMasterDataByUserIdResul
 	return &p
 }
 
+type SignFreezeMasterDataTimestampResult struct {
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
+}
+
+type SignFreezeMasterDataTimestampAsyncResult struct {
+	result *SignFreezeMasterDataTimestampResult
+	err    error
+}
+
+func NewSignFreezeMasterDataTimestampResultFromJson(data string) SignFreezeMasterDataTimestampResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSignFreezeMasterDataTimestampResultFromDict(dict)
+}
+
+func NewSignFreezeMasterDataTimestampResultFromDict(data map[string]interface{}) SignFreezeMasterDataTimestampResult {
+	return SignFreezeMasterDataTimestampResult{
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p SignFreezeMasterDataTimestampResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"body":      p.Body,
+		"signature": p.Signature,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p SignFreezeMasterDataTimestampResult) Pointer() *SignFreezeMasterDataTimestampResult {
+	return &p
+}
+
+type FreezeMasterDataBySignedTimestampResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type FreezeMasterDataBySignedTimestampAsyncResult struct {
+	result *FreezeMasterDataBySignedTimestampResult
+	err    error
+}
+
+func NewFreezeMasterDataBySignedTimestampResultFromJson(data string) FreezeMasterDataBySignedTimestampResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFreezeMasterDataBySignedTimestampResultFromDict(dict)
+}
+
+func NewFreezeMasterDataBySignedTimestampResultFromDict(data map[string]interface{}) FreezeMasterDataBySignedTimestampResult {
+	return FreezeMasterDataBySignedTimestampResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p FreezeMasterDataBySignedTimestampResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p FreezeMasterDataBySignedTimestampResult) Pointer() *FreezeMasterDataBySignedTimestampResult {
+	return &p
+}
+
 type IfExpressionByUserIdResult struct {
 	Metadata *core.ResultMetadata `json:"metadata"`
 }

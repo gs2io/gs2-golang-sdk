@@ -3038,6 +3038,209 @@ func (p Gs2DistributorRestClient) FreezeMasterDataByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func signFreezeMasterDataTimestampAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- SignFreezeMasterDataTimestampAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SignFreezeMasterDataTimestampAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SignFreezeMasterDataTimestampResult
+	if asyncResult.Err != nil {
+		callback <- SignFreezeMasterDataTimestampAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SignFreezeMasterDataTimestampAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SignFreezeMasterDataTimestampAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) SignFreezeMasterDataTimestampAsync(
+	request *SignFreezeMasterDataTimestampRequest,
+	callback chan<- SignFreezeMasterDataTimestampAsyncResult,
+) {
+	path := "/{namespaceName}/masterdata/freeze/timestamp"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Timestamp != nil {
+		bodies["timestamp"] = *request.Timestamp
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go signFreezeMasterDataTimestampAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) SignFreezeMasterDataTimestamp(
+	request *SignFreezeMasterDataTimestampRequest,
+) (*SignFreezeMasterDataTimestampResult, error) {
+	callback := make(chan SignFreezeMasterDataTimestampAsyncResult, 1)
+	go p.SignFreezeMasterDataTimestampAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func freezeMasterDataBySignedTimestampAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- FreezeMasterDataBySignedTimestampAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result FreezeMasterDataBySignedTimestampResult
+	if asyncResult.Err != nil {
+		callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) FreezeMasterDataBySignedTimestampAsync(
+	request *FreezeMasterDataBySignedTimestampRequest,
+	callback chan<- FreezeMasterDataBySignedTimestampAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/masterdata/freeze/timestamp"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Body != nil && *request.Body != "" {
+		bodies["body"] = *request.Body
+	}
+	if request.Signature != nil && *request.Signature != "" {
+		bodies["signature"] = *request.Signature
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go freezeMasterDataBySignedTimestampAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) FreezeMasterDataBySignedTimestamp(
+	request *FreezeMasterDataBySignedTimestampRequest,
+) (*FreezeMasterDataBySignedTimestampResult, error) {
+	callback := make(chan FreezeMasterDataBySignedTimestampAsyncResult, 1)
+	go p.FreezeMasterDataBySignedTimestampAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func ifExpressionByUserIdAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,

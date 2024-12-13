@@ -2955,6 +2955,206 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DistributorWebSocketClient) signFreezeMasterDataTimestampAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SignFreezeMasterDataTimestampAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SignFreezeMasterDataTimestampAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SignFreezeMasterDataTimestampResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SignFreezeMasterDataTimestampAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SignFreezeMasterDataTimestampAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) SignFreezeMasterDataTimestampAsync(
+	request *SignFreezeMasterDataTimestampRequest,
+	callback chan<- SignFreezeMasterDataTimestampAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "signFreezeMasterDataTimestamp",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Timestamp != nil {
+		bodies["timestamp"] = *request.Timestamp
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.signFreezeMasterDataTimestampAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) SignFreezeMasterDataTimestamp(
+	request *SignFreezeMasterDataTimestampRequest,
+) (*SignFreezeMasterDataTimestampResult, error) {
+	callback := make(chan SignFreezeMasterDataTimestampAsyncResult, 1)
+	go p.SignFreezeMasterDataTimestampAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) freezeMasterDataBySignedTimestampAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- FreezeMasterDataBySignedTimestampAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result FreezeMasterDataBySignedTimestampResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- FreezeMasterDataBySignedTimestampAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) FreezeMasterDataBySignedTimestampAsync(
+	request *FreezeMasterDataBySignedTimestampRequest,
+	callback chan<- FreezeMasterDataBySignedTimestampAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "freezeMasterDataBySignedTimestamp",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Body != nil && *request.Body != "" {
+		bodies["body"] = *request.Body
+	}
+	if request.Signature != nil && *request.Signature != "" {
+		bodies["signature"] = *request.Signature
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.freezeMasterDataBySignedTimestampAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) FreezeMasterDataBySignedTimestamp(
+	request *FreezeMasterDataBySignedTimestampRequest,
+) (*FreezeMasterDataBySignedTimestampResult, error) {
+	callback := make(chan FreezeMasterDataBySignedTimestampAsyncResult, 1)
+	go p.FreezeMasterDataBySignedTimestampAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DistributorWebSocketClient) ifExpressionByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- IfExpressionByUserIdAsyncResult,

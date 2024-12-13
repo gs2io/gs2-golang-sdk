@@ -4156,6 +4156,351 @@ func (p FreezeMasterDataByUserIdRequest) Pointer() *FreezeMasterDataByUserIdRequ
 	return &p
 }
 
+type SignFreezeMasterDataTimestampRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Timestamp     *int64  `json:"timestamp"`
+	KeyId         *string `json:"keyId"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *SignFreezeMasterDataTimestampRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SignFreezeMasterDataTimestampRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SignFreezeMasterDataTimestampRequest{}
+	} else {
+		*p = SignFreezeMasterDataTimestampRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSignFreezeMasterDataTimestampRequestFromJson(data string) (SignFreezeMasterDataTimestampRequest, error) {
+	req := SignFreezeMasterDataTimestampRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SignFreezeMasterDataTimestampRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSignFreezeMasterDataTimestampRequestFromDict(data map[string]interface{}) SignFreezeMasterDataTimestampRequest {
+	return SignFreezeMasterDataTimestampRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p SignFreezeMasterDataTimestampRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"timestamp":     p.Timestamp,
+		"keyId":         p.KeyId,
+	}
+}
+
+func (p SignFreezeMasterDataTimestampRequest) Pointer() *SignFreezeMasterDataTimestampRequest {
+	return &p
+}
+
+type FreezeMasterDataBySignedTimestampRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	Body               *string `json:"body"`
+	Signature          *string `json:"signature"`
+	KeyId              *string `json:"keyId"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *FreezeMasterDataBySignedTimestampRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FreezeMasterDataBySignedTimestampRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FreezeMasterDataBySignedTimestampRequest{}
+	} else {
+		*p = FreezeMasterDataBySignedTimestampRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["body"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Body = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Body = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Body = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Body = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Body = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Body)
+				}
+			}
+		}
+		if v, ok := d["signature"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Signature = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Signature = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Signature = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Signature = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Signature = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Signature)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewFreezeMasterDataBySignedTimestampRequestFromJson(data string) (FreezeMasterDataBySignedTimestampRequest, error) {
+	req := FreezeMasterDataBySignedTimestampRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return FreezeMasterDataBySignedTimestampRequest{}, err
+	}
+	return req, nil
+}
+
+func NewFreezeMasterDataBySignedTimestampRequestFromDict(data map[string]interface{}) FreezeMasterDataBySignedTimestampRequest {
+	return FreezeMasterDataBySignedTimestampRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p FreezeMasterDataBySignedTimestampRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"body":          p.Body,
+		"signature":     p.Signature,
+		"keyId":         p.KeyId,
+	}
+}
+
+func (p FreezeMasterDataBySignedTimestampRequest) Pointer() *FreezeMasterDataBySignedTimestampRequest {
+	return &p
+}
+
 type IfExpressionByUserIdRequest struct {
 	ContextStack                    *string         `json:"contextStack"`
 	DuplicationAvoider              *string         `json:"duplicationAvoider"`
