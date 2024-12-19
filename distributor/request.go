@@ -4501,6 +4501,73 @@ func (p FreezeMasterDataBySignedTimestampRequest) Pointer() *FreezeMasterDataByS
 	return &p
 }
 
+type BatchExecuteApiRequest struct {
+	ContextStack    *string               `json:"contextStack"`
+	RequestPayloads []BatchRequestPayload `json:"requestPayloads"`
+	DryRun          *bool                 `json:"dryRun"`
+}
+
+func (p *BatchExecuteApiRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchExecuteApiRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchExecuteApiRequest{}
+	} else {
+		*p = BatchExecuteApiRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["requestPayloads"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RequestPayloads)
+		}
+	}
+	return nil
+}
+
+func NewBatchExecuteApiRequestFromJson(data string) (BatchExecuteApiRequest, error) {
+	req := BatchExecuteApiRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchExecuteApiRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchExecuteApiRequestFromDict(data map[string]interface{}) BatchExecuteApiRequest {
+	return BatchExecuteApiRequest{
+		RequestPayloads: func() []BatchRequestPayload {
+			if data["requestPayloads"] == nil {
+				return nil
+			}
+			return CastBatchRequestPayloads(core.CastArray(data["requestPayloads"]))
+		}(),
+	}
+}
+
+func (p BatchExecuteApiRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"requestPayloads": CastBatchRequestPayloadsFromDict(
+			p.RequestPayloads,
+		),
+	}
+}
+
+func (p BatchExecuteApiRequest) Pointer() *BatchExecuteApiRequest {
+	return &p
+}
+
 type IfExpressionByUserIdRequest struct {
 	ContextStack                    *string         `json:"contextStack"`
 	DuplicationAvoider              *string         `json:"duplicationAvoider"`

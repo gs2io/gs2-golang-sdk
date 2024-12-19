@@ -3241,6 +3241,99 @@ func (p Gs2DistributorRestClient) FreezeMasterDataBySignedTimestamp(
 	return asyncResult.result, asyncResult.err
 }
 
+func batchExecuteApiAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchExecuteApiAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchExecuteApiAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchExecuteApiResult
+	if asyncResult.Err != nil {
+		callback <- BatchExecuteApiAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchExecuteApiAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchExecuteApiAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) BatchExecuteApiAsync(
+	request *BatchExecuteApiRequest,
+	callback chan<- BatchExecuteApiAsyncResult,
+) {
+	path := "/batch/execute"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RequestPayloads != nil {
+		var _requestPayloads []interface{}
+		for _, item := range request.RequestPayloads {
+			_requestPayloads = append(_requestPayloads, item)
+		}
+		bodies["requestPayloads"] = _requestPayloads
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go batchExecuteApiAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) BatchExecuteApi(
+	request *BatchExecuteApiRequest,
+) (*BatchExecuteApiResult, error) {
+	callback := make(chan BatchExecuteApiAsyncResult, 1)
+	go p.BatchExecuteApiAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func ifExpressionByUserIdAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,

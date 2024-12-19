@@ -1908,19 +1908,20 @@ func (p DescribeGlobalRankingModelMastersRequest) Pointer() *DescribeGlobalRanki
 }
 
 type CreateGlobalRankingModelMasterRequest struct {
-	ContextStack        *string         `json:"contextStack"`
-	NamespaceName       *string         `json:"namespaceName"`
-	Name                *string         `json:"name"`
-	Description         *string         `json:"description"`
-	Metadata            *string         `json:"metadata"`
-	MinimumValue        *int64          `json:"minimumValue"`
-	MaximumValue        *int64          `json:"maximumValue"`
-	Sum                 *bool           `json:"sum"`
-	OrderDirection      *string         `json:"orderDirection"`
-	RankingRewards      []RankingReward `json:"rankingRewards"`
-	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string         `json:"accessPeriodEventId"`
-	DryRun              *bool           `json:"dryRun"`
+	ContextStack           *string         `json:"contextStack"`
+	NamespaceName          *string         `json:"namespaceName"`
+	Name                   *string         `json:"name"`
+	Description            *string         `json:"description"`
+	Metadata               *string         `json:"metadata"`
+	MinimumValue           *int64          `json:"minimumValue"`
+	MaximumValue           *int64          `json:"maximumValue"`
+	Sum                    *bool           `json:"sum"`
+	OrderDirection         *string         `json:"orderDirection"`
+	RankingRewards         []RankingReward `json:"rankingRewards"`
+	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
+	EntryPeriodEventId     *string         `json:"entryPeriodEventId"`
+	AccessPeriodEventId    *string         `json:"accessPeriodEventId"`
+	DryRun                 *bool           `json:"dryRun"`
 }
 
 func (p *CreateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2072,6 +2073,29 @@ func (p *CreateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error
 		if v, ok := d["rankingRewards"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RankingRewards)
 		}
+		if v, ok := d["rewardCalculationIndex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardCalculationIndex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardCalculationIndex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardCalculationIndex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardCalculationIndex)
+				}
+			}
+		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2195,6 +2219,13 @@ func NewCreateGlobalRankingModelMasterRequestFromDict(data map[string]interface{
 			}
 			return CastRankingRewards(core.CastArray(data["rankingRewards"]))
 		}(),
+		RewardCalculationIndex: func() *string {
+			v, ok := data["rewardCalculationIndex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardCalculationIndex"])
+		}(),
 		EntryPeriodEventId: func() *string {
 			v, ok := data["entryPeriodEventId"]
 			if !ok || v == nil {
@@ -2225,8 +2256,9 @@ func (p CreateGlobalRankingModelMasterRequest) ToDict() map[string]interface{} {
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
+		"rewardCalculationIndex": p.RewardCalculationIndex,
+		"entryPeriodEventId":     p.EntryPeriodEventId,
+		"accessPeriodEventId":    p.AccessPeriodEventId,
 	}
 }
 
@@ -2353,19 +2385,20 @@ func (p GetGlobalRankingModelMasterRequest) Pointer() *GetGlobalRankingModelMast
 }
 
 type UpdateGlobalRankingModelMasterRequest struct {
-	ContextStack        *string         `json:"contextStack"`
-	NamespaceName       *string         `json:"namespaceName"`
-	RankingName         *string         `json:"rankingName"`
-	Description         *string         `json:"description"`
-	Metadata            *string         `json:"metadata"`
-	MinimumValue        *int64          `json:"minimumValue"`
-	MaximumValue        *int64          `json:"maximumValue"`
-	Sum                 *bool           `json:"sum"`
-	OrderDirection      *string         `json:"orderDirection"`
-	RankingRewards      []RankingReward `json:"rankingRewards"`
-	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string         `json:"accessPeriodEventId"`
-	DryRun              *bool           `json:"dryRun"`
+	ContextStack           *string         `json:"contextStack"`
+	NamespaceName          *string         `json:"namespaceName"`
+	RankingName            *string         `json:"rankingName"`
+	Description            *string         `json:"description"`
+	Metadata               *string         `json:"metadata"`
+	MinimumValue           *int64          `json:"minimumValue"`
+	MaximumValue           *int64          `json:"maximumValue"`
+	Sum                    *bool           `json:"sum"`
+	OrderDirection         *string         `json:"orderDirection"`
+	RankingRewards         []RankingReward `json:"rankingRewards"`
+	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
+	EntryPeriodEventId     *string         `json:"entryPeriodEventId"`
+	AccessPeriodEventId    *string         `json:"accessPeriodEventId"`
+	DryRun                 *bool           `json:"dryRun"`
 }
 
 func (p *UpdateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2517,6 +2550,29 @@ func (p *UpdateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error
 		if v, ok := d["rankingRewards"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RankingRewards)
 		}
+		if v, ok := d["rewardCalculationIndex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardCalculationIndex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardCalculationIndex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardCalculationIndex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardCalculationIndex)
+				}
+			}
+		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2640,6 +2696,13 @@ func NewUpdateGlobalRankingModelMasterRequestFromDict(data map[string]interface{
 			}
 			return CastRankingRewards(core.CastArray(data["rankingRewards"]))
 		}(),
+		RewardCalculationIndex: func() *string {
+			v, ok := data["rewardCalculationIndex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardCalculationIndex"])
+		}(),
 		EntryPeriodEventId: func() *string {
 			v, ok := data["entryPeriodEventId"]
 			if !ok || v == nil {
@@ -2670,8 +2733,9 @@ func (p UpdateGlobalRankingModelMasterRequest) ToDict() map[string]interface{} {
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
+		"rewardCalculationIndex": p.RewardCalculationIndex,
+		"entryPeriodEventId":     p.EntryPeriodEventId,
+		"accessPeriodEventId":    p.AccessPeriodEventId,
 	}
 }
 
@@ -7768,21 +7832,22 @@ func (p DescribeClusterRankingModelMastersRequest) Pointer() *DescribeClusterRan
 }
 
 type CreateClusterRankingModelMasterRequest struct {
-	ContextStack        *string         `json:"contextStack"`
-	NamespaceName       *string         `json:"namespaceName"`
-	Name                *string         `json:"name"`
-	Description         *string         `json:"description"`
-	Metadata            *string         `json:"metadata"`
-	ClusterType         *string         `json:"clusterType"`
-	MinimumValue        *int64          `json:"minimumValue"`
-	MaximumValue        *int64          `json:"maximumValue"`
-	Sum                 *bool           `json:"sum"`
-	ScoreTtlDays        *int32          `json:"scoreTtlDays"`
-	OrderDirection      *string         `json:"orderDirection"`
-	RankingRewards      []RankingReward `json:"rankingRewards"`
-	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string         `json:"accessPeriodEventId"`
-	DryRun              *bool           `json:"dryRun"`
+	ContextStack           *string         `json:"contextStack"`
+	NamespaceName          *string         `json:"namespaceName"`
+	Name                   *string         `json:"name"`
+	Description            *string         `json:"description"`
+	Metadata               *string         `json:"metadata"`
+	ClusterType            *string         `json:"clusterType"`
+	MinimumValue           *int64          `json:"minimumValue"`
+	MaximumValue           *int64          `json:"maximumValue"`
+	Sum                    *bool           `json:"sum"`
+	ScoreTtlDays           *int32          `json:"scoreTtlDays"`
+	OrderDirection         *string         `json:"orderDirection"`
+	RankingRewards         []RankingReward `json:"rankingRewards"`
+	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
+	EntryPeriodEventId     *string         `json:"entryPeriodEventId"`
+	AccessPeriodEventId    *string         `json:"accessPeriodEventId"`
+	DryRun                 *bool           `json:"dryRun"`
 }
 
 func (p *CreateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -7960,6 +8025,29 @@ func (p *CreateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) erro
 		if v, ok := d["rankingRewards"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RankingRewards)
 		}
+		if v, ok := d["rewardCalculationIndex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardCalculationIndex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardCalculationIndex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardCalculationIndex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardCalculationIndex)
+				}
+			}
+		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -8097,6 +8185,13 @@ func NewCreateClusterRankingModelMasterRequestFromDict(data map[string]interface
 			}
 			return CastRankingRewards(core.CastArray(data["rankingRewards"]))
 		}(),
+		RewardCalculationIndex: func() *string {
+			v, ok := data["rewardCalculationIndex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardCalculationIndex"])
+		}(),
 		EntryPeriodEventId: func() *string {
 			v, ok := data["entryPeriodEventId"]
 			if !ok || v == nil {
@@ -8129,8 +8224,9 @@ func (p CreateClusterRankingModelMasterRequest) ToDict() map[string]interface{} 
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
+		"rewardCalculationIndex": p.RewardCalculationIndex,
+		"entryPeriodEventId":     p.EntryPeriodEventId,
+		"accessPeriodEventId":    p.AccessPeriodEventId,
 	}
 }
 
@@ -8257,21 +8353,22 @@ func (p GetClusterRankingModelMasterRequest) Pointer() *GetClusterRankingModelMa
 }
 
 type UpdateClusterRankingModelMasterRequest struct {
-	ContextStack        *string         `json:"contextStack"`
-	NamespaceName       *string         `json:"namespaceName"`
-	RankingName         *string         `json:"rankingName"`
-	Description         *string         `json:"description"`
-	Metadata            *string         `json:"metadata"`
-	ClusterType         *string         `json:"clusterType"`
-	MinimumValue        *int64          `json:"minimumValue"`
-	MaximumValue        *int64          `json:"maximumValue"`
-	Sum                 *bool           `json:"sum"`
-	ScoreTtlDays        *int32          `json:"scoreTtlDays"`
-	OrderDirection      *string         `json:"orderDirection"`
-	RankingRewards      []RankingReward `json:"rankingRewards"`
-	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
-	AccessPeriodEventId *string         `json:"accessPeriodEventId"`
-	DryRun              *bool           `json:"dryRun"`
+	ContextStack           *string         `json:"contextStack"`
+	NamespaceName          *string         `json:"namespaceName"`
+	RankingName            *string         `json:"rankingName"`
+	Description            *string         `json:"description"`
+	Metadata               *string         `json:"metadata"`
+	ClusterType            *string         `json:"clusterType"`
+	MinimumValue           *int64          `json:"minimumValue"`
+	MaximumValue           *int64          `json:"maximumValue"`
+	Sum                    *bool           `json:"sum"`
+	ScoreTtlDays           *int32          `json:"scoreTtlDays"`
+	OrderDirection         *string         `json:"orderDirection"`
+	RankingRewards         []RankingReward `json:"rankingRewards"`
+	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
+	EntryPeriodEventId     *string         `json:"entryPeriodEventId"`
+	AccessPeriodEventId    *string         `json:"accessPeriodEventId"`
+	DryRun                 *bool           `json:"dryRun"`
 }
 
 func (p *UpdateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8449,6 +8546,29 @@ func (p *UpdateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) erro
 		if v, ok := d["rankingRewards"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RankingRewards)
 		}
+		if v, ok := d["rewardCalculationIndex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardCalculationIndex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardCalculationIndex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardCalculationIndex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardCalculationIndex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardCalculationIndex)
+				}
+			}
+		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -8586,6 +8706,13 @@ func NewUpdateClusterRankingModelMasterRequestFromDict(data map[string]interface
 			}
 			return CastRankingRewards(core.CastArray(data["rankingRewards"]))
 		}(),
+		RewardCalculationIndex: func() *string {
+			v, ok := data["rewardCalculationIndex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardCalculationIndex"])
+		}(),
 		EntryPeriodEventId: func() *string {
 			v, ok := data["entryPeriodEventId"]
 			if !ok || v == nil {
@@ -8618,8 +8745,9 @@ func (p UpdateClusterRankingModelMasterRequest) ToDict() map[string]interface{} 
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
+		"rewardCalculationIndex": p.RewardCalculationIndex,
+		"entryPeriodEventId":     p.EntryPeriodEventId,
+		"accessPeriodEventId":    p.AccessPeriodEventId,
 	}
 }
 

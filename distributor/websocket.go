@@ -3155,6 +3155,98 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataBySignedTimestamp(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DistributorWebSocketClient) batchExecuteApiAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- BatchExecuteApiAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchExecuteApiAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchExecuteApiResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchExecuteApiAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- BatchExecuteApiAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) BatchExecuteApiAsync(
+	request *BatchExecuteApiRequest,
+	callback chan<- BatchExecuteApiAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "batchExecuteApi",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.RequestPayloads != nil {
+		var _requestPayloads []interface{}
+		for _, item := range request.RequestPayloads {
+			_requestPayloads = append(_requestPayloads, item)
+		}
+		bodies["requestPayloads"] = _requestPayloads
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.batchExecuteApiAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) BatchExecuteApi(
+	request *BatchExecuteApiRequest,
+) (*BatchExecuteApiResult, error) {
+	callback := make(chan BatchExecuteApiAsyncResult, 1)
+	go p.BatchExecuteApiAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DistributorWebSocketClient) ifExpressionByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- IfExpressionByUserIdAsyncResult,

@@ -2033,6 +2033,58 @@ func (p FreezeMasterDataBySignedTimestampResult) Pointer() *FreezeMasterDataBySi
 	return &p
 }
 
+type BatchExecuteApiResult struct {
+	Results  []BatchResultPayload `json:"results"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type BatchExecuteApiAsyncResult struct {
+	result *BatchExecuteApiResult
+	err    error
+}
+
+func NewBatchExecuteApiResultFromJson(data string) BatchExecuteApiResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchExecuteApiResultFromDict(dict)
+}
+
+func NewBatchExecuteApiResultFromDict(data map[string]interface{}) BatchExecuteApiResult {
+	return BatchExecuteApiResult{
+		Results: func() []BatchResultPayload {
+			if data["results"] == nil {
+				return nil
+			}
+			return CastBatchResultPayloads(core.CastArray(data["results"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p BatchExecuteApiResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"results": CastBatchResultPayloadsFromDict(
+			p.Results,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p BatchExecuteApiResult) Pointer() *BatchExecuteApiResult {
+	return &p
+}
+
 type IfExpressionByUserIdResult struct {
 	Metadata *core.ResultMetadata `json:"metadata"`
 }

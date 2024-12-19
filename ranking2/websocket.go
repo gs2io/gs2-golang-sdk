@@ -1580,6 +1580,9 @@ func (p Gs2Ranking2WebSocketClient) CreateGlobalRankingModelMasterAsync(
 		}
 		bodies["rankingRewards"] = _rankingRewards
 	}
+	if request.RewardCalculationIndex != nil && *request.RewardCalculationIndex != "" {
+		bodies["rewardCalculationIndex"] = *request.RewardCalculationIndex
+	}
 	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
 		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
 	}
@@ -1792,6 +1795,9 @@ func (p Gs2Ranking2WebSocketClient) UpdateGlobalRankingModelMasterAsync(
 			_rankingRewards = append(_rankingRewards, item)
 		}
 		bodies["rankingRewards"] = _rankingRewards
+	}
+	if request.RewardCalculationIndex != nil && *request.RewardCalculationIndex != "" {
+		bodies["rewardCalculationIndex"] = *request.RewardCalculationIndex
 	}
 	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
 		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
@@ -4765,6 +4771,9 @@ func (p Gs2Ranking2WebSocketClient) CreateClusterRankingModelMasterAsync(
 		}
 		bodies["rankingRewards"] = _rankingRewards
 	}
+	if request.RewardCalculationIndex != nil && *request.RewardCalculationIndex != "" {
+		bodies["rewardCalculationIndex"] = *request.RewardCalculationIndex
+	}
 	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
 		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
 	}
@@ -4983,6 +4992,9 @@ func (p Gs2Ranking2WebSocketClient) UpdateClusterRankingModelMasterAsync(
 			_rankingRewards = append(_rankingRewards, item)
 		}
 		bodies["rankingRewards"] = _rankingRewards
+	}
+	if request.RewardCalculationIndex != nil && *request.RewardCalculationIndex != "" {
+		bodies["rewardCalculationIndex"] = *request.RewardCalculationIndex
 	}
 	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
 		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId

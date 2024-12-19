@@ -1448,6 +1448,354 @@ func CastStampSheetResultsFromDict(data []StampSheetResult) []interface{} {
 	return v
 }
 
+type BatchRequestPayload struct {
+	RequestId  *string `json:"requestId"`
+	Service    *string `json:"service"`
+	MethodName *string `json:"methodName"`
+	Parameter  *string `json:"parameter"`
+}
+
+func (p *BatchRequestPayload) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchRequestPayload{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchRequestPayload{}
+	} else {
+		*p = BatchRequestPayload{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["requestId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RequestId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RequestId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RequestId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RequestId)
+				}
+			}
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["methodName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MethodName)
+				}
+			}
+		}
+		if v, ok := d["parameter"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Parameter = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Parameter = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Parameter = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Parameter = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Parameter = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Parameter)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewBatchRequestPayloadFromJson(data string) BatchRequestPayload {
+	req := BatchRequestPayload{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewBatchRequestPayloadFromDict(data map[string]interface{}) BatchRequestPayload {
+	return BatchRequestPayload{
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["requestId"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		MethodName: func() *string {
+			v, ok := data["methodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["methodName"])
+		}(),
+		Parameter: func() *string {
+			v, ok := data["parameter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameter"])
+		}(),
+	}
+}
+
+func (p BatchRequestPayload) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.RequestId != nil {
+		m["requestId"] = p.RequestId
+	}
+	if p.Service != nil {
+		m["service"] = p.Service
+	}
+	if p.MethodName != nil {
+		m["methodName"] = p.MethodName
+	}
+	if p.Parameter != nil {
+		m["parameter"] = p.Parameter
+	}
+	return m
+}
+
+func (p BatchRequestPayload) Pointer() *BatchRequestPayload {
+	return &p
+}
+
+func CastBatchRequestPayloads(data []interface{}) []BatchRequestPayload {
+	v := make([]BatchRequestPayload, 0)
+	for _, d := range data {
+		v = append(v, NewBatchRequestPayloadFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBatchRequestPayloadsFromDict(data []BatchRequestPayload) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type BatchResultPayload struct {
+	RequestId     *string `json:"requestId"`
+	StatusCode    *int32  `json:"statusCode"`
+	ResultPayload *string `json:"resultPayload"`
+}
+
+func (p *BatchResultPayload) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchResultPayload{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchResultPayload{}
+	} else {
+		*p = BatchResultPayload{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["requestId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RequestId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RequestId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RequestId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RequestId)
+				}
+			}
+		}
+		if v, ok := d["statusCode"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StatusCode)
+		}
+		if v, ok := d["resultPayload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ResultPayload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ResultPayload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ResultPayload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ResultPayload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ResultPayload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ResultPayload)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewBatchResultPayloadFromJson(data string) BatchResultPayload {
+	req := BatchResultPayload{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewBatchResultPayloadFromDict(data map[string]interface{}) BatchResultPayload {
+	return BatchResultPayload{
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["requestId"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		ResultPayload: func() *string {
+			v, ok := data["resultPayload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resultPayload"])
+		}(),
+	}
+}
+
+func (p BatchResultPayload) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.RequestId != nil {
+		m["requestId"] = p.RequestId
+	}
+	if p.StatusCode != nil {
+		m["statusCode"] = p.StatusCode
+	}
+	if p.ResultPayload != nil {
+		m["resultPayload"] = p.ResultPayload
+	}
+	return m
+}
+
+func (p BatchResultPayload) Pointer() *BatchResultPayload {
+	return &p
+}
+
+func CastBatchResultPayloads(data []interface{}) []BatchResultPayload {
+	v := make([]BatchResultPayload, 0)
+	for _, d := range data {
+		v = append(v, NewBatchResultPayloadFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBatchResultPayloadsFromDict(data []BatchResultPayload) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`
