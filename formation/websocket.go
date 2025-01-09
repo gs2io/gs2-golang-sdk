@@ -5395,6 +5395,116 @@ func (p Gs2FormationWebSocketClient) GetFormWithSignatureByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2FormationWebSocketClient) setFormAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetFormResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFormAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) SetFormAsync(
+	request *SetFormRequest,
+	callback chan<- SetFormAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "formation",
+			"component":   "form",
+			"function":    "setForm",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		bodies["moldModelName"] = *request.MoldModelName
+	}
+	if request.Index != nil {
+		bodies["index"] = *request.Index
+	}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.setFormAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) SetForm(
+	request *SetFormRequest,
+) (*SetFormResult, error) {
+	callback := make(chan SetFormAsyncResult, 1)
+	go p.SetFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2FormationWebSocketClient) setFormByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- SetFormByUserIdAsyncResult,

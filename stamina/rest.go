@@ -4643,6 +4643,215 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func applyStaminaAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- ApplyStaminaAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ApplyStaminaAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ApplyStaminaResult
+	if asyncResult.Err != nil {
+		callback <- ApplyStaminaAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ApplyStaminaAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ApplyStaminaAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) ApplyStaminaAsync(
+	request *ApplyStaminaRequest,
+	callback chan<- ApplyStaminaAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/apply"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go applyStaminaAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) ApplyStamina(
+	request *ApplyStaminaRequest,
+) (*ApplyStaminaResult, error) {
+	callback := make(chan ApplyStaminaAsyncResult, 1)
+	go p.ApplyStaminaAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func applyStaminaByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- ApplyStaminaByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ApplyStaminaByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ApplyStaminaByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ApplyStaminaByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ApplyStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ApplyStaminaByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) ApplyStaminaByUserIdAsync(
+	request *ApplyStaminaByUserIdRequest,
+	callback chan<- ApplyStaminaByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/apply"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go applyStaminaByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) ApplyStaminaByUserId(
+	request *ApplyStaminaByUserIdRequest,
+) (*ApplyStaminaByUserIdResult, error) {
+	callback := make(chan ApplyStaminaByUserIdAsyncResult, 1)
+	go p.ApplyStaminaByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func recoverStaminaByUserIdAsyncHandler(
 	client Gs2StaminaRestClient,
 	job *core.NetworkJob,

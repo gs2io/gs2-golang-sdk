@@ -2632,6 +2632,146 @@ func (p ConsumeStaminaByUserIdResult) Pointer() *ConsumeStaminaByUserIdResult {
 	return &p
 }
 
+type ApplyStaminaResult struct {
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
+}
+
+type ApplyStaminaAsyncResult struct {
+	result *ApplyStaminaResult
+	err    error
+}
+
+func NewApplyStaminaResultFromJson(data string) ApplyStaminaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewApplyStaminaResultFromDict(dict)
+}
+
+func NewApplyStaminaResultFromDict(data map[string]interface{}) ApplyStaminaResult {
+	return ApplyStaminaResult{
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ApplyStaminaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ApplyStaminaResult) Pointer() *ApplyStaminaResult {
+	return &p
+}
+
+type ApplyStaminaByUserIdResult struct {
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
+}
+
+type ApplyStaminaByUserIdAsyncResult struct {
+	result *ApplyStaminaByUserIdResult
+	err    error
+}
+
+func NewApplyStaminaByUserIdResultFromJson(data string) ApplyStaminaByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewApplyStaminaByUserIdResultFromDict(dict)
+}
+
+func NewApplyStaminaByUserIdResultFromDict(data map[string]interface{}) ApplyStaminaByUserIdResult {
+	return ApplyStaminaByUserIdResult{
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ApplyStaminaByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ApplyStaminaByUserIdResult) Pointer() *ApplyStaminaByUserIdResult {
+	return &p
+}
+
 type RecoverStaminaByUserIdResult struct {
 	Item          *Stamina             `json:"item"`
 	StaminaModel  *StaminaModel        `json:"staminaModel"`

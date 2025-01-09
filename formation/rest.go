@@ -5612,6 +5612,120 @@ func (p Gs2FormationRestClient) GetFormWithSignatureByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func setFormAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetFormResult
+	if asyncResult.Err != nil {
+		callback <- SetFormAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFormAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) SetFormAsync(
+	request *SetFormRequest,
+	callback chan<- SetFormAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go setFormAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) SetForm(
+	request *SetFormRequest,
+) (*SetFormResult, error) {
+	callback := make(chan SetFormAsyncResult, 1)
+	go p.SetFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func setFormByUserIdAsyncHandler(
 	client Gs2FormationRestClient,
 	job *core.NetworkJob,

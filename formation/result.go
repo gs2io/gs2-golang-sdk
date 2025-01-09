@@ -3490,6 +3490,104 @@ func (p GetFormWithSignatureByUserIdResult) Pointer() *GetFormWithSignatureByUse
 	return &p
 }
 
+type SetFormResult struct {
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
+}
+
+type SetFormAsyncResult struct {
+	result *SetFormResult
+	err    error
+}
+
+func NewSetFormResultFromJson(data string) SetFormResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFormResultFromDict(dict)
+}
+
+func NewSetFormResultFromDict(data map[string]interface{}) SetFormResult {
+	return SetFormResult{
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p SetFormResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p SetFormResult) Pointer() *SetFormResult {
+	return &p
+}
+
 type SetFormByUserIdResult struct {
 	Item      *Form                `json:"item"`
 	Mold      *Mold                `json:"mold"`
