@@ -4792,6 +4792,76 @@ func (p GetPropertyFormWithSignatureByUserIdResult) Pointer() *GetPropertyFormWi
 	return &p
 }
 
+type SetPropertyFormResult struct {
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
+}
+
+type SetPropertyFormAsyncResult struct {
+	result *SetPropertyFormResult
+	err    error
+}
+
+func NewSetPropertyFormResultFromJson(data string) SetPropertyFormResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetPropertyFormResultFromDict(dict)
+}
+
+func NewSetPropertyFormResultFromDict(data map[string]interface{}) SetPropertyFormResult {
+	return SetPropertyFormResult{
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p SetPropertyFormResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p SetPropertyFormResult) Pointer() *SetPropertyFormResult {
+	return &p
+}
+
 type SetPropertyFormByUserIdResult struct {
 	Item              *PropertyForm        `json:"item"`
 	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`

@@ -10955,6 +10955,202 @@ func (p GetPropertyFormWithSignatureByUserIdRequest) Pointer() *GetPropertyFormW
 	return &p
 }
 
+type SetPropertyFormRequest struct {
+	ContextStack          *string `json:"contextStack"`
+	DuplicationAvoider    *string `json:"duplicationAvoider"`
+	NamespaceName         *string `json:"namespaceName"`
+	AccessToken           *string `json:"accessToken"`
+	PropertyFormModelName *string `json:"propertyFormModelName"`
+	PropertyId            *string `json:"propertyId"`
+	Slots                 []Slot  `json:"slots"`
+	DryRun                *bool   `json:"dryRun"`
+}
+
+func (p *SetPropertyFormRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SetPropertyFormRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SetPropertyFormRequest{}
+	} else {
+		*p = SetPropertyFormRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["propertyFormModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyFormModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyFormModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyFormModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyFormModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyFormModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyFormModelName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["slots"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slots)
+		}
+	}
+	return nil
+}
+
+func NewSetPropertyFormRequestFromJson(data string) (SetPropertyFormRequest, error) {
+	req := SetPropertyFormRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SetPropertyFormRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSetPropertyFormRequestFromDict(data map[string]interface{}) SetPropertyFormRequest {
+	return SetPropertyFormRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Slots: func() []Slot {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlots(core.CastArray(data["slots"]))
+		}(),
+	}
+}
+
+func (p SetPropertyFormRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":         p.NamespaceName,
+		"accessToken":           p.AccessToken,
+		"propertyFormModelName": p.PropertyFormModelName,
+		"propertyId":            p.PropertyId,
+		"slots": CastSlotsFromDict(
+			p.Slots,
+		),
+	}
+}
+
+func (p SetPropertyFormRequest) Pointer() *SetPropertyFormRequest {
+	return &p
+}
+
 type SetPropertyFormByUserIdRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	DuplicationAvoider    *string `json:"duplicationAvoider"`

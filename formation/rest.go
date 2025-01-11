@@ -7134,6 +7134,120 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func setPropertyFormAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetPropertyFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetPropertyFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetPropertyFormResult
+	if asyncResult.Err != nil {
+		callback <- SetPropertyFormAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetPropertyFormAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetPropertyFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) SetPropertyFormAsync(
+	request *SetPropertyFormRequest,
+	callback chan<- SetPropertyFormAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyFormModelName != nil && *request.PropertyFormModelName != "" {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", core.ToString(*request.PropertyFormModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyFormModelName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Slots != nil {
+		var _slots []interface{}
+		for _, item := range request.Slots {
+			_slots = append(_slots, item)
+		}
+		bodies["slots"] = _slots
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go setPropertyFormAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) SetPropertyForm(
+	request *SetPropertyFormRequest,
+) (*SetPropertyFormResult, error) {
+	callback := make(chan SetPropertyFormAsyncResult, 1)
+	go p.SetPropertyFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func setPropertyFormByUserIdAsyncHandler(
 	client Gs2FormationRestClient,
 	job *core.NetworkJob,
