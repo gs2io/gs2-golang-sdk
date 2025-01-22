@@ -3945,6 +3945,8 @@ type CreateGuildRequest struct {
 	Attribute3             *int32      `json:"attribute3"`
 	Attribute4             *int32      `json:"attribute4"`
 	Attribute5             *int32      `json:"attribute5"`
+	Metadata               *string     `json:"metadata"`
+	MemberMetadata         *string     `json:"memberMetadata"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -4080,6 +4082,52 @@ func (p *CreateGuildRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["attribute5"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Attribute5)
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["memberMetadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MemberMetadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MemberMetadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MemberMetadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MemberMetadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MemberMetadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MemberMetadata)
+				}
+			}
+		}
 		if v, ok := d["joinPolicy"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4207,6 +4255,20 @@ func NewCreateGuildRequestFromDict(data map[string]interface{}) CreateGuildReque
 			}
 			return core.CastInt32(data["attribute5"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MemberMetadata: func() *string {
+			v, ok := data["memberMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["memberMetadata"])
+		}(),
 		JoinPolicy: func() *string {
 			v, ok := data["joinPolicy"]
 			if !ok || v == nil {
@@ -4241,6 +4303,8 @@ func (p CreateGuildRequest) ToDict() map[string]interface{} {
 		"attribute3":     p.Attribute3,
 		"attribute4":     p.Attribute4,
 		"attribute5":     p.Attribute5,
+		"metadata":       p.Metadata,
+		"memberMetadata": p.MemberMetadata,
 		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
@@ -4265,6 +4329,8 @@ type CreateGuildByUserIdRequest struct {
 	Attribute3             *int32      `json:"attribute3"`
 	Attribute4             *int32      `json:"attribute4"`
 	Attribute5             *int32      `json:"attribute5"`
+	Metadata               *string     `json:"metadata"`
+	MemberMetadata         *string     `json:"memberMetadata"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -4400,6 +4466,52 @@ func (p *CreateGuildByUserIdRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["attribute5"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Attribute5)
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["memberMetadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MemberMetadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MemberMetadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MemberMetadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MemberMetadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MemberMetadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MemberMetadata)
+				}
+			}
 		}
 		if v, ok := d["joinPolicy"]; ok && v != nil {
 			var temp interface{}
@@ -4551,6 +4663,20 @@ func NewCreateGuildByUserIdRequestFromDict(data map[string]interface{}) CreateGu
 			}
 			return core.CastInt32(data["attribute5"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MemberMetadata: func() *string {
+			v, ok := data["memberMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["memberMetadata"])
+		}(),
 		JoinPolicy: func() *string {
 			v, ok := data["joinPolicy"]
 			if !ok || v == nil {
@@ -4592,6 +4718,8 @@ func (p CreateGuildByUserIdRequest) ToDict() map[string]interface{} {
 		"attribute3":     p.Attribute3,
 		"attribute4":     p.Attribute4,
 		"attribute5":     p.Attribute5,
+		"metadata":       p.Metadata,
+		"memberMetadata": p.MemberMetadata,
 		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
@@ -5013,6 +5141,7 @@ type UpdateGuildRequest struct {
 	Attribute3             *int32      `json:"attribute3"`
 	Attribute4             *int32      `json:"attribute4"`
 	Attribute5             *int32      `json:"attribute5"`
+	Metadata               *string     `json:"metadata"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -5148,6 +5277,29 @@ func (p *UpdateGuildRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["attribute5"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Attribute5)
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 		if v, ok := d["joinPolicy"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5275,6 +5427,13 @@ func NewUpdateGuildRequestFromDict(data map[string]interface{}) UpdateGuildReque
 			}
 			return core.CastInt32(data["attribute5"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 		JoinPolicy: func() *string {
 			v, ok := data["joinPolicy"]
 			if !ok || v == nil {
@@ -5309,6 +5468,7 @@ func (p UpdateGuildRequest) ToDict() map[string]interface{} {
 		"attribute3":     p.Attribute3,
 		"attribute4":     p.Attribute4,
 		"attribute5":     p.Attribute5,
+		"metadata":       p.Metadata,
 		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
@@ -5333,6 +5493,7 @@ type UpdateGuildByGuildNameRequest struct {
 	Attribute3             *int32      `json:"attribute3"`
 	Attribute4             *int32      `json:"attribute4"`
 	Attribute5             *int32      `json:"attribute5"`
+	Metadata               *string     `json:"metadata"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -5468,6 +5629,29 @@ func (p *UpdateGuildByGuildNameRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["attribute5"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Attribute5)
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 		if v, ok := d["joinPolicy"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5595,6 +5779,13 @@ func NewUpdateGuildByGuildNameRequestFromDict(data map[string]interface{}) Updat
 			}
 			return core.CastInt32(data["attribute5"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 		JoinPolicy: func() *string {
 			v, ok := data["joinPolicy"]
 			if !ok || v == nil {
@@ -5629,6 +5820,7 @@ func (p UpdateGuildByGuildNameRequest) ToDict() map[string]interface{} {
 		"attribute3":     p.Attribute3,
 		"attribute4":     p.Attribute4,
 		"attribute5":     p.Attribute5,
+		"metadata":       p.Metadata,
 		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
@@ -6762,6 +6954,468 @@ func (p BatchUpdateMemberRoleByGuildNameRequest) ToDict() map[string]interface{}
 }
 
 func (p BatchUpdateMemberRoleByGuildNameRequest) Pointer() *BatchUpdateMemberRoleByGuildNameRequest {
+	return &p
+}
+
+type UpdateMemberMetadataRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	GuildName          *string `json:"guildName"`
+	AccessToken        *string `json:"accessToken"`
+	Metadata           *string `json:"metadata"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *UpdateMemberMetadataRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateMemberMetadataRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateMemberMetadataRequest{}
+	} else {
+		*p = UpdateMemberMetadataRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateMemberMetadataRequestFromJson(data string) (UpdateMemberMetadataRequest, error) {
+	req := UpdateMemberMetadataRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateMemberMetadataRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateMemberMetadataRequestFromDict(data map[string]interface{}) UpdateMemberMetadataRequest {
+	return UpdateMemberMetadataRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"guildName":      p.GuildName,
+		"accessToken":    p.AccessToken,
+		"metadata":       p.Metadata,
+	}
+}
+
+func (p UpdateMemberMetadataRequest) Pointer() *UpdateMemberMetadataRequest {
+	return &p
+}
+
+type UpdateMemberMetadataByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	GuildName          *string `json:"guildName"`
+	UserId             *string `json:"userId"`
+	Metadata           *string `json:"metadata"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *UpdateMemberMetadataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateMemberMetadataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateMemberMetadataByUserIdRequest{}
+	} else {
+		*p = UpdateMemberMetadataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateMemberMetadataByUserIdRequestFromJson(data string) (UpdateMemberMetadataByUserIdRequest, error) {
+	req := UpdateMemberMetadataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateMemberMetadataByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateMemberMetadataByUserIdRequestFromDict(data map[string]interface{}) UpdateMemberMetadataByUserIdRequest {
+	return UpdateMemberMetadataByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"guildModelName":  p.GuildModelName,
+		"guildName":       p.GuildName,
+		"userId":          p.UserId,
+		"metadata":        p.Metadata,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p UpdateMemberMetadataByUserIdRequest) Pointer() *UpdateMemberMetadataByUserIdRequest {
 	return &p
 }
 
@@ -14099,6 +14753,7 @@ type SendRequestRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
+	Metadata           *string `json:"metadata"`
 	DryRun             *bool   `json:"dryRun"`
 }
 
@@ -14216,6 +14871,29 @@ func (p *SendRequestRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -14259,6 +14937,13 @@ func NewSendRequestRequestFromDict(data map[string]interface{}) SendRequestReque
 			}
 			return core.CastString(data["targetGuildName"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -14268,6 +14953,7 @@ func (p SendRequestRequest) ToDict() map[string]interface{} {
 		"accessToken":     p.AccessToken,
 		"guildModelName":  p.GuildModelName,
 		"targetGuildName": p.TargetGuildName,
+		"metadata":        p.Metadata,
 	}
 }
 
@@ -14282,6 +14968,7 @@ type SendRequestByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
+	Metadata           *string `json:"metadata"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -14400,6 +15087,29 @@ func (p *SendRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -14466,6 +15176,13 @@ func NewSendRequestByUserIdRequestFromDict(data map[string]interface{}) SendRequ
 			}
 			return core.CastString(data["targetGuildName"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -14482,6 +15199,7 @@ func (p SendRequestByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":          p.UserId,
 		"guildModelName":  p.GuildModelName,
 		"targetGuildName": p.TargetGuildName,
+		"metadata":        p.Metadata,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

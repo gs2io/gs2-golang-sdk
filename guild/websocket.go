@@ -2388,6 +2388,12 @@ func (p Gs2GuildWebSocketClient) CreateGuildAsync(
 	if request.Attribute5 != nil {
 		bodies["attribute5"] = *request.Attribute5
 	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MemberMetadata != nil && *request.MemberMetadata != "" {
+		bodies["memberMetadata"] = *request.MemberMetadata
+	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
 	}
@@ -2518,6 +2524,12 @@ func (p Gs2GuildWebSocketClient) CreateGuildByUserIdAsync(
 	}
 	if request.Attribute5 != nil {
 		bodies["attribute5"] = *request.Attribute5
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MemberMetadata != nil && *request.MemberMetadata != "" {
+		bodies["memberMetadata"] = *request.MemberMetadata
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
@@ -2850,6 +2862,9 @@ func (p Gs2GuildWebSocketClient) UpdateGuildAsync(
 	if request.Attribute5 != nil {
 		bodies["attribute5"] = *request.Attribute5
 	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
 	}
@@ -2980,6 +2995,9 @@ func (p Gs2GuildWebSocketClient) UpdateGuildByGuildNameAsync(
 	}
 	if request.Attribute5 != nil {
 		bodies["attribute5"] = *request.Attribute5
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
@@ -3645,6 +3663,218 @@ func (p Gs2GuildWebSocketClient) BatchUpdateMemberRoleByGuildName(
 ) (*BatchUpdateMemberRoleByGuildNameResult, error) {
 	callback := make(chan BatchUpdateMemberRoleByGuildNameAsyncResult, 1)
 	go p.BatchUpdateMemberRoleByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) updateMemberMetadataAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateMemberMetadataAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateMemberMetadataAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateMemberMetadataResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMemberMetadataAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateMemberMetadataAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) UpdateMemberMetadataAsync(
+	request *UpdateMemberMetadataRequest,
+	callback chan<- UpdateMemberMetadataAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "updateMemberMetadata",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.updateMemberMetadataAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) UpdateMemberMetadata(
+	request *UpdateMemberMetadataRequest,
+) (*UpdateMemberMetadataResult, error) {
+	callback := make(chan UpdateMemberMetadataAsyncResult, 1)
+	go p.UpdateMemberMetadataAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) updateMemberMetadataByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateMemberMetadataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateMemberMetadataByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMemberMetadataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateMemberMetadataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) UpdateMemberMetadataByUserIdAsync(
+	request *UpdateMemberMetadataByUserIdRequest,
+	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "updateMemberMetadataByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.updateMemberMetadataByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) UpdateMemberMetadataByUserId(
+	request *UpdateMemberMetadataByUserIdRequest,
+) (*UpdateMemberMetadataByUserIdResult, error) {
+	callback := make(chan UpdateMemberMetadataByUserIdAsyncResult, 1)
+	go p.UpdateMemberMetadataByUserIdAsync(
 		request,
 		callback,
 	)
@@ -7975,6 +8205,9 @@ func (p Gs2GuildWebSocketClient) SendRequestAsync(
 	if request.TargetGuildName != nil && *request.TargetGuildName != "" {
 		bodies["targetGuildName"] = *request.TargetGuildName
 	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -8077,6 +8310,9 @@ func (p Gs2GuildWebSocketClient) SendRequestByUserIdAsync(
 	}
 	if request.TargetGuildName != nil && *request.TargetGuildName != "" {
 		bodies["targetGuildName"] = *request.TargetGuildName
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

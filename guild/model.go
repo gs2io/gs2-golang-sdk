@@ -1205,12 +1205,14 @@ func CastGuildModelsFromDict(data []GuildModel) []interface{} {
 }
 
 type Inbox struct {
-	InboxId     *string   `json:"inboxId"`
-	GuildName   *string   `json:"guildName"`
-	FromUserIds []*string `json:"fromUserIds"`
-	CreatedAt   *int64    `json:"createdAt"`
-	UpdatedAt   *int64    `json:"updatedAt"`
-	Revision    *int64    `json:"revision"`
+	InboxId   *string `json:"inboxId"`
+	GuildName *string `json:"guildName"`
+	// Deprecated: should not be used
+	FromUserIds           []*string              `json:"fromUserIds"`
+	ReceiveMemberRequests []ReceiveMemberRequest `json:"receiveMemberRequests"`
+	CreatedAt             *int64                 `json:"createdAt"`
+	UpdatedAt             *int64                 `json:"updatedAt"`
+	Revision              *int64                 `json:"revision"`
 }
 
 func (p *Inbox) UnmarshalJSON(data []byte) error {
@@ -1307,6 +1309,9 @@ func (p *Inbox) UnmarshalJSON(data []byte) error {
 				p.FromUserIds = l
 			}
 		}
+		if v, ok := d["receiveMemberRequests"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReceiveMemberRequests)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -1349,6 +1354,12 @@ func NewInboxFromDict(data map[string]interface{}) Inbox {
 			}
 			return core.CastStrings(core.CastArray(v))
 		}(),
+		ReceiveMemberRequests: func() []ReceiveMemberRequest {
+			if data["receiveMemberRequests"] == nil {
+				return nil
+			}
+			return CastReceiveMemberRequests(core.CastArray(data["receiveMemberRequests"]))
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -1384,6 +1395,11 @@ func (p Inbox) ToDict() map[string]interface{} {
 	if p.FromUserIds != nil {
 		m["fromUserIds"] = core.CastStringsFromDict(
 			p.FromUserIds,
+		)
+	}
+	if p.ReceiveMemberRequests != nil {
+		m["receiveMemberRequests"] = CastReceiveMemberRequestsFromDict(
+			p.ReceiveMemberRequests,
 		)
 	}
 	if p.CreatedAt != nil {
@@ -1676,6 +1692,7 @@ type Guild struct {
 	Attribute3                *int32      `json:"attribute3"`
 	Attribute4                *int32      `json:"attribute4"`
 	Attribute5                *int32      `json:"attribute5"`
+	Metadata                  *string     `json:"metadata"`
 	JoinPolicy                *string     `json:"joinPolicy"`
 	CustomRoles               []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -1814,6 +1831,29 @@ func (p *Guild) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["attribute5"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Attribute5)
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
 		}
 		if v, ok := d["joinPolicy"]; ok && v != nil {
 			var temp interface{}
@@ -1954,6 +1994,13 @@ func NewGuildFromDict(data map[string]interface{}) Guild {
 			}
 			return core.CastInt32(data["attribute5"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 		JoinPolicy: func() *string {
 			v, ok := data["joinPolicy"]
 			if !ok || v == nil {
@@ -2039,6 +2086,9 @@ func (p Guild) ToDict() map[string]interface{} {
 	}
 	if p.Attribute5 != nil {
 		m["attribute5"] = p.Attribute5
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
 	}
 	if p.JoinPolicy != nil {
 		m["joinPolicy"] = p.JoinPolicy
@@ -2722,6 +2772,7 @@ func CastRoleModelsFromDict(data []RoleModel) []interface{} {
 type Member struct {
 	UserId   *string `json:"userId"`
 	RoleName *string `json:"roleName"`
+	Metadata *string `json:"metadata"`
 	JoinedAt *int64  `json:"joinedAt"`
 }
 
@@ -2793,6 +2844,29 @@ func (p *Member) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 		if v, ok := d["joinedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinedAt)
 		}
@@ -2822,6 +2896,13 @@ func NewMemberFromDict(data map[string]interface{}) Member {
 			}
 			return core.CastString(data["roleName"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 		JoinedAt: func() *int64 {
 			v, ok := data["joinedAt"]
 			if !ok || v == nil {
@@ -2839,6 +2920,9 @@ func (p Member) ToDict() map[string]interface{} {
 	}
 	if p.RoleName != nil {
 		m["roleName"] = p.RoleName
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
 	}
 	if p.JoinedAt != nil {
 		m["joinedAt"] = p.JoinedAt
@@ -2869,6 +2953,7 @@ func CastMembersFromDict(data []Member) []interface{} {
 type ReceiveMemberRequest struct {
 	UserId          *string `json:"userId"`
 	TargetGuildName *string `json:"targetGuildName"`
+	Metadata        *string `json:"metadata"`
 }
 
 func (p *ReceiveMemberRequest) UnmarshalJSON(data []byte) error {
@@ -2939,6 +3024,29 @@ func (p *ReceiveMemberRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2965,6 +3073,13 @@ func NewReceiveMemberRequestFromDict(data map[string]interface{}) ReceiveMemberR
 			}
 			return core.CastString(data["targetGuildName"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2975,6 +3090,9 @@ func (p ReceiveMemberRequest) ToDict() map[string]interface{} {
 	}
 	if p.TargetGuildName != nil {
 		m["targetGuildName"] = p.TargetGuildName
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
 	}
 	return m
 }
@@ -3002,6 +3120,7 @@ func CastReceiveMemberRequestsFromDict(data []ReceiveMemberRequest) []interface{
 type SendMemberRequest struct {
 	UserId          *string `json:"userId"`
 	TargetGuildName *string `json:"targetGuildName"`
+	Metadata        *string `json:"metadata"`
 }
 
 func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
@@ -3072,6 +3191,29 @@ func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -3098,6 +3240,13 @@ func NewSendMemberRequestFromDict(data map[string]interface{}) SendMemberRequest
 			}
 			return core.CastString(data["targetGuildName"])
 		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -3108,6 +3257,9 @@ func (p SendMemberRequest) ToDict() map[string]interface{} {
 	}
 	if p.TargetGuildName != nil {
 		m["targetGuildName"] = p.TargetGuildName
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
 	}
 	return m
 }

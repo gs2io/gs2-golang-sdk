@@ -1875,6 +1875,118 @@ func (p BatchUpdateMemberRoleByGuildNameResult) Pointer() *BatchUpdateMemberRole
 	return &p
 }
 
+type UpdateMemberMetadataResult struct {
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateMemberMetadataAsyncResult struct {
+	result *UpdateMemberMetadataResult
+	err    error
+}
+
+func NewUpdateMemberMetadataResultFromJson(data string) UpdateMemberMetadataResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateMemberMetadataResultFromDict(dict)
+}
+
+func NewUpdateMemberMetadataResultFromDict(data map[string]interface{}) UpdateMemberMetadataResult {
+	return UpdateMemberMetadataResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataResult) Pointer() *UpdateMemberMetadataResult {
+	return &p
+}
+
+type UpdateMemberMetadataByUserIdResult struct {
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateMemberMetadataByUserIdAsyncResult struct {
+	result *UpdateMemberMetadataByUserIdResult
+	err    error
+}
+
+func NewUpdateMemberMetadataByUserIdResultFromJson(data string) UpdateMemberMetadataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateMemberMetadataByUserIdResultFromDict(dict)
+}
+
+func NewUpdateMemberMetadataByUserIdResultFromDict(data map[string]interface{}) UpdateMemberMetadataByUserIdResult {
+	return UpdateMemberMetadataByUserIdResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateMemberMetadataByUserIdResult) Pointer() *UpdateMemberMetadataByUserIdResult {
+	return &p
+}
+
 type DeleteGuildResult struct {
 	Item     *Guild               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

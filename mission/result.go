@@ -3073,6 +3073,62 @@ func (p VerifyCounterValueByUserIdResult) Pointer() *VerifyCounterValueByUserIdR
 	return &p
 }
 
+type DeleteCounterResult struct {
+	Item     *Counter             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteCounterAsyncResult struct {
+	result *DeleteCounterResult
+	err    error
+}
+
+func NewDeleteCounterResultFromJson(data string) DeleteCounterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCounterResultFromDict(dict)
+}
+
+func NewDeleteCounterResultFromDict(data map[string]interface{}) DeleteCounterResult {
+	return DeleteCounterResult{
+		Item: func() *Counter {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCounterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteCounterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteCounterResult) Pointer() *DeleteCounterResult {
+	return &p
+}
+
 type DeleteCounterByUserIdResult struct {
 	Item     *Counter             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

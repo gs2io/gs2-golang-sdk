@@ -5378,6 +5378,108 @@ func (p Gs2MissionRestClient) VerifyCounterValueByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func deleteCounterAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteCounterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteCounterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteCounterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteCounterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteCounterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteCounterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) DeleteCounterAsync(
+	request *DeleteCounterRequest,
+	callback chan<- DeleteCounterAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/counter/{counterName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go deleteCounterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) DeleteCounter(
+	request *DeleteCounterRequest,
+) (*DeleteCounterResult, error) {
+	callback := make(chan DeleteCounterAsyncResult, 1)
+	go p.DeleteCounterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteCounterByUserIdAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,

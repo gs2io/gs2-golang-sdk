@@ -9043,6 +9043,157 @@ func (p VerifyCounterValueByUserIdRequest) Pointer() *VerifyCounterValueByUserId
 	return &p
 }
 
+type DeleteCounterRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	CounterName        *string `json:"counterName"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *DeleteCounterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteCounterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteCounterRequest{}
+	} else {
+		*p = DeleteCounterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteCounterRequestFromJson(data string) (DeleteCounterRequest, error) {
+	req := DeleteCounterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteCounterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteCounterRequestFromDict(data map[string]interface{}) DeleteCounterRequest {
+	return DeleteCounterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+	}
+}
+
+func (p DeleteCounterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"counterName":   p.CounterName,
+	}
+}
+
+func (p DeleteCounterRequest) Pointer() *DeleteCounterRequest {
+	return &p
+}
+
 type DeleteCounterByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
