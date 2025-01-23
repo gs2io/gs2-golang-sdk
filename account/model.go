@@ -1796,13 +1796,15 @@ func CastCurrentModelMastersFromDict(data []CurrentModelMaster) []interface{} {
 }
 
 type OpenIdConnectSetting struct {
-	ConfigurationPath  *string `json:"configurationPath"`
-	ClientId           *string `json:"clientId"`
-	ClientSecret       *string `json:"clientSecret"`
-	AppleTeamId        *string `json:"appleTeamId"`
-	AppleKeyId         *string `json:"appleKeyId"`
-	ApplePrivateKeyPem *string `json:"applePrivateKeyPem"`
-	DoneEndpointUrl    *string `json:"doneEndpointUrl"`
+	ConfigurationPath      *string      `json:"configurationPath"`
+	ClientId               *string      `json:"clientId"`
+	ClientSecret           *string      `json:"clientSecret"`
+	AppleTeamId            *string      `json:"appleTeamId"`
+	AppleKeyId             *string      `json:"appleKeyId"`
+	ApplePrivateKeyPem     *string      `json:"applePrivateKeyPem"`
+	DoneEndpointUrl        *string      `json:"doneEndpointUrl"`
+	AdditionalScopeValues  []ScopeValue `json:"additionalScopeValues"`
+	AdditionalReturnValues []*string    `json:"additionalReturnValues"`
 }
 
 func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
@@ -1988,6 +1990,35 @@ func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["additionalScopeValues"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AdditionalScopeValues)
+		}
+		if v, ok := d["additionalReturnValues"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.AdditionalReturnValues = l
+			}
+		}
 	}
 	return nil
 }
@@ -2049,6 +2080,19 @@ func NewOpenIdConnectSettingFromDict(data map[string]interface{}) OpenIdConnectS
 			}
 			return core.CastString(data["doneEndpointUrl"])
 		}(),
+		AdditionalScopeValues: func() []ScopeValue {
+			if data["additionalScopeValues"] == nil {
+				return nil
+			}
+			return CastScopeValues(core.CastArray(data["additionalScopeValues"]))
+		}(),
+		AdditionalReturnValues: func() []*string {
+			v, ok := data["additionalReturnValues"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -2075,6 +2119,16 @@ func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
 	if p.DoneEndpointUrl != nil {
 		m["doneEndpointUrl"] = p.DoneEndpointUrl
 	}
+	if p.AdditionalScopeValues != nil {
+		m["additionalScopeValues"] = CastScopeValuesFromDict(
+			p.AdditionalScopeValues,
+		)
+	}
+	if p.AdditionalReturnValues != nil {
+		m["additionalReturnValues"] = core.CastStringsFromDict(
+			p.AdditionalReturnValues,
+		)
+	}
 	return m
 }
 
@@ -2091,6 +2145,139 @@ func CastOpenIdConnectSettings(data []interface{}) []OpenIdConnectSetting {
 }
 
 func CastOpenIdConnectSettingsFromDict(data []OpenIdConnectSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ScopeValue struct {
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
+}
+
+func (p *ScopeValue) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ScopeValue{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ScopeValue{}
+	} else {
+		*p = ScopeValue{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewScopeValueFromJson(data string) ScopeValue {
+	req := ScopeValue{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewScopeValueFromDict(data map[string]interface{}) ScopeValue {
+	return ScopeValue{
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
+	}
+}
+
+func (p ScopeValue) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Key != nil {
+		m["key"] = p.Key
+	}
+	if p.Value != nil {
+		m["value"] = p.Value
+	}
+	return m
+}
+
+func (p ScopeValue) Pointer() *ScopeValue {
+	return &p
+}
+
+func CastScopeValues(data []interface{}) []ScopeValue {
+	v := make([]ScopeValue, 0)
+	for _, d := range data {
+		v = append(v, NewScopeValueFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScopeValuesFromDict(data []ScopeValue) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
