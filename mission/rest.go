@@ -1247,6 +1247,215 @@ func (p Gs2MissionRestClient) GetCompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func evaluateCompleteAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- EvaluateCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EvaluateCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EvaluateCompleteResult
+	if asyncResult.Err != nil {
+		callback <- EvaluateCompleteAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EvaluateCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- EvaluateCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) EvaluateCompleteAsync(
+	request *EvaluateCompleteRequest,
+	callback chan<- EvaluateCompleteAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/complete/group/{missionGroupName}/eval"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go evaluateCompleteAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) EvaluateComplete(
+	request *EvaluateCompleteRequest,
+) (*EvaluateCompleteResult, error) {
+	callback := make(chan EvaluateCompleteAsyncResult, 1)
+	go p.EvaluateCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func evaluateCompleteByUserIdAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- EvaluateCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EvaluateCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EvaluateCompleteByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- EvaluateCompleteByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EvaluateCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- EvaluateCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) EvaluateCompleteByUserIdAsync(
+	request *EvaluateCompleteByUserIdRequest,
+	callback chan<- EvaluateCompleteByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/eval"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go evaluateCompleteByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) EvaluateCompleteByUserId(
+	request *EvaluateCompleteByUserIdRequest,
+) (*EvaluateCompleteByUserIdResult, error) {
+	callback := make(chan EvaluateCompleteByUserIdAsyncResult, 1)
+	go p.EvaluateCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteCompleteByUserIdAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,
@@ -2644,6 +2853,12 @@ func (p Gs2MissionRestClient) CreateMissionGroupModelMasterAsync(
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
 	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
+	}
 	if request.CompleteNotificationNamespaceId != nil && *request.CompleteNotificationNamespaceId != "" {
 		bodies["completeNotificationNamespaceId"] = *request.CompleteNotificationNamespaceId
 	}
@@ -2856,6 +3071,12 @@ func (p Gs2MissionRestClient) UpdateMissionGroupModelMasterAsync(
 	}
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
+	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
 	}
 	if request.CompleteNotificationNamespaceId != nil && *request.CompleteNotificationNamespaceId != "" {
 		bodies["completeNotificationNamespaceId"] = *request.CompleteNotificationNamespaceId

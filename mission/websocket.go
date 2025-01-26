@@ -1186,6 +1186,206 @@ func (p Gs2MissionWebSocketClient) GetCompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MissionWebSocketClient) evaluateCompleteAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- EvaluateCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EvaluateCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EvaluateCompleteResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EvaluateCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- EvaluateCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) EvaluateCompleteAsync(
+	request *EvaluateCompleteRequest,
+	callback chan<- EvaluateCompleteAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "evaluateComplete",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.evaluateCompleteAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) EvaluateComplete(
+	request *EvaluateCompleteRequest,
+) (*EvaluateCompleteResult, error) {
+	callback := make(chan EvaluateCompleteAsyncResult, 1)
+	go p.EvaluateCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) evaluateCompleteByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- EvaluateCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EvaluateCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EvaluateCompleteByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EvaluateCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- EvaluateCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) EvaluateCompleteByUserIdAsync(
+	request *EvaluateCompleteByUserIdRequest,
+	callback chan<- EvaluateCompleteByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "evaluateCompleteByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.evaluateCompleteByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) EvaluateCompleteByUserId(
+	request *EvaluateCompleteByUserIdRequest,
+) (*EvaluateCompleteByUserIdResult, error) {
+	callback := make(chan EvaluateCompleteByUserIdAsyncResult, 1)
+	go p.EvaluateCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MissionWebSocketClient) deleteCompleteByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteCompleteByUserIdAsyncResult,
@@ -2529,6 +2729,12 @@ func (p Gs2MissionWebSocketClient) CreateMissionGroupModelMasterAsync(
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
 	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
+	}
 	if request.CompleteNotificationNamespaceId != nil && *request.CompleteNotificationNamespaceId != "" {
 		bodies["completeNotificationNamespaceId"] = *request.CompleteNotificationNamespaceId
 	}
@@ -2731,6 +2937,12 @@ func (p Gs2MissionWebSocketClient) UpdateMissionGroupModelMasterAsync(
 	}
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
+	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
 	}
 	if request.CompleteNotificationNamespaceId != nil && *request.CompleteNotificationNamespaceId != "" {
 		bodies["completeNotificationNamespaceId"] = *request.CompleteNotificationNamespaceId

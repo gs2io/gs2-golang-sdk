@@ -771,6 +771,8 @@ type CounterScopeModel struct {
 	ResetHour       *int32        `json:"resetHour"`
 	ConditionName   *string       `json:"conditionName"`
 	Condition       *VerifyAction `json:"condition"`
+	AnchorTimestamp *int64        `json:"anchorTimestamp"`
+	Days            *int32        `json:"days"`
 }
 
 func (p *CounterScopeModel) UnmarshalJSON(data []byte) error {
@@ -896,6 +898,12 @@ func (p *CounterScopeModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["condition"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Condition)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 	}
 	return nil
 }
@@ -957,6 +965,20 @@ func NewCounterScopeModelFromDict(data map[string]interface{}) CounterScopeModel
 			}
 			return NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer()
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 	}
 }
 
@@ -987,6 +1009,12 @@ func (p CounterScopeModel) ToDict() map[string]interface{} {
 			}
 			return p.Condition.ToDict()
 		}()
+	}
+	if p.AnchorTimestamp != nil {
+		m["anchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		m["days"] = p.Days
 	}
 	return m
 }
@@ -1020,6 +1048,8 @@ type MissionGroupModelMaster struct {
 	ResetDayOfMonth                 *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek                  *string `json:"resetDayOfWeek"`
 	ResetHour                       *int32  `json:"resetHour"`
+	AnchorTimestamp                 *int64  `json:"anchorTimestamp"`
+	Days                            *int32  `json:"days"`
 	CompleteNotificationNamespaceId *string `json:"completeNotificationNamespaceId"`
 	CreatedAt                       *int64  `json:"createdAt"`
 	UpdatedAt                       *int64  `json:"updatedAt"`
@@ -1192,6 +1222,12 @@ func (p *MissionGroupModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 		if v, ok := d["completeNotificationNamespaceId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1292,6 +1328,20 @@ func NewMissionGroupModelMasterFromDict(data map[string]interface{}) MissionGrou
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 		CompleteNotificationNamespaceId: func() *string {
 			v, ok := data["completeNotificationNamespaceId"]
 			if !ok || v == nil {
@@ -1348,6 +1398,12 @@ func (p MissionGroupModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.ResetHour != nil {
 		m["resetHour"] = p.ResetHour
+	}
+	if p.AnchorTimestamp != nil {
+		m["anchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		m["days"] = p.Days
 	}
 	if p.CompleteNotificationNamespaceId != nil {
 		m["completeNotificationNamespaceId"] = p.CompleteNotificationNamespaceId
@@ -2360,6 +2416,8 @@ type MissionGroupModel struct {
 	ResetDayOfWeek                  *string            `json:"resetDayOfWeek"`
 	ResetHour                       *int32             `json:"resetHour"`
 	CompleteNotificationNamespaceId *string            `json:"completeNotificationNamespaceId"`
+	AnchorTimestamp                 *int64             `json:"anchorTimestamp"`
+	Days                            *int32             `json:"days"`
 }
 
 func (p *MissionGroupModel) UnmarshalJSON(data []byte) error {
@@ -2531,6 +2589,12 @@ func (p *MissionGroupModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 	}
 	return nil
 }
@@ -2605,6 +2669,20 @@ func NewMissionGroupModelFromDict(data map[string]interface{}) MissionGroupModel
 			}
 			return core.CastString(data["completeNotificationNamespaceId"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 	}
 }
 
@@ -2638,6 +2716,12 @@ func (p MissionGroupModel) ToDict() map[string]interface{} {
 	}
 	if p.CompleteNotificationNamespaceId != nil {
 		m["completeNotificationNamespaceId"] = p.CompleteNotificationNamespaceId
+	}
+	if p.AnchorTimestamp != nil {
+		m["anchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		m["days"] = p.Days
 	}
 	return m
 }

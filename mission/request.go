@@ -2219,6 +2219,340 @@ func (p GetCompleteByUserIdRequest) Pointer() *GetCompleteByUserIdRequest {
 	return &p
 }
 
+type EvaluateCompleteRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	MissionGroupName   *string `json:"missionGroupName"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *EvaluateCompleteRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EvaluateCompleteRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EvaluateCompleteRequest{}
+	} else {
+		*p = EvaluateCompleteRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewEvaluateCompleteRequestFromJson(data string) (EvaluateCompleteRequest, error) {
+	req := EvaluateCompleteRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return EvaluateCompleteRequest{}, err
+	}
+	return req, nil
+}
+
+func NewEvaluateCompleteRequestFromDict(data map[string]interface{}) EvaluateCompleteRequest {
+	return EvaluateCompleteRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MissionGroupName: func() *string {
+			v, ok := data["missionGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupName"])
+		}(),
+	}
+}
+
+func (p EvaluateCompleteRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":    p.NamespaceName,
+		"accessToken":      p.AccessToken,
+		"missionGroupName": p.MissionGroupName,
+	}
+}
+
+func (p EvaluateCompleteRequest) Pointer() *EvaluateCompleteRequest {
+	return &p
+}
+
+type EvaluateCompleteByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	MissionGroupName   *string `json:"missionGroupName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *EvaluateCompleteByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EvaluateCompleteByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EvaluateCompleteByUserIdRequest{}
+	} else {
+		*p = EvaluateCompleteByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewEvaluateCompleteByUserIdRequestFromJson(data string) (EvaluateCompleteByUserIdRequest, error) {
+	req := EvaluateCompleteByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return EvaluateCompleteByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewEvaluateCompleteByUserIdRequestFromDict(data map[string]interface{}) EvaluateCompleteByUserIdRequest {
+	return EvaluateCompleteByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MissionGroupName: func() *string {
+			v, ok := data["missionGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["missionGroupName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p EvaluateCompleteByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":    p.NamespaceName,
+		"userId":           p.UserId,
+		"missionGroupName": p.MissionGroupName,
+		"timeOffsetToken":  p.TimeOffsetToken,
+	}
+}
+
+func (p EvaluateCompleteByUserIdRequest) Pointer() *EvaluateCompleteByUserIdRequest {
+	return &p
+}
+
 type DeleteCompleteByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4320,6 +4654,8 @@ type CreateMissionGroupModelMasterRequest struct {
 	ResetDayOfMonth                 *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek                  *string `json:"resetDayOfWeek"`
 	ResetHour                       *int32  `json:"resetHour"`
+	AnchorTimestamp                 *int64  `json:"anchorTimestamp"`
+	Days                            *int32  `json:"days"`
 	CompleteNotificationNamespaceId *string `json:"completeNotificationNamespaceId"`
 	DryRun                          *bool   `json:"dryRun"`
 }
@@ -4490,6 +4826,12 @@ func (p *CreateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 		if v, ok := d["completeNotificationNamespaceId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4584,6 +4926,20 @@ func NewCreateMissionGroupModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 		CompleteNotificationNamespaceId: func() *string {
 			v, ok := data["completeNotificationNamespaceId"]
 			if !ok || v == nil {
@@ -4604,6 +4960,8 @@ func (p CreateMissionGroupModelMasterRequest) ToDict() map[string]interface{} {
 		"resetDayOfMonth":                 p.ResetDayOfMonth,
 		"resetDayOfWeek":                  p.ResetDayOfWeek,
 		"resetHour":                       p.ResetHour,
+		"anchorTimestamp":                 p.AnchorTimestamp,
+		"days":                            p.Days,
 		"completeNotificationNamespaceId": p.CompleteNotificationNamespaceId,
 	}
 }
@@ -4740,6 +5098,8 @@ type UpdateMissionGroupModelMasterRequest struct {
 	ResetDayOfMonth                 *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek                  *string `json:"resetDayOfWeek"`
 	ResetHour                       *int32  `json:"resetHour"`
+	AnchorTimestamp                 *int64  `json:"anchorTimestamp"`
+	Days                            *int32  `json:"days"`
 	CompleteNotificationNamespaceId *string `json:"completeNotificationNamespaceId"`
 	DryRun                          *bool   `json:"dryRun"`
 }
@@ -4910,6 +5270,12 @@ func (p *UpdateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 		if v, ok := d["completeNotificationNamespaceId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5004,6 +5370,20 @@ func NewUpdateMissionGroupModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 		CompleteNotificationNamespaceId: func() *string {
 			v, ok := data["completeNotificationNamespaceId"]
 			if !ok || v == nil {
@@ -5024,6 +5404,8 @@ func (p UpdateMissionGroupModelMasterRequest) ToDict() map[string]interface{} {
 		"resetDayOfMonth":                 p.ResetDayOfMonth,
 		"resetDayOfWeek":                  p.ResetDayOfWeek,
 		"resetHour":                       p.ResetHour,
+		"anchorTimestamp":                 p.AnchorTimestamp,
+		"days":                            p.Days,
 		"completeNotificationNamespaceId": p.CompleteNotificationNamespaceId,
 	}
 }

@@ -864,6 +864,118 @@ func (p GetCompleteByUserIdResult) Pointer() *GetCompleteByUserIdResult {
 	return &p
 }
 
+type EvaluateCompleteResult struct {
+	Item     *Complete            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type EvaluateCompleteAsyncResult struct {
+	result *EvaluateCompleteResult
+	err    error
+}
+
+func NewEvaluateCompleteResultFromJson(data string) EvaluateCompleteResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEvaluateCompleteResultFromDict(dict)
+}
+
+func NewEvaluateCompleteResultFromDict(data map[string]interface{}) EvaluateCompleteResult {
+	return EvaluateCompleteResult{
+		Item: func() *Complete {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCompleteFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p EvaluateCompleteResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p EvaluateCompleteResult) Pointer() *EvaluateCompleteResult {
+	return &p
+}
+
+type EvaluateCompleteByUserIdResult struct {
+	Item     *Complete            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type EvaluateCompleteByUserIdAsyncResult struct {
+	result *EvaluateCompleteByUserIdResult
+	err    error
+}
+
+func NewEvaluateCompleteByUserIdResultFromJson(data string) EvaluateCompleteByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEvaluateCompleteByUserIdResultFromDict(dict)
+}
+
+func NewEvaluateCompleteByUserIdResultFromDict(data map[string]interface{}) EvaluateCompleteByUserIdResult {
+	return EvaluateCompleteByUserIdResult{
+		Item: func() *Complete {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCompleteFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p EvaluateCompleteByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p EvaluateCompleteByUserIdResult) Pointer() *EvaluateCompleteByUserIdResult {
+	return &p
+}
+
 type DeleteCompleteByUserIdResult struct {
 	Item     *Complete            `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
