@@ -3185,6 +3185,118 @@ func (p VerifyCounterValueByUserIdResult) Pointer() *VerifyCounterValueByUserIdR
 	return &p
 }
 
+type ResetCounterResult struct {
+	Item     *Counter             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ResetCounterAsyncResult struct {
+	result *ResetCounterResult
+	err    error
+}
+
+func NewResetCounterResultFromJson(data string) ResetCounterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetCounterResultFromDict(dict)
+}
+
+func NewResetCounterResultFromDict(data map[string]interface{}) ResetCounterResult {
+	return ResetCounterResult{
+		Item: func() *Counter {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCounterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ResetCounterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ResetCounterResult) Pointer() *ResetCounterResult {
+	return &p
+}
+
+type ResetCounterByUserIdResult struct {
+	Item     *Counter             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ResetCounterByUserIdAsyncResult struct {
+	result *ResetCounterByUserIdResult
+	err    error
+}
+
+func NewResetCounterByUserIdResultFromJson(data string) ResetCounterByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetCounterByUserIdResultFromDict(dict)
+}
+
+func NewResetCounterByUserIdResultFromDict(data map[string]interface{}) ResetCounterByUserIdResult {
+	return ResetCounterByUserIdResult{
+		Item: func() *Counter {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCounterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ResetCounterByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ResetCounterByUserIdResult) Pointer() *ResetCounterByUserIdResult {
+	return &p
+}
+
 type DeleteCounterResult struct {
 	Item     *Counter             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -3515,6 +3627,71 @@ func (p DecreaseByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p DecreaseByStampTaskResult) Pointer() *DecreaseByStampTaskResult {
+	return &p
+}
+
+type ResetByStampTaskResult struct {
+	Item            *Counter             `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type ResetByStampTaskAsyncResult struct {
+	result *ResetByStampTaskResult
+	err    error
+}
+
+func NewResetByStampTaskResultFromJson(data string) ResetByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetByStampTaskResultFromDict(dict)
+}
+
+func NewResetByStampTaskResultFromDict(data map[string]interface{}) ResetByStampTaskResult {
+	return ResetByStampTaskResult{
+		Item: func() *Counter {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCounterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ResetByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ResetByStampTaskResult) Pointer() *ResetByStampTaskResult {
 	return &p
 }
 

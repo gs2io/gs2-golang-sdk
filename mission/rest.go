@@ -5599,6 +5599,229 @@ func (p Gs2MissionRestClient) VerifyCounterValueByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func resetCounterAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- ResetCounterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetCounterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetCounterResult
+	if asyncResult.Err != nil {
+		callback <- ResetCounterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ResetCounterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ResetCounterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) ResetCounterAsync(
+	request *ResetCounterRequest,
+	callback chan<- ResetCounterAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/counter/{counterName}/reset"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Scopes != nil {
+		var _scopes []interface{}
+		for _, item := range request.Scopes {
+			_scopes = append(_scopes, item)
+		}
+		bodies["scopes"] = _scopes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go resetCounterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) ResetCounter(
+	request *ResetCounterRequest,
+) (*ResetCounterResult, error) {
+	callback := make(chan ResetCounterAsyncResult, 1)
+	go p.ResetCounterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func resetCounterByUserIdAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- ResetCounterByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetCounterByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetCounterByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ResetCounterByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ResetCounterByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ResetCounterByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) ResetCounterByUserIdAsync(
+	request *ResetCounterByUserIdRequest,
+	callback chan<- ResetCounterByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/counter/{counterName}/reset"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Scopes != nil {
+		var _scopes []interface{}
+		for _, item := range request.Scopes {
+			_scopes = append(_scopes, item)
+		}
+		bodies["scopes"] = _scopes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go resetCounterByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) ResetCounterByUserId(
+	request *ResetCounterByUserIdRequest,
+) (*ResetCounterByUserIdResult, error) {
+	callback := make(chan ResetCounterByUserIdAsyncResult, 1)
+	go p.ResetCounterByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteCounterAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,
@@ -6077,6 +6300,98 @@ func (p Gs2MissionRestClient) DecreaseByStampTask(
 ) (*DecreaseByStampTaskResult, error) {
 	callback := make(chan DecreaseByStampTaskAsyncResult, 1)
 	go p.DecreaseByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func resetByStampTaskAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- ResetByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- ResetByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ResetByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ResetByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) ResetByStampTaskAsync(
+	request *ResetByStampTaskRequest,
+	callback chan<- ResetByStampTaskAsyncResult,
+) {
+	path := "/stamp/reset"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go resetByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) ResetByStampTask(
+	request *ResetByStampTaskRequest,
+) (*ResetByStampTaskResult, error) {
+	callback := make(chan ResetByStampTaskAsyncResult, 1)
+	go p.ResetByStampTaskAsync(
 		request,
 		callback,
 	)

@@ -531,6 +531,8 @@ type LimitModelMaster struct {
 	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
 	ResetHour       *int32  `json:"resetHour"`
+	AnchorTimestamp *int64  `json:"anchorTimestamp"`
+	Days            *int32  `json:"days"`
 	CreatedAt       *int64  `json:"createdAt"`
 	UpdatedAt       *int64  `json:"updatedAt"`
 	Revision        *int64  `json:"revision"`
@@ -702,6 +704,12 @@ func (p *LimitModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -779,6 +787,20 @@ func NewLimitModelMasterFromDict(data map[string]interface{}) LimitModelMaster {
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -828,6 +850,12 @@ func (p LimitModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.ResetHour != nil {
 		m["resetHour"] = p.ResetHour
+	}
+	if p.AnchorTimestamp != nil {
+		m["anchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		m["days"] = p.Days
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
@@ -1404,6 +1432,8 @@ type LimitModel struct {
 	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
 	ResetHour       *int32  `json:"resetHour"`
+	AnchorTimestamp *int64  `json:"anchorTimestamp"`
+	Days            *int32  `json:"days"`
 }
 
 func (p *LimitModel) UnmarshalJSON(data []byte) error {
@@ -1549,6 +1579,12 @@ func (p *LimitModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 	}
 	return nil
 }
@@ -1610,6 +1646,20 @@ func NewLimitModelFromDict(data map[string]interface{}) LimitModel {
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 	}
 }
 
@@ -1635,6 +1685,12 @@ func (p LimitModel) ToDict() map[string]interface{} {
 	}
 	if p.ResetHour != nil {
 		m["resetHour"] = p.ResetHour
+	}
+	if p.AnchorTimestamp != nil {
+		m["anchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		m["days"] = p.Days
 	}
 	return m
 }

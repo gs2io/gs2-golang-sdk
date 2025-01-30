@@ -4365,6 +4365,8 @@ type CreateLimitModelMasterRequest struct {
 	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
 	ResetHour       *int32  `json:"resetHour"`
+	AnchorTimestamp *int64  `json:"anchorTimestamp"`
+	Days            *int32  `json:"days"`
 	DryRun          *bool   `json:"dryRun"`
 }
 
@@ -4534,6 +4536,12 @@ func (p *CreateLimitModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 	}
 	return nil
 }
@@ -4605,6 +4613,20 @@ func NewCreateLimitModelMasterRequestFromDict(data map[string]interface{}) Creat
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 	}
 }
 
@@ -4618,6 +4640,8 @@ func (p CreateLimitModelMasterRequest) ToDict() map[string]interface{} {
 		"resetDayOfMonth": p.ResetDayOfMonth,
 		"resetDayOfWeek":  p.ResetDayOfWeek,
 		"resetHour":       p.ResetHour,
+		"anchorTimestamp": p.AnchorTimestamp,
+		"days":            p.Days,
 	}
 }
 
@@ -4753,6 +4777,8 @@ type UpdateLimitModelMasterRequest struct {
 	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
 	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
 	ResetHour       *int32  `json:"resetHour"`
+	AnchorTimestamp *int64  `json:"anchorTimestamp"`
+	Days            *int32  `json:"days"`
 	DryRun          *bool   `json:"dryRun"`
 }
 
@@ -4922,6 +4948,12 @@ func (p *UpdateLimitModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Days)
+		}
 	}
 	return nil
 }
@@ -4993,6 +5025,20 @@ func NewUpdateLimitModelMasterRequestFromDict(data map[string]interface{}) Updat
 			}
 			return core.CastInt32(data["resetHour"])
 		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
 	}
 }
 
@@ -5006,6 +5052,8 @@ func (p UpdateLimitModelMasterRequest) ToDict() map[string]interface{} {
 		"resetDayOfMonth": p.ResetDayOfMonth,
 		"resetDayOfWeek":  p.ResetDayOfWeek,
 		"resetHour":       p.ResetHour,
+		"anchorTimestamp": p.AnchorTimestamp,
+		"days":            p.Days,
 	}
 }
 

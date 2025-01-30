@@ -9425,6 +9425,366 @@ func (p VerifyCounterValueByUserIdRequest) Pointer() *VerifyCounterValueByUserId
 	return &p
 }
 
+type ResetCounterRequest struct {
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	NamespaceName      *string       `json:"namespaceName"`
+	AccessToken        *string       `json:"accessToken"`
+	CounterName        *string       `json:"counterName"`
+	Scopes             []ScopedValue `json:"scopes"`
+	DryRun             *bool         `json:"dryRun"`
+}
+
+func (p *ResetCounterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ResetCounterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ResetCounterRequest{}
+	} else {
+		*p = ResetCounterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["scopes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Scopes)
+		}
+	}
+	return nil
+}
+
+func NewResetCounterRequestFromJson(data string) (ResetCounterRequest, error) {
+	req := ResetCounterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ResetCounterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewResetCounterRequestFromDict(data map[string]interface{}) ResetCounterRequest {
+	return ResetCounterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Scopes: func() []ScopedValue {
+			if data["scopes"] == nil {
+				return nil
+			}
+			return CastScopedValues(core.CastArray(data["scopes"]))
+		}(),
+	}
+}
+
+func (p ResetCounterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"counterName":   p.CounterName,
+		"scopes": CastScopedValuesFromDict(
+			p.Scopes,
+		),
+	}
+}
+
+func (p ResetCounterRequest) Pointer() *ResetCounterRequest {
+	return &p
+}
+
+type ResetCounterByUserIdRequest struct {
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	NamespaceName      *string       `json:"namespaceName"`
+	UserId             *string       `json:"userId"`
+	CounterName        *string       `json:"counterName"`
+	Scopes             []ScopedValue `json:"scopes"`
+	TimeOffsetToken    *string       `json:"timeOffsetToken"`
+	DryRun             *bool         `json:"dryRun"`
+}
+
+func (p *ResetCounterByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ResetCounterByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ResetCounterByUserIdRequest{}
+	} else {
+		*p = ResetCounterByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["scopes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Scopes)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewResetCounterByUserIdRequestFromJson(data string) (ResetCounterByUserIdRequest, error) {
+	req := ResetCounterByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ResetCounterByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewResetCounterByUserIdRequestFromDict(data map[string]interface{}) ResetCounterByUserIdRequest {
+	return ResetCounterByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		CounterName: func() *string {
+			v, ok := data["counterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["counterName"])
+		}(),
+		Scopes: func() []ScopedValue {
+			if data["scopes"] == nil {
+				return nil
+			}
+			return CastScopedValues(core.CastArray(data["scopes"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p ResetCounterByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"counterName":   p.CounterName,
+		"scopes": CastScopedValuesFromDict(
+			p.Scopes,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p ResetCounterByUserIdRequest) Pointer() *ResetCounterByUserIdRequest {
+	return &p
+}
+
 type DeleteCounterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -10110,6 +10470,124 @@ func (p DecreaseByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p DecreaseByStampTaskRequest) Pointer() *DecreaseByStampTaskRequest {
+	return &p
+}
+
+type ResetByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *ResetByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ResetByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ResetByStampTaskRequest{}
+	} else {
+		*p = ResetByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewResetByStampTaskRequestFromJson(data string) (ResetByStampTaskRequest, error) {
+	req := ResetByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ResetByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewResetByStampTaskRequestFromDict(data map[string]interface{}) ResetByStampTaskRequest {
+	return ResetByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p ResetByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p ResetByStampTaskRequest) Pointer() *ResetByStampTaskRequest {
 	return &p
 }
 

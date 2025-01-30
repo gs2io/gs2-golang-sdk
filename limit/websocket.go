@@ -2821,6 +2821,12 @@ func (p Gs2LimitWebSocketClient) CreateLimitModelMasterAsync(
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
 	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3020,6 +3026,12 @@ func (p Gs2LimitWebSocketClient) UpdateLimitModelMasterAsync(
 	}
 	if request.ResetHour != nil {
 		bodies["resetHour"] = *request.ResetHour
+	}
+	if request.AnchorTimestamp != nil {
+		bodies["anchorTimestamp"] = *request.AnchorTimestamp
+	}
+	if request.Days != nil {
+		bodies["days"] = *request.Days
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
