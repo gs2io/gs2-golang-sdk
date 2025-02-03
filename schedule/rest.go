@@ -2295,6 +2295,9 @@ func (p Gs2ScheduleRestClient) TriggerByUserIdAsync(
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}
+	if request.EventId != nil && *request.EventId != "" {
+		bodies["eventId"] = *request.EventId
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

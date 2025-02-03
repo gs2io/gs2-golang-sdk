@@ -2221,6 +2221,9 @@ func (p Gs2ScheduleWebSocketClient) TriggerByUserIdAsync(
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}
+	if request.EventId != nil && *request.EventId != "" {
+		bodies["eventId"] = *request.EventId
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}

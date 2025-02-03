@@ -3477,6 +3477,7 @@ type TriggerByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	TriggerStrategy    *string `json:"triggerStrategy"`
 	Ttl                *int32  `json:"ttl"`
+	EventId            *string `json:"eventId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -3598,6 +3599,29 @@ func (p *TriggerByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["ttl"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Ttl)
 		}
+		if v, ok := d["eventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventId)
+				}
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3671,6 +3695,13 @@ func NewTriggerByUserIdRequestFromDict(data map[string]interface{}) TriggerByUse
 			}
 			return core.CastInt32(data["ttl"])
 		}(),
+		EventId: func() *string {
+			v, ok := data["eventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventId"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -3688,6 +3719,7 @@ func (p TriggerByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":          p.UserId,
 		"triggerStrategy": p.TriggerStrategy,
 		"ttl":             p.Ttl,
+		"eventId":         p.EventId,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
