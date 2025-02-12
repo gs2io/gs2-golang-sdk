@@ -130,6 +130,7 @@ type CreateNamespaceRequest struct {
 	TransactionSetting        *TransactionSetting `json:"transactionSetting"`
 	ExchangeScript            *ScriptSetting      `json:"exchangeScript"`
 	IncrementalExchangeScript *ScriptSetting      `json:"incrementalExchangeScript"`
+	AcquireAwaitScript        *ScriptSetting      `json:"acquireAwaitScript"`
 	LogSetting                *LogSetting         `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -220,6 +221,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["incrementalExchangeScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncrementalExchangeScript)
+		}
+		if v, ok := d["acquireAwaitScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireAwaitScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -334,6 +338,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["incrementalExchangeScript"])).Pointer()
 		}(),
+		AcquireAwaitScript: func() *ScriptSetting {
+			v, ok := data["acquireAwaitScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquireAwaitScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -381,6 +392,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.IncrementalExchangeScript.ToDict()
+		}(),
+		"acquireAwaitScript": func() map[string]interface{} {
+			if p.AcquireAwaitScript == nil {
+				return nil
+			}
+			return p.AcquireAwaitScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -578,6 +595,7 @@ type UpdateNamespaceRequest struct {
 	TransactionSetting        *TransactionSetting `json:"transactionSetting"`
 	ExchangeScript            *ScriptSetting      `json:"exchangeScript"`
 	IncrementalExchangeScript *ScriptSetting      `json:"incrementalExchangeScript"`
+	AcquireAwaitScript        *ScriptSetting      `json:"acquireAwaitScript"`
 	LogSetting                *LogSetting         `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -668,6 +686,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["incrementalExchangeScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncrementalExchangeScript)
+		}
+		if v, ok := d["acquireAwaitScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireAwaitScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -782,6 +803,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["incrementalExchangeScript"])).Pointer()
 		}(),
+		AcquireAwaitScript: func() *ScriptSetting {
+			v, ok := data["acquireAwaitScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquireAwaitScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -829,6 +857,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.IncrementalExchangeScript.ToDict()
+		}(),
+		"acquireAwaitScript": func() map[string]interface{} {
+			if p.AcquireAwaitScript == nil {
+				return nil
+			}
+			return p.AcquireAwaitScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
