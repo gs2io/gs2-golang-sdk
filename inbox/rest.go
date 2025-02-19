@@ -2487,6 +2487,245 @@ func (p Gs2InboxRestClient) ReadMessageByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func batchReadMessagesAsyncHandler(
+	client Gs2InboxRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchReadMessagesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReadMessagesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReadMessagesResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
+		callback <- BatchReadMessagesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReadMessagesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchReadMessagesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InboxRestClient) BatchReadMessagesAsync(
+	request *BatchReadMessagesRequest,
+	callback chan<- BatchReadMessagesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/messages/read/batch"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MessageNames != nil {
+		var _messageNames []interface{}
+		for _, item := range request.MessageNames {
+			_messageNames = append(_messageNames, item)
+		}
+		bodies["messageNames"] = _messageNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go batchReadMessagesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InboxRestClient) BatchReadMessages(
+	request *BatchReadMessagesRequest,
+) (*BatchReadMessagesResult, error) {
+	callback := make(chan BatchReadMessagesAsyncResult, 1)
+	go p.BatchReadMessagesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchReadMessagesByUserIdAsyncHandler(
+	client Gs2InboxRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchReadMessagesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReadMessagesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReadMessagesByUserIdResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
+		callback <- BatchReadMessagesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReadMessagesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchReadMessagesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InboxRestClient) BatchReadMessagesByUserIdAsync(
+	request *BatchReadMessagesByUserIdRequest,
+	callback chan<- BatchReadMessagesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/messages/read/batch"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MessageNames != nil {
+		var _messageNames []interface{}
+		for _, item := range request.MessageNames {
+			_messageNames = append(_messageNames, item)
+		}
+		bodies["messageNames"] = _messageNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go batchReadMessagesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InboxRestClient) BatchReadMessagesByUserId(
+	request *BatchReadMessagesByUserIdRequest,
+) (*BatchReadMessagesByUserIdResult, error) {
+	callback := make(chan BatchReadMessagesByUserIdAsyncResult, 1)
+	go p.BatchReadMessagesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteMessageAsyncHandler(
 	client Gs2InboxRestClient,
 	job *core.NetworkJob,

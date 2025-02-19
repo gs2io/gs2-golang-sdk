@@ -756,14 +756,16 @@ func (p DeleteScriptResult) Pointer() *DeleteScriptResult {
 }
 
 type InvokeScriptResult struct {
-	Code         *int32               `json:"code"`
-	Result       *string              `json:"result"`
-	Transaction  *Transaction         `json:"transaction"`
-	RandomStatus *RandomStatus        `json:"randomStatus"`
-	ExecuteTime  *int32               `json:"executeTime"`
-	Charged      *int32               `json:"charged"`
-	Output       []*string            `json:"output"`
-	Metadata     *core.ResultMetadata `json:"metadata"`
+	Code              *int32                  `json:"code"`
+	Result            *string                 `json:"result"`
+	Transaction       *Transaction            `json:"transaction"`
+	RandomStatus      *RandomStatus           `json:"randomStatus"`
+	AtomicCommit      *bool                   `json:"atomicCommit"`
+	TransactionResult *core.TransactionResult `json:"transactionResult"`
+	ExecuteTime       *int32                  `json:"executeTime"`
+	Charged           *int32                  `json:"charged"`
+	Output            []*string               `json:"output"`
+	Metadata          *core.ResultMetadata    `json:"metadata"`
 }
 
 type InvokeScriptAsyncResult struct {
@@ -806,6 +808,20 @@ func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResu
 				return nil
 			}
 			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
 		}(),
 		ExecuteTime: func() *int32 {
 			v, ok := data["executeTime"]
@@ -854,6 +870,13 @@ func (p InvokeScriptResult) ToDict() map[string]interface{} {
 			}
 			return p.RandomStatus.ToDict()
 		}(),
+		"atomicCommit": p.AtomicCommit,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 		"executeTime": p.ExecuteTime,
 		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
@@ -873,14 +896,16 @@ func (p InvokeScriptResult) Pointer() *InvokeScriptResult {
 }
 
 type DebugInvokeResult struct {
-	Code         *int32               `json:"code"`
-	Result       *string              `json:"result"`
-	Transaction  *Transaction         `json:"transaction"`
-	RandomStatus *RandomStatus        `json:"randomStatus"`
-	ExecuteTime  *int32               `json:"executeTime"`
-	Charged      *int32               `json:"charged"`
-	Output       []*string            `json:"output"`
-	Metadata     *core.ResultMetadata `json:"metadata"`
+	Code              *int32                  `json:"code"`
+	Result            *string                 `json:"result"`
+	Transaction       *Transaction            `json:"transaction"`
+	RandomStatus      *RandomStatus           `json:"randomStatus"`
+	AtomicCommit      *bool                   `json:"atomicCommit"`
+	TransactionResult *core.TransactionResult `json:"transactionResult"`
+	ExecuteTime       *int32                  `json:"executeTime"`
+	Charged           *int32                  `json:"charged"`
+	Output            []*string               `json:"output"`
+	Metadata          *core.ResultMetadata    `json:"metadata"`
 }
 
 type DebugInvokeAsyncResult struct {
@@ -923,6 +948,20 @@ func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult
 				return nil
 			}
 			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
 		}(),
 		ExecuteTime: func() *int32 {
 			v, ok := data["executeTime"]
@@ -971,6 +1010,13 @@ func (p DebugInvokeResult) ToDict() map[string]interface{} {
 			}
 			return p.RandomStatus.ToDict()
 		}(),
+		"atomicCommit": p.AtomicCommit,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 		"executeTime": p.ExecuteTime,
 		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
@@ -990,14 +1036,16 @@ func (p DebugInvokeResult) Pointer() *DebugInvokeResult {
 }
 
 type InvokeByStampSheetResult struct {
-	Code         *int32               `json:"code"`
-	Result       *string              `json:"result"`
-	Transaction  *Transaction         `json:"transaction"`
-	RandomStatus *RandomStatus        `json:"randomStatus"`
-	ExecuteTime  *int32               `json:"executeTime"`
-	Charged      *int32               `json:"charged"`
-	Output       []*string            `json:"output"`
-	Metadata     *core.ResultMetadata `json:"metadata"`
+	Code              *int32                  `json:"code"`
+	Result            *string                 `json:"result"`
+	Transaction       *Transaction            `json:"transaction"`
+	RandomStatus      *RandomStatus           `json:"randomStatus"`
+	AtomicCommit      *bool                   `json:"atomicCommit"`
+	TransactionResult *core.TransactionResult `json:"transactionResult"`
+	ExecuteTime       *int32                  `json:"executeTime"`
+	Charged           *int32                  `json:"charged"`
+	Output            []*string               `json:"output"`
+	Metadata          *core.ResultMetadata    `json:"metadata"`
 }
 
 type InvokeByStampSheetAsyncResult struct {
@@ -1040,6 +1088,20 @@ func NewInvokeByStampSheetResultFromDict(data map[string]interface{}) InvokeBySt
 				return nil
 			}
 			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
 		}(),
 		ExecuteTime: func() *int32 {
 			v, ok := data["executeTime"]
@@ -1087,6 +1149,13 @@ func (p InvokeByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.RandomStatus.ToDict()
+		}(),
+		"atomicCommit": p.AtomicCommit,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
 		}(),
 		"executeTime": p.ExecuteTime,
 		"charged":     p.Charged,

@@ -1442,6 +1442,246 @@ func (p ReadMessageByUserIdResult) Pointer() *ReadMessageByUserIdResult {
 	return &p
 }
 
+type BatchReadMessagesResult struct {
+	Items                     []Message               `json:"items"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
+}
+
+type BatchReadMessagesAsyncResult struct {
+	result *BatchReadMessagesResult
+	err    error
+}
+
+func NewBatchReadMessagesResultFromJson(data string) BatchReadMessagesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchReadMessagesResultFromDict(dict)
+}
+
+func NewBatchReadMessagesResultFromDict(data map[string]interface{}) BatchReadMessagesResult {
+	return BatchReadMessagesResult{
+		Items: func() []Message {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMessages(core.CastArray(data["items"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p BatchReadMessagesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p BatchReadMessagesResult) Pointer() *BatchReadMessagesResult {
+	return &p
+}
+
+type BatchReadMessagesByUserIdResult struct {
+	Items                     []Message               `json:"items"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
+}
+
+type BatchReadMessagesByUserIdAsyncResult struct {
+	result *BatchReadMessagesByUserIdResult
+	err    error
+}
+
+func NewBatchReadMessagesByUserIdResultFromJson(data string) BatchReadMessagesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchReadMessagesByUserIdResultFromDict(dict)
+}
+
+func NewBatchReadMessagesByUserIdResultFromDict(data map[string]interface{}) BatchReadMessagesByUserIdResult {
+	return BatchReadMessagesByUserIdResult{
+		Items: func() []Message {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMessages(core.CastArray(data["items"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p BatchReadMessagesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p BatchReadMessagesByUserIdResult) Pointer() *BatchReadMessagesByUserIdResult {
+	return &p
+}
+
 type DeleteMessageResult struct {
 	Item     *Message             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
