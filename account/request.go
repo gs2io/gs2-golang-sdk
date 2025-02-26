@@ -131,6 +131,7 @@ type CreateNamespaceRequest struct {
 	AuthenticationScript                    *ScriptSetting `json:"authenticationScript"`
 	CreateTakeOverScript                    *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript                        *ScriptSetting `json:"doTakeOverScript"`
+	BanScript                               *ScriptSetting `json:"banScript"`
 	LogSetting                              *LogSetting    `json:"logSetting"`
 	DryRun                                  *bool          `json:"dryRun"`
 }
@@ -221,6 +222,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["doTakeOverScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DoTakeOverScript)
 		}
+		if v, ok := d["banScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.BanScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -295,6 +299,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["doTakeOverScript"])).Pointer()
 		}(),
+		BanScript: func() *ScriptSetting {
+			v, ok := data["banScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["banScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -334,6 +345,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.DoTakeOverScript.ToDict()
+		}(),
+		"banScript": func() map[string]interface{} {
+			if p.BanScript == nil {
+				return nil
+			}
+			return p.BanScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -529,6 +546,7 @@ type UpdateNamespaceRequest struct {
 	AuthenticationScript     *ScriptSetting `json:"authenticationScript"`
 	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
+	BanScript                *ScriptSetting `json:"banScript"`
 	LogSetting               *LogSetting    `json:"logSetting"`
 	DryRun                   *bool          `json:"dryRun"`
 }
@@ -616,6 +634,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["doTakeOverScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DoTakeOverScript)
 		}
+		if v, ok := d["banScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.BanScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -683,6 +704,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["doTakeOverScript"])).Pointer()
 		}(),
+		BanScript: func() *ScriptSetting {
+			v, ok := data["banScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["banScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -721,6 +749,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.DoTakeOverScript.ToDict()
+		}(),
+		"banScript": func() map[string]interface{} {
+			if p.BanScript == nil {
+				return nil
+			}
+			return p.BanScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {

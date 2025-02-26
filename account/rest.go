@@ -196,6 +196,9 @@ func (p Gs2AccountRestClient) CreateNamespaceAsync(
 	if request.DoTakeOverScript != nil {
 		bodies["doTakeOverScript"] = request.DoTakeOverScript.ToDict()
 	}
+	if request.BanScript != nil {
+		bodies["banScript"] = request.BanScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -489,6 +492,9 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
 	}
 	if request.DoTakeOverScript != nil {
 		bodies["doTakeOverScript"] = request.DoTakeOverScript.ToDict()
+	}
+	if request.BanScript != nil {
+		bodies["banScript"] = request.BanScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

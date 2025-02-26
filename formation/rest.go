@@ -5657,7 +5657,7 @@ func (p Gs2FormationRestClient) SetFormAsync(
 	request *SetFormRequest,
 	callback chan<- SetFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}"
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}/raw"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -7179,7 +7179,7 @@ func (p Gs2FormationRestClient) SetPropertyFormAsync(
 	request *SetPropertyFormRequest,
 	callback chan<- SetPropertyFormAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}"
+	path := "/{namespaceName}/user/me/property/{propertyFormModelName}/form/{propertyId}/raw"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
