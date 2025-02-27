@@ -2033,6 +2033,57 @@ func (p FreezeMasterDataBySignedTimestampResult) Pointer() *FreezeMasterDataBySi
 	return &p
 }
 
+type FreezeMasterDataByTimestampResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type FreezeMasterDataByTimestampAsyncResult struct {
+	result *FreezeMasterDataByTimestampResult
+	err    error
+}
+
+func NewFreezeMasterDataByTimestampResultFromJson(data string) FreezeMasterDataByTimestampResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFreezeMasterDataByTimestampResultFromDict(dict)
+}
+
+func NewFreezeMasterDataByTimestampResultFromDict(data map[string]interface{}) FreezeMasterDataByTimestampResult {
+	return FreezeMasterDataByTimestampResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p FreezeMasterDataByTimestampResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p FreezeMasterDataByTimestampResult) Pointer() *FreezeMasterDataByTimestampResult {
+	return &p
+}
+
 type BatchExecuteApiResult struct {
 	Results  []BatchResultPayload `json:"results"`
 	Metadata *core.ResultMetadata `json:"metadata"`

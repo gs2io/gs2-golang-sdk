@@ -4501,6 +4501,137 @@ func (p FreezeMasterDataBySignedTimestampRequest) Pointer() *FreezeMasterDataByS
 	return &p
 }
 
+type FreezeMasterDataByTimestampRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	Timestamp          *int64  `json:"timestamp"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *FreezeMasterDataByTimestampRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FreezeMasterDataByTimestampRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FreezeMasterDataByTimestampRequest{}
+	} else {
+		*p = FreezeMasterDataByTimestampRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+	}
+	return nil
+}
+
+func NewFreezeMasterDataByTimestampRequestFromJson(data string) (FreezeMasterDataByTimestampRequest, error) {
+	req := FreezeMasterDataByTimestampRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return FreezeMasterDataByTimestampRequest{}, err
+	}
+	return req, nil
+}
+
+func NewFreezeMasterDataByTimestampRequestFromDict(data map[string]interface{}) FreezeMasterDataByTimestampRequest {
+	return FreezeMasterDataByTimestampRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+	}
+}
+
+func (p FreezeMasterDataByTimestampRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"timestamp":     p.Timestamp,
+	}
+}
+
+func (p FreezeMasterDataByTimestampRequest) Pointer() *FreezeMasterDataByTimestampRequest {
+	return &p
+}
+
 type BatchExecuteApiRequest struct {
 	ContextStack    *string               `json:"contextStack"`
 	RequestPayloads []BatchRequestPayload `json:"requestPayloads"`
