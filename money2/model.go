@@ -601,6 +601,7 @@ type Event struct {
 	VerifyReceiptEvent *VerifyReceiptEvent `json:"verifyReceiptEvent"`
 	DepositEvent       *DepositEvent       `json:"depositEvent"`
 	WithdrawEvent      *WithdrawEvent      `json:"withdrawEvent"`
+	RefundEvent        *RefundEvent        `json:"refundEvent"`
 	CreatedAt          *int64              `json:"createdAt"`
 	Revision           *int64              `json:"revision"`
 }
@@ -728,6 +729,9 @@ func (p *Event) UnmarshalJSON(data []byte) error {
 		if v, ok := d["withdrawEvent"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawEvent)
 		}
+		if v, ok := d["refundEvent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RefundEvent)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -795,6 +799,13 @@ func NewEventFromDict(data map[string]interface{}) Event {
 			}
 			return NewWithdrawEventFromDict(core.CastMap(data["withdrawEvent"])).Pointer()
 		}(),
+		RefundEvent: func() *RefundEvent {
+			v, ok := data["refundEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRefundEventFromDict(core.CastMap(data["refundEvent"])).Pointer()
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -850,6 +861,14 @@ func (p Event) ToDict() map[string]interface{} {
 			return p.WithdrawEvent.ToDict()
 		}()
 	}
+	if p.RefundEvent != nil {
+		m["refundEvent"] = func() map[string]interface{} {
+			if p.RefundEvent == nil {
+				return nil
+			}
+			return p.RefundEvent.ToDict()
+		}()
+	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
 	}
@@ -872,6 +891,331 @@ func CastEvents(data []interface{}) []Event {
 }
 
 func CastEventsFromDict(data []Event) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type SubscribeTransaction struct {
+	SubscribeTransactionId *string `json:"subscribeTransactionId"`
+	TransactionId          *string `json:"transactionId"`
+	Store                  *string `json:"store"`
+	UserId                 *string `json:"userId"`
+	Status                 *string `json:"status"`
+	StatusDetail           *string `json:"statusDetail"`
+	ExpiresAt              *int64  `json:"expiresAt"`
+	CreatedAt              *int64  `json:"createdAt"`
+	UpdatedAt              *int64  `json:"updatedAt"`
+	Revision               *int64  `json:"revision"`
+}
+
+func (p *SubscribeTransaction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubscribeTransaction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubscribeTransaction{}
+	} else {
+		*p = SubscribeTransaction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["subscribeTransactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SubscribeTransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SubscribeTransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SubscribeTransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeTransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeTransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SubscribeTransactionId)
+				}
+			}
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
+				}
+			}
+		}
+		if v, ok := d["store"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Store = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Store = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Store = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Store = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Store = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Store)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
+		if v, ok := d["statusDetail"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StatusDetail = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StatusDetail = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StatusDetail = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusDetail = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusDetail = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StatusDetail)
+				}
+			}
+		}
+		if v, ok := d["expiresAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExpiresAt)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewSubscribeTransactionFromJson(data string) SubscribeTransaction {
+	req := SubscribeTransaction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewSubscribeTransactionFromDict(data map[string]interface{}) SubscribeTransaction {
+	return SubscribeTransaction{
+		SubscribeTransactionId: func() *string {
+			v, ok := data["subscribeTransactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subscribeTransactionId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		Store: func() *string {
+			v, ok := data["store"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["store"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		StatusDetail: func() *string {
+			v, ok := data["statusDetail"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["statusDetail"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
+	}
+}
+
+func (p SubscribeTransaction) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.SubscribeTransactionId != nil {
+		m["subscribeTransactionId"] = p.SubscribeTransactionId
+	}
+	if p.TransactionId != nil {
+		m["transactionId"] = p.TransactionId
+	}
+	if p.Store != nil {
+		m["store"] = p.Store
+	}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.Status != nil {
+		m["status"] = p.Status
+	}
+	if p.StatusDetail != nil {
+		m["statusDetail"] = p.StatusDetail
+	}
+	if p.ExpiresAt != nil {
+		m["expiresAt"] = p.ExpiresAt
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
+	}
+	if p.UpdatedAt != nil {
+		m["updatedAt"] = p.UpdatedAt
+	}
+	if p.Revision != nil {
+		m["revision"] = p.Revision
+	}
+	return m
+}
+
+func (p SubscribeTransaction) Pointer() *SubscribeTransaction {
+	return &p
+}
+
+func CastSubscribeTransactions(data []interface{}) []SubscribeTransaction {
+	v := make([]SubscribeTransaction, 0)
+	for _, d := range data {
+		v = append(v, NewSubscribeTransactionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSubscribeTransactionsFromDict(data []SubscribeTransaction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1788,7 +2132,10 @@ func CastPlatformSettingsFromDict(data []PlatformSetting) []interface{} {
 }
 
 type AppleAppStoreSetting struct {
-	BundleId *string `json:"bundleId"`
+	BundleId      *string `json:"bundleId"`
+	TeamId        *string `json:"teamId"`
+	KeyId         *string `json:"keyId"`
+	PrivateKeyPem *string `json:"privateKeyPem"`
 }
 
 func (p *AppleAppStoreSetting) UnmarshalJSON(data []byte) error {
@@ -1836,6 +2183,75 @@ func (p *AppleAppStoreSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["teamId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TeamId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TeamId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TeamId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TeamId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TeamId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TeamId)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+		if v, ok := d["privateKeyPem"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PrivateKeyPem = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PrivateKeyPem = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PrivateKeyPem = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PrivateKeyPem = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PrivateKeyPem = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PrivateKeyPem)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1855,6 +2271,27 @@ func NewAppleAppStoreSettingFromDict(data map[string]interface{}) AppleAppStoreS
 			}
 			return core.CastString(data["bundleId"])
 		}(),
+		TeamId: func() *string {
+			v, ok := data["teamId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["teamId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		PrivateKeyPem: func() *string {
+			v, ok := data["privateKeyPem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["privateKeyPem"])
+		}(),
 	}
 }
 
@@ -1862,6 +2299,15 @@ func (p AppleAppStoreSetting) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
 	if p.BundleId != nil {
 		m["bundleId"] = p.BundleId
+	}
+	if p.TeamId != nil {
+		m["teamId"] = p.TeamId
+	}
+	if p.KeyId != nil {
+		m["keyId"] = p.KeyId
+	}
+	if p.PrivateKeyPem != nil {
+		m["privateKeyPem"] = p.PrivateKeyPem
 	}
 	return m
 }
@@ -1887,8 +2333,9 @@ func CastAppleAppStoreSettingsFromDict(data []AppleAppStoreSetting) []interface{
 }
 
 type GooglePlaySetting struct {
-	PackageName *string `json:"packageName"`
-	PublicKey   *string `json:"publicKey"`
+	PackageName     *string `json:"packageName"`
+	PublicKey       *string `json:"publicKey"`
+	CredentialsJSON *string `json:"credentialsJSON"`
 }
 
 func (p *GooglePlaySetting) UnmarshalJSON(data []byte) error {
@@ -1959,6 +2406,29 @@ func (p *GooglePlaySetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["credentialsJSON"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CredentialsJSON = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CredentialsJSON = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CredentialsJSON = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CredentialsJSON = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CredentialsJSON = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CredentialsJSON)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1985,6 +2455,13 @@ func NewGooglePlaySettingFromDict(data map[string]interface{}) GooglePlaySetting
 			}
 			return core.CastString(data["publicKey"])
 		}(),
+		CredentialsJSON: func() *string {
+			v, ok := data["credentialsJSON"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["credentialsJSON"])
+		}(),
 	}
 }
 
@@ -1995,6 +2472,9 @@ func (p GooglePlaySetting) ToDict() map[string]interface{} {
 	}
 	if p.PublicKey != nil {
 		m["publicKey"] = p.PublicKey
+	}
+	if p.CredentialsJSON != nil {
+		m["credentialsJSON"] = p.CredentialsJSON
 	}
 	return m
 }
@@ -2763,6 +3243,177 @@ func CastWithdrawEventsFromDict(data []WithdrawEvent) []interface{} {
 	return v
 }
 
+type RefundEvent struct {
+	ContentName              *string                          `json:"contentName"`
+	Platform                 *string                          `json:"platform"`
+	AppleAppStoreRefundEvent *AppleAppStoreVerifyReceiptEvent `json:"appleAppStoreRefundEvent"`
+	GooglePlayRefundEvent    *GooglePlayVerifyReceiptEvent    `json:"googlePlayRefundEvent"`
+}
+
+func (p *RefundEvent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RefundEvent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RefundEvent{}
+	} else {
+		*p = RefundEvent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+		if v, ok := d["platform"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Platform = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Platform = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Platform = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Platform = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Platform = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Platform)
+				}
+			}
+		}
+		if v, ok := d["appleAppStoreRefundEvent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppleAppStoreRefundEvent)
+		}
+		if v, ok := d["googlePlayRefundEvent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GooglePlayRefundEvent)
+		}
+	}
+	return nil
+}
+
+func NewRefundEventFromJson(data string) RefundEvent {
+	req := RefundEvent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewRefundEventFromDict(data map[string]interface{}) RefundEvent {
+	return RefundEvent{
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+		Platform: func() *string {
+			v, ok := data["platform"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["platform"])
+		}(),
+		AppleAppStoreRefundEvent: func() *AppleAppStoreVerifyReceiptEvent {
+			v, ok := data["appleAppStoreRefundEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreVerifyReceiptEventFromDict(core.CastMap(data["appleAppStoreRefundEvent"])).Pointer()
+		}(),
+		GooglePlayRefundEvent: func() *GooglePlayVerifyReceiptEvent {
+			v, ok := data["googlePlayRefundEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlayVerifyReceiptEventFromDict(core.CastMap(data["googlePlayRefundEvent"])).Pointer()
+		}(),
+	}
+}
+
+func (p RefundEvent) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ContentName != nil {
+		m["contentName"] = p.ContentName
+	}
+	if p.Platform != nil {
+		m["platform"] = p.Platform
+	}
+	if p.AppleAppStoreRefundEvent != nil {
+		m["appleAppStoreRefundEvent"] = func() map[string]interface{} {
+			if p.AppleAppStoreRefundEvent == nil {
+				return nil
+			}
+			return p.AppleAppStoreRefundEvent.ToDict()
+		}()
+	}
+	if p.GooglePlayRefundEvent != nil {
+		m["googlePlayRefundEvent"] = func() map[string]interface{} {
+			if p.GooglePlayRefundEvent == nil {
+				return nil
+			}
+			return p.GooglePlayRefundEvent.ToDict()
+		}()
+	}
+	return m
+}
+
+func (p RefundEvent) Pointer() *RefundEvent {
+	return &p
+}
+
+func CastRefundEvents(data []interface{}) []RefundEvent {
+	v := make([]RefundEvent, 0)
+	for _, d := range data {
+		v = append(v, NewRefundEventFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRefundEventsFromDict(data []RefundEvent) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AppleAppStoreVerifyReceiptEvent struct {
 	Environment *string `json:"environment"`
 }
@@ -3152,6 +3803,173 @@ func CastGooglePlayContents(data []interface{}) []GooglePlayContent {
 }
 
 func CastGooglePlayContentsFromDict(data []GooglePlayContent) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type GooglePlayRealtimeNotificationMessage struct {
+	Data        *string `json:"data"`
+	MessageId   *string `json:"messageId"`
+	PublishTime *string `json:"publishTime"`
+}
+
+func (p *GooglePlayRealtimeNotificationMessage) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GooglePlayRealtimeNotificationMessage{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GooglePlayRealtimeNotificationMessage{}
+	} else {
+		*p = GooglePlayRealtimeNotificationMessage{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["data"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Data = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Data = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Data = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Data = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Data = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Data)
+				}
+			}
+		}
+		if v, ok := d["messageId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MessageId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MessageId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MessageId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MessageId)
+				}
+			}
+		}
+		if v, ok := d["publishTime"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PublishTime = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PublishTime = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PublishTime = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PublishTime = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PublishTime = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PublishTime)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGooglePlayRealtimeNotificationMessageFromJson(data string) GooglePlayRealtimeNotificationMessage {
+	req := GooglePlayRealtimeNotificationMessage{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewGooglePlayRealtimeNotificationMessageFromDict(data map[string]interface{}) GooglePlayRealtimeNotificationMessage {
+	return GooglePlayRealtimeNotificationMessage{
+		Data: func() *string {
+			v, ok := data["data"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["data"])
+		}(),
+		MessageId: func() *string {
+			v, ok := data["messageId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageId"])
+		}(),
+		PublishTime: func() *string {
+			v, ok := data["publishTime"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publishTime"])
+		}(),
+	}
+}
+
+func (p GooglePlayRealtimeNotificationMessage) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Data != nil {
+		m["data"] = p.Data
+	}
+	if p.MessageId != nil {
+		m["messageId"] = p.MessageId
+	}
+	if p.PublishTime != nil {
+		m["publishTime"] = p.PublishTime
+	}
+	return m
+}
+
+func (p GooglePlayRealtimeNotificationMessage) Pointer() *GooglePlayRealtimeNotificationMessage {
+	return &p
+}
+
+func CastGooglePlayRealtimeNotificationMessages(data []interface{}) []GooglePlayRealtimeNotificationMessage {
+	v := make([]GooglePlayRealtimeNotificationMessage, 0)
+	for _, d := range data {
+		v = append(v, NewGooglePlayRealtimeNotificationMessageFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGooglePlayRealtimeNotificationMessagesFromDict(data []GooglePlayRealtimeNotificationMessage) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
