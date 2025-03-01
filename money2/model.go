@@ -2133,7 +2133,7 @@ func CastPlatformSettingsFromDict(data []PlatformSetting) []interface{} {
 
 type AppleAppStoreSetting struct {
 	BundleId      *string `json:"bundleId"`
-	TeamId        *string `json:"teamId"`
+	IssuerId      *string `json:"issuerId"`
 	KeyId         *string `json:"keyId"`
 	PrivateKeyPem *string `json:"privateKeyPem"`
 }
@@ -2183,26 +2183,26 @@ func (p *AppleAppStoreSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["teamId"]; ok && v != nil {
+		if v, ok := d["issuerId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.TeamId = &v2
+					p.IssuerId = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TeamId = &strValue
+					p.IssuerId = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.TeamId = &strValue
+					p.IssuerId = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.TeamId = &strValue
+					p.IssuerId = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.TeamId = &strValue
+					p.IssuerId = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.TeamId)
+					_ = json.Unmarshal(*v, &p.IssuerId)
 				}
 			}
 		}
@@ -2271,12 +2271,12 @@ func NewAppleAppStoreSettingFromDict(data map[string]interface{}) AppleAppStoreS
 			}
 			return core.CastString(data["bundleId"])
 		}(),
-		TeamId: func() *string {
-			v, ok := data["teamId"]
+		IssuerId: func() *string {
+			v, ok := data["issuerId"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastString(data["teamId"])
+			return core.CastString(data["issuerId"])
 		}(),
 		KeyId: func() *string {
 			v, ok := data["keyId"]
@@ -2300,8 +2300,8 @@ func (p AppleAppStoreSetting) ToDict() map[string]interface{} {
 	if p.BundleId != nil {
 		m["bundleId"] = p.BundleId
 	}
-	if p.TeamId != nil {
-		m["teamId"] = p.TeamId
+	if p.IssuerId != nil {
+		m["issuerId"] = p.IssuerId
 	}
 	if p.KeyId != nil {
 		m["keyId"] = p.KeyId
