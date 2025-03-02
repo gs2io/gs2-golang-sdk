@@ -900,10 +900,10 @@ func CastEventsFromDict(data []Event) []interface{} {
 
 type SubscribeTransaction struct {
 	SubscribeTransactionId *string `json:"subscribeTransactionId"`
+	ContentName            *string `json:"contentName"`
 	TransactionId          *string `json:"transactionId"`
 	Store                  *string `json:"store"`
 	UserId                 *string `json:"userId"`
-	Status                 *string `json:"status"`
 	StatusDetail           *string `json:"statusDetail"`
 	ExpiresAt              *int64  `json:"expiresAt"`
 	CreatedAt              *int64  `json:"createdAt"`
@@ -953,6 +953,29 @@ func (p *SubscribeTransaction) UnmarshalJSON(data []byte) error {
 					p.SubscribeTransactionId = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.SubscribeTransactionId)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
 				}
 			}
 		}
@@ -1025,29 +1048,6 @@ func (p *SubscribeTransaction) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["status"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Status = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Status = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Status = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Status = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Status = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Status)
-				}
-			}
-		}
 		if v, ok := d["statusDetail"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1102,6 +1102,13 @@ func NewSubscribeTransactionFromDict(data map[string]interface{}) SubscribeTrans
 			}
 			return core.CastString(data["subscribeTransactionId"])
 		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
 		TransactionId: func() *string {
 			v, ok := data["transactionId"]
 			if !ok || v == nil {
@@ -1122,13 +1129,6 @@ func NewSubscribeTransactionFromDict(data map[string]interface{}) SubscribeTrans
 				return nil
 			}
 			return core.CastString(data["userId"])
-		}(),
-		Status: func() *string {
-			v, ok := data["status"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["status"])
 		}(),
 		StatusDetail: func() *string {
 			v, ok := data["statusDetail"]
@@ -1173,6 +1173,9 @@ func (p SubscribeTransaction) ToDict() map[string]interface{} {
 	if p.SubscribeTransactionId != nil {
 		m["subscribeTransactionId"] = p.SubscribeTransactionId
 	}
+	if p.ContentName != nil {
+		m["contentName"] = p.ContentName
+	}
 	if p.TransactionId != nil {
 		m["transactionId"] = p.TransactionId
 	}
@@ -1181,9 +1184,6 @@ func (p SubscribeTransaction) ToDict() map[string]interface{} {
 	}
 	if p.UserId != nil {
 		m["userId"] = p.UserId
-	}
-	if p.Status != nil {
-		m["status"] = p.Status
 	}
 	if p.StatusDetail != nil {
 		m["statusDetail"] = p.StatusDetail
@@ -1216,6 +1216,202 @@ func CastSubscribeTransactions(data []interface{}) []SubscribeTransaction {
 }
 
 func CastSubscribeTransactionsFromDict(data []SubscribeTransaction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type SubscriptionStatus struct {
+	UserId      *string                `json:"userId"`
+	ContentName *string                `json:"contentName"`
+	Status      *string                `json:"status"`
+	ExpiresAt   *int64                 `json:"expiresAt"`
+	Detail      []SubscribeTransaction `json:"detail"`
+}
+
+func (p *SubscriptionStatus) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubscriptionStatus{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubscriptionStatus{}
+	} else {
+		*p = SubscriptionStatus{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
+		if v, ok := d["expiresAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExpiresAt)
+		}
+		if v, ok := d["detail"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Detail)
+		}
+	}
+	return nil
+}
+
+func NewSubscriptionStatusFromJson(data string) SubscriptionStatus {
+	req := SubscriptionStatus{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewSubscriptionStatusFromDict(data map[string]interface{}) SubscriptionStatus {
+	return SubscriptionStatus{
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		Detail: func() []SubscribeTransaction {
+			if data["detail"] == nil {
+				return nil
+			}
+			return CastSubscribeTransactions(core.CastArray(data["detail"]))
+		}(),
+	}
+}
+
+func (p SubscriptionStatus) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.ContentName != nil {
+		m["contentName"] = p.ContentName
+	}
+	if p.Status != nil {
+		m["status"] = p.Status
+	}
+	if p.ExpiresAt != nil {
+		m["expiresAt"] = p.ExpiresAt
+	}
+	if p.Detail != nil {
+		m["detail"] = CastSubscribeTransactionsFromDict(
+			p.Detail,
+		)
+	}
+	return m
+}
+
+func (p SubscriptionStatus) Pointer() *SubscriptionStatus {
+	return &p
+}
+
+func CastSubscriptionStatuses(data []interface{}) []SubscriptionStatus {
+	v := make([]SubscriptionStatus, 0)
+	for _, d := range data {
+		v = append(v, NewSubscriptionStatusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSubscriptionStatusesFromDict(data []SubscriptionStatus) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1702,6 +1898,628 @@ func CastStoreContentModelMasters(data []interface{}) []StoreContentModelMaster 
 }
 
 func CastStoreContentModelMastersFromDict(data []StoreContentModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type StoreSubscriptionContentModel struct {
+	StoreSubscriptionContentModelId *string                           `json:"storeSubscriptionContentModelId"`
+	Name                            *string                           `json:"name"`
+	Metadata                        *string                           `json:"metadata"`
+	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
+	TriggerName                     *string                           `json:"triggerName"`
+	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
+	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
+}
+
+func (p *StoreSubscriptionContentModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StoreSubscriptionContentModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StoreSubscriptionContentModel{}
+	} else {
+		*p = StoreSubscriptionContentModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["storeSubscriptionContentModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StoreSubscriptionContentModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StoreSubscriptionContentModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StoreSubscriptionContentModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StoreSubscriptionContentModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StoreSubscriptionContentModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StoreSubscriptionContentModelId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["scheduleNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScheduleNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScheduleNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScheduleNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScheduleNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["appleAppStore"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppleAppStore)
+		}
+		if v, ok := d["googlePlay"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GooglePlay)
+		}
+	}
+	return nil
+}
+
+func NewStoreSubscriptionContentModelFromJson(data string) StoreSubscriptionContentModel {
+	req := StoreSubscriptionContentModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewStoreSubscriptionContentModelFromDict(data map[string]interface{}) StoreSubscriptionContentModel {
+	return StoreSubscriptionContentModel{
+		StoreSubscriptionContentModelId: func() *string {
+			v, ok := data["storeSubscriptionContentModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["storeSubscriptionContentModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleNamespaceId: func() *string {
+			v, ok := data["scheduleNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleNamespaceId"])
+		}(),
+		TriggerName: func() *string {
+			v, ok := data["triggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerName"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreSubscriptionContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlaySubscriptionContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlaySubscriptionContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+	}
+}
+
+func (p StoreSubscriptionContentModel) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.StoreSubscriptionContentModelId != nil {
+		m["storeSubscriptionContentModelId"] = p.StoreSubscriptionContentModelId
+	}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
+	}
+	if p.ScheduleNamespaceId != nil {
+		m["scheduleNamespaceId"] = p.ScheduleNamespaceId
+	}
+	if p.TriggerName != nil {
+		m["triggerName"] = p.TriggerName
+	}
+	if p.AppleAppStore != nil {
+		m["appleAppStore"] = func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}()
+	}
+	if p.GooglePlay != nil {
+		m["googlePlay"] = func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}()
+	}
+	return m
+}
+
+func (p StoreSubscriptionContentModel) Pointer() *StoreSubscriptionContentModel {
+	return &p
+}
+
+func CastStoreSubscriptionContentModels(data []interface{}) []StoreSubscriptionContentModel {
+	v := make([]StoreSubscriptionContentModel, 0)
+	for _, d := range data {
+		v = append(v, NewStoreSubscriptionContentModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStoreSubscriptionContentModelsFromDict(data []StoreSubscriptionContentModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type StoreSubscriptionContentModelMaster struct {
+	StoreSubscriptionContentModelId *string                           `json:"storeSubscriptionContentModelId"`
+	Name                            *string                           `json:"name"`
+	Description                     *string                           `json:"description"`
+	Metadata                        *string                           `json:"metadata"`
+	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
+	TriggerName                     *string                           `json:"triggerName"`
+	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
+	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
+	CreatedAt                       *int64                            `json:"createdAt"`
+	UpdatedAt                       *int64                            `json:"updatedAt"`
+	Revision                        *int64                            `json:"revision"`
+}
+
+func (p *StoreSubscriptionContentModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StoreSubscriptionContentModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StoreSubscriptionContentModelMaster{}
+	} else {
+		*p = StoreSubscriptionContentModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["storeSubscriptionContentModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StoreSubscriptionContentModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StoreSubscriptionContentModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StoreSubscriptionContentModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StoreSubscriptionContentModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StoreSubscriptionContentModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StoreSubscriptionContentModelId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["scheduleNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScheduleNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScheduleNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScheduleNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScheduleNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["appleAppStore"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppleAppStore)
+		}
+		if v, ok := d["googlePlay"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GooglePlay)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewStoreSubscriptionContentModelMasterFromJson(data string) StoreSubscriptionContentModelMaster {
+	req := StoreSubscriptionContentModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewStoreSubscriptionContentModelMasterFromDict(data map[string]interface{}) StoreSubscriptionContentModelMaster {
+	return StoreSubscriptionContentModelMaster{
+		StoreSubscriptionContentModelId: func() *string {
+			v, ok := data["storeSubscriptionContentModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["storeSubscriptionContentModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleNamespaceId: func() *string {
+			v, ok := data["scheduleNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleNamespaceId"])
+		}(),
+		TriggerName: func() *string {
+			v, ok := data["triggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerName"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreSubscriptionContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlaySubscriptionContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlaySubscriptionContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
+	}
+}
+
+func (p StoreSubscriptionContentModelMaster) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.StoreSubscriptionContentModelId != nil {
+		m["storeSubscriptionContentModelId"] = p.StoreSubscriptionContentModelId
+	}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.Description != nil {
+		m["description"] = p.Description
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
+	}
+	if p.ScheduleNamespaceId != nil {
+		m["scheduleNamespaceId"] = p.ScheduleNamespaceId
+	}
+	if p.TriggerName != nil {
+		m["triggerName"] = p.TriggerName
+	}
+	if p.AppleAppStore != nil {
+		m["appleAppStore"] = func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}()
+	}
+	if p.GooglePlay != nil {
+		m["googlePlay"] = func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}()
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
+	}
+	if p.UpdatedAt != nil {
+		m["updatedAt"] = p.UpdatedAt
+	}
+	if p.Revision != nil {
+		m["revision"] = p.Revision
+	}
+	return m
+}
+
+func (p StoreSubscriptionContentModelMaster) Pointer() *StoreSubscriptionContentModelMaster {
+	return &p
+}
+
+func CastStoreSubscriptionContentModelMasters(data []interface{}) []StoreSubscriptionContentModelMaster {
+	v := make([]StoreSubscriptionContentModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewStoreSubscriptionContentModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStoreSubscriptionContentModelMastersFromDict(data []StoreSubscriptionContentModelMaster) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -3803,6 +4621,204 @@ func CastGooglePlayContents(data []interface{}) []GooglePlayContent {
 }
 
 func CastGooglePlayContentsFromDict(data []GooglePlayContent) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AppleAppStoreSubscriptionContent struct {
+	SubscriptionGroupIdentifier *string `json:"subscriptionGroupIdentifier"`
+}
+
+func (p *AppleAppStoreSubscriptionContent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AppleAppStoreSubscriptionContent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AppleAppStoreSubscriptionContent{}
+	} else {
+		*p = AppleAppStoreSubscriptionContent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["subscriptionGroupIdentifier"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SubscriptionGroupIdentifier = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SubscriptionGroupIdentifier = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SubscriptionGroupIdentifier = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscriptionGroupIdentifier = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscriptionGroupIdentifier = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SubscriptionGroupIdentifier)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAppleAppStoreSubscriptionContentFromJson(data string) AppleAppStoreSubscriptionContent {
+	req := AppleAppStoreSubscriptionContent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewAppleAppStoreSubscriptionContentFromDict(data map[string]interface{}) AppleAppStoreSubscriptionContent {
+	return AppleAppStoreSubscriptionContent{
+		SubscriptionGroupIdentifier: func() *string {
+			v, ok := data["subscriptionGroupIdentifier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subscriptionGroupIdentifier"])
+		}(),
+	}
+}
+
+func (p AppleAppStoreSubscriptionContent) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.SubscriptionGroupIdentifier != nil {
+		m["subscriptionGroupIdentifier"] = p.SubscriptionGroupIdentifier
+	}
+	return m
+}
+
+func (p AppleAppStoreSubscriptionContent) Pointer() *AppleAppStoreSubscriptionContent {
+	return &p
+}
+
+func CastAppleAppStoreSubscriptionContents(data []interface{}) []AppleAppStoreSubscriptionContent {
+	v := make([]AppleAppStoreSubscriptionContent, 0)
+	for _, d := range data {
+		v = append(v, NewAppleAppStoreSubscriptionContentFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAppleAppStoreSubscriptionContentsFromDict(data []AppleAppStoreSubscriptionContent) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type GooglePlaySubscriptionContent struct {
+	ProductId *string `json:"productId"`
+}
+
+func (p *GooglePlaySubscriptionContent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GooglePlaySubscriptionContent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GooglePlaySubscriptionContent{}
+	} else {
+		*p = GooglePlaySubscriptionContent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["productId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProductId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProductId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProductId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProductId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProductId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProductId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGooglePlaySubscriptionContentFromJson(data string) GooglePlaySubscriptionContent {
+	req := GooglePlaySubscriptionContent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewGooglePlaySubscriptionContentFromDict(data map[string]interface{}) GooglePlaySubscriptionContent {
+	return GooglePlaySubscriptionContent{
+		ProductId: func() *string {
+			v, ok := data["productId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["productId"])
+		}(),
+	}
+}
+
+func (p GooglePlaySubscriptionContent) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ProductId != nil {
+		m["productId"] = p.ProductId
+	}
+	return m
+}
+
+func (p GooglePlaySubscriptionContent) Pointer() *GooglePlaySubscriptionContent {
+	return &p
+}
+
+func CastGooglePlaySubscriptionContents(data []interface{}) []GooglePlaySubscriptionContent {
+	v := make([]GooglePlaySubscriptionContent, 0)
+	for _, d := range data {
+		v = append(v, NewGooglePlaySubscriptionContentFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGooglePlaySubscriptionContentsFromDict(data []GooglePlaySubscriptionContent) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

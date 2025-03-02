@@ -3941,6 +3941,606 @@ func (p VerifyReceiptByStampTaskRequest) Pointer() *VerifyReceiptByStampTaskRequ
 	return &p
 }
 
+type DescribeSubscriptionStatusesRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *DescribeSubscriptionStatusesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeSubscriptionStatusesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeSubscriptionStatusesRequest{}
+	} else {
+		*p = DescribeSubscriptionStatusesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeSubscriptionStatusesRequestFromJson(data string) (DescribeSubscriptionStatusesRequest, error) {
+	req := DescribeSubscriptionStatusesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeSubscriptionStatusesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeSubscriptionStatusesRequestFromDict(data map[string]interface{}) DescribeSubscriptionStatusesRequest {
+	return DescribeSubscriptionStatusesRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+	}
+}
+
+func (p DescribeSubscriptionStatusesRequest) Pointer() *DescribeSubscriptionStatusesRequest {
+	return &p
+}
+
+type DescribeSubscriptionStatusesByUserIdRequest struct {
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *DescribeSubscriptionStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeSubscriptionStatusesByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeSubscriptionStatusesByUserIdRequest{}
+	} else {
+		*p = DescribeSubscriptionStatusesByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeSubscriptionStatusesByUserIdRequestFromJson(data string) (DescribeSubscriptionStatusesByUserIdRequest, error) {
+	req := DescribeSubscriptionStatusesByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeSubscriptionStatusesByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeSubscriptionStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeSubscriptionStatusesByUserIdRequest {
+	return DescribeSubscriptionStatusesByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p DescribeSubscriptionStatusesByUserIdRequest) Pointer() *DescribeSubscriptionStatusesByUserIdRequest {
+	return &p
+}
+
+type GetSubscriptionStatusRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	ContentName   *string `json:"contentName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *GetSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSubscriptionStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSubscriptionStatusRequest{}
+	} else {
+		*p = GetSubscriptionStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSubscriptionStatusRequestFromJson(data string) (GetSubscriptionStatusRequest, error) {
+	req := GetSubscriptionStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSubscriptionStatusRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSubscriptionStatusRequestFromDict(data map[string]interface{}) GetSubscriptionStatusRequest {
+	return GetSubscriptionStatusRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"contentName":   p.ContentName,
+	}
+}
+
+func (p GetSubscriptionStatusRequest) Pointer() *GetSubscriptionStatusRequest {
+	return &p
+}
+
+type GetSubscriptionStatusByUserIdRequest struct {
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	ContentName     *string `json:"contentName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *GetSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSubscriptionStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSubscriptionStatusByUserIdRequest{}
+	} else {
+		*p = GetSubscriptionStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSubscriptionStatusByUserIdRequestFromJson(data string) (GetSubscriptionStatusByUserIdRequest, error) {
+	req := GetSubscriptionStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSubscriptionStatusByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSubscriptionStatusByUserIdRequestFromDict(data map[string]interface{}) GetSubscriptionStatusByUserIdRequest {
+	return GetSubscriptionStatusByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"contentName":     p.ContentName,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p GetSubscriptionStatusByUserIdRequest) Pointer() *GetSubscriptionStatusByUserIdRequest {
+	return &p
+}
+
 type DescribeStoreContentModelsRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
@@ -4940,6 +5540,1136 @@ func (p DeleteStoreContentModelMasterRequest) ToDict() map[string]interface{} {
 }
 
 func (p DeleteStoreContentModelMasterRequest) Pointer() *DeleteStoreContentModelMasterRequest {
+	return &p
+}
+
+type DescribeStoreSubscriptionContentModelsRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *DescribeStoreSubscriptionContentModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStoreSubscriptionContentModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStoreSubscriptionContentModelsRequest{}
+	} else {
+		*p = DescribeStoreSubscriptionContentModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeStoreSubscriptionContentModelsRequestFromJson(data string) (DescribeStoreSubscriptionContentModelsRequest, error) {
+	req := DescribeStoreSubscriptionContentModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStoreSubscriptionContentModelsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeStoreSubscriptionContentModelsRequestFromDict(data map[string]interface{}) DescribeStoreSubscriptionContentModelsRequest {
+	return DescribeStoreSubscriptionContentModelsRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelsRequest) Pointer() *DescribeStoreSubscriptionContentModelsRequest {
+	return &p
+}
+
+type GetStoreSubscriptionContentModelRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ContentName   *string `json:"contentName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *GetStoreSubscriptionContentModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStoreSubscriptionContentModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStoreSubscriptionContentModelRequest{}
+	} else {
+		*p = GetStoreSubscriptionContentModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStoreSubscriptionContentModelRequestFromJson(data string) (GetStoreSubscriptionContentModelRequest, error) {
+	req := GetStoreSubscriptionContentModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStoreSubscriptionContentModelRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetStoreSubscriptionContentModelRequestFromDict(data map[string]interface{}) GetStoreSubscriptionContentModelRequest {
+	return GetStoreSubscriptionContentModelRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"contentName":   p.ContentName,
+	}
+}
+
+func (p GetStoreSubscriptionContentModelRequest) Pointer() *GetStoreSubscriptionContentModelRequest {
+	return &p
+}
+
+type DescribeStoreSubscriptionContentModelMastersRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *DescribeStoreSubscriptionContentModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStoreSubscriptionContentModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStoreSubscriptionContentModelMastersRequest{}
+	} else {
+		*p = DescribeStoreSubscriptionContentModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeStoreSubscriptionContentModelMastersRequestFromJson(data string) (DescribeStoreSubscriptionContentModelMastersRequest, error) {
+	req := DescribeStoreSubscriptionContentModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStoreSubscriptionContentModelMastersRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeStoreSubscriptionContentModelMastersRequestFromDict(data map[string]interface{}) DescribeStoreSubscriptionContentModelMastersRequest {
+	return DescribeStoreSubscriptionContentModelMastersRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelMastersRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelMastersRequest) Pointer() *DescribeStoreSubscriptionContentModelMastersRequest {
+	return &p
+}
+
+type CreateStoreSubscriptionContentModelMasterRequest struct {
+	ContextStack        *string                           `json:"contextStack"`
+	NamespaceName       *string                           `json:"namespaceName"`
+	Name                *string                           `json:"name"`
+	Description         *string                           `json:"description"`
+	Metadata            *string                           `json:"metadata"`
+	ScheduleNamespaceId *string                           `json:"scheduleNamespaceId"`
+	TriggerName         *string                           `json:"triggerName"`
+	AppleAppStore       *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
+	GooglePlay          *GooglePlaySubscriptionContent    `json:"googlePlay"`
+	DryRun              *bool                             `json:"dryRun"`
+}
+
+func (p *CreateStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateStoreSubscriptionContentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateStoreSubscriptionContentModelMasterRequest{}
+	} else {
+		*p = CreateStoreSubscriptionContentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["scheduleNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScheduleNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScheduleNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScheduleNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScheduleNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["appleAppStore"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppleAppStore)
+		}
+		if v, ok := d["googlePlay"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GooglePlay)
+		}
+	}
+	return nil
+}
+
+func NewCreateStoreSubscriptionContentModelMasterRequestFromJson(data string) (CreateStoreSubscriptionContentModelMasterRequest, error) {
+	req := CreateStoreSubscriptionContentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateStoreSubscriptionContentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCreateStoreSubscriptionContentModelMasterRequestFromDict(data map[string]interface{}) CreateStoreSubscriptionContentModelMasterRequest {
+	return CreateStoreSubscriptionContentModelMasterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleNamespaceId: func() *string {
+			v, ok := data["scheduleNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleNamespaceId"])
+		}(),
+		TriggerName: func() *string {
+			v, ok := data["triggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerName"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreSubscriptionContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlaySubscriptionContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlaySubscriptionContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+	}
+}
+
+func (p CreateStoreSubscriptionContentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":       p.NamespaceName,
+		"name":                p.Name,
+		"description":         p.Description,
+		"metadata":            p.Metadata,
+		"scheduleNamespaceId": p.ScheduleNamespaceId,
+		"triggerName":         p.TriggerName,
+		"appleAppStore": func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}(),
+		"googlePlay": func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}(),
+	}
+}
+
+func (p CreateStoreSubscriptionContentModelMasterRequest) Pointer() *CreateStoreSubscriptionContentModelMasterRequest {
+	return &p
+}
+
+type GetStoreSubscriptionContentModelMasterRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ContentName   *string `json:"contentName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *GetStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStoreSubscriptionContentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStoreSubscriptionContentModelMasterRequest{}
+	} else {
+		*p = GetStoreSubscriptionContentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStoreSubscriptionContentModelMasterRequestFromJson(data string) (GetStoreSubscriptionContentModelMasterRequest, error) {
+	req := GetStoreSubscriptionContentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStoreSubscriptionContentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetStoreSubscriptionContentModelMasterRequestFromDict(data map[string]interface{}) GetStoreSubscriptionContentModelMasterRequest {
+	return GetStoreSubscriptionContentModelMasterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"contentName":   p.ContentName,
+	}
+}
+
+func (p GetStoreSubscriptionContentModelMasterRequest) Pointer() *GetStoreSubscriptionContentModelMasterRequest {
+	return &p
+}
+
+type UpdateStoreSubscriptionContentModelMasterRequest struct {
+	ContextStack        *string                           `json:"contextStack"`
+	NamespaceName       *string                           `json:"namespaceName"`
+	ContentName         *string                           `json:"contentName"`
+	Description         *string                           `json:"description"`
+	Metadata            *string                           `json:"metadata"`
+	ScheduleNamespaceId *string                           `json:"scheduleNamespaceId"`
+	TriggerName         *string                           `json:"triggerName"`
+	AppleAppStore       *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
+	GooglePlay          *GooglePlaySubscriptionContent    `json:"googlePlay"`
+	DryRun              *bool                             `json:"dryRun"`
+}
+
+func (p *UpdateStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateStoreSubscriptionContentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateStoreSubscriptionContentModelMasterRequest{}
+	} else {
+		*p = UpdateStoreSubscriptionContentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["scheduleNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScheduleNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScheduleNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScheduleNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScheduleNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScheduleNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["appleAppStore"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppleAppStore)
+		}
+		if v, ok := d["googlePlay"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GooglePlay)
+		}
+	}
+	return nil
+}
+
+func NewUpdateStoreSubscriptionContentModelMasterRequestFromJson(data string) (UpdateStoreSubscriptionContentModelMasterRequest, error) {
+	req := UpdateStoreSubscriptionContentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateStoreSubscriptionContentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateStoreSubscriptionContentModelMasterRequestFromDict(data map[string]interface{}) UpdateStoreSubscriptionContentModelMasterRequest {
+	return UpdateStoreSubscriptionContentModelMasterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleNamespaceId: func() *string {
+			v, ok := data["scheduleNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleNamespaceId"])
+		}(),
+		TriggerName: func() *string {
+			v, ok := data["triggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerName"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreSubscriptionContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlaySubscriptionContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlaySubscriptionContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+	}
+}
+
+func (p UpdateStoreSubscriptionContentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":       p.NamespaceName,
+		"contentName":         p.ContentName,
+		"description":         p.Description,
+		"metadata":            p.Metadata,
+		"scheduleNamespaceId": p.ScheduleNamespaceId,
+		"triggerName":         p.TriggerName,
+		"appleAppStore": func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}(),
+		"googlePlay": func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateStoreSubscriptionContentModelMasterRequest) Pointer() *UpdateStoreSubscriptionContentModelMasterRequest {
+	return &p
+}
+
+type DeleteStoreSubscriptionContentModelMasterRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	ContentName   *string `json:"contentName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *DeleteStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteStoreSubscriptionContentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteStoreSubscriptionContentModelMasterRequest{}
+	} else {
+		*p = DeleteStoreSubscriptionContentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["contentName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteStoreSubscriptionContentModelMasterRequestFromJson(data string) (DeleteStoreSubscriptionContentModelMasterRequest, error) {
+	req := DeleteStoreSubscriptionContentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteStoreSubscriptionContentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteStoreSubscriptionContentModelMasterRequestFromDict(data map[string]interface{}) DeleteStoreSubscriptionContentModelMasterRequest {
+	return DeleteStoreSubscriptionContentModelMasterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+	}
+}
+
+func (p DeleteStoreSubscriptionContentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"contentName":   p.ContentName,
+	}
+}
+
+func (p DeleteStoreSubscriptionContentModelMasterRequest) Pointer() *DeleteStoreSubscriptionContentModelMasterRequest {
 	return &p
 }
 

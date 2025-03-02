@@ -1535,6 +1535,222 @@ func (p VerifyReceiptByStampTaskResult) Pointer() *VerifyReceiptByStampTaskResul
 	return &p
 }
 
+type DescribeSubscriptionStatusesResult struct {
+	Items    []SubscriptionStatus `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeSubscriptionStatusesAsyncResult struct {
+	result *DescribeSubscriptionStatusesResult
+	err    error
+}
+
+func NewDescribeSubscriptionStatusesResultFromJson(data string) DescribeSubscriptionStatusesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscriptionStatusesResultFromDict(dict)
+}
+
+func NewDescribeSubscriptionStatusesResultFromDict(data map[string]interface{}) DescribeSubscriptionStatusesResult {
+	return DescribeSubscriptionStatusesResult{
+		Items: func() []SubscriptionStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscriptionStatuses(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSubscriptionStatusesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesResult) Pointer() *DescribeSubscriptionStatusesResult {
+	return &p
+}
+
+type DescribeSubscriptionStatusesByUserIdResult struct {
+	Items    []SubscriptionStatus `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeSubscriptionStatusesByUserIdAsyncResult struct {
+	result *DescribeSubscriptionStatusesByUserIdResult
+	err    error
+}
+
+func NewDescribeSubscriptionStatusesByUserIdResultFromJson(data string) DescribeSubscriptionStatusesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSubscriptionStatusesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeSubscriptionStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeSubscriptionStatusesByUserIdResult {
+	return DescribeSubscriptionStatusesByUserIdResult{
+		Items: func() []SubscriptionStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscriptionStatuses(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSubscriptionStatusesFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeSubscriptionStatusesByUserIdResult) Pointer() *DescribeSubscriptionStatusesByUserIdResult {
+	return &p
+}
+
+type GetSubscriptionStatusResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetSubscriptionStatusAsyncResult struct {
+	result *GetSubscriptionStatusResult
+	err    error
+}
+
+func NewGetSubscriptionStatusResultFromJson(data string) GetSubscriptionStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscriptionStatusResultFromDict(dict)
+}
+
+func NewGetSubscriptionStatusResultFromDict(data map[string]interface{}) GetSubscriptionStatusResult {
+	return GetSubscriptionStatusResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusResult) Pointer() *GetSubscriptionStatusResult {
+	return &p
+}
+
+type GetSubscriptionStatusByUserIdResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetSubscriptionStatusByUserIdAsyncResult struct {
+	result *GetSubscriptionStatusByUserIdResult
+	err    error
+}
+
+func NewGetSubscriptionStatusByUserIdResultFromJson(data string) GetSubscriptionStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscriptionStatusByUserIdResultFromDict(dict)
+}
+
+func NewGetSubscriptionStatusByUserIdResultFromDict(data map[string]interface{}) GetSubscriptionStatusByUserIdResult {
+	return GetSubscriptionStatusByUserIdResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetSubscriptionStatusByUserIdResult) Pointer() *GetSubscriptionStatusByUserIdResult {
+	return &p
+}
+
 type DescribeStoreContentModelsResult struct {
 	Items    []StoreContentModel  `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -1925,6 +2141,399 @@ func (p DeleteStoreContentModelMasterResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteStoreContentModelMasterResult) Pointer() *DeleteStoreContentModelMasterResult {
+	return &p
+}
+
+type DescribeStoreSubscriptionContentModelsResult struct {
+	Items    []StoreSubscriptionContentModel `json:"items"`
+	Metadata *core.ResultMetadata            `json:"metadata"`
+}
+
+type DescribeStoreSubscriptionContentModelsAsyncResult struct {
+	result *DescribeStoreSubscriptionContentModelsResult
+	err    error
+}
+
+func NewDescribeStoreSubscriptionContentModelsResultFromJson(data string) DescribeStoreSubscriptionContentModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStoreSubscriptionContentModelsResultFromDict(dict)
+}
+
+func NewDescribeStoreSubscriptionContentModelsResultFromDict(data map[string]interface{}) DescribeStoreSubscriptionContentModelsResult {
+	return DescribeStoreSubscriptionContentModelsResult{
+		Items: func() []StoreSubscriptionContentModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStoreSubscriptionContentModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastStoreSubscriptionContentModelsFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelsResult) Pointer() *DescribeStoreSubscriptionContentModelsResult {
+	return &p
+}
+
+type GetStoreSubscriptionContentModelResult struct {
+	Item     *StoreSubscriptionContentModel `json:"item"`
+	Metadata *core.ResultMetadata           `json:"metadata"`
+}
+
+type GetStoreSubscriptionContentModelAsyncResult struct {
+	result *GetStoreSubscriptionContentModelResult
+	err    error
+}
+
+func NewGetStoreSubscriptionContentModelResultFromJson(data string) GetStoreSubscriptionContentModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStoreSubscriptionContentModelResultFromDict(dict)
+}
+
+func NewGetStoreSubscriptionContentModelResultFromDict(data map[string]interface{}) GetStoreSubscriptionContentModelResult {
+	return GetStoreSubscriptionContentModelResult{
+		Item: func() *StoreSubscriptionContentModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreSubscriptionContentModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelResult) Pointer() *GetStoreSubscriptionContentModelResult {
+	return &p
+}
+
+type DescribeStoreSubscriptionContentModelMastersResult struct {
+	Items         []StoreSubscriptionContentModelMaster `json:"items"`
+	NextPageToken *string                               `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata                  `json:"metadata"`
+}
+
+type DescribeStoreSubscriptionContentModelMastersAsyncResult struct {
+	result *DescribeStoreSubscriptionContentModelMastersResult
+	err    error
+}
+
+func NewDescribeStoreSubscriptionContentModelMastersResultFromJson(data string) DescribeStoreSubscriptionContentModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStoreSubscriptionContentModelMastersResultFromDict(dict)
+}
+
+func NewDescribeStoreSubscriptionContentModelMastersResultFromDict(data map[string]interface{}) DescribeStoreSubscriptionContentModelMastersResult {
+	return DescribeStoreSubscriptionContentModelMastersResult{
+		Items: func() []StoreSubscriptionContentModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStoreSubscriptionContentModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastStoreSubscriptionContentModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeStoreSubscriptionContentModelMastersResult) Pointer() *DescribeStoreSubscriptionContentModelMastersResult {
+	return &p
+}
+
+type CreateStoreSubscriptionContentModelMasterResult struct {
+	Item     *StoreSubscriptionContentModelMaster `json:"item"`
+	Metadata *core.ResultMetadata                 `json:"metadata"`
+}
+
+type CreateStoreSubscriptionContentModelMasterAsyncResult struct {
+	result *CreateStoreSubscriptionContentModelMasterResult
+	err    error
+}
+
+func NewCreateStoreSubscriptionContentModelMasterResultFromJson(data string) CreateStoreSubscriptionContentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateStoreSubscriptionContentModelMasterResultFromDict(dict)
+}
+
+func NewCreateStoreSubscriptionContentModelMasterResultFromDict(data map[string]interface{}) CreateStoreSubscriptionContentModelMasterResult {
+	return CreateStoreSubscriptionContentModelMasterResult{
+		Item: func() *StoreSubscriptionContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreSubscriptionContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CreateStoreSubscriptionContentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CreateStoreSubscriptionContentModelMasterResult) Pointer() *CreateStoreSubscriptionContentModelMasterResult {
+	return &p
+}
+
+type GetStoreSubscriptionContentModelMasterResult struct {
+	Item     *StoreSubscriptionContentModelMaster `json:"item"`
+	Metadata *core.ResultMetadata                 `json:"metadata"`
+}
+
+type GetStoreSubscriptionContentModelMasterAsyncResult struct {
+	result *GetStoreSubscriptionContentModelMasterResult
+	err    error
+}
+
+func NewGetStoreSubscriptionContentModelMasterResultFromJson(data string) GetStoreSubscriptionContentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetStoreSubscriptionContentModelMasterResultFromDict(dict)
+}
+
+func NewGetStoreSubscriptionContentModelMasterResultFromDict(data map[string]interface{}) GetStoreSubscriptionContentModelMasterResult {
+	return GetStoreSubscriptionContentModelMasterResult{
+		Item: func() *StoreSubscriptionContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreSubscriptionContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetStoreSubscriptionContentModelMasterResult) Pointer() *GetStoreSubscriptionContentModelMasterResult {
+	return &p
+}
+
+type UpdateStoreSubscriptionContentModelMasterResult struct {
+	Item     *StoreSubscriptionContentModelMaster `json:"item"`
+	Metadata *core.ResultMetadata                 `json:"metadata"`
+}
+
+type UpdateStoreSubscriptionContentModelMasterAsyncResult struct {
+	result *UpdateStoreSubscriptionContentModelMasterResult
+	err    error
+}
+
+func NewUpdateStoreSubscriptionContentModelMasterResultFromJson(data string) UpdateStoreSubscriptionContentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateStoreSubscriptionContentModelMasterResultFromDict(dict)
+}
+
+func NewUpdateStoreSubscriptionContentModelMasterResultFromDict(data map[string]interface{}) UpdateStoreSubscriptionContentModelMasterResult {
+	return UpdateStoreSubscriptionContentModelMasterResult{
+		Item: func() *StoreSubscriptionContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreSubscriptionContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateStoreSubscriptionContentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateStoreSubscriptionContentModelMasterResult) Pointer() *UpdateStoreSubscriptionContentModelMasterResult {
+	return &p
+}
+
+type DeleteStoreSubscriptionContentModelMasterResult struct {
+	Item     *StoreSubscriptionContentModelMaster `json:"item"`
+	Metadata *core.ResultMetadata                 `json:"metadata"`
+}
+
+type DeleteStoreSubscriptionContentModelMasterAsyncResult struct {
+	result *DeleteStoreSubscriptionContentModelMasterResult
+	err    error
+}
+
+func NewDeleteStoreSubscriptionContentModelMasterResultFromJson(data string) DeleteStoreSubscriptionContentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteStoreSubscriptionContentModelMasterResultFromDict(dict)
+}
+
+func NewDeleteStoreSubscriptionContentModelMasterResultFromDict(data map[string]interface{}) DeleteStoreSubscriptionContentModelMasterResult {
+	return DeleteStoreSubscriptionContentModelMasterResult{
+		Item: func() *StoreSubscriptionContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreSubscriptionContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteStoreSubscriptionContentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteStoreSubscriptionContentModelMasterResult) Pointer() *DeleteStoreSubscriptionContentModelMasterResult {
 	return &p
 }
 

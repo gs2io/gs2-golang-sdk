@@ -2669,6 +2669,388 @@ func (p Gs2Money2WebSocketClient) VerifyReceiptByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2Money2WebSocketClient) describeSubscriptionStatusesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSubscriptionStatusesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSubscriptionStatusesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSubscriptionStatusesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSubscriptionStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeSubscriptionStatusesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeSubscriptionStatusesAsync(
+	request *DescribeSubscriptionStatusesRequest,
+	callback chan<- DescribeSubscriptionStatusesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "subscriptionStatus",
+			"function":    "describeSubscriptionStatuses",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeSubscriptionStatusesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeSubscriptionStatuses(
+	request *DescribeSubscriptionStatusesRequest,
+) (*DescribeSubscriptionStatusesResult, error) {
+	callback := make(chan DescribeSubscriptionStatusesAsyncResult, 1)
+	go p.DescribeSubscriptionStatusesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeSubscriptionStatusesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSubscriptionStatusesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSubscriptionStatusesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeSubscriptionStatusesByUserIdAsync(
+	request *DescribeSubscriptionStatusesByUserIdRequest,
+	callback chan<- DescribeSubscriptionStatusesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "subscriptionStatus",
+			"function":    "describeSubscriptionStatusesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeSubscriptionStatusesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeSubscriptionStatusesByUserId(
+	request *DescribeSubscriptionStatusesByUserIdRequest,
+) (*DescribeSubscriptionStatusesByUserIdResult, error) {
+	callback := make(chan DescribeSubscriptionStatusesByUserIdAsyncResult, 1)
+	go p.DescribeSubscriptionStatusesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getSubscriptionStatusAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSubscriptionStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscriptionStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscriptionStatusResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscriptionStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSubscriptionStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetSubscriptionStatusAsync(
+	request *GetSubscriptionStatusRequest,
+	callback chan<- GetSubscriptionStatusAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "subscriptionStatus",
+			"function":    "getSubscriptionStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getSubscriptionStatusAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetSubscriptionStatus(
+	request *GetSubscriptionStatusRequest,
+) (*GetSubscriptionStatusResult, error) {
+	callback := make(chan GetSubscriptionStatusAsyncResult, 1)
+	go p.GetSubscriptionStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getSubscriptionStatusByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSubscriptionStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscriptionStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscriptionStatusByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscriptionStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSubscriptionStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetSubscriptionStatusByUserIdAsync(
+	request *GetSubscriptionStatusByUserIdRequest,
+	callback chan<- GetSubscriptionStatusByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "subscriptionStatus",
+			"function":    "getSubscriptionStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getSubscriptionStatusByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetSubscriptionStatusByUserId(
+	request *GetSubscriptionStatusByUserIdRequest,
+) (*GetSubscriptionStatusByUserIdResult, error) {
+	callback := make(chan GetSubscriptionStatusByUserIdAsyncResult, 1)
+	go p.GetSubscriptionStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2Money2WebSocketClient) describeStoreContentModelsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeStoreContentModelsAsyncResult,
@@ -3323,6 +3705,679 @@ func (p Gs2Money2WebSocketClient) DeleteStoreContentModelMaster(
 ) (*DeleteStoreContentModelMasterResult, error) {
 	callback := make(chan DeleteStoreContentModelMasterAsyncResult, 1)
 	go p.DeleteStoreContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeStoreSubscriptionContentModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeStoreSubscriptionContentModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStoreSubscriptionContentModelsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeStoreSubscriptionContentModelsAsync(
+	request *DescribeStoreSubscriptionContentModelsRequest,
+	callback chan<- DescribeStoreSubscriptionContentModelsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModel",
+			"function":    "describeStoreSubscriptionContentModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeStoreSubscriptionContentModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeStoreSubscriptionContentModels(
+	request *DescribeStoreSubscriptionContentModelsRequest,
+) (*DescribeStoreSubscriptionContentModelsResult, error) {
+	callback := make(chan DescribeStoreSubscriptionContentModelsAsyncResult, 1)
+	go p.DescribeStoreSubscriptionContentModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getStoreSubscriptionContentModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetStoreSubscriptionContentModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStoreSubscriptionContentModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStoreSubscriptionContentModelResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStoreSubscriptionContentModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetStoreSubscriptionContentModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetStoreSubscriptionContentModelAsync(
+	request *GetStoreSubscriptionContentModelRequest,
+	callback chan<- GetStoreSubscriptionContentModelAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModel",
+			"function":    "getStoreSubscriptionContentModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getStoreSubscriptionContentModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetStoreSubscriptionContentModel(
+	request *GetStoreSubscriptionContentModelRequest,
+) (*GetStoreSubscriptionContentModelResult, error) {
+	callback := make(chan GetStoreSubscriptionContentModelAsyncResult, 1)
+	go p.GetStoreSubscriptionContentModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeStoreSubscriptionContentModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeStoreSubscriptionContentModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStoreSubscriptionContentModelMastersResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeStoreSubscriptionContentModelMastersAsync(
+	request *DescribeStoreSubscriptionContentModelMastersRequest,
+	callback chan<- DescribeStoreSubscriptionContentModelMastersAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModelMaster",
+			"function":    "describeStoreSubscriptionContentModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeStoreSubscriptionContentModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeStoreSubscriptionContentModelMasters(
+	request *DescribeStoreSubscriptionContentModelMastersRequest,
+) (*DescribeStoreSubscriptionContentModelMastersResult, error) {
+	callback := make(chan DescribeStoreSubscriptionContentModelMastersAsyncResult, 1)
+	go p.DescribeStoreSubscriptionContentModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) createStoreSubscriptionContentModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateStoreSubscriptionContentModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) CreateStoreSubscriptionContentModelMasterAsync(
+	request *CreateStoreSubscriptionContentModelMasterRequest,
+	callback chan<- CreateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModelMaster",
+			"function":    "createStoreSubscriptionContentModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleNamespaceId != nil && *request.ScheduleNamespaceId != "" {
+		bodies["scheduleNamespaceId"] = *request.ScheduleNamespaceId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.AppleAppStore != nil {
+		bodies["appleAppStore"] = request.AppleAppStore.ToDict()
+	}
+	if request.GooglePlay != nil {
+		bodies["googlePlay"] = request.GooglePlay.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.createStoreSubscriptionContentModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) CreateStoreSubscriptionContentModelMaster(
+	request *CreateStoreSubscriptionContentModelMasterRequest,
+) (*CreateStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan CreateStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.CreateStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getStoreSubscriptionContentModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStoreSubscriptionContentModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetStoreSubscriptionContentModelMasterAsync(
+	request *GetStoreSubscriptionContentModelMasterRequest,
+	callback chan<- GetStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModelMaster",
+			"function":    "getStoreSubscriptionContentModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getStoreSubscriptionContentModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetStoreSubscriptionContentModelMaster(
+	request *GetStoreSubscriptionContentModelMasterRequest,
+) (*GetStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan GetStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.GetStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) updateStoreSubscriptionContentModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateStoreSubscriptionContentModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) UpdateStoreSubscriptionContentModelMasterAsync(
+	request *UpdateStoreSubscriptionContentModelMasterRequest,
+	callback chan<- UpdateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModelMaster",
+			"function":    "updateStoreSubscriptionContentModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleNamespaceId != nil && *request.ScheduleNamespaceId != "" {
+		bodies["scheduleNamespaceId"] = *request.ScheduleNamespaceId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.AppleAppStore != nil {
+		bodies["appleAppStore"] = request.AppleAppStore.ToDict()
+	}
+	if request.GooglePlay != nil {
+		bodies["googlePlay"] = request.GooglePlay.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.updateStoreSubscriptionContentModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) UpdateStoreSubscriptionContentModelMaster(
+	request *UpdateStoreSubscriptionContentModelMasterRequest,
+) (*UpdateStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan UpdateStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.UpdateStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) deleteStoreSubscriptionContentModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteStoreSubscriptionContentModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DeleteStoreSubscriptionContentModelMasterAsync(
+	request *DeleteStoreSubscriptionContentModelMasterRequest,
+	callback chan<- DeleteStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "storeSubscriptionContentModelMaster",
+			"function":    "deleteStoreSubscriptionContentModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		bodies["contentName"] = *request.ContentName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.deleteStoreSubscriptionContentModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DeleteStoreSubscriptionContentModelMaster(
+	request *DeleteStoreSubscriptionContentModelMasterRequest,
+) (*DeleteStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan DeleteStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.DeleteStoreSubscriptionContentModelMasterAsync(
 		request,
 		callback,
 	)

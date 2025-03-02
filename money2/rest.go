@@ -2758,6 +2758,402 @@ func (p Gs2Money2RestClient) VerifyReceiptByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeSubscriptionStatusesAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeSubscriptionStatusesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSubscriptionStatusesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSubscriptionStatusesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeSubscriptionStatusesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSubscriptionStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeSubscriptionStatusesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeSubscriptionStatusesAsync(
+	request *DescribeSubscriptionStatusesRequest,
+	callback chan<- DescribeSubscriptionStatusesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeSubscriptionStatusesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeSubscriptionStatuses(
+	request *DescribeSubscriptionStatusesRequest,
+) (*DescribeSubscriptionStatusesResult, error) {
+	callback := make(chan DescribeSubscriptionStatusesAsyncResult, 1)
+	go p.DescribeSubscriptionStatusesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeSubscriptionStatusesByUserIdAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeSubscriptionStatusesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSubscriptionStatusesByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeSubscriptionStatusesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeSubscriptionStatusesByUserIdAsync(
+	request *DescribeSubscriptionStatusesByUserIdRequest,
+	callback chan<- DescribeSubscriptionStatusesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeSubscriptionStatusesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeSubscriptionStatusesByUserId(
+	request *DescribeSubscriptionStatusesByUserIdRequest,
+) (*DescribeSubscriptionStatusesByUserIdResult, error) {
+	callback := make(chan DescribeSubscriptionStatusesByUserIdAsyncResult, 1)
+	go p.DescribeSubscriptionStatusesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getSubscriptionStatusAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetSubscriptionStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscriptionStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscriptionStatusResult
+	if asyncResult.Err != nil {
+		callback <- GetSubscriptionStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscriptionStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetSubscriptionStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetSubscriptionStatusAsync(
+	request *GetSubscriptionStatusRequest,
+	callback chan<- GetSubscriptionStatusAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/subscription/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getSubscriptionStatusAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetSubscriptionStatus(
+	request *GetSubscriptionStatusRequest,
+) (*GetSubscriptionStatusResult, error) {
+	callback := make(chan GetSubscriptionStatusAsyncResult, 1)
+	go p.GetSubscriptionStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getSubscriptionStatusByUserIdAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetSubscriptionStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscriptionStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscriptionStatusByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetSubscriptionStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscriptionStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetSubscriptionStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetSubscriptionStatusByUserIdAsync(
+	request *GetSubscriptionStatusByUserIdRequest,
+	callback chan<- GetSubscriptionStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/subscription/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getSubscriptionStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetSubscriptionStatusByUserId(
+	request *GetSubscriptionStatusByUserIdRequest,
+) (*GetSubscriptionStatusByUserIdResult, error) {
+	callback := make(chan GetSubscriptionStatusByUserIdAsyncResult, 1)
+	go p.GetSubscriptionStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeStoreContentModelsAsyncHandler(
 	client Gs2Money2RestClient,
 	job *core.NetworkJob,
@@ -3441,6 +3837,708 @@ func (p Gs2Money2RestClient) DeleteStoreContentModelMaster(
 ) (*DeleteStoreContentModelMasterResult, error) {
 	callback := make(chan DeleteStoreContentModelMasterAsyncResult, 1)
 	go p.DeleteStoreContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeStoreSubscriptionContentModelsAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeStoreSubscriptionContentModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStoreSubscriptionContentModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeStoreSubscriptionContentModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeStoreSubscriptionContentModelsAsync(
+	request *DescribeStoreSubscriptionContentModelsRequest,
+	callback chan<- DescribeStoreSubscriptionContentModelsAsyncResult,
+) {
+	path := "/{namespaceName}/model/subscription/content"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeStoreSubscriptionContentModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeStoreSubscriptionContentModels(
+	request *DescribeStoreSubscriptionContentModelsRequest,
+) (*DescribeStoreSubscriptionContentModelsResult, error) {
+	callback := make(chan DescribeStoreSubscriptionContentModelsAsyncResult, 1)
+	go p.DescribeStoreSubscriptionContentModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getStoreSubscriptionContentModelAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetStoreSubscriptionContentModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStoreSubscriptionContentModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStoreSubscriptionContentModelResult
+	if asyncResult.Err != nil {
+		callback <- GetStoreSubscriptionContentModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStoreSubscriptionContentModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetStoreSubscriptionContentModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetStoreSubscriptionContentModelAsync(
+	request *GetStoreSubscriptionContentModelRequest,
+	callback chan<- GetStoreSubscriptionContentModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/subscription/content/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getStoreSubscriptionContentModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetStoreSubscriptionContentModel(
+	request *GetStoreSubscriptionContentModelRequest,
+) (*GetStoreSubscriptionContentModelResult, error) {
+	callback := make(chan GetStoreSubscriptionContentModelAsyncResult, 1)
+	go p.GetStoreSubscriptionContentModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeStoreSubscriptionContentModelMastersAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeStoreSubscriptionContentModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStoreSubscriptionContentModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeStoreSubscriptionContentModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeStoreSubscriptionContentModelMastersAsync(
+	request *DescribeStoreSubscriptionContentModelMastersRequest,
+	callback chan<- DescribeStoreSubscriptionContentModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeStoreSubscriptionContentModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeStoreSubscriptionContentModelMasters(
+	request *DescribeStoreSubscriptionContentModelMastersRequest,
+) (*DescribeStoreSubscriptionContentModelMastersResult, error) {
+	callback := make(chan DescribeStoreSubscriptionContentModelMastersAsyncResult, 1)
+	go p.DescribeStoreSubscriptionContentModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createStoreSubscriptionContentModelMasterAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateStoreSubscriptionContentModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CreateStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) CreateStoreSubscriptionContentModelMasterAsync(
+	request *CreateStoreSubscriptionContentModelMasterRequest,
+	callback chan<- CreateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleNamespaceId != nil && *request.ScheduleNamespaceId != "" {
+		bodies["scheduleNamespaceId"] = *request.ScheduleNamespaceId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.AppleAppStore != nil {
+		bodies["appleAppStore"] = request.AppleAppStore.ToDict()
+	}
+	if request.GooglePlay != nil {
+		bodies["googlePlay"] = request.GooglePlay.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go createStoreSubscriptionContentModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) CreateStoreSubscriptionContentModelMaster(
+	request *CreateStoreSubscriptionContentModelMasterRequest,
+) (*CreateStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan CreateStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.CreateStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getStoreSubscriptionContentModelMasterAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetStoreSubscriptionContentModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetStoreSubscriptionContentModelMasterAsync(
+	request *GetStoreSubscriptionContentModelMasterRequest,
+	callback chan<- GetStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/subscription/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getStoreSubscriptionContentModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetStoreSubscriptionContentModelMaster(
+	request *GetStoreSubscriptionContentModelMasterRequest,
+) (*GetStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan GetStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.GetStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateStoreSubscriptionContentModelMasterAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateStoreSubscriptionContentModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) UpdateStoreSubscriptionContentModelMasterAsync(
+	request *UpdateStoreSubscriptionContentModelMasterRequest,
+	callback chan<- UpdateStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/subscription/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleNamespaceId != nil && *request.ScheduleNamespaceId != "" {
+		bodies["scheduleNamespaceId"] = *request.ScheduleNamespaceId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.AppleAppStore != nil {
+		bodies["appleAppStore"] = request.AppleAppStore.ToDict()
+	}
+	if request.GooglePlay != nil {
+		bodies["googlePlay"] = request.GooglePlay.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateStoreSubscriptionContentModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) UpdateStoreSubscriptionContentModelMaster(
+	request *UpdateStoreSubscriptionContentModelMasterRequest,
+) (*UpdateStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan UpdateStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.UpdateStoreSubscriptionContentModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteStoreSubscriptionContentModelMasterAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteStoreSubscriptionContentModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteStoreSubscriptionContentModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DeleteStoreSubscriptionContentModelMasterAsync(
+	request *DeleteStoreSubscriptionContentModelMasterRequest,
+	callback chan<- DeleteStoreSubscriptionContentModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/model/subscription/{contentName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ContentName != nil && *request.ContentName != "" {
+		path = strings.ReplaceAll(path, "{contentName}", core.ToString(*request.ContentName))
+	} else {
+		path = strings.ReplaceAll(path, "{contentName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go deleteStoreSubscriptionContentModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DeleteStoreSubscriptionContentModelMaster(
+	request *DeleteStoreSubscriptionContentModelMasterRequest,
+) (*DeleteStoreSubscriptionContentModelMasterResult, error) {
+	callback := make(chan DeleteStoreSubscriptionContentModelMasterAsyncResult, 1)
+	go p.DeleteStoreSubscriptionContentModelMasterAsync(
 		request,
 		callback,
 	)
