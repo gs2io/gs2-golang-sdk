@@ -3244,8 +3244,8 @@ func (p Gs2Money2RestClient) AllocateSubscriptionStatusAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3355,8 +3355,8 @@ func (p Gs2Money2RestClient) AllocateSubscriptionStatusByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3461,8 +3461,8 @@ func (p Gs2Money2RestClient) TakeoverSubscriptionStatusAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3572,8 +3572,8 @@ func (p Gs2Money2RestClient) TakeoverSubscriptionStatusByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

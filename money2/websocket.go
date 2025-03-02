@@ -3146,8 +3146,8 @@ func (p Gs2Money2WebSocketClient) AllocateSubscriptionStatusAsync(
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3252,8 +3252,8 @@ func (p Gs2Money2WebSocketClient) AllocateSubscriptionStatusByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
@@ -3358,8 +3358,8 @@ func (p Gs2Money2WebSocketClient) TakeoverSubscriptionStatusAsync(
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3464,8 +3464,8 @@ func (p Gs2Money2WebSocketClient) TakeoverSubscriptionStatusByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
-	if request.Receipt != nil {
-		bodies["receipt"] = request.Receipt.ToDict()
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

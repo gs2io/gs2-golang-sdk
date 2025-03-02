@@ -4802,12 +4802,12 @@ func (p GetSubscriptionStatusByUserIdRequest) Pointer() *GetSubscriptionStatusBy
 }
 
 type AllocateSubscriptionStatusRequest struct {
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	AccessToken        *string  `json:"accessToken"`
-	Receipt            *Receipt `json:"receipt"`
-	DryRun             *bool    `json:"dryRun"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	Receipt            *string `json:"receipt"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AllocateSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
@@ -4879,7 +4879,27 @@ func (p *AllocateSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["receipt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Receipt)
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Receipt = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Receipt = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Receipt = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Receipt)
+				}
+			}
 		}
 	}
 	return nil
@@ -4910,12 +4930,12 @@ func NewAllocateSubscriptionStatusRequestFromDict(data map[string]interface{}) A
 			}
 			return core.CastString(data["accessToken"])
 		}(),
-		Receipt: func() *Receipt {
+		Receipt: func() *string {
 			v, ok := data["receipt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+			return core.CastString(data["receipt"])
 		}(),
 	}
 }
@@ -4924,12 +4944,7 @@ func (p AllocateSubscriptionStatusRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
-		"receipt": func() map[string]interface{} {
-			if p.Receipt == nil {
-				return nil
-			}
-			return p.Receipt.ToDict()
-		}(),
+		"receipt":       p.Receipt,
 	}
 }
 
@@ -4938,13 +4953,13 @@ func (p AllocateSubscriptionStatusRequest) Pointer() *AllocateSubscriptionStatus
 }
 
 type AllocateSubscriptionStatusByUserIdRequest struct {
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	UserId             *string  `json:"userId"`
-	Receipt            *Receipt `json:"receipt"`
-	TimeOffsetToken    *string  `json:"timeOffsetToken"`
-	DryRun             *bool    `json:"dryRun"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Receipt            *string `json:"receipt"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AllocateSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5016,7 +5031,27 @@ func (p *AllocateSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) e
 			}
 		}
 		if v, ok := d["receipt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Receipt)
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Receipt = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Receipt = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Receipt = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Receipt)
+				}
+			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
@@ -5070,12 +5105,12 @@ func NewAllocateSubscriptionStatusByUserIdRequestFromDict(data map[string]interf
 			}
 			return core.CastString(data["userId"])
 		}(),
-		Receipt: func() *Receipt {
+		Receipt: func() *string {
 			v, ok := data["receipt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+			return core.CastString(data["receipt"])
 		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
@@ -5089,14 +5124,9 @@ func NewAllocateSubscriptionStatusByUserIdRequestFromDict(data map[string]interf
 
 func (p AllocateSubscriptionStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"receipt": func() map[string]interface{} {
-			if p.Receipt == nil {
-				return nil
-			}
-			return p.Receipt.ToDict()
-		}(),
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"receipt":         p.Receipt,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -5106,12 +5136,12 @@ func (p AllocateSubscriptionStatusByUserIdRequest) Pointer() *AllocateSubscripti
 }
 
 type TakeoverSubscriptionStatusRequest struct {
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	AccessToken        *string  `json:"accessToken"`
-	Receipt            *Receipt `json:"receipt"`
-	DryRun             *bool    `json:"dryRun"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	Receipt            *string `json:"receipt"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *TakeoverSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
@@ -5183,7 +5213,27 @@ func (p *TakeoverSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["receipt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Receipt)
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Receipt = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Receipt = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Receipt = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Receipt)
+				}
+			}
 		}
 	}
 	return nil
@@ -5214,12 +5264,12 @@ func NewTakeoverSubscriptionStatusRequestFromDict(data map[string]interface{}) T
 			}
 			return core.CastString(data["accessToken"])
 		}(),
-		Receipt: func() *Receipt {
+		Receipt: func() *string {
 			v, ok := data["receipt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+			return core.CastString(data["receipt"])
 		}(),
 	}
 }
@@ -5228,12 +5278,7 @@ func (p TakeoverSubscriptionStatusRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
-		"receipt": func() map[string]interface{} {
-			if p.Receipt == nil {
-				return nil
-			}
-			return p.Receipt.ToDict()
-		}(),
+		"receipt":       p.Receipt,
 	}
 }
 
@@ -5242,13 +5287,13 @@ func (p TakeoverSubscriptionStatusRequest) Pointer() *TakeoverSubscriptionStatus
 }
 
 type TakeoverSubscriptionStatusByUserIdRequest struct {
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	UserId             *string  `json:"userId"`
-	Receipt            *Receipt `json:"receipt"`
-	TimeOffsetToken    *string  `json:"timeOffsetToken"`
-	DryRun             *bool    `json:"dryRun"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Receipt            *string `json:"receipt"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *TakeoverSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5320,7 +5365,27 @@ func (p *TakeoverSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) e
 			}
 		}
 		if v, ok := d["receipt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Receipt)
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Receipt = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Receipt = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Receipt = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Receipt = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Receipt)
+				}
+			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
@@ -5374,12 +5439,12 @@ func NewTakeoverSubscriptionStatusByUserIdRequestFromDict(data map[string]interf
 			}
 			return core.CastString(data["userId"])
 		}(),
-		Receipt: func() *Receipt {
+		Receipt: func() *string {
 			v, ok := data["receipt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+			return core.CastString(data["receipt"])
 		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
@@ -5393,14 +5458,9 @@ func NewTakeoverSubscriptionStatusByUserIdRequestFromDict(data map[string]interf
 
 func (p TakeoverSubscriptionStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"receipt": func() map[string]interface{} {
-			if p.Receipt == nil {
-				return nil
-			}
-			return p.Receipt.ToDict()
-		}(),
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"receipt":         p.Receipt,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
