@@ -193,6 +193,21 @@ func (p Gs2Money2RestClient) CreateNamespaceAsync(
 	if request.WithdrawBalanceScript != nil {
 		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
 	}
+	if request.SubscribeScript != nil && *request.SubscribeScript != "" {
+		bodies["subscribeScript"] = *request.SubscribeScript
+	}
+	if request.RenewScript != nil && *request.RenewScript != "" {
+		bodies["renewScript"] = *request.RenewScript
+	}
+	if request.UnsubscribeScript != nil && *request.UnsubscribeScript != "" {
+		bodies["unsubscribeScript"] = *request.UnsubscribeScript
+	}
+	if request.TakeOverScript != nil {
+		bodies["takeOverScript"] = request.TakeOverScript.ToDict()
+	}
+	if request.ChangeSubscriptionStatusNotification != nil {
+		bodies["changeSubscriptionStatusNotification"] = request.ChangeSubscriptionStatusNotification.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -483,6 +498,21 @@ func (p Gs2Money2RestClient) UpdateNamespaceAsync(
 	}
 	if request.WithdrawBalanceScript != nil {
 		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
+	}
+	if request.SubscribeScript != nil && *request.SubscribeScript != "" {
+		bodies["subscribeScript"] = *request.SubscribeScript
+	}
+	if request.RenewScript != nil && *request.RenewScript != "" {
+		bodies["renewScript"] = *request.RenewScript
+	}
+	if request.UnsubscribeScript != nil && *request.UnsubscribeScript != "" {
+		bodies["unsubscribeScript"] = *request.UnsubscribeScript
+	}
+	if request.TakeOverScript != nil {
+		bodies["takeOverScript"] = request.TakeOverScript.ToDict()
+	}
+	if request.ChangeSubscriptionStatusNotification != nil {
+		bodies["changeSubscriptionStatusNotification"] = request.ChangeSubscriptionStatusNotification.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -3154,6 +3184,440 @@ func (p Gs2Money2RestClient) GetSubscriptionStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func allocateSubscriptionStatusAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- AllocateSubscriptionStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AllocateSubscriptionStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AllocateSubscriptionStatusResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "subscription.transaction.used" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyUsed{})
+			}
+		}
+		callback <- AllocateSubscriptionStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AllocateSubscriptionStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AllocateSubscriptionStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) AllocateSubscriptionStatusAsync(
+	request *AllocateSubscriptionStatusRequest,
+	callback chan<- AllocateSubscriptionStatusAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/allocate/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Receipt != nil {
+		bodies["receipt"] = request.Receipt.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go allocateSubscriptionStatusAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) AllocateSubscriptionStatus(
+	request *AllocateSubscriptionStatusRequest,
+) (*AllocateSubscriptionStatusResult, error) {
+	callback := make(chan AllocateSubscriptionStatusAsyncResult, 1)
+	go p.AllocateSubscriptionStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func allocateSubscriptionStatusByUserIdAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- AllocateSubscriptionStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AllocateSubscriptionStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AllocateSubscriptionStatusByUserIdResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "subscription.transaction.used" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyUsed{})
+			}
+		}
+		callback <- AllocateSubscriptionStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AllocateSubscriptionStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AllocateSubscriptionStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) AllocateSubscriptionStatusByUserIdAsync(
+	request *AllocateSubscriptionStatusByUserIdRequest,
+	callback chan<- AllocateSubscriptionStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/allocate/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Receipt != nil {
+		bodies["receipt"] = request.Receipt.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go allocateSubscriptionStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) AllocateSubscriptionStatusByUserId(
+	request *AllocateSubscriptionStatusByUserIdRequest,
+) (*AllocateSubscriptionStatusByUserIdResult, error) {
+	callback := make(chan AllocateSubscriptionStatusByUserIdAsyncResult, 1)
+	go p.AllocateSubscriptionStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func takeoverSubscriptionStatusAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- TakeoverSubscriptionStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- TakeoverSubscriptionStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result TakeoverSubscriptionStatusResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "subscription.transaction.used" {
+				asyncResult.Err = gs2err.SetClientError(LockPeriodNotElapsed{})
+			}
+		}
+		callback <- TakeoverSubscriptionStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- TakeoverSubscriptionStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- TakeoverSubscriptionStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) TakeoverSubscriptionStatusAsync(
+	request *TakeoverSubscriptionStatusRequest,
+	callback chan<- TakeoverSubscriptionStatusAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/takeover/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Receipt != nil {
+		bodies["receipt"] = request.Receipt.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go takeoverSubscriptionStatusAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) TakeoverSubscriptionStatus(
+	request *TakeoverSubscriptionStatusRequest,
+) (*TakeoverSubscriptionStatusResult, error) {
+	callback := make(chan TakeoverSubscriptionStatusAsyncResult, 1)
+	go p.TakeoverSubscriptionStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func takeoverSubscriptionStatusByUserIdAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- TakeoverSubscriptionStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- TakeoverSubscriptionStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result TakeoverSubscriptionStatusByUserIdResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "subscription.transaction.used" {
+				asyncResult.Err = gs2err.SetClientError(LockPeriodNotElapsed{})
+			}
+		}
+		callback <- TakeoverSubscriptionStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- TakeoverSubscriptionStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- TakeoverSubscriptionStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) TakeoverSubscriptionStatusByUserIdAsync(
+	request *TakeoverSubscriptionStatusByUserIdRequest,
+	callback chan<- TakeoverSubscriptionStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/takeover/subscription"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Receipt != nil {
+		bodies["receipt"] = request.Receipt.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go takeoverSubscriptionStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) TakeoverSubscriptionStatusByUserId(
+	request *TakeoverSubscriptionStatusByUserIdRequest,
+) (*TakeoverSubscriptionStatusByUserIdResult, error) {
+	callback := make(chan TakeoverSubscriptionStatusByUserIdAsyncResult, 1)
+	go p.TakeoverSubscriptionStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeStoreContentModelsAsyncHandler(
 	client Gs2Money2RestClient,
 	job *core.NetworkJob,
@@ -4197,6 +4661,9 @@ func (p Gs2Money2RestClient) CreateStoreSubscriptionContentModelMasterAsync(
 	if request.TriggerName != nil && *request.TriggerName != "" {
 		bodies["triggerName"] = *request.TriggerName
 	}
+	if request.ReallocateSpanDays != nil {
+		bodies["reallocateSpanDays"] = *request.ReallocateSpanDays
+	}
 	if request.AppleAppStore != nil {
 		bodies["appleAppStore"] = request.AppleAppStore.ToDict()
 	}
@@ -4406,6 +4873,9 @@ func (p Gs2Money2RestClient) UpdateStoreSubscriptionContentModelMasterAsync(
 	}
 	if request.TriggerName != nil && *request.TriggerName != "" {
 		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.ReallocateSpanDays != nil {
+		bodies["reallocateSpanDays"] = *request.ReallocateSpanDays
 	}
 	if request.AppleAppStore != nil {
 		bodies["appleAppStore"] = request.AppleAppStore.ToDict()

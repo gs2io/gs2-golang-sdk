@@ -24,18 +24,23 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId           *string          `json:"namespaceId"`
-	Name                  *string          `json:"name"`
-	Description           *string          `json:"description"`
-	CurrencyUsagePriority *string          `json:"currencyUsagePriority"`
-	SharedFreeCurrency    *bool            `json:"sharedFreeCurrency"`
-	PlatformSetting       *PlatformSetting `json:"platformSetting"`
-	DepositBalanceScript  *ScriptSetting   `json:"depositBalanceScript"`
-	WithdrawBalanceScript *ScriptSetting   `json:"withdrawBalanceScript"`
-	LogSetting            *LogSetting      `json:"logSetting"`
-	CreatedAt             *int64           `json:"createdAt"`
-	UpdatedAt             *int64           `json:"updatedAt"`
-	Revision              *int64           `json:"revision"`
+	NamespaceId                          *string              `json:"namespaceId"`
+	Name                                 *string              `json:"name"`
+	Description                          *string              `json:"description"`
+	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
+	SharedFreeCurrency                   *bool                `json:"sharedFreeCurrency"`
+	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
+	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
+	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	SubscribeScript                      *string              `json:"subscribeScript"`
+	RenewScript                          *string              `json:"renewScript"`
+	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
+	TakeOverScript                       *ScriptSetting       `json:"takeOverScript"`
+	ChangeSubscriptionStatusNotification *NotificationSetting `json:"changeSubscriptionStatusNotification"`
+	LogSetting                           *LogSetting          `json:"logSetting"`
+	CreatedAt                            *int64               `json:"createdAt"`
+	UpdatedAt                            *int64               `json:"updatedAt"`
+	Revision                             *int64               `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -164,6 +169,81 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
 		}
+		if v, ok := d["subscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["renewScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RenewScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RenewScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RenewScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RenewScript)
+				}
+			}
+		}
+		if v, ok := d["unsubscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UnsubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UnsubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UnsubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UnsubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["takeOverScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TakeOverScript)
+		}
+		if v, ok := d["changeSubscriptionStatusNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeSubscriptionStatusNotification)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -244,6 +324,41 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		SubscribeScript: func() *string {
+			v, ok := data["subscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subscribeScript"])
+		}(),
+		RenewScript: func() *string {
+			v, ok := data["renewScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["renewScript"])
+		}(),
+		UnsubscribeScript: func() *string {
+			v, ok := data["unsubscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["unsubscribeScript"])
+		}(),
+		TakeOverScript: func() *ScriptSetting {
+			v, ok := data["takeOverScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["takeOverScript"])).Pointer()
+		}(),
+		ChangeSubscriptionStatusNotification: func() *NotificationSetting {
+			v, ok := data["changeSubscriptionStatusNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeSubscriptionStatusNotification"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -314,6 +429,31 @@ func (p Namespace) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}()
+	}
+	if p.SubscribeScript != nil {
+		m["subscribeScript"] = p.SubscribeScript
+	}
+	if p.RenewScript != nil {
+		m["renewScript"] = p.RenewScript
+	}
+	if p.UnsubscribeScript != nil {
+		m["unsubscribeScript"] = p.UnsubscribeScript
+	}
+	if p.TakeOverScript != nil {
+		m["takeOverScript"] = func() map[string]interface{} {
+			if p.TakeOverScript == nil {
+				return nil
+			}
+			return p.TakeOverScript.ToDict()
+		}()
+	}
+	if p.ChangeSubscriptionStatusNotification != nil {
+		m["changeSubscriptionStatusNotification"] = func() map[string]interface{} {
+			if p.ChangeSubscriptionStatusNotification == nil {
+				return nil
+			}
+			return p.ChangeSubscriptionStatusNotification.ToDict()
 		}()
 	}
 	if p.LogSetting != nil {
@@ -906,6 +1046,7 @@ type SubscribeTransaction struct {
 	UserId                 *string `json:"userId"`
 	StatusDetail           *string `json:"statusDetail"`
 	ExpiresAt              *int64  `json:"expiresAt"`
+	LastAllocatedAt        *int64  `json:"lastAllocatedAt"`
 	CreatedAt              *int64  `json:"createdAt"`
 	UpdatedAt              *int64  `json:"updatedAt"`
 	Revision               *int64  `json:"revision"`
@@ -1074,6 +1215,9 @@ func (p *SubscribeTransaction) UnmarshalJSON(data []byte) error {
 		if v, ok := d["expiresAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExpiresAt)
 		}
+		if v, ok := d["lastAllocatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LastAllocatedAt)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -1144,6 +1288,13 @@ func NewSubscribeTransactionFromDict(data map[string]interface{}) SubscribeTrans
 			}
 			return core.CastInt64(data["expiresAt"])
 		}(),
+		LastAllocatedAt: func() *int64 {
+			v, ok := data["lastAllocatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lastAllocatedAt"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -1190,6 +1341,9 @@ func (p SubscribeTransaction) ToDict() map[string]interface{} {
 	}
 	if p.ExpiresAt != nil {
 		m["expiresAt"] = p.ExpiresAt
+	}
+	if p.LastAllocatedAt != nil {
+		m["lastAllocatedAt"] = p.LastAllocatedAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
@@ -1911,6 +2065,7 @@ type StoreSubscriptionContentModel struct {
 	Metadata                        *string                           `json:"metadata"`
 	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
 	TriggerName                     *string                           `json:"triggerName"`
+	ReallocateSpanDays              *int32                            `json:"reallocateSpanDays"`
 	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
 }
@@ -2052,6 +2207,9 @@ func (p *StoreSubscriptionContentModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
+		}
 		if v, ok := d["appleAppStore"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppleAppStore)
 		}
@@ -2105,6 +2263,13 @@ func NewStoreSubscriptionContentModelFromDict(data map[string]interface{}) Store
 			}
 			return core.CastString(data["triggerName"])
 		}(),
+		ReallocateSpanDays: func() *int32 {
+			v, ok := data["reallocateSpanDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["reallocateSpanDays"])
+		}(),
 		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
 			v, ok := data["appleAppStore"]
 			if !ok || v == nil {
@@ -2138,6 +2303,9 @@ func (p StoreSubscriptionContentModel) ToDict() map[string]interface{} {
 	}
 	if p.TriggerName != nil {
 		m["triggerName"] = p.TriggerName
+	}
+	if p.ReallocateSpanDays != nil {
+		m["reallocateSpanDays"] = p.ReallocateSpanDays
 	}
 	if p.AppleAppStore != nil {
 		m["appleAppStore"] = func() map[string]interface{} {
@@ -2185,6 +2353,7 @@ type StoreSubscriptionContentModelMaster struct {
 	Metadata                        *string                           `json:"metadata"`
 	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
 	TriggerName                     *string                           `json:"triggerName"`
+	ReallocateSpanDays              *int32                            `json:"reallocateSpanDays"`
 	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
 	CreatedAt                       *int64                            `json:"createdAt"`
@@ -2352,6 +2521,9 @@ func (p *StoreSubscriptionContentModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
+		}
 		if v, ok := d["appleAppStore"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppleAppStore)
 		}
@@ -2421,6 +2593,13 @@ func NewStoreSubscriptionContentModelMasterFromDict(data map[string]interface{})
 			}
 			return core.CastString(data["triggerName"])
 		}(),
+		ReallocateSpanDays: func() *int32 {
+			v, ok := data["reallocateSpanDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["reallocateSpanDays"])
+		}(),
 		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
 			v, ok := data["appleAppStore"]
 			if !ok || v == nil {
@@ -2478,6 +2657,9 @@ func (p StoreSubscriptionContentModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.TriggerName != nil {
 		m["triggerName"] = p.TriggerName
+	}
+	if p.ReallocateSpanDays != nil {
+		m["reallocateSpanDays"] = p.ReallocateSpanDays
 	}
 	if p.AppleAppStore != nil {
 		m["appleAppStore"] = func() map[string]interface{} {
@@ -5490,6 +5672,153 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type NotificationSetting struct {
+	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
+	Sound                            *string `json:"sound"`
+}
+
+func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = NotificationSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = NotificationSetting{}
+	} else {
+		*p = NotificationSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["gatewayNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GatewayNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GatewayNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GatewayNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GatewayNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GatewayNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GatewayNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["enableTransferMobileNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableTransferMobileNotification)
+		}
+		if v, ok := d["sound"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Sound = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Sound = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Sound = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Sound)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewNotificationSettingFromJson(data string) NotificationSetting {
+	req := NotificationSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
+	return NotificationSetting{
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
+	}
+}
+
+func (p NotificationSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.GatewayNamespaceId != nil {
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
+	}
+	if p.EnableTransferMobileNotification != nil {
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
+	}
+	if p.Sound != nil {
+		m["sound"] = p.Sound
+	}
+	return m
+}
+
+func (p NotificationSetting) Pointer() *NotificationSetting {
+	return &p
+}
+
+func CastNotificationSettings(data []interface{}) []NotificationSetting {
+	v := make([]NotificationSetting, 0)
+	for _, d := range data {
+		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

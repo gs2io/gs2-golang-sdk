@@ -48,3 +48,36 @@ func (p Insufficient) Type() string {
 func (p Insufficient) Code() string {
 	return "wallet.balance.insufficient"
 }
+
+type AlreadyUsed struct {
+}
+
+func (p AlreadyUsed) Type() string {
+	return "Money2AlreadyUsed"
+}
+
+func (p AlreadyUsed) Code() string {
+	return "subscription.transaction.used"
+}
+
+type MyselfSubscription struct {
+}
+
+func (p MyselfSubscription) Type() string {
+	return "Money2MyselfSubscription"
+}
+
+func (p MyselfSubscription) Code() string {
+	return "subscription.transaction.myself"
+}
+
+type LockPeriodNotElapsed struct {
+}
+
+func (p LockPeriodNotElapsed) Type() string {
+	return "Money2LockPeriodNotElapsed"
+}
+
+func (p LockPeriodNotElapsed) Code() string {
+	return "subscription.transaction.used"
+}

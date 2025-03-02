@@ -1751,6 +1751,230 @@ func (p GetSubscriptionStatusByUserIdResult) Pointer() *GetSubscriptionStatusByU
 	return &p
 }
 
+type AllocateSubscriptionStatusResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AllocateSubscriptionStatusAsyncResult struct {
+	result *AllocateSubscriptionStatusResult
+	err    error
+}
+
+func NewAllocateSubscriptionStatusResultFromJson(data string) AllocateSubscriptionStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAllocateSubscriptionStatusResultFromDict(dict)
+}
+
+func NewAllocateSubscriptionStatusResultFromDict(data map[string]interface{}) AllocateSubscriptionStatusResult {
+	return AllocateSubscriptionStatusResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusResult) Pointer() *AllocateSubscriptionStatusResult {
+	return &p
+}
+
+type AllocateSubscriptionStatusByUserIdResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AllocateSubscriptionStatusByUserIdAsyncResult struct {
+	result *AllocateSubscriptionStatusByUserIdResult
+	err    error
+}
+
+func NewAllocateSubscriptionStatusByUserIdResultFromJson(data string) AllocateSubscriptionStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAllocateSubscriptionStatusByUserIdResultFromDict(dict)
+}
+
+func NewAllocateSubscriptionStatusByUserIdResultFromDict(data map[string]interface{}) AllocateSubscriptionStatusByUserIdResult {
+	return AllocateSubscriptionStatusByUserIdResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusByUserIdResult) Pointer() *AllocateSubscriptionStatusByUserIdResult {
+	return &p
+}
+
+type TakeoverSubscriptionStatusResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type TakeoverSubscriptionStatusAsyncResult struct {
+	result *TakeoverSubscriptionStatusResult
+	err    error
+}
+
+func NewTakeoverSubscriptionStatusResultFromJson(data string) TakeoverSubscriptionStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTakeoverSubscriptionStatusResultFromDict(dict)
+}
+
+func NewTakeoverSubscriptionStatusResultFromDict(data map[string]interface{}) TakeoverSubscriptionStatusResult {
+	return TakeoverSubscriptionStatusResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusResult) Pointer() *TakeoverSubscriptionStatusResult {
+	return &p
+}
+
+type TakeoverSubscriptionStatusByUserIdResult struct {
+	Item     *SubscriptionStatus  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type TakeoverSubscriptionStatusByUserIdAsyncResult struct {
+	result *TakeoverSubscriptionStatusByUserIdResult
+	err    error
+}
+
+func NewTakeoverSubscriptionStatusByUserIdResultFromJson(data string) TakeoverSubscriptionStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTakeoverSubscriptionStatusByUserIdResultFromDict(dict)
+}
+
+func NewTakeoverSubscriptionStatusByUserIdResultFromDict(data map[string]interface{}) TakeoverSubscriptionStatusByUserIdResult {
+	return TakeoverSubscriptionStatusByUserIdResult{
+		Item: func() *SubscriptionStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscriptionStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusByUserIdResult) Pointer() *TakeoverSubscriptionStatusByUserIdResult {
+	return &p
+}
+
 type DescribeStoreContentModelsResult struct {
 	Items    []StoreContentModel  `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`

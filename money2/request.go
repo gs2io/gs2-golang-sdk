@@ -122,16 +122,21 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack          *string          `json:"contextStack"`
-	Name                  *string          `json:"name"`
-	CurrencyUsagePriority *string          `json:"currencyUsagePriority"`
-	Description           *string          `json:"description"`
-	SharedFreeCurrency    *bool            `json:"sharedFreeCurrency"`
-	PlatformSetting       *PlatformSetting `json:"platformSetting"`
-	DepositBalanceScript  *ScriptSetting   `json:"depositBalanceScript"`
-	WithdrawBalanceScript *ScriptSetting   `json:"withdrawBalanceScript"`
-	LogSetting            *LogSetting      `json:"logSetting"`
-	DryRun                *bool            `json:"dryRun"`
+	ContextStack                         *string              `json:"contextStack"`
+	Name                                 *string              `json:"name"`
+	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
+	Description                          *string              `json:"description"`
+	SharedFreeCurrency                   *bool                `json:"sharedFreeCurrency"`
+	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
+	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
+	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	SubscribeScript                      *string              `json:"subscribeScript"`
+	RenewScript                          *string              `json:"renewScript"`
+	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
+	TakeOverScript                       *ScriptSetting       `json:"takeOverScript"`
+	ChangeSubscriptionStatusNotification *NotificationSetting `json:"changeSubscriptionStatusNotification"`
+	LogSetting                           *LogSetting          `json:"logSetting"`
+	DryRun                               *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -237,6 +242,81 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
 		}
+		if v, ok := d["subscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["renewScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RenewScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RenewScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RenewScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RenewScript)
+				}
+			}
+		}
+		if v, ok := d["unsubscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UnsubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UnsubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UnsubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UnsubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["takeOverScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TakeOverScript)
+		}
+		if v, ok := d["changeSubscriptionStatusNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeSubscriptionStatusNotification)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -304,6 +384,41 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		SubscribeScript: func() *string {
+			v, ok := data["subscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subscribeScript"])
+		}(),
+		RenewScript: func() *string {
+			v, ok := data["renewScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["renewScript"])
+		}(),
+		UnsubscribeScript: func() *string {
+			v, ok := data["unsubscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["unsubscribeScript"])
+		}(),
+		TakeOverScript: func() *ScriptSetting {
+			v, ok := data["takeOverScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["takeOverScript"])).Pointer()
+		}(),
+		ChangeSubscriptionStatusNotification: func() *NotificationSetting {
+			v, ok := data["changeSubscriptionStatusNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeSubscriptionStatusNotification"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -337,6 +452,21 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"subscribeScript":   p.SubscribeScript,
+		"renewScript":       p.RenewScript,
+		"unsubscribeScript": p.UnsubscribeScript,
+		"takeOverScript": func() map[string]interface{} {
+			if p.TakeOverScript == nil {
+				return nil
+			}
+			return p.TakeOverScript.ToDict()
+		}(),
+		"changeSubscriptionStatusNotification": func() map[string]interface{} {
+			if p.ChangeSubscriptionStatusNotification == nil {
+				return nil
+			}
+			return p.ChangeSubscriptionStatusNotification.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -524,15 +654,20 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack          *string          `json:"contextStack"`
-	NamespaceName         *string          `json:"namespaceName"`
-	CurrencyUsagePriority *string          `json:"currencyUsagePriority"`
-	Description           *string          `json:"description"`
-	PlatformSetting       *PlatformSetting `json:"platformSetting"`
-	DepositBalanceScript  *ScriptSetting   `json:"depositBalanceScript"`
-	WithdrawBalanceScript *ScriptSetting   `json:"withdrawBalanceScript"`
-	LogSetting            *LogSetting      `json:"logSetting"`
-	DryRun                *bool            `json:"dryRun"`
+	ContextStack                         *string              `json:"contextStack"`
+	NamespaceName                        *string              `json:"namespaceName"`
+	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
+	Description                          *string              `json:"description"`
+	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
+	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
+	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	SubscribeScript                      *string              `json:"subscribeScript"`
+	RenewScript                          *string              `json:"renewScript"`
+	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
+	TakeOverScript                       *ScriptSetting       `json:"takeOverScript"`
+	ChangeSubscriptionStatusNotification *NotificationSetting `json:"changeSubscriptionStatusNotification"`
+	LogSetting                           *LogSetting          `json:"logSetting"`
+	DryRun                               *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -635,6 +770,81 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
 		}
+		if v, ok := d["subscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["renewScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RenewScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RenewScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RenewScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RenewScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RenewScript)
+				}
+			}
+		}
+		if v, ok := d["unsubscribeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UnsubscribeScript = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UnsubscribeScript = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UnsubscribeScript = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UnsubscribeScript = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UnsubscribeScript)
+				}
+			}
+		}
+		if v, ok := d["takeOverScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TakeOverScript)
+		}
+		if v, ok := d["changeSubscriptionStatusNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeSubscriptionStatusNotification)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -695,6 +905,41 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		SubscribeScript: func() *string {
+			v, ok := data["subscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subscribeScript"])
+		}(),
+		RenewScript: func() *string {
+			v, ok := data["renewScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["renewScript"])
+		}(),
+		UnsubscribeScript: func() *string {
+			v, ok := data["unsubscribeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["unsubscribeScript"])
+		}(),
+		TakeOverScript: func() *ScriptSetting {
+			v, ok := data["takeOverScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["takeOverScript"])).Pointer()
+		}(),
+		ChangeSubscriptionStatusNotification: func() *NotificationSetting {
+			v, ok := data["changeSubscriptionStatusNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeSubscriptionStatusNotification"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -727,6 +972,21 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"subscribeScript":   p.SubscribeScript,
+		"renewScript":       p.RenewScript,
+		"unsubscribeScript": p.UnsubscribeScript,
+		"takeOverScript": func() map[string]interface{} {
+			if p.TakeOverScript == nil {
+				return nil
+			}
+			return p.TakeOverScript.ToDict()
+		}(),
+		"changeSubscriptionStatusNotification": func() map[string]interface{} {
+			if p.ChangeSubscriptionStatusNotification == nil {
+				return nil
+			}
+			return p.ChangeSubscriptionStatusNotification.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -4541,6 +4801,614 @@ func (p GetSubscriptionStatusByUserIdRequest) Pointer() *GetSubscriptionStatusBy
 	return &p
 }
 
+type AllocateSubscriptionStatusRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	AccessToken        *string  `json:"accessToken"`
+	Receipt            *Receipt `json:"receipt"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *AllocateSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AllocateSubscriptionStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AllocateSubscriptionStatusRequest{}
+	} else {
+		*p = AllocateSubscriptionStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["receipt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receipt)
+		}
+	}
+	return nil
+}
+
+func NewAllocateSubscriptionStatusRequestFromJson(data string) (AllocateSubscriptionStatusRequest, error) {
+	req := AllocateSubscriptionStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AllocateSubscriptionStatusRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAllocateSubscriptionStatusRequestFromDict(data map[string]interface{}) AllocateSubscriptionStatusRequest {
+	return AllocateSubscriptionStatusRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Receipt: func() *Receipt {
+			v, ok := data["receipt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusRequest) Pointer() *AllocateSubscriptionStatusRequest {
+	return &p
+}
+
+type AllocateSubscriptionStatusByUserIdRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	UserId             *string  `json:"userId"`
+	Receipt            *Receipt `json:"receipt"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *AllocateSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AllocateSubscriptionStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AllocateSubscriptionStatusByUserIdRequest{}
+	} else {
+		*p = AllocateSubscriptionStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["receipt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receipt)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAllocateSubscriptionStatusByUserIdRequestFromJson(data string) (AllocateSubscriptionStatusByUserIdRequest, error) {
+	req := AllocateSubscriptionStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AllocateSubscriptionStatusByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAllocateSubscriptionStatusByUserIdRequestFromDict(data map[string]interface{}) AllocateSubscriptionStatusByUserIdRequest {
+	return AllocateSubscriptionStatusByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Receipt: func() *Receipt {
+			v, ok := data["receipt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p AllocateSubscriptionStatusByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p AllocateSubscriptionStatusByUserIdRequest) Pointer() *AllocateSubscriptionStatusByUserIdRequest {
+	return &p
+}
+
+type TakeoverSubscriptionStatusRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	AccessToken        *string  `json:"accessToken"`
+	Receipt            *Receipt `json:"receipt"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *TakeoverSubscriptionStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TakeoverSubscriptionStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TakeoverSubscriptionStatusRequest{}
+	} else {
+		*p = TakeoverSubscriptionStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["receipt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receipt)
+		}
+	}
+	return nil
+}
+
+func NewTakeoverSubscriptionStatusRequestFromJson(data string) (TakeoverSubscriptionStatusRequest, error) {
+	req := TakeoverSubscriptionStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return TakeoverSubscriptionStatusRequest{}, err
+	}
+	return req, nil
+}
+
+func NewTakeoverSubscriptionStatusRequestFromDict(data map[string]interface{}) TakeoverSubscriptionStatusRequest {
+	return TakeoverSubscriptionStatusRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Receipt: func() *Receipt {
+			v, ok := data["receipt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusRequest) Pointer() *TakeoverSubscriptionStatusRequest {
+	return &p
+}
+
+type TakeoverSubscriptionStatusByUserIdRequest struct {
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	UserId             *string  `json:"userId"`
+	Receipt            *Receipt `json:"receipt"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
+}
+
+func (p *TakeoverSubscriptionStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TakeoverSubscriptionStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TakeoverSubscriptionStatusByUserIdRequest{}
+	} else {
+		*p = TakeoverSubscriptionStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["receipt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receipt)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewTakeoverSubscriptionStatusByUserIdRequestFromJson(data string) (TakeoverSubscriptionStatusByUserIdRequest, error) {
+	req := TakeoverSubscriptionStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return TakeoverSubscriptionStatusByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewTakeoverSubscriptionStatusByUserIdRequestFromDict(data map[string]interface{}) TakeoverSubscriptionStatusByUserIdRequest {
+	return TakeoverSubscriptionStatusByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Receipt: func() *Receipt {
+			v, ok := data["receipt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiptFromDict(core.CastMap(data["receipt"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p TakeoverSubscriptionStatusByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p TakeoverSubscriptionStatusByUserIdRequest) Pointer() *TakeoverSubscriptionStatusByUserIdRequest {
+	return &p
+}
+
 type DescribeStoreContentModelsRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
@@ -5885,6 +6753,7 @@ type CreateStoreSubscriptionContentModelMasterRequest struct {
 	Metadata            *string                           `json:"metadata"`
 	ScheduleNamespaceId *string                           `json:"scheduleNamespaceId"`
 	TriggerName         *string                           `json:"triggerName"`
+	ReallocateSpanDays  *int32                            `json:"reallocateSpanDays"`
 	AppleAppStore       *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay          *GooglePlaySubscriptionContent    `json:"googlePlay"`
 	DryRun              *bool                             `json:"dryRun"`
@@ -6050,6 +6919,9 @@ func (p *CreateStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []
 				}
 			}
 		}
+		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
+		}
 		if v, ok := d["appleAppStore"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppleAppStore)
 		}
@@ -6113,6 +6985,13 @@ func NewCreateStoreSubscriptionContentModelMasterRequestFromDict(data map[string
 			}
 			return core.CastString(data["triggerName"])
 		}(),
+		ReallocateSpanDays: func() *int32 {
+			v, ok := data["reallocateSpanDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["reallocateSpanDays"])
+		}(),
 		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
 			v, ok := data["appleAppStore"]
 			if !ok || v == nil {
@@ -6138,6 +7017,7 @@ func (p CreateStoreSubscriptionContentModelMasterRequest) ToDict() map[string]in
 		"metadata":            p.Metadata,
 		"scheduleNamespaceId": p.ScheduleNamespaceId,
 		"triggerName":         p.TriggerName,
+		"reallocateSpanDays":  p.ReallocateSpanDays,
 		"appleAppStore": func() map[string]interface{} {
 			if p.AppleAppStore == nil {
 				return nil
@@ -6283,6 +7163,7 @@ type UpdateStoreSubscriptionContentModelMasterRequest struct {
 	Metadata            *string                           `json:"metadata"`
 	ScheduleNamespaceId *string                           `json:"scheduleNamespaceId"`
 	TriggerName         *string                           `json:"triggerName"`
+	ReallocateSpanDays  *int32                            `json:"reallocateSpanDays"`
 	AppleAppStore       *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay          *GooglePlaySubscriptionContent    `json:"googlePlay"`
 	DryRun              *bool                             `json:"dryRun"`
@@ -6448,6 +7329,9 @@ func (p *UpdateStoreSubscriptionContentModelMasterRequest) UnmarshalJSON(data []
 				}
 			}
 		}
+		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
+		}
 		if v, ok := d["appleAppStore"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppleAppStore)
 		}
@@ -6511,6 +7395,13 @@ func NewUpdateStoreSubscriptionContentModelMasterRequestFromDict(data map[string
 			}
 			return core.CastString(data["triggerName"])
 		}(),
+		ReallocateSpanDays: func() *int32 {
+			v, ok := data["reallocateSpanDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["reallocateSpanDays"])
+		}(),
 		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
 			v, ok := data["appleAppStore"]
 			if !ok || v == nil {
@@ -6536,6 +7427,7 @@ func (p UpdateStoreSubscriptionContentModelMasterRequest) ToDict() map[string]in
 		"metadata":            p.Metadata,
 		"scheduleNamespaceId": p.ScheduleNamespaceId,
 		"triggerName":         p.TriggerName,
+		"reallocateSpanDays":  p.ReallocateSpanDays,
 		"appleAppStore": func() map[string]interface{} {
 			if p.AppleAppStore == nil {
 				return nil
