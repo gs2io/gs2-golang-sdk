@@ -1047,6 +1047,7 @@ type SubscribeTransaction struct {
 	StatusDetail           *string `json:"statusDetail"`
 	ExpiresAt              *int64  `json:"expiresAt"`
 	LastAllocatedAt        *int64  `json:"lastAllocatedAt"`
+	LastTakeOverAt         *int64  `json:"lastTakeOverAt"`
 	CreatedAt              *int64  `json:"createdAt"`
 	UpdatedAt              *int64  `json:"updatedAt"`
 	Revision               *int64  `json:"revision"`
@@ -1218,6 +1219,9 @@ func (p *SubscribeTransaction) UnmarshalJSON(data []byte) error {
 		if v, ok := d["lastAllocatedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LastAllocatedAt)
 		}
+		if v, ok := d["lastTakeOverAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LastTakeOverAt)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -1295,6 +1299,13 @@ func NewSubscribeTransactionFromDict(data map[string]interface{}) SubscribeTrans
 			}
 			return core.CastInt64(data["lastAllocatedAt"])
 		}(),
+		LastTakeOverAt: func() *int64 {
+			v, ok := data["lastTakeOverAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lastTakeOverAt"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -1344,6 +1355,9 @@ func (p SubscribeTransaction) ToDict() map[string]interface{} {
 	}
 	if p.LastAllocatedAt != nil {
 		m["lastAllocatedAt"] = p.LastAllocatedAt
+	}
+	if p.LastTakeOverAt != nil {
+		m["lastTakeOverAt"] = p.LastTakeOverAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
