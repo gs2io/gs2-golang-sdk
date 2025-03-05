@@ -2079,6 +2079,8 @@ type StoreSubscriptionContentModel struct {
 	Metadata                        *string                           `json:"metadata"`
 	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
 	TriggerName                     *string                           `json:"triggerName"`
+	TriggerExtendMode               *string                           `json:"triggerExtendMode"`
+	RollupHour                      *int32                            `json:"rollupHour"`
 	ReallocateSpanDays              *int32                            `json:"reallocateSpanDays"`
 	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
@@ -2221,6 +2223,32 @@ func (p *StoreSubscriptionContentModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["triggerExtendMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerExtendMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerExtendMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerExtendMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerExtendMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerExtendMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerExtendMode)
+				}
+			}
+		}
+		if v, ok := d["rollupHour"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RollupHour)
+		}
 		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
 		}
@@ -2277,6 +2305,20 @@ func NewStoreSubscriptionContentModelFromDict(data map[string]interface{}) Store
 			}
 			return core.CastString(data["triggerName"])
 		}(),
+		TriggerExtendMode: func() *string {
+			v, ok := data["triggerExtendMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerExtendMode"])
+		}(),
+		RollupHour: func() *int32 {
+			v, ok := data["rollupHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rollupHour"])
+		}(),
 		ReallocateSpanDays: func() *int32 {
 			v, ok := data["reallocateSpanDays"]
 			if !ok || v == nil {
@@ -2317,6 +2359,12 @@ func (p StoreSubscriptionContentModel) ToDict() map[string]interface{} {
 	}
 	if p.TriggerName != nil {
 		m["triggerName"] = p.TriggerName
+	}
+	if p.TriggerExtendMode != nil {
+		m["triggerExtendMode"] = p.TriggerExtendMode
+	}
+	if p.RollupHour != nil {
+		m["rollupHour"] = p.RollupHour
 	}
 	if p.ReallocateSpanDays != nil {
 		m["reallocateSpanDays"] = p.ReallocateSpanDays
@@ -2368,6 +2416,8 @@ type StoreSubscriptionContentModelMaster struct {
 	ScheduleNamespaceId             *string                           `json:"scheduleNamespaceId"`
 	TriggerName                     *string                           `json:"triggerName"`
 	ReallocateSpanDays              *int32                            `json:"reallocateSpanDays"`
+	TriggerExtendMode               *string                           `json:"triggerExtendMode"`
+	RollupHour                      *int32                            `json:"rollupHour"`
 	AppleAppStore                   *AppleAppStoreSubscriptionContent `json:"appleAppStore"`
 	GooglePlay                      *GooglePlaySubscriptionContent    `json:"googlePlay"`
 	CreatedAt                       *int64                            `json:"createdAt"`
@@ -2538,6 +2588,32 @@ func (p *StoreSubscriptionContentModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["reallocateSpanDays"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReallocateSpanDays)
 		}
+		if v, ok := d["triggerExtendMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerExtendMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerExtendMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerExtendMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerExtendMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerExtendMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerExtendMode)
+				}
+			}
+		}
+		if v, ok := d["rollupHour"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RollupHour)
+		}
 		if v, ok := d["appleAppStore"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppleAppStore)
 		}
@@ -2614,6 +2690,20 @@ func NewStoreSubscriptionContentModelMasterFromDict(data map[string]interface{})
 			}
 			return core.CastInt32(data["reallocateSpanDays"])
 		}(),
+		TriggerExtendMode: func() *string {
+			v, ok := data["triggerExtendMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerExtendMode"])
+		}(),
+		RollupHour: func() *int32 {
+			v, ok := data["rollupHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rollupHour"])
+		}(),
 		AppleAppStore: func() *AppleAppStoreSubscriptionContent {
 			v, ok := data["appleAppStore"]
 			if !ok || v == nil {
@@ -2674,6 +2764,12 @@ func (p StoreSubscriptionContentModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.ReallocateSpanDays != nil {
 		m["reallocateSpanDays"] = p.ReallocateSpanDays
+	}
+	if p.TriggerExtendMode != nil {
+		m["triggerExtendMode"] = p.TriggerExtendMode
+	}
+	if p.RollupHour != nil {
+		m["rollupHour"] = p.RollupHour
 	}
 	if p.AppleAppStore != nil {
 		m["appleAppStore"] = func() map[string]interface{} {
@@ -3347,9 +3443,8 @@ func CastAppleAppStoreSettingsFromDict(data []AppleAppStoreSetting) []interface{
 }
 
 type GooglePlaySetting struct {
-	PackageName     *string `json:"packageName"`
-	PublicKey       *string `json:"publicKey"`
-	CredentialsJSON *string `json:"credentialsJSON"`
+	PackageName *string `json:"packageName"`
+	PublicKey   *string `json:"publicKey"`
 }
 
 func (p *GooglePlaySetting) UnmarshalJSON(data []byte) error {
@@ -3420,29 +3515,6 @@ func (p *GooglePlaySetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["credentialsJSON"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.CredentialsJSON = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.CredentialsJSON = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.CredentialsJSON = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.CredentialsJSON = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.CredentialsJSON = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.CredentialsJSON)
-				}
-			}
-		}
 	}
 	return nil
 }
@@ -3469,13 +3541,6 @@ func NewGooglePlaySettingFromDict(data map[string]interface{}) GooglePlaySetting
 			}
 			return core.CastString(data["publicKey"])
 		}(),
-		CredentialsJSON: func() *string {
-			v, ok := data["credentialsJSON"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["credentialsJSON"])
-		}(),
 	}
 }
 
@@ -3486,9 +3551,6 @@ func (p GooglePlaySetting) ToDict() map[string]interface{} {
 	}
 	if p.PublicKey != nil {
 		m["publicKey"] = p.PublicKey
-	}
-	if p.CredentialsJSON != nil {
-		m["credentialsJSON"] = p.CredentialsJSON
 	}
 	return m
 }

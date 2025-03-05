@@ -4661,6 +4661,12 @@ func (p Gs2Money2RestClient) CreateStoreSubscriptionContentModelMasterAsync(
 	if request.TriggerName != nil && *request.TriggerName != "" {
 		bodies["triggerName"] = *request.TriggerName
 	}
+	if request.TriggerExtendMode != nil && *request.TriggerExtendMode != "" {
+		bodies["triggerExtendMode"] = *request.TriggerExtendMode
+	}
+	if request.RollupHour != nil {
+		bodies["rollupHour"] = *request.RollupHour
+	}
 	if request.ReallocateSpanDays != nil {
 		bodies["reallocateSpanDays"] = *request.ReallocateSpanDays
 	}
@@ -4873,6 +4879,12 @@ func (p Gs2Money2RestClient) UpdateStoreSubscriptionContentModelMasterAsync(
 	}
 	if request.TriggerName != nil && *request.TriggerName != "" {
 		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.TriggerExtendMode != nil && *request.TriggerExtendMode != "" {
+		bodies["triggerExtendMode"] = *request.TriggerExtendMode
+	}
+	if request.RollupHour != nil {
+		bodies["rollupHour"] = *request.RollupHour
 	}
 	if request.ReallocateSpanDays != nil {
 		bodies["reallocateSpanDays"] = *request.ReallocateSpanDays
