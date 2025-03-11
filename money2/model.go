@@ -3242,10 +3242,11 @@ func CastPlatformSettingsFromDict(data []PlatformSetting) []interface{} {
 }
 
 type AppleAppStoreSetting struct {
-	BundleId      *string `json:"bundleId"`
-	IssuerId      *string `json:"issuerId"`
-	KeyId         *string `json:"keyId"`
-	PrivateKeyPem *string `json:"privateKeyPem"`
+	BundleId        *string `json:"bundleId"`
+	SharedSecretKey *string `json:"sharedSecretKey"`
+	IssuerId        *string `json:"issuerId"`
+	KeyId           *string `json:"keyId"`
+	PrivateKeyPem   *string `json:"privateKeyPem"`
 }
 
 func (p *AppleAppStoreSetting) UnmarshalJSON(data []byte) error {
@@ -3290,6 +3291,29 @@ func (p *AppleAppStoreSetting) UnmarshalJSON(data []byte) error {
 					p.BundleId = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.BundleId)
+				}
+			}
+		}
+		if v, ok := d["sharedSecretKey"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SharedSecretKey = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SharedSecretKey = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SharedSecretKey = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SharedSecretKey = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SharedSecretKey = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SharedSecretKey)
 				}
 			}
 		}
@@ -3381,6 +3405,13 @@ func NewAppleAppStoreSettingFromDict(data map[string]interface{}) AppleAppStoreS
 			}
 			return core.CastString(data["bundleId"])
 		}(),
+		SharedSecretKey: func() *string {
+			v, ok := data["sharedSecretKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sharedSecretKey"])
+		}(),
 		IssuerId: func() *string {
 			v, ok := data["issuerId"]
 			if !ok || v == nil {
@@ -3409,6 +3440,9 @@ func (p AppleAppStoreSetting) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
 	if p.BundleId != nil {
 		m["bundleId"] = p.BundleId
+	}
+	if p.SharedSecretKey != nil {
+		m["sharedSecretKey"] = p.SharedSecretKey
 	}
 	if p.IssuerId != nil {
 		m["issuerId"] = p.IssuerId
