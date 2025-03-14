@@ -1587,6 +1587,248 @@ func CastSubscriptionStatusesFromDict(data []SubscriptionStatus) []interface{} {
 	return v
 }
 
+type RefundHistory struct {
+	RefundHistoryId *string      `json:"refundHistoryId"`
+	TransactionId   *string      `json:"transactionId"`
+	Year            *int32       `json:"year"`
+	Month           *int32       `json:"month"`
+	Day             *int32       `json:"day"`
+	UserId          *string      `json:"userId"`
+	Detail          *RefundEvent `json:"detail"`
+	CreatedAt       *int64       `json:"createdAt"`
+}
+
+func (p *RefundHistory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RefundHistory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RefundHistory{}
+	} else {
+		*p = RefundHistory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["refundHistoryId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RefundHistoryId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RefundHistoryId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RefundHistoryId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RefundHistoryId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RefundHistoryId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RefundHistoryId)
+				}
+			}
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["detail"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Detail)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+	}
+	return nil
+}
+
+func NewRefundHistoryFromJson(data string) RefundHistory {
+	req := RefundHistory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewRefundHistoryFromDict(data map[string]interface{}) RefundHistory {
+	return RefundHistory{
+		RefundHistoryId: func() *string {
+			v, ok := data["refundHistoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["refundHistoryId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Detail: func() *RefundEvent {
+			v, ok := data["detail"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRefundEventFromDict(core.CastMap(data["detail"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+	}
+}
+
+func (p RefundHistory) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.RefundHistoryId != nil {
+		m["refundHistoryId"] = p.RefundHistoryId
+	}
+	if p.TransactionId != nil {
+		m["transactionId"] = p.TransactionId
+	}
+	if p.Year != nil {
+		m["year"] = p.Year
+	}
+	if p.Month != nil {
+		m["month"] = p.Month
+	}
+	if p.Day != nil {
+		m["day"] = p.Day
+	}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.Detail != nil {
+		m["detail"] = func() map[string]interface{} {
+			if p.Detail == nil {
+				return nil
+			}
+			return p.Detail.ToDict()
+		}()
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
+	}
+	return m
+}
+
+func (p RefundHistory) Pointer() *RefundHistory {
+	return &p
+}
+
+func CastRefundHistories(data []interface{}) []RefundHistory {
+	v := make([]RefundHistory, 0)
+	for _, d := range data {
+		v = append(v, NewRefundHistoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRefundHistoriesFromDict(data []RefundHistory) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type StoreContentModel struct {
 	StoreContentModelId *string               `json:"storeContentModelId"`
 	Name                *string               `json:"name"`

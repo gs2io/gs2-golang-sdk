@@ -3618,6 +3618,317 @@ func (p Gs2Money2RestClient) TakeoverSubscriptionStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeRefundHistoriesByUserIdAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeRefundHistoriesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeRefundHistoriesByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeRefundHistoriesByUserIdAsync(
+	request *DescribeRefundHistoriesByUserIdRequest,
+	callback chan<- DescribeRefundHistoriesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/refund/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeRefundHistoriesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeRefundHistoriesByUserId(
+	request *DescribeRefundHistoriesByUserIdRequest,
+) (*DescribeRefundHistoriesByUserIdResult, error) {
+	callback := make(chan DescribeRefundHistoriesByUserIdAsyncResult, 1)
+	go p.DescribeRefundHistoriesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeRefundHistoriesByDateAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeRefundHistoriesByDateAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeRefundHistoriesByDateAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeRefundHistoriesByDateResult
+	if asyncResult.Err != nil {
+		callback <- DescribeRefundHistoriesByDateAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRefundHistoriesByDateAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeRefundHistoriesByDateAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeRefundHistoriesByDateAsync(
+	request *DescribeRefundHistoriesByDateRequest,
+	callback chan<- DescribeRefundHistoriesByDateAsyncResult,
+) {
+	path := "/{namespaceName}/refund/date/{year}/{month}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+	if request.Month != nil {
+		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+	} else {
+		path = strings.ReplaceAll(path, "{month}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Day != nil {
+		queryStrings["day"] = core.ToString(*request.Day)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeRefundHistoriesByDateAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeRefundHistoriesByDate(
+	request *DescribeRefundHistoriesByDateRequest,
+) (*DescribeRefundHistoriesByDateResult, error) {
+	callback := make(chan DescribeRefundHistoriesByDateAsyncResult, 1)
+	go p.DescribeRefundHistoriesByDateAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getRefundHistoryAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetRefundHistoryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetRefundHistoryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetRefundHistoryResult
+	if asyncResult.Err != nil {
+		callback <- GetRefundHistoryAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRefundHistoryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetRefundHistoryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetRefundHistoryAsync(
+	request *GetRefundHistoryRequest,
+	callback chan<- GetRefundHistoryAsyncResult,
+) {
+	path := "/{namespaceName}/refund/{transactionId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+	} else {
+		path = strings.ReplaceAll(path, "{transactionId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getRefundHistoryAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetRefundHistory(
+	request *GetRefundHistoryRequest,
+) (*GetRefundHistoryResult, error) {
+	callback := make(chan GetRefundHistoryAsyncResult, 1)
+	go p.GetRefundHistoryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeStoreContentModelsAsyncHandler(
 	client Gs2Money2RestClient,
 	job *core.NetworkJob,

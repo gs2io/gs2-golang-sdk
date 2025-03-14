@@ -775,12 +775,13 @@ func CastEventMastersFromDict(data []EventMaster) []interface{} {
 }
 
 type Trigger struct {
-	TriggerId *string `json:"triggerId"`
-	Name      *string `json:"name"`
-	UserId    *string `json:"userId"`
-	CreatedAt *int64  `json:"createdAt"`
-	ExpiresAt *int64  `json:"expiresAt"`
-	Revision  *int64  `json:"revision"`
+	TriggerId   *string `json:"triggerId"`
+	Name        *string `json:"name"`
+	UserId      *string `json:"userId"`
+	TriggeredAt *int64  `json:"triggeredAt"`
+	ExpiresAt   *int64  `json:"expiresAt"`
+	CreatedAt   *int64  `json:"createdAt"`
+	Revision    *int64  `json:"revision"`
 }
 
 func (p *Trigger) UnmarshalJSON(data []byte) error {
@@ -874,11 +875,14 @@ func (p *Trigger) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
+		if v, ok := d["triggeredAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TriggeredAt)
 		}
 		if v, ok := d["expiresAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExpiresAt)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
 		if v, ok := d["revision"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Revision)
@@ -916,12 +920,12 @@ func NewTriggerFromDict(data map[string]interface{}) Trigger {
 			}
 			return core.CastString(data["userId"])
 		}(),
-		CreatedAt: func() *int64 {
-			v, ok := data["createdAt"]
+		TriggeredAt: func() *int64 {
+			v, ok := data["triggeredAt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastInt64(data["createdAt"])
+			return core.CastInt64(data["triggeredAt"])
 		}(),
 		ExpiresAt: func() *int64 {
 			v, ok := data["expiresAt"]
@@ -929,6 +933,13 @@ func NewTriggerFromDict(data map[string]interface{}) Trigger {
 				return nil
 			}
 			return core.CastInt64(data["expiresAt"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
 		}(),
 		Revision: func() *int64 {
 			v, ok := data["revision"]
@@ -951,11 +962,14 @@ func (p Trigger) ToDict() map[string]interface{} {
 	if p.UserId != nil {
 		m["userId"] = p.UserId
 	}
-	if p.CreatedAt != nil {
-		m["createdAt"] = p.CreatedAt
+	if p.TriggeredAt != nil {
+		m["triggeredAt"] = p.TriggeredAt
 	}
 	if p.ExpiresAt != nil {
 		m["expiresAt"] = p.ExpiresAt
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
 	}
 	if p.Revision != nil {
 		m["revision"] = p.Revision

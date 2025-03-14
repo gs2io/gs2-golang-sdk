@@ -1975,6 +1975,184 @@ func (p TakeoverSubscriptionStatusByUserIdResult) Pointer() *TakeoverSubscriptio
 	return &p
 }
 
+type DescribeRefundHistoriesByUserIdResult struct {
+	Items         []RefundHistory      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeRefundHistoriesByUserIdAsyncResult struct {
+	result *DescribeRefundHistoriesByUserIdResult
+	err    error
+}
+
+func NewDescribeRefundHistoriesByUserIdResultFromJson(data string) DescribeRefundHistoriesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRefundHistoriesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeRefundHistoriesByUserIdResultFromDict(data map[string]interface{}) DescribeRefundHistoriesByUserIdResult {
+	return DescribeRefundHistoriesByUserIdResult{
+		Items: func() []RefundHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRefundHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeRefundHistoriesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastRefundHistoriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeRefundHistoriesByUserIdResult) Pointer() *DescribeRefundHistoriesByUserIdResult {
+	return &p
+}
+
+type DescribeRefundHistoriesByDateResult struct {
+	Items         []RefundHistory      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeRefundHistoriesByDateAsyncResult struct {
+	result *DescribeRefundHistoriesByDateResult
+	err    error
+}
+
+func NewDescribeRefundHistoriesByDateResultFromJson(data string) DescribeRefundHistoriesByDateResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeRefundHistoriesByDateResultFromDict(dict)
+}
+
+func NewDescribeRefundHistoriesByDateResultFromDict(data map[string]interface{}) DescribeRefundHistoriesByDateResult {
+	return DescribeRefundHistoriesByDateResult{
+		Items: func() []RefundHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRefundHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeRefundHistoriesByDateResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastRefundHistoriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeRefundHistoriesByDateResult) Pointer() *DescribeRefundHistoriesByDateResult {
+	return &p
+}
+
+type GetRefundHistoryResult struct {
+	Item     *RefundHistory       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetRefundHistoryAsyncResult struct {
+	result *GetRefundHistoryResult
+	err    error
+}
+
+func NewGetRefundHistoryResultFromJson(data string) GetRefundHistoryResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetRefundHistoryResultFromDict(dict)
+}
+
+func NewGetRefundHistoryResultFromDict(data map[string]interface{}) GetRefundHistoryResult {
+	return GetRefundHistoryResult{
+		Item: func() *RefundHistory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRefundHistoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetRefundHistoryResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetRefundHistoryResult) Pointer() *GetRefundHistoryResult {
+	return &p
+}
+
 type DescribeStoreContentModelsResult struct {
 	Items    []StoreContentModel  `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`

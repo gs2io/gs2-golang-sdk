@@ -3505,6 +3505,300 @@ func (p Gs2Money2WebSocketClient) TakeoverSubscriptionStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2Money2WebSocketClient) describeRefundHistoriesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeRefundHistoriesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeRefundHistoriesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeRefundHistoriesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeRefundHistoriesByUserIdAsync(
+	request *DescribeRefundHistoriesByUserIdRequest,
+	callback chan<- DescribeRefundHistoriesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "refundHistory",
+			"function":    "describeRefundHistoriesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeRefundHistoriesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeRefundHistoriesByUserId(
+	request *DescribeRefundHistoriesByUserIdRequest,
+) (*DescribeRefundHistoriesByUserIdResult, error) {
+	callback := make(chan DescribeRefundHistoriesByUserIdAsyncResult, 1)
+	go p.DescribeRefundHistoriesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeRefundHistoriesByDateAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeRefundHistoriesByDateAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeRefundHistoriesByDateAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeRefundHistoriesByDateResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRefundHistoriesByDateAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeRefundHistoriesByDateAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeRefundHistoriesByDateAsync(
+	request *DescribeRefundHistoriesByDateRequest,
+	callback chan<- DescribeRefundHistoriesByDateAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "refundHistory",
+			"function":    "describeRefundHistoriesByDate",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Year != nil {
+		bodies["year"] = *request.Year
+	}
+	if request.Month != nil {
+		bodies["month"] = *request.Month
+	}
+	if request.Day != nil {
+		bodies["day"] = *request.Day
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.describeRefundHistoriesByDateAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeRefundHistoriesByDate(
+	request *DescribeRefundHistoriesByDateRequest,
+) (*DescribeRefundHistoriesByDateResult, error) {
+	callback := make(chan DescribeRefundHistoriesByDateAsyncResult, 1)
+	go p.DescribeRefundHistoriesByDateAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getRefundHistoryAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetRefundHistoryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetRefundHistoryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetRefundHistoryResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRefundHistoryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetRefundHistoryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetRefundHistoryAsync(
+	request *GetRefundHistoryRequest,
+	callback chan<- GetRefundHistoryAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "refundHistory",
+			"function":    "getRefundHistory",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		bodies["transactionId"] = *request.TransactionId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getRefundHistoryAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetRefundHistory(
+	request *GetRefundHistoryRequest,
+) (*GetRefundHistoryResult, error) {
+	callback := make(chan GetRefundHistoryAsyncResult, 1)
+	go p.GetRefundHistoryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2Money2WebSocketClient) describeStoreContentModelsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeStoreContentModelsAsyncResult,
