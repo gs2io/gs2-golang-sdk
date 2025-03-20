@@ -1897,6 +1897,9 @@ func (p Gs2AccountWebSocketClient) GetAccountAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.IncludeLastAuthenticatedAt != nil {
+		bodies["includeLastAuthenticatedAt"] = *request.IncludeLastAuthenticatedAt
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}

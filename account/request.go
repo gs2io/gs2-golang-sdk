@@ -2639,11 +2639,12 @@ func (p RemoveBanRequest) Pointer() *RemoveBanRequest {
 }
 
 type GetAccountRequest struct {
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	UserId          *string `json:"userId"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack               *string `json:"contextStack"`
+	NamespaceName              *string `json:"namespaceName"`
+	UserId                     *string `json:"userId"`
+	IncludeLastAuthenticatedAt *bool   `json:"includeLastAuthenticatedAt"`
+	TimeOffsetToken            *string `json:"timeOffsetToken"`
+	DryRun                     *bool   `json:"dryRun"`
 }
 
 func (p *GetAccountRequest) UnmarshalJSON(data []byte) error {
@@ -2714,6 +2715,9 @@ func (p *GetAccountRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["includeLastAuthenticatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncludeLastAuthenticatedAt)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2766,6 +2770,13 @@ func NewGetAccountRequestFromDict(data map[string]interface{}) GetAccountRequest
 			}
 			return core.CastString(data["userId"])
 		}(),
+		IncludeLastAuthenticatedAt: func() *bool {
+			v, ok := data["includeLastAuthenticatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["includeLastAuthenticatedAt"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -2778,9 +2789,10 @@ func NewGetAccountRequestFromDict(data map[string]interface{}) GetAccountRequest
 
 func (p GetAccountRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"timeOffsetToken": p.TimeOffsetToken,
+		"namespaceName":              p.NamespaceName,
+		"userId":                     p.UserId,
+		"includeLastAuthenticatedAt": p.IncludeLastAuthenticatedAt,
+		"timeOffsetToken":            p.TimeOffsetToken,
 	}
 }
 

@@ -1962,6 +1962,9 @@ func (p Gs2AccountRestClient) GetAccountAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.IncludeLastAuthenticatedAt != nil {
+		queryStrings["includeLastAuthenticatedAt"] = core.ToString(*request.IncludeLastAuthenticatedAt)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}

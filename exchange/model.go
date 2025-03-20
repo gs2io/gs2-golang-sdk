@@ -1930,6 +1930,7 @@ type Await struct {
 	Config       []Config `json:"config"`
 	AcquirableAt *int64   `json:"acquirableAt"`
 	ExchangedAt  *int64   `json:"exchangedAt"`
+	CreatedAt    *int64   `json:"createdAt"`
 	Revision     *int64   `json:"revision"`
 }
 
@@ -2062,6 +2063,9 @@ func (p *Await) UnmarshalJSON(data []byte) error {
 		if v, ok := d["exchangedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExchangedAt)
 		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
 		if v, ok := d["revision"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Revision)
 		}
@@ -2139,6 +2143,13 @@ func NewAwaitFromDict(data map[string]interface{}) Await {
 			}
 			return core.CastInt64(data["exchangedAt"])
 		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 		Revision: func() *int64 {
 			v, ok := data["revision"]
 			if !ok || v == nil {
@@ -2179,6 +2190,9 @@ func (p Await) ToDict() map[string]interface{} {
 	}
 	if p.ExchangedAt != nil {
 		m["exchangedAt"] = p.ExchangedAt
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
 	}
 	if p.Revision != nil {
 		m["revision"] = p.Revision
