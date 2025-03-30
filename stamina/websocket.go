@@ -5820,6 +5820,1096 @@ func (p Gs2StaminaWebSocketClient) DeleteStaminaByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2StaminaWebSocketClient) verifyStaminaValueAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValueAsync(
+	request *VerifyStaminaValueRequest,
+	callback chan<- VerifyStaminaValueAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaValue",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaValueAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValue(
+	request *VerifyStaminaValueRequest,
+) (*VerifyStaminaValueResult, error) {
+	callback := make(chan VerifyStaminaValueAsyncResult, 1)
+	go p.VerifyStaminaValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaValueByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValueByUserIdAsync(
+	request *VerifyStaminaValueByUserIdRequest,
+	callback chan<- VerifyStaminaValueByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaValueByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaValueByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValueByUserId(
+	request *VerifyStaminaValueByUserIdRequest,
+) (*VerifyStaminaValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaMaxValueAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaMaxValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaMaxValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValueAsync(
+	request *VerifyStaminaMaxValueRequest,
+	callback chan<- VerifyStaminaMaxValueAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaMaxValue",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaMaxValueAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValue(
+	request *VerifyStaminaMaxValueRequest,
+) (*VerifyStaminaMaxValueResult, error) {
+	callback := make(chan VerifyStaminaMaxValueAsyncResult, 1)
+	go p.VerifyStaminaMaxValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaMaxValueByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaMaxValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValueByUserIdAsync(
+	request *VerifyStaminaMaxValueByUserIdRequest,
+	callback chan<- VerifyStaminaMaxValueByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaMaxValueByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaMaxValueByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValueByUserId(
+	request *VerifyStaminaMaxValueByUserIdRequest,
+) (*VerifyStaminaMaxValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaMaxValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaMaxValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverIntervalMinutesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutesAsync(
+	request *VerifyStaminaRecoverIntervalMinutesRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverIntervalMinutes",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverIntervalMinutesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutes(
+	request *VerifyStaminaRecoverIntervalMinutesRequest,
+) (*VerifyStaminaRecoverIntervalMinutesResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverIntervalMinutesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutesByUserIdAsync(
+	request *VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverIntervalMinutesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverIntervalMinutesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutesByUserId(
+	request *VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+) (*VerifyStaminaRecoverIntervalMinutesByUserIdResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverValueAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValueAsync(
+	request *VerifyStaminaRecoverValueRequest,
+	callback chan<- VerifyStaminaRecoverValueAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverValue",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverValueAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValue(
+	request *VerifyStaminaRecoverValueRequest,
+) (*VerifyStaminaRecoverValueResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverValueByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValueByUserIdAsync(
+	request *VerifyStaminaRecoverValueByUserIdRequest,
+	callback chan<- VerifyStaminaRecoverValueByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverValueByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverValueByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValueByUserId(
+	request *VerifyStaminaRecoverValueByUserIdRequest,
+) (*VerifyStaminaRecoverValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaOverflowValueAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaOverflowValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaOverflowValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValueAsync(
+	request *VerifyStaminaOverflowValueRequest,
+	callback chan<- VerifyStaminaOverflowValueAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaOverflowValue",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaOverflowValueAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValue(
+	request *VerifyStaminaOverflowValueRequest,
+) (*VerifyStaminaOverflowValueResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaOverflowValueByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaOverflowValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValueByUserIdAsync(
+	request *VerifyStaminaOverflowValueByUserIdRequest,
+	callback chan<- VerifyStaminaOverflowValueByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaOverflowValueByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaOverflowValueByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValueByUserId(
+	request *VerifyStaminaOverflowValueByUserIdRequest,
+) (*VerifyStaminaOverflowValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2StaminaWebSocketClient) recoverStaminaByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- RecoverStaminaByStampSheetAsyncResult,
@@ -6450,6 +7540,461 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaByStampTask(
 ) (*ConsumeStaminaByStampTaskResult, error) {
 	callback := make(chan ConsumeStaminaByStampTaskAsyncResult, 1)
 	go p.ConsumeStaminaByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaValueByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValueByStampTaskAsync(
+	request *VerifyStaminaValueByStampTaskRequest,
+	callback chan<- VerifyStaminaValueByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaValueByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaValueByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaValueByStampTask(
+	request *VerifyStaminaValueByStampTaskRequest,
+) (*VerifyStaminaValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaMaxValueByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaMaxValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValueByStampTaskAsync(
+	request *VerifyStaminaMaxValueByStampTaskRequest,
+	callback chan<- VerifyStaminaMaxValueByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaMaxValueByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaMaxValueByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaMaxValueByStampTask(
+	request *VerifyStaminaMaxValueByStampTaskRequest,
+) (*VerifyStaminaMaxValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaMaxValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaMaxValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverIntervalMinutesByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutesByStampTaskAsync(
+	request *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverIntervalMinutesByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverIntervalMinutesByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverIntervalMinutesByStampTask(
+	request *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+) (*VerifyStaminaRecoverIntervalMinutesByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaRecoverValueByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaRecoverValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValueByStampTaskAsync(
+	request *VerifyStaminaRecoverValueByStampTaskRequest,
+	callback chan<- VerifyStaminaRecoverValueByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaRecoverValueByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaRecoverValueByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaRecoverValueByStampTask(
+	request *VerifyStaminaRecoverValueByStampTaskRequest,
+) (*VerifyStaminaRecoverValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StaminaWebSocketClient) verifyStaminaOverflowValueByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyStaminaOverflowValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValueByStampTaskAsync(
+	request *VerifyStaminaOverflowValueByStampTaskRequest,
+	callback chan<- VerifyStaminaOverflowValueByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "verifyStaminaOverflowValueByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyStaminaOverflowValueByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) VerifyStaminaOverflowValueByStampTask(
+	request *VerifyStaminaOverflowValueByStampTaskRequest,
+) (*VerifyStaminaOverflowValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueByStampTaskAsync(
 		request,
 		callback,
 	)

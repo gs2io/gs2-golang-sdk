@@ -9576,6 +9576,2236 @@ func (p DeleteStaminaByUserIdRequest) Pointer() *DeleteStaminaByUserIdRequest {
 	return &p
 }
 
+type VerifyStaminaValueRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaValueRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaValueRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaValueRequest{}
+	} else {
+		*p = VerifyStaminaValueRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaValueRequestFromJson(data string) (VerifyStaminaValueRequest, error) {
+	req := VerifyStaminaValueRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaValueRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaValueRequestFromDict(data map[string]interface{}) VerifyStaminaValueRequest {
+	return VerifyStaminaValueRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyStaminaValueRequest) Pointer() *VerifyStaminaValueRequest {
+	return &p
+}
+
+type VerifyStaminaValueByUserIdRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaValueByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaValueByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaValueByUserIdRequest{}
+	} else {
+		*p = VerifyStaminaValueByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaValueByUserIdRequestFromJson(data string) (VerifyStaminaValueByUserIdRequest, error) {
+	req := VerifyStaminaValueByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaValueByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaValueByUserIdRequestFromDict(data map[string]interface{}) VerifyStaminaValueByUserIdRequest {
+	return VerifyStaminaValueByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyStaminaValueByUserIdRequest) Pointer() *VerifyStaminaValueByUserIdRequest {
+	return &p
+}
+
+type VerifyStaminaMaxValueRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaMaxValueRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaMaxValueRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaMaxValueRequest{}
+	} else {
+		*p = VerifyStaminaMaxValueRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaMaxValueRequestFromJson(data string) (VerifyStaminaMaxValueRequest, error) {
+	req := VerifyStaminaMaxValueRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaMaxValueRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaMaxValueRequestFromDict(data map[string]interface{}) VerifyStaminaMaxValueRequest {
+	return VerifyStaminaMaxValueRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyStaminaMaxValueRequest) Pointer() *VerifyStaminaMaxValueRequest {
+	return &p
+}
+
+type VerifyStaminaMaxValueByUserIdRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaMaxValueByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaMaxValueByUserIdRequest{}
+	} else {
+		*p = VerifyStaminaMaxValueByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaMaxValueByUserIdRequestFromJson(data string) (VerifyStaminaMaxValueByUserIdRequest, error) {
+	req := VerifyStaminaMaxValueByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaMaxValueByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaMaxValueByUserIdRequestFromDict(data map[string]interface{}) VerifyStaminaMaxValueByUserIdRequest {
+	return VerifyStaminaMaxValueByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyStaminaMaxValueByUserIdRequest) Pointer() *VerifyStaminaMaxValueByUserIdRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverIntervalMinutesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverIntervalMinutesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverIntervalMinutesRequest{}
+	} else {
+		*p = VerifyStaminaRecoverIntervalMinutesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesRequestFromJson(data string) (VerifyStaminaRecoverIntervalMinutesRequest, error) {
+	req := VerifyStaminaRecoverIntervalMinutesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverIntervalMinutesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesRequest {
+	return VerifyStaminaRecoverIntervalMinutesRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesRequest) Pointer() *VerifyStaminaRecoverIntervalMinutesRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesByUserIdRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverIntervalMinutesByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverIntervalMinutesByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverIntervalMinutesByUserIdRequest{}
+	} else {
+		*p = VerifyStaminaRecoverIntervalMinutesByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByUserIdRequestFromJson(data string) (VerifyStaminaRecoverIntervalMinutesByUserIdRequest, error) {
+	req := VerifyStaminaRecoverIntervalMinutesByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverIntervalMinutesByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByUserIdRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesByUserIdRequest {
+	return VerifyStaminaRecoverIntervalMinutesByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByUserIdRequest) Pointer() *VerifyStaminaRecoverIntervalMinutesByUserIdRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverValueRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverValueRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverValueRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverValueRequest{}
+	} else {
+		*p = VerifyStaminaRecoverValueRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverValueRequestFromJson(data string) (VerifyStaminaRecoverValueRequest, error) {
+	req := VerifyStaminaRecoverValueRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverValueRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverValueRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverValueRequest {
+	return VerifyStaminaRecoverValueRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyStaminaRecoverValueRequest) Pointer() *VerifyStaminaRecoverValueRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverValueByUserIdRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverValueByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverValueByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverValueByUserIdRequest{}
+	} else {
+		*p = VerifyStaminaRecoverValueByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverValueByUserIdRequestFromJson(data string) (VerifyStaminaRecoverValueByUserIdRequest, error) {
+	req := VerifyStaminaRecoverValueByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverValueByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverValueByUserIdRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverValueByUserIdRequest {
+	return VerifyStaminaRecoverValueByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyStaminaRecoverValueByUserIdRequest) Pointer() *VerifyStaminaRecoverValueByUserIdRequest {
+	return &p
+}
+
+type VerifyStaminaOverflowValueRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaOverflowValueRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaOverflowValueRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaOverflowValueRequest{}
+	} else {
+		*p = VerifyStaminaOverflowValueRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaOverflowValueRequestFromJson(data string) (VerifyStaminaOverflowValueRequest, error) {
+	req := VerifyStaminaOverflowValueRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaOverflowValueRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaOverflowValueRequestFromDict(data map[string]interface{}) VerifyStaminaOverflowValueRequest {
+	return VerifyStaminaOverflowValueRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyStaminaOverflowValueRequest) Pointer() *VerifyStaminaOverflowValueRequest {
+	return &p
+}
+
+type VerifyStaminaOverflowValueByUserIdRequest struct {
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	StaminaName                     *string `json:"staminaName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaOverflowValueByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaOverflowValueByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaOverflowValueByUserIdRequest{}
+	} else {
+		*p = VerifyStaminaOverflowValueByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaOverflowValueByUserIdRequestFromJson(data string) (VerifyStaminaOverflowValueByUserIdRequest, error) {
+	req := VerifyStaminaOverflowValueByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaOverflowValueByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaOverflowValueByUserIdRequestFromDict(data map[string]interface{}) VerifyStaminaOverflowValueByUserIdRequest {
+	return VerifyStaminaOverflowValueByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"staminaName":                     p.StaminaName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyStaminaOverflowValueByUserIdRequest) Pointer() *VerifyStaminaOverflowValueByUserIdRequest {
+	return &p
+}
+
 type RecoverStaminaByStampSheetRequest struct {
 	ContextStack *string `json:"contextStack"`
 	StampSheet   *string `json:"stampSheet"`
@@ -10399,5 +12629,595 @@ func (p ConsumeStaminaByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeStaminaByStampTaskRequest) Pointer() *ConsumeStaminaByStampTaskRequest {
+	return &p
+}
+
+type VerifyStaminaValueByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaValueByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaValueByStampTaskRequest{}
+	} else {
+		*p = VerifyStaminaValueByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaValueByStampTaskRequestFromJson(data string) (VerifyStaminaValueByStampTaskRequest, error) {
+	req := VerifyStaminaValueByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaValueByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaValueByStampTaskRequestFromDict(data map[string]interface{}) VerifyStaminaValueByStampTaskRequest {
+	return VerifyStaminaValueByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyStaminaValueByStampTaskRequest) Pointer() *VerifyStaminaValueByStampTaskRequest {
+	return &p
+}
+
+type VerifyStaminaMaxValueByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaMaxValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaMaxValueByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaMaxValueByStampTaskRequest{}
+	} else {
+		*p = VerifyStaminaMaxValueByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaMaxValueByStampTaskRequestFromJson(data string) (VerifyStaminaMaxValueByStampTaskRequest, error) {
+	req := VerifyStaminaMaxValueByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaMaxValueByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaMaxValueByStampTaskRequestFromDict(data map[string]interface{}) VerifyStaminaMaxValueByStampTaskRequest {
+	return VerifyStaminaMaxValueByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyStaminaMaxValueByStampTaskRequest) Pointer() *VerifyStaminaMaxValueByStampTaskRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{}
+	} else {
+		*p = VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByStampTaskRequestFromJson(data string) (VerifyStaminaRecoverIntervalMinutesByStampTaskRequest, error) {
+	req := VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByStampTaskRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesByStampTaskRequest {
+	return VerifyStaminaRecoverIntervalMinutesByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByStampTaskRequest) Pointer() *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest {
+	return &p
+}
+
+type VerifyStaminaRecoverValueByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaRecoverValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaRecoverValueByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaRecoverValueByStampTaskRequest{}
+	} else {
+		*p = VerifyStaminaRecoverValueByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaRecoverValueByStampTaskRequestFromJson(data string) (VerifyStaminaRecoverValueByStampTaskRequest, error) {
+	req := VerifyStaminaRecoverValueByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaRecoverValueByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaRecoverValueByStampTaskRequestFromDict(data map[string]interface{}) VerifyStaminaRecoverValueByStampTaskRequest {
+	return VerifyStaminaRecoverValueByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyStaminaRecoverValueByStampTaskRequest) Pointer() *VerifyStaminaRecoverValueByStampTaskRequest {
+	return &p
+}
+
+type VerifyStaminaOverflowValueByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyStaminaOverflowValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyStaminaOverflowValueByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyStaminaOverflowValueByStampTaskRequest{}
+	} else {
+		*p = VerifyStaminaOverflowValueByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyStaminaOverflowValueByStampTaskRequestFromJson(data string) (VerifyStaminaOverflowValueByStampTaskRequest, error) {
+	req := VerifyStaminaOverflowValueByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyStaminaOverflowValueByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyStaminaOverflowValueByStampTaskRequestFromDict(data map[string]interface{}) VerifyStaminaOverflowValueByStampTaskRequest {
+	return VerifyStaminaOverflowValueByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyStaminaOverflowValueByStampTaskRequest) Pointer() *VerifyStaminaOverflowValueByStampTaskRequest {
 	return &p
 }

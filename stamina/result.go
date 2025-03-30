@@ -3621,6 +3621,426 @@ func (p DeleteStaminaByUserIdResult) Pointer() *DeleteStaminaByUserIdResult {
 	return &p
 }
 
+type VerifyStaminaValueResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaValueAsyncResult struct {
+	result *VerifyStaminaValueResult
+	err    error
+}
+
+func NewVerifyStaminaValueResultFromJson(data string) VerifyStaminaValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaValueResultFromDict(dict)
+}
+
+func NewVerifyStaminaValueResultFromDict(data map[string]interface{}) VerifyStaminaValueResult {
+	return VerifyStaminaValueResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueResult) Pointer() *VerifyStaminaValueResult {
+	return &p
+}
+
+type VerifyStaminaValueByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaValueByUserIdAsyncResult struct {
+	result *VerifyStaminaValueByUserIdResult
+	err    error
+}
+
+func NewVerifyStaminaValueByUserIdResultFromJson(data string) VerifyStaminaValueByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaValueByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStaminaValueByUserIdResultFromDict(data map[string]interface{}) VerifyStaminaValueByUserIdResult {
+	return VerifyStaminaValueByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByUserIdResult) Pointer() *VerifyStaminaValueByUserIdResult {
+	return &p
+}
+
+type VerifyStaminaMaxValueResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaMaxValueAsyncResult struct {
+	result *VerifyStaminaMaxValueResult
+	err    error
+}
+
+func NewVerifyStaminaMaxValueResultFromJson(data string) VerifyStaminaMaxValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaMaxValueResultFromDict(dict)
+}
+
+func NewVerifyStaminaMaxValueResultFromDict(data map[string]interface{}) VerifyStaminaMaxValueResult {
+	return VerifyStaminaMaxValueResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueResult) Pointer() *VerifyStaminaMaxValueResult {
+	return &p
+}
+
+type VerifyStaminaMaxValueByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaMaxValueByUserIdAsyncResult struct {
+	result *VerifyStaminaMaxValueByUserIdResult
+	err    error
+}
+
+func NewVerifyStaminaMaxValueByUserIdResultFromJson(data string) VerifyStaminaMaxValueByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaMaxValueByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStaminaMaxValueByUserIdResultFromDict(data map[string]interface{}) VerifyStaminaMaxValueByUserIdResult {
+	return VerifyStaminaMaxValueByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByUserIdResult) Pointer() *VerifyStaminaMaxValueByUserIdResult {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverIntervalMinutesAsyncResult struct {
+	result *VerifyStaminaRecoverIntervalMinutesResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesResultFromJson(data string) VerifyStaminaRecoverIntervalMinutesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverIntervalMinutesResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesResultFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesResult {
+	return VerifyStaminaRecoverIntervalMinutesResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesResult) Pointer() *VerifyStaminaRecoverIntervalMinutesResult {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult struct {
+	result *VerifyStaminaRecoverIntervalMinutesByUserIdResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByUserIdResultFromJson(data string) VerifyStaminaRecoverIntervalMinutesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverIntervalMinutesByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByUserIdResultFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesByUserIdResult {
+	return VerifyStaminaRecoverIntervalMinutesByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByUserIdResult) Pointer() *VerifyStaminaRecoverIntervalMinutesByUserIdResult {
+	return &p
+}
+
+type VerifyStaminaRecoverValueResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverValueAsyncResult struct {
+	result *VerifyStaminaRecoverValueResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverValueResultFromJson(data string) VerifyStaminaRecoverValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverValueResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverValueResultFromDict(data map[string]interface{}) VerifyStaminaRecoverValueResult {
+	return VerifyStaminaRecoverValueResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueResult) Pointer() *VerifyStaminaRecoverValueResult {
+	return &p
+}
+
+type VerifyStaminaRecoverValueByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverValueByUserIdAsyncResult struct {
+	result *VerifyStaminaRecoverValueByUserIdResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverValueByUserIdResultFromJson(data string) VerifyStaminaRecoverValueByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverValueByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverValueByUserIdResultFromDict(data map[string]interface{}) VerifyStaminaRecoverValueByUserIdResult {
+	return VerifyStaminaRecoverValueByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByUserIdResult) Pointer() *VerifyStaminaRecoverValueByUserIdResult {
+	return &p
+}
+
+type VerifyStaminaOverflowValueResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaOverflowValueAsyncResult struct {
+	result *VerifyStaminaOverflowValueResult
+	err    error
+}
+
+func NewVerifyStaminaOverflowValueResultFromJson(data string) VerifyStaminaOverflowValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaOverflowValueResultFromDict(dict)
+}
+
+func NewVerifyStaminaOverflowValueResultFromDict(data map[string]interface{}) VerifyStaminaOverflowValueResult {
+	return VerifyStaminaOverflowValueResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueResult) Pointer() *VerifyStaminaOverflowValueResult {
+	return &p
+}
+
+type VerifyStaminaOverflowValueByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaOverflowValueByUserIdAsyncResult struct {
+	result *VerifyStaminaOverflowValueByUserIdResult
+	err    error
+}
+
+func NewVerifyStaminaOverflowValueByUserIdResultFromJson(data string) VerifyStaminaOverflowValueByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaOverflowValueByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStaminaOverflowValueByUserIdResultFromDict(data map[string]interface{}) VerifyStaminaOverflowValueByUserIdResult {
+	return VerifyStaminaOverflowValueByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByUserIdResult) Pointer() *VerifyStaminaOverflowValueByUserIdResult {
+	return &p
+}
+
 type RecoverStaminaByStampSheetResult struct {
 	Item          *Stamina             `json:"item"`
 	StaminaModel  *StaminaModel        `json:"staminaModel"`
@@ -4177,5 +4597,260 @@ func (p ConsumeStaminaByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeStaminaByStampTaskResult) Pointer() *ConsumeStaminaByStampTaskResult {
+	return &p
+}
+
+type VerifyStaminaValueByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaValueByStampTaskAsyncResult struct {
+	result *VerifyStaminaValueByStampTaskResult
+	err    error
+}
+
+func NewVerifyStaminaValueByStampTaskResultFromJson(data string) VerifyStaminaValueByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaValueByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStaminaValueByStampTaskResultFromDict(data map[string]interface{}) VerifyStaminaValueByStampTaskResult {
+	return VerifyStaminaValueByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaValueByStampTaskResult) Pointer() *VerifyStaminaValueByStampTaskResult {
+	return &p
+}
+
+type VerifyStaminaMaxValueByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaMaxValueByStampTaskAsyncResult struct {
+	result *VerifyStaminaMaxValueByStampTaskResult
+	err    error
+}
+
+func NewVerifyStaminaMaxValueByStampTaskResultFromJson(data string) VerifyStaminaMaxValueByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaMaxValueByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStaminaMaxValueByStampTaskResultFromDict(data map[string]interface{}) VerifyStaminaMaxValueByStampTaskResult {
+	return VerifyStaminaMaxValueByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaMaxValueByStampTaskResult) Pointer() *VerifyStaminaMaxValueByStampTaskResult {
+	return &p
+}
+
+type VerifyStaminaRecoverIntervalMinutesByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult struct {
+	result *VerifyStaminaRecoverIntervalMinutesByStampTaskResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByStampTaskResultFromJson(data string) VerifyStaminaRecoverIntervalMinutesByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverIntervalMinutesByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverIntervalMinutesByStampTaskResultFromDict(data map[string]interface{}) VerifyStaminaRecoverIntervalMinutesByStampTaskResult {
+	return VerifyStaminaRecoverIntervalMinutesByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverIntervalMinutesByStampTaskResult) Pointer() *VerifyStaminaRecoverIntervalMinutesByStampTaskResult {
+	return &p
+}
+
+type VerifyStaminaRecoverValueByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaRecoverValueByStampTaskAsyncResult struct {
+	result *VerifyStaminaRecoverValueByStampTaskResult
+	err    error
+}
+
+func NewVerifyStaminaRecoverValueByStampTaskResultFromJson(data string) VerifyStaminaRecoverValueByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaRecoverValueByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStaminaRecoverValueByStampTaskResultFromDict(data map[string]interface{}) VerifyStaminaRecoverValueByStampTaskResult {
+	return VerifyStaminaRecoverValueByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaRecoverValueByStampTaskResult) Pointer() *VerifyStaminaRecoverValueByStampTaskResult {
+	return &p
+}
+
+type VerifyStaminaOverflowValueByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStaminaOverflowValueByStampTaskAsyncResult struct {
+	result *VerifyStaminaOverflowValueByStampTaskResult
+	err    error
+}
+
+func NewVerifyStaminaOverflowValueByStampTaskResultFromJson(data string) VerifyStaminaOverflowValueByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStaminaOverflowValueByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStaminaOverflowValueByStampTaskResultFromDict(data map[string]interface{}) VerifyStaminaOverflowValueByStampTaskResult {
+	return VerifyStaminaOverflowValueByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStaminaOverflowValueByStampTaskResult) Pointer() *VerifyStaminaOverflowValueByStampTaskResult {
 	return &p
 }

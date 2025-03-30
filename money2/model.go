@@ -4058,7 +4058,7 @@ func CastWalletSummariesFromDict(data []WalletSummary) []interface{} {
 }
 
 type DepositTransaction struct {
-	Price       *float32 `json:"price"`
+	Price       *float64 `json:"price"`
 	Currency    *string  `json:"currency"`
 	Count       *int32   `json:"count"`
 	DepositedAt *int64   `json:"depositedAt"`
@@ -4130,12 +4130,12 @@ func NewDepositTransactionFromJson(data string) DepositTransaction {
 
 func NewDepositTransactionFromDict(data map[string]interface{}) DepositTransaction {
 	return DepositTransaction{
-		Price: func() *float32 {
+		Price: func() *float64 {
 			v, ok := data["price"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastFloat32(data["price"])
+			return core.CastFloat64(data["price"])
 		}(),
 		Currency: func() *string {
 			v, ok := data["currency"]
@@ -6283,8 +6283,8 @@ type DailyTransactionHistory struct {
 	Month                     *int32   `json:"month"`
 	Day                       *int32   `json:"day"`
 	Currency                  *string  `json:"currency"`
-	DepositAmount             *float32 `json:"depositAmount"`
-	WithdrawAmount            *float32 `json:"withdrawAmount"`
+	DepositAmount             *float64 `json:"depositAmount"`
+	WithdrawAmount            *float64 `json:"withdrawAmount"`
 	UpdatedAt                 *int64   `json:"updatedAt"`
 	Revision                  *int64   `json:"revision"`
 }
@@ -6425,19 +6425,19 @@ func NewDailyTransactionHistoryFromDict(data map[string]interface{}) DailyTransa
 			}
 			return core.CastString(data["currency"])
 		}(),
-		DepositAmount: func() *float32 {
+		DepositAmount: func() *float64 {
 			v, ok := data["depositAmount"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastFloat32(data["depositAmount"])
+			return core.CastFloat64(data["depositAmount"])
 		}(),
-		WithdrawAmount: func() *float32 {
+		WithdrawAmount: func() *float64 {
 			v, ok := data["withdrawAmount"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastFloat32(data["withdrawAmount"])
+			return core.CastFloat64(data["withdrawAmount"])
 		}(),
 		UpdatedAt: func() *int64 {
 			v, ok := data["updatedAt"]
@@ -6511,7 +6511,7 @@ func CastDailyTransactionHistoriesFromDict(data []DailyTransactionHistory) []int
 type UnusedBalance struct {
 	UnusedBalanceId *string  `json:"unusedBalanceId"`
 	Currency        *string  `json:"currency"`
-	Balance         *float32 `json:"balance"`
+	Balance         *float64 `json:"balance"`
 	UpdatedAt       *int64   `json:"updatedAt"`
 	Revision        *int64   `json:"revision"`
 }
@@ -6619,12 +6619,12 @@ func NewUnusedBalanceFromDict(data map[string]interface{}) UnusedBalance {
 			}
 			return core.CastString(data["currency"])
 		}(),
-		Balance: func() *float32 {
+		Balance: func() *float64 {
 			v, ok := data["balance"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastFloat32(data["balance"])
+			return core.CastFloat64(data["balance"])
 		}(),
 		UpdatedAt: func() *int64 {
 			v, ok := data["updatedAt"]

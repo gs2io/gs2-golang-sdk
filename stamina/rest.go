@@ -6057,6 +6057,1161 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyStaminaValueAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaValueAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValueAsync(
+	request *VerifyStaminaValueRequest,
+	callback chan<- VerifyStaminaValueAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaValueAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValue(
+	request *VerifyStaminaValueRequest,
+) (*VerifyStaminaValueResult, error) {
+	callback := make(chan VerifyStaminaValueAsyncResult, 1)
+	go p.VerifyStaminaValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaValueByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValueByUserIdAsync(
+	request *VerifyStaminaValueByUserIdRequest,
+	callback chan<- VerifyStaminaValueByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaValueByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValueByUserId(
+	request *VerifyStaminaValueByUserIdRequest,
+) (*VerifyStaminaValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaMaxValueAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaMaxValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaMaxValueAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaMaxValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValueAsync(
+	request *VerifyStaminaMaxValueRequest,
+	callback chan<- VerifyStaminaMaxValueAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/max/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaMaxValueAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValue(
+	request *VerifyStaminaMaxValueRequest,
+) (*VerifyStaminaMaxValueResult, error) {
+	callback := make(chan VerifyStaminaMaxValueAsyncResult, 1)
+	go p.VerifyStaminaMaxValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaMaxValueByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaMaxValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaMaxValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByUserIdAsync(
+	request *VerifyStaminaMaxValueByUserIdRequest,
+	callback chan<- VerifyStaminaMaxValueByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/max/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaMaxValueByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByUserId(
+	request *VerifyStaminaMaxValueByUserIdRequest,
+) (*VerifyStaminaMaxValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaMaxValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaMaxValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverIntervalMinutesAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesAsync(
+	request *VerifyStaminaRecoverIntervalMinutesRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/recover/interval/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverIntervalMinutesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutes(
+	request *VerifyStaminaRecoverIntervalMinutesRequest,
+) (*VerifyStaminaRecoverIntervalMinutesResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverIntervalMinutesByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByUserIdAsync(
+	request *VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover/interval/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverIntervalMinutesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByUserId(
+	request *VerifyStaminaRecoverIntervalMinutesByUserIdRequest,
+) (*VerifyStaminaRecoverIntervalMinutesByUserIdResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesByUserIdAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverValueAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverValueAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueAsync(
+	request *VerifyStaminaRecoverValueRequest,
+	callback chan<- VerifyStaminaRecoverValueAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/recover/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverValueAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValue(
+	request *VerifyStaminaRecoverValueRequest,
+) (*VerifyStaminaRecoverValueResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverValueByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByUserIdAsync(
+	request *VerifyStaminaRecoverValueByUserIdRequest,
+	callback chan<- VerifyStaminaRecoverValueByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverValueByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByUserId(
+	request *VerifyStaminaRecoverValueByUserIdRequest,
+) (*VerifyStaminaRecoverValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaOverflowValueAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaOverflowValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaOverflowValueAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaOverflowValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueAsync(
+	request *VerifyStaminaOverflowValueRequest,
+	callback chan<- VerifyStaminaOverflowValueAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/overflow/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaOverflowValueAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValue(
+	request *VerifyStaminaOverflowValueRequest,
+) (*VerifyStaminaOverflowValueResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaOverflowValueByUserIdAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaOverflowValueByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaOverflowValueByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByUserIdAsync(
+	request *VerifyStaminaOverflowValueByUserIdRequest,
+	callback chan<- VerifyStaminaOverflowValueByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/overflow/value/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaOverflowValueByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByUserId(
+	request *VerifyStaminaOverflowValueByUserIdRequest,
+) (*VerifyStaminaOverflowValueByUserIdResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueByUserIdAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func recoverStaminaByStampSheetAsyncHandler(
 	client Gs2StaminaRestClient,
 	job *core.NetworkJob,
@@ -6694,6 +7849,466 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByStampTask(
 ) (*ConsumeStaminaByStampTaskResult, error) {
 	callback := make(chan ConsumeStaminaByStampTaskAsyncResult, 1)
 	go p.ConsumeStaminaByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaValueByStampTaskAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaValueByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaValueByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValueByStampTaskAsync(
+	request *VerifyStaminaValueByStampTaskRequest,
+	callback chan<- VerifyStaminaValueByStampTaskAsyncResult,
+) {
+	path := "/stamina/value/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaValueByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaValueByStampTask(
+	request *VerifyStaminaValueByStampTaskRequest,
+) (*VerifyStaminaValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaMaxValueByStampTaskAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaMaxValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaMaxValueByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaMaxValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByStampTaskAsync(
+	request *VerifyStaminaMaxValueByStampTaskRequest,
+	callback chan<- VerifyStaminaMaxValueByStampTaskAsyncResult,
+) {
+	path := "/stamina/max/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaMaxValueByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByStampTask(
+	request *VerifyStaminaMaxValueByStampTaskRequest,
+) (*VerifyStaminaMaxValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaMaxValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaMaxValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverIntervalMinutesByStampTaskAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverIntervalMinutesByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByStampTaskAsync(
+	request *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+	callback chan<- VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult,
+) {
+	path := "/stamina/recover/interval/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverIntervalMinutesByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByStampTask(
+	request *VerifyStaminaRecoverIntervalMinutesByStampTaskRequest,
+) (*VerifyStaminaRecoverIntervalMinutesByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaRecoverIntervalMinutesByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaRecoverIntervalMinutesByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaRecoverValueByStampTaskAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaRecoverValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaRecoverValueByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaRecoverValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByStampTaskAsync(
+	request *VerifyStaminaRecoverValueByStampTaskRequest,
+	callback chan<- VerifyStaminaRecoverValueByStampTaskAsyncResult,
+) {
+	path := "/stamina/recover/value/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaRecoverValueByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByStampTask(
+	request *VerifyStaminaRecoverValueByStampTaskRequest,
+) (*VerifyStaminaRecoverValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaRecoverValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaRecoverValueByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStaminaOverflowValueByStampTaskAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStaminaOverflowValueByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStaminaOverflowValueByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStaminaOverflowValueByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByStampTaskAsync(
+	request *VerifyStaminaOverflowValueByStampTaskRequest,
+	callback chan<- VerifyStaminaOverflowValueByStampTaskAsyncResult,
+) {
+	path := "/stamina/overflow/value/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStaminaOverflowValueByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByStampTask(
+	request *VerifyStaminaOverflowValueByStampTaskRequest,
+) (*VerifyStaminaOverflowValueByStampTaskResult, error) {
+	callback := make(chan VerifyStaminaOverflowValueByStampTaskAsyncResult, 1)
+	go p.VerifyStaminaOverflowValueByStampTaskAsync(
 		request,
 		callback,
 	)
