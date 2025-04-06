@@ -1321,9 +1321,6 @@ func (p Gs2ScriptWebSocketClient) InvokeScriptAsync(
 	if request.RandomStatus != nil {
 		bodies["randomStatus"] = request.RandomStatus.ToDict()
 	}
-	if request.ForceUseDistributor != nil {
-		bodies["forceUseDistributor"] = *request.ForceUseDistributor
-	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}

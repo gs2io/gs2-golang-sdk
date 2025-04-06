@@ -122,8 +122,104 @@ type Notification struct {
 	Payload string `json:"payload"`
 }
 
+type ScriptTransactionResult struct {
+	ScriptId          *string            `json:"scriptId"`
+	TransactionId     *string            `json:"transactionId"`
+	TransactionResult *TransactionResult `json:"transactionResult"`
+}
+
+func (p *ScriptTransactionResult) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ScriptTransactionResult{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ScriptTransactionResult{}
+	} else {
+		*p = ScriptTransactionResult{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["scriptId"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ScriptId)
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionId)
+		}
+		if v, ok := d["transactionResult"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionResult)
+		}
+	}
+	return nil
+}
+
+func NewScriptTransactionResultFromJson(data string) ScriptTransactionResult {
+	req := ScriptTransactionResult{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewScriptTransactionResultFromDict(data map[string]interface{}) ScriptTransactionResult {
+	return ScriptTransactionResult{
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return CastString(data["scriptId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return CastString(data["transactionId"])
+		}(),
+		TransactionResult: func() *TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			v2 := CastString(data["transactionResult"])
+			if v2 == nil {
+				return nil
+			}
+			return NewTransactionResultFromJson(*v2).Pointer()
+		}(),
+	}
+}
+
+func (p ScriptTransactionResult) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ScriptId != nil {
+		m["scriptId"] = p.ScriptId
+	}
+	if p.TransactionId != nil {
+		m["transactionId"] = p.TransactionId
+	}
+	if p.TransactionResult != nil {
+		m["transactionResult"] = p.TransactionResult
+	}
+	return m
+}
+
+func (p ScriptTransactionResult) Pointer() *ScriptTransactionResult {
+	return &p
+}
+
 type ResultMetadata struct {
-	Uncommitted *string `json:"uncommitted"`
+	Uncommitted              *string                   `json:"uncommitted"`
+	ScriptTransactionResults []ScriptTransactionResult `json:"scriptTransactionResults"`
 }
 
 func (p *ResultMetadata) UnmarshalJSON(data []byte) error {
@@ -151,6 +247,9 @@ func (p *ResultMetadata) UnmarshalJSON(data []byte) error {
 		if v, ok := d["uncommitted"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Uncommitted)
 		}
+		if v, ok := d["scriptTransactionResults"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ScriptTransactionResults)
+		}
 	}
 	return nil
 }
@@ -170,6 +269,13 @@ func NewResultMetadataFromDict(data map[string]interface{}) ResultMetadata {
 			}
 			return CastString(data["uncommitted"])
 		}(),
+		ScriptTransactionResults: func() []ScriptTransactionResult {
+			v, ok := data["scriptTransactionResults"]
+			if !ok || v == nil {
+				return nil
+			}
+			return CastScriptTransactionResults(CastArray(data["scriptTransactionResults"]))
+		}(),
 	}
 }
 
@@ -177,6 +283,9 @@ func (p ResultMetadata) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
 	if p.Uncommitted != nil {
 		m["uncommitted"] = p.Uncommitted
+	}
+	if p.ScriptTransactionResults != nil {
+		m["scriptTransactionResults"] = p.ScriptTransactionResults
 	}
 	return m
 }
@@ -194,6 +303,22 @@ func CastResultMetadatas(data []interface{}) []ResultMetadata {
 }
 
 func CastResultMetadatasFromDict(data []ResultMetadata) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+func CastScriptTransactionResults(data []interface{}) []ScriptTransactionResult {
+	v := make([]ScriptTransactionResult, 0)
+	for _, d := range data {
+		v = append(v, NewScriptTransactionResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptTransactionResultsFromDict(data []ScriptTransactionResult) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

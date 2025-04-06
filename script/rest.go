@@ -1360,9 +1360,6 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
 	if request.RandomStatus != nil {
 		bodies["randomStatus"] = request.RandomStatus.ToDict()
 	}
-	if request.ForceUseDistributor != nil {
-		bodies["forceUseDistributor"] = *request.ForceUseDistributor
-	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

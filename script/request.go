@@ -1796,15 +1796,14 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	ContextStack        *string       `json:"contextStack"`
-	DuplicationAvoider  *string       `json:"duplicationAvoider"`
-	ScriptId            *string       `json:"scriptId"`
-	UserId              *string       `json:"userId"`
-	Args                *string       `json:"args"`
-	RandomStatus        *RandomStatus `json:"randomStatus"`
-	ForceUseDistributor *bool         `json:"forceUseDistributor"`
-	TimeOffsetToken     *string       `json:"timeOffsetToken"`
-	DryRun              *bool         `json:"dryRun"`
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	ScriptId           *string       `json:"scriptId"`
+	UserId             *string       `json:"userId"`
+	Args               *string       `json:"args"`
+	RandomStatus       *RandomStatus `json:"randomStatus"`
+	TimeOffsetToken    *string       `json:"timeOffsetToken"`
+	DryRun             *bool         `json:"dryRun"`
 }
 
 func (p *InvokeScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1901,9 +1900,6 @@ func (p *InvokeScriptRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["randomStatus"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RandomStatus)
 		}
-		if v, ok := d["forceUseDistributor"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ForceUseDistributor)
-		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1970,13 +1966,6 @@ func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptReq
 			}
 			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
 		}(),
-		ForceUseDistributor: func() *bool {
-			v, ok := data["forceUseDistributor"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastBool(data["forceUseDistributor"])
-		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -1998,8 +1987,7 @@ func (p InvokeScriptRequest) ToDict() map[string]interface{} {
 			}
 			return p.RandomStatus.ToDict()
 		}(),
-		"forceUseDistributor": p.ForceUseDistributor,
-		"timeOffsetToken":     p.TimeOffsetToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

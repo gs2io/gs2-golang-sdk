@@ -1809,6 +1809,7 @@ type CreateCategoryModelMasterRequest struct {
 	Metadata                  *string             `json:"metadata"`
 	RewardIntervalMinutes     *int32              `json:"rewardIntervalMinutes"`
 	DefaultMaximumIdleMinutes *int32              `json:"defaultMaximumIdleMinutes"`
+	RewardResetMode           *string             `json:"rewardResetMode"`
 	AcquireActions            []AcquireActionList `json:"acquireActions"`
 	IdlePeriodScheduleId      *string             `json:"idlePeriodScheduleId"`
 	ReceivePeriodScheduleId   *string             `json:"receivePeriodScheduleId"`
@@ -1935,6 +1936,29 @@ func (p *CreateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["defaultMaximumIdleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DefaultMaximumIdleMinutes)
 		}
+		if v, ok := d["rewardResetMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardResetMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardResetMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardResetMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardResetMode)
+				}
+			}
+		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
@@ -2041,6 +2065,13 @@ func NewCreateCategoryModelMasterRequestFromDict(data map[string]interface{}) Cr
 			}
 			return core.CastInt32(data["defaultMaximumIdleMinutes"])
 		}(),
+		RewardResetMode: func() *string {
+			v, ok := data["rewardResetMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardResetMode"])
+		}(),
 		AcquireActions: func() []AcquireActionList {
 			if data["acquireActions"] == nil {
 				return nil
@@ -2072,6 +2103,7 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":                  p.Metadata,
 		"rewardIntervalMinutes":     p.RewardIntervalMinutes,
 		"defaultMaximumIdleMinutes": p.DefaultMaximumIdleMinutes,
+		"rewardResetMode":           p.RewardResetMode,
 		"acquireActions": CastAcquireActionListFromDict(
 			p.AcquireActions,
 		),
@@ -2210,6 +2242,7 @@ type UpdateCategoryModelMasterRequest struct {
 	Metadata                  *string             `json:"metadata"`
 	RewardIntervalMinutes     *int32              `json:"rewardIntervalMinutes"`
 	DefaultMaximumIdleMinutes *int32              `json:"defaultMaximumIdleMinutes"`
+	RewardResetMode           *string             `json:"rewardResetMode"`
 	AcquireActions            []AcquireActionList `json:"acquireActions"`
 	IdlePeriodScheduleId      *string             `json:"idlePeriodScheduleId"`
 	ReceivePeriodScheduleId   *string             `json:"receivePeriodScheduleId"`
@@ -2336,6 +2369,29 @@ func (p *UpdateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["defaultMaximumIdleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DefaultMaximumIdleMinutes)
 		}
+		if v, ok := d["rewardResetMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardResetMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardResetMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardResetMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardResetMode)
+				}
+			}
+		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
@@ -2442,6 +2498,13 @@ func NewUpdateCategoryModelMasterRequestFromDict(data map[string]interface{}) Up
 			}
 			return core.CastInt32(data["defaultMaximumIdleMinutes"])
 		}(),
+		RewardResetMode: func() *string {
+			v, ok := data["rewardResetMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardResetMode"])
+		}(),
 		AcquireActions: func() []AcquireActionList {
 			if data["acquireActions"] == nil {
 				return nil
@@ -2473,6 +2536,7 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":                  p.Metadata,
 		"rewardIntervalMinutes":     p.RewardIntervalMinutes,
 		"defaultMaximumIdleMinutes": p.DefaultMaximumIdleMinutes,
+		"rewardResetMode":           p.RewardResetMode,
 		"acquireActions": CastAcquireActionListFromDict(
 			p.AcquireActions,
 		),

@@ -3811,231 +3811,6 @@ func (p Gs2GuildRestClient) BatchUpdateMemberRoleByGuildName(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateMemberMetadataAsyncHandler(
-	client Gs2GuildRestClient,
-	job *core.NetworkJob,
-	callback chan<- UpdateMemberMetadataAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UpdateMemberMetadataAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UpdateMemberMetadataResult
-	if asyncResult.Err != nil {
-		callback <- UpdateMemberMetadataAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateMemberMetadataAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- UpdateMemberMetadataAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2GuildRestClient) UpdateMemberMetadataAsync(
-	request *UpdateMemberMetadataRequest,
-	callback chan<- UpdateMemberMetadataAsyncResult,
-) {
-	path := "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/me/metadata"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GuildModelName != nil && *request.GuildModelName != "" {
-		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
-	} else {
-		path = strings.ReplaceAll(path, "{guildModelName}", "null")
-	}
-	if request.GuildName != nil && *request.GuildName != "" {
-		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
-	} else {
-		path = strings.ReplaceAll(path, "{guildName}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
-	if request.DryRun != nil {
-		if *request.DryRun {
-			headers["X-GS2-DRY-RUN"] = "true"
-		} else {
-			headers["X-GS2-DRY-RUN"] = "false"
-		}
-	}
-
-	go updateMemberMetadataAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2GuildRestClient) UpdateMemberMetadata(
-	request *UpdateMemberMetadataRequest,
-) (*UpdateMemberMetadataResult, error) {
-	callback := make(chan UpdateMemberMetadataAsyncResult, 1)
-	go p.UpdateMemberMetadataAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func updateMemberMetadataByUserIdAsyncHandler(
-	client Gs2GuildRestClient,
-	job *core.NetworkJob,
-	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- UpdateMemberMetadataByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result UpdateMemberMetadataByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- UpdateMemberMetadataByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- UpdateMemberMetadataByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- UpdateMemberMetadataByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2GuildRestClient) UpdateMemberMetadataByUserIdAsync(
-	request *UpdateMemberMetadataByUserIdRequest,
-	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/{userId}/metadata"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.GuildModelName != nil && *request.GuildModelName != "" {
-		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
-	} else {
-		path = strings.ReplaceAll(path, "{guildModelName}", "null")
-	}
-	if request.GuildName != nil && *request.GuildName != "" {
-		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
-	} else {
-		path = strings.ReplaceAll(path, "{guildName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Metadata != nil && *request.Metadata != "" {
-		bodies["metadata"] = *request.Metadata
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
-	if request.TimeOffsetToken != nil {
-		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
-	}
-	if request.DryRun != nil {
-		if *request.DryRun {
-			headers["X-GS2-DRY-RUN"] = "true"
-		} else {
-			headers["X-GS2-DRY-RUN"] = "false"
-		}
-	}
-
-	go updateMemberMetadataByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
-			Method:  core.Put,
-			Headers: headers,
-			Bodies:  bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2GuildRestClient) UpdateMemberMetadataByUserId(
-	request *UpdateMemberMetadataByUserIdRequest,
-) (*UpdateMemberMetadataByUserIdResult, error) {
-	callback := make(chan UpdateMemberMetadataByUserIdAsyncResult, 1)
-	go p.UpdateMemberMetadataByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func deleteGuildAsyncHandler(
 	client Gs2GuildRestClient,
 	job *core.NetworkJob,
@@ -6213,6 +5988,231 @@ func (p Gs2GuildRestClient) GetJoinedGuildByUserId(
 ) (*GetJoinedGuildByUserIdResult, error) {
 	callback := make(chan GetJoinedGuildByUserIdAsyncResult, 1)
 	go p.GetJoinedGuildByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateMemberMetadataAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateMemberMetadataAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateMemberMetadataAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateMemberMetadataResult
+	if asyncResult.Err != nil {
+		callback <- UpdateMemberMetadataAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMemberMetadataAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateMemberMetadataAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) UpdateMemberMetadataAsync(
+	request *UpdateMemberMetadataRequest,
+	callback chan<- UpdateMemberMetadataAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/me/metadata"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateMemberMetadataAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) UpdateMemberMetadata(
+	request *UpdateMemberMetadataRequest,
+) (*UpdateMemberMetadataResult, error) {
+	callback := make(chan UpdateMemberMetadataAsyncResult, 1)
+	go p.UpdateMemberMetadataAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateMemberMetadataByUserIdAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateMemberMetadataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateMemberMetadataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UpdateMemberMetadataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMemberMetadataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateMemberMetadataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) UpdateMemberMetadataByUserIdAsync(
+	request *UpdateMemberMetadataByUserIdRequest,
+	callback chan<- UpdateMemberMetadataByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/guild/{guildName}/member/{userId}/metadata"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateMemberMetadataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) UpdateMemberMetadataByUserId(
+	request *UpdateMemberMetadataByUserIdRequest,
+) (*UpdateMemberMetadataByUserIdResult, error) {
+	callback := make(chan UpdateMemberMetadataByUserIdAsyncResult, 1)
+	go p.UpdateMemberMetadataByUserIdAsync(
 		request,
 		callback,
 	)

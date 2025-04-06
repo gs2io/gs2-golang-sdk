@@ -330,6 +330,7 @@ type CategoryModelMaster struct {
 	Metadata                  *string             `json:"metadata"`
 	RewardIntervalMinutes     *int32              `json:"rewardIntervalMinutes"`
 	DefaultMaximumIdleMinutes *int32              `json:"defaultMaximumIdleMinutes"`
+	RewardResetMode           *string             `json:"rewardResetMode"`
 	AcquireActions            []AcquireActionList `json:"acquireActions"`
 	IdlePeriodScheduleId      *string             `json:"idlePeriodScheduleId"`
 	ReceivePeriodScheduleId   *string             `json:"receivePeriodScheduleId"`
@@ -458,6 +459,29 @@ func (p *CategoryModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["defaultMaximumIdleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DefaultMaximumIdleMinutes)
 		}
+		if v, ok := d["rewardResetMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardResetMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardResetMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardResetMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardResetMode)
+				}
+			}
+		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
@@ -570,6 +594,13 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
 			}
 			return core.CastInt32(data["defaultMaximumIdleMinutes"])
 		}(),
+		RewardResetMode: func() *string {
+			v, ok := data["rewardResetMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardResetMode"])
+		}(),
 		AcquireActions: func() []AcquireActionList {
 			if data["acquireActions"] == nil {
 				return nil
@@ -634,6 +665,9 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
 	if p.DefaultMaximumIdleMinutes != nil {
 		m["defaultMaximumIdleMinutes"] = p.DefaultMaximumIdleMinutes
 	}
+	if p.RewardResetMode != nil {
+		m["rewardResetMode"] = p.RewardResetMode
+	}
 	if p.AcquireActions != nil {
 		m["acquireActions"] = CastAcquireActionListFromDict(
 			p.AcquireActions,
@@ -683,6 +717,7 @@ type CategoryModel struct {
 	Metadata                  *string             `json:"metadata"`
 	RewardIntervalMinutes     *int32              `json:"rewardIntervalMinutes"`
 	DefaultMaximumIdleMinutes *int32              `json:"defaultMaximumIdleMinutes"`
+	RewardResetMode           *string             `json:"rewardResetMode"`
 	AcquireActions            []AcquireActionList `json:"acquireActions"`
 	IdlePeriodScheduleId      *string             `json:"idlePeriodScheduleId"`
 	ReceivePeriodScheduleId   *string             `json:"receivePeriodScheduleId"`
@@ -785,6 +820,29 @@ func (p *CategoryModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["defaultMaximumIdleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DefaultMaximumIdleMinutes)
 		}
+		if v, ok := d["rewardResetMode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RewardResetMode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RewardResetMode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RewardResetMode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RewardResetMode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RewardResetMode)
+				}
+			}
+		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
@@ -881,6 +939,13 @@ func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
 			}
 			return core.CastInt32(data["defaultMaximumIdleMinutes"])
 		}(),
+		RewardResetMode: func() *string {
+			v, ok := data["rewardResetMode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rewardResetMode"])
+		}(),
 		AcquireActions: func() []AcquireActionList {
 			if data["acquireActions"] == nil {
 				return nil
@@ -920,6 +985,9 @@ func (p CategoryModel) ToDict() map[string]interface{} {
 	}
 	if p.DefaultMaximumIdleMinutes != nil {
 		m["defaultMaximumIdleMinutes"] = p.DefaultMaximumIdleMinutes
+	}
+	if p.RewardResetMode != nil {
+		m["rewardResetMode"] = p.RewardResetMode
 	}
 	if p.AcquireActions != nil {
 		m["acquireActions"] = CastAcquireActionListFromDict(

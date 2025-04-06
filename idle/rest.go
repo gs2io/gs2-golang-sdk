@@ -1438,6 +1438,9 @@ func (p Gs2IdleRestClient) CreateCategoryModelMasterAsync(
 	if request.DefaultMaximumIdleMinutes != nil {
 		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
 	}
+	if request.RewardResetMode != nil && *request.RewardResetMode != "" {
+		bodies["rewardResetMode"] = *request.RewardResetMode
+	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
 		for _, item := range request.AcquireActions {
@@ -1654,6 +1657,9 @@ func (p Gs2IdleRestClient) UpdateCategoryModelMasterAsync(
 	}
 	if request.DefaultMaximumIdleMinutes != nil {
 		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
+	}
+	if request.RewardResetMode != nil && *request.RewardResetMode != "" {
+		bodies["rewardResetMode"] = *request.RewardResetMode
 	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
