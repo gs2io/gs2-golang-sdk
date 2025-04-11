@@ -6285,6 +6285,8 @@ type DailyTransactionHistory struct {
 	Currency                  *string  `json:"currency"`
 	DepositAmount             *float64 `json:"depositAmount"`
 	WithdrawAmount            *float64 `json:"withdrawAmount"`
+	IssueCount                *int64   `json:"issueCount"`
+	ConsumeCount              *int64   `json:"consumeCount"`
 	UpdatedAt                 *int64   `json:"updatedAt"`
 	Revision                  *int64   `json:"revision"`
 }
@@ -6372,6 +6374,12 @@ func (p *DailyTransactionHistory) UnmarshalJSON(data []byte) error {
 		if v, ok := d["withdrawAmount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawAmount)
 		}
+		if v, ok := d["issueCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IssueCount)
+		}
+		if v, ok := d["consumeCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumeCount)
+		}
 		if v, ok := d["updatedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UpdatedAt)
 		}
@@ -6439,6 +6447,20 @@ func NewDailyTransactionHistoryFromDict(data map[string]interface{}) DailyTransa
 			}
 			return core.CastFloat64(data["withdrawAmount"])
 		}(),
+		IssueCount: func() *int64 {
+			v, ok := data["issueCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["issueCount"])
+		}(),
+		ConsumeCount: func() *int64 {
+			v, ok := data["consumeCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumeCount"])
+		}(),
 		UpdatedAt: func() *int64 {
 			v, ok := data["updatedAt"]
 			if !ok || v == nil {
@@ -6478,6 +6500,12 @@ func (p DailyTransactionHistory) ToDict() map[string]interface{} {
 	}
 	if p.WithdrawAmount != nil {
 		m["withdrawAmount"] = p.WithdrawAmount
+	}
+	if p.IssueCount != nil {
+		m["issueCount"] = p.IssueCount
+	}
+	if p.ConsumeCount != nil {
+		m["consumeCount"] = p.ConsumeCount
 	}
 	if p.UpdatedAt != nil {
 		m["updatedAt"] = p.UpdatedAt
