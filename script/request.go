@@ -1997,10 +1997,13 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 
 type DebugInvokeRequest struct {
 	ContextStack                *string       `json:"contextStack"`
+	DuplicationAvoider          *string       `json:"duplicationAvoider"`
 	Script                      *string       `json:"script"`
 	Args                        *string       `json:"args"`
+	UserId                      *string       `json:"userId"`
 	RandomStatus                *RandomStatus `json:"randomStatus"`
 	DisableStringNumberToNumber *bool         `json:"disableStringNumberToNumber"`
+	TimeOffsetToken             *string       `json:"timeOffsetToken"`
 	DryRun                      *bool         `json:"dryRun"`
 }
 
@@ -2072,11 +2075,57 @@ func (p *DebugInvokeRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
 		if v, ok := d["randomStatus"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RandomStatus)
 		}
 		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
 		}
 	}
 	return nil
@@ -2107,6 +2156,13 @@ func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeReque
 			}
 			return core.CastString(data["args"])
 		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
 		RandomStatus: func() *RandomStatus {
 			v, ok := data["randomStatus"]
 			if !ok || v == nil {
@@ -2121,6 +2177,13 @@ func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeReque
 			}
 			return core.CastBool(data["disableStringNumberToNumber"])
 		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2128,6 +2191,7 @@ func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"script": p.Script,
 		"args":   p.Args,
+		"userId": p.UserId,
 		"randomStatus": func() map[string]interface{} {
 			if p.RandomStatus == nil {
 				return nil
@@ -2135,6 +2199,7 @@ func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 			return p.RandomStatus.ToDict()
 		}(),
 		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
+		"timeOffsetToken":             p.TimeOffsetToken,
 	}
 }
 

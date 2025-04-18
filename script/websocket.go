@@ -1418,14 +1418,23 @@ func (p Gs2ScriptWebSocketClient) DebugInvokeAsync(
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
 	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
 	if request.RandomStatus != nil {
 		bodies["randomStatus"] = request.RandomStatus.ToDict()
 	}
 	if request.DisableStringNumberToNumber != nil {
 		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 	if request.DryRun != nil {
 		if *request.DryRun {
