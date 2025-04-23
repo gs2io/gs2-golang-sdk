@@ -2184,6 +2184,106 @@ func (p Gs2InboxWebSocketClient) OpenMessageByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InboxWebSocketClient) closeMessageByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CloseMessageByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CloseMessageByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CloseMessageByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CloseMessageByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- CloseMessageByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InboxWebSocketClient) CloseMessageByUserIdAsync(
+	request *CloseMessageByUserIdRequest,
+	callback chan<- CloseMessageByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inbox",
+			"component":   "message",
+			"function":    "closeMessageByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.MessageName != nil && *request.MessageName != "" {
+		bodies["messageName"] = *request.MessageName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.closeMessageByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InboxWebSocketClient) CloseMessageByUserId(
+	request *CloseMessageByUserIdRequest,
+) (*CloseMessageByUserIdResult, error) {
+	callback := make(chan CloseMessageByUserIdAsyncResult, 1)
+	go p.CloseMessageByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InboxWebSocketClient) readMessageAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ReadMessageAsyncResult,

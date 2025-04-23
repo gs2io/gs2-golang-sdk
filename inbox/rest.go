@@ -2252,6 +2252,113 @@ func (p Gs2InboxRestClient) OpenMessageByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func closeMessageByUserIdAsyncHandler(
+	client Gs2InboxRestClient,
+	job *core.NetworkJob,
+	callback chan<- CloseMessageByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CloseMessageByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CloseMessageByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CloseMessageByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CloseMessageByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CloseMessageByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InboxRestClient) CloseMessageByUserIdAsync(
+	request *CloseMessageByUserIdRequest,
+	callback chan<- CloseMessageByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/{messageName}/close"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MessageName != nil && *request.MessageName != "" {
+		path = strings.ReplaceAll(path, "{messageName}", core.ToString(*request.MessageName))
+	} else {
+		path = strings.ReplaceAll(path, "{messageName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go closeMessageByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InboxRestClient) CloseMessageByUserId(
+	request *CloseMessageByUserIdRequest,
+) (*CloseMessageByUserIdResult, error) {
+	callback := make(chan CloseMessageByUserIdAsyncResult, 1)
+	go p.CloseMessageByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func readMessageAsyncHandler(
 	client Gs2InboxRestClient,
 	job *core.NetworkJob,

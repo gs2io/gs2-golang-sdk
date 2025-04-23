@@ -1194,6 +1194,62 @@ func (p OpenMessageByUserIdResult) Pointer() *OpenMessageByUserIdResult {
 	return &p
 }
 
+type CloseMessageByUserIdResult struct {
+	Item     *Message             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CloseMessageByUserIdAsyncResult struct {
+	result *CloseMessageByUserIdResult
+	err    error
+}
+
+func NewCloseMessageByUserIdResultFromJson(data string) CloseMessageByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCloseMessageByUserIdResultFromDict(dict)
+}
+
+func NewCloseMessageByUserIdResultFromDict(data map[string]interface{}) CloseMessageByUserIdResult {
+	return CloseMessageByUserIdResult{
+		Item: func() *Message {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMessageFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CloseMessageByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CloseMessageByUserIdResult) Pointer() *CloseMessageByUserIdResult {
+	return &p
+}
+
 type ReadMessageResult struct {
 	Item                      *Message                `json:"item"`
 	TransactionId             *string                 `json:"transactionId"`
