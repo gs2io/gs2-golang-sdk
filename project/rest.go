@@ -2778,7 +2778,12 @@ func (p Gs2ProjectRestClient) WaitDumpUserDataAsync(
 	request *WaitDumpUserDataRequest,
 	callback chan<- WaitDumpUserDataAsyncResult,
 ) {
-	path := "/account/me/project/dump/progress/{transactionId}/wait"
+	path := "/system/{ownerId}/project/dump/progress/{transactionId}/wait"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
 	} else {
@@ -2881,7 +2886,12 @@ func (p Gs2ProjectRestClient) ArchiveDumpUserDataAsync(
 	request *ArchiveDumpUserDataRequest,
 	callback chan<- ArchiveDumpUserDataAsyncResult,
 ) {
-	path := "/account/me/project/dump/progress/{transactionId}/archive"
+	path := "/system/{ownerId}/project/dump/progress/{transactionId}/archive"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
 	} else {

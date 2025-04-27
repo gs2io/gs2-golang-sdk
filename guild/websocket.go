@@ -6746,6 +6746,94 @@ func (p Gs2GuildWebSocketClient) GetCurrentGuildMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2GuildWebSocketClient) preUpdateCurrentGuildMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentGuildMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentGuildMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentGuildMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentGuildMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentGuildMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) PreUpdateCurrentGuildMasterAsync(
+	request *PreUpdateCurrentGuildMasterRequest,
+	callback chan<- PreUpdateCurrentGuildMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "currentGuildMaster",
+			"function":    "preUpdateCurrentGuildMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentGuildMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) PreUpdateCurrentGuildMaster(
+	request *PreUpdateCurrentGuildMasterRequest,
+) (*PreUpdateCurrentGuildMasterResult, error) {
+	callback := make(chan PreUpdateCurrentGuildMasterAsyncResult, 1)
+	go p.PreUpdateCurrentGuildMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2GuildWebSocketClient) updateCurrentGuildMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentGuildMasterAsyncResult,
@@ -6802,8 +6890,14 @@ func (p Gs2GuildWebSocketClient) UpdateCurrentGuildMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

@@ -2460,6 +2460,66 @@ func (p GetCurrentTreeMasterResult) Pointer() *GetCurrentTreeMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentTreeMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentTreeMasterAsyncResult struct {
+	result *PreUpdateCurrentTreeMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentTreeMasterResultFromJson(data string) PreUpdateCurrentTreeMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentTreeMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentTreeMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentTreeMasterResult {
+	return PreUpdateCurrentTreeMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentTreeMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentTreeMasterResult) Pointer() *PreUpdateCurrentTreeMasterResult {
+	return &p
+}
+
 type UpdateCurrentTreeMasterResult struct {
 	Item     *CurrentTreeMaster   `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

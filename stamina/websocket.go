@@ -3387,6 +3387,94 @@ func (p Gs2StaminaWebSocketClient) GetCurrentStaminaMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2StaminaWebSocketClient) preUpdateCurrentStaminaMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentStaminaMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentStaminaMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentStaminaMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentStaminaMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentStaminaMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) PreUpdateCurrentStaminaMasterAsync(
+	request *PreUpdateCurrentStaminaMasterRequest,
+	callback chan<- PreUpdateCurrentStaminaMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "currentStaminaMaster",
+			"function":    "preUpdateCurrentStaminaMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentStaminaMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) PreUpdateCurrentStaminaMaster(
+	request *PreUpdateCurrentStaminaMasterRequest,
+) (*PreUpdateCurrentStaminaMasterResult, error) {
+	callback := make(chan PreUpdateCurrentStaminaMasterAsyncResult, 1)
+	go p.PreUpdateCurrentStaminaMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2StaminaWebSocketClient) updateCurrentStaminaMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentStaminaMasterAsyncResult,
@@ -3443,8 +3531,14 @@ func (p Gs2StaminaWebSocketClient) UpdateCurrentStaminaMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

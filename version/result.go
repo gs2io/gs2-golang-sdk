@@ -1965,6 +1965,66 @@ func (p GetCurrentVersionMasterResult) Pointer() *GetCurrentVersionMasterResult 
 	return &p
 }
 
+type PreUpdateCurrentVersionMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentVersionMasterAsyncResult struct {
+	result *PreUpdateCurrentVersionMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentVersionMasterResultFromJson(data string) PreUpdateCurrentVersionMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentVersionMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentVersionMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentVersionMasterResult {
+	return PreUpdateCurrentVersionMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentVersionMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentVersionMasterResult) Pointer() *PreUpdateCurrentVersionMasterResult {
+	return &p
+}
+
 type UpdateCurrentVersionMasterResult struct {
 	Item     *CurrentVersionMaster `json:"item"`
 	Metadata *core.ResultMetadata  `json:"metadata"`

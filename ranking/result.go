@@ -1988,6 +1988,66 @@ func (p GetCurrentRankingMasterResult) Pointer() *GetCurrentRankingMasterResult 
 	return &p
 }
 
+type PreUpdateCurrentRankingMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentRankingMasterAsyncResult struct {
+	result *PreUpdateCurrentRankingMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentRankingMasterResultFromJson(data string) PreUpdateCurrentRankingMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentRankingMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentRankingMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentRankingMasterResult {
+	return PreUpdateCurrentRankingMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentRankingMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentRankingMasterResult) Pointer() *PreUpdateCurrentRankingMasterResult {
+	return &p
+}
+
 type UpdateCurrentRankingMasterResult struct {
 	Item     *CurrentRankingMaster `json:"item"`
 	Metadata *core.ResultMetadata  `json:"metadata"`

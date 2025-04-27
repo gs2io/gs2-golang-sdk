@@ -3322,6 +3322,94 @@ func (p Gs2FormationWebSocketClient) GetCurrentFormMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2FormationWebSocketClient) preUpdateCurrentFormMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentFormMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentFormMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentFormMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentFormMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentFormMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) PreUpdateCurrentFormMasterAsync(
+	request *PreUpdateCurrentFormMasterRequest,
+	callback chan<- PreUpdateCurrentFormMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "formation",
+			"component":   "currentFormMaster",
+			"function":    "preUpdateCurrentFormMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentFormMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) PreUpdateCurrentFormMaster(
+	request *PreUpdateCurrentFormMasterRequest,
+) (*PreUpdateCurrentFormMasterResult, error) {
+	callback := make(chan PreUpdateCurrentFormMasterAsyncResult, 1)
+	go p.PreUpdateCurrentFormMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2FormationWebSocketClient) updateCurrentFormMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentFormMasterAsyncResult,
@@ -3378,8 +3466,14 @@ func (p Gs2FormationWebSocketClient) UpdateCurrentFormMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

@@ -18,6 +18,7 @@ package formation
 
 import (
 	"encoding/json"
+	"net/http"
 	"strings"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
@@ -3449,6 +3450,97 @@ func (p Gs2FormationRestClient) GetCurrentFormMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func preUpdateCurrentFormMasterAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreUpdateCurrentFormMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentFormMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentFormMasterResult
+	if asyncResult.Err != nil {
+		callback <- PreUpdateCurrentFormMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentFormMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreUpdateCurrentFormMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) PreUpdateCurrentFormMasterAsync(
+	request *PreUpdateCurrentFormMasterRequest,
+	callback chan<- PreUpdateCurrentFormMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go preUpdateCurrentFormMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) PreUpdateCurrentFormMaster(
+	request *PreUpdateCurrentFormMasterRequest,
+) (*PreUpdateCurrentFormMasterResult, error) {
+	callback := make(chan PreUpdateCurrentFormMasterAsyncResult, 1)
+	go p.PreUpdateCurrentFormMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func updateCurrentFormMasterAsyncHandler(
 	client Gs2FormationRestClient,
 	job *core.NetworkJob,
@@ -3494,6 +3586,37 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterAsync(
 	request *UpdateCurrentFormMasterRequest,
 	callback chan<- UpdateCurrentFormMasterAsyncResult,
 ) {
+	if request.Settings != nil {
+		res, err := p.PreUpdateCurrentFormMaster(
+			&PreUpdateCurrentFormMasterRequest{
+				ContextStack:  request.ContextStack,
+				NamespaceName: request.NamespaceName,
+			},
+		)
+		if err != nil {
+			callback <- UpdateCurrentFormMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+		{
+			req, _ := http.NewRequest("PUT", *res.UploadUrl, strings.NewReader(*request.Settings))
+			req.Header.Set("Content-Type", "application/json")
+
+			client := new(http.Client)
+			_, err = client.Do(req)
+			if err != nil {
+				callback <- UpdateCurrentFormMasterAsyncResult{
+					err: err,
+				}
+				return
+			}
+		}
+		v := "preUpload"
+		request.Mode = &v
+		request.UploadToken = res.UploadToken
+		request.Settings = nil
+	}
 	path := "/{namespaceName}/master"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
@@ -3503,8 +3626,14 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

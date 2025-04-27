@@ -2238,6 +2238,66 @@ func (p GetCurrentCampaignMasterResult) Pointer() *GetCurrentCampaignMasterResul
 	return &p
 }
 
+type PreUpdateCurrentCampaignMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentCampaignMasterAsyncResult struct {
+	result *PreUpdateCurrentCampaignMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentCampaignMasterResultFromJson(data string) PreUpdateCurrentCampaignMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentCampaignMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentCampaignMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentCampaignMasterResult {
+	return PreUpdateCurrentCampaignMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentCampaignMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentCampaignMasterResult) Pointer() *PreUpdateCurrentCampaignMasterResult {
+	return &p
+}
+
 type UpdateCurrentCampaignMasterResult struct {
 	Item     *CurrentCampaignMaster `json:"item"`
 	Metadata *core.ResultMetadata   `json:"metadata"`

@@ -3393,6 +3393,94 @@ func (p Gs2InboxWebSocketClient) GetCurrentMessageMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InboxWebSocketClient) preUpdateCurrentMessageMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentMessageMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentMessageMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentMessageMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentMessageMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentMessageMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InboxWebSocketClient) PreUpdateCurrentMessageMasterAsync(
+	request *PreUpdateCurrentMessageMasterRequest,
+	callback chan<- PreUpdateCurrentMessageMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inbox",
+			"component":   "currentMessageMaster",
+			"function":    "preUpdateCurrentMessageMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentMessageMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InboxWebSocketClient) PreUpdateCurrentMessageMaster(
+	request *PreUpdateCurrentMessageMasterRequest,
+) (*PreUpdateCurrentMessageMasterResult, error) {
+	callback := make(chan PreUpdateCurrentMessageMasterAsyncResult, 1)
+	go p.PreUpdateCurrentMessageMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InboxWebSocketClient) updateCurrentMessageMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentMessageMasterAsyncResult,
@@ -3449,8 +3537,14 @@ func (p Gs2InboxWebSocketClient) UpdateCurrentMessageMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

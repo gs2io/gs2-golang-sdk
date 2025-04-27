@@ -1370,6 +1370,66 @@ func (p GetCurrentQuestMasterResult) Pointer() *GetCurrentQuestMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentQuestMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentQuestMasterAsyncResult struct {
+	result *PreUpdateCurrentQuestMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentQuestMasterResultFromJson(data string) PreUpdateCurrentQuestMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentQuestMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentQuestMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentQuestMasterResult {
+	return PreUpdateCurrentQuestMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentQuestMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentQuestMasterResult) Pointer() *PreUpdateCurrentQuestMasterResult {
+	return &p
+}
+
 type UpdateCurrentQuestMasterResult struct {
 	Item     *CurrentQuestMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

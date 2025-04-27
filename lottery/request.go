@@ -5415,10 +5415,98 @@ func (p GetCurrentLotteryMasterRequest) Pointer() *GetCurrentLotteryMasterReques
 	return &p
 }
 
+type PreUpdateCurrentLotteryMasterRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *PreUpdateCurrentLotteryMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreUpdateCurrentLotteryMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreUpdateCurrentLotteryMasterRequest{}
+	} else {
+		*p = PreUpdateCurrentLotteryMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPreUpdateCurrentLotteryMasterRequestFromJson(data string) (PreUpdateCurrentLotteryMasterRequest, error) {
+	req := PreUpdateCurrentLotteryMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreUpdateCurrentLotteryMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreUpdateCurrentLotteryMasterRequestFromDict(data map[string]interface{}) PreUpdateCurrentLotteryMasterRequest {
+	return PreUpdateCurrentLotteryMasterRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentLotteryMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p PreUpdateCurrentLotteryMasterRequest) Pointer() *PreUpdateCurrentLotteryMasterRequest {
+	return &p
+}
+
 type UpdateCurrentLotteryMasterRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
+	Mode          *string `json:"mode"`
 	Settings      *string `json:"settings"`
+	UploadToken   *string `json:"uploadToken"`
 	DryRun        *bool   `json:"dryRun"`
 }
 
@@ -5467,6 +5555,29 @@ func (p *UpdateCurrentLotteryMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Mode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Mode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Mode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Mode)
+				}
+			}
+		}
 		if v, ok := d["settings"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5487,6 +5598,29 @@ func (p *UpdateCurrentLotteryMasterRequest) UnmarshalJSON(data []byte) error {
 					p.Settings = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.Settings)
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
 				}
 			}
 		}
@@ -5512,6 +5646,13 @@ func NewUpdateCurrentLotteryMasterRequestFromDict(data map[string]interface{}) U
 			}
 			return core.CastString(data["namespaceName"])
 		}(),
+		Mode: func() *string {
+			v, ok := data["mode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mode"])
+		}(),
 		Settings: func() *string {
 			v, ok := data["settings"]
 			if !ok || v == nil {
@@ -5519,13 +5660,22 @@ func NewUpdateCurrentLotteryMasterRequestFromDict(data map[string]interface{}) U
 			}
 			return core.CastString(data["settings"])
 		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
 	}
 }
 
 func (p UpdateCurrentLotteryMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
+		"mode":          p.Mode,
 		"settings":      p.Settings,
+		"uploadToken":   p.UploadToken,
 	}
 }
 

@@ -4342,6 +4342,94 @@ func (p Gs2GradeWebSocketClient) GetCurrentGradeMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2GradeWebSocketClient) preUpdateCurrentGradeMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentGradeMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentGradeMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentGradeMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentGradeMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentGradeMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GradeWebSocketClient) PreUpdateCurrentGradeMasterAsync(
+	request *PreUpdateCurrentGradeMasterRequest,
+	callback chan<- PreUpdateCurrentGradeMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "grade",
+			"component":   "currentGradeMaster",
+			"function":    "preUpdateCurrentGradeMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentGradeMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GradeWebSocketClient) PreUpdateCurrentGradeMaster(
+	request *PreUpdateCurrentGradeMasterRequest,
+) (*PreUpdateCurrentGradeMasterResult, error) {
+	callback := make(chan PreUpdateCurrentGradeMasterAsyncResult, 1)
+	go p.PreUpdateCurrentGradeMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2GradeWebSocketClient) updateCurrentGradeMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentGradeMasterAsyncResult,
@@ -4398,8 +4486,14 @@ func (p Gs2GradeWebSocketClient) UpdateCurrentGradeMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

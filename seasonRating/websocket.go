@@ -2444,6 +2444,94 @@ func (p Gs2SeasonRatingWebSocketClient) GetCurrentSeasonModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2SeasonRatingWebSocketClient) preUpdateCurrentSeasonModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateCurrentSeasonModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateCurrentSeasonModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateCurrentSeasonModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateCurrentSeasonModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateCurrentSeasonModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SeasonRatingWebSocketClient) PreUpdateCurrentSeasonModelMasterAsync(
+	request *PreUpdateCurrentSeasonModelMasterRequest,
+	callback chan<- PreUpdateCurrentSeasonModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "season_rating",
+			"component":   "currentSeasonModelMaster",
+			"function":    "preUpdateCurrentSeasonModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateCurrentSeasonModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SeasonRatingWebSocketClient) PreUpdateCurrentSeasonModelMaster(
+	request *PreUpdateCurrentSeasonModelMasterRequest,
+) (*PreUpdateCurrentSeasonModelMasterResult, error) {
+	callback := make(chan PreUpdateCurrentSeasonModelMasterAsyncResult, 1)
+	go p.PreUpdateCurrentSeasonModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2SeasonRatingWebSocketClient) updateCurrentSeasonModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateCurrentSeasonModelMasterAsyncResult,
@@ -2500,8 +2588,14 @@ func (p Gs2SeasonRatingWebSocketClient) UpdateCurrentSeasonModelMasterAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Settings != nil && *request.Settings != "" {
 		bodies["settings"] = *request.Settings
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

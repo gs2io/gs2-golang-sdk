@@ -4170,6 +4170,7 @@ func (p GetDumpProgressRequest) Pointer() *GetDumpProgressRequest {
 type WaitDumpUserDataRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
+	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
 	MicroserviceName   *string `json:"microserviceName"`
@@ -4198,6 +4199,29 @@ func (p *WaitDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
@@ -4306,6 +4330,13 @@ func NewWaitDumpUserDataRequestFromJson(data string) (WaitDumpUserDataRequest, e
 
 func NewWaitDumpUserDataRequestFromDict(data map[string]interface{}) WaitDumpUserDataRequest {
 	return WaitDumpUserDataRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
 		TransactionId: func() *string {
 			v, ok := data["transactionId"]
 			if !ok || v == nil {
@@ -4339,6 +4370,7 @@ func NewWaitDumpUserDataRequestFromDict(data map[string]interface{}) WaitDumpUse
 
 func (p WaitDumpUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"ownerId":          p.OwnerId,
 		"transactionId":    p.TransactionId,
 		"userId":           p.UserId,
 		"microserviceName": p.MicroserviceName,
@@ -4352,6 +4384,7 @@ func (p WaitDumpUserDataRequest) Pointer() *WaitDumpUserDataRequest {
 
 type ArchiveDumpUserDataRequest struct {
 	ContextStack  *string `json:"contextStack"`
+	OwnerId       *string `json:"ownerId"`
 	TransactionId *string `json:"transactionId"`
 	DryRun        *bool   `json:"dryRun"`
 }
@@ -4377,6 +4410,29 @@ func (p *ArchiveDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
@@ -4416,6 +4472,13 @@ func NewArchiveDumpUserDataRequestFromJson(data string) (ArchiveDumpUserDataRequ
 
 func NewArchiveDumpUserDataRequestFromDict(data map[string]interface{}) ArchiveDumpUserDataRequest {
 	return ArchiveDumpUserDataRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
 		TransactionId: func() *string {
 			v, ok := data["transactionId"]
 			if !ok || v == nil {
@@ -4428,6 +4491,7 @@ func NewArchiveDumpUserDataRequestFromDict(data map[string]interface{}) ArchiveD
 
 func (p ArchiveDumpUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"ownerId":       p.OwnerId,
 		"transactionId": p.TransactionId,
 	}
 }

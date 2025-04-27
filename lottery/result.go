@@ -2182,6 +2182,66 @@ func (p GetCurrentLotteryMasterResult) Pointer() *GetCurrentLotteryMasterResult 
 	return &p
 }
 
+type PreUpdateCurrentLotteryMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentLotteryMasterAsyncResult struct {
+	result *PreUpdateCurrentLotteryMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentLotteryMasterResultFromJson(data string) PreUpdateCurrentLotteryMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentLotteryMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentLotteryMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentLotteryMasterResult {
+	return PreUpdateCurrentLotteryMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentLotteryMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentLotteryMasterResult) Pointer() *PreUpdateCurrentLotteryMasterResult {
+	return &p
+}
+
 type UpdateCurrentLotteryMasterResult struct {
 	Item     *CurrentLotteryMaster `json:"item"`
 	Metadata *core.ResultMetadata  `json:"metadata"`

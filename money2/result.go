@@ -3051,6 +3051,66 @@ func (p GetCurrentModelMasterResult) Pointer() *GetCurrentModelMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentModelMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentModelMasterAsyncResult struct {
+	result *PreUpdateCurrentModelMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentModelMasterResultFromJson(data string) PreUpdateCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentModelMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentModelMasterResult {
+	return PreUpdateCurrentModelMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentModelMasterResult) Pointer() *PreUpdateCurrentModelMasterResult {
+	return &p
+}
+
 type UpdateCurrentModelMasterResult struct {
 	Item     *CurrentModelMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

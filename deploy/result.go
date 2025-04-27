@@ -83,6 +83,66 @@ func (p DescribeStacksResult) Pointer() *DescribeStacksResult {
 	return &p
 }
 
+type PreCreateStackResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreCreateStackAsyncResult struct {
+	result *PreCreateStackResult
+	err    error
+}
+
+func NewPreCreateStackResultFromJson(data string) PreCreateStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreCreateStackResultFromDict(dict)
+}
+
+func NewPreCreateStackResultFromDict(data map[string]interface{}) PreCreateStackResult {
+	return PreCreateStackResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreCreateStackResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreCreateStackResult) Pointer() *PreCreateStackResult {
+	return &p
+}
+
 type CreateStackResult struct {
 	Item     *Stack               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -192,6 +252,66 @@ func (p CreateStackFromGitHubResult) ToDict() map[string]interface{} {
 }
 
 func (p CreateStackFromGitHubResult) Pointer() *CreateStackFromGitHubResult {
+	return &p
+}
+
+type PreValidateResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreValidateAsyncResult struct {
+	result *PreValidateResult
+	err    error
+}
+
+func NewPreValidateResultFromJson(data string) PreValidateResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreValidateResultFromDict(dict)
+}
+
+func NewPreValidateResultFromDict(data map[string]interface{}) PreValidateResult {
+	return PreValidateResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreValidateResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreValidateResult) Pointer() *PreValidateResult {
 	return &p
 }
 
@@ -344,6 +464,66 @@ func (p GetStackResult) Pointer() *GetStackResult {
 	return &p
 }
 
+type PreUpdateStackResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateStackAsyncResult struct {
+	result *PreUpdateStackResult
+	err    error
+}
+
+func NewPreUpdateStackResultFromJson(data string) PreUpdateStackResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateStackResultFromDict(dict)
+}
+
+func NewPreUpdateStackResultFromDict(data map[string]interface{}) PreUpdateStackResult {
+	return PreUpdateStackResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateStackResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateStackResult) Pointer() *PreUpdateStackResult {
+	return &p
+}
+
 type UpdateStackResult struct {
 	Item     *Stack               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -397,6 +577,66 @@ func (p UpdateStackResult) ToDict() map[string]interface{} {
 }
 
 func (p UpdateStackResult) Pointer() *UpdateStackResult {
+	return &p
+}
+
+type PreChangeSetResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreChangeSetAsyncResult struct {
+	result *PreChangeSetResult
+	err    error
+}
+
+func NewPreChangeSetResultFromJson(data string) PreChangeSetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreChangeSetResultFromDict(dict)
+}
+
+func NewPreChangeSetResultFromDict(data map[string]interface{}) PreChangeSetResult {
+	return PreChangeSetResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreChangeSetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreChangeSetResult) Pointer() *PreChangeSetResult {
 	return &p
 }
 

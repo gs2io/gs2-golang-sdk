@@ -1085,6 +1085,66 @@ func (p GetCurrentBonusMasterResult) Pointer() *GetCurrentBonusMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentBonusMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentBonusMasterAsyncResult struct {
+	result *PreUpdateCurrentBonusMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentBonusMasterResultFromJson(data string) PreUpdateCurrentBonusMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentBonusMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentBonusMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentBonusMasterResult {
+	return PreUpdateCurrentBonusMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentBonusMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentBonusMasterResult) Pointer() *PreUpdateCurrentBonusMasterResult {
+	return &p
+}
+
 type UpdateCurrentBonusMasterResult struct {
 	Item     *CurrentBonusMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

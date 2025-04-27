@@ -121,11 +121,65 @@ func (p DescribeStacksRequest) Pointer() *DescribeStacksRequest {
 	return &p
 }
 
+type PreCreateStackRequest struct {
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *PreCreateStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreCreateStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreCreateStackRequest{}
+	} else {
+		*p = PreCreateStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewPreCreateStackRequestFromJson(data string) (PreCreateStackRequest, error) {
+	req := PreCreateStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreCreateStackRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreCreateStackRequestFromDict(data map[string]interface{}) PreCreateStackRequest {
+	return PreCreateStackRequest{}
+}
+
+func (p PreCreateStackRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p PreCreateStackRequest) Pointer() *PreCreateStackRequest {
+	return &p
+}
+
 type CreateStackRequest struct {
 	ContextStack *string `json:"contextStack"`
 	Name         *string `json:"name"`
 	Description  *string `json:"description"`
+	Mode         *string `json:"mode"`
 	Template     *string `json:"template"`
+	UploadToken  *string `json:"uploadToken"`
 	DryRun       *bool   `json:"dryRun"`
 }
 
@@ -197,6 +251,29 @@ func (p *CreateStackRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Mode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Mode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Mode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Mode)
+				}
+			}
+		}
 		if v, ok := d["template"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -217,6 +294,29 @@ func (p *CreateStackRequest) UnmarshalJSON(data []byte) error {
 					p.Template = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.Template)
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
 				}
 			}
 		}
@@ -249,12 +349,26 @@ func NewCreateStackRequestFromDict(data map[string]interface{}) CreateStackReque
 			}
 			return core.CastString(data["description"])
 		}(),
+		Mode: func() *string {
+			v, ok := data["mode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mode"])
+		}(),
 		Template: func() *string {
 			v, ok := data["template"]
 			if !ok || v == nil {
 				return nil
 			}
 			return core.CastString(data["template"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
 		}(),
 	}
 }
@@ -263,7 +377,9 @@ func (p CreateStackRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":        p.Name,
 		"description": p.Description,
+		"mode":        p.Mode,
 		"template":    p.Template,
+		"uploadToken": p.UploadToken,
 	}
 }
 
@@ -406,9 +522,63 @@ func (p CreateStackFromGitHubRequest) Pointer() *CreateStackFromGitHubRequest {
 	return &p
 }
 
+type PreValidateRequest struct {
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *PreValidateRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreValidateRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreValidateRequest{}
+	} else {
+		*p = PreValidateRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewPreValidateRequestFromJson(data string) (PreValidateRequest, error) {
+	req := PreValidateRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreValidateRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreValidateRequestFromDict(data map[string]interface{}) PreValidateRequest {
+	return PreValidateRequest{}
+}
+
+func (p PreValidateRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p PreValidateRequest) Pointer() *PreValidateRequest {
+	return &p
+}
+
 type ValidateRequest struct {
 	ContextStack *string `json:"contextStack"`
+	Mode         *string `json:"mode"`
 	Template     *string `json:"template"`
+	UploadToken  *string `json:"uploadToken"`
 	DryRun       *bool   `json:"dryRun"`
 }
 
@@ -434,6 +604,29 @@ func (p *ValidateRequest) UnmarshalJSON(data []byte) error {
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
 		}
+		if v, ok := d["mode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Mode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Mode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Mode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Mode)
+				}
+			}
+		}
 		if v, ok := d["template"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -457,6 +650,29 @@ func (p *ValidateRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -472,6 +688,13 @@ func NewValidateRequestFromJson(data string) (ValidateRequest, error) {
 
 func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
 	return ValidateRequest{
+		Mode: func() *string {
+			v, ok := data["mode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mode"])
+		}(),
 		Template: func() *string {
 			v, ok := data["template"]
 			if !ok || v == nil {
@@ -479,12 +702,21 @@ func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
 			}
 			return core.CastString(data["template"])
 		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
 	}
 }
 
 func (p ValidateRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"template": p.Template,
+		"mode":        p.Mode,
+		"template":    p.Template,
+		"uploadToken": p.UploadToken,
 	}
 }
 
@@ -664,11 +896,99 @@ func (p GetStackRequest) Pointer() *GetStackRequest {
 	return &p
 }
 
+type PreUpdateStackRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StackName    *string `json:"stackName"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *PreUpdateStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreUpdateStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreUpdateStackRequest{}
+	} else {
+		*p = PreUpdateStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StackName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StackName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StackName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StackName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StackName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StackName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPreUpdateStackRequestFromJson(data string) (PreUpdateStackRequest, error) {
+	req := PreUpdateStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreUpdateStackRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreUpdateStackRequestFromDict(data map[string]interface{}) PreUpdateStackRequest {
+	return PreUpdateStackRequest{
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+	}
+}
+
+func (p PreUpdateStackRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stackName": p.StackName,
+	}
+}
+
+func (p PreUpdateStackRequest) Pointer() *PreUpdateStackRequest {
+	return &p
+}
+
 type UpdateStackRequest struct {
 	ContextStack *string `json:"contextStack"`
 	StackName    *string `json:"stackName"`
 	Description  *string `json:"description"`
+	Mode         *string `json:"mode"`
 	Template     *string `json:"template"`
+	UploadToken  *string `json:"uploadToken"`
 	DryRun       *bool   `json:"dryRun"`
 }
 
@@ -740,6 +1060,29 @@ func (p *UpdateStackRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Mode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Mode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Mode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Mode)
+				}
+			}
+		}
 		if v, ok := d["template"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -760,6 +1103,29 @@ func (p *UpdateStackRequest) UnmarshalJSON(data []byte) error {
 					p.Template = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.Template)
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
 				}
 			}
 		}
@@ -792,12 +1158,26 @@ func NewUpdateStackRequestFromDict(data map[string]interface{}) UpdateStackReque
 			}
 			return core.CastString(data["description"])
 		}(),
+		Mode: func() *string {
+			v, ok := data["mode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mode"])
+		}(),
 		Template: func() *string {
 			v, ok := data["template"]
 			if !ok || v == nil {
 				return nil
 			}
 			return core.CastString(data["template"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
 		}(),
 	}
 }
@@ -806,7 +1186,9 @@ func (p UpdateStackRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"stackName":   p.StackName,
 		"description": p.Description,
+		"mode":        p.Mode,
 		"template":    p.Template,
+		"uploadToken": p.UploadToken,
 	}
 }
 
@@ -814,10 +1196,98 @@ func (p UpdateStackRequest) Pointer() *UpdateStackRequest {
 	return &p
 }
 
+type PreChangeSetRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StackName    *string `json:"stackName"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *PreChangeSetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreChangeSetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreChangeSetRequest{}
+	} else {
+		*p = PreChangeSetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StackName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StackName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StackName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StackName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StackName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StackName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPreChangeSetRequestFromJson(data string) (PreChangeSetRequest, error) {
+	req := PreChangeSetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreChangeSetRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreChangeSetRequestFromDict(data map[string]interface{}) PreChangeSetRequest {
+	return PreChangeSetRequest{
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+	}
+}
+
+func (p PreChangeSetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stackName": p.StackName,
+	}
+}
+
+func (p PreChangeSetRequest) Pointer() *PreChangeSetRequest {
+	return &p
+}
+
 type ChangeSetRequest struct {
 	ContextStack *string `json:"contextStack"`
 	StackName    *string `json:"stackName"`
+	Mode         *string `json:"mode"`
 	Template     *string `json:"template"`
+	UploadToken  *string `json:"uploadToken"`
 	DryRun       *bool   `json:"dryRun"`
 }
 
@@ -866,6 +1336,29 @@ func (p *ChangeSetRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Mode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Mode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Mode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Mode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Mode)
+				}
+			}
+		}
 		if v, ok := d["template"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -886,6 +1379,29 @@ func (p *ChangeSetRequest) UnmarshalJSON(data []byte) error {
 					p.Template = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.Template)
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
 				}
 			}
 		}
@@ -911,6 +1427,13 @@ func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
 			}
 			return core.CastString(data["stackName"])
 		}(),
+		Mode: func() *string {
+			v, ok := data["mode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mode"])
+		}(),
 		Template: func() *string {
 			v, ok := data["template"]
 			if !ok || v == nil {
@@ -918,13 +1441,22 @@ func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
 			}
 			return core.CastString(data["template"])
 		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
 	}
 }
 
 func (p ChangeSetRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"stackName": p.StackName,
-		"template":  p.Template,
+		"stackName":   p.StackName,
+		"mode":        p.Mode,
+		"template":    p.Template,
+		"uploadToken": p.UploadToken,
 	}
 }
 

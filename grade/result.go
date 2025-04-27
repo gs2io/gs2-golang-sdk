@@ -2728,6 +2728,66 @@ func (p GetCurrentGradeMasterResult) Pointer() *GetCurrentGradeMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentGradeMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentGradeMasterAsyncResult struct {
+	result *PreUpdateCurrentGradeMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentGradeMasterResultFromJson(data string) PreUpdateCurrentGradeMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentGradeMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentGradeMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentGradeMasterResult {
+	return PreUpdateCurrentGradeMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentGradeMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentGradeMasterResult) Pointer() *PreUpdateCurrentGradeMasterResult {
+	return &p
+}
+
 type UpdateCurrentGradeMasterResult struct {
 	Item     *CurrentGradeMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

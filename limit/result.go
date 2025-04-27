@@ -1855,6 +1855,66 @@ func (p GetCurrentLimitMasterResult) Pointer() *GetCurrentLimitMasterResult {
 	return &p
 }
 
+type PreUpdateCurrentLimitMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentLimitMasterAsyncResult struct {
+	result *PreUpdateCurrentLimitMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentLimitMasterResultFromJson(data string) PreUpdateCurrentLimitMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentLimitMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentLimitMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentLimitMasterResult {
+	return PreUpdateCurrentLimitMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentLimitMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentLimitMasterResult) Pointer() *PreUpdateCurrentLimitMasterResult {
+	return &p
+}
+
 type UpdateCurrentLimitMasterResult struct {
 	Item     *CurrentLimitMaster  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

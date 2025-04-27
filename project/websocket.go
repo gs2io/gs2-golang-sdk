@@ -2722,6 +2722,9 @@ func (p Gs2ProjectWebSocketClient) WaitDumpUserDataAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		bodies["ownerId"] = *request.OwnerId
+	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		bodies["transactionId"] = *request.TransactionId
 	}
@@ -2821,6 +2824,9 @@ func (p Gs2ProjectWebSocketClient) ArchiveDumpUserDataAsync(
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
+	}
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		bodies["ownerId"] = *request.OwnerId
 	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		bodies["transactionId"] = *request.TransactionId

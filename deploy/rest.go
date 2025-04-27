@@ -18,6 +18,7 @@ package deploy
 
 import (
 	"encoding/json"
+	"net/http"
 	"strings"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
@@ -123,6 +124,92 @@ func (p Gs2DeployRestClient) DescribeStacks(
 	return asyncResult.result, asyncResult.err
 }
 
+func preCreateStackAsyncHandler(
+	client Gs2DeployRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreCreateStackAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreCreateStackAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreCreateStackResult
+	if asyncResult.Err != nil {
+		callback <- PreCreateStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreCreateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreCreateStackAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployRestClient) PreCreateStackAsync(
+	request *PreCreateStackRequest,
+	callback chan<- PreCreateStackAsyncResult,
+) {
+	path := "/stack/pre"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go preCreateStackAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployRestClient) PreCreateStack(
+	request *PreCreateStackRequest,
+) (*PreCreateStackResult, error) {
+	callback := make(chan PreCreateStackAsyncResult, 1)
+	go p.PreCreateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func createStackAsyncHandler(
 	client Gs2DeployRestClient,
 	job *core.NetworkJob,
@@ -168,6 +255,36 @@ func (p Gs2DeployRestClient) CreateStackAsync(
 	request *CreateStackRequest,
 	callback chan<- CreateStackAsyncResult,
 ) {
+	if request.Template != nil {
+		res, err := p.PreCreateStack(
+			&PreCreateStackRequest{
+				ContextStack: request.ContextStack,
+			},
+		)
+		if err != nil {
+			callback <- CreateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+		{
+			req, _ := http.NewRequest("PUT", *res.UploadUrl, strings.NewReader(*request.Template))
+			req.Header.Set("Content-Type", "application/json")
+
+			client := new(http.Client)
+			_, err = client.Do(req)
+			if err != nil {
+				callback <- CreateStackAsyncResult{
+					err: err,
+				}
+				return
+			}
+		}
+		v := "preUpload"
+		request.Mode = &v
+		request.UploadToken = res.UploadToken
+		request.Template = nil
+	}
 	path := "/stack"
 
 	replacer := strings.NewReplacer()
@@ -178,8 +295,14 @@ func (p Gs2DeployRestClient) CreateStackAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -313,6 +436,92 @@ func (p Gs2DeployRestClient) CreateStackFromGitHub(
 	return asyncResult.result, asyncResult.err
 }
 
+func preValidateAsyncHandler(
+	client Gs2DeployRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreValidateAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreValidateAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreValidateResult
+	if asyncResult.Err != nil {
+		callback <- PreValidateAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreValidateAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreValidateAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployRestClient) PreValidateAsync(
+	request *PreValidateRequest,
+	callback chan<- PreValidateAsyncResult,
+) {
+	path := "/stack/validate/pre"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go preValidateAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployRestClient) PreValidate(
+	request *PreValidateRequest,
+) (*PreValidateResult, error) {
+	callback := make(chan PreValidateAsyncResult, 1)
+	go p.PreValidateAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func validateAsyncHandler(
 	client Gs2DeployRestClient,
 	job *core.NetworkJob,
@@ -358,12 +567,48 @@ func (p Gs2DeployRestClient) ValidateAsync(
 	request *ValidateRequest,
 	callback chan<- ValidateAsyncResult,
 ) {
+	if request.Template != nil {
+		res, err := p.PreValidate(
+			&PreValidateRequest{
+				ContextStack: request.ContextStack,
+			},
+		)
+		if err != nil {
+			callback <- ValidateAsyncResult{
+				err: err,
+			}
+			return
+		}
+		{
+			req, _ := http.NewRequest("PUT", *res.UploadUrl, strings.NewReader(*request.Template))
+			req.Header.Set("Content-Type", "application/json")
+
+			client := new(http.Client)
+			_, err = client.Do(req)
+			if err != nil {
+				callback <- ValidateAsyncResult{
+					err: err,
+				}
+				return
+			}
+		}
+		v := "preUpload"
+		request.Mode = &v
+		request.UploadToken = res.UploadToken
+		request.Template = nil
+	}
 	path := "/stack/validate"
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -584,6 +829,97 @@ func (p Gs2DeployRestClient) GetStack(
 	return asyncResult.result, asyncResult.err
 }
 
+func preUpdateStackAsyncHandler(
+	client Gs2DeployRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreUpdateStackAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateStackAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateStackResult
+	if asyncResult.Err != nil {
+		callback <- PreUpdateStackAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreUpdateStackAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployRestClient) PreUpdateStackAsync(
+	request *PreUpdateStackRequest,
+	callback chan<- PreUpdateStackAsyncResult,
+) {
+	path := "/stack/{stackName}/pre"
+	if request.StackName != nil && *request.StackName != "" {
+		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+	} else {
+		path = strings.ReplaceAll(path, "{stackName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go preUpdateStackAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployRestClient) PreUpdateStack(
+	request *PreUpdateStackRequest,
+) (*PreUpdateStackResult, error) {
+	callback := make(chan PreUpdateStackAsyncResult, 1)
+	go p.PreUpdateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func updateStackAsyncHandler(
 	client Gs2DeployRestClient,
 	job *core.NetworkJob,
@@ -629,6 +965,37 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	request *UpdateStackRequest,
 	callback chan<- UpdateStackAsyncResult,
 ) {
+	if request.Template != nil {
+		res, err := p.PreUpdateStack(
+			&PreUpdateStackRequest{
+				ContextStack: request.ContextStack,
+				StackName:    request.StackName,
+			},
+		)
+		if err != nil {
+			callback <- UpdateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+		{
+			req, _ := http.NewRequest("PUT", *res.UploadUrl, strings.NewReader(*request.Template))
+			req.Header.Set("Content-Type", "application/json")
+
+			client := new(http.Client)
+			_, err = client.Do(req)
+			if err != nil {
+				callback <- UpdateStackAsyncResult{
+					err: err,
+				}
+				return
+			}
+		}
+		v := "preUpload"
+		request.Mode = &v
+		request.UploadToken = res.UploadToken
+		request.Template = nil
+	}
 	path := "/stack/{stackName}"
 	if request.StackName != nil && *request.StackName != "" {
 		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
@@ -641,8 +1008,14 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -674,6 +1047,97 @@ func (p Gs2DeployRestClient) UpdateStack(
 ) (*UpdateStackResult, error) {
 	callback := make(chan UpdateStackAsyncResult, 1)
 	go p.UpdateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func preChangeSetAsyncHandler(
+	client Gs2DeployRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreChangeSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreChangeSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreChangeSetResult
+	if asyncResult.Err != nil {
+		callback <- PreChangeSetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreChangeSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreChangeSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployRestClient) PreChangeSetAsync(
+	request *PreChangeSetRequest,
+	callback chan<- PreChangeSetAsyncResult,
+) {
+	path := "/stack/{stackName}/pre"
+	if request.StackName != nil && *request.StackName != "" {
+		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+	} else {
+		path = strings.ReplaceAll(path, "{stackName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go preChangeSetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployRestClient) PreChangeSet(
+	request *PreChangeSetRequest,
+) (*PreChangeSetResult, error) {
+	callback := make(chan PreChangeSetAsyncResult, 1)
+	go p.PreChangeSetAsync(
 		request,
 		callback,
 	)
@@ -726,6 +1190,37 @@ func (p Gs2DeployRestClient) ChangeSetAsync(
 	request *ChangeSetRequest,
 	callback chan<- ChangeSetAsyncResult,
 ) {
+	if request.Template != nil {
+		res, err := p.PreChangeSet(
+			&PreChangeSetRequest{
+				ContextStack: request.ContextStack,
+				StackName:    request.StackName,
+			},
+		)
+		if err != nil {
+			callback <- ChangeSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+		{
+			req, _ := http.NewRequest("PUT", *res.UploadUrl, strings.NewReader(*request.Template))
+			req.Header.Set("Content-Type", "application/json")
+
+			client := new(http.Client)
+			_, err = client.Do(req)
+			if err != nil {
+				callback <- ChangeSetAsyncResult{
+					err: err,
+				}
+				return
+			}
+		}
+		v := "preUpload"
+		request.Mode = &v
+		request.UploadToken = res.UploadToken
+		request.Template = nil
+	}
 	path := "/stack/{stackName}"
 	if request.StackName != nil && *request.StackName != "" {
 		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
@@ -735,8 +1230,14 @@ func (p Gs2DeployRestClient) ChangeSetAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

@@ -122,6 +122,91 @@ func (p Gs2DeployWebSocketClient) DescribeStacks(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DeployWebSocketClient) preCreateStackAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreCreateStackAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreCreateStackAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreCreateStackResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreCreateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreCreateStackAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployWebSocketClient) PreCreateStackAsync(
+	request *PreCreateStackRequest,
+	callback chan<- PreCreateStackAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "preCreateStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preCreateStackAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployWebSocketClient) PreCreateStack(
+	request *PreCreateStackRequest,
+) (*PreCreateStackResult, error) {
+	callback := make(chan PreCreateStackAsyncResult, 1)
+	go p.PreCreateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DeployWebSocketClient) createStackAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- CreateStackAsyncResult,
@@ -181,8 +266,14 @@ func (p Gs2DeployWebSocketClient) CreateStackAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -310,6 +401,91 @@ func (p Gs2DeployWebSocketClient) CreateStackFromGitHub(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DeployWebSocketClient) preValidateAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreValidateAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreValidateAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreValidateResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreValidateAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreValidateAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployWebSocketClient) PreValidateAsync(
+	request *PreValidateRequest,
+	callback chan<- PreValidateAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "preValidate",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preValidateAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployWebSocketClient) PreValidate(
+	request *PreValidateRequest,
+) (*PreValidateResult, error) {
+	callback := make(chan PreValidateAsyncResult, 1)
+	go p.PreValidateAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DeployWebSocketClient) validateAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ValidateAsyncResult,
@@ -363,8 +539,14 @@ func (p Gs2DeployWebSocketClient) ValidateAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -574,6 +756,94 @@ func (p Gs2DeployWebSocketClient) GetStack(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DeployWebSocketClient) preUpdateStackAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreUpdateStackAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreUpdateStackAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreUpdateStackResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreUpdateStackAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreUpdateStackAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployWebSocketClient) PreUpdateStackAsync(
+	request *PreUpdateStackRequest,
+	callback chan<- PreUpdateStackAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "preUpdateStack",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preUpdateStackAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployWebSocketClient) PreUpdateStack(
+	request *PreUpdateStackRequest,
+) (*PreUpdateStackResult, error) {
+	callback := make(chan PreUpdateStackAsyncResult, 1)
+	go p.PreUpdateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DeployWebSocketClient) updateStackAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateStackAsyncResult,
@@ -633,8 +903,14 @@ func (p Gs2DeployWebSocketClient) UpdateStackAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -661,6 +937,94 @@ func (p Gs2DeployWebSocketClient) UpdateStack(
 ) (*UpdateStackResult, error) {
 	callback := make(chan UpdateStackAsyncResult, 1)
 	go p.UpdateStackAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DeployWebSocketClient) preChangeSetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreChangeSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreChangeSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreChangeSetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreChangeSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PreChangeSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployWebSocketClient) PreChangeSetAsync(
+	request *PreChangeSetRequest,
+	callback chan<- PreChangeSetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "preChangeSet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.preChangeSetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployWebSocketClient) PreChangeSet(
+	request *PreChangeSetRequest,
+) (*PreChangeSetResult, error) {
+	callback := make(chan PreChangeSetAsyncResult, 1)
+	go p.PreChangeSetAsync(
 		request,
 		callback,
 	)
@@ -724,8 +1088,14 @@ func (p Gs2DeployWebSocketClient) ChangeSetAsync(
 	if request.StackName != nil && *request.StackName != "" {
 		bodies["stackName"] = *request.StackName
 	}
+	if request.Mode != nil && *request.Mode != "" {
+		bodies["mode"] = *request.Mode
+	}
 	if request.Template != nil && *request.Template != "" {
 		bodies["template"] = *request.Template
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
