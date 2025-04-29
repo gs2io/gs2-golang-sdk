@@ -2194,6 +2194,9 @@ func (p Gs2ChatWebSocketClient) DescribeMessagesAsync(
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
 	}
+	if request.Category != nil {
+		bodies["category"] = *request.Category
+	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
@@ -2311,6 +2314,9 @@ func (p Gs2ChatWebSocketClient) DescribeMessagesByUserIdAsync(
 	}
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
+	}
+	if request.Category != nil {
+		bodies["category"] = *request.Category
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
@@ -2430,6 +2436,9 @@ func (p Gs2ChatWebSocketClient) DescribeLatestMessagesAsync(
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
 	}
+	if request.Category != nil {
+		bodies["category"] = *request.Category
+	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
@@ -2544,6 +2553,9 @@ func (p Gs2ChatWebSocketClient) DescribeLatestMessagesByUserIdAsync(
 	}
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
+	}
+	if request.Category != nil {
+		bodies["category"] = *request.Category
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId

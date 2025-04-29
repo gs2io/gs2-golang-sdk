@@ -2256,6 +2256,9 @@ func (p Gs2ChatRestClient) DescribeMessagesAsync(
 	if request.Password != nil {
 		queryStrings["password"] = core.ToString(*request.Password)
 	}
+	if request.Category != nil {
+		queryStrings["category"] = core.ToString(*request.Category)
+	}
 	if request.StartAt != nil {
 		queryStrings["startAt"] = core.ToString(*request.StartAt)
 	}
@@ -2375,6 +2378,9 @@ func (p Gs2ChatRestClient) DescribeMessagesByUserIdAsync(
 	queryStrings := core.QueryStrings{}
 	if request.Password != nil {
 		queryStrings["password"] = core.ToString(*request.Password)
+	}
+	if request.Category != nil {
+		queryStrings["category"] = core.ToString(*request.Category)
 	}
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)
@@ -2499,6 +2505,9 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesAsync(
 	if request.Password != nil {
 		queryStrings["password"] = core.ToString(*request.Password)
 	}
+	if request.Category != nil {
+		queryStrings["category"] = core.ToString(*request.Category)
+	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
@@ -2615,6 +2624,9 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesByUserIdAsync(
 	queryStrings := core.QueryStrings{}
 	if request.Password != nil {
 		queryStrings["password"] = core.ToString(*request.Password)
+	}
+	if request.Category != nil {
+		queryStrings["category"] = core.ToString(*request.Category)
 	}
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)

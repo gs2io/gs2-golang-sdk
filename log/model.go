@@ -24,21 +24,22 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId         *string `json:"namespaceId"`
-	Name                *string `json:"name"`
-	Description         *string `json:"description"`
-	Type                *string `json:"type"`
-	GcpCredentialJson   *string `json:"gcpCredentialJson"`
-	BigQueryDatasetName *string `json:"bigQueryDatasetName"`
-	LogExpireDays       *int32  `json:"logExpireDays"`
-	AwsRegion           *string `json:"awsRegion"`
-	AwsAccessKeyId      *string `json:"awsAccessKeyId"`
-	AwsSecretAccessKey  *string `json:"awsSecretAccessKey"`
-	FirehoseStreamName  *string `json:"firehoseStreamName"`
-	Status              *string `json:"status"`
-	CreatedAt           *int64  `json:"createdAt"`
-	UpdatedAt           *int64  `json:"updatedAt"`
-	Revision            *int64  `json:"revision"`
+	NamespaceId          *string `json:"namespaceId"`
+	Name                 *string `json:"name"`
+	Description          *string `json:"description"`
+	Type                 *string `json:"type"`
+	GcpCredentialJson    *string `json:"gcpCredentialJson"`
+	BigQueryDatasetName  *string `json:"bigQueryDatasetName"`
+	LogExpireDays        *int32  `json:"logExpireDays"`
+	AwsRegion            *string `json:"awsRegion"`
+	AwsAccessKeyId       *string `json:"awsAccessKeyId"`
+	AwsSecretAccessKey   *string `json:"awsSecretAccessKey"`
+	FirehoseStreamName   *string `json:"firehoseStreamName"`
+	FirehoseCompressData *string `json:"firehoseCompressData"`
+	Status               *string `json:"status"`
+	CreatedAt            *int64  `json:"createdAt"`
+	UpdatedAt            *int64  `json:"updatedAt"`
+	Revision             *int64  `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -296,6 +297,29 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firehoseCompressData"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirehoseCompressData = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirehoseCompressData = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirehoseCompressData = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirehoseCompressData)
+				}
+			}
+		}
 		if v, ok := d["status"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -417,6 +441,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["firehoseStreamName"])
 		}(),
+		FirehoseCompressData: func() *string {
+			v, ok := data["firehoseCompressData"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseCompressData"])
+		}(),
 		Status: func() *string {
 			v, ok := data["status"]
 			if !ok || v == nil {
@@ -482,6 +513,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	if p.FirehoseStreamName != nil {
 		m["firehoseStreamName"] = p.FirehoseStreamName
+	}
+	if p.FirehoseCompressData != nil {
+		m["firehoseCompressData"] = p.FirehoseCompressData
 	}
 	if p.Status != nil {
 		m["status"] = p.Status

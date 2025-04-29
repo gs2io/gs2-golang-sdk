@@ -3450,6 +3450,7 @@ type DescribeMessagesRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	RoomName      *string `json:"roomName"`
 	Password      *string `json:"password"`
+	Category      *int32  `json:"category"`
 	AccessToken   *string `json:"accessToken"`
 	StartAt       *int64  `json:"startAt"`
 	Limit         *int32  `json:"limit"`
@@ -3547,6 +3548,9 @@ func (p *DescribeMessagesRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
 		if v, ok := d["accessToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3612,6 +3616,13 @@ func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMes
 			}
 			return core.CastString(data["password"])
 		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
 		AccessToken: func() *string {
 			v, ok := data["accessToken"]
 			if !ok || v == nil {
@@ -3641,6 +3652,7 @@ func (p DescribeMessagesRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"roomName":      p.RoomName,
 		"password":      p.Password,
+		"category":      p.Category,
 		"accessToken":   p.AccessToken,
 		"startAt":       p.StartAt,
 		"limit":         p.Limit,
@@ -3656,6 +3668,7 @@ type DescribeMessagesByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
 	Password        *string `json:"password"`
+	Category        *int32  `json:"category"`
 	UserId          *string `json:"userId"`
 	StartAt         *int64  `json:"startAt"`
 	Limit           *int32  `json:"limit"`
@@ -3754,6 +3767,9 @@ func (p *DescribeMessagesByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3842,6 +3858,13 @@ func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) Des
 			}
 			return core.CastString(data["password"])
 		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
 		UserId: func() *string {
 			v, ok := data["userId"]
 			if !ok || v == nil {
@@ -3878,6 +3901,7 @@ func (p DescribeMessagesByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"roomName":        p.RoomName,
 		"password":        p.Password,
+		"category":        p.Category,
 		"userId":          p.UserId,
 		"startAt":         p.StartAt,
 		"limit":           p.Limit,
@@ -3894,6 +3918,7 @@ type DescribeLatestMessagesRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	RoomName      *string `json:"roomName"`
 	Password      *string `json:"password"`
+	Category      *int32  `json:"category"`
 	AccessToken   *string `json:"accessToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
@@ -3990,6 +4015,9 @@ func (p *DescribeLatestMessagesRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
 		if v, ok := d["accessToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4052,6 +4080,13 @@ func NewDescribeLatestMessagesRequestFromDict(data map[string]interface{}) Descr
 			}
 			return core.CastString(data["password"])
 		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
 		AccessToken: func() *string {
 			v, ok := data["accessToken"]
 			if !ok || v == nil {
@@ -4074,6 +4109,7 @@ func (p DescribeLatestMessagesRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"roomName":      p.RoomName,
 		"password":      p.Password,
+		"category":      p.Category,
 		"accessToken":   p.AccessToken,
 		"limit":         p.Limit,
 	}
@@ -4088,6 +4124,7 @@ type DescribeLatestMessagesByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
 	Password        *string `json:"password"`
+	Category        *int32  `json:"category"`
 	UserId          *string `json:"userId"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -4185,6 +4222,9 @@ func (p *DescribeLatestMessagesByUserIdRequest) UnmarshalJSON(data []byte) error
 				}
 			}
 		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4270,6 +4310,13 @@ func NewDescribeLatestMessagesByUserIdRequestFromDict(data map[string]interface{
 			}
 			return core.CastString(data["password"])
 		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
 		UserId: func() *string {
 			v, ok := data["userId"]
 			if !ok || v == nil {
@@ -4299,6 +4346,7 @@ func (p DescribeLatestMessagesByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"roomName":        p.RoomName,
 		"password":        p.Password,
+		"category":        p.Category,
 		"userId":          p.UserId,
 		"limit":           p.Limit,
 		"timeOffsetToken": p.TimeOffsetToken,

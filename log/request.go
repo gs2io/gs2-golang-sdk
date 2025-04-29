@@ -122,18 +122,19 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack        *string `json:"contextStack"`
-	Name                *string `json:"name"`
-	Description         *string `json:"description"`
-	Type                *string `json:"type"`
-	GcpCredentialJson   *string `json:"gcpCredentialJson"`
-	BigQueryDatasetName *string `json:"bigQueryDatasetName"`
-	LogExpireDays       *int32  `json:"logExpireDays"`
-	AwsRegion           *string `json:"awsRegion"`
-	AwsAccessKeyId      *string `json:"awsAccessKeyId"`
-	AwsSecretAccessKey  *string `json:"awsSecretAccessKey"`
-	FirehoseStreamName  *string `json:"firehoseStreamName"`
-	DryRun              *bool   `json:"dryRun"`
+	ContextStack         *string `json:"contextStack"`
+	Name                 *string `json:"name"`
+	Description          *string `json:"description"`
+	Type                 *string `json:"type"`
+	GcpCredentialJson    *string `json:"gcpCredentialJson"`
+	BigQueryDatasetName  *string `json:"bigQueryDatasetName"`
+	LogExpireDays        *int32  `json:"logExpireDays"`
+	AwsRegion            *string `json:"awsRegion"`
+	AwsAccessKeyId       *string `json:"awsAccessKeyId"`
+	AwsSecretAccessKey   *string `json:"awsSecretAccessKey"`
+	FirehoseStreamName   *string `json:"firehoseStreamName"`
+	FirehoseCompressData *string `json:"firehoseCompressData"`
+	DryRun               *bool   `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -368,6 +369,29 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firehoseCompressData"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirehoseCompressData = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirehoseCompressData = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirehoseCompressData = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirehoseCompressData)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -453,21 +477,29 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["firehoseStreamName"])
 		}(),
+		FirehoseCompressData: func() *string {
+			v, ok := data["firehoseCompressData"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseCompressData"])
+		}(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                p.Name,
-		"description":         p.Description,
-		"type":                p.Type,
-		"gcpCredentialJson":   p.GcpCredentialJson,
-		"bigQueryDatasetName": p.BigQueryDatasetName,
-		"logExpireDays":       p.LogExpireDays,
-		"awsRegion":           p.AwsRegion,
-		"awsAccessKeyId":      p.AwsAccessKeyId,
-		"awsSecretAccessKey":  p.AwsSecretAccessKey,
-		"firehoseStreamName":  p.FirehoseStreamName,
+		"name":                 p.Name,
+		"description":          p.Description,
+		"type":                 p.Type,
+		"gcpCredentialJson":    p.GcpCredentialJson,
+		"bigQueryDatasetName":  p.BigQueryDatasetName,
+		"logExpireDays":        p.LogExpireDays,
+		"awsRegion":            p.AwsRegion,
+		"awsAccessKeyId":       p.AwsAccessKeyId,
+		"awsSecretAccessKey":   p.AwsSecretAccessKey,
+		"firehoseStreamName":   p.FirehoseStreamName,
+		"firehoseCompressData": p.FirehoseCompressData,
 	}
 }
 
@@ -648,18 +680,19 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack        *string `json:"contextStack"`
-	NamespaceName       *string `json:"namespaceName"`
-	Description         *string `json:"description"`
-	Type                *string `json:"type"`
-	GcpCredentialJson   *string `json:"gcpCredentialJson"`
-	BigQueryDatasetName *string `json:"bigQueryDatasetName"`
-	LogExpireDays       *int32  `json:"logExpireDays"`
-	AwsRegion           *string `json:"awsRegion"`
-	AwsAccessKeyId      *string `json:"awsAccessKeyId"`
-	AwsSecretAccessKey  *string `json:"awsSecretAccessKey"`
-	FirehoseStreamName  *string `json:"firehoseStreamName"`
-	DryRun              *bool   `json:"dryRun"`
+	ContextStack         *string `json:"contextStack"`
+	NamespaceName        *string `json:"namespaceName"`
+	Description          *string `json:"description"`
+	Type                 *string `json:"type"`
+	GcpCredentialJson    *string `json:"gcpCredentialJson"`
+	BigQueryDatasetName  *string `json:"bigQueryDatasetName"`
+	LogExpireDays        *int32  `json:"logExpireDays"`
+	AwsRegion            *string `json:"awsRegion"`
+	AwsAccessKeyId       *string `json:"awsAccessKeyId"`
+	AwsSecretAccessKey   *string `json:"awsSecretAccessKey"`
+	FirehoseStreamName   *string `json:"firehoseStreamName"`
+	FirehoseCompressData *string `json:"firehoseCompressData"`
+	DryRun               *bool   `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -894,6 +927,29 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firehoseCompressData"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirehoseCompressData = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirehoseCompressData = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirehoseCompressData = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirehoseCompressData = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirehoseCompressData)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -979,21 +1035,29 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return core.CastString(data["firehoseStreamName"])
 		}(),
+		FirehoseCompressData: func() *string {
+			v, ok := data["firehoseCompressData"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseCompressData"])
+		}(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":       p.NamespaceName,
-		"description":         p.Description,
-		"type":                p.Type,
-		"gcpCredentialJson":   p.GcpCredentialJson,
-		"bigQueryDatasetName": p.BigQueryDatasetName,
-		"logExpireDays":       p.LogExpireDays,
-		"awsRegion":           p.AwsRegion,
-		"awsAccessKeyId":      p.AwsAccessKeyId,
-		"awsSecretAccessKey":  p.AwsSecretAccessKey,
-		"firehoseStreamName":  p.FirehoseStreamName,
+		"namespaceName":        p.NamespaceName,
+		"description":          p.Description,
+		"type":                 p.Type,
+		"gcpCredentialJson":    p.GcpCredentialJson,
+		"bigQueryDatasetName":  p.BigQueryDatasetName,
+		"logExpireDays":        p.LogExpireDays,
+		"awsRegion":            p.AwsRegion,
+		"awsAccessKeyId":       p.AwsAccessKeyId,
+		"awsSecretAccessKey":   p.AwsSecretAccessKey,
+		"firehoseStreamName":   p.FirehoseStreamName,
+		"firehoseCompressData": p.FirehoseCompressData,
 	}
 }
 

@@ -202,6 +202,9 @@ func (p Gs2LogRestClient) CreateNamespaceAsync(
 	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
 		bodies["firehoseStreamName"] = *request.FirehoseStreamName
 	}
+	if request.FirehoseCompressData != nil && *request.FirehoseCompressData != "" {
+		bodies["firehoseCompressData"] = *request.FirehoseCompressData
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -501,6 +504,9 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	}
 	if request.FirehoseStreamName != nil && *request.FirehoseStreamName != "" {
 		bodies["firehoseStreamName"] = *request.FirehoseStreamName
+	}
+	if request.FirehoseCompressData != nil && *request.FirehoseCompressData != "" {
+		bodies["firehoseCompressData"] = *request.FirehoseCompressData
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
