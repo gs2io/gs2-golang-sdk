@@ -5166,6 +5166,111 @@ func (p Gs2AccountRestClient) GetDataOwnerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func updateDataOwnerByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateDataOwnerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateDataOwnerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateDataOwnerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UpdateDataOwnerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateDataOwnerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateDataOwnerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) UpdateDataOwnerByUserIdAsync(
+	request *UpdateDataOwnerByUserIdRequest,
+	callback chan<- UpdateDataOwnerByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/dataOwner"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DataOwnerName != nil && *request.DataOwnerName != "" {
+		bodies["dataOwnerName"] = *request.DataOwnerName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateDataOwnerByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) UpdateDataOwnerByUserId(
+	request *UpdateDataOwnerByUserIdRequest,
+) (*UpdateDataOwnerByUserIdResult, error) {
+	callback := make(chan UpdateDataOwnerByUserIdAsyncResult, 1)
+	go p.UpdateDataOwnerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteDataOwnerByUserIdAsyncHandler(
 	client Gs2AccountRestClient,
 	job *core.NetworkJob,

@@ -2808,6 +2808,62 @@ func (p GetDataOwnerByUserIdResult) Pointer() *GetDataOwnerByUserIdResult {
 	return &p
 }
 
+type UpdateDataOwnerByUserIdResult struct {
+	Item     *DataOwner           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateDataOwnerByUserIdAsyncResult struct {
+	result *UpdateDataOwnerByUserIdResult
+	err    error
+}
+
+func NewUpdateDataOwnerByUserIdResultFromJson(data string) UpdateDataOwnerByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDataOwnerByUserIdResultFromDict(dict)
+}
+
+func NewUpdateDataOwnerByUserIdResultFromDict(data map[string]interface{}) UpdateDataOwnerByUserIdResult {
+	return UpdateDataOwnerByUserIdResult{
+		Item: func() *DataOwner {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataOwnerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateDataOwnerByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateDataOwnerByUserIdResult) Pointer() *UpdateDataOwnerByUserIdResult {
+	return &p
+}
+
 type DeleteDataOwnerByUserIdResult struct {
 	Item     *DataOwner           `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
