@@ -1555,7 +1555,7 @@ type GlobalRankingData struct {
 	Rank                *int32  `json:"rank"`
 	Score               *int64  `json:"score"`
 	Metadata            *string `json:"metadata"`
-	InvertCreatedAt     *int64  `json:"invertCreatedAt"`
+	InvertUpdatedAt     *int64  `json:"invertUpdatedAt"`
 	CreatedAt           *int64  `json:"createdAt"`
 	UpdatedAt           *int64  `json:"updatedAt"`
 	Revision            *int64  `json:"revision"`
@@ -1687,8 +1687,8 @@ func (p *GlobalRankingData) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["invertCreatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.InvertCreatedAt)
+		if v, ok := d["invertUpdatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InvertUpdatedAt)
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
@@ -1767,12 +1767,12 @@ func NewGlobalRankingDataFromDict(data map[string]interface{}) GlobalRankingData
 			}
 			return core.CastString(data["metadata"])
 		}(),
-		InvertCreatedAt: func() *int64 {
-			v, ok := data["invertCreatedAt"]
+		InvertUpdatedAt: func() *int64 {
+			v, ok := data["invertUpdatedAt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastInt64(data["invertCreatedAt"])
+			return core.CastInt64(data["invertUpdatedAt"])
 		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
@@ -1824,8 +1824,8 @@ func (p GlobalRankingData) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
 	}
-	if p.InvertCreatedAt != nil {
-		m["invertCreatedAt"] = p.InvertCreatedAt
+	if p.InvertUpdatedAt != nil {
+		m["invertUpdatedAt"] = p.InvertUpdatedAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
@@ -3295,7 +3295,7 @@ type ClusterRankingData struct {
 	Rank                 *int32  `json:"rank"`
 	Score                *int64  `json:"score"`
 	Metadata             *string `json:"metadata"`
-	InvertCreatedAt      *int64  `json:"invertCreatedAt"`
+	InvertUpdatedAt      *int64  `json:"invertUpdatedAt"`
 	CreatedAt            *int64  `json:"createdAt"`
 	UpdatedAt            *int64  `json:"updatedAt"`
 	Revision             *int64  `json:"revision"`
@@ -3450,8 +3450,8 @@ func (p *ClusterRankingData) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["invertCreatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.InvertCreatedAt)
+		if v, ok := d["invertUpdatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InvertUpdatedAt)
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
@@ -3537,12 +3537,12 @@ func NewClusterRankingDataFromDict(data map[string]interface{}) ClusterRankingDa
 			}
 			return core.CastString(data["metadata"])
 		}(),
-		InvertCreatedAt: func() *int64 {
-			v, ok := data["invertCreatedAt"]
+		InvertUpdatedAt: func() *int64 {
+			v, ok := data["invertUpdatedAt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastInt64(data["invertCreatedAt"])
+			return core.CastInt64(data["invertUpdatedAt"])
 		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
@@ -3597,8 +3597,8 @@ func (p ClusterRankingData) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
 	}
-	if p.InvertCreatedAt != nil {
-		m["invertCreatedAt"] = p.InvertCreatedAt
+	if p.InvertUpdatedAt != nil {
+		m["invertUpdatedAt"] = p.InvertUpdatedAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
@@ -4912,7 +4912,7 @@ type SubscribeRankingData struct {
 	ScorerUserId           *string `json:"scorerUserId"`
 	Score                  *int64  `json:"score"`
 	Metadata               *string `json:"metadata"`
-	InvertCreatedAt        *int64  `json:"invertCreatedAt"`
+	InvertUpdatedAt        *int64  `json:"invertUpdatedAt"`
 	CreatedAt              *int64  `json:"createdAt"`
 	UpdatedAt              *int64  `json:"updatedAt"`
 	Revision               *int64  `json:"revision"`
@@ -5067,8 +5067,8 @@ func (p *SubscribeRankingData) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["invertCreatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.InvertCreatedAt)
+		if v, ok := d["invertUpdatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InvertUpdatedAt)
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
@@ -5154,12 +5154,12 @@ func NewSubscribeRankingDataFromDict(data map[string]interface{}) SubscribeRanki
 			}
 			return core.CastString(data["metadata"])
 		}(),
-		InvertCreatedAt: func() *int64 {
-			v, ok := data["invertCreatedAt"]
+		InvertUpdatedAt: func() *int64 {
+			v, ok := data["invertUpdatedAt"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastInt64(data["invertCreatedAt"])
+			return core.CastInt64(data["invertUpdatedAt"])
 		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
@@ -5214,8 +5214,8 @@ func (p SubscribeRankingData) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
 	}
-	if p.InvertCreatedAt != nil {
-		m["invertCreatedAt"] = p.InvertCreatedAt
+	if p.InvertUpdatedAt != nil {
+		m["invertUpdatedAt"] = p.InvertUpdatedAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
