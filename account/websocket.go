@@ -202,6 +202,9 @@ func (p Gs2AccountWebSocketClient) CreateNamespaceAsync(
 	if request.BanScript != nil {
 		bodies["banScript"] = request.BanScript.ToDict()
 	}
+	if request.UnBanScript != nil {
+		bodies["unBanScript"] = request.UnBanScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -489,6 +492,9 @@ func (p Gs2AccountWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.BanScript != nil {
 		bodies["banScript"] = request.BanScript.ToDict()
+	}
+	if request.UnBanScript != nil {
+		bodies["unBanScript"] = request.UnBanScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
