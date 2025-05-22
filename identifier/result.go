@@ -1605,10 +1605,10 @@ func (p DetachSecurityPolicyResult) Pointer() *DetachSecurityPolicyResult {
 }
 
 type LoginResult struct {
-    AccessToken *string              `json:"accessToken"`
-    TokenType   *string              `json:"tokenType"`
-    ExpiresIn   *int32               `json:"expiresIn"`
-    OwnerId     *string              `json:"ownerId"`
+    AccessToken *string              `json:"access_token"`
+    TokenType   *string              `json:"token_type"`
+    ExpiresIn   *int32               `json:"expires_in"`
+    OwnerId     *string              `json:"owner_id"`
     Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
