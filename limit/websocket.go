@@ -574,6 +574,91 @@ func (p Gs2LimitWebSocketClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LimitWebSocketClient) getServiceVersionAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetServiceVersionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetServiceVersionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetServiceVersionResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetServiceVersionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetServiceVersionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitWebSocketClient) GetServiceVersionAsync(
+	request *GetServiceVersionRequest,
+	callback chan<- GetServiceVersionAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "limit",
+			"component":   "namespace",
+			"function":    "getServiceVersion",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getServiceVersionAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitWebSocketClient) GetServiceVersion(
+	request *GetServiceVersionRequest,
+) (*GetServiceVersionResult, error) {
+	callback := make(chan GetServiceVersionAsyncResult, 1)
+	go p.GetServiceVersionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LimitWebSocketClient) dumpUserDataByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DumpUserDataByUserIdAsyncResult,

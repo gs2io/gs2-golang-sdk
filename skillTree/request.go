@@ -751,6 +751,58 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 	return &p
 }
 
+type GetServiceVersionRequest struct {
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *GetServiceVersionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetServiceVersionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetServiceVersionRequest{}
+	} else {
+		*p = GetServiceVersionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewGetServiceVersionRequestFromJson(data string) (GetServiceVersionRequest, error) {
+	req := GetServiceVersionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetServiceVersionRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetServiceVersionRequestFromDict(data map[string]interface{}) GetServiceVersionRequest {
+	return GetServiceVersionRequest{}
+}
+
+func (p GetServiceVersionRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p GetServiceVersionRequest) Pointer() *GetServiceVersionRequest {
+	return &p
+}
+
 type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
