@@ -3945,6 +3945,7 @@ type TransactionResult struct {
 	VerifyResults  []VerifyActionResult  `json:"verifyResults"`
 	ConsumeResults []ConsumeActionResult `json:"consumeResults"`
 	AcquireResults []AcquireActionResult `json:"acquireResults"`
+	HasError       *bool                 `json:"hasError"`
 }
 
 func (p *TransactionResult) UnmarshalJSON(data []byte) error {
@@ -4001,6 +4002,9 @@ func (p *TransactionResult) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireResults"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireResults)
 		}
+		if v, ok := d["hasError"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.HasError)
+		}
 	}
 	return nil
 }
@@ -4038,6 +4042,13 @@ func NewTransactionResultFromDict(data map[string]interface{}) TransactionResult
 			}
 			return CastAcquireActionResults(core.CastArray(data["acquireResults"]))
 		}(),
+		HasError: func() *bool {
+			v, ok := data["hasError"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["hasError"])
+		}(),
 	}
 }
 
@@ -4060,6 +4071,9 @@ func (p TransactionResult) ToDict() map[string]interface{} {
 		m["acquireResults"] = CastAcquireActionResultsFromDict(
 			p.AcquireResults,
 		)
+	}
+	if p.HasError != nil {
+		m["hasError"] = p.HasError
 	}
 	return m
 }
