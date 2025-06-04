@@ -2115,6 +2115,118 @@ func (p GetFriendByUserIdResult) Pointer() *GetFriendByUserIdResult {
 	return &p
 }
 
+type AddFriendResult struct {
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AddFriendAsyncResult struct {
+	result *AddFriendResult
+	err    error
+}
+
+func NewAddFriendResultFromJson(data string) AddFriendResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddFriendResultFromDict(dict)
+}
+
+func NewAddFriendResultFromDict(data map[string]interface{}) AddFriendResult {
+	return AddFriendResult{
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AddFriendResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AddFriendResult) Pointer() *AddFriendResult {
+	return &p
+}
+
+type AddFriendByUserIdResult struct {
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type AddFriendByUserIdAsyncResult struct {
+	result *AddFriendByUserIdResult
+	err    error
+}
+
+func NewAddFriendByUserIdResultFromJson(data string) AddFriendByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddFriendByUserIdResultFromDict(dict)
+}
+
+func NewAddFriendByUserIdResultFromDict(data map[string]interface{}) AddFriendByUserIdResult {
+	return AddFriendByUserIdResult{
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p AddFriendByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p AddFriendByUserIdResult) Pointer() *AddFriendByUserIdResult {
+	return &p
+}
+
 type DeleteFriendResult struct {
 	Item     *FriendUser          `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

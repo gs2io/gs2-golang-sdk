@@ -6230,6 +6230,340 @@ func (p GetFriendByUserIdRequest) Pointer() *GetFriendByUserIdRequest {
 	return &p
 }
 
+type AddFriendRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	TargetUserId       *string `json:"targetUserId"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *AddFriendRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AddFriendRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AddFriendRequest{}
+	} else {
+		*p = AddFriendRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAddFriendRequestFromJson(data string) (AddFriendRequest, error) {
+	req := AddFriendRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AddFriendRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAddFriendRequestFromDict(data map[string]interface{}) AddFriendRequest {
+	return AddFriendRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
+	}
+}
+
+func (p AddFriendRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"targetUserId":  p.TargetUserId,
+	}
+}
+
+func (p AddFriendRequest) Pointer() *AddFriendRequest {
+	return &p
+}
+
+type AddFriendByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	TargetUserId       *string `json:"targetUserId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *AddFriendByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AddFriendByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AddFriendByUserIdRequest{}
+	} else {
+		*p = AddFriendByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAddFriendByUserIdRequestFromJson(data string) (AddFriendByUserIdRequest, error) {
+	req := AddFriendByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AddFriendByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAddFriendByUserIdRequestFromDict(data map[string]interface{}) AddFriendByUserIdRequest {
+	return AddFriendByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p AddFriendByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"targetUserId":    p.TargetUserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p AddFriendByUserIdRequest) Pointer() *AddFriendByUserIdRequest {
+	return &p
+}
+
 type DeleteFriendRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`

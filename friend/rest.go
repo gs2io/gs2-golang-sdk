@@ -3909,6 +3909,215 @@ func (p Gs2FriendRestClient) GetFriendByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func addFriendAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- AddFriendAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddFriendAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddFriendResult
+	if asyncResult.Err != nil {
+		callback <- AddFriendAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddFriendAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AddFriendAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) AddFriendAsync(
+	request *AddFriendRequest,
+	callback chan<- AddFriendAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/friend/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go addFriendAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) AddFriend(
+	request *AddFriendRequest,
+) (*AddFriendResult, error) {
+	callback := make(chan AddFriendAsyncResult, 1)
+	go p.AddFriendAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func addFriendByUserIdAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- AddFriendByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddFriendByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddFriendByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- AddFriendByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddFriendByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AddFriendByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) AddFriendByUserIdAsync(
+	request *AddFriendByUserIdRequest,
+	callback chan<- AddFriendByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/friend/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go addFriendByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) AddFriendByUserId(
+	request *AddFriendByUserIdRequest,
+) (*AddFriendByUserIdResult, error) {
+	callback := make(chan AddFriendByUserIdAsyncResult, 1)
+	go p.AddFriendByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteFriendAsyncHandler(
 	client Gs2FriendRestClient,
 	job *core.NetworkJob,
