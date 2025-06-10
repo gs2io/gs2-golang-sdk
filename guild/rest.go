@@ -212,6 +212,9 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	if request.ChangeRoleScript != nil {
 		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
 	}
+	if request.DeleteGuildScript != nil {
+		bodies["deleteGuildScript"] = request.DeleteGuildScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -523,6 +526,9 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 	if request.ChangeRoleScript != nil {
 		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
+	}
+	if request.DeleteGuildScript != nil {
+		bodies["deleteGuildScript"] = request.DeleteGuildScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

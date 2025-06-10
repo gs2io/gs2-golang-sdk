@@ -38,6 +38,7 @@ type Namespace struct {
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	CreatedAt                  *int64               `json:"createdAt"`
 	UpdatedAt                  *int64               `json:"updatedAt"`
@@ -168,6 +169,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["changeRoleScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
 		}
+		if v, ok := d["deleteGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteGuildScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -289,6 +293,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 				return nil
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer()
+		}(),
+		DeleteGuildScript: func() *ScriptSetting {
+			v, ok := data["deleteGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteGuildScript"])).Pointer()
 		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
@@ -418,6 +429,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.ChangeRoleScript.ToDict()
+		}()
+	}
+	if p.DeleteGuildScript != nil {
+		m["deleteGuildScript"] = func() map[string]interface{} {
+			if p.DeleteGuildScript == nil {
+				return nil
+			}
+			return p.DeleteGuildScript.ToDict()
 		}()
 	}
 	if p.LogSetting != nil {

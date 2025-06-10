@@ -136,6 +136,7 @@ type CreateNamespaceRequest struct {
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	DryRun                     *bool                `json:"dryRun"`
 }
@@ -240,6 +241,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["changeRoleScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
+		}
+		if v, ok := d["deleteGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteGuildScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -350,6 +354,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer()
 		}(),
+		DeleteGuildScript: func() *ScriptSetting {
+			v, ok := data["deleteGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteGuildScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -429,6 +440,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.ChangeRoleScript.ToDict()
+		}(),
+		"deleteGuildScript": func() map[string]interface{} {
+			if p.DeleteGuildScript == nil {
+				return nil
+			}
+			return p.DeleteGuildScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -630,6 +647,7 @@ type UpdateNamespaceRequest struct {
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	DryRun                     *bool                `json:"dryRun"`
 }
@@ -734,6 +752,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["changeRoleScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
+		}
+		if v, ok := d["deleteGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteGuildScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -844,6 +865,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer()
 		}(),
+		DeleteGuildScript: func() *ScriptSetting {
+			v, ok := data["deleteGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteGuildScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -923,6 +951,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.ChangeRoleScript.ToDict()
+		}(),
+		"deleteGuildScript": func() map[string]interface{} {
+			if p.DeleteGuildScript == nil {
+				return nil
+			}
+			return p.DeleteGuildScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
