@@ -2347,6 +2347,109 @@ func (p Gs2ScheduleWebSocketClient) TriggerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ScheduleWebSocketClient) extendTriggerByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ExtendTriggerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ExtendTriggerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ExtendTriggerByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExtendTriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ExtendTriggerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleWebSocketClient) ExtendTriggerByUserIdAsync(
+	request *ExtendTriggerByUserIdRequest,
+	callback chan<- ExtendTriggerByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "extendTriggerByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExtendSeconds != nil {
+		bodies["extendSeconds"] = *request.ExtendSeconds
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.extendTriggerByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleWebSocketClient) ExtendTriggerByUserId(
+	request *ExtendTriggerByUserIdRequest,
+) (*ExtendTriggerByUserIdResult, error) {
+	callback := make(chan ExtendTriggerByUserIdAsyncResult, 1)
+	go p.ExtendTriggerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ScheduleWebSocketClient) triggerByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- TriggerByStampSheetAsyncResult,
@@ -2431,6 +2534,97 @@ func (p Gs2ScheduleWebSocketClient) TriggerByStampSheet(
 ) (*TriggerByStampSheetResult, error) {
 	callback := make(chan TriggerByStampSheetAsyncResult, 1)
 	go p.TriggerByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ScheduleWebSocketClient) extendTriggerByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ExtendTriggerByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ExtendTriggerByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ExtendTriggerByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExtendTriggerByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ExtendTriggerByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleWebSocketClient) ExtendTriggerByStampSheetAsync(
+	request *ExtendTriggerByStampSheetRequest,
+	callback chan<- ExtendTriggerByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "extendTriggerByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.extendTriggerByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleWebSocketClient) ExtendTriggerByStampSheet(
+	request *ExtendTriggerByStampSheetRequest,
+) (*ExtendTriggerByStampSheetResult, error) {
+	callback := make(chan ExtendTriggerByStampSheetAsyncResult, 1)
+	go p.ExtendTriggerByStampSheetAsync(
 		request,
 		callback,
 	)

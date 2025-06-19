@@ -2428,6 +2428,116 @@ func (p Gs2ScheduleRestClient) TriggerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func extendTriggerByUserIdAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- ExtendTriggerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ExtendTriggerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ExtendTriggerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ExtendTriggerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExtendTriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ExtendTriggerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) ExtendTriggerByUserIdAsync(
+	request *ExtendTriggerByUserIdRequest,
+	callback chan<- ExtendTriggerByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}/extend"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+	} else {
+		path = strings.ReplaceAll(path, "{triggerName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ExtendSeconds != nil {
+		bodies["extendSeconds"] = *request.ExtendSeconds
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go extendTriggerByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) ExtendTriggerByUserId(
+	request *ExtendTriggerByUserIdRequest,
+) (*ExtendTriggerByUserIdResult, error) {
+	callback := make(chan ExtendTriggerByUserIdAsyncResult, 1)
+	go p.ExtendTriggerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func triggerByStampSheetAsyncHandler(
 	client Gs2ScheduleRestClient,
 	job *core.NetworkJob,
@@ -2513,6 +2623,98 @@ func (p Gs2ScheduleRestClient) TriggerByStampSheet(
 ) (*TriggerByStampSheetResult, error) {
 	callback := make(chan TriggerByStampSheetAsyncResult, 1)
 	go p.TriggerByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func extendTriggerByStampSheetAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- ExtendTriggerByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ExtendTriggerByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ExtendTriggerByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- ExtendTriggerByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExtendTriggerByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ExtendTriggerByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) ExtendTriggerByStampSheetAsync(
+	request *ExtendTriggerByStampSheetRequest,
+	callback chan<- ExtendTriggerByStampSheetAsyncResult,
+) {
+	path := "/stamp/trigger/extend"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go extendTriggerByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) ExtendTriggerByStampSheet(
+	request *ExtendTriggerByStampSheetRequest,
+) (*ExtendTriggerByStampSheetResult, error) {
+	callback := make(chan ExtendTriggerByStampSheetAsyncResult, 1)
+	go p.ExtendTriggerByStampSheetAsync(
 		request,
 		callback,
 	)

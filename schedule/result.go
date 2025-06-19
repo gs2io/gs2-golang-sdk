@@ -1314,6 +1314,62 @@ func (p TriggerByUserIdResult) Pointer() *TriggerByUserIdResult {
 	return &p
 }
 
+type ExtendTriggerByUserIdResult struct {
+	Item     *Trigger             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ExtendTriggerByUserIdAsyncResult struct {
+	result *ExtendTriggerByUserIdResult
+	err    error
+}
+
+func NewExtendTriggerByUserIdResultFromJson(data string) ExtendTriggerByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExtendTriggerByUserIdResultFromDict(dict)
+}
+
+func NewExtendTriggerByUserIdResultFromDict(data map[string]interface{}) ExtendTriggerByUserIdResult {
+	return ExtendTriggerByUserIdResult{
+		Item: func() *Trigger {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTriggerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ExtendTriggerByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ExtendTriggerByUserIdResult) Pointer() *ExtendTriggerByUserIdResult {
+	return &p
+}
+
 type TriggerByStampSheetResult struct {
 	Item     *Trigger             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -1367,6 +1423,62 @@ func (p TriggerByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p TriggerByStampSheetResult) Pointer() *TriggerByStampSheetResult {
+	return &p
+}
+
+type ExtendTriggerByStampSheetResult struct {
+	Item     *Trigger             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ExtendTriggerByStampSheetAsyncResult struct {
+	result *ExtendTriggerByStampSheetResult
+	err    error
+}
+
+func NewExtendTriggerByStampSheetResultFromJson(data string) ExtendTriggerByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExtendTriggerByStampSheetResultFromDict(dict)
+}
+
+func NewExtendTriggerByStampSheetResultFromDict(data map[string]interface{}) ExtendTriggerByStampSheetResult {
+	return ExtendTriggerByStampSheetResult{
+		Item: func() *Trigger {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTriggerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ExtendTriggerByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ExtendTriggerByStampSheetResult) Pointer() *ExtendTriggerByStampSheetResult {
 	return &p
 }
 

@@ -3780,6 +3780,201 @@ func (p TriggerByUserIdRequest) Pointer() *TriggerByUserIdRequest {
 	return &p
 }
 
+type ExtendTriggerByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	TriggerName        *string `json:"triggerName"`
+	UserId             *string `json:"userId"`
+	ExtendSeconds      *int32  `json:"extendSeconds"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *ExtendTriggerByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExtendTriggerByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExtendTriggerByUserIdRequest{}
+	} else {
+		*p = ExtendTriggerByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["extendSeconds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExtendSeconds)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExtendTriggerByUserIdRequestFromJson(data string) (ExtendTriggerByUserIdRequest, error) {
+	req := ExtendTriggerByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExtendTriggerByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewExtendTriggerByUserIdRequestFromDict(data map[string]interface{}) ExtendTriggerByUserIdRequest {
+	return ExtendTriggerByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		TriggerName: func() *string {
+			v, ok := data["triggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ExtendSeconds: func() *int32 {
+			v, ok := data["extendSeconds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["extendSeconds"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p ExtendTriggerByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"triggerName":     p.TriggerName,
+		"userId":          p.UserId,
+		"extendSeconds":   p.ExtendSeconds,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p ExtendTriggerByUserIdRequest) Pointer() *ExtendTriggerByUserIdRequest {
+	return &p
+}
+
 type TriggerByStampSheetRequest struct {
 	ContextStack *string `json:"contextStack"`
 	StampSheet   *string `json:"stampSheet"`
@@ -3895,6 +4090,124 @@ func (p TriggerByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p TriggerByStampSheetRequest) Pointer() *TriggerByStampSheetRequest {
+	return &p
+}
+
+type ExtendTriggerByStampSheetRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *ExtendTriggerByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExtendTriggerByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExtendTriggerByStampSheetRequest{}
+	} else {
+		*p = ExtendTriggerByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampSheet = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampSheet = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampSheet = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampSheet = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampSheet = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampSheet)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExtendTriggerByStampSheetRequestFromJson(data string) (ExtendTriggerByStampSheetRequest, error) {
+	req := ExtendTriggerByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExtendTriggerByStampSheetRequest{}, err
+	}
+	return req, nil
+}
+
+func NewExtendTriggerByStampSheetRequestFromDict(data map[string]interface{}) ExtendTriggerByStampSheetRequest {
+	return ExtendTriggerByStampSheetRequest{
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p ExtendTriggerByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p ExtendTriggerByStampSheetRequest) Pointer() *ExtendTriggerByStampSheetRequest {
 	return &p
 }
 
