@@ -2202,6 +2202,7 @@ type TransactionResult struct {
 	VerifyResults       []VerifyActionResult  `json:"verifyResults"`
 	ConsumeResults      []ConsumeActionResult `json:"consumeResults"`
 	AcquireResults      []AcquireActionResult `json:"acquireResults"`
+	HasError            *bool                 `json:"hasError"`
 	CreatedAt           *int64                `json:"createdAt"`
 	Revision            *int64                `json:"revision"`
 }
@@ -2306,6 +2307,9 @@ func (p *TransactionResult) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireResults"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireResults)
 		}
+		if v, ok := d["hasError"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.HasError)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -2363,6 +2367,13 @@ func NewTransactionResultFromDict(data map[string]interface{}) TransactionResult
 			}
 			return CastAcquireActionResults(core.CastArray(data["acquireResults"]))
 		}(),
+		HasError: func() *bool {
+			v, ok := data["hasError"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["hasError"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -2405,6 +2416,9 @@ func (p TransactionResult) ToDict() map[string]interface{} {
 		m["acquireResults"] = CastAcquireActionResultsFromDict(
 			p.AcquireResults,
 		)
+	}
+	if p.HasError != nil {
+		m["hasError"] = p.HasError
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
