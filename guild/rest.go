@@ -7878,6 +7878,12 @@ func acceptRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- AcceptRequestAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -7985,6 +7991,12 @@ func acceptRequestByGuildNameAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestByGuildNameResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- AcceptRequestByGuildNameAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -8738,6 +8750,12 @@ func sendRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- SendRequestAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -8848,6 +8866,12 @@ func sendRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- SendRequestByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

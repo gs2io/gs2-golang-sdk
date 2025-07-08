@@ -48,3 +48,14 @@ func (p GuildJoinRequestLimitReached) Type() string {
 func (p GuildJoinRequestLimitReached) Code() string {
 	return "guild.request.tooMany"
 }
+
+type MaximumJoinedGuildsReached struct {
+}
+
+func (p MaximumJoinedGuildsReached) Type() string {
+	return "GuildMaximumJoinedGuildsReached"
+}
+
+func (p MaximumJoinedGuildsReached) Code() string {
+	return "user.joinedGuild.tooMany"
+}

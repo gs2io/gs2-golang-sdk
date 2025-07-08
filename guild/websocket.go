@@ -7541,6 +7541,12 @@ func (p Gs2GuildWebSocketClient) acceptRequestAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 	}
 	callback <- AcceptRequestAsyncResult{
 		result: &result,
@@ -7644,6 +7650,12 @@ func (p Gs2GuildWebSocketClient) acceptRequestByGuildNameAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 	}
 	callback <- AcceptRequestByGuildNameAsyncResult{
 		result: &result,
@@ -8353,6 +8365,12 @@ func (p Gs2GuildWebSocketClient) sendRequestAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 	}
 	callback <- SendRequestAsyncResult{
 		result: &result,
@@ -8459,6 +8477,12 @@ func (p Gs2GuildWebSocketClient) sendRequestByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 	}
 	callback <- SendRequestByUserIdAsyncResult{
 		result: &result,
