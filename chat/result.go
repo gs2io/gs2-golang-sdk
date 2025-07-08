@@ -1297,8 +1297,9 @@ func (p DescribeMessagesByUserIdResult) Pointer() *DescribeMessagesByUserIdResul
 }
 
 type DescribeLatestMessagesResult struct {
-	Items    []Message            `json:"items"`
-	Metadata *core.ResultMetadata `json:"metadata"`
+	Items         []Message            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLatestMessagesAsyncResult struct {
@@ -1320,6 +1321,13 @@ func NewDescribeLatestMessagesResultFromDict(data map[string]interface{}) Descri
 			}
 			return CastMessages(core.CastArray(data["items"]))
 		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1335,6 +1343,7 @@ func (p DescribeLatestMessagesResult) ToDict() map[string]interface{} {
 		"items": CastMessagesFromDict(
 			p.Items,
 		),
+		"nextPageToken": p.NextPageToken,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -1349,8 +1358,9 @@ func (p DescribeLatestMessagesResult) Pointer() *DescribeLatestMessagesResult {
 }
 
 type DescribeLatestMessagesByUserIdResult struct {
-	Items    []Message            `json:"items"`
-	Metadata *core.ResultMetadata `json:"metadata"`
+	Items         []Message            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLatestMessagesByUserIdAsyncResult struct {
@@ -1372,6 +1382,13 @@ func NewDescribeLatestMessagesByUserIdResultFromDict(data map[string]interface{}
 			}
 			return CastMessages(core.CastArray(data["items"]))
 		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1387,6 +1404,7 @@ func (p DescribeLatestMessagesByUserIdResult) ToDict() map[string]interface{} {
 		"items": CastMessagesFromDict(
 			p.Items,
 		),
+		"nextPageToken": p.NextPageToken,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil

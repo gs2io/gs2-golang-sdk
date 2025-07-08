@@ -2594,6 +2594,9 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesAsync(
 	if request.Category != nil {
 		queryStrings["category"] = core.ToString(*request.Category)
 	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
@@ -2716,6 +2719,9 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesByUserIdAsync(
 	}
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)

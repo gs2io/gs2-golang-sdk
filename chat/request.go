@@ -3972,6 +3972,7 @@ type DescribeLatestMessagesRequest struct {
 	Password      *string `json:"password"`
 	Category      *int32  `json:"category"`
 	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
 }
@@ -4093,6 +4094,29 @@ func (p *DescribeLatestMessagesRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
 		if v, ok := d["limit"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Limit)
 		}
@@ -4146,6 +4170,13 @@ func NewDescribeLatestMessagesRequestFromDict(data map[string]interface{}) Descr
 			}
 			return core.CastString(data["accessToken"])
 		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
 		Limit: func() *int32 {
 			v, ok := data["limit"]
 			if !ok || v == nil {
@@ -4163,6 +4194,7 @@ func (p DescribeLatestMessagesRequest) ToDict() map[string]interface{} {
 		"password":      p.Password,
 		"category":      p.Category,
 		"accessToken":   p.AccessToken,
+		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
 }
@@ -4178,6 +4210,7 @@ type DescribeLatestMessagesByUserIdRequest struct {
 	Password        *string `json:"password"`
 	Category        *int32  `json:"category"`
 	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 	DryRun          *bool   `json:"dryRun"`
@@ -4300,6 +4333,29 @@ func (p *DescribeLatestMessagesByUserIdRequest) UnmarshalJSON(data []byte) error
 				}
 			}
 		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
 		if v, ok := d["limit"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Limit)
 		}
@@ -4376,6 +4432,13 @@ func NewDescribeLatestMessagesByUserIdRequestFromDict(data map[string]interface{
 			}
 			return core.CastString(data["userId"])
 		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
 		Limit: func() *int32 {
 			v, ok := data["limit"]
 			if !ok || v == nil {
@@ -4400,6 +4463,7 @@ func (p DescribeLatestMessagesByUserIdRequest) ToDict() map[string]interface{} {
 		"password":        p.Password,
 		"category":        p.Category,
 		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
 		"limit":           p.Limit,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}

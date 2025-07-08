@@ -2527,6 +2527,9 @@ func (p Gs2ChatWebSocketClient) DescribeLatestMessagesAsync(
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
@@ -2644,6 +2647,9 @@ func (p Gs2ChatWebSocketClient) DescribeLatestMessagesByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
