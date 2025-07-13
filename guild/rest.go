@@ -5005,6 +5005,12 @@ func assumeAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AssumeResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.notFound" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedGuildMember{})
+			}
+		}
 		callback <- AssumeAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -5112,6 +5118,12 @@ func assumeByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AssumeByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.notFound" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedGuildMember{})
+			}
+		}
 		callback <- AssumeByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -8755,6 +8767,15 @@ func sendRequestAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.receiveRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumReceiveRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumSendRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.notMeetJoinRequirements" {
+				asyncResult.Err = gs2err.SetClientError(DotMeetJoinRequirements{})
+			}
 		}
 		callback <- SendRequestAsyncResult{
 			err: asyncResult.Err,
@@ -8870,6 +8891,15 @@ func sendRequestByUserIdAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.receiveRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumReceiveRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumSendRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.notMeetJoinRequirements" {
+				asyncResult.Err = gs2err.SetClientError(DotMeetJoinRequirements{})
 			}
 		}
 		callback <- SendRequestByUserIdAsyncResult{

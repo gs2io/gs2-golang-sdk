@@ -4816,6 +4816,12 @@ func (p Gs2GuildWebSocketClient) assumeAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.notFound" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedGuildMember{})
+			}
+		}
 	}
 	callback <- AssumeAsyncResult{
 		result: &result,
@@ -4919,6 +4925,12 @@ func (p Gs2GuildWebSocketClient) assumeByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.notFound" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedGuildMember{})
+			}
+		}
 	}
 	callback <- AssumeByUserIdAsyncResult{
 		result: &result,
@@ -8370,6 +8382,15 @@ func (p Gs2GuildWebSocketClient) sendRequestAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.receiveRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumReceiveRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumSendRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.notMeetJoinRequirements" {
+				asyncResult.Err = gs2err.SetClientError(DotMeetJoinRequirements{})
+			}
 		}
 	}
 	callback <- SendRequestAsyncResult{
@@ -8481,6 +8502,15 @@ func (p Gs2GuildWebSocketClient) sendRequestByUserIdAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.receiveRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumReceiveRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumSendRequestsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.sendRequests.notMeetJoinRequirements" {
+				asyncResult.Err = gs2err.SetClientError(DotMeetJoinRequirements{})
 			}
 		}
 	}

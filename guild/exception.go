@@ -59,3 +59,47 @@ func (p MaximumJoinedGuildsReached) Type() string {
 func (p MaximumJoinedGuildsReached) Code() string {
 	return "user.joinedGuild.tooMany"
 }
+
+type MaximumReceiveRequestsReached struct {
+}
+
+func (p MaximumReceiveRequestsReached) Type() string {
+	return "GuildMaximumReceiveRequestsReached"
+}
+
+func (p MaximumReceiveRequestsReached) Code() string {
+	return "guild.receiveRequests.tooMany"
+}
+
+type MaximumSendRequestsReached struct {
+}
+
+func (p MaximumSendRequestsReached) Type() string {
+	return "GuildMaximumSendRequestsReached"
+}
+
+func (p MaximumSendRequestsReached) Code() string {
+	return "guild.sendRequests.tooMany"
+}
+
+type DotMeetJoinRequirements struct {
+}
+
+func (p DotMeetJoinRequirements) Type() string {
+	return "GuildDotMeetJoinRequirements"
+}
+
+func (p DotMeetJoinRequirements) Code() string {
+	return "guild.sendRequests.notMeetJoinRequirements"
+}
+
+type NotIncludedGuildMember struct {
+}
+
+func (p NotIncludedGuildMember) Type() string {
+	return "GuildNotIncludedGuildMember"
+}
+
+func (p NotIncludedGuildMember) Code() string {
+	return "guild.member.notFound"
+}

@@ -257,6 +257,7 @@ type Mutex struct {
 	PropertyId    *string `json:"propertyId"`
 	TransactionId *string `json:"transactionId"`
 	CreatedAt     *int64  `json:"createdAt"`
+	TtlAt         *int64  `json:"ttlAt"`
 	Revision      *int64  `json:"revision"`
 }
 
@@ -377,6 +378,9 @@ func (p *Mutex) UnmarshalJSON(data []byte) error {
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
+		if v, ok := d["ttlAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TtlAt)
+		}
 		if v, ok := d["revision"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Revision)
 		}
@@ -427,6 +431,13 @@ func NewMutexFromDict(data map[string]interface{}) Mutex {
 			}
 			return core.CastInt64(data["createdAt"])
 		}(),
+		TtlAt: func() *int64 {
+			v, ok := data["ttlAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["ttlAt"])
+		}(),
 		Revision: func() *int64 {
 			v, ok := data["revision"]
 			if !ok || v == nil {
@@ -453,6 +464,9 @@ func (p Mutex) ToDict() map[string]interface{} {
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
+	}
+	if p.TtlAt != nil {
+		m["ttlAt"] = p.TtlAt
 	}
 	if p.Revision != nil {
 		m["revision"] = p.Revision
