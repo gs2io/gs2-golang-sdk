@@ -206,6 +206,9 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	if request.JoinGuildScript != nil {
 		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
 	}
+	if request.ReceiveJoinRequestScript != nil {
+		bodies["receiveJoinRequestScript"] = request.ReceiveJoinRequestScript.ToDict()
+	}
 	if request.LeaveGuildScript != nil {
 		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
 	}
@@ -520,6 +523,9 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 	if request.JoinGuildScript != nil {
 		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
+	}
+	if request.ReceiveJoinRequestScript != nil {
+		bodies["receiveJoinRequestScript"] = request.ReceiveJoinRequestScript.ToDict()
 	}
 	if request.LeaveGuildScript != nil {
 		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
