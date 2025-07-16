@@ -1223,484 +1223,6 @@ func CastGuildModelsFromDict(data []GuildModel) []interface{} {
 	return v
 }
 
-type Inbox struct {
-	InboxId   *string `json:"inboxId"`
-	GuildName *string `json:"guildName"`
-	// Deprecated: should not be used
-	FromUserIds           []*string              `json:"fromUserIds"`
-	ReceiveMemberRequests []ReceiveMemberRequest `json:"receiveMemberRequests"`
-	CreatedAt             *int64                 `json:"createdAt"`
-	UpdatedAt             *int64                 `json:"updatedAt"`
-	Revision              *int64                 `json:"revision"`
-}
-
-func (p *Inbox) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = Inbox{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = Inbox{}
-	} else {
-		*p = Inbox{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["inboxId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.InboxId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.InboxId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.InboxId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.InboxId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.InboxId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.InboxId)
-				}
-			}
-		}
-		if v, ok := d["guildName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.GuildName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.GuildName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.GuildName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.GuildName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.GuildName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.GuildName)
-				}
-			}
-		}
-		if v, ok := d["fromUserIds"]; ok && v != nil {
-			var v2 []interface{}
-			if err := json.Unmarshal(*v, &v2); err == nil {
-				l := make([]*string, len(v2))
-				for i, v3 := range v2 {
-					switch v4 := v3.(type) {
-					case string:
-						l[i] = &v4
-					case float64:
-						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
-						l[i] = &strValue
-					case int:
-						strValue := strconv.Itoa(v4)
-						l[i] = &strValue
-					case int32:
-						strValue := strconv.Itoa(int(v4))
-						l[i] = &strValue
-					case int64:
-						strValue := strconv.Itoa(int(v4))
-						l[i] = &strValue
-					default:
-					}
-				}
-				p.FromUserIds = l
-			}
-		}
-		if v, ok := d["receiveMemberRequests"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ReceiveMemberRequests)
-		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
-		}
-		if v, ok := d["updatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UpdatedAt)
-		}
-		if v, ok := d["revision"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Revision)
-		}
-	}
-	return nil
-}
-
-func NewInboxFromJson(data string) Inbox {
-	req := Inbox{}
-	_ = json.Unmarshal([]byte(data), &req)
-	return req
-}
-
-func NewInboxFromDict(data map[string]interface{}) Inbox {
-	return Inbox{
-		InboxId: func() *string {
-			v, ok := data["inboxId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["inboxId"])
-		}(),
-		GuildName: func() *string {
-			v, ok := data["guildName"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["guildName"])
-		}(),
-		FromUserIds: func() []*string {
-			v, ok := data["fromUserIds"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastStrings(core.CastArray(v))
-		}(),
-		ReceiveMemberRequests: func() []ReceiveMemberRequest {
-			if data["receiveMemberRequests"] == nil {
-				return nil
-			}
-			return CastReceiveMemberRequests(core.CastArray(data["receiveMemberRequests"]))
-		}(),
-		CreatedAt: func() *int64 {
-			v, ok := data["createdAt"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["createdAt"])
-		}(),
-		UpdatedAt: func() *int64 {
-			v, ok := data["updatedAt"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["updatedAt"])
-		}(),
-		Revision: func() *int64 {
-			v, ok := data["revision"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["revision"])
-		}(),
-	}
-}
-
-func (p Inbox) ToDict() map[string]interface{} {
-	m := map[string]interface{}{}
-	if p.InboxId != nil {
-		m["inboxId"] = p.InboxId
-	}
-	if p.GuildName != nil {
-		m["guildName"] = p.GuildName
-	}
-	if p.FromUserIds != nil {
-		m["fromUserIds"] = core.CastStringsFromDict(
-			p.FromUserIds,
-		)
-	}
-	if p.ReceiveMemberRequests != nil {
-		m["receiveMemberRequests"] = CastReceiveMemberRequestsFromDict(
-			p.ReceiveMemberRequests,
-		)
-	}
-	if p.CreatedAt != nil {
-		m["createdAt"] = p.CreatedAt
-	}
-	if p.UpdatedAt != nil {
-		m["updatedAt"] = p.UpdatedAt
-	}
-	if p.Revision != nil {
-		m["revision"] = p.Revision
-	}
-	return m
-}
-
-func (p Inbox) Pointer() *Inbox {
-	return &p
-}
-
-func CastInboxes(data []interface{}) []Inbox {
-	v := make([]Inbox, 0)
-	for _, d := range data {
-		v = append(v, NewInboxFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastInboxesFromDict(data []Inbox) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type SendBox struct {
-	SendBoxId        *string   `json:"sendBoxId"`
-	UserId           *string   `json:"userId"`
-	GuildModelName   *string   `json:"guildModelName"`
-	TargetGuildNames []*string `json:"targetGuildNames"`
-	CreatedAt        *int64    `json:"createdAt"`
-	UpdatedAt        *int64    `json:"updatedAt"`
-	Revision         *int64    `json:"revision"`
-}
-
-func (p *SendBox) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = SendBox{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = SendBox{}
-	} else {
-		*p = SendBox{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["sendBoxId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.SendBoxId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.SendBoxId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.SendBoxId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.SendBoxId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.SendBoxId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.SendBoxId)
-				}
-			}
-		}
-		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.UserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.UserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.UserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.UserId)
-				}
-			}
-		}
-		if v, ok := d["guildModelName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.GuildModelName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.GuildModelName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.GuildModelName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.GuildModelName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.GuildModelName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.GuildModelName)
-				}
-			}
-		}
-		if v, ok := d["targetGuildNames"]; ok && v != nil {
-			var v2 []interface{}
-			if err := json.Unmarshal(*v, &v2); err == nil {
-				l := make([]*string, len(v2))
-				for i, v3 := range v2 {
-					switch v4 := v3.(type) {
-					case string:
-						l[i] = &v4
-					case float64:
-						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
-						l[i] = &strValue
-					case int:
-						strValue := strconv.Itoa(v4)
-						l[i] = &strValue
-					case int32:
-						strValue := strconv.Itoa(int(v4))
-						l[i] = &strValue
-					case int64:
-						strValue := strconv.Itoa(int(v4))
-						l[i] = &strValue
-					default:
-					}
-				}
-				p.TargetGuildNames = l
-			}
-		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
-		}
-		if v, ok := d["updatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UpdatedAt)
-		}
-		if v, ok := d["revision"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Revision)
-		}
-	}
-	return nil
-}
-
-func NewSendBoxFromJson(data string) SendBox {
-	req := SendBox{}
-	_ = json.Unmarshal([]byte(data), &req)
-	return req
-}
-
-func NewSendBoxFromDict(data map[string]interface{}) SendBox {
-	return SendBox{
-		SendBoxId: func() *string {
-			v, ok := data["sendBoxId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["sendBoxId"])
-		}(),
-		UserId: func() *string {
-			v, ok := data["userId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["userId"])
-		}(),
-		GuildModelName: func() *string {
-			v, ok := data["guildModelName"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["guildModelName"])
-		}(),
-		TargetGuildNames: func() []*string {
-			v, ok := data["targetGuildNames"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastStrings(core.CastArray(v))
-		}(),
-		CreatedAt: func() *int64 {
-			v, ok := data["createdAt"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["createdAt"])
-		}(),
-		UpdatedAt: func() *int64 {
-			v, ok := data["updatedAt"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["updatedAt"])
-		}(),
-		Revision: func() *int64 {
-			v, ok := data["revision"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["revision"])
-		}(),
-	}
-}
-
-func (p SendBox) ToDict() map[string]interface{} {
-	m := map[string]interface{}{}
-	if p.SendBoxId != nil {
-		m["sendBoxId"] = p.SendBoxId
-	}
-	if p.UserId != nil {
-		m["userId"] = p.UserId
-	}
-	if p.GuildModelName != nil {
-		m["guildModelName"] = p.GuildModelName
-	}
-	if p.TargetGuildNames != nil {
-		m["targetGuildNames"] = core.CastStringsFromDict(
-			p.TargetGuildNames,
-		)
-	}
-	if p.CreatedAt != nil {
-		m["createdAt"] = p.CreatedAt
-	}
-	if p.UpdatedAt != nil {
-		m["updatedAt"] = p.UpdatedAt
-	}
-	if p.Revision != nil {
-		m["revision"] = p.Revision
-	}
-	return m
-}
-
-func (p SendBox) Pointer() *SendBox {
-	return &p
-}
-
-func CastSendBoxes(data []interface{}) []SendBox {
-	v := make([]SendBox, 0)
-	for _, d := range data {
-		v = append(v, NewSendBoxFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastSendBoxesFromDict(data []SendBox) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
 type Guild struct {
 	GuildId                   *string     `json:"guildId"`
 	GuildModelName            *string     `json:"guildModelName"`
@@ -2973,6 +2495,7 @@ type ReceiveMemberRequest struct {
 	UserId          *string `json:"userId"`
 	TargetGuildName *string `json:"targetGuildName"`
 	Metadata        *string `json:"metadata"`
+	CreatedAt       *int64  `json:"createdAt"`
 }
 
 func (p *ReceiveMemberRequest) UnmarshalJSON(data []byte) error {
@@ -3066,6 +2589,9 @@ func (p *ReceiveMemberRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
 	}
 	return nil
 }
@@ -3099,6 +2625,13 @@ func NewReceiveMemberRequestFromDict(data map[string]interface{}) ReceiveMemberR
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -3112,6 +2645,9 @@ func (p ReceiveMemberRequest) ToDict() map[string]interface{} {
 	}
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
 	}
 	return m
 }
@@ -3140,6 +2676,7 @@ type SendMemberRequest struct {
 	UserId          *string `json:"userId"`
 	TargetGuildName *string `json:"targetGuildName"`
 	Metadata        *string `json:"metadata"`
+	CreatedAt       *int64  `json:"createdAt"`
 }
 
 func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
@@ -3233,6 +2770,9 @@ func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
 	}
 	return nil
 }
@@ -3266,6 +2806,13 @@ func NewSendMemberRequestFromDict(data map[string]interface{}) SendMemberRequest
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -3279,6 +2826,9 @@ func (p SendMemberRequest) ToDict() map[string]interface{} {
 	}
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
 	}
 	return m
 }

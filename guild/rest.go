@@ -3266,6 +3266,12 @@ func deleteMemberAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMemberResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.master.require" {
+				asyncResult.Err = gs2err.SetClientError(GuildMasterRequired{})
+			}
+		}
 		callback <- DeleteMemberAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3373,6 +3379,12 @@ func deleteMemberByGuildNameAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteMemberByGuildNameResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.master.require" {
+				asyncResult.Err = gs2err.SetClientError(GuildMasterRequired{})
+			}
+		}
 		callback <- DeleteMemberByGuildNameAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -6345,6 +6357,12 @@ func withdrawalAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawalResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.master.require" {
+				asyncResult.Err = gs2err.SetClientError(GuildMasterRequired{})
+			}
+		}
 		callback <- WithdrawalAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -6452,6 +6470,12 @@ func withdrawalByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawalByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.member.master.require" {
+				asyncResult.Err = gs2err.SetClientError(GuildMasterRequired{})
+			}
+		}
 		callback <- WithdrawalByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -7895,6 +7919,9 @@ func acceptRequestAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.members.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumMembersReached{})
+			}
 		}
 		callback <- AcceptRequestAsyncResult{
 			err: asyncResult.Err,
@@ -8007,6 +8034,9 @@ func acceptRequestByGuildNameAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.members.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumMembersReached{})
 			}
 		}
 		callback <- AcceptRequestByGuildNameAsyncResult{
@@ -8764,6 +8794,9 @@ func sendRequestAsyncHandler(
 	if asyncResult.Err != nil {
 		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
 		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.members.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumMembersReached{})
+			}
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
 			}
@@ -8889,6 +8922,9 @@ func sendRequestByUserIdAsyncHandler(
 	if asyncResult.Err != nil {
 		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
 		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "guild.members.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumMembersReached{})
+			}
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
 				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
 			}
