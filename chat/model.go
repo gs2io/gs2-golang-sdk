@@ -1196,6 +1196,509 @@ func CastSubscribesFromDict(data []Subscribe) []interface{} {
 	return v
 }
 
+type CategoryModel struct {
+	CategoryModelId       *string `json:"categoryModelId"`
+	Category              *int32  `json:"category"`
+	RejectAccessTokenPost *string `json:"rejectAccessTokenPost"`
+}
+
+func (p *CategoryModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CategoryModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CategoryModel{}
+	} else {
+		*p = CategoryModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["categoryModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryModelId)
+				}
+			}
+		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
+		if v, ok := d["rejectAccessTokenPost"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RejectAccessTokenPost = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RejectAccessTokenPost = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RejectAccessTokenPost = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RejectAccessTokenPost = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RejectAccessTokenPost = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RejectAccessTokenPost)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCategoryModelFromJson(data string) CategoryModel {
+	req := CategoryModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
+	return CategoryModel{
+		CategoryModelId: func() *string {
+			v, ok := data["categoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryModelId"])
+		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
+		RejectAccessTokenPost: func() *string {
+			v, ok := data["rejectAccessTokenPost"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rejectAccessTokenPost"])
+		}(),
+	}
+}
+
+func (p CategoryModel) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.CategoryModelId != nil {
+		m["categoryModelId"] = p.CategoryModelId
+	}
+	if p.Category != nil {
+		m["category"] = p.Category
+	}
+	if p.RejectAccessTokenPost != nil {
+		m["rejectAccessTokenPost"] = p.RejectAccessTokenPost
+	}
+	return m
+}
+
+func (p CategoryModel) Pointer() *CategoryModel {
+	return &p
+}
+
+func CastCategoryModels(data []interface{}) []CategoryModel {
+	v := make([]CategoryModel, 0)
+	for _, d := range data {
+		v = append(v, NewCategoryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCategoryModelsFromDict(data []CategoryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type CategoryModelMaster struct {
+	CategoryModelId       *string `json:"categoryModelId"`
+	Category              *int32  `json:"category"`
+	Description           *string `json:"description"`
+	RejectAccessTokenPost *string `json:"rejectAccessTokenPost"`
+	CreatedAt             *int64  `json:"createdAt"`
+	UpdatedAt             *int64  `json:"updatedAt"`
+	Revision              *int64  `json:"revision"`
+}
+
+func (p *CategoryModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CategoryModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CategoryModelMaster{}
+	} else {
+		*p = CategoryModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["categoryModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryModelId)
+				}
+			}
+		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["rejectAccessTokenPost"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RejectAccessTokenPost = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RejectAccessTokenPost = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RejectAccessTokenPost = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RejectAccessTokenPost = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RejectAccessTokenPost = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RejectAccessTokenPost)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
+	req := CategoryModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMaster {
+	return CategoryModelMaster{
+		CategoryModelId: func() *string {
+			v, ok := data["categoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryModelId"])
+		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		RejectAccessTokenPost: func() *string {
+			v, ok := data["rejectAccessTokenPost"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rejectAccessTokenPost"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
+	}
+}
+
+func (p CategoryModelMaster) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.CategoryModelId != nil {
+		m["categoryModelId"] = p.CategoryModelId
+	}
+	if p.Category != nil {
+		m["category"] = p.Category
+	}
+	if p.Description != nil {
+		m["description"] = p.Description
+	}
+	if p.RejectAccessTokenPost != nil {
+		m["rejectAccessTokenPost"] = p.RejectAccessTokenPost
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
+	}
+	if p.UpdatedAt != nil {
+		m["updatedAt"] = p.UpdatedAt
+	}
+	if p.Revision != nil {
+		m["revision"] = p.Revision
+	}
+	return m
+}
+
+func (p CategoryModelMaster) Pointer() *CategoryModelMaster {
+	return &p
+}
+
+func CastCategoryModelMasters(data []interface{}) []CategoryModelMaster {
+	v := make([]CategoryModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCategoryModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCategoryModelMastersFromDict(data []CategoryModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type CurrentModelMaster struct {
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
+}
+
+func (p *CurrentModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CurrentModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CurrentModelMaster{}
+	} else {
+		*p = CurrentModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["settings"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Settings = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Settings = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Settings = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Settings)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCurrentModelMasterFromJson(data string) CurrentModelMaster {
+	req := CurrentModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMaster {
+	return CurrentModelMaster{
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
+	}
+}
+
+func (p CurrentModelMaster) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.NamespaceId != nil {
+		m["namespaceId"] = p.NamespaceId
+	}
+	if p.Settings != nil {
+		m["settings"] = p.Settings
+	}
+	return m
+}
+
+func (p CurrentModelMaster) Pointer() *CurrentModelMaster {
+	return &p
+}
+
+func CastCurrentModelMasters(data []interface{}) []CurrentModelMaster {
+	v := make([]CurrentModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentModelMastersFromDict(data []CurrentModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type NotificationType struct {
 	Category                             *int32 `json:"category"`
 	EnableTransferMobilePushNotification *bool  `json:"enableTransferMobilePushNotification"`
@@ -1729,6 +2232,309 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type GitHubCheckoutSetting struct {
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
+}
+
+func (p *GitHubCheckoutSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GitHubCheckoutSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GitHubCheckoutSetting{}
+	} else {
+		*p = GitHubCheckoutSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["apiKeyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApiKeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApiKeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApiKeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApiKeyId)
+				}
+			}
+		}
+		if v, ok := d["repositoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RepositoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RepositoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RepositoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RepositoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RepositoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RepositoryName)
+				}
+			}
+		}
+		if v, ok := d["sourcePath"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SourcePath = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SourcePath = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SourcePath = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SourcePath = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SourcePath = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SourcePath)
+				}
+			}
+		}
+		if v, ok := d["referenceType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ReferenceType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ReferenceType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ReferenceType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ReferenceType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ReferenceType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ReferenceType)
+				}
+			}
+		}
+		if v, ok := d["commitHash"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CommitHash = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CommitHash = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CommitHash = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CommitHash = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CommitHash = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CommitHash)
+				}
+			}
+		}
+		if v, ok := d["branchName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BranchName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BranchName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BranchName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BranchName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BranchName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BranchName)
+				}
+			}
+		}
+		if v, ok := d["tagName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TagName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TagName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TagName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TagName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TagName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TagName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	req := GitHubCheckoutSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ApiKeyId != nil {
+		m["apiKeyId"] = p.ApiKeyId
+	}
+	if p.RepositoryName != nil {
+		m["repositoryName"] = p.RepositoryName
+	}
+	if p.SourcePath != nil {
+		m["sourcePath"] = p.SourcePath
+	}
+	if p.ReferenceType != nil {
+		m["referenceType"] = p.ReferenceType
+	}
+	if p.CommitHash != nil {
+		m["commitHash"] = p.CommitHash
+	}
+	if p.BranchName != nil {
+		m["branchName"] = p.BranchName
+	}
+	if p.TagName != nil {
+		m["tagName"] = p.TagName
+	}
+	return m
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

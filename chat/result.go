@@ -2328,3 +2328,680 @@ func (p UnsubscribeByUserIdResult) ToDict() map[string]interface{} {
 func (p UnsubscribeByUserIdResult) Pointer() *UnsubscribeByUserIdResult {
 	return &p
 }
+
+type DescribeCategoryModelsResult struct {
+	Items    []CategoryModel      `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeCategoryModelsAsyncResult struct {
+	result *DescribeCategoryModelsResult
+	err    error
+}
+
+func NewDescribeCategoryModelsResultFromJson(data string) DescribeCategoryModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCategoryModelsResultFromDict(dict)
+}
+
+func NewDescribeCategoryModelsResultFromDict(data map[string]interface{}) DescribeCategoryModelsResult {
+	return DescribeCategoryModelsResult{
+		Items: func() []CategoryModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastCategoryModels(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeCategoryModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastCategoryModelsFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeCategoryModelsResult) Pointer() *DescribeCategoryModelsResult {
+	return &p
+}
+
+type GetCategoryModelResult struct {
+	Item     *CategoryModel       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetCategoryModelAsyncResult struct {
+	result *GetCategoryModelResult
+	err    error
+}
+
+func NewGetCategoryModelResultFromJson(data string) GetCategoryModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCategoryModelResultFromDict(dict)
+}
+
+func NewGetCategoryModelResultFromDict(data map[string]interface{}) GetCategoryModelResult {
+	return GetCategoryModelResult{
+		Item: func() *CategoryModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCategoryModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetCategoryModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetCategoryModelResult) Pointer() *GetCategoryModelResult {
+	return &p
+}
+
+type DescribeCategoryModelMastersResult struct {
+	Items         []CategoryModelMaster `json:"items"`
+	NextPageToken *string               `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata  `json:"metadata"`
+}
+
+type DescribeCategoryModelMastersAsyncResult struct {
+	result *DescribeCategoryModelMastersResult
+	err    error
+}
+
+func NewDescribeCategoryModelMastersResultFromJson(data string) DescribeCategoryModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeCategoryModelMastersResultFromDict(dict)
+}
+
+func NewDescribeCategoryModelMastersResultFromDict(data map[string]interface{}) DescribeCategoryModelMastersResult {
+	return DescribeCategoryModelMastersResult{
+		Items: func() []CategoryModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastCategoryModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeCategoryModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastCategoryModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeCategoryModelMastersResult) Pointer() *DescribeCategoryModelMastersResult {
+	return &p
+}
+
+type CreateCategoryModelMasterResult struct {
+	Item     *CategoryModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CreateCategoryModelMasterAsyncResult struct {
+	result *CreateCategoryModelMasterResult
+	err    error
+}
+
+func NewCreateCategoryModelMasterResultFromJson(data string) CreateCategoryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateCategoryModelMasterResultFromDict(dict)
+}
+
+func NewCreateCategoryModelMasterResultFromDict(data map[string]interface{}) CreateCategoryModelMasterResult {
+	return CreateCategoryModelMasterResult{
+		Item: func() *CategoryModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCategoryModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CreateCategoryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CreateCategoryModelMasterResult) Pointer() *CreateCategoryModelMasterResult {
+	return &p
+}
+
+type GetCategoryModelMasterResult struct {
+	Item     *CategoryModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetCategoryModelMasterAsyncResult struct {
+	result *GetCategoryModelMasterResult
+	err    error
+}
+
+func NewGetCategoryModelMasterResultFromJson(data string) GetCategoryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCategoryModelMasterResultFromDict(dict)
+}
+
+func NewGetCategoryModelMasterResultFromDict(data map[string]interface{}) GetCategoryModelMasterResult {
+	return GetCategoryModelMasterResult{
+		Item: func() *CategoryModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCategoryModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetCategoryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetCategoryModelMasterResult) Pointer() *GetCategoryModelMasterResult {
+	return &p
+}
+
+type UpdateCategoryModelMasterResult struct {
+	Item     *CategoryModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateCategoryModelMasterAsyncResult struct {
+	result *UpdateCategoryModelMasterResult
+	err    error
+}
+
+func NewUpdateCategoryModelMasterResultFromJson(data string) UpdateCategoryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCategoryModelMasterResultFromDict(dict)
+}
+
+func NewUpdateCategoryModelMasterResultFromDict(data map[string]interface{}) UpdateCategoryModelMasterResult {
+	return UpdateCategoryModelMasterResult{
+		Item: func() *CategoryModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCategoryModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateCategoryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateCategoryModelMasterResult) Pointer() *UpdateCategoryModelMasterResult {
+	return &p
+}
+
+type DeleteCategoryModelMasterResult struct {
+	Item     *CategoryModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteCategoryModelMasterAsyncResult struct {
+	result *DeleteCategoryModelMasterResult
+	err    error
+}
+
+func NewDeleteCategoryModelMasterResultFromJson(data string) DeleteCategoryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteCategoryModelMasterResultFromDict(dict)
+}
+
+func NewDeleteCategoryModelMasterResultFromDict(data map[string]interface{}) DeleteCategoryModelMasterResult {
+	return DeleteCategoryModelMasterResult{
+		Item: func() *CategoryModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCategoryModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteCategoryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteCategoryModelMasterResult) Pointer() *DeleteCategoryModelMasterResult {
+	return &p
+}
+
+type ExportMasterResult struct {
+	Item     *CurrentModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ExportMasterAsyncResult struct {
+	result *ExportMasterResult
+	err    error
+}
+
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+	return ExportMasterResult{
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+	return &p
+}
+
+type GetCurrentModelMasterResult struct {
+	Item     *CurrentModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetCurrentModelMasterAsyncResult struct {
+	result *GetCurrentModelMasterResult
+	err    error
+}
+
+func NewGetCurrentModelMasterResultFromJson(data string) GetCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentModelMasterResultFromDict(dict)
+}
+
+func NewGetCurrentModelMasterResultFromDict(data map[string]interface{}) GetCurrentModelMasterResult {
+	return GetCurrentModelMasterResult{
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetCurrentModelMasterResult) Pointer() *GetCurrentModelMasterResult {
+	return &p
+}
+
+type PreUpdateCurrentModelMasterResult struct {
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreUpdateCurrentModelMasterAsyncResult struct {
+	result *PreUpdateCurrentModelMasterResult
+	err    error
+}
+
+func NewPreUpdateCurrentModelMasterResultFromJson(data string) PreUpdateCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreUpdateCurrentModelMasterResultFromDict(dict)
+}
+
+func NewPreUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) PreUpdateCurrentModelMasterResult {
+	return PreUpdateCurrentModelMasterResult{
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreUpdateCurrentModelMasterResult) Pointer() *PreUpdateCurrentModelMasterResult {
+	return &p
+}
+
+type UpdateCurrentModelMasterResult struct {
+	Item     *CurrentModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateCurrentModelMasterAsyncResult struct {
+	result *UpdateCurrentModelMasterResult
+	err    error
+}
+
+func NewUpdateCurrentModelMasterResultFromJson(data string) UpdateCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentModelMasterResultFromDict(dict)
+}
+
+func NewUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterResult {
+	return UpdateCurrentModelMasterResult{
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateCurrentModelMasterResult) Pointer() *UpdateCurrentModelMasterResult {
+	return &p
+}
+
+type UpdateCurrentModelMasterFromGitHubResult struct {
+	Item     *CurrentModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateCurrentModelMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentModelMasterFromGitHubResult
+	err    error
+}
+
+func NewUpdateCurrentModelMasterFromGitHubResultFromJson(data string) UpdateCurrentModelMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentModelMasterFromGitHubResultFromDict(dict)
+}
+
+func NewUpdateCurrentModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubResult {
+	return UpdateCurrentModelMasterFromGitHubResult{
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubResult) Pointer() *UpdateCurrentModelMasterFromGitHubResult {
+	return &p
+}
