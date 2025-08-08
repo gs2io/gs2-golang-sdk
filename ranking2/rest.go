@@ -5026,9 +5026,6 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingModelMasterAsync(
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
 	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
-	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
 	}
@@ -5257,9 +5254,6 @@ func (p Gs2Ranking2RestClient) UpdateClusterRankingModelMasterAsync(
 	}
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
-	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
 	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
@@ -8463,9 +8457,6 @@ func (p Gs2Ranking2RestClient) CreateSubscribeRankingModelMasterAsync(
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
 	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
-	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
 	}
@@ -8681,9 +8672,6 @@ func (p Gs2Ranking2RestClient) UpdateSubscribeRankingModelMasterAsync(
 	}
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
-	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
 	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection

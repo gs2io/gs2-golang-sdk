@@ -2017,6 +2017,7 @@ type SetUserIdRequest struct {
 	NamespaceName         *string `json:"namespaceName"`
 	AccessToken           *string `json:"accessToken"`
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
+	Force                 *bool   `json:"force"`
 	DryRun                *bool   `json:"dryRun"`
 }
 
@@ -2091,6 +2092,9 @@ func (p *SetUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowConcurrentAccess"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowConcurrentAccess)
 		}
+		if v, ok := d["force"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Force)
+		}
 	}
 	return nil
 }
@@ -2127,6 +2131,13 @@ func NewSetUserIdRequestFromDict(data map[string]interface{}) SetUserIdRequest {
 			}
 			return core.CastBool(data["allowConcurrentAccess"])
 		}(),
+		Force: func() *bool {
+			v, ok := data["force"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["force"])
+		}(),
 	}
 }
 
@@ -2135,6 +2146,7 @@ func (p SetUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"accessToken":           p.AccessToken,
 		"allowConcurrentAccess": p.AllowConcurrentAccess,
+		"force":                 p.Force,
 	}
 }
 
@@ -2148,6 +2160,7 @@ type SetUserIdByUserIdRequest struct {
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
+	Force                 *bool   `json:"force"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
 	DryRun                *bool   `json:"dryRun"`
 }
@@ -2223,6 +2236,9 @@ func (p *SetUserIdByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowConcurrentAccess"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowConcurrentAccess)
 		}
+		if v, ok := d["force"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Force)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2282,6 +2298,13 @@ func NewSetUserIdByUserIdRequestFromDict(data map[string]interface{}) SetUserIdB
 			}
 			return core.CastBool(data["allowConcurrentAccess"])
 		}(),
+		Force: func() *bool {
+			v, ok := data["force"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["force"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -2297,6 +2320,7 @@ func (p SetUserIdByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"userId":                p.UserId,
 		"allowConcurrentAccess": p.AllowConcurrentAccess,
+		"force":                 p.Force,
 		"timeOffsetToken":       p.TimeOffsetToken,
 	}
 }

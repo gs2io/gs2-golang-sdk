@@ -1570,6 +1570,9 @@ func (p Gs2GatewayWebSocketClient) SetUserIdAsync(
 	if request.AllowConcurrentAccess != nil {
 		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
 	}
+	if request.Force != nil {
+		bodies["force"] = *request.Force
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1669,6 +1672,9 @@ func (p Gs2GatewayWebSocketClient) SetUserIdByUserIdAsync(
 	}
 	if request.AllowConcurrentAccess != nil {
 		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
+	}
+	if request.Force != nil {
+		bodies["force"] = *request.Force
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

@@ -7893,7 +7893,6 @@ type CreateClusterRankingModelMasterRequest struct {
 	MinimumValue           *int64          `json:"minimumValue"`
 	MaximumValue           *int64          `json:"maximumValue"`
 	Sum                    *bool           `json:"sum"`
-	ScoreTtlDays           *int32          `json:"scoreTtlDays"`
 	OrderDirection         *string         `json:"orderDirection"`
 	RankingRewards         []RankingReward `json:"rankingRewards"`
 	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
@@ -8047,9 +8046,6 @@ func (p *CreateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) erro
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -8217,13 +8213,6 @@ func NewCreateClusterRankingModelMasterRequestFromDict(data map[string]interface
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -8271,7 +8260,6 @@ func (p CreateClusterRankingModelMasterRequest) ToDict() map[string]interface{} 
 		"minimumValue":   p.MinimumValue,
 		"maximumValue":   p.MaximumValue,
 		"sum":            p.Sum,
-		"scoreTtlDays":   p.ScoreTtlDays,
 		"orderDirection": p.OrderDirection,
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
@@ -8414,7 +8402,6 @@ type UpdateClusterRankingModelMasterRequest struct {
 	MinimumValue           *int64          `json:"minimumValue"`
 	MaximumValue           *int64          `json:"maximumValue"`
 	Sum                    *bool           `json:"sum"`
-	ScoreTtlDays           *int32          `json:"scoreTtlDays"`
 	OrderDirection         *string         `json:"orderDirection"`
 	RankingRewards         []RankingReward `json:"rankingRewards"`
 	RewardCalculationIndex *string         `json:"rewardCalculationIndex"`
@@ -8568,9 +8555,6 @@ func (p *UpdateClusterRankingModelMasterRequest) UnmarshalJSON(data []byte) erro
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -8738,13 +8722,6 @@ func NewUpdateClusterRankingModelMasterRequestFromDict(data map[string]interface
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -8792,7 +8769,6 @@ func (p UpdateClusterRankingModelMasterRequest) ToDict() map[string]interface{} 
 		"minimumValue":   p.MinimumValue,
 		"maximumValue":   p.MaximumValue,
 		"sum":            p.Sum,
-		"scoreTtlDays":   p.ScoreTtlDays,
 		"orderDirection": p.OrderDirection,
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
@@ -14632,7 +14608,6 @@ type CreateSubscribeRankingModelMasterRequest struct {
 	MinimumValue        *int64  `json:"minimumValue"`
 	MaximumValue        *int64  `json:"maximumValue"`
 	Sum                 *bool   `json:"sum"`
-	ScoreTtlDays        *int32  `json:"scoreTtlDays"`
 	OrderDirection      *string `json:"orderDirection"`
 	EntryPeriodEventId  *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
@@ -14761,9 +14736,6 @@ func (p *CreateSubscribeRankingModelMasterRequest) UnmarshalJSON(data []byte) er
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -14898,13 +14870,6 @@ func NewCreateSubscribeRankingModelMasterRequestFromDict(data map[string]interfa
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -14938,7 +14903,6 @@ func (p CreateSubscribeRankingModelMasterRequest) ToDict() map[string]interface{
 		"minimumValue":        p.MinimumValue,
 		"maximumValue":        p.MaximumValue,
 		"sum":                 p.Sum,
-		"scoreTtlDays":        p.ScoreTtlDays,
 		"orderDirection":      p.OrderDirection,
 		"entryPeriodEventId":  p.EntryPeriodEventId,
 		"accessPeriodEventId": p.AccessPeriodEventId,
@@ -15076,7 +15040,6 @@ type UpdateSubscribeRankingModelMasterRequest struct {
 	MinimumValue        *int64  `json:"minimumValue"`
 	MaximumValue        *int64  `json:"maximumValue"`
 	Sum                 *bool   `json:"sum"`
-	ScoreTtlDays        *int32  `json:"scoreTtlDays"`
 	OrderDirection      *string `json:"orderDirection"`
 	EntryPeriodEventId  *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId *string `json:"accessPeriodEventId"`
@@ -15205,9 +15168,6 @@ func (p *UpdateSubscribeRankingModelMasterRequest) UnmarshalJSON(data []byte) er
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -15342,13 +15302,6 @@ func NewUpdateSubscribeRankingModelMasterRequestFromDict(data map[string]interfa
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -15382,7 +15335,6 @@ func (p UpdateSubscribeRankingModelMasterRequest) ToDict() map[string]interface{
 		"minimumValue":        p.MinimumValue,
 		"maximumValue":        p.MaximumValue,
 		"sum":                 p.Sum,
-		"scoreTtlDays":        p.ScoreTtlDays,
 		"orderDirection":      p.OrderDirection,
 		"entryPeriodEventId":  p.EntryPeriodEventId,
 		"accessPeriodEventId": p.AccessPeriodEventId,

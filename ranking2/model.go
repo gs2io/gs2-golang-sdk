@@ -2262,7 +2262,6 @@ type ClusterRankingModelMaster struct {
 	MinimumValue           *int64          `json:"minimumValue"`
 	MaximumValue           *int64          `json:"maximumValue"`
 	Sum                    *bool           `json:"sum"`
-	ScoreTtlDays           *int32          `json:"scoreTtlDays"`
 	OrderDirection         *string         `json:"orderDirection"`
 	EntryPeriodEventId     *string         `json:"entryPeriodEventId"`
 	RankingRewards         []RankingReward `json:"rankingRewards"`
@@ -2418,9 +2417,6 @@ func (p *ClusterRankingModelMaster) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -2594,13 +2590,6 @@ func NewClusterRankingModelMasterFromDict(data map[string]interface{}) ClusterRa
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -2684,9 +2673,6 @@ func (p ClusterRankingModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.Sum != nil {
 		m["sum"] = p.Sum
-	}
-	if p.ScoreTtlDays != nil {
-		m["scoreTtlDays"] = p.ScoreTtlDays
 	}
 	if p.OrderDirection != nil {
 		m["orderDirection"] = p.OrderDirection
@@ -3951,7 +3937,6 @@ type SubscribeRankingModelMaster struct {
 	MinimumValue            *int64  `json:"minimumValue"`
 	MaximumValue            *int64  `json:"maximumValue"`
 	Sum                     *bool   `json:"sum"`
-	ScoreTtlDays            *int32  `json:"scoreTtlDays"`
 	OrderDirection          *string `json:"orderDirection"`
 	EntryPeriodEventId      *string `json:"entryPeriodEventId"`
 	AccessPeriodEventId     *string `json:"accessPeriodEventId"`
@@ -4082,9 +4067,6 @@ func (p *SubscribeRankingModelMaster) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
 		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
@@ -4225,13 +4207,6 @@ func NewSubscribeRankingModelMasterFromDict(data map[string]interface{}) Subscri
 			}
 			return core.CastBool(data["sum"])
 		}(),
-		ScoreTtlDays: func() *int32 {
-			v, ok := data["scoreTtlDays"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["scoreTtlDays"])
-		}(),
 		OrderDirection: func() *string {
 			v, ok := data["orderDirection"]
 			if !ok || v == nil {
@@ -4299,9 +4274,6 @@ func (p SubscribeRankingModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.Sum != nil {
 		m["sum"] = p.Sum
-	}
-	if p.ScoreTtlDays != nil {
-		m["scoreTtlDays"] = p.ScoreTtlDays
 	}
 	if p.OrderDirection != nil {
 		m["orderDirection"] = p.OrderDirection
