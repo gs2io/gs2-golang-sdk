@@ -6902,6 +6902,7 @@ type DescribeSendRequestsRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
+	WithProfile   *bool   `json:"withProfile"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
@@ -6975,6 +6976,9 @@ func (p *DescribeSendRequestsRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -7030,6 +7034,13 @@ func NewDescribeSendRequestsRequestFromDict(data map[string]interface{}) Describ
 			}
 			return core.CastString(data["accessToken"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -7051,6 +7062,7 @@ func (p DescribeSendRequestsRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"withProfile":   p.WithProfile,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
@@ -7064,6 +7076,7 @@ type DescribeSendRequestsByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
+	WithProfile     *bool   `json:"withProfile"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -7137,6 +7150,9 @@ func (p *DescribeSendRequestsByUserIdRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
+		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
@@ -7216,6 +7232,13 @@ func NewDescribeSendRequestsByUserIdRequestFromDict(data map[string]interface{})
 			}
 			return core.CastString(data["userId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -7244,6 +7267,7 @@ func (p DescribeSendRequestsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
+		"withProfile":     p.WithProfile,
 		"pageToken":       p.PageToken,
 		"limit":           p.Limit,
 		"timeOffsetToken": p.TimeOffsetToken,
@@ -7259,6 +7283,7 @@ type GetSendRequestRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
 	TargetUserId  *string `json:"targetUserId"`
+	WithProfile   *bool   `json:"withProfile"`
 	DryRun        *bool   `json:"dryRun"`
 }
 
@@ -7353,6 +7378,9 @@ func (p *GetSendRequestRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 	}
 	return nil
 }
@@ -7389,6 +7417,13 @@ func NewGetSendRequestRequestFromDict(data map[string]interface{}) GetSendReques
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 	}
 }
 
@@ -7397,6 +7432,7 @@ func (p GetSendRequestRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"targetUserId":  p.TargetUserId,
+		"withProfile":   p.WithProfile,
 	}
 }
 
@@ -7409,6 +7445,7 @@ type GetSendRequestByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TargetUserId    *string `json:"targetUserId"`
+	WithProfile     *bool   `json:"withProfile"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 	DryRun          *bool   `json:"dryRun"`
 }
@@ -7504,6 +7541,9 @@ func (p *GetSendRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -7563,6 +7603,13 @@ func NewGetSendRequestByUserIdRequestFromDict(data map[string]interface{}) GetSe
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -7578,6 +7625,7 @@ func (p GetSendRequestByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
 		"targetUserId":    p.TargetUserId,
+		"withProfile":     p.WithProfile,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -8258,6 +8306,7 @@ type DescribeReceiveRequestsRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
+	WithProfile   *bool   `json:"withProfile"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
@@ -8331,6 +8380,9 @@ func (p *DescribeReceiveRequestsRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -8386,6 +8438,13 @@ func NewDescribeReceiveRequestsRequestFromDict(data map[string]interface{}) Desc
 			}
 			return core.CastString(data["accessToken"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -8407,6 +8466,7 @@ func (p DescribeReceiveRequestsRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"withProfile":   p.WithProfile,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
@@ -8420,6 +8480,7 @@ type DescribeReceiveRequestsByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
+	WithProfile     *bool   `json:"withProfile"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
@@ -8493,6 +8554,9 @@ func (p *DescribeReceiveRequestsByUserIdRequest) UnmarshalJSON(data []byte) erro
 					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
+		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
@@ -8572,6 +8636,13 @@ func NewDescribeReceiveRequestsByUserIdRequestFromDict(data map[string]interface
 			}
 			return core.CastString(data["userId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -8600,6 +8671,7 @@ func (p DescribeReceiveRequestsByUserIdRequest) ToDict() map[string]interface{} 
 	return map[string]interface{}{
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
+		"withProfile":     p.WithProfile,
 		"pageToken":       p.PageToken,
 		"limit":           p.Limit,
 		"timeOffsetToken": p.TimeOffsetToken,
@@ -8615,6 +8687,7 @@ type GetReceiveRequestRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
 	FromUserId    *string `json:"fromUserId"`
+	WithProfile   *bool   `json:"withProfile"`
 	DryRun        *bool   `json:"dryRun"`
 }
 
@@ -8709,6 +8782,9 @@ func (p *GetReceiveRequestRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 	}
 	return nil
 }
@@ -8745,6 +8821,13 @@ func NewGetReceiveRequestRequestFromDict(data map[string]interface{}) GetReceive
 			}
 			return core.CastString(data["fromUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 	}
 }
 
@@ -8753,6 +8836,7 @@ func (p GetReceiveRequestRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"fromUserId":    p.FromUserId,
+		"withProfile":   p.WithProfile,
 	}
 }
 
@@ -8765,6 +8849,7 @@ type GetReceiveRequestByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	FromUserId      *string `json:"fromUserId"`
+	WithProfile     *bool   `json:"withProfile"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 	DryRun          *bool   `json:"dryRun"`
 }
@@ -8860,6 +8945,9 @@ func (p *GetReceiveRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -8919,6 +9007,13 @@ func NewGetReceiveRequestByUserIdRequestFromDict(data map[string]interface{}) Ge
 			}
 			return core.CastString(data["fromUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -8934,6 +9029,7 @@ func (p GetReceiveRequestByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
 		"fromUserId":      p.FromUserId,
+		"withProfile":     p.WithProfile,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

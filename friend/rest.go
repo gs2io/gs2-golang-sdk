@@ -4381,6 +4381,9 @@ func (p Gs2FriendRestClient) DescribeSendRequestsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -4486,6 +4489,9 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -4591,6 +4597,9 @@ func (p Gs2FriendRestClient) GetSendRequestAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
@@ -4695,6 +4704,9 @@ func (p Gs2FriendRestClient) GetSendRequestByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
@@ -5207,6 +5219,9 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -5312,6 +5327,9 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -5417,6 +5435,9 @@ func (p Gs2FriendRestClient) GetReceiveRequestAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
@@ -5521,6 +5542,9 @@ func (p Gs2FriendRestClient) GetReceiveRequestByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.WithProfile != nil {
+		queryStrings["withProfile"] = core.ToString(*request.WithProfile)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}

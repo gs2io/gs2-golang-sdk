@@ -2199,8 +2199,9 @@ func CastFriendUsersFromDict(data []FriendUser) []interface{} {
 }
 
 type FriendRequest struct {
-	UserId       *string `json:"userId"`
-	TargetUserId *string `json:"targetUserId"`
+	UserId        *string `json:"userId"`
+	TargetUserId  *string `json:"targetUserId"`
+	PublicProfile *string `json:"publicProfile"`
 }
 
 func (p *FriendRequest) UnmarshalJSON(data []byte) error {
@@ -2271,6 +2272,29 @@ func (p *FriendRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["publicProfile"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PublicProfile = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PublicProfile = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PublicProfile = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PublicProfile)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2297,6 +2321,13 @@ func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
 	}
 }
 
@@ -2307,6 +2338,9 @@ func (p FriendRequest) ToDict() map[string]interface{} {
 	}
 	if p.TargetUserId != nil {
 		m["targetUserId"] = p.TargetUserId
+	}
+	if p.PublicProfile != nil {
+		m["publicProfile"] = p.PublicProfile
 	}
 	return m
 }
@@ -2332,8 +2366,9 @@ func CastFriendRequestsFromDict(data []FriendRequest) []interface{} {
 }
 
 type SendFriendRequest struct {
-	UserId       *string `json:"userId"`
-	TargetUserId *string `json:"targetUserId"`
+	UserId        *string `json:"userId"`
+	TargetUserId  *string `json:"targetUserId"`
+	PublicProfile *string `json:"publicProfile"`
 }
 
 func (p *SendFriendRequest) UnmarshalJSON(data []byte) error {
@@ -2404,6 +2439,29 @@ func (p *SendFriendRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["publicProfile"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PublicProfile = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PublicProfile = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PublicProfile = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PublicProfile)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2430,6 +2488,13 @@ func NewSendFriendRequestFromDict(data map[string]interface{}) SendFriendRequest
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
 	}
 }
 
@@ -2440,6 +2505,9 @@ func (p SendFriendRequest) ToDict() map[string]interface{} {
 	}
 	if p.TargetUserId != nil {
 		m["targetUserId"] = p.TargetUserId
+	}
+	if p.PublicProfile != nil {
+		m["publicProfile"] = p.PublicProfile
 	}
 	return m
 }
@@ -2465,8 +2533,9 @@ func CastSendFriendRequestsFromDict(data []SendFriendRequest) []interface{} {
 }
 
 type ReceiveFriendRequest struct {
-	UserId       *string `json:"userId"`
-	TargetUserId *string `json:"targetUserId"`
+	UserId        *string `json:"userId"`
+	TargetUserId  *string `json:"targetUserId"`
+	PublicProfile *string `json:"publicProfile"`
 }
 
 func (p *ReceiveFriendRequest) UnmarshalJSON(data []byte) error {
@@ -2537,6 +2606,29 @@ func (p *ReceiveFriendRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["publicProfile"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PublicProfile = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PublicProfile = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PublicProfile = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PublicProfile = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PublicProfile)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2563,6 +2655,13 @@ func NewReceiveFriendRequestFromDict(data map[string]interface{}) ReceiveFriendR
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
 	}
 }
 
@@ -2573,6 +2672,9 @@ func (p ReceiveFriendRequest) ToDict() map[string]interface{} {
 	}
 	if p.TargetUserId != nil {
 		m["targetUserId"] = p.TargetUserId
+	}
+	if p.PublicProfile != nil {
+		m["publicProfile"] = p.PublicProfile
 	}
 	return m
 }
