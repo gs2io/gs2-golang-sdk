@@ -1951,12 +1951,13 @@ func (p DescribeRawEventsResult) Pointer() *DescribeRawEventsResult {
 }
 
 type GetEventResult struct {
-	Item            *Event               `json:"item"`
-	InSchedule      *bool                `json:"inSchedule"`
-	ScheduleStartAt *int64               `json:"scheduleStartAt"`
-	ScheduleEndAt   *int64               `json:"scheduleEndAt"`
-	RepeatSchedule  *RepeatSchedule      `json:"repeatSchedule"`
-	Metadata        *core.ResultMetadata `json:"metadata"`
+	Item             *Event               `json:"item"`
+	InSchedule       *bool                `json:"inSchedule"`
+	ScheduleStartAt  *int64               `json:"scheduleStartAt"`
+	ScheduleEndAt    *int64               `json:"scheduleEndAt"`
+	RepeatSchedule   *RepeatSchedule      `json:"repeatSchedule"`
+	IsGlobalSchedule *bool                `json:"isGlobalSchedule"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEventAsyncResult struct {
@@ -2007,6 +2008,13 @@ func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
 			}
 			return NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer()
 		}(),
+		IsGlobalSchedule: func() *bool {
+			v, ok := data["isGlobalSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isGlobalSchedule"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2034,6 +2042,7 @@ func (p GetEventResult) ToDict() map[string]interface{} {
 			}
 			return p.RepeatSchedule.ToDict()
 		}(),
+		"isGlobalSchedule": p.IsGlobalSchedule,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2048,12 +2057,13 @@ func (p GetEventResult) Pointer() *GetEventResult {
 }
 
 type GetEventByUserIdResult struct {
-	Item            *Event               `json:"item"`
-	InSchedule      *bool                `json:"inSchedule"`
-	ScheduleStartAt *int64               `json:"scheduleStartAt"`
-	ScheduleEndAt   *int64               `json:"scheduleEndAt"`
-	RepeatSchedule  *RepeatSchedule      `json:"repeatSchedule"`
-	Metadata        *core.ResultMetadata `json:"metadata"`
+	Item             *Event               `json:"item"`
+	InSchedule       *bool                `json:"inSchedule"`
+	ScheduleStartAt  *int64               `json:"scheduleStartAt"`
+	ScheduleEndAt    *int64               `json:"scheduleEndAt"`
+	RepeatSchedule   *RepeatSchedule      `json:"repeatSchedule"`
+	IsGlobalSchedule *bool                `json:"isGlobalSchedule"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEventByUserIdAsyncResult struct {
@@ -2104,6 +2114,13 @@ func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUs
 			}
 			return NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer()
 		}(),
+		IsGlobalSchedule: func() *bool {
+			v, ok := data["isGlobalSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isGlobalSchedule"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2131,6 +2148,7 @@ func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.RepeatSchedule.ToDict()
 		}(),
+		"isGlobalSchedule": p.IsGlobalSchedule,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2201,7 +2219,13 @@ func (p GetRawEventResult) Pointer() *GetRawEventResult {
 }
 
 type VerifyEventResult struct {
-	Metadata *core.ResultMetadata `json:"metadata"`
+	Item             *Event               `json:"item"`
+	InSchedule       *bool                `json:"inSchedule"`
+	ScheduleStartAt  *int64               `json:"scheduleStartAt"`
+	ScheduleEndAt    *int64               `json:"scheduleEndAt"`
+	RepeatSchedule   *RepeatSchedule      `json:"repeatSchedule"`
+	IsGlobalSchedule *bool                `json:"isGlobalSchedule"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEventAsyncResult struct {
@@ -2217,6 +2241,48 @@ func NewVerifyEventResultFromJson(data string) VerifyEventResult {
 
 func NewVerifyEventResultFromDict(data map[string]interface{}) VerifyEventResult {
 	return VerifyEventResult{
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		InSchedule: func() *bool {
+			v, ok := data["inSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["inSchedule"])
+		}(),
+		ScheduleStartAt: func() *int64 {
+			v, ok := data["scheduleStartAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleStartAt"])
+		}(),
+		ScheduleEndAt: func() *int64 {
+			v, ok := data["scheduleEndAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleEndAt"])
+		}(),
+		RepeatSchedule: func() *RepeatSchedule {
+			v, ok := data["repeatSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer()
+		}(),
+		IsGlobalSchedule: func() *bool {
+			v, ok := data["isGlobalSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isGlobalSchedule"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2229,6 +2295,22 @@ func NewVerifyEventResultFromDict(data map[string]interface{}) VerifyEventResult
 
 func (p VerifyEventResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"inSchedule":      p.InSchedule,
+		"scheduleStartAt": p.ScheduleStartAt,
+		"scheduleEndAt":   p.ScheduleEndAt,
+		"repeatSchedule": func() map[string]interface{} {
+			if p.RepeatSchedule == nil {
+				return nil
+			}
+			return p.RepeatSchedule.ToDict()
+		}(),
+		"isGlobalSchedule": p.IsGlobalSchedule,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2243,7 +2325,13 @@ func (p VerifyEventResult) Pointer() *VerifyEventResult {
 }
 
 type VerifyEventByUserIdResult struct {
-	Metadata *core.ResultMetadata `json:"metadata"`
+	Item             *Event               `json:"item"`
+	InSchedule       *bool                `json:"inSchedule"`
+	ScheduleStartAt  *int64               `json:"scheduleStartAt"`
+	ScheduleEndAt    *int64               `json:"scheduleEndAt"`
+	RepeatSchedule   *RepeatSchedule      `json:"repeatSchedule"`
+	IsGlobalSchedule *bool                `json:"isGlobalSchedule"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEventByUserIdAsyncResult struct {
@@ -2259,6 +2347,48 @@ func NewVerifyEventByUserIdResultFromJson(data string) VerifyEventByUserIdResult
 
 func NewVerifyEventByUserIdResultFromDict(data map[string]interface{}) VerifyEventByUserIdResult {
 	return VerifyEventByUserIdResult{
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		InSchedule: func() *bool {
+			v, ok := data["inSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["inSchedule"])
+		}(),
+		ScheduleStartAt: func() *int64 {
+			v, ok := data["scheduleStartAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleStartAt"])
+		}(),
+		ScheduleEndAt: func() *int64 {
+			v, ok := data["scheduleEndAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleEndAt"])
+		}(),
+		RepeatSchedule: func() *RepeatSchedule {
+			v, ok := data["repeatSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer()
+		}(),
+		IsGlobalSchedule: func() *bool {
+			v, ok := data["isGlobalSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isGlobalSchedule"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2271,6 +2401,22 @@ func NewVerifyEventByUserIdResultFromDict(data map[string]interface{}) VerifyEve
 
 func (p VerifyEventByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"inSchedule":      p.InSchedule,
+		"scheduleStartAt": p.ScheduleStartAt,
+		"scheduleEndAt":   p.ScheduleEndAt,
+		"repeatSchedule": func() map[string]interface{} {
+			if p.RepeatSchedule == nil {
+				return nil
+			}
+			return p.RepeatSchedule.ToDict()
+		}(),
+		"isGlobalSchedule": p.IsGlobalSchedule,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2285,8 +2431,14 @@ func (p VerifyEventByUserIdResult) Pointer() *VerifyEventByUserIdResult {
 }
 
 type VerifyEventByStampTaskResult struct {
-	NewContextStack *string              `json:"newContextStack"`
-	Metadata        *core.ResultMetadata `json:"metadata"`
+	Item             *Event               `json:"item"`
+	InSchedule       *bool                `json:"inSchedule"`
+	ScheduleStartAt  *int64               `json:"scheduleStartAt"`
+	ScheduleEndAt    *int64               `json:"scheduleEndAt"`
+	RepeatSchedule   *RepeatSchedule      `json:"repeatSchedule"`
+	IsGlobalSchedule *bool                `json:"isGlobalSchedule"`
+	NewContextStack  *string              `json:"newContextStack"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEventByStampTaskAsyncResult struct {
@@ -2302,6 +2454,48 @@ func NewVerifyEventByStampTaskResultFromJson(data string) VerifyEventByStampTask
 
 func NewVerifyEventByStampTaskResultFromDict(data map[string]interface{}) VerifyEventByStampTaskResult {
 	return VerifyEventByStampTaskResult{
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		InSchedule: func() *bool {
+			v, ok := data["inSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["inSchedule"])
+		}(),
+		ScheduleStartAt: func() *int64 {
+			v, ok := data["scheduleStartAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleStartAt"])
+		}(),
+		ScheduleEndAt: func() *int64 {
+			v, ok := data["scheduleEndAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scheduleEndAt"])
+		}(),
+		RepeatSchedule: func() *RepeatSchedule {
+			v, ok := data["repeatSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRepeatScheduleFromDict(core.CastMap(data["repeatSchedule"])).Pointer()
+		}(),
+		IsGlobalSchedule: func() *bool {
+			v, ok := data["isGlobalSchedule"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isGlobalSchedule"])
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -2321,7 +2515,23 @@ func NewVerifyEventByStampTaskResultFromDict(data map[string]interface{}) Verify
 
 func (p VerifyEventByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"newContextStack": p.NewContextStack,
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"inSchedule":      p.InSchedule,
+		"scheduleStartAt": p.ScheduleStartAt,
+		"scheduleEndAt":   p.ScheduleEndAt,
+		"repeatSchedule": func() map[string]interface{} {
+			if p.RepeatSchedule == nil {
+				return nil
+			}
+			return p.RepeatSchedule.ToDict()
+		}(),
+		"isGlobalSchedule": p.IsGlobalSchedule,
+		"newContextStack":  p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil

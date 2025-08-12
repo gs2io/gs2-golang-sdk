@@ -103,3 +103,14 @@ func (p NotIncludedGuildMember) Type() string {
 func (p NotIncludedGuildMember) Code() string {
 	return "guild.member.notFound"
 }
+
+type CoolDownPeriod struct {
+}
+
+func (p CoolDownPeriod) Type() string {
+	return "GuildCoolDownPeriod"
+}
+
+func (p CoolDownPeriod) Code() string {
+	return "user.cooldown.period"
+}
