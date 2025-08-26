@@ -2475,9 +2475,6 @@ func (p Gs2IdleWebSocketClient) PredictionAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			bodies["xGs2DryRun"] = "true"
@@ -2574,9 +2571,6 @@ func (p Gs2IdleWebSocketClient) PredictionByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 	if request.DryRun != nil {
 		if *request.DryRun {

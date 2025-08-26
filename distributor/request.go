@@ -4089,11 +4089,10 @@ func (p SetTransactionDefaultConfigByUserIdRequest) Pointer() *SetTransactionDef
 }
 
 type FreezeMasterDataRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataRequest) UnmarshalJSON(data []byte) error {
@@ -4208,12 +4207,11 @@ func (p FreezeMasterDataRequest) Pointer() *FreezeMasterDataRequest {
 }
 
 type FreezeMasterDataByUserIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4489,14 +4487,13 @@ func (p SignFreezeMasterDataTimestampRequest) Pointer() *SignFreezeMasterDataTim
 }
 
 type FreezeMasterDataBySignedTimestampRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	Body               *string `json:"body"`
-	Signature          *string `json:"signature"`
-	KeyId              *string `json:"keyId"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	Body          *string `json:"body"`
+	Signature     *string `json:"signature"`
+	KeyId         *string `json:"keyId"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataBySignedTimestampRequest) UnmarshalJSON(data []byte) error {
@@ -4704,12 +4701,11 @@ func (p FreezeMasterDataBySignedTimestampRequest) Pointer() *FreezeMasterDataByS
 }
 
 type FreezeMasterDataByTimestampRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	Timestamp          *int64  `json:"timestamp"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	Timestamp     *int64  `json:"timestamp"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataByTimestampRequest) UnmarshalJSON(data []byte) error {

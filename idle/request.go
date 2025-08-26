@@ -3612,12 +3612,11 @@ func (p GetStatusByUserIdRequest) Pointer() *GetStatusByUserIdRequest {
 }
 
 type PredictionRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	CategoryName       *string `json:"categoryName"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	CategoryName  *string `json:"categoryName"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *PredictionRequest) UnmarshalJSON(data []byte) error {
@@ -3763,13 +3762,12 @@ func (p PredictionRequest) Pointer() *PredictionRequest {
 }
 
 type PredictionByUserIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	CategoryName       *string `json:"categoryName"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	CategoryName    *string `json:"categoryName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PredictionByUserIdRequest) UnmarshalJSON(data []byte) error {

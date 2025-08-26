@@ -2844,11 +2844,10 @@ func (p DeleteBuffEntryModelMasterRequest) Pointer() *DeleteBuffEntryModelMaster
 }
 
 type ApplyBuffRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	DryRun        *bool   `json:"dryRun"`
 }
 
 func (p *ApplyBuffRequest) UnmarshalJSON(data []byte) error {
@@ -2963,12 +2962,11 @@ func (p ApplyBuffRequest) Pointer() *ApplyBuffRequest {
 }
 
 type ApplyBuffByUserIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ApplyBuffByUserIdRequest) UnmarshalJSON(data []byte) error {

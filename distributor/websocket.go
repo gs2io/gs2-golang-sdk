@@ -3005,9 +3005,6 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			bodies["xGs2DryRun"] = "true"
@@ -3101,9 +3098,6 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 	if request.DryRun != nil {
 		if *request.DryRun {
@@ -3302,9 +3296,6 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataBySignedTimestampAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			bodies["xGs2DryRun"] = "true"
@@ -3401,9 +3392,6 @@ func (p Gs2DistributorWebSocketClient) FreezeMasterDataByTimestampAsync(
 	}
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 	if request.DryRun != nil {
 		if *request.DryRun {

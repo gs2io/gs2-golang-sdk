@@ -122,13 +122,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack             *string             `json:"contextStack"`
-	Name                     *string             `json:"name"`
-	Description              *string             `json:"description"`
-	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
-	LotteryTriggerScriptId   *string             `json:"lotteryTriggerScriptId"`
-	ChoicePrizeTableScriptId *string             `json:"choicePrizeTableScriptId"`
-	LogSetting               *LogSetting         `json:"logSetting"`
+	ContextStack           *string             `json:"contextStack"`
+	Name                   *string             `json:"name"`
+	Description            *string             `json:"description"`
+	TransactionSetting     *TransactionSetting `json:"transactionSetting"`
+	LotteryTriggerScriptId *string             `json:"lotteryTriggerScriptId"`
+	LogSetting             *LogSetting         `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -230,29 +229,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["choicePrizeTableScriptId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ChoicePrizeTableScriptId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ChoicePrizeTableScriptId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ChoicePrizeTableScriptId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ChoicePrizeTableScriptId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ChoicePrizeTableScriptId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ChoicePrizeTableScriptId)
-				}
-			}
-		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -345,13 +321,6 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["lotteryTriggerScriptId"])
 		}(),
-		ChoicePrizeTableScriptId: func() *string {
-			v, ok := data["choicePrizeTableScriptId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["choicePrizeTableScriptId"])
-		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -386,8 +355,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.TransactionSetting.ToDict()
 		}(),
-		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
-		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+		"lotteryTriggerScriptId": p.LotteryTriggerScriptId,
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
@@ -576,13 +544,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack             *string             `json:"contextStack"`
-	NamespaceName            *string             `json:"namespaceName"`
-	Description              *string             `json:"description"`
-	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
-	LotteryTriggerScriptId   *string             `json:"lotteryTriggerScriptId"`
-	ChoicePrizeTableScriptId *string             `json:"choicePrizeTableScriptId"`
-	LogSetting               *LogSetting         `json:"logSetting"`
+	ContextStack           *string             `json:"contextStack"`
+	NamespaceName          *string             `json:"namespaceName"`
+	Description            *string             `json:"description"`
+	TransactionSetting     *TransactionSetting `json:"transactionSetting"`
+	LotteryTriggerScriptId *string             `json:"lotteryTriggerScriptId"`
+	LogSetting             *LogSetting         `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -684,29 +651,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["choicePrizeTableScriptId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ChoicePrizeTableScriptId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ChoicePrizeTableScriptId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ChoicePrizeTableScriptId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ChoicePrizeTableScriptId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ChoicePrizeTableScriptId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ChoicePrizeTableScriptId)
-				}
-			}
-		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -799,13 +743,6 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return core.CastString(data["lotteryTriggerScriptId"])
 		}(),
-		ChoicePrizeTableScriptId: func() *string {
-			v, ok := data["choicePrizeTableScriptId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["choicePrizeTableScriptId"])
-		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -840,8 +777,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.TransactionSetting.ToDict()
 		}(),
-		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
-		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
+		"lotteryTriggerScriptId": p.LotteryTriggerScriptId,
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil

@@ -4696,9 +4696,6 @@ func (p Gs2AccountRestClient) FindPlatformIdAsync(
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
 	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"
@@ -4805,9 +4802,6 @@ func (p Gs2AccountRestClient) FindPlatformIdByUserIdAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}

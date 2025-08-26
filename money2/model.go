@@ -32,6 +32,7 @@ type Namespace struct {
 	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
 	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
 	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	VerifyReceiptScript                  *ScriptSetting       `json:"verifyReceiptScript"`
 	SubscribeScript                      *string              `json:"subscribeScript"`
 	RenewScript                          *string              `json:"renewScript"`
 	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
@@ -168,6 +169,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
+		}
+		if v, ok := d["verifyReceiptScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyReceiptScript)
 		}
 		if v, ok := d["subscribeScript"]; ok && v != nil {
 			var temp interface{}
@@ -324,6 +328,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		VerifyReceiptScript: func() *ScriptSetting {
+			v, ok := data["verifyReceiptScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["verifyReceiptScript"])).Pointer()
+		}(),
 		SubscribeScript: func() *string {
 			v, ok := data["subscribeScript"]
 			if !ok || v == nil {
@@ -429,6 +440,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}()
+	}
+	if p.VerifyReceiptScript != nil {
+		m["verifyReceiptScript"] = func() map[string]interface{} {
+			if p.VerifyReceiptScript == nil {
+				return nil
+			}
+			return p.VerifyReceiptScript.ToDict()
 		}()
 	}
 	if p.SubscribeScript != nil {

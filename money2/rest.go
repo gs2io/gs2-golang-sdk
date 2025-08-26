@@ -194,6 +194,9 @@ func (p Gs2Money2RestClient) CreateNamespaceAsync(
 	if request.WithdrawBalanceScript != nil {
 		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
 	}
+	if request.VerifyReceiptScript != nil {
+		bodies["verifyReceiptScript"] = request.VerifyReceiptScript.ToDict()
+	}
 	if request.SubscribeScript != nil && *request.SubscribeScript != "" {
 		bodies["subscribeScript"] = *request.SubscribeScript
 	}
@@ -499,6 +502,9 @@ func (p Gs2Money2RestClient) UpdateNamespaceAsync(
 	}
 	if request.WithdrawBalanceScript != nil {
 		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
+	}
+	if request.VerifyReceiptScript != nil {
+		bodies["verifyReceiptScript"] = request.VerifyReceiptScript.ToDict()
 	}
 	if request.SubscribeScript != nil && *request.SubscribeScript != "" {
 		bodies["subscribeScript"] = *request.SubscribeScript

@@ -130,6 +130,7 @@ type CreateNamespaceRequest struct {
 	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
 	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
 	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	VerifyReceiptScript                  *ScriptSetting       `json:"verifyReceiptScript"`
 	SubscribeScript                      *string              `json:"subscribeScript"`
 	RenewScript                          *string              `json:"renewScript"`
 	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
@@ -241,6 +242,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
+		}
+		if v, ok := d["verifyReceiptScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyReceiptScript)
 		}
 		if v, ok := d["subscribeScript"]; ok && v != nil {
 			var temp interface{}
@@ -384,6 +388,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		VerifyReceiptScript: func() *ScriptSetting {
+			v, ok := data["verifyReceiptScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["verifyReceiptScript"])).Pointer()
+		}(),
 		SubscribeScript: func() *string {
 			v, ok := data["subscribeScript"]
 			if !ok || v == nil {
@@ -452,6 +463,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"verifyReceiptScript": func() map[string]interface{} {
+			if p.VerifyReceiptScript == nil {
+				return nil
+			}
+			return p.VerifyReceiptScript.ToDict()
 		}(),
 		"subscribeScript":   p.SubscribeScript,
 		"renewScript":       p.RenewScript,
@@ -661,6 +678,7 @@ type UpdateNamespaceRequest struct {
 	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
 	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
 	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
+	VerifyReceiptScript                  *ScriptSetting       `json:"verifyReceiptScript"`
 	SubscribeScript                      *string              `json:"subscribeScript"`
 	RenewScript                          *string              `json:"renewScript"`
 	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
@@ -769,6 +787,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
+		}
+		if v, ok := d["verifyReceiptScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyReceiptScript)
 		}
 		if v, ok := d["subscribeScript"]; ok && v != nil {
 			var temp interface{}
@@ -905,6 +926,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
 		}(),
+		VerifyReceiptScript: func() *ScriptSetting {
+			v, ok := data["verifyReceiptScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["verifyReceiptScript"])).Pointer()
+		}(),
 		SubscribeScript: func() *string {
 			v, ok := data["subscribeScript"]
 			if !ok || v == nil {
@@ -972,6 +1000,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"verifyReceiptScript": func() map[string]interface{} {
+			if p.VerifyReceiptScript == nil {
+				return nil
+			}
+			return p.VerifyReceiptScript.ToDict()
 		}(),
 		"subscribeScript":   p.SubscribeScript,
 		"renewScript":       p.RenewScript,

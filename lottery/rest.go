@@ -185,9 +185,6 @@ func (p Gs2LotteryRestClient) CreateNamespaceAsync(
 	if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
 		bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
 	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
-	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -478,9 +475,6 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
 	}
 	if request.LotteryTriggerScriptId != nil && *request.LotteryTriggerScriptId != "" {
 		bodies["lotteryTriggerScriptId"] = *request.LotteryTriggerScriptId
-	}
-	if request.ChoicePrizeTableScriptId != nil && *request.ChoicePrizeTableScriptId != "" {
-		bodies["choicePrizeTableScriptId"] = *request.ChoicePrizeTableScriptId
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

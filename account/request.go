@@ -6956,13 +6956,12 @@ func (p GetPlatformIdByUserIdRequest) Pointer() *GetPlatformIdByUserIdRequest {
 }
 
 type FindPlatformIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	Type               *int32  `json:"type"`
-	UserIdentifier     *string `json:"userIdentifier"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	AccessToken    *string `json:"accessToken"`
+	Type           *int32  `json:"type"`
+	UserIdentifier *string `json:"userIdentifier"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *FindPlatformIdRequest) UnmarshalJSON(data []byte) error {
@@ -7119,14 +7118,13 @@ func (p FindPlatformIdRequest) Pointer() *FindPlatformIdRequest {
 }
 
 type FindPlatformIdByUserIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	Type               *int32  `json:"type"`
-	UserIdentifier     *string `json:"userIdentifier"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	Type            *int32  `json:"type"`
+	UserIdentifier  *string `json:"userIdentifier"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *FindPlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
