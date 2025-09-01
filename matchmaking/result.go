@@ -3046,6 +3046,7 @@ func (p GetSeasonGatheringResult) Pointer() *GetSeasonGatheringResult {
 }
 
 type VerifyIncludeParticipantResult struct {
+	Item     *SeasonGathering     `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -3062,6 +3063,13 @@ func NewVerifyIncludeParticipantResultFromJson(data string) VerifyIncludePartici
 
 func NewVerifyIncludeParticipantResultFromDict(data map[string]interface{}) VerifyIncludeParticipantResult {
 	return VerifyIncludeParticipantResult{
+		Item: func() *SeasonGathering {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -3074,6 +3082,12 @@ func NewVerifyIncludeParticipantResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifyIncludeParticipantResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -3088,6 +3102,7 @@ func (p VerifyIncludeParticipantResult) Pointer() *VerifyIncludeParticipantResul
 }
 
 type VerifyIncludeParticipantByUserIdResult struct {
+	Item     *SeasonGathering     `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -3104,6 +3119,13 @@ func NewVerifyIncludeParticipantByUserIdResultFromJson(data string) VerifyInclud
 
 func NewVerifyIncludeParticipantByUserIdResultFromDict(data map[string]interface{}) VerifyIncludeParticipantByUserIdResult {
 	return VerifyIncludeParticipantByUserIdResult{
+		Item: func() *SeasonGathering {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -3116,6 +3138,12 @@ func NewVerifyIncludeParticipantByUserIdResultFromDict(data map[string]interface
 
 func (p VerifyIncludeParticipantByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -3186,6 +3214,7 @@ func (p DeleteSeasonGatheringResult) Pointer() *DeleteSeasonGatheringResult {
 }
 
 type VerifyIncludeParticipantByStampTaskResult struct {
+	Item            *SeasonGathering     `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -3203,6 +3232,13 @@ func NewVerifyIncludeParticipantByStampTaskResultFromJson(data string) VerifyInc
 
 func NewVerifyIncludeParticipantByStampTaskResultFromDict(data map[string]interface{}) VerifyIncludeParticipantByStampTaskResult {
 	return VerifyIncludeParticipantByStampTaskResult{
+		Item: func() *SeasonGathering {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -3222,6 +3258,12 @@ func NewVerifyIncludeParticipantByStampTaskResultFromDict(data map[string]interf
 
 func (p VerifyIncludeParticipantByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {

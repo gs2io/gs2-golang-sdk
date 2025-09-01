@@ -4654,6 +4654,9 @@ func (p Gs2FriendWebSocketClient) SendRequestAsync(
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
 	}
+	if request.WithProfile != nil {
+		bodies["withProfile"] = *request.WithProfile
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4753,6 +4756,9 @@ func (p Gs2FriendWebSocketClient) SendRequestByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.WithProfile != nil {
+		bodies["withProfile"] = *request.WithProfile
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

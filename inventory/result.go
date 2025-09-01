@@ -3799,6 +3799,7 @@ func (p DeleteInventoryByUserIdResult) Pointer() *DeleteInventoryByUserIdResult 
 }
 
 type VerifyInventoryCurrentMaxCapacityResult struct {
+	Item     *Inventory           `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -3815,6 +3816,13 @@ func NewVerifyInventoryCurrentMaxCapacityResultFromJson(data string) VerifyInven
 
 func NewVerifyInventoryCurrentMaxCapacityResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityResult {
 	return VerifyInventoryCurrentMaxCapacityResult{
+		Item: func() *Inventory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -3827,6 +3835,12 @@ func NewVerifyInventoryCurrentMaxCapacityResultFromDict(data map[string]interfac
 
 func (p VerifyInventoryCurrentMaxCapacityResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -3841,6 +3855,7 @@ func (p VerifyInventoryCurrentMaxCapacityResult) Pointer() *VerifyInventoryCurre
 }
 
 type VerifyInventoryCurrentMaxCapacityByUserIdResult struct {
+	Item     *Inventory           `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -3857,6 +3872,13 @@ func NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromJson(data string) Ver
 
 func NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByUserIdResult {
 	return VerifyInventoryCurrentMaxCapacityByUserIdResult{
+		Item: func() *Inventory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -3869,6 +3891,12 @@ func NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromDict(data map[string]
 
 func (p VerifyInventoryCurrentMaxCapacityByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -3883,6 +3911,7 @@ func (p VerifyInventoryCurrentMaxCapacityByUserIdResult) Pointer() *VerifyInvent
 }
 
 type VerifyInventoryCurrentMaxCapacityByStampTaskResult struct {
+	Item            *Inventory           `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -3900,6 +3929,13 @@ func NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromJson(data string) 
 
 func NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByStampTaskResult {
 	return VerifyInventoryCurrentMaxCapacityByStampTaskResult{
+		Item: func() *Inventory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInventoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -3919,6 +3955,12 @@ func NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromDict(data map[stri
 
 func (p VerifyInventoryCurrentMaxCapacityByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
@@ -4960,6 +5002,7 @@ func (p DeleteItemSetByUserIdResult) Pointer() *DeleteItemSetByUserIdResult {
 }
 
 type VerifyItemSetResult struct {
+	Items    []ItemSet            `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -4976,6 +5019,12 @@ func NewVerifyItemSetResultFromJson(data string) VerifyItemSetResult {
 
 func NewVerifyItemSetResultFromDict(data map[string]interface{}) VerifyItemSetResult {
 	return VerifyItemSetResult{
+		Items: func() []ItemSet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastItemSets(core.CastArray(data["items"]))
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -4988,6 +5037,9 @@ func NewVerifyItemSetResultFromDict(data map[string]interface{}) VerifyItemSetRe
 
 func (p VerifyItemSetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"items": CastItemSetsFromDict(
+			p.Items,
+		),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -5002,6 +5054,7 @@ func (p VerifyItemSetResult) Pointer() *VerifyItemSetResult {
 }
 
 type VerifyItemSetByUserIdResult struct {
+	Items    []ItemSet            `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -5018,6 +5071,12 @@ func NewVerifyItemSetByUserIdResultFromJson(data string) VerifyItemSetByUserIdRe
 
 func NewVerifyItemSetByUserIdResultFromDict(data map[string]interface{}) VerifyItemSetByUserIdResult {
 	return VerifyItemSetByUserIdResult{
+		Items: func() []ItemSet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastItemSets(core.CastArray(data["items"]))
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -5030,6 +5089,9 @@ func NewVerifyItemSetByUserIdResultFromDict(data map[string]interface{}) VerifyI
 
 func (p VerifyItemSetByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"items": CastItemSetsFromDict(
+			p.Items,
+		),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -5329,6 +5391,7 @@ func (p ConsumeItemSetByStampTaskResult) Pointer() *ConsumeItemSetByStampTaskRes
 }
 
 type VerifyItemSetByStampTaskResult struct {
+	Items           []ItemSet            `json:"items"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -5346,6 +5409,12 @@ func NewVerifyItemSetByStampTaskResultFromJson(data string) VerifyItemSetByStamp
 
 func NewVerifyItemSetByStampTaskResultFromDict(data map[string]interface{}) VerifyItemSetByStampTaskResult {
 	return VerifyItemSetByStampTaskResult{
+		Items: func() []ItemSet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastItemSets(core.CastArray(data["items"]))
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -5365,6 +5434,9 @@ func NewVerifyItemSetByStampTaskResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifyItemSetByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"items": CastItemSetsFromDict(
+			p.Items,
+		),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
@@ -7290,6 +7362,7 @@ func (p DeleteSimpleItemsByUserIdResult) Pointer() *DeleteSimpleItemsByUserIdRes
 }
 
 type VerifySimpleItemResult struct {
+	Item     *SimpleItem          `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -7306,6 +7379,13 @@ func NewVerifySimpleItemResultFromJson(data string) VerifySimpleItemResult {
 
 func NewVerifySimpleItemResultFromDict(data map[string]interface{}) VerifySimpleItemResult {
 	return VerifySimpleItemResult{
+		Item: func() *SimpleItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -7318,6 +7398,12 @@ func NewVerifySimpleItemResultFromDict(data map[string]interface{}) VerifySimple
 
 func (p VerifySimpleItemResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -7332,6 +7418,7 @@ func (p VerifySimpleItemResult) Pointer() *VerifySimpleItemResult {
 }
 
 type VerifySimpleItemByUserIdResult struct {
+	Item     *SimpleItem          `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -7348,6 +7435,13 @@ func NewVerifySimpleItemByUserIdResultFromJson(data string) VerifySimpleItemByUs
 
 func NewVerifySimpleItemByUserIdResultFromDict(data map[string]interface{}) VerifySimpleItemByUserIdResult {
 	return VerifySimpleItemByUserIdResult{
+		Item: func() *SimpleItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -7360,6 +7454,12 @@ func NewVerifySimpleItemByUserIdResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifySimpleItemByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -7539,6 +7639,7 @@ func (p SetSimpleItemsByStampSheetResult) Pointer() *SetSimpleItemsByStampSheetR
 }
 
 type VerifySimpleItemByStampTaskResult struct {
+	Item            *SimpleItem          `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -7556,6 +7657,13 @@ func NewVerifySimpleItemByStampTaskResultFromJson(data string) VerifySimpleItemB
 
 func NewVerifySimpleItemByStampTaskResultFromDict(data map[string]interface{}) VerifySimpleItemByStampTaskResult {
 	return VerifySimpleItemByStampTaskResult{
+		Item: func() *SimpleItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSimpleItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -7575,6 +7683,12 @@ func NewVerifySimpleItemByStampTaskResultFromDict(data map[string]interface{}) V
 
 func (p VerifySimpleItemByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
@@ -8132,6 +8246,7 @@ func (p DeleteBigItemByUserIdResult) Pointer() *DeleteBigItemByUserIdResult {
 }
 
 type VerifyBigItemResult struct {
+	Item     *BigItem             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -8148,6 +8263,13 @@ func NewVerifyBigItemResultFromJson(data string) VerifyBigItemResult {
 
 func NewVerifyBigItemResultFromDict(data map[string]interface{}) VerifyBigItemResult {
 	return VerifyBigItemResult{
+		Item: func() *BigItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBigItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -8160,6 +8282,12 @@ func NewVerifyBigItemResultFromDict(data map[string]interface{}) VerifyBigItemRe
 
 func (p VerifyBigItemResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -8174,6 +8302,7 @@ func (p VerifyBigItemResult) Pointer() *VerifyBigItemResult {
 }
 
 type VerifyBigItemByUserIdResult struct {
+	Item     *BigItem             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -8190,6 +8319,13 @@ func NewVerifyBigItemByUserIdResultFromJson(data string) VerifyBigItemByUserIdRe
 
 func NewVerifyBigItemByUserIdResultFromDict(data map[string]interface{}) VerifyBigItemByUserIdResult {
 	return VerifyBigItemByUserIdResult{
+		Item: func() *BigItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBigItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -8202,6 +8338,12 @@ func NewVerifyBigItemByUserIdResultFromDict(data map[string]interface{}) VerifyB
 
 func (p VerifyBigItemByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -8393,6 +8535,7 @@ func (p SetBigItemByStampSheetResult) Pointer() *SetBigItemByStampSheetResult {
 }
 
 type VerifyBigItemByStampTaskResult struct {
+	Item            *BigItem             `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -8410,6 +8553,13 @@ func NewVerifyBigItemByStampTaskResultFromJson(data string) VerifyBigItemByStamp
 
 func NewVerifyBigItemByStampTaskResultFromDict(data map[string]interface{}) VerifyBigItemByStampTaskResult {
 	return VerifyBigItemByStampTaskResult{
+		Item: func() *BigItem {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBigItemFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -8429,6 +8579,12 @@ func NewVerifyBigItemByStampTaskResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifyBigItemByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {

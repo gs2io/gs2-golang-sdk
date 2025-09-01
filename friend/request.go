@@ -7640,6 +7640,7 @@ type SendRequestRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	TargetUserId       *string `json:"targetUserId"`
+	WithProfile        *bool   `json:"withProfile"`
 	DryRun             *bool   `json:"dryRun"`
 }
 
@@ -7734,6 +7735,9 @@ func (p *SendRequestRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 	}
 	return nil
 }
@@ -7770,6 +7774,13 @@ func NewSendRequestRequestFromDict(data map[string]interface{}) SendRequestReque
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 	}
 }
 
@@ -7778,6 +7789,7 @@ func (p SendRequestRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"targetUserId":  p.TargetUserId,
+		"withProfile":   p.WithProfile,
 	}
 }
 
@@ -7791,6 +7803,7 @@ type SendRequestByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TargetUserId       *string `json:"targetUserId"`
+	WithProfile        *bool   `json:"withProfile"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -7886,6 +7899,9 @@ func (p *SendRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["withProfile"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithProfile)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -7945,6 +7961,13 @@ func NewSendRequestByUserIdRequestFromDict(data map[string]interface{}) SendRequ
 			}
 			return core.CastString(data["targetUserId"])
 		}(),
+		WithProfile: func() *bool {
+			v, ok := data["withProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["withProfile"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -7960,6 +7983,7 @@ func (p SendRequestByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
 		"targetUserId":    p.TargetUserId,
+		"withProfile":     p.WithProfile,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

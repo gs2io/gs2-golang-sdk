@@ -5094,14 +5094,12 @@ func (p Gs2MatchmakingRestClient) DescribeSeasonGatheringsAsync(
 	} else {
 		path = strings.ReplaceAll(path, "{season}", "null")
 	}
-	if request.Tier != nil {
-		path = strings.ReplaceAll(path, "{tier}", core.ToString(*request.Tier))
-	} else {
-		path = strings.ReplaceAll(path, "{tier}", "null")
-	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.Tier != nil {
+		queryStrings["tier"] = core.ToString(*request.Tier)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}

@@ -1595,6 +1595,7 @@ func (p DeleteTriggerByUserIdResult) Pointer() *DeleteTriggerByUserIdResult {
 }
 
 type VerifyTriggerResult struct {
+	Item     *Trigger             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -1611,6 +1612,13 @@ func NewVerifyTriggerResultFromJson(data string) VerifyTriggerResult {
 
 func NewVerifyTriggerResultFromDict(data map[string]interface{}) VerifyTriggerResult {
 	return VerifyTriggerResult{
+		Item: func() *Trigger {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTriggerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1623,6 +1631,12 @@ func NewVerifyTriggerResultFromDict(data map[string]interface{}) VerifyTriggerRe
 
 func (p VerifyTriggerResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -1637,6 +1651,7 @@ func (p VerifyTriggerResult) Pointer() *VerifyTriggerResult {
 }
 
 type VerifyTriggerByUserIdResult struct {
+	Item     *Trigger             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -1653,6 +1668,13 @@ func NewVerifyTriggerByUserIdResultFromJson(data string) VerifyTriggerByUserIdRe
 
 func NewVerifyTriggerByUserIdResultFromDict(data map[string]interface{}) VerifyTriggerByUserIdResult {
 	return VerifyTriggerByUserIdResult{
+		Item: func() *Trigger {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTriggerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1665,6 +1687,12 @@ func NewVerifyTriggerByUserIdResultFromDict(data map[string]interface{}) VerifyT
 
 func (p VerifyTriggerByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -1744,6 +1772,7 @@ func (p DeleteTriggerByStampTaskResult) Pointer() *DeleteTriggerByStampTaskResul
 }
 
 type VerifyTriggerByStampTaskResult struct {
+	Item            *Trigger             `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -1761,6 +1790,13 @@ func NewVerifyTriggerByStampTaskResultFromJson(data string) VerifyTriggerByStamp
 
 func NewVerifyTriggerByStampTaskResultFromDict(data map[string]interface{}) VerifyTriggerByStampTaskResult {
 	return VerifyTriggerByStampTaskResult{
+		Item: func() *Trigger {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTriggerFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -1780,6 +1816,12 @@ func NewVerifyTriggerByStampTaskResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifyTriggerByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {

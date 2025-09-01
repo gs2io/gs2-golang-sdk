@@ -1912,6 +1912,7 @@ func (p DeleteStatusByUserIdResult) Pointer() *DeleteStatusByUserIdResult {
 }
 
 type VerifyGradeResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -1928,6 +1929,13 @@ func NewVerifyGradeResultFromJson(data string) VerifyGradeResult {
 
 func NewVerifyGradeResultFromDict(data map[string]interface{}) VerifyGradeResult {
 	return VerifyGradeResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1940,6 +1948,12 @@ func NewVerifyGradeResultFromDict(data map[string]interface{}) VerifyGradeResult
 
 func (p VerifyGradeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -1954,6 +1968,7 @@ func (p VerifyGradeResult) Pointer() *VerifyGradeResult {
 }
 
 type VerifyGradeByUserIdResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -1970,6 +1985,13 @@ func NewVerifyGradeByUserIdResultFromJson(data string) VerifyGradeByUserIdResult
 
 func NewVerifyGradeByUserIdResultFromDict(data map[string]interface{}) VerifyGradeByUserIdResult {
 	return VerifyGradeByUserIdResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -1982,6 +2004,12 @@ func NewVerifyGradeByUserIdResultFromDict(data map[string]interface{}) VerifyGra
 
 func (p VerifyGradeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2566,6 +2594,7 @@ func (p MultiplyAcquireActionsByStampSheetResult) Pointer() *MultiplyAcquireActi
 }
 
 type VerifyGradeByStampTaskResult struct {
+	Item            *Status              `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -2583,6 +2612,13 @@ func NewVerifyGradeByStampTaskResultFromJson(data string) VerifyGradeByStampTask
 
 func NewVerifyGradeByStampTaskResultFromDict(data map[string]interface{}) VerifyGradeByStampTaskResult {
 	return VerifyGradeByStampTaskResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -2602,6 +2638,12 @@ func NewVerifyGradeByStampTaskResultFromDict(data map[string]interface{}) Verify
 
 func (p VerifyGradeByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {

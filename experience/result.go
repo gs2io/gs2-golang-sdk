@@ -2616,6 +2616,7 @@ func (p DeleteStatusByUserIdResult) Pointer() *DeleteStatusByUserIdResult {
 }
 
 type VerifyRankResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2632,6 +2633,13 @@ func NewVerifyRankResultFromJson(data string) VerifyRankResult {
 
 func NewVerifyRankResultFromDict(data map[string]interface{}) VerifyRankResult {
 	return VerifyRankResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2644,6 +2652,12 @@ func NewVerifyRankResultFromDict(data map[string]interface{}) VerifyRankResult {
 
 func (p VerifyRankResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2658,6 +2672,7 @@ func (p VerifyRankResult) Pointer() *VerifyRankResult {
 }
 
 type VerifyRankByUserIdResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2674,6 +2689,13 @@ func NewVerifyRankByUserIdResultFromJson(data string) VerifyRankByUserIdResult {
 
 func NewVerifyRankByUserIdResultFromDict(data map[string]interface{}) VerifyRankByUserIdResult {
 	return VerifyRankByUserIdResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2686,6 +2708,12 @@ func NewVerifyRankByUserIdResultFromDict(data map[string]interface{}) VerifyRank
 
 func (p VerifyRankByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2700,6 +2728,7 @@ func (p VerifyRankByUserIdResult) Pointer() *VerifyRankByUserIdResult {
 }
 
 type VerifyRankCapResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2716,6 +2745,13 @@ func NewVerifyRankCapResultFromJson(data string) VerifyRankCapResult {
 
 func NewVerifyRankCapResultFromDict(data map[string]interface{}) VerifyRankCapResult {
 	return VerifyRankCapResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2728,6 +2764,12 @@ func NewVerifyRankCapResultFromDict(data map[string]interface{}) VerifyRankCapRe
 
 func (p VerifyRankCapResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2742,6 +2784,7 @@ func (p VerifyRankCapResult) Pointer() *VerifyRankCapResult {
 }
 
 type VerifyRankCapByUserIdResult struct {
+	Item     *Status              `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2758,6 +2801,13 @@ func NewVerifyRankCapByUserIdResultFromJson(data string) VerifyRankCapByUserIdRe
 
 func NewVerifyRankCapByUserIdResultFromDict(data map[string]interface{}) VerifyRankCapByUserIdResult {
 	return VerifyRankCapByUserIdResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2770,6 +2820,12 @@ func NewVerifyRankCapByUserIdResultFromDict(data map[string]interface{}) VerifyR
 
 func (p VerifyRankCapByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -3392,6 +3448,7 @@ func (p MultiplyAcquireActionsByStampSheetResult) Pointer() *MultiplyAcquireActi
 }
 
 type VerifyRankByStampTaskResult struct {
+	Item            *Status              `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -3409,6 +3466,13 @@ func NewVerifyRankByStampTaskResultFromJson(data string) VerifyRankByStampTaskRe
 
 func NewVerifyRankByStampTaskResultFromDict(data map[string]interface{}) VerifyRankByStampTaskResult {
 	return VerifyRankByStampTaskResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -3428,6 +3492,12 @@ func NewVerifyRankByStampTaskResultFromDict(data map[string]interface{}) VerifyR
 
 func (p VerifyRankByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
@@ -3443,6 +3513,7 @@ func (p VerifyRankByStampTaskResult) Pointer() *VerifyRankByStampTaskResult {
 }
 
 type VerifyRankCapByStampTaskResult struct {
+	Item            *Status              `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -3460,6 +3531,13 @@ func NewVerifyRankCapByStampTaskResultFromJson(data string) VerifyRankCapByStamp
 
 func NewVerifyRankCapByStampTaskResultFromDict(data map[string]interface{}) VerifyRankCapByStampTaskResult {
 	return VerifyRankCapByStampTaskResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -3479,6 +3557,12 @@ func NewVerifyRankCapByStampTaskResultFromDict(data map[string]interface{}) Veri
 
 func (p VerifyRankCapByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {

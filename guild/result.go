@@ -2207,6 +2207,7 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *De
 }
 
 type VerifyCurrentMaximumMemberCountResult struct {
+	Item     *Guild               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2223,6 +2224,13 @@ func NewVerifyCurrentMaximumMemberCountResultFromJson(data string) VerifyCurrent
 
 func NewVerifyCurrentMaximumMemberCountResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountResult {
 	return VerifyCurrentMaximumMemberCountResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2235,6 +2243,12 @@ func NewVerifyCurrentMaximumMemberCountResultFromDict(data map[string]interface{
 
 func (p VerifyCurrentMaximumMemberCountResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2249,6 +2263,7 @@ func (p VerifyCurrentMaximumMemberCountResult) Pointer() *VerifyCurrentMaximumMe
 }
 
 type VerifyCurrentMaximumMemberCountByGuildNameResult struct {
+	Item     *Guild               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2265,6 +2280,13 @@ func NewVerifyCurrentMaximumMemberCountByGuildNameResultFromJson(data string) Ve
 
 func NewVerifyCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByGuildNameResult {
 	return VerifyCurrentMaximumMemberCountByGuildNameResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2277,6 +2299,12 @@ func NewVerifyCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string
 
 func (p VerifyCurrentMaximumMemberCountByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2291,6 +2319,7 @@ func (p VerifyCurrentMaximumMemberCountByGuildNameResult) Pointer() *VerifyCurre
 }
 
 type VerifyIncludeMemberResult struct {
+	Item     *Guild               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2307,6 +2336,13 @@ func NewVerifyIncludeMemberResultFromJson(data string) VerifyIncludeMemberResult
 
 func NewVerifyIncludeMemberResultFromDict(data map[string]interface{}) VerifyIncludeMemberResult {
 	return VerifyIncludeMemberResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2319,6 +2355,12 @@ func NewVerifyIncludeMemberResultFromDict(data map[string]interface{}) VerifyInc
 
 func (p VerifyIncludeMemberResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2333,6 +2375,7 @@ func (p VerifyIncludeMemberResult) Pointer() *VerifyIncludeMemberResult {
 }
 
 type VerifyIncludeMemberByUserIdResult struct {
+	Item     *Guild               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
@@ -2349,6 +2392,13 @@ func NewVerifyIncludeMemberByUserIdResultFromJson(data string) VerifyIncludeMemb
 
 func NewVerifyIncludeMemberByUserIdResultFromDict(data map[string]interface{}) VerifyIncludeMemberByUserIdResult {
 	return VerifyIncludeMemberByUserIdResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2361,6 +2411,12 @@ func NewVerifyIncludeMemberByUserIdResultFromDict(data map[string]interface{}) V
 
 func (p VerifyIncludeMemberByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2774,6 +2830,7 @@ func (p SetMaximumCurrentMaximumMemberCountByStampSheetResult) Pointer() *SetMax
 }
 
 type VerifyCurrentMaximumMemberCountByStampTaskResult struct {
+	Item            *Guild               `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -2791,6 +2848,13 @@ func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromJson(data string) Ve
 
 func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByStampTaskResult {
 	return VerifyCurrentMaximumMemberCountByStampTaskResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -2810,6 +2874,12 @@ func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromDict(data map[string
 
 func (p VerifyCurrentMaximumMemberCountByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
@@ -2825,6 +2895,7 @@ func (p VerifyCurrentMaximumMemberCountByStampTaskResult) Pointer() *VerifyCurre
 }
 
 type VerifyIncludeMemberByStampTaskResult struct {
+	Item            *Guild               `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
 	Metadata        *core.ResultMetadata `json:"metadata"`
 }
@@ -2842,6 +2913,13 @@ func NewVerifyIncludeMemberByStampTaskResultFromJson(data string) VerifyIncludeM
 
 func NewVerifyIncludeMemberByStampTaskResultFromDict(data map[string]interface{}) VerifyIncludeMemberByStampTaskResult {
 	return VerifyIncludeMemberByStampTaskResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -2861,6 +2939,12 @@ func NewVerifyIncludeMemberByStampTaskResultFromDict(data map[string]interface{}
 
 func (p VerifyIncludeMemberByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
