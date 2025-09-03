@@ -179,6 +179,9 @@ func (p Gs2VersionRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.AssumeUserId != nil && *request.AssumeUserId != "" {
 		bodies["assumeUserId"] = *request.AssumeUserId
 	}
@@ -466,6 +469,9 @@ func (p Gs2VersionRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.AssumeUserId != nil && *request.AssumeUserId != "" {
 		bodies["assumeUserId"] = *request.AssumeUserId

@@ -24,16 +24,17 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId                 *string        `json:"namespaceId"`
-	Name                        *string        `json:"name"`
-	Description                 *string        `json:"description"`
-	AssumeUserId                *string        `json:"assumeUserId"`
-	AcceptVersionScript         *ScriptSetting `json:"acceptVersionScript"`
-	CheckVersionTriggerScriptId *string        `json:"checkVersionTriggerScriptId"`
-	LogSetting                  *LogSetting    `json:"logSetting"`
-	CreatedAt                   *int64         `json:"createdAt"`
-	UpdatedAt                   *int64         `json:"updatedAt"`
-	Revision                    *int64         `json:"revision"`
+	NamespaceId                 *string             `json:"namespaceId"`
+	Name                        *string             `json:"name"`
+	Description                 *string             `json:"description"`
+	TransactionSetting          *TransactionSetting `json:"transactionSetting"`
+	AssumeUserId                *string             `json:"assumeUserId"`
+	AcceptVersionScript         *ScriptSetting      `json:"acceptVersionScript"`
+	CheckVersionTriggerScriptId *string             `json:"checkVersionTriggerScriptId"`
+	LogSetting                  *LogSetting         `json:"logSetting"`
+	CreatedAt                   *int64              `json:"createdAt"`
+	UpdatedAt                   *int64              `json:"updatedAt"`
+	Revision                    *int64              `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -126,6 +127,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
 		if v, ok := d["assumeUserId"]; ok && v != nil {
 			var temp interface{}
@@ -221,6 +225,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["description"])
 		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		AssumeUserId: func() *string {
 			v, ok := data["assumeUserId"]
 			if !ok || v == nil {
@@ -283,6 +294,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	if p.Description != nil {
 		m["description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		m["transactionSetting"] = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	if p.AssumeUserId != nil {
 		m["assumeUserId"] = p.AssumeUserId
@@ -2658,6 +2677,230 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TransactionSetting struct {
+	EnableAutoRun             *bool   `json:"enableAutoRun"`
+	EnableAtomicCommit        *bool   `json:"enableAtomicCommit"`
+	TransactionUseDistributor *bool   `json:"transactionUseDistributor"`
+	AcquireActionUseJobQueue  *bool   `json:"acquireActionUseJobQueue"`
+	DistributorNamespaceId    *string `json:"distributorNamespaceId"`
+	// Deprecated: should not be used
+	KeyId            *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
+}
+
+func (p *TransactionSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TransactionSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TransactionSetting{}
+	} else {
+		*p = TransactionSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["enableAutoRun"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableAutoRun)
+		}
+		if v, ok := d["enableAtomicCommit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableAtomicCommit)
+		}
+		if v, ok := d["transactionUseDistributor"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionUseDistributor)
+		}
+		if v, ok := d["acquireActionUseJobQueue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireActionUseJobQueue)
+		}
+		if v, ok := d["distributorNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DistributorNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DistributorNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DistributorNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DistributorNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+		if v, ok := d["queueNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QueueNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QueueNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QueueNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QueueNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QueueNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QueueNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewTransactionSettingFromJson(data string) TransactionSetting {
+	req := TransactionSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
+	return TransactionSetting{
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		EnableAtomicCommit: func() *bool {
+			v, ok := data["enableAtomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAtomicCommit"])
+		}(),
+		TransactionUseDistributor: func() *bool {
+			v, ok := data["transactionUseDistributor"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["transactionUseDistributor"])
+		}(),
+		AcquireActionUseJobQueue: func() *bool {
+			v, ok := data["acquireActionUseJobQueue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["acquireActionUseJobQueue"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
+	}
+}
+
+func (p TransactionSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.EnableAutoRun != nil {
+		m["enableAutoRun"] = p.EnableAutoRun
+	}
+	if p.EnableAtomicCommit != nil {
+		m["enableAtomicCommit"] = p.EnableAtomicCommit
+	}
+	if p.TransactionUseDistributor != nil {
+		m["transactionUseDistributor"] = p.TransactionUseDistributor
+	}
+	if p.AcquireActionUseJobQueue != nil {
+		m["acquireActionUseJobQueue"] = p.AcquireActionUseJobQueue
+	}
+	if p.DistributorNamespaceId != nil {
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
+	}
+	if p.KeyId != nil {
+		m["keyId"] = p.KeyId
+	}
+	if p.QueueNamespaceId != nil {
+		m["queueNamespaceId"] = p.QueueNamespaceId
+	}
+	return m
+}
+
+func (p TransactionSetting) Pointer() *TransactionSetting {
+	return &p
+}
+
+func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	v := make([]TransactionSetting, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

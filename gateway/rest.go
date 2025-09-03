@@ -178,6 +178,9 @@ func (p Gs2GatewayRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
 		bodies["firebaseSecret"] = *request.FirebaseSecret
 	}
@@ -459,6 +462,9 @@ func (p Gs2GatewayRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
 		bodies["firebaseSecret"] = *request.FirebaseSecret

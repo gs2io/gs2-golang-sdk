@@ -181,6 +181,9 @@ func (p Gs2BuffWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.ApplyBuffScript != nil {
 		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()
 	}
@@ -453,6 +456,9 @@ func (p Gs2BuffWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.ApplyBuffScript != nil {
 		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()

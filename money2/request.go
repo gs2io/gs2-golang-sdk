@@ -126,6 +126,7 @@ type CreateNamespaceRequest struct {
 	Name                                 *string              `json:"name"`
 	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
 	Description                          *string              `json:"description"`
+	TransactionSetting                   *TransactionSetting  `json:"transactionSetting"`
 	SharedFreeCurrency                   *bool                `json:"sharedFreeCurrency"`
 	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
 	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
@@ -230,6 +231,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
 		if v, ok := d["sharedFreeCurrency"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.SharedFreeCurrency)
@@ -360,6 +364,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["description"])
 		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		SharedFreeCurrency: func() *bool {
 			v, ok := data["sharedFreeCurrency"]
 			if !ok || v == nil {
@@ -445,7 +456,13 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":                  p.Name,
 		"currencyUsagePriority": p.CurrencyUsagePriority,
 		"description":           p.Description,
-		"sharedFreeCurrency":    p.SharedFreeCurrency,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"sharedFreeCurrency": p.SharedFreeCurrency,
 		"platformSetting": func() map[string]interface{} {
 			if p.PlatformSetting == nil {
 				return nil
@@ -675,6 +692,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName                        *string              `json:"namespaceName"`
 	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
 	Description                          *string              `json:"description"`
+	TransactionSetting                   *TransactionSetting  `json:"transactionSetting"`
 	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
 	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
 	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
@@ -778,6 +796,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
 		if v, ok := d["platformSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PlatformSetting)
@@ -905,6 +926,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return core.CastString(data["description"])
 		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		PlatformSetting: func() *PlatformSetting {
 			v, ok := data["platformSetting"]
 			if !ok || v == nil {
@@ -983,6 +1011,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"currencyUsagePriority": p.CurrencyUsagePriority,
 		"description":           p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"platformSetting": func() map[string]interface{} {
 			if p.PlatformSetting == nil {
 				return nil

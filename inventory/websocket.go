@@ -181,6 +181,9 @@ func (p Gs2InventoryWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.AcquireScript != nil {
 		bodies["acquireScript"] = request.AcquireScript.ToDict()
 	}
@@ -471,6 +474,9 @@ func (p Gs2InventoryWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.AcquireScript != nil {
 		bodies["acquireScript"] = request.AcquireScript.ToDict()

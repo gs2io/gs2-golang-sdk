@@ -124,10 +124,11 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 type CreateNamespaceRequest struct {
 	ContextStack            *string              `json:"contextStack"`
 	Name                    *string              `json:"name"`
+	Description             *string              `json:"description"`
+	TransactionSetting      *TransactionSetting  `json:"transactionSetting"`
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
 	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
-	Description             *string              `json:"description"`
 	AcquirePointScript      *ScriptSetting       `json:"acquirePointScript"`
 	ConsumePointScript      *ScriptSetting       `json:"consumePointScript"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
@@ -180,15 +181,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["admob"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Admob)
-		}
-		if v, ok := d["unityAd"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UnityAd)
-		}
-		if v, ok := d["appLovinMaxes"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.AppLovinMaxes)
-		}
 		if v, ok := d["description"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -211,6 +203,18 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["admob"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Admob)
+		}
+		if v, ok := d["unityAd"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UnityAd)
+		}
+		if v, ok := d["appLovinMaxes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppLovinMaxes)
 		}
 		if v, ok := d["acquirePointScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquirePointScript)
@@ -246,6 +250,20 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["name"])
 		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		Admob: func() *AdMob {
 			v, ok := data["admob"]
 			if !ok || v == nil {
@@ -265,13 +283,6 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 				return nil
 			}
 			return CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"]))
-		}(),
-		Description: func() *string {
-			v, ok := data["description"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["description"])
 		}(),
 		AcquirePointScript: func() *ScriptSetting {
 			v, ok := data["acquirePointScript"]
@@ -306,7 +317,14 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name": p.Name,
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"admob": func() map[string]interface{} {
 			if p.Admob == nil {
 				return nil
@@ -322,7 +340,6 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"appLovinMaxes": CastAppLovinMaxesFromDict(
 			p.AppLovinMaxes,
 		),
-		"description": p.Description,
 		"acquirePointScript": func() map[string]interface{} {
 			if p.AcquirePointScript == nil {
 				return nil
@@ -530,6 +547,7 @@ type UpdateNamespaceRequest struct {
 	ContextStack            *string              `json:"contextStack"`
 	NamespaceName           *string              `json:"namespaceName"`
 	Description             *string              `json:"description"`
+	TransactionSetting      *TransactionSetting  `json:"transactionSetting"`
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
 	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
@@ -608,6 +626,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["admob"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Admob)
 		}
@@ -657,6 +678,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
 		Admob: func() *AdMob {
 			v, ok := data["admob"]
@@ -713,6 +741,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"admob": func() map[string]interface{} {
 			if p.Admob == nil {
 				return nil

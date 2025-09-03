@@ -181,6 +181,9 @@ func (p Gs2AccountWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.ChangePasswordIfTakeOver != nil {
 		bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
 	}
@@ -474,6 +477,9 @@ func (p Gs2AccountWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.ChangePasswordIfTakeOver != nil {
 		bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver

@@ -181,6 +181,9 @@ func (p Gs2JobQueueWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.EnableAutoRun != nil {
 		bodies["enableAutoRun"] = *request.EnableAutoRun
 	}
@@ -459,6 +462,9 @@ func (p Gs2JobQueueWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.EnableAutoRun != nil {
 		bodies["enableAutoRun"] = *request.EnableAutoRun

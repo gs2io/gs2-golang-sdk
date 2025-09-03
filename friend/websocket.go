@@ -181,6 +181,9 @@ func (p Gs2FriendWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.FollowScript != nil {
 		bodies["followScript"] = request.FollowScript.ToDict()
 	}
@@ -492,6 +495,9 @@ func (p Gs2FriendWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.FollowScript != nil {
 		bodies["followScript"] = request.FollowScript.ToDict()

@@ -27,6 +27,7 @@ type Namespace struct {
 	NamespaceId                *string              `json:"namespaceId"`
 	Name                       *string              `json:"name"`
 	Description                *string              `json:"description"`
+	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
 	ChangeNotification         *NotificationSetting `json:"changeNotification"`
 	JoinNotification           *NotificationSetting `json:"joinNotification"`
 	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
@@ -137,6 +138,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["changeNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeNotification)
 		}
@@ -220,6 +224,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
 		ChangeNotification: func() *NotificationSetting {
 			v, ok := data["changeNotification"]
@@ -353,6 +364,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	if p.Description != nil {
 		m["description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		m["transactionSetting"] = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	if p.ChangeNotification != nil {
 		m["changeNotification"] = func() map[string]interface{} {

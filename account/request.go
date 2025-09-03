@@ -122,19 +122,20 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack                            *string        `json:"contextStack"`
-	Name                                    *string        `json:"name"`
-	Description                             *string        `json:"description"`
-	ChangePasswordIfTakeOver                *bool          `json:"changePasswordIfTakeOver"`
-	DifferentUserIdForLoginAndDataRetention *bool          `json:"differentUserIdForLoginAndDataRetention"`
-	CreateAccountScript                     *ScriptSetting `json:"createAccountScript"`
-	AuthenticationScript                    *ScriptSetting `json:"authenticationScript"`
-	CreateTakeOverScript                    *ScriptSetting `json:"createTakeOverScript"`
-	DoTakeOverScript                        *ScriptSetting `json:"doTakeOverScript"`
-	BanScript                               *ScriptSetting `json:"banScript"`
-	UnBanScript                             *ScriptSetting `json:"unBanScript"`
-	LogSetting                              *LogSetting    `json:"logSetting"`
-	DryRun                                  *bool          `json:"dryRun"`
+	ContextStack                            *string             `json:"contextStack"`
+	Name                                    *string             `json:"name"`
+	Description                             *string             `json:"description"`
+	TransactionSetting                      *TransactionSetting `json:"transactionSetting"`
+	ChangePasswordIfTakeOver                *bool               `json:"changePasswordIfTakeOver"`
+	DifferentUserIdForLoginAndDataRetention *bool               `json:"differentUserIdForLoginAndDataRetention"`
+	CreateAccountScript                     *ScriptSetting      `json:"createAccountScript"`
+	AuthenticationScript                    *ScriptSetting      `json:"authenticationScript"`
+	CreateTakeOverScript                    *ScriptSetting      `json:"createTakeOverScript"`
+	DoTakeOverScript                        *ScriptSetting      `json:"doTakeOverScript"`
+	BanScript                               *ScriptSetting      `json:"banScript"`
+	UnBanScript                             *ScriptSetting      `json:"unBanScript"`
+	LogSetting                              *LogSetting         `json:"logSetting"`
+	DryRun                                  *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -205,6 +206,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["changePasswordIfTakeOver"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangePasswordIfTakeOver)
 		}
@@ -260,6 +264,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
 		ChangePasswordIfTakeOver: func() *bool {
 			v, ok := data["changePasswordIfTakeOver"]
@@ -329,9 +340,15 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                     p.Name,
-		"description":              p.Description,
-		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"changePasswordIfTakeOver":                p.ChangePasswordIfTakeOver,
 		"differentUserIdForLoginAndDataRetention": p.DifferentUserIdForLoginAndDataRetention,
 		"createAccountScript": func() map[string]interface{} {
 			if p.CreateAccountScript == nil {
@@ -555,18 +572,19 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack             *string        `json:"contextStack"`
-	NamespaceName            *string        `json:"namespaceName"`
-	Description              *string        `json:"description"`
-	ChangePasswordIfTakeOver *bool          `json:"changePasswordIfTakeOver"`
-	CreateAccountScript      *ScriptSetting `json:"createAccountScript"`
-	AuthenticationScript     *ScriptSetting `json:"authenticationScript"`
-	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
-	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
-	BanScript                *ScriptSetting `json:"banScript"`
-	UnBanScript              *ScriptSetting `json:"unBanScript"`
-	LogSetting               *LogSetting    `json:"logSetting"`
-	DryRun                   *bool          `json:"dryRun"`
+	ContextStack             *string             `json:"contextStack"`
+	NamespaceName            *string             `json:"namespaceName"`
+	Description              *string             `json:"description"`
+	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
+	ChangePasswordIfTakeOver *bool               `json:"changePasswordIfTakeOver"`
+	CreateAccountScript      *ScriptSetting      `json:"createAccountScript"`
+	AuthenticationScript     *ScriptSetting      `json:"authenticationScript"`
+	CreateTakeOverScript     *ScriptSetting      `json:"createTakeOverScript"`
+	DoTakeOverScript         *ScriptSetting      `json:"doTakeOverScript"`
+	BanScript                *ScriptSetting      `json:"banScript"`
+	UnBanScript              *ScriptSetting      `json:"unBanScript"`
+	LogSetting               *LogSetting         `json:"logSetting"`
+	DryRun                   *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -637,6 +655,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["changePasswordIfTakeOver"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangePasswordIfTakeOver)
 		}
@@ -689,6 +710,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
 		ChangePasswordIfTakeOver: func() *bool {
 			v, ok := data["changePasswordIfTakeOver"]
@@ -751,8 +779,14 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":            p.NamespaceName,
-		"description":              p.Description,
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
 		"createAccountScript": func() map[string]interface{} {
 			if p.CreateAccountScript == nil {

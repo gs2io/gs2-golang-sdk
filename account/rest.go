@@ -179,6 +179,9 @@ func (p Gs2AccountRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.ChangePasswordIfTakeOver != nil {
 		bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver
 	}
@@ -481,6 +484,9 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.ChangePasswordIfTakeOver != nil {
 		bodies["changePasswordIfTakeOver"] = *request.ChangePasswordIfTakeOver

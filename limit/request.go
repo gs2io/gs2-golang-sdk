@@ -122,11 +122,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack *string     `json:"contextStack"`
-	Name         *string     `json:"name"`
-	Description  *string     `json:"description"`
-	LogSetting   *LogSetting `json:"logSetting"`
-	DryRun       *bool       `json:"dryRun"`
+	ContextStack       *string             `json:"contextStack"`
+	Name               *string             `json:"name"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -197,6 +198,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -229,6 +233,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["description"])
 		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -243,6 +254,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":        p.Name,
 		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
@@ -429,11 +446,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack  *string     `json:"contextStack"`
-	NamespaceName *string     `json:"namespaceName"`
-	Description   *string     `json:"description"`
-	LogSetting    *LogSetting `json:"logSetting"`
-	DryRun        *bool       `json:"dryRun"`
+	ContextStack       *string             `json:"contextStack"`
+	NamespaceName      *string             `json:"namespaceName"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -504,6 +522,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -536,6 +557,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return core.CastString(data["description"])
 		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -550,6 +578,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil

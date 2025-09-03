@@ -181,6 +181,9 @@ func (p Gs2RealtimeWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.ServerType != nil && *request.ServerType != "" {
 		bodies["serverType"] = *request.ServerType
 	}
@@ -459,6 +462,9 @@ func (p Gs2RealtimeWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.ServerType != nil && *request.ServerType != "" {
 		bodies["serverType"] = *request.ServerType

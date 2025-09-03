@@ -178,6 +178,12 @@ func (p Gs2AdRewardWebSocketClient) CreateNamespaceAsync(
 	if request.Name != nil && *request.Name != "" {
 		bodies["name"] = *request.Name
 	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.Admob != nil {
 		bodies["admob"] = request.Admob.ToDict()
 	}
@@ -190,9 +196,6 @@ func (p Gs2AdRewardWebSocketClient) CreateNamespaceAsync(
 			_appLovinMaxes = append(_appLovinMaxes, item)
 		}
 		bodies["appLovinMaxes"] = _appLovinMaxes
-	}
-	if request.Description != nil && *request.Description != "" {
-		bodies["description"] = *request.Description
 	}
 	if request.AcquirePointScript != nil {
 		bodies["acquirePointScript"] = request.AcquirePointScript.ToDict()
@@ -472,6 +475,9 @@ func (p Gs2AdRewardWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.Admob != nil {
 		bodies["admob"] = request.Admob.ToDict()

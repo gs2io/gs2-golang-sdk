@@ -181,6 +181,9 @@ func (p Gs2GuildWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.ChangeNotification != nil {
 		bodies["changeNotification"] = request.ChangeNotification.ToDict()
 	}
@@ -489,6 +492,9 @@ func (p Gs2GuildWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.ChangeNotification != nil {
 		bodies["changeNotification"] = request.ChangeNotification.ToDict()
