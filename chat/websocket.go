@@ -3332,8 +3332,8 @@ func (p Gs2ChatWebSocketClient) DescribeSubscribesAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
-	if request.NamePrefix != nil && *request.NamePrefix != "" {
-		bodies["namePrefix"] = *request.NamePrefix
+	if request.RoomNamePrefix != nil && *request.RoomNamePrefix != "" {
+		bodies["roomNamePrefix"] = *request.RoomNamePrefix
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
@@ -3435,8 +3435,8 @@ func (p Gs2ChatWebSocketClient) DescribeSubscribesByUserIdAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
-	if request.NamePrefix != nil && *request.NamePrefix != "" {
-		bodies["namePrefix"] = *request.NamePrefix
+	if request.RoomNamePrefix != nil && *request.RoomNamePrefix != "" {
+		bodies["roomNamePrefix"] = *request.RoomNamePrefix
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId

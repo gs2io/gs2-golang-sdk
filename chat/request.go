@@ -5733,13 +5733,13 @@ func (p DeleteMessageRequest) Pointer() *DeleteMessageRequest {
 }
 
 type DescribeSubscribesRequest struct {
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	NamePrefix    *string `json:"namePrefix"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
-	DryRun        *bool   `json:"dryRun"`
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	RoomNamePrefix *string `json:"roomNamePrefix"`
+	AccessToken    *string `json:"accessToken"`
+	PageToken      *string `json:"pageToken"`
+	Limit          *int32  `json:"limit"`
+	DryRun         *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesRequest) UnmarshalJSON(data []byte) error {
@@ -5787,26 +5787,26 @@ func (p *DescribeSubscribesRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["namePrefix"]; ok && v != nil {
+		if v, ok := d["roomNamePrefix"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.NamePrefix = &v2
+					p.RoomNamePrefix = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.NamePrefix)
+					_ = json.Unmarshal(*v, &p.RoomNamePrefix)
 				}
 			}
 		}
@@ -5881,12 +5881,12 @@ func NewDescribeSubscribesRequestFromDict(data map[string]interface{}) DescribeS
 			}
 			return core.CastString(data["namespaceName"])
 		}(),
-		NamePrefix: func() *string {
-			v, ok := data["namePrefix"]
+		RoomNamePrefix: func() *string {
+			v, ok := data["roomNamePrefix"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastString(data["namePrefix"])
+			return core.CastString(data["roomNamePrefix"])
 		}(),
 		AccessToken: func() *string {
 			v, ok := data["accessToken"]
@@ -5914,11 +5914,11 @@ func NewDescribeSubscribesRequestFromDict(data map[string]interface{}) DescribeS
 
 func (p DescribeSubscribesRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"namePrefix":    p.NamePrefix,
-		"accessToken":   p.AccessToken,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":  p.NamespaceName,
+		"roomNamePrefix": p.RoomNamePrefix,
+		"accessToken":    p.AccessToken,
+		"pageToken":      p.PageToken,
+		"limit":          p.Limit,
 	}
 }
 
@@ -5929,7 +5929,7 @@ func (p DescribeSubscribesRequest) Pointer() *DescribeSubscribesRequest {
 type DescribeSubscribesByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
-	NamePrefix      *string `json:"namePrefix"`
+	RoomNamePrefix  *string `json:"roomNamePrefix"`
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
@@ -5982,26 +5982,26 @@ func (p *DescribeSubscribesByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["namePrefix"]; ok && v != nil {
+		if v, ok := d["roomNamePrefix"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.NamePrefix = &v2
+					p.RoomNamePrefix = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
+					p.RoomNamePrefix = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.NamePrefix)
+					_ = json.Unmarshal(*v, &p.RoomNamePrefix)
 				}
 			}
 		}
@@ -6099,12 +6099,12 @@ func NewDescribeSubscribesByUserIdRequestFromDict(data map[string]interface{}) D
 			}
 			return core.CastString(data["namespaceName"])
 		}(),
-		NamePrefix: func() *string {
-			v, ok := data["namePrefix"]
+		RoomNamePrefix: func() *string {
+			v, ok := data["roomNamePrefix"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastString(data["namePrefix"])
+			return core.CastString(data["roomNamePrefix"])
 		}(),
 		UserId: func() *string {
 			v, ok := data["userId"]
@@ -6140,7 +6140,7 @@ func NewDescribeSubscribesByUserIdRequestFromDict(data map[string]interface{}) D
 func (p DescribeSubscribesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":   p.NamespaceName,
-		"namePrefix":      p.NamePrefix,
+		"roomNamePrefix":  p.RoomNamePrefix,
 		"userId":          p.UserId,
 		"pageToken":       p.PageToken,
 		"limit":           p.Limit,

@@ -1850,7 +1850,6 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 type DescribeStateMachineMastersRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
-	NamePrefix    *string `json:"namePrefix"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
@@ -1898,29 +1897,6 @@ func (p *DescribeStateMachineMastersRequest) UnmarshalJSON(data []byte) error {
 					p.NamespaceName = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.NamespaceName)
-				}
-			}
-		}
-		if v, ok := d["namePrefix"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.NamePrefix = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamePrefix = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.NamePrefix = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.NamePrefix = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.NamePrefix)
 				}
 			}
 		}
@@ -1972,13 +1948,6 @@ func NewDescribeStateMachineMastersRequestFromDict(data map[string]interface{}) 
 			}
 			return core.CastString(data["namespaceName"])
 		}(),
-		NamePrefix: func() *string {
-			v, ok := data["namePrefix"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["namePrefix"])
-		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -1999,7 +1968,6 @@ func NewDescribeStateMachineMastersRequestFromDict(data map[string]interface{}) 
 func (p DescribeStateMachineMastersRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
-		"namePrefix":    p.NamePrefix,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
