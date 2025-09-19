@@ -84,6 +84,9 @@ func (p Gs2QuestWebSocketClient) DescribeNamespacesAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -1394,6 +1397,9 @@ func (p Gs2QuestWebSocketClient) DescribeQuestGroupModelMastersAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -1872,6 +1878,9 @@ func (p Gs2QuestWebSocketClient) DescribeQuestModelMastersAsync(
 	}
 	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
 		bodies["questGroupName"] = *request.QuestGroupName
+	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken

@@ -84,6 +84,9 @@ func (p Gs2ExchangeWebSocketClient) DescribeNamespacesAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -1585,6 +1588,9 @@ func (p Gs2ExchangeWebSocketClient) DescribeRateModelMastersAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -2287,6 +2293,9 @@ func (p Gs2ExchangeWebSocketClient) DescribeIncrementalRateModelMastersAsync(
 	}
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken

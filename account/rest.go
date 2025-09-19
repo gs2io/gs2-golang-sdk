@@ -81,6 +81,9 @@ func (p Gs2AccountRestClient) DescribeNamespacesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -3976,9 +3979,6 @@ func (p Gs2AccountRestClient) GetAuthorizationUrlAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
 	if request.DryRun != nil {
 		if *request.DryRun {
 			headers["X-GS2-DRY-RUN"] = "true"

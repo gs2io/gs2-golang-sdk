@@ -84,6 +84,9 @@ func (p Gs2Ranking2WebSocketClient) DescribeNamespacesAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -1542,6 +1545,9 @@ func (p Gs2Ranking2WebSocketClient) DescribeGlobalRankingModelMastersAsync(
 	}
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
@@ -4727,6 +4733,9 @@ func (p Gs2Ranking2WebSocketClient) DescribeClusterRankingModelMastersAsync(
 	}
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
@@ -7990,6 +7999,9 @@ func (p Gs2Ranking2WebSocketClient) DescribeSubscribeRankingModelMastersAsync(
 	}
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken

@@ -81,6 +81,9 @@ func (p Gs2StaminaRestClient) DescribeNamespacesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1407,6 +1410,9 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -2457,6 +2463,9 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -2968,6 +2977,9 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}

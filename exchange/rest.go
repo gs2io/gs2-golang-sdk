@@ -81,6 +81,9 @@ func (p Gs2ExchangeRestClient) DescribeNamespacesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1630,6 +1633,9 @@ func (p Gs2ExchangeRestClient) DescribeRateModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -2362,6 +2368,9 @@ func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}

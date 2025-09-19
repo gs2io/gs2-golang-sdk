@@ -81,6 +81,9 @@ func (p Gs2InventoryRestClient) DescribeNamespacesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -1443,6 +1446,9 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -2870,6 +2876,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -3553,6 +3562,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -4261,6 +4273,9 @@ func (p Gs2InventoryRestClient) DescribeBigInventoryModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -4944,6 +4959,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemModelMastersAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}

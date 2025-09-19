@@ -84,6 +84,9 @@ func (p Gs2AccountWebSocketClient) DescribeNamespacesAsync(
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
+	if request.NamePrefix != nil && *request.NamePrefix != "" {
+		bodies["namePrefix"] = *request.NamePrefix
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -3827,17 +3830,11 @@ func (p Gs2AccountWebSocketClient) GetAuthorizationUrlAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
 	if request.Type != nil {
 		bodies["type"] = *request.Type
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
 	if request.DryRun != nil {
 		if *request.DryRun {

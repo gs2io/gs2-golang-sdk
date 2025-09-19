@@ -25,6 +25,7 @@ import (
 
 type DescribeNamespacesRequest struct {
 	ContextStack *string `json:"contextStack"`
+	NamePrefix   *string `json:"namePrefix"`
 	PageToken    *string `json:"pageToken"`
 	Limit        *int32  `json:"limit"`
 	DryRun       *bool   `json:"dryRun"`
@@ -51,6 +52,29 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["namePrefix"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamePrefix = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamePrefix = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamePrefix = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamePrefix = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamePrefix = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamePrefix)
+				}
+			}
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
@@ -93,6 +117,13 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
+		NamePrefix: func() *string {
+			v, ok := data["namePrefix"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namePrefix"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -112,8 +143,9 @@ func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeN
 
 func (p DescribeNamespacesRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"pageToken": p.PageToken,
-		"limit":     p.Limit,
+		"namePrefix": p.NamePrefix,
+		"pageToken":  p.PageToken,
+		"limit":      p.Limit,
 	}
 }
 
@@ -1628,6 +1660,7 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 type DescribeEventMastersRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
+	NamePrefix    *string `json:"namePrefix"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 	DryRun        *bool   `json:"dryRun"`
@@ -1675,6 +1708,29 @@ func (p *DescribeEventMastersRequest) UnmarshalJSON(data []byte) error {
 					p.NamespaceName = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["namePrefix"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamePrefix = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamePrefix = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamePrefix = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamePrefix = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamePrefix = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamePrefix)
 				}
 			}
 		}
@@ -1726,6 +1782,13 @@ func NewDescribeEventMastersRequestFromDict(data map[string]interface{}) Describ
 			}
 			return core.CastString(data["namespaceName"])
 		}(),
+		NamePrefix: func() *string {
+			v, ok := data["namePrefix"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namePrefix"])
+		}(),
 		PageToken: func() *string {
 			v, ok := data["pageToken"]
 			if !ok || v == nil {
@@ -1746,6 +1809,7 @@ func NewDescribeEventMastersRequestFromDict(data map[string]interface{}) Describ
 func (p DescribeEventMastersRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
+		"namePrefix":    p.NamePrefix,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
