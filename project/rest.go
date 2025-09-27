@@ -957,6 +957,92 @@ func (p Gs2ProjectRestClient) DeleteAccount(
 	return asyncResult.result, asyncResult.err
 }
 
+func getServiceVersionAsyncHandler(
+	client Gs2ProjectRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetServiceVersionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetServiceVersionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetServiceVersionResult
+	if asyncResult.Err != nil {
+		callback <- GetServiceVersionAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetServiceVersionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetServiceVersionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectRestClient) GetServiceVersionAsync(
+	request *GetServiceVersionRequest,
+	callback chan<- GetServiceVersionAsyncResult,
+) {
+	path := "/system/version"
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getServiceVersionAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectRestClient) GetServiceVersion(
+	request *GetServiceVersionRequest,
+) (*GetServiceVersionResult, error) {
+	callback := make(chan GetServiceVersionAsyncResult, 1)
+	go p.GetServiceVersionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeProjectsAsyncHandler(
 	client Gs2ProjectRestClient,
 	job *core.NetworkJob,
@@ -1719,7 +1805,12 @@ func (p Gs2ProjectRestClient) WaitActivateRegionAsync(
 	request *WaitActivateRegionRequest,
 	callback chan<- WaitActivateRegionAsyncResult,
 ) {
-	path := "/account/me/project/{projectName}/region/{regionName}/activate/wait"
+	path := "/system/{ownerId}/project/region/{regionName}/activate/wait"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
 	if request.ProjectName != nil && *request.ProjectName != "" {
 		path = strings.ReplaceAll(path, "{projectName}", core.ToString(*request.ProjectName))
 	} else {
@@ -3353,7 +3444,12 @@ func (p Gs2ProjectRestClient) WaitCleanUserDataAsync(
 	request *WaitCleanUserDataRequest,
 	callback chan<- WaitCleanUserDataAsyncResult,
 ) {
-	path := "/account/me/project/clean/progress/{transactionId}/wait"
+	path := "/system/{ownerId}/project/clean/progress/{transactionId}/wait"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
 	} else {
@@ -3736,7 +3832,12 @@ func (p Gs2ProjectRestClient) WaitImportUserDataAsync(
 	request *WaitImportUserDataRequest,
 	callback chan<- WaitImportUserDataAsyncResult,
 ) {
-	path := "/account/me/project/import/progress/{transactionId}/wait"
+	path := "/system/{ownerId}/project/import/progress/{transactionId}/wait"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
 	} else {

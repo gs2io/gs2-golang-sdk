@@ -66,26 +66,27 @@ func readBody(response *http.Response) (string, error) {
 }
 
 type ErrorResult struct {
-	Message string `json:"message"`
+	Message  string          `json:"message"`
+	Metadata *ResultMetadata `json:"metadata,omitempty"`
 }
 
-func readErrors(response *http.Response) ([]RequestError, error) {
+func readErrors(response *http.Response) ([]RequestError, *ResultMetadata, error) {
 	byteArray, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return []RequestError{}, err
+		return []RequestError{}, nil, err
 	}
 	var result ErrorResult
 	err = json.Unmarshal(byteArray, &result)
 	if err != nil {
-		return []RequestError{}, err
+		return []RequestError{}, nil, err
 	}
 
 	var errors []RequestError
 	err = json.Unmarshal([]byte(result.Message), &errors)
 	if err != nil {
-		return []RequestError{}, err
+		return []RequestError{}, nil, err
 	}
-	return errors, nil
+	return errors, result.Metadata, nil
 }
 
 func parseResponse(response *http.Response) (string, error) {
@@ -97,92 +98,102 @@ func parseResponse(response *http.Response) (string, error) {
 		return body, nil
 	}
 	if response.StatusCode == 400 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", BadRequestException{}
 		}
 		return "", BadRequestException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 401 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", UnauthorizedException{}
 		}
 		return "", UnauthorizedException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 402 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", QuotaExceedException{}
 		}
 		return "", QuotaExceedException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 404 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", NotFoundException{}
 		}
 		return "", NotFoundException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 409 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", ConflictException{}
 		}
 		return "", ConflictException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 500 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", InternalServerErrorException{}
 		}
 		return "", InternalServerErrorException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 502 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", BadGatewayException{}
 		}
 		return "", BadGatewayException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 503 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", ServiceUnavailableException{}
 		}
 		return "", ServiceUnavailableException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
 	if response.StatusCode == 504 {
-		errors, err := readErrors(response)
+		errors, metadata, err := readErrors(response)
 		if err != nil {
 			return "", RequestTimeoutException{}
 		}
 		return "", RequestTimeoutException{
-			Errors: errors,
+			Errors:   errors,
+			Metadata: metadata,
 		}
 	}
-	errors, err := readErrors(response)
+	errors, metadata, err := readErrors(response)
 	if err != nil {
 		return "", RequestTimeoutException{}
 	}
 	return "", RequestTimeoutException{
-		Errors: errors,
+		Errors:   errors,
+		Metadata: metadata,
 	}
 }
 

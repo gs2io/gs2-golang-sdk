@@ -581,6 +581,57 @@ func (p DeleteAccountResult) Pointer() *DeleteAccountResult {
 	return &p
 }
 
+type GetServiceVersionResult struct {
+	Item     *string              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetServiceVersionAsyncResult struct {
+	result *GetServiceVersionResult
+	err    error
+}
+
+func NewGetServiceVersionResultFromJson(data string) GetServiceVersionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetServiceVersionResultFromDict(dict)
+}
+
+func NewGetServiceVersionResultFromDict(data map[string]interface{}) GetServiceVersionResult {
+	return GetServiceVersionResult{
+		Item: func() *string {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["item"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetServiceVersionResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetServiceVersionResult) Pointer() *GetServiceVersionResult {
+	return &p
+}
+
 type DescribeProjectsResult struct {
 	Items         []Project            `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`

@@ -5433,11 +5433,12 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 }
 
 type TransactionSetting struct {
-	EnableAutoRun             *bool   `json:"enableAutoRun"`
-	EnableAtomicCommit        *bool   `json:"enableAtomicCommit"`
-	TransactionUseDistributor *bool   `json:"transactionUseDistributor"`
-	AcquireActionUseJobQueue  *bool   `json:"acquireActionUseJobQueue"`
-	DistributorNamespaceId    *string `json:"distributorNamespaceId"`
+	EnableAutoRun                      *bool   `json:"enableAutoRun"`
+	EnableAtomicCommit                 *bool   `json:"enableAtomicCommit"`
+	TransactionUseDistributor          *bool   `json:"transactionUseDistributor"`
+	CommitScriptResultInUseDistributor *bool   `json:"commitScriptResultInUseDistributor"`
+	AcquireActionUseJobQueue           *bool   `json:"acquireActionUseJobQueue"`
+	DistributorNamespaceId             *string `json:"distributorNamespaceId"`
 	// Deprecated: should not be used
 	KeyId            *string `json:"keyId"`
 	QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -5473,6 +5474,9 @@ func (p *TransactionSetting) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionUseDistributor"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionUseDistributor)
+		}
+		if v, ok := d["commitScriptResultInUseDistributor"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CommitScriptResultInUseDistributor)
 		}
 		if v, ok := d["acquireActionUseJobQueue"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActionUseJobQueue)
@@ -5579,6 +5583,13 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 			}
 			return core.CastBool(data["transactionUseDistributor"])
 		}(),
+		CommitScriptResultInUseDistributor: func() *bool {
+			v, ok := data["commitScriptResultInUseDistributor"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["commitScriptResultInUseDistributor"])
+		}(),
 		AcquireActionUseJobQueue: func() *bool {
 			v, ok := data["acquireActionUseJobQueue"]
 			if !ok || v == nil {
@@ -5620,6 +5631,9 @@ func (p TransactionSetting) ToDict() map[string]interface{} {
 	}
 	if p.TransactionUseDistributor != nil {
 		m["transactionUseDistributor"] = p.TransactionUseDistributor
+	}
+	if p.CommitScriptResultInUseDistributor != nil {
+		m["commitScriptResultInUseDistributor"] = p.CommitScriptResultInUseDistributor
 	}
 	if p.AcquireActionUseJobQueue != nil {
 		m["acquireActionUseJobQueue"] = p.AcquireActionUseJobQueue

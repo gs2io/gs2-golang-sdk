@@ -1267,6 +1267,58 @@ func (p DeleteAccountRequest) Pointer() *DeleteAccountRequest {
 	return &p
 }
 
+type GetServiceVersionRequest struct {
+	ContextStack *string `json:"contextStack"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *GetServiceVersionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetServiceVersionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetServiceVersionRequest{}
+	} else {
+		*p = GetServiceVersionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewGetServiceVersionRequestFromJson(data string) (GetServiceVersionRequest, error) {
+	req := GetServiceVersionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetServiceVersionRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetServiceVersionRequestFromDict(data map[string]interface{}) GetServiceVersionRequest {
+	return GetServiceVersionRequest{}
+}
+
+func (p GetServiceVersionRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p GetServiceVersionRequest) Pointer() *GetServiceVersionRequest {
+	return &p
+}
+
 type DescribeProjectsRequest struct {
 	ContextStack *string `json:"contextStack"`
 	AccountToken *string `json:"accountToken"`
@@ -2683,6 +2735,7 @@ func (p ActivateRegionRequest) Pointer() *ActivateRegionRequest {
 
 type WaitActivateRegionRequest struct {
 	ContextStack *string `json:"contextStack"`
+	OwnerId      *string `json:"ownerId"`
 	ProjectName  *string `json:"projectName"`
 	RegionName   *string `json:"regionName"`
 	DryRun       *bool   `json:"dryRun"`
@@ -2709,6 +2762,29 @@ func (p *WaitActivateRegionRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
@@ -2771,6 +2847,13 @@ func NewWaitActivateRegionRequestFromJson(data string) (WaitActivateRegionReques
 
 func NewWaitActivateRegionRequestFromDict(data map[string]interface{}) WaitActivateRegionRequest {
 	return WaitActivateRegionRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
 		ProjectName: func() *string {
 			v, ok := data["projectName"]
 			if !ok || v == nil {
@@ -2790,6 +2873,7 @@ func NewWaitActivateRegionRequestFromDict(data map[string]interface{}) WaitActiv
 
 func (p WaitActivateRegionRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"ownerId":     p.OwnerId,
 		"projectName": p.ProjectName,
 		"regionName":  p.RegionName,
 	}
@@ -4892,6 +4976,7 @@ func (p GetCleanProgressRequest) Pointer() *GetCleanProgressRequest {
 type WaitCleanUserDataRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
+	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
 	MicroserviceName   *string `json:"microserviceName"`
@@ -4920,6 +5005,29 @@ func (p *WaitCleanUserDataRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
@@ -5028,6 +5136,13 @@ func NewWaitCleanUserDataRequestFromJson(data string) (WaitCleanUserDataRequest,
 
 func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanUserDataRequest {
 	return WaitCleanUserDataRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
 		TransactionId: func() *string {
 			v, ok := data["transactionId"]
 			if !ok || v == nil {
@@ -5061,6 +5176,7 @@ func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanU
 
 func (p WaitCleanUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"ownerId":          p.OwnerId,
 		"transactionId":    p.TransactionId,
 		"userId":           p.UserId,
 		"microserviceName": p.MicroserviceName,
@@ -5378,6 +5494,7 @@ func (p GetImportProgressRequest) Pointer() *GetImportProgressRequest {
 type WaitImportUserDataRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
+	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
 	MicroserviceName   *string `json:"microserviceName"`
@@ -5406,6 +5523,29 @@ func (p *WaitImportUserDataRequest) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
@@ -5514,6 +5654,13 @@ func NewWaitImportUserDataRequestFromJson(data string) (WaitImportUserDataReques
 
 func NewWaitImportUserDataRequestFromDict(data map[string]interface{}) WaitImportUserDataRequest {
 	return WaitImportUserDataRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
 		TransactionId: func() *string {
 			v, ok := data["transactionId"]
 			if !ok || v == nil {
@@ -5547,6 +5694,7 @@ func NewWaitImportUserDataRequestFromDict(data map[string]interface{}) WaitImpor
 
 func (p WaitImportUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"ownerId":          p.OwnerId,
 		"transactionId":    p.TransactionId,
 		"userId":           p.UserId,
 		"microserviceName": p.MicroserviceName,

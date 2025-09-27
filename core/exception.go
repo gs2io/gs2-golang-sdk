@@ -37,7 +37,8 @@ type Gs2Exception interface {
 }
 
 type BadRequestException struct {
-	Errors    []RequestError `json:"errors"`
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -60,7 +61,8 @@ func (p BadRequestException) Error() string {
 }
 
 type BadGatewayException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -83,7 +85,8 @@ func (p BadGatewayException) ClientError() *ClientError {
 }
 
 type ConflictException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -106,7 +109,8 @@ func (p ConflictException) ClientError() *ClientError {
 }
 
 type InternalServerErrorException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -129,7 +133,8 @@ func (p InternalServerErrorException) ClientError() *ClientError {
 }
 
 type NotFoundException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -152,7 +157,8 @@ func (p NotFoundException) ClientError() *ClientError {
 }
 
 type QuotaExceedException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -175,7 +181,8 @@ func (p QuotaExceedException) ClientError() *ClientError {
 }
 
 type RequestTimeoutException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -198,7 +205,8 @@ func (p RequestTimeoutException) ClientError() *ClientError {
 }
 
 type ServiceUnavailableException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -221,7 +229,8 @@ func (p ServiceUnavailableException) ClientError() *ClientError {
 }
 
 type UnauthorizedException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -244,7 +253,8 @@ func (p UnauthorizedException) ClientError() *ClientError {
 }
 
 type UnknownException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 
@@ -267,7 +277,8 @@ func (p UnknownException) ClientError() *ClientError {
 }
 
 type NoInternetConnectionException struct {
-	Errors    []RequestError
+	Errors    []RequestError  `json:"errors"`
+	Metadata  *ResultMetadata `json:"metadata,omitempty"`
 	clientErr *ClientError
 }
 

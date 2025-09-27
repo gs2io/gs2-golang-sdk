@@ -218,6 +218,7 @@ func (p ScriptTransactionResult) Pointer() *ScriptTransactionResult {
 }
 
 type ResultMetadata struct {
+	RequestId                *string                   `json:"requestId"`
 	Uncommitted              *string                   `json:"uncommitted"`
 	ScriptTransactionResults []ScriptTransactionResult `json:"scriptTransactionResults"`
 }
@@ -244,6 +245,9 @@ func (p *ResultMetadata) UnmarshalJSON(data []byte) error {
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
 		}
+		if v, ok := d["requestId"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RequestId)
+		}
 		if v, ok := d["uncommitted"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Uncommitted)
 		}
@@ -262,6 +266,13 @@ func NewResultMetadataFromJson(data string) ResultMetadata {
 
 func NewResultMetadataFromDict(data map[string]interface{}) ResultMetadata {
 	return ResultMetadata{
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return CastString(data["requestId"])
+		}(),
 		Uncommitted: func() *string {
 			v, ok := data["uncommitted"]
 			if !ok || v == nil {
@@ -281,6 +292,9 @@ func NewResultMetadataFromDict(data map[string]interface{}) ResultMetadata {
 
 func (p ResultMetadata) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
+	if p.RequestId != nil {
+		m["requestId"] = p.RequestId
+	}
 	if p.Uncommitted != nil {
 		m["uncommitted"] = p.Uncommitted
 	}
