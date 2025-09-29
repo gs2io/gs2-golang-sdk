@@ -2083,6 +2083,7 @@ type SetUserIdRequest struct {
 	NamespaceName         *string `json:"namespaceName"`
 	AccessToken           *string `json:"accessToken"`
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
+	SessionId             *string `json:"sessionId"`
 	Force                 *bool   `json:"force"`
 	DryRun                *bool   `json:"dryRun"`
 }
@@ -2158,6 +2159,29 @@ func (p *SetUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowConcurrentAccess"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowConcurrentAccess)
 		}
+		if v, ok := d["sessionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SessionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SessionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SessionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SessionId)
+				}
+			}
+		}
 		if v, ok := d["force"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Force)
 		}
@@ -2197,6 +2221,13 @@ func NewSetUserIdRequestFromDict(data map[string]interface{}) SetUserIdRequest {
 			}
 			return core.CastBool(data["allowConcurrentAccess"])
 		}(),
+		SessionId: func() *string {
+			v, ok := data["sessionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionId"])
+		}(),
 		Force: func() *bool {
 			v, ok := data["force"]
 			if !ok || v == nil {
@@ -2212,6 +2243,7 @@ func (p SetUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"accessToken":           p.AccessToken,
 		"allowConcurrentAccess": p.AllowConcurrentAccess,
+		"sessionId":             p.SessionId,
 		"force":                 p.Force,
 	}
 }
@@ -2226,6 +2258,7 @@ type SetUserIdByUserIdRequest struct {
 	NamespaceName         *string `json:"namespaceName"`
 	UserId                *string `json:"userId"`
 	AllowConcurrentAccess *bool   `json:"allowConcurrentAccess"`
+	SessionId             *string `json:"sessionId"`
 	Force                 *bool   `json:"force"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
 	DryRun                *bool   `json:"dryRun"`
@@ -2302,6 +2335,29 @@ func (p *SetUserIdByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowConcurrentAccess"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowConcurrentAccess)
 		}
+		if v, ok := d["sessionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SessionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SessionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SessionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SessionId)
+				}
+			}
+		}
 		if v, ok := d["force"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Force)
 		}
@@ -2364,6 +2420,13 @@ func NewSetUserIdByUserIdRequestFromDict(data map[string]interface{}) SetUserIdB
 			}
 			return core.CastBool(data["allowConcurrentAccess"])
 		}(),
+		SessionId: func() *string {
+			v, ok := data["sessionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionId"])
+		}(),
 		Force: func() *bool {
 			v, ok := data["force"]
 			if !ok || v == nil {
@@ -2386,6 +2449,7 @@ func (p SetUserIdByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"userId":                p.UserId,
 		"allowConcurrentAccess": p.AllowConcurrentAccess,
+		"sessionId":             p.SessionId,
 		"force":                 p.Force,
 		"timeOffsetToken":       p.TimeOffsetToken,
 	}

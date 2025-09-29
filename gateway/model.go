@@ -309,6 +309,7 @@ type WebSocketSession struct {
 	ConnectionId       *string `json:"connectionId"`
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
+	SessionId          *string `json:"sessionId"`
 	CreatedAt          *int64  `json:"createdAt"`
 	UpdatedAt          *int64  `json:"updatedAt"`
 	Revision           *int64  `json:"revision"`
@@ -428,6 +429,29 @@ func (p *WebSocketSession) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["sessionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SessionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SessionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SessionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SessionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SessionId)
+				}
+			}
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -477,6 +501,13 @@ func NewWebSocketSessionFromDict(data map[string]interface{}) WebSocketSession {
 			}
 			return core.CastString(data["userId"])
 		}(),
+		SessionId: func() *string {
+			v, ok := data["sessionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionId"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -514,6 +545,9 @@ func (p WebSocketSession) ToDict() map[string]interface{} {
 	}
 	if p.UserId != nil {
 		m["userId"] = p.UserId
+	}
+	if p.SessionId != nil {
+		m["sessionId"] = p.SessionId
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt

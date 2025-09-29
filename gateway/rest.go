@@ -1617,6 +1617,9 @@ func (p Gs2GatewayRestClient) SetUserIdAsync(
 	if request.AllowConcurrentAccess != nil {
 		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
 	}
+	if request.SessionId != nil && *request.SessionId != "" {
+		bodies["sessionId"] = *request.SessionId
+	}
 	if request.Force != nil {
 		bodies["force"] = *request.Force
 	}
@@ -1724,6 +1727,9 @@ func (p Gs2GatewayRestClient) SetUserIdByUserIdAsync(
 	var bodies = core.Bodies{}
 	if request.AllowConcurrentAccess != nil {
 		bodies["allowConcurrentAccess"] = *request.AllowConcurrentAccess
+	}
+	if request.SessionId != nil && *request.SessionId != "" {
+		bodies["sessionId"] = *request.SessionId
 	}
 	if request.Force != nil {
 		bodies["force"] = *request.Force
