@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2DictionaryRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2DictionaryRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -210,7 +212,7 @@ func (p Gs2DictionaryRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -301,7 +303,7 @@ func (p Gs2DictionaryRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -392,7 +394,7 @@ func (p Gs2DictionaryRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -498,7 +500,7 @@ func (p Gs2DictionaryRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -589,7 +591,7 @@ func (p Gs2DictionaryRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -675,7 +677,7 @@ func (p Gs2DictionaryRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -769,7 +771,7 @@ func (p Gs2DictionaryRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -863,7 +865,7 @@ func (p Gs2DictionaryRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -957,7 +959,7 @@ func (p Gs2DictionaryRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1051,7 +1053,7 @@ func (p Gs2DictionaryRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1145,7 +1147,7 @@ func (p Gs2DictionaryRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1242,7 +1244,7 @@ func (p Gs2DictionaryRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1341,7 +1343,7 @@ func (p Gs2DictionaryRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1432,7 +1434,7 @@ func (p Gs2DictionaryRestClient) DescribeEntryModelsAsync(
 	go describeEntryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1528,7 +1530,7 @@ func (p Gs2DictionaryRestClient) GetEntryModelAsync(
 	go getEntryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1628,7 +1630,7 @@ func (p Gs2DictionaryRestClient) DescribeEntryModelMastersAsync(
 	go describeEntryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1728,7 +1730,7 @@ func (p Gs2DictionaryRestClient) CreateEntryModelMasterAsync(
 	go createEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1824,7 +1826,7 @@ func (p Gs2DictionaryRestClient) GetEntryModelMasterAsync(
 	go getEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1926,7 +1928,7 @@ func (p Gs2DictionaryRestClient) UpdateEntryModelMasterAsync(
 	go updateEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2022,7 +2024,7 @@ func (p Gs2DictionaryRestClient) DeleteEntryModelMasterAsync(
 	go deleteEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2122,7 +2124,7 @@ func (p Gs2DictionaryRestClient) DescribeEntriesAsync(
 	go describeEntriesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2227,7 +2229,7 @@ func (p Gs2DictionaryRestClient) DescribeEntriesByUserIdAsync(
 	go describeEntriesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2336,7 +2338,7 @@ func (p Gs2DictionaryRestClient) AddEntriesByUserIdAsync(
 	go addEntriesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2435,7 +2437,7 @@ func (p Gs2DictionaryRestClient) GetEntryAsync(
 	go getEntryAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2539,7 +2541,7 @@ func (p Gs2DictionaryRestClient) GetEntryByUserIdAsync(
 	go getEntryByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2641,7 +2643,7 @@ func (p Gs2DictionaryRestClient) GetEntryWithSignatureAsync(
 	go getEntryWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2748,7 +2750,7 @@ func (p Gs2DictionaryRestClient) GetEntryWithSignatureByUserIdAsync(
 	go getEntryWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2850,7 +2852,7 @@ func (p Gs2DictionaryRestClient) ResetByUserIdAsync(
 	go resetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2957,7 +2959,7 @@ func (p Gs2DictionaryRestClient) VerifyEntryAsync(
 	go verifyEntryAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3069,7 +3071,7 @@ func (p Gs2DictionaryRestClient) VerifyEntryByUserIdAsync(
 	go verifyEntryByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3173,7 +3175,7 @@ func (p Gs2DictionaryRestClient) DeleteEntriesAsync(
 	go deleteEntriesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3282,7 +3284,7 @@ func (p Gs2DictionaryRestClient) DeleteEntriesByUserIdAsync(
 	go deleteEntriesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3374,7 +3376,7 @@ func (p Gs2DictionaryRestClient) AddEntriesByStampSheetAsync(
 	go addEntriesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3466,7 +3468,7 @@ func (p Gs2DictionaryRestClient) DeleteEntriesByStampTaskAsync(
 	go deleteEntriesByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3558,7 +3560,7 @@ func (p Gs2DictionaryRestClient) VerifyEntryByStampTaskAsync(
 	go verifyEntryByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3658,7 +3660,7 @@ func (p Gs2DictionaryRestClient) DescribeLikesAsync(
 	go describeLikesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3763,7 +3765,7 @@ func (p Gs2DictionaryRestClient) DescribeLikesByUserIdAsync(
 	go describeLikesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3867,7 +3869,7 @@ func (p Gs2DictionaryRestClient) AddLikesAsync(
 	go addLikesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3976,7 +3978,7 @@ func (p Gs2DictionaryRestClient) AddLikesByUserIdAsync(
 	go addLikesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4075,7 +4077,7 @@ func (p Gs2DictionaryRestClient) GetLikeAsync(
 	go getLikeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4179,7 +4181,7 @@ func (p Gs2DictionaryRestClient) GetLikeByUserIdAsync(
 	go getLikeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4276,7 +4278,7 @@ func (p Gs2DictionaryRestClient) ResetLikesAsync(
 	go resetLikesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4378,7 +4380,7 @@ func (p Gs2DictionaryRestClient) ResetLikesByUserIdAsync(
 	go resetLikesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4482,7 +4484,7 @@ func (p Gs2DictionaryRestClient) DeleteLikesAsync(
 	go deleteLikesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4591,7 +4593,7 @@ func (p Gs2DictionaryRestClient) DeleteLikesByUserIdAsync(
 	go deleteLikesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4682,7 +4684,7 @@ func (p Gs2DictionaryRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4773,7 +4775,7 @@ func (p Gs2DictionaryRestClient) GetCurrentEntryMasterAsync(
 	go getCurrentEntryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4864,7 +4866,7 @@ func (p Gs2DictionaryRestClient) PreUpdateCurrentEntryMasterAsync(
 	go preUpdateCurrentEntryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4995,7 +4997,7 @@ func (p Gs2DictionaryRestClient) UpdateCurrentEntryMasterAsync(
 	go updateCurrentEntryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5089,7 +5091,7 @@ func (p Gs2DictionaryRestClient) UpdateCurrentEntryMasterFromGitHubAsync(
 	go updateCurrentEntryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("dictionary", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

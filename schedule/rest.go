@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ScheduleRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2ScheduleRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2ScheduleRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2ScheduleRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2ScheduleRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2ScheduleRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2ScheduleRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2ScheduleRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2ScheduleRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2ScheduleRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2ScheduleRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2ScheduleRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2ScheduleRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2ScheduleRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2ScheduleRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1429,7 +1431,7 @@ func (p Gs2ScheduleRestClient) DescribeEventMastersAsync(
 	go describeEventMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1565,7 +1567,7 @@ func (p Gs2ScheduleRestClient) CreateEventMasterAsync(
 	go createEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1661,7 +1663,7 @@ func (p Gs2ScheduleRestClient) GetEventMasterAsync(
 	go getEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1799,7 +1801,7 @@ func (p Gs2ScheduleRestClient) UpdateEventMasterAsync(
 	go updateEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1895,7 +1897,7 @@ func (p Gs2ScheduleRestClient) DeleteEventMasterAsync(
 	go deleteEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1995,7 +1997,7 @@ func (p Gs2ScheduleRestClient) DescribeTriggersAsync(
 	go describeTriggersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2100,7 +2102,7 @@ func (p Gs2ScheduleRestClient) DescribeTriggersByUserIdAsync(
 	go describeTriggersByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2199,7 +2201,7 @@ func (p Gs2ScheduleRestClient) GetTriggerAsync(
 	go getTriggerAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2303,7 +2305,7 @@ func (p Gs2ScheduleRestClient) GetTriggerByUserIdAsync(
 	go getTriggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2419,7 +2421,7 @@ func (p Gs2ScheduleRestClient) TriggerByUserIdAsync(
 	go triggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2529,7 +2531,7 @@ func (p Gs2ScheduleRestClient) ExtendTriggerByUserIdAsync(
 	go extendTriggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2621,7 +2623,7 @@ func (p Gs2ScheduleRestClient) TriggerByStampSheetAsync(
 	go triggerByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2713,7 +2715,7 @@ func (p Gs2ScheduleRestClient) ExtendTriggerByStampSheetAsync(
 	go extendTriggerByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2815,7 +2817,7 @@ func (p Gs2ScheduleRestClient) DeleteTriggerAsync(
 	go deleteTriggerAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2922,7 +2924,7 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByUserIdAsync(
 	go deleteTriggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3032,7 +3034,7 @@ func (p Gs2ScheduleRestClient) VerifyTriggerAsync(
 	go verifyTriggerAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3147,7 +3149,7 @@ func (p Gs2ScheduleRestClient) VerifyTriggerByUserIdAsync(
 	go verifyTriggerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3239,7 +3241,7 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByStampTaskAsync(
 	go deleteTriggerByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3331,7 +3333,7 @@ func (p Gs2ScheduleRestClient) VerifyTriggerByStampTaskAsync(
 	go verifyTriggerByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3425,7 +3427,7 @@ func (p Gs2ScheduleRestClient) DescribeEventsAsync(
 	go describeEventsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3524,7 +3526,7 @@ func (p Gs2ScheduleRestClient) DescribeEventsByUserIdAsync(
 	go describeEventsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3615,7 +3617,7 @@ func (p Gs2ScheduleRestClient) DescribeRawEventsAsync(
 	go describeRawEventsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3717,7 +3719,7 @@ func (p Gs2ScheduleRestClient) GetEventAsync(
 	go getEventAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3824,7 +3826,7 @@ func (p Gs2ScheduleRestClient) GetEventByUserIdAsync(
 	go getEventByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3920,7 +3922,7 @@ func (p Gs2ScheduleRestClient) GetRawEventAsync(
 	go getRawEventAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4027,7 +4029,7 @@ func (p Gs2ScheduleRestClient) VerifyEventAsync(
 	go verifyEventAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4139,7 +4141,7 @@ func (p Gs2ScheduleRestClient) VerifyEventByUserIdAsync(
 	go verifyEventByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4231,7 +4233,7 @@ func (p Gs2ScheduleRestClient) VerifyEventByStampTaskAsync(
 	go verifyEventByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4322,7 +4324,7 @@ func (p Gs2ScheduleRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4413,7 +4415,7 @@ func (p Gs2ScheduleRestClient) GetCurrentEventMasterAsync(
 	go getCurrentEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4504,7 +4506,7 @@ func (p Gs2ScheduleRestClient) PreUpdateCurrentEventMasterAsync(
 	go preUpdateCurrentEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4635,7 +4637,7 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterAsync(
 	go updateCurrentEventMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4729,7 +4731,7 @@ func (p Gs2ScheduleRestClient) UpdateCurrentEventMasterFromGitHubAsync(
 	go updateCurrentEventMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("schedule", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

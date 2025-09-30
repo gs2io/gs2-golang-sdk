@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2MoneyRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2MoneyRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -230,7 +232,7 @@ func (p Gs2MoneyRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -321,7 +323,7 @@ func (p Gs2MoneyRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -412,7 +414,7 @@ func (p Gs2MoneyRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -533,7 +535,7 @@ func (p Gs2MoneyRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -624,7 +626,7 @@ func (p Gs2MoneyRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -710,7 +712,7 @@ func (p Gs2MoneyRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -804,7 +806,7 @@ func (p Gs2MoneyRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -898,7 +900,7 @@ func (p Gs2MoneyRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -992,7 +994,7 @@ func (p Gs2MoneyRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1086,7 +1088,7 @@ func (p Gs2MoneyRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1180,7 +1182,7 @@ func (p Gs2MoneyRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1277,7 +1279,7 @@ func (p Gs2MoneyRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1376,7 +1378,7 @@ func (p Gs2MoneyRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1476,7 +1478,7 @@ func (p Gs2MoneyRestClient) DescribeWalletsAsync(
 	go describeWalletsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1581,7 +1583,7 @@ func (p Gs2MoneyRestClient) DescribeWalletsByUserIdAsync(
 	go describeWalletsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1680,7 +1682,7 @@ func (p Gs2MoneyRestClient) GetWalletAsync(
 	go getWalletAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1784,7 +1786,7 @@ func (p Gs2MoneyRestClient) GetWalletByUserIdAsync(
 	go getWalletByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1903,7 +1905,7 @@ func (p Gs2MoneyRestClient) DepositByUserIdAsync(
 	go depositByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2020,7 +2022,7 @@ func (p Gs2MoneyRestClient) WithdrawAsync(
 	go withdrawAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2142,7 +2144,7 @@ func (p Gs2MoneyRestClient) WithdrawByUserIdAsync(
 	go withdrawByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2234,7 +2236,7 @@ func (p Gs2MoneyRestClient) DepositByStampSheetAsync(
 	go depositByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2326,7 +2328,7 @@ func (p Gs2MoneyRestClient) WithdrawByStampTaskAsync(
 	go withdrawByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2438,7 +2440,7 @@ func (p Gs2MoneyRestClient) DescribeReceiptsAsync(
 	go describeReceiptsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2542,7 +2544,7 @@ func (p Gs2MoneyRestClient) GetByUserIdAndTransactionIdAsync(
 	go getByUserIdAndTransactionIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2656,7 +2658,7 @@ func (p Gs2MoneyRestClient) RecordReceiptAsync(
 	go recordReceiptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2761,7 +2763,7 @@ func (p Gs2MoneyRestClient) RevertRecordReceiptAsync(
 	go revertRecordReceiptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2853,7 +2855,7 @@ func (p Gs2MoneyRestClient) RecordReceiptByStampTaskAsync(
 	go recordReceiptByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2945,7 +2947,7 @@ func (p Gs2MoneyRestClient) RevertRecordReceiptByStampSheetAsync(
 	go revertRecordReceiptByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("money", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

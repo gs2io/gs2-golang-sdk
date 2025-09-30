@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2MegaFieldRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2MegaFieldRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -201,7 +203,7 @@ func (p Gs2MegaFieldRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -292,7 +294,7 @@ func (p Gs2MegaFieldRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -383,7 +385,7 @@ func (p Gs2MegaFieldRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -480,7 +482,7 @@ func (p Gs2MegaFieldRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -571,7 +573,7 @@ func (p Gs2MegaFieldRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -657,7 +659,7 @@ func (p Gs2MegaFieldRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -748,7 +750,7 @@ func (p Gs2MegaFieldRestClient) DescribeAreaModelsAsync(
 	go describeAreaModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -844,7 +846,7 @@ func (p Gs2MegaFieldRestClient) GetAreaModelAsync(
 	go getAreaModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -941,7 +943,7 @@ func (p Gs2MegaFieldRestClient) DescribeAreaModelMastersAsync(
 	go describeAreaModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1041,7 +1043,7 @@ func (p Gs2MegaFieldRestClient) CreateAreaModelMasterAsync(
 	go createAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1137,7 +1139,7 @@ func (p Gs2MegaFieldRestClient) GetAreaModelMasterAsync(
 	go getAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1239,7 +1241,7 @@ func (p Gs2MegaFieldRestClient) UpdateAreaModelMasterAsync(
 	go updateAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1335,7 +1337,7 @@ func (p Gs2MegaFieldRestClient) DeleteAreaModelMasterAsync(
 	go deleteAreaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1431,7 +1433,7 @@ func (p Gs2MegaFieldRestClient) DescribeLayerModelsAsync(
 	go describeLayerModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1532,7 +1534,7 @@ func (p Gs2MegaFieldRestClient) GetLayerModelAsync(
 	go getLayerModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1634,7 +1636,7 @@ func (p Gs2MegaFieldRestClient) DescribeLayerModelMastersAsync(
 	go describeLayerModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1739,7 +1741,7 @@ func (p Gs2MegaFieldRestClient) CreateLayerModelMasterAsync(
 	go createLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1840,7 +1842,7 @@ func (p Gs2MegaFieldRestClient) GetLayerModelMasterAsync(
 	go getLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1947,7 +1949,7 @@ func (p Gs2MegaFieldRestClient) UpdateLayerModelMasterAsync(
 	go updateLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2048,7 +2050,7 @@ func (p Gs2MegaFieldRestClient) DeleteLayerModelMasterAsync(
 	go deleteLayerModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2139,7 +2141,7 @@ func (p Gs2MegaFieldRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2230,7 +2232,7 @@ func (p Gs2MegaFieldRestClient) GetCurrentFieldMasterAsync(
 	go getCurrentFieldMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2321,7 +2323,7 @@ func (p Gs2MegaFieldRestClient) PreUpdateCurrentFieldMasterAsync(
 	go preUpdateCurrentFieldMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2452,7 +2454,7 @@ func (p Gs2MegaFieldRestClient) UpdateCurrentFieldMasterAsync(
 	go updateCurrentFieldMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2546,7 +2548,7 @@ func (p Gs2MegaFieldRestClient) UpdateCurrentFieldMasterFromGitHubAsync(
 	go updateCurrentFieldMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2662,7 +2664,7 @@ func (p Gs2MegaFieldRestClient) PutPositionAsync(
 	go putPositionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2783,7 +2785,7 @@ func (p Gs2MegaFieldRestClient) PutPositionByUserIdAsync(
 	go putPositionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2897,7 +2899,7 @@ func (p Gs2MegaFieldRestClient) FetchPositionAsync(
 	go fetchPositionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3008,7 +3010,7 @@ func (p Gs2MegaFieldRestClient) FetchPositionFromSystemAsync(
 	go fetchPositionFromSystemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3124,7 +3126,7 @@ func (p Gs2MegaFieldRestClient) NearUserIdsAsync(
 	go nearUserIdsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3237,7 +3239,7 @@ func (p Gs2MegaFieldRestClient) NearUserIdsFromSystemAsync(
 	go nearUserIdsFromSystemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3354,7 +3356,7 @@ func (p Gs2MegaFieldRestClient) ActionAsync(
 	go actionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3476,7 +3478,7 @@ func (p Gs2MegaFieldRestClient) ActionByUserIdAsync(
 	go actionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mega-field").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mega-field", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

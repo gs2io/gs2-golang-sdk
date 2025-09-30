@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2IdleRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2IdleRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -210,7 +212,7 @@ func (p Gs2IdleRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -301,7 +303,7 @@ func (p Gs2IdleRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -392,7 +394,7 @@ func (p Gs2IdleRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -498,7 +500,7 @@ func (p Gs2IdleRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -589,7 +591,7 @@ func (p Gs2IdleRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -675,7 +677,7 @@ func (p Gs2IdleRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -769,7 +771,7 @@ func (p Gs2IdleRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -863,7 +865,7 @@ func (p Gs2IdleRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -957,7 +959,7 @@ func (p Gs2IdleRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1051,7 +1053,7 @@ func (p Gs2IdleRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1145,7 +1147,7 @@ func (p Gs2IdleRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1242,7 +1244,7 @@ func (p Gs2IdleRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1341,7 +1343,7 @@ func (p Gs2IdleRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1441,7 +1443,7 @@ func (p Gs2IdleRestClient) DescribeCategoryModelMastersAsync(
 	go describeCategoryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1563,7 +1565,7 @@ func (p Gs2IdleRestClient) CreateCategoryModelMasterAsync(
 	go createCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1659,7 +1661,7 @@ func (p Gs2IdleRestClient) GetCategoryModelMasterAsync(
 	go getCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1783,7 +1785,7 @@ func (p Gs2IdleRestClient) UpdateCategoryModelMasterAsync(
 	go updateCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1879,7 +1881,7 @@ func (p Gs2IdleRestClient) DeleteCategoryModelMasterAsync(
 	go deleteCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1970,7 +1972,7 @@ func (p Gs2IdleRestClient) DescribeCategoryModelsAsync(
 	go describeCategoryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2066,7 +2068,7 @@ func (p Gs2IdleRestClient) GetCategoryModelAsync(
 	go getCategoryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2166,7 +2168,7 @@ func (p Gs2IdleRestClient) DescribeStatusesAsync(
 	go describeStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2271,7 +2273,7 @@ func (p Gs2IdleRestClient) DescribeStatusesByUserIdAsync(
 	go describeStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2370,7 +2372,7 @@ func (p Gs2IdleRestClient) GetStatusAsync(
 	go getStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2474,7 +2476,7 @@ func (p Gs2IdleRestClient) GetStatusByUserIdAsync(
 	go getStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2573,7 +2575,7 @@ func (p Gs2IdleRestClient) PredictionAsync(
 	go predictionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2677,7 +2679,7 @@ func (p Gs2IdleRestClient) PredictionByUserIdAsync(
 	go predictionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2786,7 +2788,7 @@ func (p Gs2IdleRestClient) ReceiveAsync(
 	go receiveAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2900,7 +2902,7 @@ func (p Gs2IdleRestClient) ReceiveByUserIdAsync(
 	go receiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3010,7 +3012,7 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByUserIdAsync(
 	go increaseMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3115,7 +3117,7 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesAsync(
 	go decreaseMaximumIdleMinutesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3225,7 +3227,7 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByUserIdAsync(
 	go decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3335,7 +3337,7 @@ func (p Gs2IdleRestClient) SetMaximumIdleMinutesByUserIdAsync(
 	go setMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3427,7 +3429,7 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByStampSheetAsync(
 	go increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3519,7 +3521,7 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByStampTaskAsync(
 	go decreaseMaximumIdleMinutesByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3611,7 +3613,7 @@ func (p Gs2IdleRestClient) SetMaximumIdleMinutesByStampSheetAsync(
 	go setMaximumIdleMinutesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3703,7 +3705,7 @@ func (p Gs2IdleRestClient) ReceiveByStampSheetAsync(
 	go receiveByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3794,7 +3796,7 @@ func (p Gs2IdleRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3885,7 +3887,7 @@ func (p Gs2IdleRestClient) GetCurrentCategoryMasterAsync(
 	go getCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3976,7 +3978,7 @@ func (p Gs2IdleRestClient) PreUpdateCurrentCategoryMasterAsync(
 	go preUpdateCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4107,7 +4109,7 @@ func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterAsync(
 	go updateCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4201,7 +4203,7 @@ func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterFromGitHubAsync(
 	go updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("idle", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

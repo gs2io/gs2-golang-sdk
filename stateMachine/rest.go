@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2StateMachineRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2StateMachineRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -218,7 +220,7 @@ func (p Gs2StateMachineRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -309,7 +311,7 @@ func (p Gs2StateMachineRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -400,7 +402,7 @@ func (p Gs2StateMachineRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -515,7 +517,7 @@ func (p Gs2StateMachineRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -606,7 +608,7 @@ func (p Gs2StateMachineRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -692,7 +694,7 @@ func (p Gs2StateMachineRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -786,7 +788,7 @@ func (p Gs2StateMachineRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -880,7 +882,7 @@ func (p Gs2StateMachineRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -974,7 +976,7 @@ func (p Gs2StateMachineRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1068,7 +1070,7 @@ func (p Gs2StateMachineRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1162,7 +1164,7 @@ func (p Gs2StateMachineRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1259,7 +1261,7 @@ func (p Gs2StateMachineRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1358,7 +1360,7 @@ func (p Gs2StateMachineRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1455,7 +1457,7 @@ func (p Gs2StateMachineRestClient) DescribeStateMachineMastersAsync(
 	go describeStateMachineMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1552,7 +1554,7 @@ func (p Gs2StateMachineRestClient) UpdateStateMachineMasterAsync(
 	go updateStateMachineMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1648,7 +1650,7 @@ func (p Gs2StateMachineRestClient) GetStateMachineMasterAsync(
 	go getStateMachineMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1744,7 +1746,7 @@ func (p Gs2StateMachineRestClient) DeleteStateMachineMasterAsync(
 	go deleteStateMachineMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1847,7 +1849,7 @@ func (p Gs2StateMachineRestClient) DescribeStatusesAsync(
 	go describeStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1955,7 +1957,7 @@ func (p Gs2StateMachineRestClient) DescribeStatusesByUserIdAsync(
 	go describeStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2054,7 +2056,7 @@ func (p Gs2StateMachineRestClient) GetStatusAsync(
 	go getStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2158,7 +2160,7 @@ func (p Gs2StateMachineRestClient) GetStatusByUserIdAsync(
 	go getStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2266,7 +2268,7 @@ func (p Gs2StateMachineRestClient) StartStateMachineByUserIdAsync(
 	go startStateMachineByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2358,7 +2360,7 @@ func (p Gs2StateMachineRestClient) StartStateMachineByStampSheetAsync(
 	go startStateMachineByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2466,7 +2468,7 @@ func (p Gs2StateMachineRestClient) EmitAsync(
 	go emitAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2579,7 +2581,7 @@ func (p Gs2StateMachineRestClient) EmitByUserIdAsync(
 	go emitByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2694,7 +2696,7 @@ func (p Gs2StateMachineRestClient) ReportAsync(
 	go reportAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2808,7 +2810,7 @@ func (p Gs2StateMachineRestClient) ReportByUserIdAsync(
 	go reportByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2915,7 +2917,7 @@ func (p Gs2StateMachineRestClient) DeleteStatusByUserIdAsync(
 	go deleteStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3017,7 +3019,7 @@ func (p Gs2StateMachineRestClient) ExitStateMachineAsync(
 	go exitStateMachineAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3124,7 +3126,7 @@ func (p Gs2StateMachineRestClient) ExitStateMachineByUserIdAsync(
 	go exitStateMachineByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("state-machine", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

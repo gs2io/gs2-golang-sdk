@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2AccountRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2AccountRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -228,7 +230,7 @@ func (p Gs2AccountRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -319,7 +321,7 @@ func (p Gs2AccountRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -410,7 +412,7 @@ func (p Gs2AccountRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -531,7 +533,7 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -622,7 +624,7 @@ func (p Gs2AccountRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -708,7 +710,7 @@ func (p Gs2AccountRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -802,7 +804,7 @@ func (p Gs2AccountRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -896,7 +898,7 @@ func (p Gs2AccountRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -990,7 +992,7 @@ func (p Gs2AccountRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1084,7 +1086,7 @@ func (p Gs2AccountRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1178,7 +1180,7 @@ func (p Gs2AccountRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1275,7 +1277,7 @@ func (p Gs2AccountRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1374,7 +1376,7 @@ func (p Gs2AccountRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1471,7 +1473,7 @@ func (p Gs2AccountRestClient) DescribeAccountsAsync(
 	go describeAccountsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1562,7 +1564,7 @@ func (p Gs2AccountRestClient) CreateAccountAsync(
 	go createAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1667,7 +1669,7 @@ func (p Gs2AccountRestClient) UpdateTimeOffsetAsync(
 	go updateTimeOffsetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1772,7 +1774,7 @@ func (p Gs2AccountRestClient) UpdateBannedAsync(
 	go updateBannedAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1877,7 +1879,7 @@ func (p Gs2AccountRestClient) AddBanAsync(
 	go addBanAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1984,7 +1986,7 @@ func (p Gs2AccountRestClient) RemoveBanAsync(
 	go removeBanAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2086,7 +2088,7 @@ func (p Gs2AccountRestClient) GetAccountAsync(
 	go getAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2188,7 +2190,7 @@ func (p Gs2AccountRestClient) DeleteAccountAsync(
 	go deleteAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2305,7 +2307,7 @@ func (p Gs2AccountRestClient) AuthenticationAsync(
 	go authenticationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2405,7 +2407,7 @@ func (p Gs2AccountRestClient) DescribeTakeOversAsync(
 	go describeTakeOversAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2510,7 +2512,7 @@ func (p Gs2AccountRestClient) DescribeTakeOversByUserIdAsync(
 	go describeTakeOversByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2616,7 +2618,7 @@ func (p Gs2AccountRestClient) CreateTakeOverAsync(
 	go createTakeOverAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2727,7 +2729,7 @@ func (p Gs2AccountRestClient) CreateTakeOverByUserIdAsync(
 	go createTakeOverByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2830,7 +2832,7 @@ func (p Gs2AccountRestClient) CreateTakeOverOpenIdConnectAsync(
 	go createTakeOverOpenIdConnectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2938,7 +2940,7 @@ func (p Gs2AccountRestClient) CreateTakeOverOpenIdConnectAndByUserIdAsync(
 	go createTakeOverOpenIdConnectAndByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3037,7 +3039,7 @@ func (p Gs2AccountRestClient) GetTakeOverAsync(
 	go getTakeOverAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3141,7 +3143,7 @@ func (p Gs2AccountRestClient) GetTakeOverByUserIdAsync(
 	go getTakeOverByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3255,7 +3257,7 @@ func (p Gs2AccountRestClient) UpdateTakeOverAsync(
 	go updateTakeOverAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3374,7 +3376,7 @@ func (p Gs2AccountRestClient) UpdateTakeOverByUserIdAsync(
 	go updateTakeOverByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3476,7 +3478,7 @@ func (p Gs2AccountRestClient) DeleteTakeOverAsync(
 	go deleteTakeOverAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3580,7 +3582,7 @@ func (p Gs2AccountRestClient) DeleteTakeOverByUserIdentifierAsync(
 	go deleteTakeOverByUserIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3687,7 +3689,7 @@ func (p Gs2AccountRestClient) DeleteTakeOverByUserIdAsync(
 	go deleteTakeOverByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3795,7 +3797,7 @@ func (p Gs2AccountRestClient) DoTakeOverAsync(
 	go doTakeOverAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3894,7 +3896,7 @@ func (p Gs2AccountRestClient) DoTakeOverOpenIdConnectAsync(
 	go doTakeOverOpenIdConnectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3990,7 +3992,7 @@ func (p Gs2AccountRestClient) GetAuthorizationUrlAsync(
 	go getAuthorizationUrlAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4090,7 +4092,7 @@ func (p Gs2AccountRestClient) DescribePlatformIdsAsync(
 	go describePlatformIdsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4195,7 +4197,7 @@ func (p Gs2AccountRestClient) DescribePlatformIdsByUserIdAsync(
 	go describePlatformIdsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4298,7 +4300,7 @@ func (p Gs2AccountRestClient) CreatePlatformIdAsync(
 	go createPlatformIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4406,7 +4408,7 @@ func (p Gs2AccountRestClient) CreatePlatformIdByUserIdAsync(
 	go createPlatformIdByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4505,7 +4507,7 @@ func (p Gs2AccountRestClient) GetPlatformIdAsync(
 	go getPlatformIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4609,7 +4611,7 @@ func (p Gs2AccountRestClient) GetPlatformIdByUserIdAsync(
 	go getPlatformIdByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4713,7 +4715,7 @@ func (p Gs2AccountRestClient) FindPlatformIdAsync(
 	go findPlatformIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4822,7 +4824,7 @@ func (p Gs2AccountRestClient) FindPlatformIdByUserIdAsync(
 	go findPlatformIdByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4927,7 +4929,7 @@ func (p Gs2AccountRestClient) DeletePlatformIdAsync(
 	go deletePlatformIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5031,7 +5033,7 @@ func (p Gs2AccountRestClient) DeletePlatformIdByUserIdentifierAsync(
 	go deletePlatformIdByUserIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5138,7 +5140,7 @@ func (p Gs2AccountRestClient) DeletePlatformIdByUserIdAsync(
 	go deletePlatformIdByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5237,7 +5239,7 @@ func (p Gs2AccountRestClient) GetDataOwnerByUserIdAsync(
 	go getDataOwnerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5342,7 +5344,7 @@ func (p Gs2AccountRestClient) UpdateDataOwnerByUserIdAsync(
 	go updateDataOwnerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5444,7 +5446,7 @@ func (p Gs2AccountRestClient) DeleteDataOwnerByUserIdAsync(
 	go deleteDataOwnerByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5535,7 +5537,7 @@ func (p Gs2AccountRestClient) DescribeTakeOverTypeModelsAsync(
 	go describeTakeOverTypeModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5631,7 +5633,7 @@ func (p Gs2AccountRestClient) GetTakeOverTypeModelAsync(
 	go getTakeOverTypeModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5728,7 +5730,7 @@ func (p Gs2AccountRestClient) DescribeTakeOverTypeModelMastersAsync(
 	go describeTakeOverTypeModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5831,7 +5833,7 @@ func (p Gs2AccountRestClient) CreateTakeOverTypeModelMasterAsync(
 	go createTakeOverTypeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5927,7 +5929,7 @@ func (p Gs2AccountRestClient) GetTakeOverTypeModelMasterAsync(
 	go getTakeOverTypeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6032,7 +6034,7 @@ func (p Gs2AccountRestClient) UpdateTakeOverTypeModelMasterAsync(
 	go updateTakeOverTypeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6128,7 +6130,7 @@ func (p Gs2AccountRestClient) DeleteTakeOverTypeModelMasterAsync(
 	go deleteTakeOverTypeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6219,7 +6221,7 @@ func (p Gs2AccountRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6310,7 +6312,7 @@ func (p Gs2AccountRestClient) GetCurrentModelMasterAsync(
 	go getCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6401,7 +6403,7 @@ func (p Gs2AccountRestClient) PreUpdateCurrentModelMasterAsync(
 	go preUpdateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6532,7 +6534,7 @@ func (p Gs2AccountRestClient) UpdateCurrentModelMasterAsync(
 	go updateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6626,7 +6628,7 @@ func (p Gs2AccountRestClient) UpdateCurrentModelMasterFromGitHubAsync(
 	go updateCurrentModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

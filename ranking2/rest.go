@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2Ranking2RestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2Ranking2RestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2Ranking2RestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2Ranking2RestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2Ranking2RestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2Ranking2RestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2Ranking2RestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2Ranking2RestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2Ranking2RestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2Ranking2RestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2Ranking2RestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2Ranking2RestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2Ranking2RestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2Ranking2RestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2Ranking2RestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1420,7 +1422,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingModelsAsync(
 	go describeGlobalRankingModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1516,7 +1518,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingModelAsync(
 	go getGlobalRankingModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1616,7 +1618,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingModelMastersAsync(
 	go describeGlobalRankingModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1744,7 +1746,7 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingModelMasterAsync(
 	go createGlobalRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1840,7 +1842,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingModelMasterAsync(
 	go getGlobalRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1970,7 +1972,7 @@ func (p Gs2Ranking2RestClient) UpdateGlobalRankingModelMasterAsync(
 	go updateGlobalRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2066,7 +2068,7 @@ func (p Gs2Ranking2RestClient) DeleteGlobalRankingModelMasterAsync(
 	go deleteGlobalRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2169,7 +2171,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingScoresAsync(
 	go describeGlobalRankingScoresAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2277,7 +2279,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingScoresByUserIdAsync(
 	go describeGlobalRankingScoresByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2385,7 +2387,7 @@ func (p Gs2Ranking2RestClient) PutGlobalRankingScoreAsync(
 	go putGlobalRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2498,7 +2500,7 @@ func (p Gs2Ranking2RestClient) PutGlobalRankingScoreByUserIdAsync(
 	go putGlobalRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2600,7 +2602,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingScoreAsync(
 	go getGlobalRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2707,7 +2709,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingScoreByUserIdAsync(
 	go getGlobalRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2817,7 +2819,7 @@ func (p Gs2Ranking2RestClient) DeleteGlobalRankingScoreByUserIdAsync(
 	go deleteGlobalRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2933,7 +2935,7 @@ func (p Gs2Ranking2RestClient) VerifyGlobalRankingScoreAsync(
 	go verifyGlobalRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3054,7 +3056,7 @@ func (p Gs2Ranking2RestClient) VerifyGlobalRankingScoreByUserIdAsync(
 	go verifyGlobalRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3146,7 +3148,7 @@ func (p Gs2Ranking2RestClient) VerifyGlobalRankingScoreByStampTaskAsync(
 	go verifyGlobalRankingScoreByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3252,7 +3254,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingReceivedRewardsAsync(
 	go describeGlobalRankingReceivedRewardsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3363,7 +3365,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingReceivedRewardsByUserIdAsync
 	go describeGlobalRankingReceivedRewardsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3468,7 +3470,7 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingReceivedRewardAsync(
 	go createGlobalRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3578,7 +3580,7 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingReceivedRewardByUserIdAsync(
 	go createGlobalRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3692,7 +3694,7 @@ func (p Gs2Ranking2RestClient) ReceiveGlobalRankingReceivedRewardAsync(
 	go receiveGlobalRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3811,7 +3813,7 @@ func (p Gs2Ranking2RestClient) ReceiveGlobalRankingReceivedRewardByUserIdAsync(
 	go receiveGlobalRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3913,7 +3915,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingReceivedRewardAsync(
 	go getGlobalRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4020,7 +4022,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingReceivedRewardByUserIdAsync(
 	go getGlobalRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4130,7 +4132,7 @@ func (p Gs2Ranking2RestClient) DeleteGlobalRankingReceivedRewardByUserIdAsync(
 	go deleteGlobalRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4222,7 +4224,7 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingReceivedRewardByStampTaskAsync
 	go createGlobalRankingReceivedRewardByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4330,7 +4332,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingsAsync(
 	go describeGlobalRankingsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4443,7 +4445,7 @@ func (p Gs2Ranking2RestClient) DescribeGlobalRankingsByUserIdAsync(
 	go describeGlobalRankingsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4545,7 +4547,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingAsync(
 	go getGlobalRankingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4652,7 +4654,7 @@ func (p Gs2Ranking2RestClient) GetGlobalRankingByUserIdAsync(
 	go getGlobalRankingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4743,7 +4745,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingModelsAsync(
 	go describeClusterRankingModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4839,7 +4841,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingModelAsync(
 	go getClusterRankingModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4939,7 +4941,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingModelMastersAsync(
 	go describeClusterRankingModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5070,7 +5072,7 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingModelMasterAsync(
 	go createClusterRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5166,7 +5168,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingModelMasterAsync(
 	go getClusterRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5299,7 +5301,7 @@ func (p Gs2Ranking2RestClient) UpdateClusterRankingModelMasterAsync(
 	go updateClusterRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5395,7 +5397,7 @@ func (p Gs2Ranking2RestClient) DeleteClusterRankingModelMasterAsync(
 	go deleteClusterRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5504,7 +5506,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingScoresAsync(
 	go describeClusterRankingScoresAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5618,7 +5620,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingScoresByUserIdAsync(
 	go describeClusterRankingScoresByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5731,7 +5733,7 @@ func (p Gs2Ranking2RestClient) PutClusterRankingScoreAsync(
 	go putClusterRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5849,7 +5851,7 @@ func (p Gs2Ranking2RestClient) PutClusterRankingScoreByUserIdAsync(
 	go putClusterRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5956,7 +5958,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingScoreAsync(
 	go getClusterRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6068,7 +6070,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingScoreByUserIdAsync(
 	go getClusterRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6183,7 +6185,7 @@ func (p Gs2Ranking2RestClient) DeleteClusterRankingScoreByUserIdAsync(
 	go deleteClusterRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6304,7 +6306,7 @@ func (p Gs2Ranking2RestClient) VerifyClusterRankingScoreAsync(
 	go verifyClusterRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6430,7 +6432,7 @@ func (p Gs2Ranking2RestClient) VerifyClusterRankingScoreByUserIdAsync(
 	go verifyClusterRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6522,7 +6524,7 @@ func (p Gs2Ranking2RestClient) VerifyClusterRankingScoreByStampTaskAsync(
 	go verifyClusterRankingScoreByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6631,7 +6633,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingReceivedRewardsAsync(
 	go describeClusterRankingReceivedRewardsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6745,7 +6747,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingReceivedRewardsByUserIdAsyn
 	go describeClusterRankingReceivedRewardsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6855,7 +6857,7 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingReceivedRewardAsync(
 	go createClusterRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6970,7 +6972,7 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingReceivedRewardByUserIdAsync(
 	go createClusterRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7089,7 +7091,7 @@ func (p Gs2Ranking2RestClient) ReceiveClusterRankingReceivedRewardAsync(
 	go receiveClusterRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7213,7 +7215,7 @@ func (p Gs2Ranking2RestClient) ReceiveClusterRankingReceivedRewardByUserIdAsync(
 	go receiveClusterRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7320,7 +7322,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingReceivedRewardAsync(
 	go getClusterRankingReceivedRewardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7432,7 +7434,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingReceivedRewardByUserIdAsync(
 	go getClusterRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7547,7 +7549,7 @@ func (p Gs2Ranking2RestClient) DeleteClusterRankingReceivedRewardByUserIdAsync(
 	go deleteClusterRankingReceivedRewardByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7639,7 +7641,7 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingReceivedRewardByStampTaskAsyn
 	go createClusterRankingReceivedRewardByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7752,7 +7754,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingsAsync(
 	go describeClusterRankingsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7870,7 +7872,7 @@ func (p Gs2Ranking2RestClient) DescribeClusterRankingsByUserIdAsync(
 	go describeClusterRankingsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7977,7 +7979,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingAsync(
 	go getClusterRankingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8089,7 +8091,7 @@ func (p Gs2Ranking2RestClient) GetClusterRankingByUserIdAsync(
 	go getClusterRankingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8180,7 +8182,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingModelsAsync(
 	go describeSubscribeRankingModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8276,7 +8278,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingModelAsync(
 	go getSubscribeRankingModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8376,7 +8378,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingModelMastersAsync(
 	go describeSubscribeRankingModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8494,7 +8496,7 @@ func (p Gs2Ranking2RestClient) CreateSubscribeRankingModelMasterAsync(
 	go createSubscribeRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8590,7 +8592,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingModelMasterAsync(
 	go getSubscribeRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8710,7 +8712,7 @@ func (p Gs2Ranking2RestClient) UpdateSubscribeRankingModelMasterAsync(
 	go updateSubscribeRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8806,7 +8808,7 @@ func (p Gs2Ranking2RestClient) DeleteSubscribeRankingModelMasterAsync(
 	go deleteSubscribeRankingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8909,7 +8911,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribesAsync(
 	go describeSubscribesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9017,7 +9019,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribesByUserIdAsync(
 	go describeSubscribesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9124,7 +9126,7 @@ func (p Gs2Ranking2RestClient) AddSubscribeAsync(
 	go addSubscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9236,7 +9238,7 @@ func (p Gs2Ranking2RestClient) AddSubscribeByUserIdAsync(
 	go addSubscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9339,7 +9341,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingScoresAsync(
 	go describeSubscribeRankingScoresAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9447,7 +9449,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingScoresByUserIdAsync(
 	go describeSubscribeRankingScoresByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9555,7 +9557,7 @@ func (p Gs2Ranking2RestClient) PutSubscribeRankingScoreAsync(
 	go putSubscribeRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9668,7 +9670,7 @@ func (p Gs2Ranking2RestClient) PutSubscribeRankingScoreByUserIdAsync(
 	go putSubscribeRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9770,7 +9772,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingScoreAsync(
 	go getSubscribeRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9877,7 +9879,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingScoreByUserIdAsync(
 	go getSubscribeRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9987,7 +9989,7 @@ func (p Gs2Ranking2RestClient) DeleteSubscribeRankingScoreByUserIdAsync(
 	go deleteSubscribeRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10103,7 +10105,7 @@ func (p Gs2Ranking2RestClient) VerifySubscribeRankingScoreAsync(
 	go verifySubscribeRankingScoreAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10224,7 +10226,7 @@ func (p Gs2Ranking2RestClient) VerifySubscribeRankingScoreByUserIdAsync(
 	go verifySubscribeRankingScoreByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10316,7 +10318,7 @@ func (p Gs2Ranking2RestClient) VerifySubscribeRankingScoreByStampTaskAsync(
 	go verifySubscribeRankingScoreByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10424,7 +10426,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingsAsync(
 	go describeSubscribeRankingsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10537,7 +10539,7 @@ func (p Gs2Ranking2RestClient) DescribeSubscribeRankingsByUserIdAsync(
 	go describeSubscribeRankingsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10642,7 +10644,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingAsync(
 	go getSubscribeRankingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10752,7 +10754,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeRankingByUserIdAsync(
 	go getSubscribeRankingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10843,7 +10845,7 @@ func (p Gs2Ranking2RestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10934,7 +10936,7 @@ func (p Gs2Ranking2RestClient) GetCurrentRankingMasterAsync(
 	go getCurrentRankingMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11025,7 +11027,7 @@ func (p Gs2Ranking2RestClient) PreUpdateCurrentRankingMasterAsync(
 	go preUpdateCurrentRankingMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11156,7 +11158,7 @@ func (p Gs2Ranking2RestClient) UpdateCurrentRankingMasterAsync(
 	go updateCurrentRankingMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11250,7 +11252,7 @@ func (p Gs2Ranking2RestClient) UpdateCurrentRankingMasterFromGitHubAsync(
 	go updateCurrentRankingMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11354,7 +11356,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeAsync(
 	go getSubscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11463,7 +11465,7 @@ func (p Gs2Ranking2RestClient) GetSubscribeByUserIdAsync(
 	go getSubscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11570,7 +11572,7 @@ func (p Gs2Ranking2RestClient) DeleteSubscribeAsync(
 	go deleteSubscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11682,7 +11684,7 @@ func (p Gs2Ranking2RestClient) DeleteSubscribeByUserIdAsync(
 	go deleteSubscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ranking2", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

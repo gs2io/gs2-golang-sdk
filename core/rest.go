@@ -230,8 +230,11 @@ type Gs2RestSession struct {
 	connection   IConnection
 }
 
-func (p Gs2RestSession) EndpointHost(service string) Url {
-	return Url(strings.ReplaceAll(strings.ReplaceAll(EndpointHost, "{service}", service), "{region}", string(p.Region)))
+func (p Gs2RestSession) EndpointHost(service string, endpointHost *string) Url {
+	if endpointHost == nil {
+		endpointHost = &EndpointHost
+	}
+	return Url(strings.ReplaceAll(strings.ReplaceAll(*endpointHost, "{service}", service), "{region}", string(p.Region)))
 }
 
 func (p Gs2RestSession) CreateAuthorizationHeader() map[string]string {

@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2MatchmakingRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2MatchmakingRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -255,7 +257,7 @@ func (p Gs2MatchmakingRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -346,7 +348,7 @@ func (p Gs2MatchmakingRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -437,7 +439,7 @@ func (p Gs2MatchmakingRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -588,7 +590,7 @@ func (p Gs2MatchmakingRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -679,7 +681,7 @@ func (p Gs2MatchmakingRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -765,7 +767,7 @@ func (p Gs2MatchmakingRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -859,7 +861,7 @@ func (p Gs2MatchmakingRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -953,7 +955,7 @@ func (p Gs2MatchmakingRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1047,7 +1049,7 @@ func (p Gs2MatchmakingRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1141,7 +1143,7 @@ func (p Gs2MatchmakingRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1235,7 +1237,7 @@ func (p Gs2MatchmakingRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1332,7 +1334,7 @@ func (p Gs2MatchmakingRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1431,7 +1433,7 @@ func (p Gs2MatchmakingRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1528,7 +1530,7 @@ func (p Gs2MatchmakingRestClient) DescribeGatheringsAsync(
 	go describeGatheringsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1655,7 +1657,7 @@ func (p Gs2MatchmakingRestClient) CreateGatheringAsync(
 	go createGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1787,7 +1789,7 @@ func (p Gs2MatchmakingRestClient) CreateGatheringByUserIdAsync(
 	go createGatheringByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1896,7 +1898,7 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringAsync(
 	go updateGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2010,7 +2012,7 @@ func (p Gs2MatchmakingRestClient) UpdateGatheringByUserIdAsync(
 	go updateGatheringByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2107,7 +2109,7 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingByPlayerAsync(
 	go doMatchmakingByPlayerAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2210,7 +2212,7 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingAsync(
 	go doMatchmakingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2318,7 +2320,7 @@ func (p Gs2MatchmakingRestClient) DoMatchmakingByUserIdAsync(
 	go doMatchmakingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2420,7 +2422,7 @@ func (p Gs2MatchmakingRestClient) PingAsync(
 	go pingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2527,7 +2529,7 @@ func (p Gs2MatchmakingRestClient) PingByUserIdAsync(
 	go pingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2623,7 +2625,7 @@ func (p Gs2MatchmakingRestClient) GetGatheringAsync(
 	go getGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2725,7 +2727,7 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingAsync(
 	go cancelMatchmakingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2832,7 +2834,7 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingByUserIdAsync(
 	go cancelMatchmakingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2934,7 +2936,7 @@ func (p Gs2MatchmakingRestClient) EarlyCompleteAsync(
 	go earlyCompleteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3041,7 +3043,7 @@ func (p Gs2MatchmakingRestClient) EarlyCompleteByUserIdAsync(
 	go earlyCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3137,7 +3139,7 @@ func (p Gs2MatchmakingRestClient) DeleteGatheringAsync(
 	go deleteGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3237,7 +3239,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelMastersAsync(
 	go describeRatingModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3343,7 +3345,7 @@ func (p Gs2MatchmakingRestClient) CreateRatingModelMasterAsync(
 	go createRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3439,7 +3441,7 @@ func (p Gs2MatchmakingRestClient) GetRatingModelMasterAsync(
 	go getRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3547,7 +3549,7 @@ func (p Gs2MatchmakingRestClient) UpdateRatingModelMasterAsync(
 	go updateRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3643,7 +3645,7 @@ func (p Gs2MatchmakingRestClient) DeleteRatingModelMasterAsync(
 	go deleteRatingModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3734,7 +3736,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingModelsAsync(
 	go describeRatingModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3830,7 +3832,7 @@ func (p Gs2MatchmakingRestClient) GetRatingModelAsync(
 	go getRatingModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3921,7 +3923,7 @@ func (p Gs2MatchmakingRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4012,7 +4014,7 @@ func (p Gs2MatchmakingRestClient) GetCurrentModelMasterAsync(
 	go getCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4103,7 +4105,7 @@ func (p Gs2MatchmakingRestClient) PreUpdateCurrentModelMasterAsync(
 	go preUpdateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4234,7 +4236,7 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentModelMasterAsync(
 	go updateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4328,7 +4330,7 @@ func (p Gs2MatchmakingRestClient) UpdateCurrentModelMasterFromGitHubAsync(
 	go updateCurrentModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4419,7 +4421,7 @@ func (p Gs2MatchmakingRestClient) DescribeSeasonModelsAsync(
 	go describeSeasonModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4515,7 +4517,7 @@ func (p Gs2MatchmakingRestClient) GetSeasonModelAsync(
 	go getSeasonModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4615,7 +4617,7 @@ func (p Gs2MatchmakingRestClient) DescribeSeasonModelMastersAsync(
 	go describeSeasonModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4724,7 +4726,7 @@ func (p Gs2MatchmakingRestClient) CreateSeasonModelMasterAsync(
 	go createSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4820,7 +4822,7 @@ func (p Gs2MatchmakingRestClient) GetSeasonModelMasterAsync(
 	go getSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4931,7 +4933,7 @@ func (p Gs2MatchmakingRestClient) UpdateSeasonModelMasterAsync(
 	go updateSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5027,7 +5029,7 @@ func (p Gs2MatchmakingRestClient) DeleteSeasonModelMasterAsync(
 	go deleteSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5137,7 +5139,7 @@ func (p Gs2MatchmakingRestClient) DescribeSeasonGatheringsAsync(
 	go describeSeasonGatheringsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5247,7 +5249,7 @@ func (p Gs2MatchmakingRestClient) DescribeMatchmakingSeasonGatheringsAsync(
 	go describeMatchmakingSeasonGatheringsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5352,7 +5354,7 @@ func (p Gs2MatchmakingRestClient) DoSeasonMatchmakingAsync(
 	go doSeasonMatchmakingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5462,7 +5464,7 @@ func (p Gs2MatchmakingRestClient) DoSeasonMatchmakingByUserIdAsync(
 	go doSeasonMatchmakingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5573,7 +5575,7 @@ func (p Gs2MatchmakingRestClient) GetSeasonGatheringAsync(
 	go getSeasonGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5693,7 +5695,7 @@ func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantAsync(
 	go verifyIncludeParticipantAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5818,7 +5820,7 @@ func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByUserIdAsync(
 	go verifyIncludeParticipantByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5929,7 +5931,7 @@ func (p Gs2MatchmakingRestClient) DeleteSeasonGatheringAsync(
 	go deleteSeasonGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6021,7 +6023,7 @@ func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByStampTaskAsync(
 	go verifyIncludeParticipantByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6126,7 +6128,7 @@ func (p Gs2MatchmakingRestClient) DescribeJoinedSeasonGatheringsAsync(
 	go describeJoinedSeasonGatheringsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6236,7 +6238,7 @@ func (p Gs2MatchmakingRestClient) DescribeJoinedSeasonGatheringsByUserIdAsync(
 	go describeJoinedSeasonGatheringsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6340,7 +6342,7 @@ func (p Gs2MatchmakingRestClient) GetJoinedSeasonGatheringAsync(
 	go getJoinedSeasonGatheringAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6449,7 +6451,7 @@ func (p Gs2MatchmakingRestClient) GetJoinedSeasonGatheringByUserIdAsync(
 	go getJoinedSeasonGatheringByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6549,7 +6551,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsAsync(
 	go describeRatingsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6654,7 +6656,7 @@ func (p Gs2MatchmakingRestClient) DescribeRatingsByUserIdAsync(
 	go describeRatingsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6753,7 +6755,7 @@ func (p Gs2MatchmakingRestClient) GetRatingAsync(
 	go getRatingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6857,7 +6859,7 @@ func (p Gs2MatchmakingRestClient) GetRatingByUserIdAsync(
 	go getRatingByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6960,7 +6962,7 @@ func (p Gs2MatchmakingRestClient) PutResultAsync(
 	go putResultAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7067,7 +7069,7 @@ func (p Gs2MatchmakingRestClient) DeleteRatingAsync(
 	go deleteRatingAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7177,7 +7179,7 @@ func (p Gs2MatchmakingRestClient) GetBallotAsync(
 	go getBallotAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7292,7 +7294,7 @@ func (p Gs2MatchmakingRestClient) GetBallotByUserIdAsync(
 	go getBallotByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7399,7 +7401,7 @@ func (p Gs2MatchmakingRestClient) VoteAsync(
 	go voteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7507,7 +7509,7 @@ func (p Gs2MatchmakingRestClient) VoteMultipleAsync(
 	go voteMultipleAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7608,7 +7610,7 @@ func (p Gs2MatchmakingRestClient) CommitVoteAsync(
 	go commitVoteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

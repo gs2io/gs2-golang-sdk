@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2LotteryRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2LotteryRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -213,7 +215,7 @@ func (p Gs2LotteryRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -304,7 +306,7 @@ func (p Gs2LotteryRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -395,7 +397,7 @@ func (p Gs2LotteryRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -504,7 +506,7 @@ func (p Gs2LotteryRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -595,7 +597,7 @@ func (p Gs2LotteryRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -681,7 +683,7 @@ func (p Gs2LotteryRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -775,7 +777,7 @@ func (p Gs2LotteryRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -869,7 +871,7 @@ func (p Gs2LotteryRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -963,7 +965,7 @@ func (p Gs2LotteryRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1057,7 +1059,7 @@ func (p Gs2LotteryRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1151,7 +1153,7 @@ func (p Gs2LotteryRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1248,7 +1250,7 @@ func (p Gs2LotteryRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1347,7 +1349,7 @@ func (p Gs2LotteryRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1447,7 +1449,7 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelMastersAsync(
 	go describeLotteryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1559,7 +1561,7 @@ func (p Gs2LotteryRestClient) CreateLotteryModelMasterAsync(
 	go createLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1655,7 +1657,7 @@ func (p Gs2LotteryRestClient) GetLotteryModelMasterAsync(
 	go getLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1769,7 +1771,7 @@ func (p Gs2LotteryRestClient) UpdateLotteryModelMasterAsync(
 	go updateLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1865,7 +1867,7 @@ func (p Gs2LotteryRestClient) DeleteLotteryModelMasterAsync(
 	go deleteLotteryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1965,7 +1967,7 @@ func (p Gs2LotteryRestClient) DescribePrizeTableMastersAsync(
 	go describePrizeTableMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2072,7 +2074,7 @@ func (p Gs2LotteryRestClient) CreatePrizeTableMasterAsync(
 	go createPrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2168,7 +2170,7 @@ func (p Gs2LotteryRestClient) GetPrizeTableMasterAsync(
 	go getPrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2277,7 +2279,7 @@ func (p Gs2LotteryRestClient) UpdatePrizeTableMasterAsync(
 	go updatePrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2373,7 +2375,7 @@ func (p Gs2LotteryRestClient) DeletePrizeTableMasterAsync(
 	go deletePrizeTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2464,7 +2466,7 @@ func (p Gs2LotteryRestClient) DescribeLotteryModelsAsync(
 	go describeLotteryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2560,7 +2562,7 @@ func (p Gs2LotteryRestClient) GetLotteryModelAsync(
 	go getLotteryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2651,7 +2653,7 @@ func (p Gs2LotteryRestClient) DescribePrizeTablesAsync(
 	go describePrizeTablesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2747,7 +2749,7 @@ func (p Gs2LotteryRestClient) GetPrizeTableAsync(
 	go getPrizeTableAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2870,7 +2872,7 @@ func (p Gs2LotteryRestClient) DrawByUserIdAsync(
 	go drawByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2978,7 +2980,7 @@ func (p Gs2LotteryRestClient) PredictionAsync(
 	go predictionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3091,7 +3093,7 @@ func (p Gs2LotteryRestClient) PredictionByUserIdAsync(
 	go predictionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3211,7 +3213,7 @@ func (p Gs2LotteryRestClient) DrawWithRandomSeedByUserIdAsync(
 	go drawWithRandomSeedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3303,7 +3305,7 @@ func (p Gs2LotteryRestClient) DrawByStampSheetAsync(
 	go drawByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3402,7 +3404,7 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesAsync(
 	go describeProbabilitiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3506,7 +3508,7 @@ func (p Gs2LotteryRestClient) DescribeProbabilitiesByUserIdAsync(
 	go describeProbabilitiesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3597,7 +3599,7 @@ func (p Gs2LotteryRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3688,7 +3690,7 @@ func (p Gs2LotteryRestClient) GetCurrentLotteryMasterAsync(
 	go getCurrentLotteryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3779,7 +3781,7 @@ func (p Gs2LotteryRestClient) PreUpdateCurrentLotteryMasterAsync(
 	go preUpdateCurrentLotteryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3910,7 +3912,7 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterAsync(
 	go updateCurrentLotteryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4004,7 +4006,7 @@ func (p Gs2LotteryRestClient) UpdateCurrentLotteryMasterFromGitHubAsync(
 	go updateCurrentLotteryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4106,7 +4108,7 @@ func (p Gs2LotteryRestClient) DescribePrizeLimitsAsync(
 	go describePrizeLimitsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4207,7 +4209,7 @@ func (p Gs2LotteryRestClient) GetPrizeLimitAsync(
 	go getPrizeLimitAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4308,7 +4310,7 @@ func (p Gs2LotteryRestClient) ResetPrizeLimitAsync(
 	go resetPrizeLimitAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4408,7 +4410,7 @@ func (p Gs2LotteryRestClient) DescribeBoxesAsync(
 	go describeBoxesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4513,7 +4515,7 @@ func (p Gs2LotteryRestClient) DescribeBoxesByUserIdAsync(
 	go describeBoxesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4612,7 +4614,7 @@ func (p Gs2LotteryRestClient) GetBoxAsync(
 	go getBoxAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4716,7 +4718,7 @@ func (p Gs2LotteryRestClient) GetBoxByUserIdAsync(
 	go getBoxByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4818,7 +4820,7 @@ func (p Gs2LotteryRestClient) ResetBoxAsync(
 	go resetBoxAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4925,7 +4927,7 @@ func (p Gs2LotteryRestClient) ResetBoxByUserIdAsync(
 	go resetBoxByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5017,7 +5019,7 @@ func (p Gs2LotteryRestClient) ResetByStampSheetAsync(
 	go resetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("lottery", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

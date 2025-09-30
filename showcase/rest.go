@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ShowcaseRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2ShowcaseRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -213,7 +215,7 @@ func (p Gs2ShowcaseRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -304,7 +306,7 @@ func (p Gs2ShowcaseRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -395,7 +397,7 @@ func (p Gs2ShowcaseRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -504,7 +506,7 @@ func (p Gs2ShowcaseRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -595,7 +597,7 @@ func (p Gs2ShowcaseRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -681,7 +683,7 @@ func (p Gs2ShowcaseRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -775,7 +777,7 @@ func (p Gs2ShowcaseRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -869,7 +871,7 @@ func (p Gs2ShowcaseRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -963,7 +965,7 @@ func (p Gs2ShowcaseRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1057,7 +1059,7 @@ func (p Gs2ShowcaseRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1151,7 +1153,7 @@ func (p Gs2ShowcaseRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1248,7 +1250,7 @@ func (p Gs2ShowcaseRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1347,7 +1349,7 @@ func (p Gs2ShowcaseRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1447,7 +1449,7 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemMastersAsync(
 	go describeSalesItemMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1568,7 +1570,7 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemMasterAsync(
 	go createSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1664,7 +1666,7 @@ func (p Gs2ShowcaseRestClient) GetSalesItemMasterAsync(
 	go getSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1787,7 +1789,7 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemMasterAsync(
 	go updateSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1883,7 +1885,7 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemMasterAsync(
 	go deleteSalesItemMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1983,7 +1985,7 @@ func (p Gs2ShowcaseRestClient) DescribeSalesItemGroupMastersAsync(
 	go describeSalesItemGroupMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2090,7 +2092,7 @@ func (p Gs2ShowcaseRestClient) CreateSalesItemGroupMasterAsync(
 	go createSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2186,7 +2188,7 @@ func (p Gs2ShowcaseRestClient) GetSalesItemGroupMasterAsync(
 	go getSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2295,7 +2297,7 @@ func (p Gs2ShowcaseRestClient) UpdateSalesItemGroupMasterAsync(
 	go updateSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2391,7 +2393,7 @@ func (p Gs2ShowcaseRestClient) DeleteSalesItemGroupMasterAsync(
 	go deleteSalesItemGroupMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2491,7 +2493,7 @@ func (p Gs2ShowcaseRestClient) DescribeShowcaseMastersAsync(
 	go describeShowcaseMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2601,7 +2603,7 @@ func (p Gs2ShowcaseRestClient) CreateShowcaseMasterAsync(
 	go createShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2697,7 +2699,7 @@ func (p Gs2ShowcaseRestClient) GetShowcaseMasterAsync(
 	go getShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2809,7 +2811,7 @@ func (p Gs2ShowcaseRestClient) UpdateShowcaseMasterAsync(
 	go updateShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2905,7 +2907,7 @@ func (p Gs2ShowcaseRestClient) DeleteShowcaseMasterAsync(
 	go deleteShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2996,7 +2998,7 @@ func (p Gs2ShowcaseRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3087,7 +3089,7 @@ func (p Gs2ShowcaseRestClient) GetCurrentShowcaseMasterAsync(
 	go getCurrentShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3178,7 +3180,7 @@ func (p Gs2ShowcaseRestClient) PreUpdateCurrentShowcaseMasterAsync(
 	go preUpdateCurrentShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3309,7 +3311,7 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterAsync(
 	go updateCurrentShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3403,7 +3405,7 @@ func (p Gs2ShowcaseRestClient) UpdateCurrentShowcaseMasterFromGitHubAsync(
 	go updateCurrentShowcaseMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3497,7 +3499,7 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesAsync(
 	go describeShowcasesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3596,7 +3598,7 @@ func (p Gs2ShowcaseRestClient) DescribeShowcasesByUserIdAsync(
 	go describeShowcasesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3695,7 +3697,7 @@ func (p Gs2ShowcaseRestClient) GetShowcaseAsync(
 	go getShowcaseAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3799,7 +3801,7 @@ func (p Gs2ShowcaseRestClient) GetShowcaseByUserIdAsync(
 	go getShowcaseByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3916,7 +3918,7 @@ func (p Gs2ShowcaseRestClient) BuyAsync(
 	go buyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4038,7 +4040,7 @@ func (p Gs2ShowcaseRestClient) BuyByUserIdAsync(
 	go buyByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4138,7 +4140,7 @@ func (p Gs2ShowcaseRestClient) DescribeRandomShowcaseMastersAsync(
 	go describeRandomShowcaseMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4257,7 +4259,7 @@ func (p Gs2ShowcaseRestClient) CreateRandomShowcaseMasterAsync(
 	go createRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4353,7 +4355,7 @@ func (p Gs2ShowcaseRestClient) GetRandomShowcaseMasterAsync(
 	go getRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4474,7 +4476,7 @@ func (p Gs2ShowcaseRestClient) UpdateRandomShowcaseMasterAsync(
 	go updateRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4570,7 +4572,7 @@ func (p Gs2ShowcaseRestClient) DeleteRandomShowcaseMasterAsync(
 	go deleteRandomShowcaseMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4680,7 +4682,7 @@ func (p Gs2ShowcaseRestClient) IncrementPurchaseCountAsync(
 	go incrementPurchaseCountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4795,7 +4797,7 @@ func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByUserIdAsync(
 	go incrementPurchaseCountByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4910,7 +4912,7 @@ func (p Gs2ShowcaseRestClient) DecrementPurchaseCountByUserIdAsync(
 	go decrementPurchaseCountByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5002,7 +5004,7 @@ func (p Gs2ShowcaseRestClient) IncrementPurchaseCountByStampTaskAsync(
 	go incrementPurchaseCountByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5094,7 +5096,7 @@ func (p Gs2ShowcaseRestClient) DecrementPurchaseCountByStampSheetAsync(
 	go decrementPurchaseCountByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5201,7 +5203,7 @@ func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdAsync(
 	go forceReDrawByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5293,7 +5295,7 @@ func (p Gs2ShowcaseRestClient) ForceReDrawByUserIdByStampSheetAsync(
 	go forceReDrawByUserIdByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5392,7 +5394,7 @@ func (p Gs2ShowcaseRestClient) DescribeRandomDisplayItemsAsync(
 	go describeRandomDisplayItemsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5496,7 +5498,7 @@ func (p Gs2ShowcaseRestClient) DescribeRandomDisplayItemsByUserIdAsync(
 	go describeRandomDisplayItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5600,7 +5602,7 @@ func (p Gs2ShowcaseRestClient) GetRandomDisplayItemAsync(
 	go getRandomDisplayItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5709,7 +5711,7 @@ func (p Gs2ShowcaseRestClient) GetRandomDisplayItemByUserIdAsync(
 	go getRandomDisplayItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5826,7 +5828,7 @@ func (p Gs2ShowcaseRestClient) RandomShowcaseBuyAsync(
 	go randomShowcaseBuyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5948,7 +5950,7 @@ func (p Gs2ShowcaseRestClient) RandomShowcaseBuyByUserIdAsync(
 	go randomShowcaseBuyByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("showcase").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("showcase", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

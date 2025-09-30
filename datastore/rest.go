@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2DatastoreRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2DatastoreRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -206,7 +208,7 @@ func (p Gs2DatastoreRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -297,7 +299,7 @@ func (p Gs2DatastoreRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -388,7 +390,7 @@ func (p Gs2DatastoreRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -491,7 +493,7 @@ func (p Gs2DatastoreRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -582,7 +584,7 @@ func (p Gs2DatastoreRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -668,7 +670,7 @@ func (p Gs2DatastoreRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -762,7 +764,7 @@ func (p Gs2DatastoreRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -856,7 +858,7 @@ func (p Gs2DatastoreRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -950,7 +952,7 @@ func (p Gs2DatastoreRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1044,7 +1046,7 @@ func (p Gs2DatastoreRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1138,7 +1140,7 @@ func (p Gs2DatastoreRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1235,7 +1237,7 @@ func (p Gs2DatastoreRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1334,7 +1336,7 @@ func (p Gs2DatastoreRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1437,7 +1439,7 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectsAsync(
 	go describeDataObjectsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1545,7 +1547,7 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectsByUserIdAsync(
 	go describeDataObjectsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1661,7 +1663,7 @@ func (p Gs2DatastoreRestClient) PrepareUploadAsync(
 	go prepareUploadAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1782,7 +1784,7 @@ func (p Gs2DatastoreRestClient) PrepareUploadByUserIdAsync(
 	go prepareUploadByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1894,7 +1896,7 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectAsync(
 	go updateDataObjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2011,7 +2013,7 @@ func (p Gs2DatastoreRestClient) UpdateDataObjectByUserIdAsync(
 	go updateDataObjectByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2116,7 +2118,7 @@ func (p Gs2DatastoreRestClient) PrepareReUploadAsync(
 	go prepareReUploadAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2226,7 +2228,7 @@ func (p Gs2DatastoreRestClient) PrepareReUploadByUserIdAsync(
 	go prepareReUploadByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2337,7 +2339,7 @@ func (p Gs2DatastoreRestClient) DoneUploadAsync(
 	go doneUploadAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2453,7 +2455,7 @@ func (p Gs2DatastoreRestClient) DoneUploadByUserIdAsync(
 	go doneUploadByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2561,7 +2563,7 @@ func (p Gs2DatastoreRestClient) DeleteDataObjectAsync(
 	go deleteDataObjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2674,7 +2676,7 @@ func (p Gs2DatastoreRestClient) DeleteDataObjectByUserIdAsync(
 	go deleteDataObjectByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2774,7 +2776,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadAsync(
 	go prepareDownloadAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2879,7 +2881,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAsync(
 	go prepareDownloadByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2984,7 +2986,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByGenerationAsync(
 	go prepareDownloadByGenerationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3094,7 +3096,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByGenerationAndUserIdAsync(
 	go prepareDownloadByGenerationAndUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3196,7 +3198,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadOwnDataAsync(
 	go prepareDownloadOwnDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3303,7 +3305,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAsync(
 	go prepareDownloadByUserIdAndDataObjectNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3410,7 +3412,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadOwnDataByGenerationAsync(
 	go prepareDownloadOwnDataByGenerationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3522,7 +3524,7 @@ func (p Gs2DatastoreRestClient) PrepareDownloadByUserIdAndDataObjectNameAndGener
 	go prepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3622,7 +3624,7 @@ func (p Gs2DatastoreRestClient) RestoreDataObjectAsync(
 	go restoreDataObjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3727,7 +3729,7 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectHistoriesAsync(
 	go describeDataObjectHistoriesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3837,7 +3839,7 @@ func (p Gs2DatastoreRestClient) DescribeDataObjectHistoriesByUserIdAsync(
 	go describeDataObjectHistoriesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3941,7 +3943,7 @@ func (p Gs2DatastoreRestClient) GetDataObjectHistoryAsync(
 	go getDataObjectHistoryAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4050,7 +4052,7 @@ func (p Gs2DatastoreRestClient) GetDataObjectHistoryByUserIdAsync(
 	go getDataObjectHistoryByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("datastore").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("datastore", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

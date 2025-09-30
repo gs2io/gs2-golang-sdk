@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2LogRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -102,7 +104,7 @@ func (p Gs2LogRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -221,7 +223,7 @@ func (p Gs2LogRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -312,7 +314,7 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -403,7 +405,7 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -524,7 +526,7 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -615,7 +617,7 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -701,7 +703,7 @@ func (p Gs2LogRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -819,7 +821,7 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	go queryAccessLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -937,7 +939,7 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	go countAccessLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1058,7 +1060,7 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	go queryIssueStampSheetLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1179,7 +1181,7 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	go countIssueStampSheetLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1300,7 +1302,7 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	go queryExecuteStampSheetLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1421,7 +1423,7 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	go countExecuteStampSheetLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1542,7 +1544,7 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	go queryExecuteStampTaskLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1663,7 +1665,7 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	go countExecuteStampTaskLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1785,7 +1787,7 @@ func (p Gs2LogRestClient) QueryInGameLogAsync(
 	go queryInGameLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1892,7 +1894,7 @@ func (p Gs2LogRestClient) SendInGameLogAsync(
 	go sendInGameLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2004,7 +2006,7 @@ func (p Gs2LogRestClient) SendInGameLogByUserIdAsync(
 	go sendInGameLogByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2116,7 +2118,7 @@ func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
 	go queryAccessLogWithTelemetryAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2213,7 +2215,7 @@ func (p Gs2LogRestClient) DescribeInsightsAsync(
 	go describeInsightsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2304,7 +2306,7 @@ func (p Gs2LogRestClient) CreateInsightAsync(
 	go createInsightAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2400,7 +2402,7 @@ func (p Gs2LogRestClient) GetInsightAsync(
 	go getInsightAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2496,7 +2498,7 @@ func (p Gs2LogRestClient) DeleteInsightAsync(
 	go deleteInsightAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

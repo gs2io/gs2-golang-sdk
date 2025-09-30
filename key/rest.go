@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2KeyRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2KeyRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -200,7 +202,7 @@ func (p Gs2KeyRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -291,7 +293,7 @@ func (p Gs2KeyRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -382,7 +384,7 @@ func (p Gs2KeyRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -479,7 +481,7 @@ func (p Gs2KeyRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -570,7 +572,7 @@ func (p Gs2KeyRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -656,7 +658,7 @@ func (p Gs2KeyRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -756,7 +758,7 @@ func (p Gs2KeyRestClient) DescribeKeysAsync(
 	go describeKeysAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -853,7 +855,7 @@ func (p Gs2KeyRestClient) CreateKeyAsync(
 	go createKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -952,7 +954,7 @@ func (p Gs2KeyRestClient) UpdateKeyAsync(
 	go updateKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1048,7 +1050,7 @@ func (p Gs2KeyRestClient) GetKeyAsync(
 	go getKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1144,7 +1146,7 @@ func (p Gs2KeyRestClient) DeleteKeyAsync(
 	go deleteKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1243,7 +1245,7 @@ func (p Gs2KeyRestClient) EncryptAsync(
 	go encryptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1342,7 +1344,7 @@ func (p Gs2KeyRestClient) DecryptAsync(
 	go decryptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1439,7 +1441,7 @@ func (p Gs2KeyRestClient) DescribeGitHubApiKeysAsync(
 	go describeGitHubApiKeysAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1542,7 +1544,7 @@ func (p Gs2KeyRestClient) CreateGitHubApiKeyAsync(
 	go createGitHubApiKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1647,7 +1649,7 @@ func (p Gs2KeyRestClient) UpdateGitHubApiKeyAsync(
 	go updateGitHubApiKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1743,7 +1745,7 @@ func (p Gs2KeyRestClient) GetGitHubApiKeyAsync(
 	go getGitHubApiKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1839,7 +1841,7 @@ func (p Gs2KeyRestClient) DeleteGitHubApiKeyAsync(
 	go deleteGitHubApiKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

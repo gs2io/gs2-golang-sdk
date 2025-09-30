@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2AdRewardRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2AdRewardRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -225,7 +227,7 @@ func (p Gs2AdRewardRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -316,7 +318,7 @@ func (p Gs2AdRewardRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -407,7 +409,7 @@ func (p Gs2AdRewardRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -529,7 +531,7 @@ func (p Gs2AdRewardRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -620,7 +622,7 @@ func (p Gs2AdRewardRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -706,7 +708,7 @@ func (p Gs2AdRewardRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -800,7 +802,7 @@ func (p Gs2AdRewardRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -894,7 +896,7 @@ func (p Gs2AdRewardRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -988,7 +990,7 @@ func (p Gs2AdRewardRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1082,7 +1084,7 @@ func (p Gs2AdRewardRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1176,7 +1178,7 @@ func (p Gs2AdRewardRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1273,7 +1275,7 @@ func (p Gs2AdRewardRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1372,7 +1374,7 @@ func (p Gs2AdRewardRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1466,7 +1468,7 @@ func (p Gs2AdRewardRestClient) GetPointAsync(
 	go getPointAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1565,7 +1567,7 @@ func (p Gs2AdRewardRestClient) GetPointByUserIdAsync(
 	go getPointByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1670,7 +1672,7 @@ func (p Gs2AdRewardRestClient) AcquirePointByUserIdAsync(
 	go acquirePointByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1770,7 +1772,7 @@ func (p Gs2AdRewardRestClient) ConsumePointAsync(
 	go consumePointAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1875,7 +1877,7 @@ func (p Gs2AdRewardRestClient) ConsumePointByUserIdAsync(
 	go consumePointByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1977,7 +1979,7 @@ func (p Gs2AdRewardRestClient) DeletePointByUserIdAsync(
 	go deletePointByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2069,7 +2071,7 @@ func (p Gs2AdRewardRestClient) ConsumePointByStampTaskAsync(
 	go consumePointByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2161,7 +2163,7 @@ func (p Gs2AdRewardRestClient) AcquirePointByStampSheetAsync(
 	go acquirePointByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("ad-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("ad-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

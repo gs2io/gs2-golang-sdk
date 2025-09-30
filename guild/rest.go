@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2GuildRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2GuildRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -243,7 +245,7 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -334,7 +336,7 @@ func (p Gs2GuildRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -425,7 +427,7 @@ func (p Gs2GuildRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -564,7 +566,7 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -655,7 +657,7 @@ func (p Gs2GuildRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -741,7 +743,7 @@ func (p Gs2GuildRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -835,7 +837,7 @@ func (p Gs2GuildRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -929,7 +931,7 @@ func (p Gs2GuildRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1023,7 +1025,7 @@ func (p Gs2GuildRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1117,7 +1119,7 @@ func (p Gs2GuildRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1211,7 +1213,7 @@ func (p Gs2GuildRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1308,7 +1310,7 @@ func (p Gs2GuildRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1407,7 +1409,7 @@ func (p Gs2GuildRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1507,7 +1509,7 @@ func (p Gs2GuildRestClient) DescribeGuildModelMastersAsync(
 	go describeGuildModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1638,7 +1640,7 @@ func (p Gs2GuildRestClient) CreateGuildModelMasterAsync(
 	go createGuildModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1734,7 +1736,7 @@ func (p Gs2GuildRestClient) GetGuildModelMasterAsync(
 	go getGuildModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1867,7 +1869,7 @@ func (p Gs2GuildRestClient) UpdateGuildModelMasterAsync(
 	go updateGuildModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1963,7 +1965,7 @@ func (p Gs2GuildRestClient) DeleteGuildModelMasterAsync(
 	go deleteGuildModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2054,7 +2056,7 @@ func (p Gs2GuildRestClient) DescribeGuildModelsAsync(
 	go describeGuildModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2150,7 +2152,7 @@ func (p Gs2GuildRestClient) GetGuildModelAsync(
 	go getGuildModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2309,7 +2311,7 @@ func (p Gs2GuildRestClient) SearchGuildsAsync(
 	go searchGuildsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2473,7 +2475,7 @@ func (p Gs2GuildRestClient) SearchGuildsByUserIdAsync(
 	go searchGuildsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2612,7 +2614,7 @@ func (p Gs2GuildRestClient) CreateGuildAsync(
 	go createGuildAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2756,7 +2758,7 @@ func (p Gs2GuildRestClient) CreateGuildByUserIdAsync(
 	go createGuildByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2860,7 +2862,7 @@ func (p Gs2GuildRestClient) GetGuildAsync(
 	go getGuildAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2969,7 +2971,7 @@ func (p Gs2GuildRestClient) GetGuildByUserIdAsync(
 	go getGuildByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3105,7 +3107,7 @@ func (p Gs2GuildRestClient) UpdateGuildAsync(
 	go updateGuildAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3243,7 +3245,7 @@ func (p Gs2GuildRestClient) UpdateGuildByGuildNameAsync(
 	go updateGuildByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3356,7 +3358,7 @@ func (p Gs2GuildRestClient) DeleteMemberAsync(
 	go deleteMemberAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3471,7 +3473,7 @@ func (p Gs2GuildRestClient) DeleteMemberByGuildNameAsync(
 	go deleteMemberByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3581,7 +3583,7 @@ func (p Gs2GuildRestClient) UpdateMemberRoleAsync(
 	go updateMemberRoleAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3693,7 +3695,7 @@ func (p Gs2GuildRestClient) UpdateMemberRoleByGuildNameAsync(
 	go updateMemberRoleByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3802,7 +3804,7 @@ func (p Gs2GuildRestClient) BatchUpdateMemberRoleAsync(
 	go batchUpdateMemberRoleAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3913,7 +3915,7 @@ func (p Gs2GuildRestClient) BatchUpdateMemberRoleByGuildNameAsync(
 	go batchUpdateMemberRoleByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4015,7 +4017,7 @@ func (p Gs2GuildRestClient) DeleteGuildAsync(
 	go deleteGuildAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4119,7 +4121,7 @@ func (p Gs2GuildRestClient) DeleteGuildByGuildNameAsync(
 	go deleteGuildByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4226,7 +4228,7 @@ func (p Gs2GuildRestClient) IncreaseMaximumCurrentMaximumMemberCountByGuildNameA
 	go increaseMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4331,7 +4333,7 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountAsync(
 	go decreaseMaximumCurrentMaximumMemberCountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4438,7 +4440,7 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountByGuildNameA
 	go decreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4549,7 +4551,7 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountAsync(
 	go verifyCurrentMaximumMemberCountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4662,7 +4664,7 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByGuildNameAsync(
 	go verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4772,7 +4774,7 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberAsync(
 	go verifyIncludeMemberAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4887,7 +4889,7 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberByUserIdAsync(
 	go verifyIncludeMemberByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4994,7 +4996,7 @@ func (p Gs2GuildRestClient) SetMaximumCurrentMaximumMemberCountByGuildNameAsync(
 	go setMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5107,7 +5109,7 @@ func (p Gs2GuildRestClient) AssumeAsync(
 	go assumeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5225,7 +5227,7 @@ func (p Gs2GuildRestClient) AssumeByUserIdAsync(
 	go assumeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5317,7 +5319,7 @@ func (p Gs2GuildRestClient) IncreaseMaximumCurrentMaximumMemberCountByStampSheet
 	go increaseMaximumCurrentMaximumMemberCountByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5409,7 +5411,7 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountByStampTaskA
 	go decreaseMaximumCurrentMaximumMemberCountByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5501,7 +5503,7 @@ func (p Gs2GuildRestClient) SetMaximumCurrentMaximumMemberCountByStampSheetAsync
 	go setMaximumCurrentMaximumMemberCountByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5593,7 +5595,7 @@ func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByStampTaskAsync(
 	go verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5685,7 +5687,7 @@ func (p Gs2GuildRestClient) VerifyIncludeMemberByStampTaskAsync(
 	go verifyIncludeMemberByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5788,7 +5790,7 @@ func (p Gs2GuildRestClient) DescribeJoinedGuildsAsync(
 	go describeJoinedGuildsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5896,7 +5898,7 @@ func (p Gs2GuildRestClient) DescribeJoinedGuildsByUserIdAsync(
 	go describeJoinedGuildsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6000,7 +6002,7 @@ func (p Gs2GuildRestClient) GetJoinedGuildAsync(
 	go getJoinedGuildAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6109,7 +6111,7 @@ func (p Gs2GuildRestClient) GetJoinedGuildByUserIdAsync(
 	go getJoinedGuildByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6219,7 +6221,7 @@ func (p Gs2GuildRestClient) UpdateMemberMetadataAsync(
 	go updateMemberMetadataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6334,7 +6336,7 @@ func (p Gs2GuildRestClient) UpdateMemberMetadataByUserIdAsync(
 	go updateMemberMetadataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6447,7 +6449,7 @@ func (p Gs2GuildRestClient) WithdrawalAsync(
 	go withdrawalAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6565,7 +6567,7 @@ func (p Gs2GuildRestClient) WithdrawalByUserIdAsync(
 	go withdrawalByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6664,7 +6666,7 @@ func (p Gs2GuildRestClient) GetLastGuildMasterActivityAsync(
 	go getLastGuildMasterActivityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6765,7 +6767,7 @@ func (p Gs2GuildRestClient) GetLastGuildMasterActivityByGuildNameAsync(
 	go getLastGuildMasterActivityByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6867,7 +6869,7 @@ func (p Gs2GuildRestClient) PromoteSeniorMemberAsync(
 	go promoteSeniorMemberAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6971,7 +6973,7 @@ func (p Gs2GuildRestClient) PromoteSeniorMemberByGuildNameAsync(
 	go promoteSeniorMemberByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7062,7 +7064,7 @@ func (p Gs2GuildRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7153,7 +7155,7 @@ func (p Gs2GuildRestClient) GetCurrentGuildMasterAsync(
 	go getCurrentGuildMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7244,7 +7246,7 @@ func (p Gs2GuildRestClient) PreUpdateCurrentGuildMasterAsync(
 	go preUpdateCurrentGuildMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7375,7 +7377,7 @@ func (p Gs2GuildRestClient) UpdateCurrentGuildMasterAsync(
 	go updateCurrentGuildMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7469,7 +7471,7 @@ func (p Gs2GuildRestClient) UpdateCurrentGuildMasterFromGitHubAsync(
 	go updateCurrentGuildMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7574,7 +7576,7 @@ func (p Gs2GuildRestClient) DescribeReceiveRequestsAsync(
 	go describeReceiveRequestsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7681,7 +7683,7 @@ func (p Gs2GuildRestClient) DescribeReceiveRequestsByGuildNameAsync(
 	go describeReceiveRequestsByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7785,7 +7787,7 @@ func (p Gs2GuildRestClient) GetReceiveRequestAsync(
 	go getReceiveRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7891,7 +7893,7 @@ func (p Gs2GuildRestClient) GetReceiveRequestByGuildNameAsync(
 	go getReceiveRequestByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8007,7 +8009,7 @@ func (p Gs2GuildRestClient) AcceptRequestAsync(
 	go acceptRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8125,7 +8127,7 @@ func (p Gs2GuildRestClient) AcceptRequestByGuildNameAsync(
 	go acceptRequestByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8232,7 +8234,7 @@ func (p Gs2GuildRestClient) RejectRequestAsync(
 	go rejectRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8341,7 +8343,7 @@ func (p Gs2GuildRestClient) RejectRequestByGuildNameAsync(
 	go rejectRequestByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8446,7 +8448,7 @@ func (p Gs2GuildRestClient) DescribeSendRequestsAsync(
 	go describeSendRequestsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8556,7 +8558,7 @@ func (p Gs2GuildRestClient) DescribeSendRequestsByUserIdAsync(
 	go describeSendRequestsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8660,7 +8662,7 @@ func (p Gs2GuildRestClient) GetSendRequestAsync(
 	go getSendRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8769,7 +8771,7 @@ func (p Gs2GuildRestClient) GetSendRequestByUserIdAsync(
 	go getSendRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8897,7 +8899,7 @@ func (p Gs2GuildRestClient) SendRequestAsync(
 	go sendRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9030,7 +9032,7 @@ func (p Gs2GuildRestClient) SendRequestByUserIdAsync(
 	go sendRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9137,7 +9139,7 @@ func (p Gs2GuildRestClient) DeleteRequestAsync(
 	go deleteRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9249,7 +9251,7 @@ func (p Gs2GuildRestClient) DeleteRequestByUserIdAsync(
 	go deleteRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9354,7 +9356,7 @@ func (p Gs2GuildRestClient) DescribeIgnoreUsersAsync(
 	go describeIgnoreUsersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9461,7 +9463,7 @@ func (p Gs2GuildRestClient) DescribeIgnoreUsersByGuildNameAsync(
 	go describeIgnoreUsersByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9565,7 +9567,7 @@ func (p Gs2GuildRestClient) GetIgnoreUserAsync(
 	go getIgnoreUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9674,7 +9676,7 @@ func (p Gs2GuildRestClient) GetIgnoreUserByGuildNameAsync(
 	go getIgnoreUserByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9781,7 +9783,7 @@ func (p Gs2GuildRestClient) AddIgnoreUserAsync(
 	go addIgnoreUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9893,7 +9895,7 @@ func (p Gs2GuildRestClient) AddIgnoreUserByGuildNameAsync(
 	go addIgnoreUserByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10000,7 +10002,7 @@ func (p Gs2GuildRestClient) DeleteIgnoreUserAsync(
 	go deleteIgnoreUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10112,7 +10114,7 @@ func (p Gs2GuildRestClient) DeleteIgnoreUserByGuildNameAsync(
 	go deleteIgnoreUserByGuildNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("guild", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

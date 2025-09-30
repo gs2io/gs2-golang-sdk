@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ChatRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2ChatRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -228,7 +230,7 @@ func (p Gs2ChatRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -319,7 +321,7 @@ func (p Gs2ChatRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -410,7 +412,7 @@ func (p Gs2ChatRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -534,7 +536,7 @@ func (p Gs2ChatRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -625,7 +627,7 @@ func (p Gs2ChatRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -711,7 +713,7 @@ func (p Gs2ChatRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -805,7 +807,7 @@ func (p Gs2ChatRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -899,7 +901,7 @@ func (p Gs2ChatRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -993,7 +995,7 @@ func (p Gs2ChatRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1087,7 +1089,7 @@ func (p Gs2ChatRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1181,7 +1183,7 @@ func (p Gs2ChatRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1278,7 +1280,7 @@ func (p Gs2ChatRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1377,7 +1379,7 @@ func (p Gs2ChatRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1477,7 +1479,7 @@ func (p Gs2ChatRestClient) DescribeRoomsAsync(
 	go describeRoomsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1596,7 +1598,7 @@ func (p Gs2ChatRestClient) CreateRoomAsync(
 	go createRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1712,7 +1714,7 @@ func (p Gs2ChatRestClient) CreateRoomFromBackendAsync(
 	go createRoomFromBackendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1808,7 +1810,7 @@ func (p Gs2ChatRestClient) GetRoomAsync(
 	go getRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1929,7 +1931,7 @@ func (p Gs2ChatRestClient) UpdateRoomAsync(
 	go updateRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2047,7 +2049,7 @@ func (p Gs2ChatRestClient) UpdateRoomFromBackendAsync(
 	go updateRoomFromBackendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2155,7 +2157,7 @@ func (p Gs2ChatRestClient) DeleteRoomAsync(
 	go deleteRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2260,7 +2262,7 @@ func (p Gs2ChatRestClient) DeleteRoomFromBackendAsync(
 	go deleteRoomFromBackendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2383,7 +2385,7 @@ func (p Gs2ChatRestClient) DescribeMessagesAsync(
 	go describeMessagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2509,7 +2511,7 @@ func (p Gs2ChatRestClient) DescribeMessagesByUserIdAsync(
 	go describeMessagesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2632,7 +2634,7 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesAsync(
 	go describeLatestMessagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2758,7 +2760,7 @@ func (p Gs2ChatRestClient) DescribeLatestMessagesByUserIdAsync(
 	go describeLatestMessagesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2881,7 +2883,7 @@ func (p Gs2ChatRestClient) PostAsync(
 	go postAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3009,7 +3011,7 @@ func (p Gs2ChatRestClient) PostByUserIdAsync(
 	go postByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3128,7 +3130,7 @@ func (p Gs2ChatRestClient) GetMessageAsync(
 	go getMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3250,7 +3252,7 @@ func (p Gs2ChatRestClient) GetMessageByUserIdAsync(
 	go getMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3360,7 +3362,7 @@ func (p Gs2ChatRestClient) DeleteMessageAsync(
 	go deleteMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3463,7 +3465,7 @@ func (p Gs2ChatRestClient) DescribeSubscribesAsync(
 	go describeSubscribesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3571,7 +3573,7 @@ func (p Gs2ChatRestClient) DescribeSubscribesByUserIdAsync(
 	go describeSubscribesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3673,7 +3675,7 @@ func (p Gs2ChatRestClient) DescribeSubscribesByRoomNameAsync(
 	go describeSubscribesByRoomNameAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3782,7 +3784,7 @@ func (p Gs2ChatRestClient) SubscribeAsync(
 	go subscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3896,7 +3898,7 @@ func (p Gs2ChatRestClient) SubscribeByUserIdAsync(
 	go subscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3995,7 +3997,7 @@ func (p Gs2ChatRestClient) GetSubscribeAsync(
 	go getSubscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4099,7 +4101,7 @@ func (p Gs2ChatRestClient) GetSubscribeByUserIdAsync(
 	go getSubscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4208,7 +4210,7 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeAsync(
 	go updateNotificationTypeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4322,7 +4324,7 @@ func (p Gs2ChatRestClient) UpdateNotificationTypeByUserIdAsync(
 	go updateNotificationTypeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4424,7 +4426,7 @@ func (p Gs2ChatRestClient) UnsubscribeAsync(
 	go unsubscribeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4531,7 +4533,7 @@ func (p Gs2ChatRestClient) UnsubscribeByUserIdAsync(
 	go unsubscribeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4622,7 +4624,7 @@ func (p Gs2ChatRestClient) DescribeCategoryModelsAsync(
 	go describeCategoryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4718,7 +4720,7 @@ func (p Gs2ChatRestClient) GetCategoryModelAsync(
 	go getCategoryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4815,7 +4817,7 @@ func (p Gs2ChatRestClient) DescribeCategoryModelMastersAsync(
 	go describeCategoryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4915,7 +4917,7 @@ func (p Gs2ChatRestClient) CreateCategoryModelMasterAsync(
 	go createCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5011,7 +5013,7 @@ func (p Gs2ChatRestClient) GetCategoryModelMasterAsync(
 	go getCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5113,7 +5115,7 @@ func (p Gs2ChatRestClient) UpdateCategoryModelMasterAsync(
 	go updateCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5209,7 +5211,7 @@ func (p Gs2ChatRestClient) DeleteCategoryModelMasterAsync(
 	go deleteCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5300,7 +5302,7 @@ func (p Gs2ChatRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5391,7 +5393,7 @@ func (p Gs2ChatRestClient) GetCurrentModelMasterAsync(
 	go getCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5482,7 +5484,7 @@ func (p Gs2ChatRestClient) PreUpdateCurrentModelMasterAsync(
 	go preUpdateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5613,7 +5615,7 @@ func (p Gs2ChatRestClient) UpdateCurrentModelMasterAsync(
 	go updateCurrentModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5707,7 +5709,7 @@ func (p Gs2ChatRestClient) UpdateCurrentModelMasterFromGitHubAsync(
 	go updateCurrentModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("chat").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("chat", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

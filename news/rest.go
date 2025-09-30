@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2NewsRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2NewsRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -200,7 +202,7 @@ func (p Gs2NewsRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -291,7 +293,7 @@ func (p Gs2NewsRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -382,7 +384,7 @@ func (p Gs2NewsRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -479,7 +481,7 @@ func (p Gs2NewsRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -570,7 +572,7 @@ func (p Gs2NewsRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -656,7 +658,7 @@ func (p Gs2NewsRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -753,7 +755,7 @@ func (p Gs2NewsRestClient) DescribeProgressesAsync(
 	go describeProgressesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -849,7 +851,7 @@ func (p Gs2NewsRestClient) GetProgressAsync(
 	go getProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -951,7 +953,7 @@ func (p Gs2NewsRestClient) DescribeOutputsAsync(
 	go describeOutputsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1052,7 +1054,7 @@ func (p Gs2NewsRestClient) GetOutputAsync(
 	go getOutputAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1143,7 +1145,7 @@ func (p Gs2NewsRestClient) PrepareUpdateCurrentNewsMasterAsync(
 	go prepareUpdateCurrentNewsMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1237,7 +1239,7 @@ func (p Gs2NewsRestClient) UpdateCurrentNewsMasterAsync(
 	go updateCurrentNewsMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1331,7 +1333,7 @@ func (p Gs2NewsRestClient) PrepareUpdateCurrentNewsMasterFromGitHubAsync(
 	go prepareUpdateCurrentNewsMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1425,7 +1427,7 @@ func (p Gs2NewsRestClient) DescribeNewsAsync(
 	go describeNewsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1524,7 +1526,7 @@ func (p Gs2NewsRestClient) DescribeNewsByUserIdAsync(
 	go describeNewsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1618,7 +1620,7 @@ func (p Gs2NewsRestClient) WantGrantAsync(
 	go wantGrantAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1717,7 +1719,7 @@ func (p Gs2NewsRestClient) WantGrantByUserIdAsync(
 	go wantGrantByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("news").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("news", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

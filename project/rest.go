@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ProjectRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -111,7 +113,7 @@ func (p Gs2ProjectRestClient) CreateAccountAsync(
 	go createAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -200,7 +202,7 @@ func (p Gs2ProjectRestClient) VerifyAsync(
 	go verifyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2ProjectRestClient) SignInAsync(
 	go signInAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -387,7 +389,7 @@ func (p Gs2ProjectRestClient) ForgetAsync(
 	go forgetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -476,7 +478,7 @@ func (p Gs2ProjectRestClient) IssuePasswordAsync(
 	go issuePasswordAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2ProjectRestClient) UpdateAccountAsync(
 	go updateAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -666,7 +668,7 @@ func (p Gs2ProjectRestClient) EnableMfaAsync(
 	go enableMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -758,7 +760,7 @@ func (p Gs2ProjectRestClient) ChallengeMfaAsync(
 	go challengeMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -847,7 +849,7 @@ func (p Gs2ProjectRestClient) DisableMfaAsync(
 	go disableMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -936,7 +938,7 @@ func (p Gs2ProjectRestClient) DeleteAccountAsync(
 	go deleteAccountAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1022,7 +1024,7 @@ func (p Gs2ProjectRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1117,7 +1119,7 @@ func (p Gs2ProjectRestClient) DescribeProjectsAsync(
 	go describeProjectsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1233,7 +1235,7 @@ func (p Gs2ProjectRestClient) CreateProjectAsync(
 	go createProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1327,7 +1329,7 @@ func (p Gs2ProjectRestClient) GetProjectAsync(
 	go getProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1421,7 +1423,7 @@ func (p Gs2ProjectRestClient) GetProjectTokenAsync(
 	go getProjectTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1528,7 +1530,7 @@ func (p Gs2ProjectRestClient) GetProjectTokenByIdentifierAsync(
 	go getProjectTokenByIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1640,7 +1642,7 @@ func (p Gs2ProjectRestClient) UpdateProjectAsync(
 	go updateProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1739,7 +1741,7 @@ func (p Gs2ProjectRestClient) ActivateRegionAsync(
 	go activateRegionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1840,7 +1842,7 @@ func (p Gs2ProjectRestClient) WaitActivateRegionAsync(
 	go waitActivateRegionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1934,7 +1936,7 @@ func (p Gs2ProjectRestClient) DeleteProjectAsync(
 	go deleteProjectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2029,7 +2031,7 @@ func (p Gs2ProjectRestClient) DescribeBillingMethodsAsync(
 	go describeBillingMethodsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2130,7 +2132,7 @@ func (p Gs2ProjectRestClient) CreateBillingMethodAsync(
 	go createBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2224,7 +2226,7 @@ func (p Gs2ProjectRestClient) GetBillingMethodAsync(
 	go getBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2321,7 +2323,7 @@ func (p Gs2ProjectRestClient) UpdateBillingMethodAsync(
 	go updateBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2415,7 +2417,7 @@ func (p Gs2ProjectRestClient) DeleteBillingMethodAsync(
 	go deleteBillingMethodAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2510,7 +2512,7 @@ func (p Gs2ProjectRestClient) DescribeReceiptsAsync(
 	go describeReceiptsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2620,7 +2622,7 @@ func (p Gs2ProjectRestClient) DescribeBillingsAsync(
 	go describeBillingsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2712,7 +2714,7 @@ func (p Gs2ProjectRestClient) DescribeDumpProgressesAsync(
 	go describeDumpProgressesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2803,7 +2805,7 @@ func (p Gs2ProjectRestClient) GetDumpProgressAsync(
 	go getDumpProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2911,7 +2913,7 @@ func (p Gs2ProjectRestClient) WaitDumpUserDataAsync(
 	go waitDumpUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3007,7 +3009,7 @@ func (p Gs2ProjectRestClient) ArchiveDumpUserDataAsync(
 	go archiveDumpUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3104,7 +3106,7 @@ func (p Gs2ProjectRestClient) DumpUserDataAsync(
 	go dumpUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3195,7 +3197,7 @@ func (p Gs2ProjectRestClient) GetDumpUserDataAsync(
 	go getDumpUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3287,7 +3289,7 @@ func (p Gs2ProjectRestClient) DescribeCleanProgressesAsync(
 	go describeCleanProgressesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3378,7 +3380,7 @@ func (p Gs2ProjectRestClient) GetCleanProgressAsync(
 	go getCleanProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3486,7 +3488,7 @@ func (p Gs2ProjectRestClient) WaitCleanUserDataAsync(
 	go waitCleanUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3583,7 +3585,7 @@ func (p Gs2ProjectRestClient) CleanUserDataAsync(
 	go cleanUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3675,7 +3677,7 @@ func (p Gs2ProjectRestClient) DescribeImportProgressesAsync(
 	go describeImportProgressesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3766,7 +3768,7 @@ func (p Gs2ProjectRestClient) GetImportProgressAsync(
 	go getImportProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3874,7 +3876,7 @@ func (p Gs2ProjectRestClient) WaitImportUserDataAsync(
 	go waitImportUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3971,7 +3973,7 @@ func (p Gs2ProjectRestClient) PrepareImportUserDataAsync(
 	go prepareImportUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4071,7 +4073,7 @@ func (p Gs2ProjectRestClient) ImportUserDataAsync(
 	go importUserDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4168,7 +4170,7 @@ func (p Gs2ProjectRestClient) DescribeImportErrorLogsAsync(
 	go describeImportErrorLogsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4264,7 +4266,7 @@ func (p Gs2ProjectRestClient) GetImportErrorLogAsync(
 	go getImportErrorLogAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("project").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

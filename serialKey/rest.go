@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2SerialKeyRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2SerialKeyRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2SerialKeyRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2SerialKeyRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2SerialKeyRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2SerialKeyRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2SerialKeyRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2SerialKeyRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2SerialKeyRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2SerialKeyRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2SerialKeyRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2SerialKeyRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2SerialKeyRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2SerialKeyRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2SerialKeyRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1431,7 +1433,7 @@ func (p Gs2SerialKeyRestClient) DescribeIssueJobsAsync(
 	go describeIssueJobsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1532,7 +1534,7 @@ func (p Gs2SerialKeyRestClient) GetIssueJobAsync(
 	go getIssueJobAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1634,7 +1636,7 @@ func (p Gs2SerialKeyRestClient) IssueAsync(
 	go issueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1741,7 +1743,7 @@ func (p Gs2SerialKeyRestClient) DescribeSerialKeysAsync(
 	go describeSerialKeysAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1842,7 +1844,7 @@ func (p Gs2SerialKeyRestClient) DownloadSerialCodesAsync(
 	go downloadSerialCodesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1941,7 +1943,7 @@ func (p Gs2SerialKeyRestClient) IssueOnceAsync(
 	go issueOnceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2037,7 +2039,7 @@ func (p Gs2SerialKeyRestClient) GetSerialKeyAsync(
 	go getSerialKeyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2143,7 +2145,7 @@ func (p Gs2SerialKeyRestClient) VerifyCodeAsync(
 	go verifyCodeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2254,7 +2256,7 @@ func (p Gs2SerialKeyRestClient) VerifyCodeByUserIdAsync(
 	go verifyCodeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2363,7 +2365,7 @@ func (p Gs2SerialKeyRestClient) UseAsync(
 	go useAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2468,7 +2470,7 @@ func (p Gs2SerialKeyRestClient) UseByUserIdAsync(
 	go useByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2573,7 +2575,7 @@ func (p Gs2SerialKeyRestClient) RevertUseByUserIdAsync(
 	go revertUseByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2665,7 +2667,7 @@ func (p Gs2SerialKeyRestClient) UseByStampTaskAsync(
 	go useByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2757,7 +2759,7 @@ func (p Gs2SerialKeyRestClient) RevertUseByStampSheetAsync(
 	go revertUseByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2849,7 +2851,7 @@ func (p Gs2SerialKeyRestClient) VerifyByStampTaskAsync(
 	go verifyByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2941,7 +2943,7 @@ func (p Gs2SerialKeyRestClient) IssueOnceByStampSheetAsync(
 	go issueOnceByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3032,7 +3034,7 @@ func (p Gs2SerialKeyRestClient) DescribeCampaignModelsAsync(
 	go describeCampaignModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3128,7 +3130,7 @@ func (p Gs2SerialKeyRestClient) GetCampaignModelAsync(
 	go getCampaignModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3228,7 +3230,7 @@ func (p Gs2SerialKeyRestClient) DescribeCampaignModelMastersAsync(
 	go describeCampaignModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3331,7 +3333,7 @@ func (p Gs2SerialKeyRestClient) CreateCampaignModelMasterAsync(
 	go createCampaignModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3427,7 +3429,7 @@ func (p Gs2SerialKeyRestClient) GetCampaignModelMasterAsync(
 	go getCampaignModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3532,7 +3534,7 @@ func (p Gs2SerialKeyRestClient) UpdateCampaignModelMasterAsync(
 	go updateCampaignModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3628,7 +3630,7 @@ func (p Gs2SerialKeyRestClient) DeleteCampaignModelMasterAsync(
 	go deleteCampaignModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3719,7 +3721,7 @@ func (p Gs2SerialKeyRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3810,7 +3812,7 @@ func (p Gs2SerialKeyRestClient) GetCurrentCampaignMasterAsync(
 	go getCurrentCampaignMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3901,7 +3903,7 @@ func (p Gs2SerialKeyRestClient) PreUpdateCurrentCampaignMasterAsync(
 	go preUpdateCurrentCampaignMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4032,7 +4034,7 @@ func (p Gs2SerialKeyRestClient) UpdateCurrentCampaignMasterAsync(
 	go updateCurrentCampaignMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4126,7 +4128,7 @@ func (p Gs2SerialKeyRestClient) UpdateCurrentCampaignMasterFromGitHubAsync(
 	go updateCurrentCampaignMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("serial-key", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

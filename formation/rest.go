@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2FormationRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2FormationRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -213,7 +215,7 @@ func (p Gs2FormationRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -304,7 +306,7 @@ func (p Gs2FormationRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -395,7 +397,7 @@ func (p Gs2FormationRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -504,7 +506,7 @@ func (p Gs2FormationRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -595,7 +597,7 @@ func (p Gs2FormationRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -681,7 +683,7 @@ func (p Gs2FormationRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -775,7 +777,7 @@ func (p Gs2FormationRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -869,7 +871,7 @@ func (p Gs2FormationRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -963,7 +965,7 @@ func (p Gs2FormationRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1057,7 +1059,7 @@ func (p Gs2FormationRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1151,7 +1153,7 @@ func (p Gs2FormationRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1248,7 +1250,7 @@ func (p Gs2FormationRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1347,7 +1349,7 @@ func (p Gs2FormationRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1443,7 +1445,7 @@ func (p Gs2FormationRestClient) GetFormModelAsync(
 	go getFormModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1543,7 +1545,7 @@ func (p Gs2FormationRestClient) DescribeFormModelMastersAsync(
 	go describeFormModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1650,7 +1652,7 @@ func (p Gs2FormationRestClient) CreateFormModelMasterAsync(
 	go createFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1746,7 +1748,7 @@ func (p Gs2FormationRestClient) GetFormModelMasterAsync(
 	go getFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1855,7 +1857,7 @@ func (p Gs2FormationRestClient) UpdateFormModelMasterAsync(
 	go updateFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1951,7 +1953,7 @@ func (p Gs2FormationRestClient) DeleteFormModelMasterAsync(
 	go deleteFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2042,7 +2044,7 @@ func (p Gs2FormationRestClient) DescribeMoldModelsAsync(
 	go describeMoldModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2138,7 +2140,7 @@ func (p Gs2FormationRestClient) GetMoldModelAsync(
 	go getMoldModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2238,7 +2240,7 @@ func (p Gs2FormationRestClient) DescribeMoldModelMastersAsync(
 	go describeMoldModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2347,7 +2349,7 @@ func (p Gs2FormationRestClient) CreateMoldModelMasterAsync(
 	go createMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2443,7 +2445,7 @@ func (p Gs2FormationRestClient) GetMoldModelMasterAsync(
 	go getMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2554,7 +2556,7 @@ func (p Gs2FormationRestClient) UpdateMoldModelMasterAsync(
 	go updateMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2650,7 +2652,7 @@ func (p Gs2FormationRestClient) DeleteMoldModelMasterAsync(
 	go deleteMoldModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2741,7 +2743,7 @@ func (p Gs2FormationRestClient) DescribePropertyFormModelsAsync(
 	go describePropertyFormModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2837,7 +2839,7 @@ func (p Gs2FormationRestClient) GetPropertyFormModelAsync(
 	go getPropertyFormModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2937,7 +2939,7 @@ func (p Gs2FormationRestClient) DescribePropertyFormModelMastersAsync(
 	go describePropertyFormModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3044,7 +3046,7 @@ func (p Gs2FormationRestClient) CreatePropertyFormModelMasterAsync(
 	go createPropertyFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3140,7 +3142,7 @@ func (p Gs2FormationRestClient) GetPropertyFormModelMasterAsync(
 	go getPropertyFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3249,7 +3251,7 @@ func (p Gs2FormationRestClient) UpdatePropertyFormModelMasterAsync(
 	go updatePropertyFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3345,7 +3347,7 @@ func (p Gs2FormationRestClient) DeletePropertyFormModelMasterAsync(
 	go deletePropertyFormModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3436,7 +3438,7 @@ func (p Gs2FormationRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3527,7 +3529,7 @@ func (p Gs2FormationRestClient) GetCurrentFormMasterAsync(
 	go getCurrentFormMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3618,7 +3620,7 @@ func (p Gs2FormationRestClient) PreUpdateCurrentFormMasterAsync(
 	go preUpdateCurrentFormMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3749,7 +3751,7 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterAsync(
 	go updateCurrentFormMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3843,7 +3845,7 @@ func (p Gs2FormationRestClient) UpdateCurrentFormMasterFromGitHubAsync(
 	go updateCurrentFormMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3943,7 +3945,7 @@ func (p Gs2FormationRestClient) DescribeMoldsAsync(
 	go describeMoldsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4048,7 +4050,7 @@ func (p Gs2FormationRestClient) DescribeMoldsByUserIdAsync(
 	go describeMoldsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4147,7 +4149,7 @@ func (p Gs2FormationRestClient) GetMoldAsync(
 	go getMoldAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4251,7 +4253,7 @@ func (p Gs2FormationRestClient) GetMoldByUserIdAsync(
 	go getMoldByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4361,7 +4363,7 @@ func (p Gs2FormationRestClient) SetMoldCapacityByUserIdAsync(
 	go setMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4471,7 +4473,7 @@ func (p Gs2FormationRestClient) AddMoldCapacityByUserIdAsync(
 	go addMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4576,7 +4578,7 @@ func (p Gs2FormationRestClient) SubMoldCapacityAsync(
 	go subMoldCapacityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4686,7 +4688,7 @@ func (p Gs2FormationRestClient) SubMoldCapacityByUserIdAsync(
 	go subMoldCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4788,7 +4790,7 @@ func (p Gs2FormationRestClient) DeleteMoldAsync(
 	go deleteMoldAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4895,7 +4897,7 @@ func (p Gs2FormationRestClient) DeleteMoldByUserIdAsync(
 	go deleteMoldByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4987,7 +4989,7 @@ func (p Gs2FormationRestClient) AddCapacityByStampSheetAsync(
 	go addCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5079,7 +5081,7 @@ func (p Gs2FormationRestClient) SubCapacityByStampTaskAsync(
 	go subCapacityByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5171,7 +5173,7 @@ func (p Gs2FormationRestClient) SetCapacityByStampSheetAsync(
 	go setCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5276,7 +5278,7 @@ func (p Gs2FormationRestClient) DescribeFormsAsync(
 	go describeFormsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5386,7 +5388,7 @@ func (p Gs2FormationRestClient) DescribeFormsByUserIdAsync(
 	go describeFormsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5490,7 +5492,7 @@ func (p Gs2FormationRestClient) GetFormAsync(
 	go getFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5599,7 +5601,7 @@ func (p Gs2FormationRestClient) GetFormByUserIdAsync(
 	go getFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5706,7 +5708,7 @@ func (p Gs2FormationRestClient) GetFormWithSignatureAsync(
 	go getFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5818,7 +5820,7 @@ func (p Gs2FormationRestClient) GetFormWithSignatureByUserIdAsync(
 	go getFormWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5932,7 +5934,7 @@ func (p Gs2FormationRestClient) SetFormAsync(
 	go setFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6051,7 +6053,7 @@ func (p Gs2FormationRestClient) SetFormByUserIdAsync(
 	go setFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6168,7 +6170,7 @@ func (p Gs2FormationRestClient) SetFormWithSignatureAsync(
 	go setFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6290,7 +6292,7 @@ func (p Gs2FormationRestClient) AcquireActionsToFormPropertiesAsync(
 	go acquireActionsToFormPropertiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6397,7 +6399,7 @@ func (p Gs2FormationRestClient) DeleteFormAsync(
 	go deleteFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6509,7 +6511,7 @@ func (p Gs2FormationRestClient) DeleteFormByUserIdAsync(
 	go deleteFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6601,7 +6603,7 @@ func (p Gs2FormationRestClient) AcquireActionToFormPropertiesByStampSheetAsync(
 	go acquireActionToFormPropertiesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6693,7 +6695,7 @@ func (p Gs2FormationRestClient) SetFormByStampSheetAsync(
 	go setFormByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6798,7 +6800,7 @@ func (p Gs2FormationRestClient) DescribePropertyFormsAsync(
 	go describePropertyFormsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6908,7 +6910,7 @@ func (p Gs2FormationRestClient) DescribePropertyFormsByUserIdAsync(
 	go describePropertyFormsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7012,7 +7014,7 @@ func (p Gs2FormationRestClient) GetPropertyFormAsync(
 	go getPropertyFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7121,7 +7123,7 @@ func (p Gs2FormationRestClient) GetPropertyFormByUserIdAsync(
 	go getPropertyFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7228,7 +7230,7 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureAsync(
 	go getPropertyFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7340,7 +7342,7 @@ func (p Gs2FormationRestClient) GetPropertyFormWithSignatureByUserIdAsync(
 	go getPropertyFormWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7454,7 +7456,7 @@ func (p Gs2FormationRestClient) SetPropertyFormAsync(
 	go setPropertyFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7573,7 +7575,7 @@ func (p Gs2FormationRestClient) SetPropertyFormByUserIdAsync(
 	go setPropertyFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7690,7 +7692,7 @@ func (p Gs2FormationRestClient) SetPropertyFormWithSignatureAsync(
 	go setPropertyFormWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7812,7 +7814,7 @@ func (p Gs2FormationRestClient) AcquireActionsToPropertyFormPropertiesAsync(
 	go acquireActionsToPropertyFormPropertiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7919,7 +7921,7 @@ func (p Gs2FormationRestClient) DeletePropertyFormAsync(
 	go deletePropertyFormAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8031,7 +8033,7 @@ func (p Gs2FormationRestClient) DeletePropertyFormByUserIdAsync(
 	go deletePropertyFormByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8123,7 +8125,7 @@ func (p Gs2FormationRestClient) AcquireActionToPropertyFormPropertiesByStampShee
 	go acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

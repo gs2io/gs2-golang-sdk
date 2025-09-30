@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2GatewayRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2GatewayRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -206,7 +208,7 @@ func (p Gs2GatewayRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -297,7 +299,7 @@ func (p Gs2GatewayRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -388,7 +390,7 @@ func (p Gs2GatewayRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -491,7 +493,7 @@ func (p Gs2GatewayRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -582,7 +584,7 @@ func (p Gs2GatewayRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -668,7 +670,7 @@ func (p Gs2GatewayRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -762,7 +764,7 @@ func (p Gs2GatewayRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -856,7 +858,7 @@ func (p Gs2GatewayRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -950,7 +952,7 @@ func (p Gs2GatewayRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1044,7 +1046,7 @@ func (p Gs2GatewayRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1138,7 +1140,7 @@ func (p Gs2GatewayRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1235,7 +1237,7 @@ func (p Gs2GatewayRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1334,7 +1336,7 @@ func (p Gs2GatewayRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1434,7 +1436,7 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsAsync(
 	go describeWebSocketSessionsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1539,7 +1541,7 @@ func (p Gs2GatewayRestClient) DescribeWebSocketSessionsByUserIdAsync(
 	go describeWebSocketSessionsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1645,7 +1647,7 @@ func (p Gs2GatewayRestClient) SetUserIdAsync(
 	go setUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1756,7 +1758,7 @@ func (p Gs2GatewayRestClient) SetUserIdByUserIdAsync(
 	go setUserIdByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1870,7 +1872,7 @@ func (p Gs2GatewayRestClient) SendNotificationAsync(
 	go sendNotificationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1972,7 +1974,7 @@ func (p Gs2GatewayRestClient) DisconnectByUserIdAsync(
 	go disconnectByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2063,7 +2065,7 @@ func (p Gs2GatewayRestClient) DisconnectAllAsync(
 	go disconnectAllAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2163,7 +2165,7 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenAsync(
 	go setFirebaseTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2268,7 +2270,7 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenByUserIdAsync(
 	go setFirebaseTokenByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2362,7 +2364,7 @@ func (p Gs2GatewayRestClient) GetFirebaseTokenAsync(
 	go getFirebaseTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2461,7 +2463,7 @@ func (p Gs2GatewayRestClient) GetFirebaseTokenByUserIdAsync(
 	go getFirebaseTokenByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2558,7 +2560,7 @@ func (p Gs2GatewayRestClient) DeleteFirebaseTokenAsync(
 	go deleteFirebaseTokenAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2660,7 +2662,7 @@ func (p Gs2GatewayRestClient) DeleteFirebaseTokenByUserIdAsync(
 	go deleteFirebaseTokenByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2771,7 +2773,7 @@ func (p Gs2GatewayRestClient) SendMobileNotificationByUserIdAsync(
 	go sendMobileNotificationByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("gateway").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("gateway", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2WatchRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -136,7 +138,7 @@ func (p Gs2WatchRestClient) GetChartAsync(
 	go getChartAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -222,7 +224,7 @@ func (p Gs2WatchRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -342,7 +344,7 @@ func (p Gs2WatchRestClient) GetDistributionAsync(
 	go getDistributionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -436,7 +438,7 @@ func (p Gs2WatchRestClient) GetCumulativeAsync(
 	go getCumulativeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -541,7 +543,7 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 	go describeBillingActivitiesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -647,7 +649,7 @@ func (p Gs2WatchRestClient) GetBillingActivityAsync(
 	go getBillingActivityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -733,7 +735,7 @@ func (p Gs2WatchRestClient) GetGeneralMetricsAsync(
 	go getGeneralMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -819,7 +821,7 @@ func (p Gs2WatchRestClient) DescribeAccountNamespaceMetricsAsync(
 	go describeAccountNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -910,7 +912,7 @@ func (p Gs2WatchRestClient) GetAccountNamespaceMetricsAsync(
 	go getAccountNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -996,7 +998,7 @@ func (p Gs2WatchRestClient) DescribeChatNamespaceMetricsAsync(
 	go describeChatNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1087,7 +1089,7 @@ func (p Gs2WatchRestClient) GetChatNamespaceMetricsAsync(
 	go getChatNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1173,7 +1175,7 @@ func (p Gs2WatchRestClient) DescribeDatastoreNamespaceMetricsAsync(
 	go describeDatastoreNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1264,7 +1266,7 @@ func (p Gs2WatchRestClient) GetDatastoreNamespaceMetricsAsync(
 	go getDatastoreNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1350,7 +1352,7 @@ func (p Gs2WatchRestClient) DescribeDictionaryNamespaceMetricsAsync(
 	go describeDictionaryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1441,7 +1443,7 @@ func (p Gs2WatchRestClient) GetDictionaryNamespaceMetricsAsync(
 	go getDictionaryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1532,7 +1534,7 @@ func (p Gs2WatchRestClient) DescribeExchangeRateModelMetricsAsync(
 	go describeExchangeRateModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1628,7 +1630,7 @@ func (p Gs2WatchRestClient) GetExchangeRateModelMetricsAsync(
 	go getExchangeRateModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1714,7 +1716,7 @@ func (p Gs2WatchRestClient) DescribeExchangeNamespaceMetricsAsync(
 	go describeExchangeNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1805,7 +1807,7 @@ func (p Gs2WatchRestClient) GetExchangeNamespaceMetricsAsync(
 	go getExchangeNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1901,7 +1903,7 @@ func (p Gs2WatchRestClient) DescribeExperienceStatusMetricsAsync(
 	go describeExperienceStatusMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1992,7 +1994,7 @@ func (p Gs2WatchRestClient) DescribeExperienceExperienceModelMetricsAsync(
 	go describeExperienceExperienceModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2088,7 +2090,7 @@ func (p Gs2WatchRestClient) GetExperienceExperienceModelMetricsAsync(
 	go getExperienceExperienceModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2174,7 +2176,7 @@ func (p Gs2WatchRestClient) DescribeExperienceNamespaceMetricsAsync(
 	go describeExperienceNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2265,7 +2267,7 @@ func (p Gs2WatchRestClient) GetExperienceNamespaceMetricsAsync(
 	go getExperienceNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2361,7 +2363,7 @@ func (p Gs2WatchRestClient) DescribeFormationFormMetricsAsync(
 	go describeFormationFormMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2452,7 +2454,7 @@ func (p Gs2WatchRestClient) DescribeFormationMoldMetricsAsync(
 	go describeFormationMoldMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2538,7 +2540,7 @@ func (p Gs2WatchRestClient) DescribeFormationNamespaceMetricsAsync(
 	go describeFormationNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2629,7 +2631,7 @@ func (p Gs2WatchRestClient) GetFormationNamespaceMetricsAsync(
 	go getFormationNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2715,7 +2717,7 @@ func (p Gs2WatchRestClient) DescribeFriendNamespaceMetricsAsync(
 	go describeFriendNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2806,7 +2808,7 @@ func (p Gs2WatchRestClient) GetFriendNamespaceMetricsAsync(
 	go getFriendNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2892,7 +2894,7 @@ func (p Gs2WatchRestClient) DescribeInboxNamespaceMetricsAsync(
 	go describeInboxNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2983,7 +2985,7 @@ func (p Gs2WatchRestClient) GetInboxNamespaceMetricsAsync(
 	go getInboxNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3079,7 +3081,7 @@ func (p Gs2WatchRestClient) DescribeInventoryItemSetMetricsAsync(
 	go describeInventoryItemSetMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3170,7 +3172,7 @@ func (p Gs2WatchRestClient) DescribeInventoryInventoryMetricsAsync(
 	go describeInventoryInventoryMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3256,7 +3258,7 @@ func (p Gs2WatchRestClient) DescribeInventoryNamespaceMetricsAsync(
 	go describeInventoryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3347,7 +3349,7 @@ func (p Gs2WatchRestClient) GetInventoryNamespaceMetricsAsync(
 	go getInventoryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3433,7 +3435,7 @@ func (p Gs2WatchRestClient) DescribeKeyNamespaceMetricsAsync(
 	go describeKeyNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3524,7 +3526,7 @@ func (p Gs2WatchRestClient) GetKeyNamespaceMetricsAsync(
 	go getKeyNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3620,7 +3622,7 @@ func (p Gs2WatchRestClient) DescribeLimitCounterMetricsAsync(
 	go describeLimitCounterMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3711,7 +3713,7 @@ func (p Gs2WatchRestClient) DescribeLimitLimitModelMetricsAsync(
 	go describeLimitLimitModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3807,7 +3809,7 @@ func (p Gs2WatchRestClient) GetLimitLimitModelMetricsAsync(
 	go getLimitLimitModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3893,7 +3895,7 @@ func (p Gs2WatchRestClient) DescribeLimitNamespaceMetricsAsync(
 	go describeLimitNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3984,7 +3986,7 @@ func (p Gs2WatchRestClient) GetLimitNamespaceMetricsAsync(
 	go getLimitNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4075,7 +4077,7 @@ func (p Gs2WatchRestClient) DescribeLotteryLotteryMetricsAsync(
 	go describeLotteryLotteryMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4171,7 +4173,7 @@ func (p Gs2WatchRestClient) GetLotteryLotteryMetricsAsync(
 	go getLotteryLotteryMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4257,7 +4259,7 @@ func (p Gs2WatchRestClient) DescribeLotteryNamespaceMetricsAsync(
 	go describeLotteryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4348,7 +4350,7 @@ func (p Gs2WatchRestClient) GetLotteryNamespaceMetricsAsync(
 	go getLotteryNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4434,7 +4436,7 @@ func (p Gs2WatchRestClient) DescribeMatchmakingNamespaceMetricsAsync(
 	go describeMatchmakingNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4525,7 +4527,7 @@ func (p Gs2WatchRestClient) GetMatchmakingNamespaceMetricsAsync(
 	go getMatchmakingNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4616,7 +4618,7 @@ func (p Gs2WatchRestClient) DescribeMissionCounterMetricsAsync(
 	go describeMissionCounterMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4707,7 +4709,7 @@ func (p Gs2WatchRestClient) DescribeMissionMissionGroupModelMetricsAsync(
 	go describeMissionMissionGroupModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4803,7 +4805,7 @@ func (p Gs2WatchRestClient) GetMissionMissionGroupModelMetricsAsync(
 	go getMissionMissionGroupModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4889,7 +4891,7 @@ func (p Gs2WatchRestClient) DescribeMissionNamespaceMetricsAsync(
 	go describeMissionNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4980,7 +4982,7 @@ func (p Gs2WatchRestClient) GetMissionNamespaceMetricsAsync(
 	go getMissionNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5071,7 +5073,7 @@ func (p Gs2WatchRestClient) DescribeMoneyWalletMetricsAsync(
 	go describeMoneyWalletMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5162,7 +5164,7 @@ func (p Gs2WatchRestClient) DescribeMoneyReceiptMetricsAsync(
 	go describeMoneyReceiptMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5248,7 +5250,7 @@ func (p Gs2WatchRestClient) DescribeMoneyNamespaceMetricsAsync(
 	go describeMoneyNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5339,7 +5341,7 @@ func (p Gs2WatchRestClient) GetMoneyNamespaceMetricsAsync(
 	go getMoneyNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5435,7 +5437,7 @@ func (p Gs2WatchRestClient) DescribeQuestQuestModelMetricsAsync(
 	go describeQuestQuestModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5536,7 +5538,7 @@ func (p Gs2WatchRestClient) GetQuestQuestModelMetricsAsync(
 	go getQuestQuestModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5627,7 +5629,7 @@ func (p Gs2WatchRestClient) DescribeQuestQuestGroupModelMetricsAsync(
 	go describeQuestQuestGroupModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5723,7 +5725,7 @@ func (p Gs2WatchRestClient) GetQuestQuestGroupModelMetricsAsync(
 	go getQuestQuestGroupModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5809,7 +5811,7 @@ func (p Gs2WatchRestClient) DescribeQuestNamespaceMetricsAsync(
 	go describeQuestNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5900,7 +5902,7 @@ func (p Gs2WatchRestClient) GetQuestNamespaceMetricsAsync(
 	go getQuestNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5991,7 +5993,7 @@ func (p Gs2WatchRestClient) DescribeRankingCategoryModelMetricsAsync(
 	go describeRankingCategoryModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6087,7 +6089,7 @@ func (p Gs2WatchRestClient) GetRankingCategoryModelMetricsAsync(
 	go getRankingCategoryModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6173,7 +6175,7 @@ func (p Gs2WatchRestClient) DescribeRankingNamespaceMetricsAsync(
 	go describeRankingNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6264,7 +6266,7 @@ func (p Gs2WatchRestClient) GetRankingNamespaceMetricsAsync(
 	go getRankingNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6360,7 +6362,7 @@ func (p Gs2WatchRestClient) DescribeShowcaseDisplayItemMetricsAsync(
 	go describeShowcaseDisplayItemMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6461,7 +6463,7 @@ func (p Gs2WatchRestClient) GetShowcaseDisplayItemMetricsAsync(
 	go getShowcaseDisplayItemMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6552,7 +6554,7 @@ func (p Gs2WatchRestClient) DescribeShowcaseShowcaseMetricsAsync(
 	go describeShowcaseShowcaseMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6648,7 +6650,7 @@ func (p Gs2WatchRestClient) GetShowcaseShowcaseMetricsAsync(
 	go getShowcaseShowcaseMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6734,7 +6736,7 @@ func (p Gs2WatchRestClient) DescribeShowcaseNamespaceMetricsAsync(
 	go describeShowcaseNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6825,7 +6827,7 @@ func (p Gs2WatchRestClient) GetShowcaseNamespaceMetricsAsync(
 	go getShowcaseNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6916,7 +6918,7 @@ func (p Gs2WatchRestClient) DescribeStaminaStaminaModelMetricsAsync(
 	go describeStaminaStaminaModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7012,7 +7014,7 @@ func (p Gs2WatchRestClient) GetStaminaStaminaModelMetricsAsync(
 	go getStaminaStaminaModelMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7098,7 +7100,7 @@ func (p Gs2WatchRestClient) DescribeStaminaNamespaceMetricsAsync(
 	go describeStaminaNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7189,7 +7191,7 @@ func (p Gs2WatchRestClient) GetStaminaNamespaceMetricsAsync(
 	go getStaminaNamespaceMetricsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("watch", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

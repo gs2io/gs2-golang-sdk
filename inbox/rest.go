@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2InboxRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2InboxRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -225,7 +227,7 @@ func (p Gs2InboxRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -316,7 +318,7 @@ func (p Gs2InboxRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -407,7 +409,7 @@ func (p Gs2InboxRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -528,7 +530,7 @@ func (p Gs2InboxRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -619,7 +621,7 @@ func (p Gs2InboxRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -705,7 +707,7 @@ func (p Gs2InboxRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -799,7 +801,7 @@ func (p Gs2InboxRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -893,7 +895,7 @@ func (p Gs2InboxRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -987,7 +989,7 @@ func (p Gs2InboxRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1081,7 +1083,7 @@ func (p Gs2InboxRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1175,7 +1177,7 @@ func (p Gs2InboxRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1272,7 +1274,7 @@ func (p Gs2InboxRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1371,7 +1373,7 @@ func (p Gs2InboxRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1474,7 +1476,7 @@ func (p Gs2InboxRestClient) DescribeMessagesAsync(
 	go describeMessagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1580,7 +1582,7 @@ func (p Gs2InboxRestClient) DescribeMessagesByUserIdAsync(
 	go describeMessagesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1698,7 +1700,7 @@ func (p Gs2InboxRestClient) SendMessageByUserIdAsync(
 	go sendMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1797,7 +1799,7 @@ func (p Gs2InboxRestClient) GetMessageAsync(
 	go getMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1901,7 +1903,7 @@ func (p Gs2InboxRestClient) GetMessageByUserIdAsync(
 	go getMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1998,7 +2000,7 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageAsync(
 	go receiveGlobalMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2100,7 +2102,7 @@ func (p Gs2InboxRestClient) ReceiveGlobalMessageByUserIdAsync(
 	go receiveGlobalMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2208,7 +2210,7 @@ func (p Gs2InboxRestClient) OpenMessageAsync(
 	go openMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2321,7 +2323,7 @@ func (p Gs2InboxRestClient) OpenMessageByUserIdAsync(
 	go openMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2428,7 +2430,7 @@ func (p Gs2InboxRestClient) CloseMessageByUserIdAsync(
 	go closeMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2543,7 +2545,7 @@ func (p Gs2InboxRestClient) ReadMessageAsync(
 	go readMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2663,7 +2665,7 @@ func (p Gs2InboxRestClient) ReadMessageByUserIdAsync(
 	go readMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2780,7 +2782,7 @@ func (p Gs2InboxRestClient) BatchReadMessagesAsync(
 	go batchReadMessagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2902,7 +2904,7 @@ func (p Gs2InboxRestClient) BatchReadMessagesByUserIdAsync(
 	go batchReadMessagesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3004,7 +3006,7 @@ func (p Gs2InboxRestClient) DeleteMessageAsync(
 	go deleteMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3111,7 +3113,7 @@ func (p Gs2InboxRestClient) DeleteMessageByUserIdAsync(
 	go deleteMessageByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3203,7 +3205,7 @@ func (p Gs2InboxRestClient) SendByStampSheetAsync(
 	go sendByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3295,7 +3297,7 @@ func (p Gs2InboxRestClient) OpenByStampTaskAsync(
 	go openByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3387,7 +3389,7 @@ func (p Gs2InboxRestClient) DeleteMessageByStampTaskAsync(
 	go deleteMessageByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3478,7 +3480,7 @@ func (p Gs2InboxRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3569,7 +3571,7 @@ func (p Gs2InboxRestClient) GetCurrentMessageMasterAsync(
 	go getCurrentMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3660,7 +3662,7 @@ func (p Gs2InboxRestClient) PreUpdateCurrentMessageMasterAsync(
 	go preUpdateCurrentMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3791,7 +3793,7 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterAsync(
 	go updateCurrentMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3885,7 +3887,7 @@ func (p Gs2InboxRestClient) UpdateCurrentMessageMasterFromGitHubAsync(
 	go updateCurrentMessageMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3985,7 +3987,7 @@ func (p Gs2InboxRestClient) DescribeGlobalMessageMastersAsync(
 	go describeGlobalMessageMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4098,7 +4100,7 @@ func (p Gs2InboxRestClient) CreateGlobalMessageMasterAsync(
 	go createGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4194,7 +4196,7 @@ func (p Gs2InboxRestClient) GetGlobalMessageMasterAsync(
 	go getGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4309,7 +4311,7 @@ func (p Gs2InboxRestClient) UpdateGlobalMessageMasterAsync(
 	go updateGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4405,7 +4407,7 @@ func (p Gs2InboxRestClient) DeleteGlobalMessageMasterAsync(
 	go deleteGlobalMessageMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4496,7 +4498,7 @@ func (p Gs2InboxRestClient) DescribeGlobalMessagesAsync(
 	go describeGlobalMessagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4592,7 +4594,7 @@ func (p Gs2InboxRestClient) GetGlobalMessageAsync(
 	go getGlobalMessageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4691,7 +4693,7 @@ func (p Gs2InboxRestClient) GetReceivedByUserIdAsync(
 	go getReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4800,7 +4802,7 @@ func (p Gs2InboxRestClient) UpdateReceivedByUserIdAsync(
 	go updateReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4902,7 +4904,7 @@ func (p Gs2InboxRestClient) DeleteReceivedByUserIdAsync(
 	go deleteReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inbox").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inbox", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

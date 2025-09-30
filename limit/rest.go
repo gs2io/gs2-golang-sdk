@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2LimitRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2LimitRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2LimitRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2LimitRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2LimitRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2LimitRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2LimitRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2LimitRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2LimitRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2LimitRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2LimitRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2LimitRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2LimitRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2LimitRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2LimitRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1432,7 +1434,7 @@ func (p Gs2LimitRestClient) DescribeCountersAsync(
 	go describeCountersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1540,7 +1542,7 @@ func (p Gs2LimitRestClient) DescribeCountersByUserIdAsync(
 	go describeCountersByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1644,7 +1646,7 @@ func (p Gs2LimitRestClient) GetCounterAsync(
 	go getCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1753,7 +1755,7 @@ func (p Gs2LimitRestClient) GetCounterByUserIdAsync(
 	go getCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1872,7 +1874,7 @@ func (p Gs2LimitRestClient) CountUpAsync(
 	go countUpAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1996,7 +1998,7 @@ func (p Gs2LimitRestClient) CountUpByUserIdAsync(
 	go countUpByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2111,7 +2113,7 @@ func (p Gs2LimitRestClient) CountDownByUserIdAsync(
 	go countDownByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2223,7 +2225,7 @@ func (p Gs2LimitRestClient) DeleteCounterByUserIdAsync(
 	go deleteCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2341,7 +2343,7 @@ func (p Gs2LimitRestClient) VerifyCounterAsync(
 	go verifyCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2464,7 +2466,7 @@ func (p Gs2LimitRestClient) VerifyCounterByUserIdAsync(
 	go verifyCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2556,7 +2558,7 @@ func (p Gs2LimitRestClient) CountUpByStampTaskAsync(
 	go countUpByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2648,7 +2650,7 @@ func (p Gs2LimitRestClient) CountDownByStampSheetAsync(
 	go countDownByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2740,7 +2742,7 @@ func (p Gs2LimitRestClient) DeleteByStampSheetAsync(
 	go deleteByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2832,7 +2834,7 @@ func (p Gs2LimitRestClient) VerifyCounterByStampTaskAsync(
 	go verifyCounterByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2932,7 +2934,7 @@ func (p Gs2LimitRestClient) DescribeLimitModelMastersAsync(
 	go describeLimitModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3050,7 +3052,7 @@ func (p Gs2LimitRestClient) CreateLimitModelMasterAsync(
 	go createLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3146,7 +3148,7 @@ func (p Gs2LimitRestClient) GetLimitModelMasterAsync(
 	go getLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3266,7 +3268,7 @@ func (p Gs2LimitRestClient) UpdateLimitModelMasterAsync(
 	go updateLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3362,7 +3364,7 @@ func (p Gs2LimitRestClient) DeleteLimitModelMasterAsync(
 	go deleteLimitModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3453,7 +3455,7 @@ func (p Gs2LimitRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3544,7 +3546,7 @@ func (p Gs2LimitRestClient) GetCurrentLimitMasterAsync(
 	go getCurrentLimitMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3635,7 +3637,7 @@ func (p Gs2LimitRestClient) PreUpdateCurrentLimitMasterAsync(
 	go preUpdateCurrentLimitMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3766,7 +3768,7 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterAsync(
 	go updateCurrentLimitMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3860,7 +3862,7 @@ func (p Gs2LimitRestClient) UpdateCurrentLimitMasterFromGitHubAsync(
 	go updateCurrentLimitMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3951,7 +3953,7 @@ func (p Gs2LimitRestClient) DescribeLimitModelsAsync(
 	go describeLimitModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4047,7 +4049,7 @@ func (p Gs2LimitRestClient) GetLimitModelAsync(
 	go getLimitModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("limit", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2FriendRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2FriendRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -245,7 +247,7 @@ func (p Gs2FriendRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -336,7 +338,7 @@ func (p Gs2FriendRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -427,7 +429,7 @@ func (p Gs2FriendRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -569,7 +571,7 @@ func (p Gs2FriendRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -660,7 +662,7 @@ func (p Gs2FriendRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -746,7 +748,7 @@ func (p Gs2FriendRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -840,7 +842,7 @@ func (p Gs2FriendRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -934,7 +936,7 @@ func (p Gs2FriendRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1028,7 +1030,7 @@ func (p Gs2FriendRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1122,7 +1124,7 @@ func (p Gs2FriendRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1216,7 +1218,7 @@ func (p Gs2FriendRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1313,7 +1315,7 @@ func (p Gs2FriendRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1412,7 +1414,7 @@ func (p Gs2FriendRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1506,7 +1508,7 @@ func (p Gs2FriendRestClient) GetProfileAsync(
 	go getProfileAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1605,7 +1607,7 @@ func (p Gs2FriendRestClient) GetProfileByUserIdAsync(
 	go getProfileByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1711,7 +1713,7 @@ func (p Gs2FriendRestClient) UpdateProfileAsync(
 	go updateProfileAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1822,7 +1824,7 @@ func (p Gs2FriendRestClient) UpdateProfileByUserIdAsync(
 	go updateProfileByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1924,7 +1926,7 @@ func (p Gs2FriendRestClient) DeleteProfileByUserIdAsync(
 	go deleteProfileByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2016,7 +2018,7 @@ func (p Gs2FriendRestClient) UpdateProfileByStampSheetAsync(
 	go updateProfileByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2119,7 +2121,7 @@ func (p Gs2FriendRestClient) DescribeFriendsAsync(
 	go describeFriendsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2227,7 +2229,7 @@ func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
 	go describeFriendsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2327,7 +2329,7 @@ func (p Gs2FriendRestClient) DescribeBlackListAsync(
 	go describeBlackListAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2432,7 +2434,7 @@ func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
 	go describeBlackListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2534,7 +2536,7 @@ func (p Gs2FriendRestClient) RegisterBlackListAsync(
 	go registerBlackListAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2641,7 +2643,7 @@ func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
 	go registerBlackListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2743,7 +2745,7 @@ func (p Gs2FriendRestClient) UnregisterBlackListAsync(
 	go unregisterBlackListAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2850,7 +2852,7 @@ func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
 	go unregisterBlackListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2953,7 +2955,7 @@ func (p Gs2FriendRestClient) DescribeFollowsAsync(
 	go describeFollowsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3061,7 +3063,7 @@ func (p Gs2FriendRestClient) DescribeFollowsByUserIdAsync(
 	go describeFollowsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3163,7 +3165,7 @@ func (p Gs2FriendRestClient) GetFollowAsync(
 	go getFollowAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3270,7 +3272,7 @@ func (p Gs2FriendRestClient) GetFollowByUserIdAsync(
 	go getFollowByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3372,7 +3374,7 @@ func (p Gs2FriendRestClient) FollowAsync(
 	go followAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3479,7 +3481,7 @@ func (p Gs2FriendRestClient) FollowByUserIdAsync(
 	go followByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3581,7 +3583,7 @@ func (p Gs2FriendRestClient) UnfollowAsync(
 	go unfollowAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3688,7 +3690,7 @@ func (p Gs2FriendRestClient) UnfollowByUserIdAsync(
 	go unfollowByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3790,7 +3792,7 @@ func (p Gs2FriendRestClient) GetFriendAsync(
 	go getFriendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3897,7 +3899,7 @@ func (p Gs2FriendRestClient) GetFriendByUserIdAsync(
 	go getFriendByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3999,7 +4001,7 @@ func (p Gs2FriendRestClient) AddFriendAsync(
 	go addFriendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4106,7 +4108,7 @@ func (p Gs2FriendRestClient) AddFriendByUserIdAsync(
 	go addFriendByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4208,7 +4210,7 @@ func (p Gs2FriendRestClient) DeleteFriendAsync(
 	go deleteFriendAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4315,7 +4317,7 @@ func (p Gs2FriendRestClient) DeleteFriendByUserIdAsync(
 	go deleteFriendByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4418,7 +4420,7 @@ func (p Gs2FriendRestClient) DescribeSendRequestsAsync(
 	go describeSendRequestsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4526,7 +4528,7 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 	go describeSendRequestsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4628,7 +4630,7 @@ func (p Gs2FriendRestClient) GetSendRequestAsync(
 	go getSendRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4735,7 +4737,7 @@ func (p Gs2FriendRestClient) GetSendRequestByUserIdAsync(
 	go getSendRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4837,7 +4839,7 @@ func (p Gs2FriendRestClient) SendRequestAsync(
 	go sendRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4944,7 +4946,7 @@ func (p Gs2FriendRestClient) SendRequestByUserIdAsync(
 	go sendRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5046,7 +5048,7 @@ func (p Gs2FriendRestClient) DeleteRequestAsync(
 	go deleteRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5153,7 +5155,7 @@ func (p Gs2FriendRestClient) DeleteRequestByUserIdAsync(
 	go deleteRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5256,7 +5258,7 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsAsync(
 	go describeReceiveRequestsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5364,7 +5366,7 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 	go describeReceiveRequestsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5466,7 +5468,7 @@ func (p Gs2FriendRestClient) GetReceiveRequestAsync(
 	go getReceiveRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5573,7 +5575,7 @@ func (p Gs2FriendRestClient) GetReceiveRequestByUserIdAsync(
 	go getReceiveRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5675,7 +5677,7 @@ func (p Gs2FriendRestClient) AcceptRequestAsync(
 	go acceptRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5782,7 +5784,7 @@ func (p Gs2FriendRestClient) AcceptRequestByUserIdAsync(
 	go acceptRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5884,7 +5886,7 @@ func (p Gs2FriendRestClient) RejectRequestAsync(
 	go rejectRequestAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5991,7 +5993,7 @@ func (p Gs2FriendRestClient) RejectRequestByUserIdAsync(
 	go rejectRequestByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6090,7 +6092,7 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 	go getPublicProfileAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("friend", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

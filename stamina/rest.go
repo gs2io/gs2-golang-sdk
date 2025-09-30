@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2StaminaRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2StaminaRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -207,7 +209,7 @@ func (p Gs2StaminaRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -298,7 +300,7 @@ func (p Gs2StaminaRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -389,7 +391,7 @@ func (p Gs2StaminaRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -492,7 +494,7 @@ func (p Gs2StaminaRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -583,7 +585,7 @@ func (p Gs2StaminaRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -669,7 +671,7 @@ func (p Gs2StaminaRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -763,7 +765,7 @@ func (p Gs2StaminaRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -857,7 +859,7 @@ func (p Gs2StaminaRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -951,7 +953,7 @@ func (p Gs2StaminaRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1045,7 +1047,7 @@ func (p Gs2StaminaRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1139,7 +1141,7 @@ func (p Gs2StaminaRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1236,7 +1238,7 @@ func (p Gs2StaminaRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1335,7 +1337,7 @@ func (p Gs2StaminaRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1435,7 +1437,7 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 	go describeStaminaModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1559,7 +1561,7 @@ func (p Gs2StaminaRestClient) CreateStaminaModelMasterAsync(
 	go createStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1655,7 +1657,7 @@ func (p Gs2StaminaRestClient) GetStaminaModelMasterAsync(
 	go getStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1781,7 +1783,7 @@ func (p Gs2StaminaRestClient) UpdateStaminaModelMasterAsync(
 	go updateStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1877,7 +1879,7 @@ func (p Gs2StaminaRestClient) DeleteStaminaModelMasterAsync(
 	go deleteStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1974,7 +1976,7 @@ func (p Gs2StaminaRestClient) DescribeMaxStaminaTableMastersAsync(
 	go describeMaxStaminaTableMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2084,7 +2086,7 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
 	go createMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2180,7 +2182,7 @@ func (p Gs2StaminaRestClient) GetMaxStaminaTableMasterAsync(
 	go getMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2292,7 +2294,7 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
 	go updateMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2388,7 +2390,7 @@ func (p Gs2StaminaRestClient) DeleteMaxStaminaTableMasterAsync(
 	go deleteMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2488,7 +2490,7 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 	go describeRecoverIntervalTableMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2598,7 +2600,7 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
 	go createRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2694,7 +2696,7 @@ func (p Gs2StaminaRestClient) GetRecoverIntervalTableMasterAsync(
 	go getRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2806,7 +2808,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
 	go updateRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2902,7 +2904,7 @@ func (p Gs2StaminaRestClient) DeleteRecoverIntervalTableMasterAsync(
 	go deleteRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3002,7 +3004,7 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 	go describeRecoverValueTableMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3112,7 +3114,7 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
 	go createRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3208,7 +3210,7 @@ func (p Gs2StaminaRestClient) GetRecoverValueTableMasterAsync(
 	go getRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3320,7 +3322,7 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
 	go updateRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3416,7 +3418,7 @@ func (p Gs2StaminaRestClient) DeleteRecoverValueTableMasterAsync(
 	go deleteRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3507,7 +3509,7 @@ func (p Gs2StaminaRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3598,7 +3600,7 @@ func (p Gs2StaminaRestClient) GetCurrentStaminaMasterAsync(
 	go getCurrentStaminaMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3689,7 +3691,7 @@ func (p Gs2StaminaRestClient) PreUpdateCurrentStaminaMasterAsync(
 	go preUpdateCurrentStaminaMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3820,7 +3822,7 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterAsync(
 	go updateCurrentStaminaMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3914,7 +3916,7 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterFromGitHubAsync(
 	go updateCurrentStaminaMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4005,7 +4007,7 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelsAsync(
 	go describeStaminaModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4101,7 +4103,7 @@ func (p Gs2StaminaRestClient) GetStaminaModelAsync(
 	go getStaminaModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4201,7 +4203,7 @@ func (p Gs2StaminaRestClient) DescribeStaminasAsync(
 	go describeStaminasAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4306,7 +4308,7 @@ func (p Gs2StaminaRestClient) DescribeStaminasByUserIdAsync(
 	go describeStaminasByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4405,7 +4407,7 @@ func (p Gs2StaminaRestClient) GetStaminaAsync(
 	go getStaminaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4509,7 +4511,7 @@ func (p Gs2StaminaRestClient) GetStaminaByUserIdAsync(
 	go getStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4628,7 +4630,7 @@ func (p Gs2StaminaRestClient) UpdateStaminaByUserIdAsync(
 	go updateStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4739,7 +4741,7 @@ func (p Gs2StaminaRestClient) ConsumeStaminaAsync(
 	go consumeStaminaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4855,7 +4857,7 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserIdAsync(
 	go consumeStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4957,7 +4959,7 @@ func (p Gs2StaminaRestClient) ApplyStaminaAsync(
 	go applyStaminaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5064,7 +5066,7 @@ func (p Gs2StaminaRestClient) ApplyStaminaByUserIdAsync(
 	go applyStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5174,7 +5176,7 @@ func (p Gs2StaminaRestClient) RecoverStaminaByUserIdAsync(
 	go recoverStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5284,7 +5286,7 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserIdAsync(
 	go raiseMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5389,7 +5391,7 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueAsync(
 	go decreaseMaxValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5499,7 +5501,7 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByUserIdAsync(
 	go decreaseMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5609,7 +5611,7 @@ func (p Gs2StaminaRestClient) SetMaxValueByUserIdAsync(
 	go setMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5719,7 +5721,7 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByUserIdAsync(
 	go setRecoverIntervalByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5829,7 +5831,7 @@ func (p Gs2StaminaRestClient) SetRecoverValueByUserIdAsync(
 	go setRecoverValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5940,7 +5942,7 @@ func (p Gs2StaminaRestClient) SetMaxValueByStatusAsync(
 	go setMaxValueByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6051,7 +6053,7 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStatusAsync(
 	go setRecoverIntervalByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6162,7 +6164,7 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
 	go setRecoverValueByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6269,7 +6271,7 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserIdAsync(
 	go deleteStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6382,7 +6384,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaValueAsync(
 	go verifyStaminaValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6500,7 +6502,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaValueByUserIdAsync(
 	go verifyStaminaValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6613,7 +6615,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaMaxValueAsync(
 	go verifyStaminaMaxValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6731,7 +6733,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByUserIdAsync(
 	go verifyStaminaMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6844,7 +6846,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesAsync(
 	go verifyStaminaRecoverIntervalMinutesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6962,7 +6964,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByUserIdAsync(
 	go verifyStaminaRecoverIntervalMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7075,7 +7077,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueAsync(
 	go verifyStaminaRecoverValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7193,7 +7195,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByUserIdAsync(
 	go verifyStaminaRecoverValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7306,7 +7308,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueAsync(
 	go verifyStaminaOverflowValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7424,7 +7426,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByUserIdAsync(
 	go verifyStaminaOverflowValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7516,7 +7518,7 @@ func (p Gs2StaminaRestClient) RecoverStaminaByStampSheetAsync(
 	go recoverStaminaByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7608,7 +7610,7 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByStampSheetAsync(
 	go raiseMaxValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7700,7 +7702,7 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByStampTaskAsync(
 	go decreaseMaxValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7792,7 +7794,7 @@ func (p Gs2StaminaRestClient) SetMaxValueByStampSheetAsync(
 	go setMaxValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7884,7 +7886,7 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStampSheetAsync(
 	go setRecoverIntervalByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7976,7 +7978,7 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStampSheetAsync(
 	go setRecoverValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8068,7 +8070,7 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByStampTaskAsync(
 	go consumeStaminaByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8160,7 +8162,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaValueByStampTaskAsync(
 	go verifyStaminaValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8252,7 +8254,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaMaxValueByStampTaskAsync(
 	go verifyStaminaMaxValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8344,7 +8346,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverIntervalMinutesByStampTaskAsyn
 	go verifyStaminaRecoverIntervalMinutesByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8436,7 +8438,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaRecoverValueByStampTaskAsync(
 	go verifyStaminaRecoverValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8528,7 +8530,7 @@ func (p Gs2StaminaRestClient) VerifyStaminaOverflowValueByStampTaskAsync(
 	go verifyStaminaOverflowValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("stamina", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

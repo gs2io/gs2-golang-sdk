@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2JobQueueRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2JobQueueRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -212,7 +214,7 @@ func (p Gs2JobQueueRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -303,7 +305,7 @@ func (p Gs2JobQueueRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -394,7 +396,7 @@ func (p Gs2JobQueueRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -503,7 +505,7 @@ func (p Gs2JobQueueRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -594,7 +596,7 @@ func (p Gs2JobQueueRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -680,7 +682,7 @@ func (p Gs2JobQueueRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -774,7 +776,7 @@ func (p Gs2JobQueueRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -868,7 +870,7 @@ func (p Gs2JobQueueRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -962,7 +964,7 @@ func (p Gs2JobQueueRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1056,7 +1058,7 @@ func (p Gs2JobQueueRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1150,7 +1152,7 @@ func (p Gs2JobQueueRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1247,7 +1249,7 @@ func (p Gs2JobQueueRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1346,7 +1348,7 @@ func (p Gs2JobQueueRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1451,7 +1453,7 @@ func (p Gs2JobQueueRestClient) DescribeJobsByUserIdAsync(
 	go describeJobsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1555,7 +1557,7 @@ func (p Gs2JobQueueRestClient) GetJobByUserIdAsync(
 	go getJobByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1664,7 +1666,7 @@ func (p Gs2JobQueueRestClient) PushByUserIdAsync(
 	go pushByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1767,7 +1769,7 @@ func (p Gs2JobQueueRestClient) RunAsync(
 	go runAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1875,7 +1877,7 @@ func (p Gs2JobQueueRestClient) RunByUserIdAsync(
 	go runByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1977,7 +1979,7 @@ func (p Gs2JobQueueRestClient) DeleteJobAsync(
 	go deleteJobAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2084,7 +2086,7 @@ func (p Gs2JobQueueRestClient) DeleteJobByUserIdAsync(
 	go deleteJobByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2176,7 +2178,7 @@ func (p Gs2JobQueueRestClient) PushByStampSheetAsync(
 	go pushByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2268,7 +2270,7 @@ func (p Gs2JobQueueRestClient) DeleteByStampTaskAsync(
 	go deleteByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2370,7 +2372,7 @@ func (p Gs2JobQueueRestClient) GetJobResultAsync(
 	go getJobResultAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2477,7 +2479,7 @@ func (p Gs2JobQueueRestClient) GetJobResultByUserIdAsync(
 	go getJobResultByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("job-queue", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

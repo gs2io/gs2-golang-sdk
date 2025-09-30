@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ScriptRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2ScriptRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -203,7 +205,7 @@ func (p Gs2ScriptRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -294,7 +296,7 @@ func (p Gs2ScriptRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -385,7 +387,7 @@ func (p Gs2ScriptRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -485,7 +487,7 @@ func (p Gs2ScriptRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -576,7 +578,7 @@ func (p Gs2ScriptRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -662,7 +664,7 @@ func (p Gs2ScriptRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -762,7 +764,7 @@ func (p Gs2ScriptRestClient) DescribeScriptsAsync(
 	go describeScriptsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -865,7 +867,7 @@ func (p Gs2ScriptRestClient) CreateScriptAsync(
 	go createScriptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -968,7 +970,7 @@ func (p Gs2ScriptRestClient) CreateScriptFromGitHubAsync(
 	go createScriptFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1064,7 +1066,7 @@ func (p Gs2ScriptRestClient) GetScriptAsync(
 	go getScriptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1169,7 +1171,7 @@ func (p Gs2ScriptRestClient) UpdateScriptAsync(
 	go updateScriptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1274,7 +1276,7 @@ func (p Gs2ScriptRestClient) UpdateScriptFromGitHubAsync(
 	go updateScriptFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1370,7 +1372,7 @@ func (p Gs2ScriptRestClient) DeleteScriptAsync(
 	go deleteScriptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1474,7 +1476,7 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
 	go invokeScriptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1581,7 +1583,7 @@ func (p Gs2ScriptRestClient) DebugInvokeAsync(
 	go debugInvokeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1673,7 +1675,7 @@ func (p Gs2ScriptRestClient) InvokeByStampSheetAsync(
 	go invokeByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("script", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

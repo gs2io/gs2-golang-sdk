@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2DeployRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2DeployRestClient) DescribeStacksAsync(
 	go describeStacksAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -192,7 +194,7 @@ func (p Gs2DeployRestClient) PreCreateStackAsync(
 	go preCreateStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -323,7 +325,7 @@ func (p Gs2DeployRestClient) CreateStackAsync(
 	go createStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -418,7 +420,7 @@ func (p Gs2DeployRestClient) CreateStackFromGitHubAsync(
 	go createStackFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -504,7 +506,7 @@ func (p Gs2DeployRestClient) PreValidateAsync(
 	go preValidateAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -629,7 +631,7 @@ func (p Gs2DeployRestClient) ValidateAsync(
 	go validateAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -720,7 +722,7 @@ func (p Gs2DeployRestClient) GetStackStatusAsync(
 	go getStackStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -811,7 +813,7 @@ func (p Gs2DeployRestClient) GetStackAsync(
 	go getStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -902,7 +904,7 @@ func (p Gs2DeployRestClient) PreUpdateStackAsync(
 	go preUpdateStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1036,7 +1038,7 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	go updateStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1127,7 +1129,7 @@ func (p Gs2DeployRestClient) PreChangeSetAsync(
 	go preChangeSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1258,7 +1260,7 @@ func (p Gs2DeployRestClient) ChangeSetAsync(
 	go changeSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1355,7 +1357,7 @@ func (p Gs2DeployRestClient) UpdateStackFromGitHubAsync(
 	go updateStackFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1446,7 +1448,7 @@ func (p Gs2DeployRestClient) DeleteStackAsync(
 	go deleteStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1537,7 +1539,7 @@ func (p Gs2DeployRestClient) ForceDeleteStackAsync(
 	go forceDeleteStackAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1628,7 +1630,7 @@ func (p Gs2DeployRestClient) DeleteStackResourcesAsync(
 	go deleteStackResourcesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1719,7 +1721,7 @@ func (p Gs2DeployRestClient) DeleteStackEntityAsync(
 	go deleteStackEntityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1805,7 +1807,7 @@ func (p Gs2DeployRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1902,7 +1904,7 @@ func (p Gs2DeployRestClient) DescribeResourcesAsync(
 	go describeResourcesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1998,7 +2000,7 @@ func (p Gs2DeployRestClient) GetResourceAsync(
 	go getResourceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2095,7 +2097,7 @@ func (p Gs2DeployRestClient) DescribeEventsAsync(
 	go describeEventsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2191,7 +2193,7 @@ func (p Gs2DeployRestClient) GetEventAsync(
 	go getEventAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2288,7 +2290,7 @@ func (p Gs2DeployRestClient) DescribeOutputsAsync(
 	go describeOutputsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2384,7 +2386,7 @@ func (p Gs2DeployRestClient) GetOutputAsync(
 	go getOutputAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("deploy", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2SkillTreeRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2SkillTreeRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -210,7 +212,7 @@ func (p Gs2SkillTreeRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -301,7 +303,7 @@ func (p Gs2SkillTreeRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -392,7 +394,7 @@ func (p Gs2SkillTreeRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -498,7 +500,7 @@ func (p Gs2SkillTreeRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -589,7 +591,7 @@ func (p Gs2SkillTreeRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -675,7 +677,7 @@ func (p Gs2SkillTreeRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -769,7 +771,7 @@ func (p Gs2SkillTreeRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -863,7 +865,7 @@ func (p Gs2SkillTreeRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -957,7 +959,7 @@ func (p Gs2SkillTreeRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1051,7 +1053,7 @@ func (p Gs2SkillTreeRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1145,7 +1147,7 @@ func (p Gs2SkillTreeRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1242,7 +1244,7 @@ func (p Gs2SkillTreeRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1341,7 +1343,7 @@ func (p Gs2SkillTreeRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1432,7 +1434,7 @@ func (p Gs2SkillTreeRestClient) DescribeNodeModelsAsync(
 	go describeNodeModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1528,7 +1530,7 @@ func (p Gs2SkillTreeRestClient) GetNodeModelAsync(
 	go getNodeModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1628,7 +1630,7 @@ func (p Gs2SkillTreeRestClient) DescribeNodeModelMastersAsync(
 	go describeNodeModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1752,7 +1754,7 @@ func (p Gs2SkillTreeRestClient) CreateNodeModelMasterAsync(
 	go createNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1848,7 +1850,7 @@ func (p Gs2SkillTreeRestClient) GetNodeModelMasterAsync(
 	go getNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1974,7 +1976,7 @@ func (p Gs2SkillTreeRestClient) UpdateNodeModelMasterAsync(
 	go updateNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2070,7 +2072,7 @@ func (p Gs2SkillTreeRestClient) DeleteNodeModelMasterAsync(
 	go deleteNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2184,7 +2186,7 @@ func (p Gs2SkillTreeRestClient) MarkReleaseByUserIdAsync(
 	go markReleaseByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2300,7 +2302,7 @@ func (p Gs2SkillTreeRestClient) ReleaseAsync(
 	go releaseAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2421,7 +2423,7 @@ func (p Gs2SkillTreeRestClient) ReleaseByUserIdAsync(
 	go releaseByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2530,7 +2532,7 @@ func (p Gs2SkillTreeRestClient) MarkRestrainAsync(
 	go markRestrainAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2644,7 +2646,7 @@ func (p Gs2SkillTreeRestClient) MarkRestrainByUserIdAsync(
 	go markRestrainByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2760,7 +2762,7 @@ func (p Gs2SkillTreeRestClient) RestrainAsync(
 	go restrainAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2881,7 +2883,7 @@ func (p Gs2SkillTreeRestClient) RestrainByUserIdAsync(
 	go restrainByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2981,7 +2983,7 @@ func (p Gs2SkillTreeRestClient) DescribeStatusesAsync(
 	go describeStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3086,7 +3088,7 @@ func (p Gs2SkillTreeRestClient) DescribeStatusesByUserIdAsync(
 	go describeStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3185,7 +3187,7 @@ func (p Gs2SkillTreeRestClient) GetStatusAsync(
 	go getStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3289,7 +3291,7 @@ func (p Gs2SkillTreeRestClient) GetStatusByUserIdAsync(
 	go getStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3398,7 +3400,7 @@ func (p Gs2SkillTreeRestClient) ResetAsync(
 	go resetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3505,7 +3507,7 @@ func (p Gs2SkillTreeRestClient) ResetByUserIdAsync(
 	go resetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3597,7 +3599,7 @@ func (p Gs2SkillTreeRestClient) MarkReleaseByStampSheetAsync(
 	go markReleaseByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3689,7 +3691,7 @@ func (p Gs2SkillTreeRestClient) MarkRestrainByStampTaskAsync(
 	go markRestrainByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3780,7 +3782,7 @@ func (p Gs2SkillTreeRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3871,7 +3873,7 @@ func (p Gs2SkillTreeRestClient) GetCurrentTreeMasterAsync(
 	go getCurrentTreeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3962,7 +3964,7 @@ func (p Gs2SkillTreeRestClient) PreUpdateCurrentTreeMasterAsync(
 	go preUpdateCurrentTreeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4093,7 +4095,7 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMasterAsync(
 	go updateCurrentTreeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4187,7 +4189,7 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMasterFromGitHubAsync(
 	go updateCurrentTreeMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

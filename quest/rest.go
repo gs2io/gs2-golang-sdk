@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2QuestRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2QuestRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -219,7 +221,7 @@ func (p Gs2QuestRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -310,7 +312,7 @@ func (p Gs2QuestRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -401,7 +403,7 @@ func (p Gs2QuestRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -516,7 +518,7 @@ func (p Gs2QuestRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -607,7 +609,7 @@ func (p Gs2QuestRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -693,7 +695,7 @@ func (p Gs2QuestRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -787,7 +789,7 @@ func (p Gs2QuestRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -881,7 +883,7 @@ func (p Gs2QuestRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -975,7 +977,7 @@ func (p Gs2QuestRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1069,7 +1071,7 @@ func (p Gs2QuestRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1163,7 +1165,7 @@ func (p Gs2QuestRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1260,7 +1262,7 @@ func (p Gs2QuestRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1359,7 +1361,7 @@ func (p Gs2QuestRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1459,7 +1461,7 @@ func (p Gs2QuestRestClient) DescribeQuestGroupModelMastersAsync(
 	go describeQuestGroupModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1562,7 +1564,7 @@ func (p Gs2QuestRestClient) CreateQuestGroupModelMasterAsync(
 	go createQuestGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1658,7 +1660,7 @@ func (p Gs2QuestRestClient) GetQuestGroupModelMasterAsync(
 	go getQuestGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1763,7 +1765,7 @@ func (p Gs2QuestRestClient) UpdateQuestGroupModelMasterAsync(
 	go updateQuestGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1859,7 +1861,7 @@ func (p Gs2QuestRestClient) DeleteQuestGroupModelMasterAsync(
 	go deleteQuestGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1964,7 +1966,7 @@ func (p Gs2QuestRestClient) DescribeQuestModelMastersAsync(
 	go describeQuestModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2114,7 +2116,7 @@ func (p Gs2QuestRestClient) CreateQuestModelMasterAsync(
 	go createQuestModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2215,7 +2217,7 @@ func (p Gs2QuestRestClient) GetQuestModelMasterAsync(
 	go getQuestModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2367,7 +2369,7 @@ func (p Gs2QuestRestClient) UpdateQuestModelMasterAsync(
 	go updateQuestModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2468,7 +2470,7 @@ func (p Gs2QuestRestClient) DeleteQuestModelMasterAsync(
 	go deleteQuestModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2559,7 +2561,7 @@ func (p Gs2QuestRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2650,7 +2652,7 @@ func (p Gs2QuestRestClient) GetCurrentQuestMasterAsync(
 	go getCurrentQuestMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2741,7 +2743,7 @@ func (p Gs2QuestRestClient) PreUpdateCurrentQuestMasterAsync(
 	go preUpdateCurrentQuestMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2872,7 +2874,7 @@ func (p Gs2QuestRestClient) UpdateCurrentQuestMasterAsync(
 	go updateCurrentQuestMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2966,7 +2968,7 @@ func (p Gs2QuestRestClient) UpdateCurrentQuestMasterFromGitHubAsync(
 	go updateCurrentQuestMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3069,7 +3071,7 @@ func (p Gs2QuestRestClient) DescribeProgressesByUserIdAsync(
 	go describeProgressesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3184,7 +3186,7 @@ func (p Gs2QuestRestClient) CreateProgressByUserIdAsync(
 	go createProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3278,7 +3280,7 @@ func (p Gs2QuestRestClient) GetProgressAsync(
 	go getProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3377,7 +3379,7 @@ func (p Gs2QuestRestClient) GetProgressByUserIdAsync(
 	go getProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3500,7 +3502,7 @@ func (p Gs2QuestRestClient) StartAsync(
 	go startAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3628,7 +3630,7 @@ func (p Gs2QuestRestClient) StartByUserIdAsync(
 	go startByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3742,7 +3744,7 @@ func (p Gs2QuestRestClient) EndAsync(
 	go endAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3861,7 +3863,7 @@ func (p Gs2QuestRestClient) EndByUserIdAsync(
 	go endByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3958,7 +3960,7 @@ func (p Gs2QuestRestClient) DeleteProgressAsync(
 	go deleteProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4060,7 +4062,7 @@ func (p Gs2QuestRestClient) DeleteProgressByUserIdAsync(
 	go deleteProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4152,7 +4154,7 @@ func (p Gs2QuestRestClient) CreateProgressByStampSheetAsync(
 	go createProgressByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4244,7 +4246,7 @@ func (p Gs2QuestRestClient) DeleteProgressByStampTaskAsync(
 	go deleteProgressByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4344,7 +4346,7 @@ func (p Gs2QuestRestClient) DescribeCompletedQuestListsAsync(
 	go describeCompletedQuestListsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4449,7 +4451,7 @@ func (p Gs2QuestRestClient) DescribeCompletedQuestListsByUserIdAsync(
 	go describeCompletedQuestListsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4548,7 +4550,7 @@ func (p Gs2QuestRestClient) GetCompletedQuestListAsync(
 	go getCompletedQuestListAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4652,7 +4654,7 @@ func (p Gs2QuestRestClient) GetCompletedQuestListByUserIdAsync(
 	go getCompletedQuestListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4759,7 +4761,7 @@ func (p Gs2QuestRestClient) DeleteCompletedQuestListByUserIdAsync(
 	go deleteCompletedQuestListByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4850,7 +4852,7 @@ func (p Gs2QuestRestClient) DescribeQuestGroupModelsAsync(
 	go describeQuestGroupModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4946,7 +4948,7 @@ func (p Gs2QuestRestClient) GetQuestGroupModelAsync(
 	go getQuestGroupModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5042,7 +5044,7 @@ func (p Gs2QuestRestClient) DescribeQuestModelsAsync(
 	go describeQuestModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5143,7 +5145,7 @@ func (p Gs2QuestRestClient) GetQuestModelAsync(
 	go getQuestModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

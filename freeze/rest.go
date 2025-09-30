@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2FreezeRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -96,7 +98,7 @@ func (p Gs2FreezeRestClient) DescribeStagesAsync(
 	go describeStagesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -187,7 +189,7 @@ func (p Gs2FreezeRestClient) GetStageAsync(
 	go getStageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -278,7 +280,7 @@ func (p Gs2FreezeRestClient) PromoteStageAsync(
 	go promoteStageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -369,7 +371,7 @@ func (p Gs2FreezeRestClient) RollbackStageAsync(
 	go rollbackStageAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -466,7 +468,7 @@ func (p Gs2FreezeRestClient) DescribeOutputsAsync(
 	go describeOutputsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -562,7 +564,7 @@ func (p Gs2FreezeRestClient) GetOutputAsync(
 	go getOutputAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("freeze").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("freeze", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2GradeRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2GradeRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -207,7 +209,7 @@ func (p Gs2GradeRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -298,7 +300,7 @@ func (p Gs2GradeRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -389,7 +391,7 @@ func (p Gs2GradeRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -492,7 +494,7 @@ func (p Gs2GradeRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -583,7 +585,7 @@ func (p Gs2GradeRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -669,7 +671,7 @@ func (p Gs2GradeRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -763,7 +765,7 @@ func (p Gs2GradeRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -857,7 +859,7 @@ func (p Gs2GradeRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -951,7 +953,7 @@ func (p Gs2GradeRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1045,7 +1047,7 @@ func (p Gs2GradeRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1139,7 +1141,7 @@ func (p Gs2GradeRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1236,7 +1238,7 @@ func (p Gs2GradeRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1335,7 +1337,7 @@ func (p Gs2GradeRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1435,7 +1437,7 @@ func (p Gs2GradeRestClient) DescribeGradeModelMastersAsync(
 	go describeGradeModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1559,7 +1561,7 @@ func (p Gs2GradeRestClient) CreateGradeModelMasterAsync(
 	go createGradeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1655,7 +1657,7 @@ func (p Gs2GradeRestClient) GetGradeModelMasterAsync(
 	go getGradeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1781,7 +1783,7 @@ func (p Gs2GradeRestClient) UpdateGradeModelMasterAsync(
 	go updateGradeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1877,7 +1879,7 @@ func (p Gs2GradeRestClient) DeleteGradeModelMasterAsync(
 	go deleteGradeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1968,7 +1970,7 @@ func (p Gs2GradeRestClient) DescribeGradeModelsAsync(
 	go describeGradeModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2064,7 +2066,7 @@ func (p Gs2GradeRestClient) GetGradeModelAsync(
 	go getGradeModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2167,7 +2169,7 @@ func (p Gs2GradeRestClient) DescribeStatusesAsync(
 	go describeStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2275,7 +2277,7 @@ func (p Gs2GradeRestClient) DescribeStatusesByUserIdAsync(
 	go describeStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2379,7 +2381,7 @@ func (p Gs2GradeRestClient) GetStatusAsync(
 	go getStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2488,7 +2490,7 @@ func (p Gs2GradeRestClient) GetStatusByUserIdAsync(
 	go getStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2603,7 +2605,7 @@ func (p Gs2GradeRestClient) AddGradeByUserIdAsync(
 	go addGradeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2713,7 +2715,7 @@ func (p Gs2GradeRestClient) SubGradeAsync(
 	go subGradeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2828,7 +2830,7 @@ func (p Gs2GradeRestClient) SubGradeByUserIdAsync(
 	go subGradeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2943,7 +2945,7 @@ func (p Gs2GradeRestClient) SetGradeByUserIdAsync(
 	go setGradeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3050,7 +3052,7 @@ func (p Gs2GradeRestClient) ApplyRankCapAsync(
 	go applyRankCapAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3162,7 +3164,7 @@ func (p Gs2GradeRestClient) ApplyRankCapByUserIdAsync(
 	go applyRankCapByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3274,7 +3276,7 @@ func (p Gs2GradeRestClient) DeleteStatusByUserIdAsync(
 	go deleteStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3390,7 +3392,7 @@ func (p Gs2GradeRestClient) VerifyGradeAsync(
 	go verifyGradeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3511,7 +3513,7 @@ func (p Gs2GradeRestClient) VerifyGradeByUserIdAsync(
 	go verifyGradeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3624,7 +3626,7 @@ func (p Gs2GradeRestClient) VerifyGradeUpMaterialAsync(
 	go verifyGradeUpMaterialAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3742,7 +3744,7 @@ func (p Gs2GradeRestClient) VerifyGradeUpMaterialByUserIdAsync(
 	go verifyGradeUpMaterialByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3834,7 +3836,7 @@ func (p Gs2GradeRestClient) AddGradeByStampSheetAsync(
 	go addGradeByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3926,7 +3928,7 @@ func (p Gs2GradeRestClient) ApplyRankCapByStampSheetAsync(
 	go applyRankCapByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4018,7 +4020,7 @@ func (p Gs2GradeRestClient) SubGradeByStampTaskAsync(
 	go subGradeByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4142,7 +4144,7 @@ func (p Gs2GradeRestClient) MultiplyAcquireActionsByUserIdAsync(
 	go multiplyAcquireActionsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4234,7 +4236,7 @@ func (p Gs2GradeRestClient) MultiplyAcquireActionsByStampSheetAsync(
 	go multiplyAcquireActionsByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4326,7 +4328,7 @@ func (p Gs2GradeRestClient) VerifyGradeByStampTaskAsync(
 	go verifyGradeByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4418,7 +4420,7 @@ func (p Gs2GradeRestClient) VerifyGradeUpMaterialByStampTaskAsync(
 	go verifyGradeUpMaterialByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4509,7 +4511,7 @@ func (p Gs2GradeRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4600,7 +4602,7 @@ func (p Gs2GradeRestClient) GetCurrentGradeMasterAsync(
 	go getCurrentGradeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4691,7 +4693,7 @@ func (p Gs2GradeRestClient) PreUpdateCurrentGradeMasterAsync(
 	go preUpdateCurrentGradeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4822,7 +4824,7 @@ func (p Gs2GradeRestClient) UpdateCurrentGradeMasterAsync(
 	go updateCurrentGradeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4916,7 +4918,7 @@ func (p Gs2GradeRestClient) UpdateCurrentGradeMasterFromGitHubAsync(
 	go updateCurrentGradeMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("grade", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

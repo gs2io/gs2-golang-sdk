@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2SeasonRatingRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2SeasonRatingRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2SeasonRatingRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2SeasonRatingRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2SeasonRatingRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2SeasonRatingRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2SeasonRatingRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2SeasonRatingRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2SeasonRatingRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2SeasonRatingRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2SeasonRatingRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2SeasonRatingRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2SeasonRatingRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2SeasonRatingRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2SeasonRatingRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1426,7 +1428,7 @@ func (p Gs2SeasonRatingRestClient) DescribeMatchSessionsAsync(
 	go describeMatchSessionsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1523,7 +1525,7 @@ func (p Gs2SeasonRatingRestClient) CreateMatchSessionAsync(
 	go createMatchSessionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1619,7 +1621,7 @@ func (p Gs2SeasonRatingRestClient) GetMatchSessionAsync(
 	go getMatchSessionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1715,7 +1717,7 @@ func (p Gs2SeasonRatingRestClient) DeleteMatchSessionAsync(
 	go deleteMatchSessionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1815,7 +1817,7 @@ func (p Gs2SeasonRatingRestClient) DescribeSeasonModelMastersAsync(
 	go describeSeasonModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1928,7 +1930,7 @@ func (p Gs2SeasonRatingRestClient) CreateSeasonModelMasterAsync(
 	go createSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2024,7 +2026,7 @@ func (p Gs2SeasonRatingRestClient) GetSeasonModelMasterAsync(
 	go getSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2139,7 +2141,7 @@ func (p Gs2SeasonRatingRestClient) UpdateSeasonModelMasterAsync(
 	go updateSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2235,7 +2237,7 @@ func (p Gs2SeasonRatingRestClient) DeleteSeasonModelMasterAsync(
 	go deleteSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2326,7 +2328,7 @@ func (p Gs2SeasonRatingRestClient) DescribeSeasonModelsAsync(
 	go describeSeasonModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2422,7 +2424,7 @@ func (p Gs2SeasonRatingRestClient) GetSeasonModelAsync(
 	go getSeasonModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2513,7 +2515,7 @@ func (p Gs2SeasonRatingRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2604,7 +2606,7 @@ func (p Gs2SeasonRatingRestClient) GetCurrentSeasonModelMasterAsync(
 	go getCurrentSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2695,7 +2697,7 @@ func (p Gs2SeasonRatingRestClient) PreUpdateCurrentSeasonModelMasterAsync(
 	go preUpdateCurrentSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2826,7 +2828,7 @@ func (p Gs2SeasonRatingRestClient) UpdateCurrentSeasonModelMasterAsync(
 	go updateCurrentSeasonModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2920,7 +2922,7 @@ func (p Gs2SeasonRatingRestClient) UpdateCurrentSeasonModelMasterFromGitHubAsync
 	go updateCurrentSeasonModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3030,7 +3032,7 @@ func (p Gs2SeasonRatingRestClient) GetBallotAsync(
 	go getBallotAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3145,7 +3147,7 @@ func (p Gs2SeasonRatingRestClient) GetBallotByUserIdAsync(
 	go getBallotByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3252,7 +3254,7 @@ func (p Gs2SeasonRatingRestClient) VoteAsync(
 	go voteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3360,7 +3362,7 @@ func (p Gs2SeasonRatingRestClient) VoteMultipleAsync(
 	go voteMultipleAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3461,7 +3463,7 @@ func (p Gs2SeasonRatingRestClient) CommitVoteAsync(
 	go commitVoteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("season-rating").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("season-rating", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

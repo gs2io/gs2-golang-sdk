@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2AuthRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2AuthRestClient) LoginAsync(
 	go loginAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("auth", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -200,7 +202,7 @@ func (p Gs2AuthRestClient) LoginBySignatureAsync(
 	go loginBySignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("auth", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -301,7 +303,7 @@ func (p Gs2AuthRestClient) FederationAsync(
 	go federationAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("auth", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -396,7 +398,7 @@ func (p Gs2AuthRestClient) IssueTimeOffsetTokenByUserIdAsync(
 	go issueTimeOffsetTokenByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("auth", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -482,7 +484,7 @@ func (p Gs2AuthRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("auth", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

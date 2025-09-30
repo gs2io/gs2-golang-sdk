@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2MissionRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -111,7 +113,7 @@ func (p Gs2MissionRestClient) DescribeCompletesAsync(
 	go describeCompletesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -216,7 +218,7 @@ func (p Gs2MissionRestClient) DescribeCompletesByUserIdAsync(
 	go describeCompletesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -330,7 +332,7 @@ func (p Gs2MissionRestClient) CompleteAsync(
 	go completeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -449,7 +451,7 @@ func (p Gs2MissionRestClient) CompleteByUserIdAsync(
 	go completeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -565,7 +567,7 @@ func (p Gs2MissionRestClient) BatchCompleteAsync(
 	go batchCompleteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -686,7 +688,7 @@ func (p Gs2MissionRestClient) BatchCompleteByUserIdAsync(
 	go batchCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -798,7 +800,7 @@ func (p Gs2MissionRestClient) ReceiveByUserIdAsync(
 	go receiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -912,7 +914,7 @@ func (p Gs2MissionRestClient) BatchReceiveByUserIdAsync(
 	go batchReceiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1024,7 +1026,7 @@ func (p Gs2MissionRestClient) RevertReceiveByUserIdAsync(
 	go revertReceiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1123,7 +1125,7 @@ func (p Gs2MissionRestClient) GetCompleteAsync(
 	go getCompleteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1227,7 +1229,7 @@ func (p Gs2MissionRestClient) GetCompleteByUserIdAsync(
 	go getCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1329,7 +1331,7 @@ func (p Gs2MissionRestClient) EvaluateCompleteAsync(
 	go evaluateCompleteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1436,7 +1438,7 @@ func (p Gs2MissionRestClient) EvaluateCompleteByUserIdAsync(
 	go evaluateCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1543,7 +1545,7 @@ func (p Gs2MissionRestClient) DeleteCompleteByUserIdAsync(
 	go deleteCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1660,7 +1662,7 @@ func (p Gs2MissionRestClient) VerifyCompleteAsync(
 	go verifyCompleteAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1782,7 +1784,7 @@ func (p Gs2MissionRestClient) VerifyCompleteByUserIdAsync(
 	go verifyCompleteByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1874,7 +1876,7 @@ func (p Gs2MissionRestClient) ReceiveByStampTaskAsync(
 	go receiveByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1966,7 +1968,7 @@ func (p Gs2MissionRestClient) BatchReceiveByStampTaskAsync(
 	go batchReceiveByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2058,7 +2060,7 @@ func (p Gs2MissionRestClient) RevertReceiveByStampSheetAsync(
 	go revertReceiveByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2150,7 +2152,7 @@ func (p Gs2MissionRestClient) VerifyCompleteByStampTaskAsync(
 	go verifyCompleteByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2250,7 +2252,7 @@ func (p Gs2MissionRestClient) DescribeCounterModelMastersAsync(
 	go describeCounterModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2360,7 +2362,7 @@ func (p Gs2MissionRestClient) CreateCounterModelMasterAsync(
 	go createCounterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2456,7 +2458,7 @@ func (p Gs2MissionRestClient) GetCounterModelMasterAsync(
 	go getCounterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2568,7 +2570,7 @@ func (p Gs2MissionRestClient) UpdateCounterModelMasterAsync(
 	go updateCounterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2664,7 +2666,7 @@ func (p Gs2MissionRestClient) DeleteCounterModelMasterAsync(
 	go deleteCounterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2764,7 +2766,7 @@ func (p Gs2MissionRestClient) DescribeMissionGroupModelMastersAsync(
 	go describeMissionGroupModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2885,7 +2887,7 @@ func (p Gs2MissionRestClient) CreateMissionGroupModelMasterAsync(
 	go createMissionGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2981,7 +2983,7 @@ func (p Gs2MissionRestClient) GetMissionGroupModelMasterAsync(
 	go getMissionGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3104,7 +3106,7 @@ func (p Gs2MissionRestClient) UpdateMissionGroupModelMasterAsync(
 	go updateMissionGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3200,7 +3202,7 @@ func (p Gs2MissionRestClient) DeleteMissionGroupModelMasterAsync(
 	go deleteMissionGroupModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3295,7 +3297,7 @@ func (p Gs2MissionRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3411,7 +3413,7 @@ func (p Gs2MissionRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3502,7 +3504,7 @@ func (p Gs2MissionRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3593,7 +3595,7 @@ func (p Gs2MissionRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3711,7 +3713,7 @@ func (p Gs2MissionRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3802,7 +3804,7 @@ func (p Gs2MissionRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3888,7 +3890,7 @@ func (p Gs2MissionRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3982,7 +3984,7 @@ func (p Gs2MissionRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4076,7 +4078,7 @@ func (p Gs2MissionRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4170,7 +4172,7 @@ func (p Gs2MissionRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4264,7 +4266,7 @@ func (p Gs2MissionRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4358,7 +4360,7 @@ func (p Gs2MissionRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4455,7 +4457,7 @@ func (p Gs2MissionRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4554,7 +4556,7 @@ func (p Gs2MissionRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4654,7 +4656,7 @@ func (p Gs2MissionRestClient) DescribeCountersAsync(
 	go describeCountersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4759,7 +4761,7 @@ func (p Gs2MissionRestClient) DescribeCountersByUserIdAsync(
 	go describeCountersByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4875,7 +4877,7 @@ func (p Gs2MissionRestClient) IncreaseCounterByUserIdAsync(
 	go increaseCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4995,7 +4997,7 @@ func (p Gs2MissionRestClient) SetCounterByUserIdAsync(
 	go setCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5106,7 +5108,7 @@ func (p Gs2MissionRestClient) DecreaseCounterAsync(
 	go decreaseCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5222,7 +5224,7 @@ func (p Gs2MissionRestClient) DecreaseCounterByUserIdAsync(
 	go decreaseCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5321,7 +5323,7 @@ func (p Gs2MissionRestClient) GetCounterAsync(
 	go getCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5425,7 +5427,7 @@ func (p Gs2MissionRestClient) GetCounterByUserIdAsync(
 	go getCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5547,7 +5549,7 @@ func (p Gs2MissionRestClient) VerifyCounterValueAsync(
 	go verifyCounterValueAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5674,7 +5676,7 @@ func (p Gs2MissionRestClient) VerifyCounterValueByUserIdAsync(
 	go verifyCounterValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5783,7 +5785,7 @@ func (p Gs2MissionRestClient) ResetCounterAsync(
 	go resetCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5897,7 +5899,7 @@ func (p Gs2MissionRestClient) ResetCounterByUserIdAsync(
 	go resetCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5999,7 +6001,7 @@ func (p Gs2MissionRestClient) DeleteCounterAsync(
 	go deleteCounterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6106,7 +6108,7 @@ func (p Gs2MissionRestClient) DeleteCounterByUserIdAsync(
 	go deleteCounterByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6198,7 +6200,7 @@ func (p Gs2MissionRestClient) IncreaseByStampSheetAsync(
 	go increaseByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6290,7 +6292,7 @@ func (p Gs2MissionRestClient) SetByStampSheetAsync(
 	go setByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6382,7 +6384,7 @@ func (p Gs2MissionRestClient) DecreaseByStampTaskAsync(
 	go decreaseByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6474,7 +6476,7 @@ func (p Gs2MissionRestClient) ResetByStampTaskAsync(
 	go resetByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6566,7 +6568,7 @@ func (p Gs2MissionRestClient) VerifyCounterValueByStampTaskAsync(
 	go verifyCounterValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6657,7 +6659,7 @@ func (p Gs2MissionRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6748,7 +6750,7 @@ func (p Gs2MissionRestClient) GetCurrentMissionMasterAsync(
 	go getCurrentMissionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6839,7 +6841,7 @@ func (p Gs2MissionRestClient) PreUpdateCurrentMissionMasterAsync(
 	go preUpdateCurrentMissionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6970,7 +6972,7 @@ func (p Gs2MissionRestClient) UpdateCurrentMissionMasterAsync(
 	go updateCurrentMissionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7064,7 +7066,7 @@ func (p Gs2MissionRestClient) UpdateCurrentMissionMasterFromGitHubAsync(
 	go updateCurrentMissionMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7155,7 +7157,7 @@ func (p Gs2MissionRestClient) DescribeCounterModelsAsync(
 	go describeCounterModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7251,7 +7253,7 @@ func (p Gs2MissionRestClient) GetCounterModelAsync(
 	go getCounterModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7342,7 +7344,7 @@ func (p Gs2MissionRestClient) DescribeMissionGroupModelsAsync(
 	go describeMissionGroupModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7438,7 +7440,7 @@ func (p Gs2MissionRestClient) GetMissionGroupModelAsync(
 	go getMissionGroupModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7534,7 +7536,7 @@ func (p Gs2MissionRestClient) DescribeMissionTaskModelsAsync(
 	go describeMissionTaskModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7635,7 +7637,7 @@ func (p Gs2MissionRestClient) GetMissionTaskModelAsync(
 	go getMissionTaskModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7740,7 +7742,7 @@ func (p Gs2MissionRestClient) DescribeMissionTaskModelMastersAsync(
 	go describeMissionTaskModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7880,7 +7882,7 @@ func (p Gs2MissionRestClient) CreateMissionTaskModelMasterAsync(
 	go createMissionTaskModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7981,7 +7983,7 @@ func (p Gs2MissionRestClient) GetMissionTaskModelMasterAsync(
 	go getMissionTaskModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8123,7 +8125,7 @@ func (p Gs2MissionRestClient) UpdateMissionTaskModelMasterAsync(
 	go updateMissionTaskModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8224,7 +8226,7 @@ func (p Gs2MissionRestClient) DeleteMissionTaskModelMasterAsync(
 	go deleteMissionTaskModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("mission", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

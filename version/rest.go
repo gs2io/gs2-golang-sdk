@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2VersionRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2VersionRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -213,7 +215,7 @@ func (p Gs2VersionRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -304,7 +306,7 @@ func (p Gs2VersionRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -395,7 +397,7 @@ func (p Gs2VersionRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -504,7 +506,7 @@ func (p Gs2VersionRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -595,7 +597,7 @@ func (p Gs2VersionRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -681,7 +683,7 @@ func (p Gs2VersionRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -775,7 +777,7 @@ func (p Gs2VersionRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -869,7 +871,7 @@ func (p Gs2VersionRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -963,7 +965,7 @@ func (p Gs2VersionRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1057,7 +1059,7 @@ func (p Gs2VersionRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1151,7 +1153,7 @@ func (p Gs2VersionRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1248,7 +1250,7 @@ func (p Gs2VersionRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1347,7 +1349,7 @@ func (p Gs2VersionRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1447,7 +1449,7 @@ func (p Gs2VersionRestClient) DescribeVersionModelMastersAsync(
 	go describeVersionModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1578,7 +1580,7 @@ func (p Gs2VersionRestClient) CreateVersionModelMasterAsync(
 	go createVersionModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1674,7 +1676,7 @@ func (p Gs2VersionRestClient) GetVersionModelMasterAsync(
 	go getVersionModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1807,7 +1809,7 @@ func (p Gs2VersionRestClient) UpdateVersionModelMasterAsync(
 	go updateVersionModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1903,7 +1905,7 @@ func (p Gs2VersionRestClient) DeleteVersionModelMasterAsync(
 	go deleteVersionModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1994,7 +1996,7 @@ func (p Gs2VersionRestClient) DescribeVersionModelsAsync(
 	go describeVersionModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2090,7 +2092,7 @@ func (p Gs2VersionRestClient) GetVersionModelAsync(
 	go getVersionModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2190,7 +2192,7 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsAsync(
 	go describeAcceptVersionsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2293,7 +2295,7 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsByUserIdAsync(
 	go describeAcceptVersionsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2402,7 +2404,7 @@ func (p Gs2VersionRestClient) AcceptAsync(
 	go acceptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2516,7 +2518,7 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
 	go acceptByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2625,7 +2627,7 @@ func (p Gs2VersionRestClient) RejectAsync(
 	go rejectAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2739,7 +2741,7 @@ func (p Gs2VersionRestClient) RejectByUserIdAsync(
 	go rejectByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2838,7 +2840,7 @@ func (p Gs2VersionRestClient) GetAcceptVersionAsync(
 	go getAcceptVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2942,7 +2944,7 @@ func (p Gs2VersionRestClient) GetAcceptVersionByUserIdAsync(
 	go getAcceptVersionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3044,7 +3046,7 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionAsync(
 	go deleteAcceptVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3151,7 +3153,7 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionByUserIdAsync(
 	go deleteAcceptVersionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3255,7 +3257,7 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
 	go checkVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3364,7 +3366,7 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
 	go checkVersionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3463,7 +3465,7 @@ func (p Gs2VersionRestClient) CalculateSignatureAsync(
 	go calculateSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3554,7 +3556,7 @@ func (p Gs2VersionRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3645,7 +3647,7 @@ func (p Gs2VersionRestClient) GetCurrentVersionMasterAsync(
 	go getCurrentVersionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3736,7 +3738,7 @@ func (p Gs2VersionRestClient) PreUpdateCurrentVersionMasterAsync(
 	go preUpdateCurrentVersionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3867,7 +3869,7 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterAsync(
 	go updateCurrentVersionMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3961,7 +3963,7 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterFromGitHubAsync(
 	go updateCurrentVersionMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("version").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("version", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

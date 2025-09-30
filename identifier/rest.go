@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2IdentifierRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -102,7 +104,7 @@ func (p Gs2IdentifierRestClient) DescribeUsersAsync(
 	go describeUsersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -194,7 +196,7 @@ func (p Gs2IdentifierRestClient) CreateUserAsync(
 	go createUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -288,7 +290,7 @@ func (p Gs2IdentifierRestClient) UpdateUserAsync(
 	go updateUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -379,7 +381,7 @@ func (p Gs2IdentifierRestClient) GetUserAsync(
 	go getUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -470,7 +472,7 @@ func (p Gs2IdentifierRestClient) DeleteUserAsync(
 	go deleteUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -562,7 +564,7 @@ func (p Gs2IdentifierRestClient) DescribeSecurityPoliciesAsync(
 	go describeSecurityPoliciesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -654,7 +656,7 @@ func (p Gs2IdentifierRestClient) DescribeCommonSecurityPoliciesAsync(
 	go describeCommonSecurityPoliciesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -749,7 +751,7 @@ func (p Gs2IdentifierRestClient) CreateSecurityPolicyAsync(
 	go createSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -846,7 +848,7 @@ func (p Gs2IdentifierRestClient) UpdateSecurityPolicyAsync(
 	go updateSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -937,7 +939,7 @@ func (p Gs2IdentifierRestClient) GetSecurityPolicyAsync(
 	go getSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1028,7 +1030,7 @@ func (p Gs2IdentifierRestClient) DeleteSecurityPolicyAsync(
 	go deleteSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1125,7 +1127,7 @@ func (p Gs2IdentifierRestClient) DescribeIdentifiersAsync(
 	go describeIdentifiersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1216,7 +1218,7 @@ func (p Gs2IdentifierRestClient) CreateIdentifierAsync(
 	go createIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1312,7 +1314,7 @@ func (p Gs2IdentifierRestClient) GetIdentifierAsync(
 	go getIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1408,7 +1410,7 @@ func (p Gs2IdentifierRestClient) DeleteIdentifierAsync(
 	go deleteIdentifierAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1504,7 +1506,7 @@ func (p Gs2IdentifierRestClient) DescribeAttachedGuardsAsync(
 	go describeAttachedGuardsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1603,7 +1605,7 @@ func (p Gs2IdentifierRestClient) AttachGuardAsync(
 	go attachGuardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1704,7 +1706,7 @@ func (p Gs2IdentifierRestClient) DetachGuardAsync(
 	go detachGuardAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1790,7 +1792,7 @@ func (p Gs2IdentifierRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1884,7 +1886,7 @@ func (p Gs2IdentifierRestClient) CreatePasswordAsync(
 	go createPasswordAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1975,7 +1977,7 @@ func (p Gs2IdentifierRestClient) GetPasswordAsync(
 	go getPasswordAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2066,7 +2068,7 @@ func (p Gs2IdentifierRestClient) EnableMfaAsync(
 	go enableMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2160,7 +2162,7 @@ func (p Gs2IdentifierRestClient) ChallengeMfaAsync(
 	go challengeMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2251,7 +2253,7 @@ func (p Gs2IdentifierRestClient) DisableMfaAsync(
 	go disableMfaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2342,7 +2344,7 @@ func (p Gs2IdentifierRestClient) DeletePasswordAsync(
 	go deletePasswordAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2433,7 +2435,7 @@ func (p Gs2IdentifierRestClient) GetHasSecurityPolicyAsync(
 	go getHasSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2527,7 +2529,7 @@ func (p Gs2IdentifierRestClient) AttachSecurityPolicyAsync(
 	go attachSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2623,7 +2625,7 @@ func (p Gs2IdentifierRestClient) DetachSecurityPolicyAsync(
 	go detachSecurityPolicyAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2715,7 +2717,7 @@ func (p Gs2IdentifierRestClient) LoginAsync(
 	go loginAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2810,7 +2812,7 @@ func (p Gs2IdentifierRestClient) LoginByUserAsync(
 	go loginByUserAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("identifier", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

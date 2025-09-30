@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2InventoryRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2InventoryRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -225,7 +227,7 @@ func (p Gs2InventoryRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -316,7 +318,7 @@ func (p Gs2InventoryRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -407,7 +409,7 @@ func (p Gs2InventoryRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -528,7 +530,7 @@ func (p Gs2InventoryRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -619,7 +621,7 @@ func (p Gs2InventoryRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -705,7 +707,7 @@ func (p Gs2InventoryRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -799,7 +801,7 @@ func (p Gs2InventoryRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -893,7 +895,7 @@ func (p Gs2InventoryRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -987,7 +989,7 @@ func (p Gs2InventoryRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1081,7 +1083,7 @@ func (p Gs2InventoryRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1175,7 +1177,7 @@ func (p Gs2InventoryRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1272,7 +1274,7 @@ func (p Gs2InventoryRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1371,7 +1373,7 @@ func (p Gs2InventoryRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1471,7 +1473,7 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 	go describeInventoryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1580,7 +1582,7 @@ func (p Gs2InventoryRestClient) CreateInventoryModelMasterAsync(
 	go createInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1676,7 +1678,7 @@ func (p Gs2InventoryRestClient) GetInventoryModelMasterAsync(
 	go getInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1787,7 +1789,7 @@ func (p Gs2InventoryRestClient) UpdateInventoryModelMasterAsync(
 	go updateInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1883,7 +1885,7 @@ func (p Gs2InventoryRestClient) DeleteInventoryModelMasterAsync(
 	go deleteInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1974,7 +1976,7 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelsAsync(
 	go describeInventoryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2070,7 +2072,7 @@ func (p Gs2InventoryRestClient) GetInventoryModelAsync(
 	go getInventoryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2172,7 +2174,7 @@ func (p Gs2InventoryRestClient) DescribeItemModelMastersAsync(
 	go describeItemModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2286,7 +2288,7 @@ func (p Gs2InventoryRestClient) CreateItemModelMasterAsync(
 	go createItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2387,7 +2389,7 @@ func (p Gs2InventoryRestClient) GetItemModelMasterAsync(
 	go getItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2503,7 +2505,7 @@ func (p Gs2InventoryRestClient) UpdateItemModelMasterAsync(
 	go updateItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2604,7 +2606,7 @@ func (p Gs2InventoryRestClient) DeleteItemModelMasterAsync(
 	go deleteItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2700,7 +2702,7 @@ func (p Gs2InventoryRestClient) DescribeItemModelsAsync(
 	go describeItemModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2801,7 +2803,7 @@ func (p Gs2InventoryRestClient) GetItemModelAsync(
 	go getItemModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2901,7 +2903,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelMastersAsync(
 	go describeSimpleInventoryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3001,7 +3003,7 @@ func (p Gs2InventoryRestClient) CreateSimpleInventoryModelMasterAsync(
 	go createSimpleInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3097,7 +3099,7 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelMasterAsync(
 	go getSimpleInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3199,7 +3201,7 @@ func (p Gs2InventoryRestClient) UpdateSimpleInventoryModelMasterAsync(
 	go updateSimpleInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3295,7 +3297,7 @@ func (p Gs2InventoryRestClient) DeleteSimpleInventoryModelMasterAsync(
 	go deleteSimpleInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3386,7 +3388,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelsAsync(
 	go describeSimpleInventoryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3482,7 +3484,7 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelAsync(
 	go getSimpleInventoryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3587,7 +3589,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelMastersAsync(
 	go describeSimpleItemModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3692,7 +3694,7 @@ func (p Gs2InventoryRestClient) CreateSimpleItemModelMasterAsync(
 	go createSimpleItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3793,7 +3795,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelMasterAsync(
 	go getSimpleItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3900,7 +3902,7 @@ func (p Gs2InventoryRestClient) UpdateSimpleItemModelMasterAsync(
 	go updateSimpleItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4001,7 +4003,7 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemModelMasterAsync(
 	go deleteSimpleItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4097,7 +4099,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelsAsync(
 	go describeSimpleItemModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4198,7 +4200,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelAsync(
 	go getSimpleItemModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4298,7 +4300,7 @@ func (p Gs2InventoryRestClient) DescribeBigInventoryModelMastersAsync(
 	go describeBigInventoryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4398,7 +4400,7 @@ func (p Gs2InventoryRestClient) CreateBigInventoryModelMasterAsync(
 	go createBigInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4494,7 +4496,7 @@ func (p Gs2InventoryRestClient) GetBigInventoryModelMasterAsync(
 	go getBigInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4596,7 +4598,7 @@ func (p Gs2InventoryRestClient) UpdateBigInventoryModelMasterAsync(
 	go updateBigInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4692,7 +4694,7 @@ func (p Gs2InventoryRestClient) DeleteBigInventoryModelMasterAsync(
 	go deleteBigInventoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4783,7 +4785,7 @@ func (p Gs2InventoryRestClient) DescribeBigInventoryModelsAsync(
 	go describeBigInventoryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4879,7 +4881,7 @@ func (p Gs2InventoryRestClient) GetBigInventoryModelAsync(
 	go getBigInventoryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4984,7 +4986,7 @@ func (p Gs2InventoryRestClient) DescribeBigItemModelMastersAsync(
 	go describeBigItemModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5089,7 +5091,7 @@ func (p Gs2InventoryRestClient) CreateBigItemModelMasterAsync(
 	go createBigItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5190,7 +5192,7 @@ func (p Gs2InventoryRestClient) GetBigItemModelMasterAsync(
 	go getBigItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5297,7 +5299,7 @@ func (p Gs2InventoryRestClient) UpdateBigItemModelMasterAsync(
 	go updateBigItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5398,7 +5400,7 @@ func (p Gs2InventoryRestClient) DeleteBigItemModelMasterAsync(
 	go deleteBigItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5494,7 +5496,7 @@ func (p Gs2InventoryRestClient) DescribeBigItemModelsAsync(
 	go describeBigItemModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5595,7 +5597,7 @@ func (p Gs2InventoryRestClient) GetBigItemModelAsync(
 	go getBigItemModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5686,7 +5688,7 @@ func (p Gs2InventoryRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5777,7 +5779,7 @@ func (p Gs2InventoryRestClient) GetCurrentItemModelMasterAsync(
 	go getCurrentItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5868,7 +5870,7 @@ func (p Gs2InventoryRestClient) PreUpdateCurrentItemModelMasterAsync(
 	go preUpdateCurrentItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5999,7 +6001,7 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterAsync(
 	go updateCurrentItemModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6093,7 +6095,7 @@ func (p Gs2InventoryRestClient) UpdateCurrentItemModelMasterFromGitHubAsync(
 	go updateCurrentItemModelMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6193,7 +6195,7 @@ func (p Gs2InventoryRestClient) DescribeInventoriesAsync(
 	go describeInventoriesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6298,7 +6300,7 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 	go describeInventoriesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6397,7 +6399,7 @@ func (p Gs2InventoryRestClient) GetInventoryAsync(
 	go getInventoryAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6501,7 +6503,7 @@ func (p Gs2InventoryRestClient) GetInventoryByUserIdAsync(
 	go getInventoryByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6611,7 +6613,7 @@ func (p Gs2InventoryRestClient) AddCapacityByUserIdAsync(
 	go addCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6721,7 +6723,7 @@ func (p Gs2InventoryRestClient) SetCapacityByUserIdAsync(
 	go setCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6828,7 +6830,7 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
 	go deleteInventoryByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -6941,7 +6943,7 @@ func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityAsync(
 	go verifyInventoryCurrentMaxCapacityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7059,7 +7061,7 @@ func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByUserIdAsync(
 	go verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7151,7 +7153,7 @@ func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByStampTaskAsyn
 	go verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7243,7 +7245,7 @@ func (p Gs2InventoryRestClient) AddCapacityByStampSheetAsync(
 	go addCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7335,7 +7337,7 @@ func (p Gs2InventoryRestClient) SetCapacityByStampSheetAsync(
 	go setCapacityByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -7440,7 +7442,7 @@ func (p Gs2InventoryRestClient) DescribeItemSetsAsync(
 	go describeItemSetsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7550,7 +7552,7 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 	go describeItemSetsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7657,7 +7659,7 @@ func (p Gs2InventoryRestClient) GetItemSetAsync(
 	go getItemSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7769,7 +7771,7 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 	go getItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7879,7 +7881,7 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureAsync(
 	go getItemWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -7994,7 +7996,7 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 	go getItemWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8124,7 +8126,7 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserIdAsync(
 	go acquireItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8248,7 +8250,7 @@ func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByUserIdAsync(
 	go acquireItemSetWithGradeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8370,7 +8372,7 @@ func (p Gs2InventoryRestClient) ConsumeItemSetAsync(
 	go consumeItemSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8497,7 +8499,7 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserIdAsync(
 	go consumeItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8612,7 +8614,7 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 	go deleteItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -8733,7 +8735,7 @@ func (p Gs2InventoryRestClient) VerifyItemSetAsync(
 	go verifyItemSetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8859,7 +8861,7 @@ func (p Gs2InventoryRestClient) VerifyItemSetByUserIdAsync(
 	go verifyItemSetByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -8951,7 +8953,7 @@ func (p Gs2InventoryRestClient) AcquireItemSetByStampSheetAsync(
 	go acquireItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9043,7 +9045,7 @@ func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByStampSheetAsync(
 	go acquireItemSetWithGradeByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9135,7 +9137,7 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByStampTaskAsync(
 	go consumeItemSetByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9227,7 +9229,7 @@ func (p Gs2InventoryRestClient) VerifyItemSetByStampTaskAsync(
 	go verifyItemSetByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9336,7 +9338,7 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfAsync(
 	go describeReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9450,7 +9452,7 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfByUserIdAsync(
 	go describeReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9564,7 +9566,7 @@ func (p Gs2InventoryRestClient) GetReferenceOfAsync(
 	go getReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9683,7 +9685,7 @@ func (p Gs2InventoryRestClient) GetReferenceOfByUserIdAsync(
 	go getReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -9805,7 +9807,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfAsync(
 	go verifyReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -9932,7 +9934,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
 	go verifyReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10047,7 +10049,7 @@ func (p Gs2InventoryRestClient) AddReferenceOfAsync(
 	go addReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10167,7 +10169,7 @@ func (p Gs2InventoryRestClient) AddReferenceOfByUserIdAsync(
 	go addReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10284,7 +10286,7 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
 	go deleteReferenceOfAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10406,7 +10408,7 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 	go deleteReferenceOfByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10498,7 +10500,7 @@ func (p Gs2InventoryRestClient) AddReferenceOfItemSetByStampSheetAsync(
 	go addReferenceOfItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10590,7 +10592,7 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfItemSetByStampSheetAsync(
 	go deleteReferenceOfItemSetByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10682,7 +10684,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByStampTaskAsync(
 	go verifyReferenceOfByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -10787,7 +10789,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemsAsync(
 	go describeSimpleItemsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -10897,7 +10899,7 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemsByUserIdAsync(
 	go describeSimpleItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11001,7 +11003,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemAsync(
 	go getSimpleItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11110,7 +11112,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemByUserIdAsync(
 	go getSimpleItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11217,7 +11219,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemWithSignatureAsync(
 	go getSimpleItemWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11329,7 +11331,7 @@ func (p Gs2InventoryRestClient) GetSimpleItemWithSignatureByUserIdAsync(
 	go getSimpleItemWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -11449,7 +11451,7 @@ func (p Gs2InventoryRestClient) AcquireSimpleItemsByUserIdAsync(
 	go acquireSimpleItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11567,7 +11569,7 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsAsync(
 	go consumeSimpleItemsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11690,7 +11692,7 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsByUserIdAsync(
 	go consumeSimpleItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11810,7 +11812,7 @@ func (p Gs2InventoryRestClient) SetSimpleItemsByUserIdAsync(
 	go setSimpleItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -11917,7 +11919,7 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemsByUserIdAsync(
 	go deleteSimpleItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -12035,7 +12037,7 @@ func (p Gs2InventoryRestClient) VerifySimpleItemAsync(
 	go verifySimpleItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12158,7 +12160,7 @@ func (p Gs2InventoryRestClient) VerifySimpleItemByUserIdAsync(
 	go verifySimpleItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12250,7 +12252,7 @@ func (p Gs2InventoryRestClient) AcquireSimpleItemsByStampSheetAsync(
 	go acquireSimpleItemsByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12342,7 +12344,7 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsByStampTaskAsync(
 	go consumeSimpleItemsByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12434,7 +12436,7 @@ func (p Gs2InventoryRestClient) SetSimpleItemsByStampSheetAsync(
 	go setSimpleItemsByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12526,7 +12528,7 @@ func (p Gs2InventoryRestClient) VerifySimpleItemByStampTaskAsync(
 	go verifySimpleItemByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -12631,7 +12633,7 @@ func (p Gs2InventoryRestClient) DescribeBigItemsAsync(
 	go describeBigItemsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -12741,7 +12743,7 @@ func (p Gs2InventoryRestClient) DescribeBigItemsByUserIdAsync(
 	go describeBigItemsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -12845,7 +12847,7 @@ func (p Gs2InventoryRestClient) GetBigItemAsync(
 	go getBigItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -12954,7 +12956,7 @@ func (p Gs2InventoryRestClient) GetBigItemByUserIdAsync(
 	go getBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -13075,7 +13077,7 @@ func (p Gs2InventoryRestClient) AcquireBigItemByUserIdAsync(
 	go acquireBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13194,7 +13196,7 @@ func (p Gs2InventoryRestClient) ConsumeBigItemAsync(
 	go consumeBigItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13318,7 +13320,7 @@ func (p Gs2InventoryRestClient) ConsumeBigItemByUserIdAsync(
 	go consumeBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13439,7 +13441,7 @@ func (p Gs2InventoryRestClient) SetBigItemByUserIdAsync(
 	go setBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13551,7 +13553,7 @@ func (p Gs2InventoryRestClient) DeleteBigItemByUserIdAsync(
 	go deleteBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -13669,7 +13671,7 @@ func (p Gs2InventoryRestClient) VerifyBigItemAsync(
 	go verifyBigItemAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13792,7 +13794,7 @@ func (p Gs2InventoryRestClient) VerifyBigItemByUserIdAsync(
 	go verifyBigItemByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13884,7 +13886,7 @@ func (p Gs2InventoryRestClient) AcquireBigItemByStampSheetAsync(
 	go acquireBigItemByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -13976,7 +13978,7 @@ func (p Gs2InventoryRestClient) ConsumeBigItemByStampTaskAsync(
 	go consumeBigItemByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -14068,7 +14070,7 @@ func (p Gs2InventoryRestClient) SetBigItemByStampSheetAsync(
 	go setBigItemByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -14160,7 +14162,7 @@ func (p Gs2InventoryRestClient) VerifyBigItemByStampTaskAsync(
 	go verifyBigItemByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("inventory", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

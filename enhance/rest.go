@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2EnhanceRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2EnhanceRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -216,7 +218,7 @@ func (p Gs2EnhanceRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -307,7 +309,7 @@ func (p Gs2EnhanceRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -398,7 +400,7 @@ func (p Gs2EnhanceRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -510,7 +512,7 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -601,7 +603,7 @@ func (p Gs2EnhanceRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -687,7 +689,7 @@ func (p Gs2EnhanceRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -781,7 +783,7 @@ func (p Gs2EnhanceRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -875,7 +877,7 @@ func (p Gs2EnhanceRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -969,7 +971,7 @@ func (p Gs2EnhanceRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1063,7 +1065,7 @@ func (p Gs2EnhanceRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1157,7 +1159,7 @@ func (p Gs2EnhanceRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1254,7 +1256,7 @@ func (p Gs2EnhanceRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1353,7 +1355,7 @@ func (p Gs2EnhanceRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1444,7 +1446,7 @@ func (p Gs2EnhanceRestClient) DescribeRateModelsAsync(
 	go describeRateModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1540,7 +1542,7 @@ func (p Gs2EnhanceRestClient) GetRateModelAsync(
 	go getRateModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1640,7 +1642,7 @@ func (p Gs2EnhanceRestClient) DescribeRateModelMastersAsync(
 	go describeRateModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1766,7 +1768,7 @@ func (p Gs2EnhanceRestClient) CreateRateModelMasterAsync(
 	go createRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1862,7 +1864,7 @@ func (p Gs2EnhanceRestClient) GetRateModelMasterAsync(
 	go getRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1990,7 +1992,7 @@ func (p Gs2EnhanceRestClient) UpdateRateModelMasterAsync(
 	go updateRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2086,7 +2088,7 @@ func (p Gs2EnhanceRestClient) DeleteRateModelMasterAsync(
 	go deleteRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2177,7 +2179,7 @@ func (p Gs2EnhanceRestClient) DescribeUnleashRateModelsAsync(
 	go describeUnleashRateModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2273,7 +2275,7 @@ func (p Gs2EnhanceRestClient) GetUnleashRateModelAsync(
 	go getUnleashRateModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2373,7 +2375,7 @@ func (p Gs2EnhanceRestClient) DescribeUnleashRateModelMastersAsync(
 	go describeUnleashRateModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2486,7 +2488,7 @@ func (p Gs2EnhanceRestClient) CreateUnleashRateModelMasterAsync(
 	go createUnleashRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2582,7 +2584,7 @@ func (p Gs2EnhanceRestClient) GetUnleashRateModelMasterAsync(
 	go getUnleashRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2697,7 +2699,7 @@ func (p Gs2EnhanceRestClient) UpdateUnleashRateModelMasterAsync(
 	go updateUnleashRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2793,7 +2795,7 @@ func (p Gs2EnhanceRestClient) DeleteUnleashRateModelMasterAsync(
 	go deleteUnleashRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2912,7 +2914,7 @@ func (p Gs2EnhanceRestClient) DirectEnhanceAsync(
 	go directEnhanceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3036,7 +3038,7 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByUserIdAsync(
 	go directEnhanceByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3128,7 +3130,7 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByStampSheetAsync(
 	go directEnhanceByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3247,7 +3249,7 @@ func (p Gs2EnhanceRestClient) UnleashAsync(
 	go unleashAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3371,7 +3373,7 @@ func (p Gs2EnhanceRestClient) UnleashByUserIdAsync(
 	go unleashByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3463,7 +3465,7 @@ func (p Gs2EnhanceRestClient) UnleashByStampSheetAsync(
 	go unleashByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3581,7 +3583,7 @@ func (p Gs2EnhanceRestClient) CreateProgressByUserIdAsync(
 	go createProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3675,7 +3677,7 @@ func (p Gs2EnhanceRestClient) GetProgressAsync(
 	go getProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3774,7 +3776,7 @@ func (p Gs2EnhanceRestClient) GetProgressByUserIdAsync(
 	go getProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3896,7 +3898,7 @@ func (p Gs2EnhanceRestClient) StartAsync(
 	go startAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4023,7 +4025,7 @@ func (p Gs2EnhanceRestClient) StartByUserIdAsync(
 	go startByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4127,7 +4129,7 @@ func (p Gs2EnhanceRestClient) EndAsync(
 	go endAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4236,7 +4238,7 @@ func (p Gs2EnhanceRestClient) EndByUserIdAsync(
 	go endByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4333,7 +4335,7 @@ func (p Gs2EnhanceRestClient) DeleteProgressAsync(
 	go deleteProgressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4435,7 +4437,7 @@ func (p Gs2EnhanceRestClient) DeleteProgressByUserIdAsync(
 	go deleteProgressByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4527,7 +4529,7 @@ func (p Gs2EnhanceRestClient) CreateProgressByStampSheetAsync(
 	go createProgressByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4619,7 +4621,7 @@ func (p Gs2EnhanceRestClient) DeleteProgressByStampTaskAsync(
 	go deleteProgressByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4710,7 +4712,7 @@ func (p Gs2EnhanceRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4801,7 +4803,7 @@ func (p Gs2EnhanceRestClient) GetCurrentRateMasterAsync(
 	go getCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4892,7 +4894,7 @@ func (p Gs2EnhanceRestClient) PreUpdateCurrentRateMasterAsync(
 	go preUpdateCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5023,7 +5025,7 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterAsync(
 	go updateCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5117,7 +5119,7 @@ func (p Gs2EnhanceRestClient) UpdateCurrentRateMasterFromGitHubAsync(
 	go updateCurrentRateMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enhance", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

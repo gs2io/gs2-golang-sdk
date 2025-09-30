@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2DistributorRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2DistributorRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -213,7 +215,7 @@ func (p Gs2DistributorRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -304,7 +306,7 @@ func (p Gs2DistributorRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -395,7 +397,7 @@ func (p Gs2DistributorRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -504,7 +506,7 @@ func (p Gs2DistributorRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -595,7 +597,7 @@ func (p Gs2DistributorRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -681,7 +683,7 @@ func (p Gs2DistributorRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -781,7 +783,7 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelMastersAsync(
 	go describeDistributorModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -891,7 +893,7 @@ func (p Gs2DistributorRestClient) CreateDistributorModelMasterAsync(
 	go createDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -987,7 +989,7 @@ func (p Gs2DistributorRestClient) GetDistributorModelMasterAsync(
 	go getDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1099,7 +1101,7 @@ func (p Gs2DistributorRestClient) UpdateDistributorModelMasterAsync(
 	go updateDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1195,7 +1197,7 @@ func (p Gs2DistributorRestClient) DeleteDistributorModelMasterAsync(
 	go deleteDistributorModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1286,7 +1288,7 @@ func (p Gs2DistributorRestClient) DescribeDistributorModelsAsync(
 	go describeDistributorModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1382,7 +1384,7 @@ func (p Gs2DistributorRestClient) GetDistributorModelAsync(
 	go getDistributorModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1473,7 +1475,7 @@ func (p Gs2DistributorRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1564,7 +1566,7 @@ func (p Gs2DistributorRestClient) GetCurrentDistributorMasterAsync(
 	go getCurrentDistributorMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1655,7 +1657,7 @@ func (p Gs2DistributorRestClient) PreUpdateCurrentDistributorMasterAsync(
 	go preUpdateCurrentDistributorMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1786,7 +1788,7 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterAsync(
 	go updateCurrentDistributorMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1880,7 +1882,7 @@ func (p Gs2DistributorRestClient) UpdateCurrentDistributorMasterFromGitHubAsync(
 	go updateCurrentDistributorMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1988,7 +1990,7 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 	go distributeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2086,7 +2088,7 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcessAsync(
 	go distributeWithoutOverflowProcessAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2183,7 +2185,7 @@ func (p Gs2DistributorRestClient) RunVerifyTaskAsync(
 	go runVerifyTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2280,7 +2282,7 @@ func (p Gs2DistributorRestClient) RunStampTaskAsync(
 	go runStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2377,7 +2379,7 @@ func (p Gs2DistributorRestClient) RunStampSheetAsync(
 	go runStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2474,7 +2476,7 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressAsync(
 	go runStampSheetExpressAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2566,7 +2568,7 @@ func (p Gs2DistributorRestClient) RunVerifyTaskWithoutNamespaceAsync(
 	go runVerifyTaskWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2658,7 +2660,7 @@ func (p Gs2DistributorRestClient) RunStampTaskWithoutNamespaceAsync(
 	go runStampTaskWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2750,7 +2752,7 @@ func (p Gs2DistributorRestClient) RunStampSheetWithoutNamespaceAsync(
 	go runStampSheetWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2842,7 +2844,7 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressWithoutNamespaceAsync(
 	go runStampSheetExpressWithoutNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2941,7 +2943,7 @@ func (p Gs2DistributorRestClient) SetTransactionDefaultConfigAsync(
 	go setTransactionDefaultConfigAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3045,7 +3047,7 @@ func (p Gs2DistributorRestClient) SetTransactionDefaultConfigByUserIdAsync(
 	go setTransactionDefaultConfigByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3139,7 +3141,7 @@ func (p Gs2DistributorRestClient) FreezeMasterDataAsync(
 	go freezeMasterDataAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3238,7 +3240,7 @@ func (p Gs2DistributorRestClient) FreezeMasterDataByUserIdAsync(
 	go freezeMasterDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3335,7 +3337,7 @@ func (p Gs2DistributorRestClient) SignFreezeMasterDataTimestampAsync(
 	go signFreezeMasterDataTimestampAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3438,7 +3440,7 @@ func (p Gs2DistributorRestClient) FreezeMasterDataBySignedTimestampAsync(
 	go freezeMasterDataBySignedTimestampAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3535,7 +3537,7 @@ func (p Gs2DistributorRestClient) FreezeMasterDataByTimestampAsync(
 	go freezeMasterDataByTimestampAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3628,7 +3630,7 @@ func (p Gs2DistributorRestClient) BatchExecuteApiAsync(
 	go batchExecuteApiAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3748,7 +3750,7 @@ func (p Gs2DistributorRestClient) IfExpressionByUserIdAsync(
 	go ifExpressionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3855,7 +3857,7 @@ func (p Gs2DistributorRestClient) AndExpressionByUserIdAsync(
 	go andExpressionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3962,7 +3964,7 @@ func (p Gs2DistributorRestClient) OrExpressionByUserIdAsync(
 	go orExpressionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4054,7 +4056,7 @@ func (p Gs2DistributorRestClient) IfExpressionByStampTaskAsync(
 	go ifExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4146,7 +4148,7 @@ func (p Gs2DistributorRestClient) AndExpressionByStampTaskAsync(
 	go andExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4238,7 +4240,7 @@ func (p Gs2DistributorRestClient) OrExpressionByStampTaskAsync(
 	go orExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4337,7 +4339,7 @@ func (p Gs2DistributorRestClient) GetStampSheetResultAsync(
 	go getStampSheetResultAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4441,7 +4443,7 @@ func (p Gs2DistributorRestClient) GetStampSheetResultByUserIdAsync(
 	go getStampSheetResultByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4551,7 +4553,7 @@ func (p Gs2DistributorRestClient) RunTransactionAsync(
 	go runTransactionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4650,7 +4652,7 @@ func (p Gs2DistributorRestClient) GetTransactionResultAsync(
 	go getTransactionResultAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4754,7 +4756,7 @@ func (p Gs2DistributorRestClient) GetTransactionResultByUserIdAsync(
 	go getTransactionResultByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("distributor", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,

@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2LoginRewardRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2LoginRewardRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -207,7 +209,7 @@ func (p Gs2LoginRewardRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -298,7 +300,7 @@ func (p Gs2LoginRewardRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -389,7 +391,7 @@ func (p Gs2LoginRewardRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -492,7 +494,7 @@ func (p Gs2LoginRewardRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -583,7 +585,7 @@ func (p Gs2LoginRewardRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -669,7 +671,7 @@ func (p Gs2LoginRewardRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -763,7 +765,7 @@ func (p Gs2LoginRewardRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -857,7 +859,7 @@ func (p Gs2LoginRewardRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -951,7 +953,7 @@ func (p Gs2LoginRewardRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1045,7 +1047,7 @@ func (p Gs2LoginRewardRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1139,7 +1141,7 @@ func (p Gs2LoginRewardRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1236,7 +1238,7 @@ func (p Gs2LoginRewardRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1335,7 +1337,7 @@ func (p Gs2LoginRewardRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1435,7 +1437,7 @@ func (p Gs2LoginRewardRestClient) DescribeBonusModelMastersAsync(
 	go describeBonusModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1571,7 +1573,7 @@ func (p Gs2LoginRewardRestClient) CreateBonusModelMasterAsync(
 	go createBonusModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1667,7 +1669,7 @@ func (p Gs2LoginRewardRestClient) GetBonusModelMasterAsync(
 	go getBonusModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1805,7 +1807,7 @@ func (p Gs2LoginRewardRestClient) UpdateBonusModelMasterAsync(
 	go updateBonusModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1901,7 +1903,7 @@ func (p Gs2LoginRewardRestClient) DeleteBonusModelMasterAsync(
 	go deleteBonusModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1992,7 +1994,7 @@ func (p Gs2LoginRewardRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2083,7 +2085,7 @@ func (p Gs2LoginRewardRestClient) GetCurrentBonusMasterAsync(
 	go getCurrentBonusMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2174,7 +2176,7 @@ func (p Gs2LoginRewardRestClient) PreUpdateCurrentBonusMasterAsync(
 	go preUpdateCurrentBonusMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2305,7 +2307,7 @@ func (p Gs2LoginRewardRestClient) UpdateCurrentBonusMasterAsync(
 	go updateCurrentBonusMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2399,7 +2401,7 @@ func (p Gs2LoginRewardRestClient) UpdateCurrentBonusMasterFromGitHubAsync(
 	go updateCurrentBonusMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2490,7 +2492,7 @@ func (p Gs2LoginRewardRestClient) DescribeBonusModelsAsync(
 	go describeBonusModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2586,7 +2588,7 @@ func (p Gs2LoginRewardRestClient) GetBonusModelAsync(
 	go getBonusModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2701,7 +2703,7 @@ func (p Gs2LoginRewardRestClient) ReceiveAsync(
 	go receiveAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2821,7 +2823,7 @@ func (p Gs2LoginRewardRestClient) ReceiveByUserIdAsync(
 	go receiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2939,7 +2941,7 @@ func (p Gs2LoginRewardRestClient) MissedReceiveAsync(
 	go missedReceiveAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3062,7 +3064,7 @@ func (p Gs2LoginRewardRestClient) MissedReceiveByUserIdAsync(
 	go missedReceiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3162,7 +3164,7 @@ func (p Gs2LoginRewardRestClient) DescribeReceiveStatusesAsync(
 	go describeReceiveStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3267,7 +3269,7 @@ func (p Gs2LoginRewardRestClient) DescribeReceiveStatusesByUserIdAsync(
 	go describeReceiveStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3366,7 +3368,7 @@ func (p Gs2LoginRewardRestClient) GetReceiveStatusAsync(
 	go getReceiveStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3470,7 +3472,7 @@ func (p Gs2LoginRewardRestClient) GetReceiveStatusByUserIdAsync(
 	go getReceiveStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3577,7 +3579,7 @@ func (p Gs2LoginRewardRestClient) DeleteReceiveStatusByUserIdAsync(
 	go deleteReceiveStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3669,7 +3671,7 @@ func (p Gs2LoginRewardRestClient) DeleteReceiveStatusByStampSheetAsync(
 	go deleteReceiveStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3774,7 +3776,7 @@ func (p Gs2LoginRewardRestClient) MarkReceivedAsync(
 	go markReceivedAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3884,7 +3886,7 @@ func (p Gs2LoginRewardRestClient) MarkReceivedByUserIdAsync(
 	go markReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3994,7 +3996,7 @@ func (p Gs2LoginRewardRestClient) UnmarkReceivedByUserIdAsync(
 	go unmarkReceivedByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4086,7 +4088,7 @@ func (p Gs2LoginRewardRestClient) MarkReceivedByStampTaskAsync(
 	go markReceivedByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4178,7 +4180,7 @@ func (p Gs2LoginRewardRestClient) UnmarkReceivedByStampSheetAsync(
 	go unmarkReceivedByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("login-reward", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

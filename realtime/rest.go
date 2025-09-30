@@ -23,6 +23,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2RealtimeRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -105,7 +107,7 @@ func (p Gs2RealtimeRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -212,7 +214,7 @@ func (p Gs2RealtimeRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -303,7 +305,7 @@ func (p Gs2RealtimeRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -394,7 +396,7 @@ func (p Gs2RealtimeRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -503,7 +505,7 @@ func (p Gs2RealtimeRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -594,7 +596,7 @@ func (p Gs2RealtimeRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -683,7 +685,7 @@ func (p Gs2RealtimeRestClient) NowAsync(
 	go nowAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -769,7 +771,7 @@ func (p Gs2RealtimeRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -866,7 +868,7 @@ func (p Gs2RealtimeRestClient) DescribeRoomsAsync(
 	go describeRoomsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -967,7 +969,7 @@ func (p Gs2RealtimeRestClient) WantRoomAsync(
 	go wantRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1063,7 +1065,7 @@ func (p Gs2RealtimeRestClient) GetRoomAsync(
 	go getRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1159,7 +1161,7 @@ func (p Gs2RealtimeRestClient) DeleteRoomAsync(
 	go deleteRoomAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("realtime").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("realtime", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,

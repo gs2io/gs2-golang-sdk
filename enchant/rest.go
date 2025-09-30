@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2EnchantRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2EnchantRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -204,7 +206,7 @@ func (p Gs2EnchantRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -295,7 +297,7 @@ func (p Gs2EnchantRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -386,7 +388,7 @@ func (p Gs2EnchantRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -486,7 +488,7 @@ func (p Gs2EnchantRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -577,7 +579,7 @@ func (p Gs2EnchantRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -663,7 +665,7 @@ func (p Gs2EnchantRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -757,7 +759,7 @@ func (p Gs2EnchantRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -851,7 +853,7 @@ func (p Gs2EnchantRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -945,7 +947,7 @@ func (p Gs2EnchantRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1039,7 +1041,7 @@ func (p Gs2EnchantRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1133,7 +1135,7 @@ func (p Gs2EnchantRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1230,7 +1232,7 @@ func (p Gs2EnchantRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1329,7 +1331,7 @@ func (p Gs2EnchantRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1420,7 +1422,7 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterModelsAsync(
 	go describeBalanceParameterModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1516,7 +1518,7 @@ func (p Gs2EnchantRestClient) GetBalanceParameterModelAsync(
 	go getBalanceParameterModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1616,7 +1618,7 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterModelMastersAsync(
 	go describeBalanceParameterModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1729,7 +1731,7 @@ func (p Gs2EnchantRestClient) CreateBalanceParameterModelMasterAsync(
 	go createBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1825,7 +1827,7 @@ func (p Gs2EnchantRestClient) GetBalanceParameterModelMasterAsync(
 	go getBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1940,7 +1942,7 @@ func (p Gs2EnchantRestClient) UpdateBalanceParameterModelMasterAsync(
 	go updateBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2036,7 +2038,7 @@ func (p Gs2EnchantRestClient) DeleteBalanceParameterModelMasterAsync(
 	go deleteBalanceParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2127,7 +2129,7 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterModelsAsync(
 	go describeRarityParameterModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2223,7 +2225,7 @@ func (p Gs2EnchantRestClient) GetRarityParameterModelAsync(
 	go getRarityParameterModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2320,7 +2322,7 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterModelMastersAsync(
 	go describeRarityParameterModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2437,7 +2439,7 @@ func (p Gs2EnchantRestClient) CreateRarityParameterModelMasterAsync(
 	go createRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2533,7 +2535,7 @@ func (p Gs2EnchantRestClient) GetRarityParameterModelMasterAsync(
 	go getRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2652,7 +2654,7 @@ func (p Gs2EnchantRestClient) UpdateRarityParameterModelMasterAsync(
 	go updateRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2748,7 +2750,7 @@ func (p Gs2EnchantRestClient) DeleteRarityParameterModelMasterAsync(
 	go deleteRarityParameterModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2839,7 +2841,7 @@ func (p Gs2EnchantRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2930,7 +2932,7 @@ func (p Gs2EnchantRestClient) GetCurrentParameterMasterAsync(
 	go getCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3021,7 +3023,7 @@ func (p Gs2EnchantRestClient) PreUpdateCurrentParameterMasterAsync(
 	go preUpdateCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3152,7 +3154,7 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterAsync(
 	go updateCurrentParameterMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3246,7 +3248,7 @@ func (p Gs2EnchantRestClient) UpdateCurrentParameterMasterFromGitHubAsync(
 	go updateCurrentParameterMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3349,7 +3351,7 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesAsync(
 	go describeBalanceParameterStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3457,7 +3459,7 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesByUserIdAsync(
 	go describeBalanceParameterStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3561,7 +3563,7 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusAsync(
 	go getBalanceParameterStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3670,7 +3672,7 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusByUserIdAsync(
 	go getBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3782,7 +3784,7 @@ func (p Gs2EnchantRestClient) DeleteBalanceParameterStatusByUserIdAsync(
 	go deleteBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3901,7 +3903,7 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByUserIdAsync(
 	go reDrawBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3993,7 +3995,7 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByStampSheetAsync(
 	go reDrawBalanceParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4112,7 +4114,7 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByUserIdAsync(
 	go setBalanceParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4204,7 +4206,7 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByStampSheetAsync(
 	go setBalanceParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4307,7 +4309,7 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesAsync(
 	go describeRarityParameterStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4415,7 +4417,7 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesByUserIdAsync(
 	go describeRarityParameterStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4519,7 +4521,7 @@ func (p Gs2EnchantRestClient) GetRarityParameterStatusAsync(
 	go getRarityParameterStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4628,7 +4630,7 @@ func (p Gs2EnchantRestClient) GetRarityParameterStatusByUserIdAsync(
 	go getRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4740,7 +4742,7 @@ func (p Gs2EnchantRestClient) DeleteRarityParameterStatusByUserIdAsync(
 	go deleteRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4859,7 +4861,7 @@ func (p Gs2EnchantRestClient) ReDrawRarityParameterStatusByUserIdAsync(
 	go reDrawRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4951,7 +4953,7 @@ func (p Gs2EnchantRestClient) ReDrawRarityParameterStatusByStampSheetAsync(
 	go reDrawRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5066,7 +5068,7 @@ func (p Gs2EnchantRestClient) AddRarityParameterStatusByUserIdAsync(
 	go addRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5158,7 +5160,7 @@ func (p Gs2EnchantRestClient) AddRarityParameterStatusByStampSheetAsync(
 	go addRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5279,7 +5281,7 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusAsync(
 	go verifyRarityParameterStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5405,7 +5407,7 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByUserIdAsync(
 	go verifyRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5497,7 +5499,7 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByStampTaskAsync(
 	go verifyRarityParameterStatusByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5616,7 +5618,7 @@ func (p Gs2EnchantRestClient) SetRarityParameterStatusByUserIdAsync(
 	go setRarityParameterStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5708,7 +5710,7 @@ func (p Gs2EnchantRestClient) SetRarityParameterStatusByStampSheetAsync(
 	go setRarityParameterStatusByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("enchant").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ExchangeRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2ExchangeRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -225,7 +227,7 @@ func (p Gs2ExchangeRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -316,7 +318,7 @@ func (p Gs2ExchangeRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -407,7 +409,7 @@ func (p Gs2ExchangeRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -528,7 +530,7 @@ func (p Gs2ExchangeRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -619,7 +621,7 @@ func (p Gs2ExchangeRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -705,7 +707,7 @@ func (p Gs2ExchangeRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -799,7 +801,7 @@ func (p Gs2ExchangeRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -893,7 +895,7 @@ func (p Gs2ExchangeRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -987,7 +989,7 @@ func (p Gs2ExchangeRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1081,7 +1083,7 @@ func (p Gs2ExchangeRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1175,7 +1177,7 @@ func (p Gs2ExchangeRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1272,7 +1274,7 @@ func (p Gs2ExchangeRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1371,7 +1373,7 @@ func (p Gs2ExchangeRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1462,7 +1464,7 @@ func (p Gs2ExchangeRestClient) DescribeRateModelsAsync(
 	go describeRateModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1558,7 +1560,7 @@ func (p Gs2ExchangeRestClient) GetRateModelAsync(
 	go getRateModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1658,7 +1660,7 @@ func (p Gs2ExchangeRestClient) DescribeRateModelMastersAsync(
 	go describeRateModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1785,7 +1787,7 @@ func (p Gs2ExchangeRestClient) CreateRateModelMasterAsync(
 	go createRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1881,7 +1883,7 @@ func (p Gs2ExchangeRestClient) GetRateModelMasterAsync(
 	go getRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2010,7 +2012,7 @@ func (p Gs2ExchangeRestClient) UpdateRateModelMasterAsync(
 	go updateRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2106,7 +2108,7 @@ func (p Gs2ExchangeRestClient) DeleteRateModelMasterAsync(
 	go deleteRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2197,7 +2199,7 @@ func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelsAsync(
 	go describeIncrementalRateModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2293,7 +2295,7 @@ func (p Gs2ExchangeRestClient) GetIncrementalRateModelAsync(
 	go getIncrementalRateModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2393,7 +2395,7 @@ func (p Gs2ExchangeRestClient) DescribeIncrementalRateModelMastersAsync(
 	go describeIncrementalRateModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2521,7 +2523,7 @@ func (p Gs2ExchangeRestClient) CreateIncrementalRateModelMasterAsync(
 	go createIncrementalRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2617,7 +2619,7 @@ func (p Gs2ExchangeRestClient) GetIncrementalRateModelMasterAsync(
 	go getIncrementalRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2747,7 +2749,7 @@ func (p Gs2ExchangeRestClient) UpdateIncrementalRateModelMasterAsync(
 	go updateIncrementalRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2843,7 +2845,7 @@ func (p Gs2ExchangeRestClient) DeleteIncrementalRateModelMasterAsync(
 	go deleteIncrementalRateModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2955,7 +2957,7 @@ func (p Gs2ExchangeRestClient) ExchangeAsync(
 	go exchangeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3072,7 +3074,7 @@ func (p Gs2ExchangeRestClient) ExchangeByUserIdAsync(
 	go exchangeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3164,7 +3166,7 @@ func (p Gs2ExchangeRestClient) ExchangeByStampSheetAsync(
 	go exchangeByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3276,7 +3278,7 @@ func (p Gs2ExchangeRestClient) IncrementalExchangeAsync(
 	go incrementalExchangeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3393,7 +3395,7 @@ func (p Gs2ExchangeRestClient) IncrementalExchangeByUserIdAsync(
 	go incrementalExchangeByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3485,7 +3487,7 @@ func (p Gs2ExchangeRestClient) IncrementalExchangeByStampSheetAsync(
 	go incrementalExchangeByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3576,7 +3578,7 @@ func (p Gs2ExchangeRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3667,7 +3669,7 @@ func (p Gs2ExchangeRestClient) GetCurrentRateMasterAsync(
 	go getCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3758,7 +3760,7 @@ func (p Gs2ExchangeRestClient) PreUpdateCurrentRateMasterAsync(
 	go preUpdateCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3889,7 +3891,7 @@ func (p Gs2ExchangeRestClient) UpdateCurrentRateMasterAsync(
 	go updateCurrentRateMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3983,7 +3985,7 @@ func (p Gs2ExchangeRestClient) UpdateCurrentRateMasterFromGitHubAsync(
 	go updateCurrentRateMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4100,7 +4102,7 @@ func (p Gs2ExchangeRestClient) CreateAwaitByUserIdAsync(
 	go createAwaitByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4203,7 +4205,7 @@ func (p Gs2ExchangeRestClient) DescribeAwaitsAsync(
 	go describeAwaitsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4311,7 +4313,7 @@ func (p Gs2ExchangeRestClient) DescribeAwaitsByUserIdAsync(
 	go describeAwaitsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4410,7 +4412,7 @@ func (p Gs2ExchangeRestClient) GetAwaitAsync(
 	go getAwaitAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4514,7 +4516,7 @@ func (p Gs2ExchangeRestClient) GetAwaitByUserIdAsync(
 	go getAwaitByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4623,7 +4625,7 @@ func (p Gs2ExchangeRestClient) AcquireAsync(
 	go acquireAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4737,7 +4739,7 @@ func (p Gs2ExchangeRestClient) AcquireByUserIdAsync(
 	go acquireByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4851,7 +4853,7 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserIdAsync(
 	go acquireForceByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4967,7 +4969,7 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
 	go skipByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5069,7 +5071,7 @@ func (p Gs2ExchangeRestClient) DeleteAwaitAsync(
 	go deleteAwaitAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5176,7 +5178,7 @@ func (p Gs2ExchangeRestClient) DeleteAwaitByUserIdAsync(
 	go deleteAwaitByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -5268,7 +5270,7 @@ func (p Gs2ExchangeRestClient) CreateAwaitByStampSheetAsync(
 	go createAwaitByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5360,7 +5362,7 @@ func (p Gs2ExchangeRestClient) AcquireForceByStampSheetAsync(
 	go acquireForceByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5452,7 +5454,7 @@ func (p Gs2ExchangeRestClient) SkipByStampSheetAsync(
 	go skipByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5544,7 +5546,7 @@ func (p Gs2ExchangeRestClient) DeleteAwaitByStampTaskAsync(
 	go deleteAwaitByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("exchange", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,

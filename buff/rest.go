@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2BuffRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2BuffRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -207,7 +209,7 @@ func (p Gs2BuffRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -298,7 +300,7 @@ func (p Gs2BuffRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -389,7 +391,7 @@ func (p Gs2BuffRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -492,7 +494,7 @@ func (p Gs2BuffRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -583,7 +585,7 @@ func (p Gs2BuffRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -669,7 +671,7 @@ func (p Gs2BuffRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -763,7 +765,7 @@ func (p Gs2BuffRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -857,7 +859,7 @@ func (p Gs2BuffRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -951,7 +953,7 @@ func (p Gs2BuffRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1045,7 +1047,7 @@ func (p Gs2BuffRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1139,7 +1141,7 @@ func (p Gs2BuffRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1236,7 +1238,7 @@ func (p Gs2BuffRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1335,7 +1337,7 @@ func (p Gs2BuffRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1426,7 +1428,7 @@ func (p Gs2BuffRestClient) DescribeBuffEntryModelsAsync(
 	go describeBuffEntryModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1522,7 +1524,7 @@ func (p Gs2BuffRestClient) GetBuffEntryModelAsync(
 	go getBuffEntryModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1622,7 +1624,7 @@ func (p Gs2BuffRestClient) DescribeBuffEntryModelMastersAsync(
 	go describeBuffEntryModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1740,7 +1742,7 @@ func (p Gs2BuffRestClient) CreateBuffEntryModelMasterAsync(
 	go createBuffEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1836,7 +1838,7 @@ func (p Gs2BuffRestClient) GetBuffEntryModelMasterAsync(
 	go getBuffEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1956,7 +1958,7 @@ func (p Gs2BuffRestClient) UpdateBuffEntryModelMasterAsync(
 	go updateBuffEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2052,7 +2054,7 @@ func (p Gs2BuffRestClient) DeleteBuffEntryModelMasterAsync(
 	go deleteBuffEntryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2146,7 +2148,7 @@ func (p Gs2BuffRestClient) ApplyBuffAsync(
 	go applyBuffAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2245,7 +2247,7 @@ func (p Gs2BuffRestClient) ApplyBuffByUserIdAsync(
 	go applyBuffByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2336,7 +2338,7 @@ func (p Gs2BuffRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2427,7 +2429,7 @@ func (p Gs2BuffRestClient) GetCurrentBuffMasterAsync(
 	go getCurrentBuffMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2518,7 +2520,7 @@ func (p Gs2BuffRestClient) PreUpdateCurrentBuffMasterAsync(
 	go preUpdateCurrentBuffMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2649,7 +2651,7 @@ func (p Gs2BuffRestClient) UpdateCurrentBuffMasterAsync(
 	go updateCurrentBuffMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2743,7 +2745,7 @@ func (p Gs2BuffRestClient) UpdateCurrentBuffMasterFromGitHubAsync(
 	go updateCurrentBuffMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("buff").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("buff", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,

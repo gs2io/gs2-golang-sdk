@@ -24,6 +24,8 @@ import (
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
+var EndpointHost *string = nil
+
 type Gs2ExperienceRestClient struct {
 	Session *core.Gs2RestSession
 }
@@ -106,7 +108,7 @@ func (p Gs2ExperienceRestClient) DescribeNamespacesAsync(
 	go describeNamespacesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -219,7 +221,7 @@ func (p Gs2ExperienceRestClient) CreateNamespaceAsync(
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -310,7 +312,7 @@ func (p Gs2ExperienceRestClient) GetNamespaceStatusAsync(
 	go getNamespaceStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -401,7 +403,7 @@ func (p Gs2ExperienceRestClient) GetNamespaceAsync(
 	go getNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -516,7 +518,7 @@ func (p Gs2ExperienceRestClient) UpdateNamespaceAsync(
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -607,7 +609,7 @@ func (p Gs2ExperienceRestClient) DeleteNamespaceAsync(
 	go deleteNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -693,7 +695,7 @@ func (p Gs2ExperienceRestClient) GetServiceVersionAsync(
 	go getServiceVersionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -787,7 +789,7 @@ func (p Gs2ExperienceRestClient) DumpUserDataByUserIdAsync(
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -881,7 +883,7 @@ func (p Gs2ExperienceRestClient) CheckDumpUserDataByUserIdAsync(
 	go checkDumpUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -975,7 +977,7 @@ func (p Gs2ExperienceRestClient) CleanUserDataByUserIdAsync(
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1069,7 +1071,7 @@ func (p Gs2ExperienceRestClient) CheckCleanUserDataByUserIdAsync(
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1163,7 +1165,7 @@ func (p Gs2ExperienceRestClient) PrepareImportUserDataByUserIdAsync(
 	go prepareImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1260,7 +1262,7 @@ func (p Gs2ExperienceRestClient) ImportUserDataByUserIdAsync(
 	go importUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1359,7 +1361,7 @@ func (p Gs2ExperienceRestClient) CheckImportUserDataByUserIdAsync(
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1459,7 +1461,7 @@ func (p Gs2ExperienceRestClient) DescribeExperienceModelMastersAsync(
 	go describeExperienceModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1578,7 +1580,7 @@ func (p Gs2ExperienceRestClient) CreateExperienceModelMasterAsync(
 	go createExperienceModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1674,7 +1676,7 @@ func (p Gs2ExperienceRestClient) GetExperienceModelMasterAsync(
 	go getExperienceModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1795,7 +1797,7 @@ func (p Gs2ExperienceRestClient) UpdateExperienceModelMasterAsync(
 	go updateExperienceModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -1891,7 +1893,7 @@ func (p Gs2ExperienceRestClient) DeleteExperienceModelMasterAsync(
 	go deleteExperienceModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -1982,7 +1984,7 @@ func (p Gs2ExperienceRestClient) DescribeExperienceModelsAsync(
 	go describeExperienceModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2078,7 +2080,7 @@ func (p Gs2ExperienceRestClient) GetExperienceModelAsync(
 	go getExperienceModelAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2178,7 +2180,7 @@ func (p Gs2ExperienceRestClient) DescribeThresholdMastersAsync(
 	go describeThresholdMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2285,7 +2287,7 @@ func (p Gs2ExperienceRestClient) CreateThresholdMasterAsync(
 	go createThresholdMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2381,7 +2383,7 @@ func (p Gs2ExperienceRestClient) GetThresholdMasterAsync(
 	go getThresholdMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2490,7 +2492,7 @@ func (p Gs2ExperienceRestClient) UpdateThresholdMasterAsync(
 	go updateThresholdMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2586,7 +2588,7 @@ func (p Gs2ExperienceRestClient) DeleteThresholdMasterAsync(
 	go deleteThresholdMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2677,7 +2679,7 @@ func (p Gs2ExperienceRestClient) ExportMasterAsync(
 	go exportMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2768,7 +2770,7 @@ func (p Gs2ExperienceRestClient) GetCurrentExperienceMasterAsync(
 	go getCurrentExperienceMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -2859,7 +2861,7 @@ func (p Gs2ExperienceRestClient) PreUpdateCurrentExperienceMasterAsync(
 	go preUpdateCurrentExperienceMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -2990,7 +2992,7 @@ func (p Gs2ExperienceRestClient) UpdateCurrentExperienceMasterAsync(
 	go updateCurrentExperienceMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3084,7 +3086,7 @@ func (p Gs2ExperienceRestClient) UpdateCurrentExperienceMasterFromGitHubAsync(
 	go updateCurrentExperienceMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3187,7 +3189,7 @@ func (p Gs2ExperienceRestClient) DescribeStatusesAsync(
 	go describeStatusesAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3295,7 +3297,7 @@ func (p Gs2ExperienceRestClient) DescribeStatusesByUserIdAsync(
 	go describeStatusesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3399,7 +3401,7 @@ func (p Gs2ExperienceRestClient) GetStatusAsync(
 	go getStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3508,7 +3510,7 @@ func (p Gs2ExperienceRestClient) GetStatusByUserIdAsync(
 	go getStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3615,7 +3617,7 @@ func (p Gs2ExperienceRestClient) GetStatusWithSignatureAsync(
 	go getStatusWithSignatureAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3727,7 +3729,7 @@ func (p Gs2ExperienceRestClient) GetStatusWithSignatureByUserIdAsync(
 	go getStatusWithSignatureByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Get,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -3845,7 +3847,7 @@ func (p Gs2ExperienceRestClient) AddExperienceByUserIdAsync(
 	go addExperienceByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -3955,7 +3957,7 @@ func (p Gs2ExperienceRestClient) SubExperienceAsync(
 	go subExperienceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4070,7 +4072,7 @@ func (p Gs2ExperienceRestClient) SubExperienceByUserIdAsync(
 	go subExperienceByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4185,7 +4187,7 @@ func (p Gs2ExperienceRestClient) SetExperienceByUserIdAsync(
 	go setExperienceByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4300,7 +4302,7 @@ func (p Gs2ExperienceRestClient) AddRankCapByUserIdAsync(
 	go addRankCapByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4410,7 +4412,7 @@ func (p Gs2ExperienceRestClient) SubRankCapAsync(
 	go subRankCapAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4525,7 +4527,7 @@ func (p Gs2ExperienceRestClient) SubRankCapByUserIdAsync(
 	go subRankCapByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4640,7 +4642,7 @@ func (p Gs2ExperienceRestClient) SetRankCapByUserIdAsync(
 	go setRankCapByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Put,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4752,7 +4754,7 @@ func (p Gs2ExperienceRestClient) DeleteStatusByUserIdAsync(
 	go deleteStatusByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:          p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:       core.Delete,
 			Headers:      headers,
 			QueryStrings: queryStrings,
@@ -4868,7 +4870,7 @@ func (p Gs2ExperienceRestClient) VerifyRankAsync(
 	go verifyRankAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -4989,7 +4991,7 @@ func (p Gs2ExperienceRestClient) VerifyRankByUserIdAsync(
 	go verifyRankByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5105,7 +5107,7 @@ func (p Gs2ExperienceRestClient) VerifyRankCapAsync(
 	go verifyRankCapAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5226,7 +5228,7 @@ func (p Gs2ExperienceRestClient) VerifyRankCapByUserIdAsync(
 	go verifyRankCapByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5318,7 +5320,7 @@ func (p Gs2ExperienceRestClient) AddExperienceByStampSheetAsync(
 	go addExperienceByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5410,7 +5412,7 @@ func (p Gs2ExperienceRestClient) SetExperienceByStampSheetAsync(
 	go setExperienceByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5502,7 +5504,7 @@ func (p Gs2ExperienceRestClient) SubExperienceByStampTaskAsync(
 	go subExperienceByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5594,7 +5596,7 @@ func (p Gs2ExperienceRestClient) AddRankCapByStampSheetAsync(
 	go addRankCapByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5686,7 +5688,7 @@ func (p Gs2ExperienceRestClient) SubRankCapByStampTaskAsync(
 	go subRankCapByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5778,7 +5780,7 @@ func (p Gs2ExperienceRestClient) SetRankCapByStampSheetAsync(
 	go setRankCapByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5905,7 +5907,7 @@ func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByUserIdAsync(
 	go multiplyAcquireActionsByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -5997,7 +5999,7 @@ func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByStampSheetAsync(
 	go multiplyAcquireActionsByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6089,7 +6091,7 @@ func (p Gs2ExperienceRestClient) VerifyRankByStampTaskAsync(
 	go verifyRankByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
@@ -6181,7 +6183,7 @@ func (p Gs2ExperienceRestClient) VerifyRankCapByStampTaskAsync(
 	go verifyRankCapByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Url:     p.Session.EndpointHost("experience", EndpointHost).AppendPath(path, replacer),
 			Method:  core.Post,
 			Headers: headers,
 			Bodies:  bodies,
