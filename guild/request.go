@@ -154,25 +154,26 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack               *string              `json:"contextStack"`
-	Name                       *string              `json:"name"`
-	Description                *string              `json:"description"`
-	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
-	ChangeNotification         *NotificationSetting `json:"changeNotification"`
-	JoinNotification           *NotificationSetting `json:"joinNotification"`
-	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
-	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
-	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
-	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
-	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
-	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
-	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
-	ReceiveJoinRequestScript   *ScriptSetting       `json:"receiveJoinRequestScript"`
-	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
-	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
-	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
-	DryRun                     *bool                `json:"dryRun"`
+	ContextStack                                 *string              `json:"contextStack"`
+	Name                                         *string              `json:"name"`
+	Description                                  *string              `json:"description"`
+	TransactionSetting                           *TransactionSetting  `json:"transactionSetting"`
+	ChangeNotification                           *NotificationSetting `json:"changeNotification"`
+	JoinNotification                             *NotificationSetting `json:"joinNotification"`
+	LeaveNotification                            *NotificationSetting `json:"leaveNotification"`
+	ChangeMemberNotification                     *NotificationSetting `json:"changeMemberNotification"`
+	ChangeMemberNotificationIgnoreChangeMetadata *bool                `json:"changeMemberNotificationIgnoreChangeMetadata"`
+	ReceiveRequestNotification                   *NotificationSetting `json:"receiveRequestNotification"`
+	RemoveRequestNotification                    *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript                            *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript                            *ScriptSetting       `json:"updateGuildScript"`
+	JoinGuildScript                              *ScriptSetting       `json:"joinGuildScript"`
+	ReceiveJoinRequestScript                     *ScriptSetting       `json:"receiveJoinRequestScript"`
+	LeaveGuildScript                             *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript                             *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript                            *ScriptSetting       `json:"deleteGuildScript"`
+	LogSetting                                   *LogSetting          `json:"logSetting"`
+	DryRun                                       *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -257,6 +258,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["changeMemberNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeMemberNotification)
+		}
+		if v, ok := d["changeMemberNotificationIgnoreChangeMetadata"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeMemberNotificationIgnoreChangeMetadata)
 		}
 		if v, ok := d["receiveRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveRequestNotification)
@@ -351,6 +355,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 				return nil
 			}
 			return NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer()
+		}(),
+		ChangeMemberNotificationIgnoreChangeMetadata: func() *bool {
+			v, ok := data["changeMemberNotificationIgnoreChangeMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["changeMemberNotificationIgnoreChangeMetadata"])
 		}(),
 		ReceiveRequestNotification: func() *NotificationSetting {
 			v, ok := data["receiveRequestNotification"]
@@ -459,6 +470,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.ChangeMemberNotification.ToDict()
 		}(),
+		"changeMemberNotificationIgnoreChangeMetadata": p.ChangeMemberNotificationIgnoreChangeMetadata,
 		"receiveRequestNotification": func() map[string]interface{} {
 			if p.ReceiveRequestNotification == nil {
 				return nil
@@ -699,25 +711,26 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack               *string              `json:"contextStack"`
-	NamespaceName              *string              `json:"namespaceName"`
-	Description                *string              `json:"description"`
-	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
-	ChangeNotification         *NotificationSetting `json:"changeNotification"`
-	JoinNotification           *NotificationSetting `json:"joinNotification"`
-	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
-	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
-	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
-	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
-	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
-	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
-	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
-	ReceiveJoinRequestScript   *ScriptSetting       `json:"receiveJoinRequestScript"`
-	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
-	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
-	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
-	DryRun                     *bool                `json:"dryRun"`
+	ContextStack                                 *string              `json:"contextStack"`
+	NamespaceName                                *string              `json:"namespaceName"`
+	Description                                  *string              `json:"description"`
+	TransactionSetting                           *TransactionSetting  `json:"transactionSetting"`
+	ChangeNotification                           *NotificationSetting `json:"changeNotification"`
+	JoinNotification                             *NotificationSetting `json:"joinNotification"`
+	LeaveNotification                            *NotificationSetting `json:"leaveNotification"`
+	ChangeMemberNotification                     *NotificationSetting `json:"changeMemberNotification"`
+	ChangeMemberNotificationIgnoreChangeMetadata *bool                `json:"changeMemberNotificationIgnoreChangeMetadata"`
+	ReceiveRequestNotification                   *NotificationSetting `json:"receiveRequestNotification"`
+	RemoveRequestNotification                    *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript                            *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript                            *ScriptSetting       `json:"updateGuildScript"`
+	JoinGuildScript                              *ScriptSetting       `json:"joinGuildScript"`
+	ReceiveJoinRequestScript                     *ScriptSetting       `json:"receiveJoinRequestScript"`
+	LeaveGuildScript                             *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript                             *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript                            *ScriptSetting       `json:"deleteGuildScript"`
+	LogSetting                                   *LogSetting          `json:"logSetting"`
+	DryRun                                       *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -802,6 +815,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["changeMemberNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeMemberNotification)
+		}
+		if v, ok := d["changeMemberNotificationIgnoreChangeMetadata"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeMemberNotificationIgnoreChangeMetadata)
 		}
 		if v, ok := d["receiveRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveRequestNotification)
@@ -896,6 +912,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 				return nil
 			}
 			return NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer()
+		}(),
+		ChangeMemberNotificationIgnoreChangeMetadata: func() *bool {
+			v, ok := data["changeMemberNotificationIgnoreChangeMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["changeMemberNotificationIgnoreChangeMetadata"])
 		}(),
 		ReceiveRequestNotification: func() *NotificationSetting {
 			v, ok := data["receiveRequestNotification"]
@@ -1004,6 +1027,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.ChangeMemberNotification.ToDict()
 		}(),
+		"changeMemberNotificationIgnoreChangeMetadata": p.ChangeMemberNotificationIgnoreChangeMetadata,
 		"receiveRequestNotification": func() map[string]interface{} {
 			if p.ReceiveRequestNotification == nil {
 				return nil

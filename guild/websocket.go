@@ -199,6 +199,9 @@ func (p Gs2GuildWebSocketClient) CreateNamespaceAsync(
 	if request.ChangeMemberNotification != nil {
 		bodies["changeMemberNotification"] = request.ChangeMemberNotification.ToDict()
 	}
+	if request.ChangeMemberNotificationIgnoreChangeMetadata != nil {
+		bodies["changeMemberNotificationIgnoreChangeMetadata"] = *request.ChangeMemberNotificationIgnoreChangeMetadata
+	}
 	if request.ReceiveRequestNotification != nil {
 		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
 	}
@@ -510,6 +513,9 @@ func (p Gs2GuildWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.ChangeMemberNotification != nil {
 		bodies["changeMemberNotification"] = request.ChangeMemberNotification.ToDict()
+	}
+	if request.ChangeMemberNotificationIgnoreChangeMetadata != nil {
+		bodies["changeMemberNotificationIgnoreChangeMetadata"] = *request.ChangeMemberNotificationIgnoreChangeMetadata
 	}
 	if request.ReceiveRequestNotification != nil {
 		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()

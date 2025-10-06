@@ -24,27 +24,28 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId                *string              `json:"namespaceId"`
-	Name                       *string              `json:"name"`
-	Description                *string              `json:"description"`
-	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
-	ChangeNotification         *NotificationSetting `json:"changeNotification"`
-	JoinNotification           *NotificationSetting `json:"joinNotification"`
-	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
-	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
-	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
-	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
-	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
-	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
-	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
-	ReceiveJoinRequestScript   *ScriptSetting       `json:"receiveJoinRequestScript"`
-	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
-	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
-	DeleteGuildScript          *ScriptSetting       `json:"deleteGuildScript"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
-	CreatedAt                  *int64               `json:"createdAt"`
-	UpdatedAt                  *int64               `json:"updatedAt"`
-	Revision                   *int64               `json:"revision"`
+	NamespaceId                                  *string              `json:"namespaceId"`
+	Name                                         *string              `json:"name"`
+	Description                                  *string              `json:"description"`
+	TransactionSetting                           *TransactionSetting  `json:"transactionSetting"`
+	ChangeNotification                           *NotificationSetting `json:"changeNotification"`
+	JoinNotification                             *NotificationSetting `json:"joinNotification"`
+	LeaveNotification                            *NotificationSetting `json:"leaveNotification"`
+	ChangeMemberNotification                     *NotificationSetting `json:"changeMemberNotification"`
+	ChangeMemberNotificationIgnoreChangeMetadata *bool                `json:"changeMemberNotificationIgnoreChangeMetadata"`
+	ReceiveRequestNotification                   *NotificationSetting `json:"receiveRequestNotification"`
+	RemoveRequestNotification                    *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript                            *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript                            *ScriptSetting       `json:"updateGuildScript"`
+	JoinGuildScript                              *ScriptSetting       `json:"joinGuildScript"`
+	ReceiveJoinRequestScript                     *ScriptSetting       `json:"receiveJoinRequestScript"`
+	LeaveGuildScript                             *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript                             *ScriptSetting       `json:"changeRoleScript"`
+	DeleteGuildScript                            *ScriptSetting       `json:"deleteGuildScript"`
+	LogSetting                                   *LogSetting          `json:"logSetting"`
+	CreatedAt                                    *int64               `json:"createdAt"`
+	UpdatedAt                                    *int64               `json:"updatedAt"`
+	Revision                                     *int64               `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -153,6 +154,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["changeMemberNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeMemberNotification)
 		}
+		if v, ok := d["changeMemberNotificationIgnoreChangeMetadata"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeMemberNotificationIgnoreChangeMetadata)
+		}
 		if v, ok := d["receiveRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveRequestNotification)
 		}
@@ -259,6 +263,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 				return nil
 			}
 			return NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer()
+		}(),
+		ChangeMemberNotificationIgnoreChangeMetadata: func() *bool {
+			v, ok := data["changeMemberNotificationIgnoreChangeMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["changeMemberNotificationIgnoreChangeMetadata"])
 		}(),
 		ReceiveRequestNotification: func() *NotificationSetting {
 			v, ok := data["receiveRequestNotification"]
@@ -404,6 +415,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 			}
 			return p.ChangeMemberNotification.ToDict()
 		}()
+	}
+	if p.ChangeMemberNotificationIgnoreChangeMetadata != nil {
+		m["changeMemberNotificationIgnoreChangeMetadata"] = p.ChangeMemberNotificationIgnoreChangeMetadata
 	}
 	if p.ReceiveRequestNotification != nil {
 		m["receiveRequestNotification"] = func() map[string]interface{} {
