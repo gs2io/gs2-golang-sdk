@@ -657,6 +657,7 @@ type NotificationSetting struct {
 	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
 	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
 	Sound                            *string `json:"sound"`
+	Enable                           *string `json:"enable"`
 }
 
 func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
@@ -730,6 +731,29 @@ func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["enable"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Enable = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Enable = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Enable = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Enable = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Enable = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Enable)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -763,6 +787,13 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 			}
 			return core.CastString(data["sound"])
 		}(),
+		Enable: func() *string {
+			v, ok := data["enable"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enable"])
+		}(),
 	}
 }
 
@@ -776,6 +807,9 @@ func (p NotificationSetting) ToDict() map[string]interface{} {
 	}
 	if p.Sound != nil {
 		m["sound"] = p.Sound
+	}
+	if p.Enable != nil {
+		m["enable"] = p.Enable
 	}
 	return m
 }
