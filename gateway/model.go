@@ -790,6 +790,255 @@ func CastFirebaseTokensFromDict(data []FirebaseToken) []interface{} {
 	return v
 }
 
+type SendNotificationEntry struct {
+	UserId                           *string `json:"userId"`
+	Issuer                           *string `json:"issuer"`
+	Subject                          *string `json:"subject"`
+	Payload                          *string `json:"payload"`
+	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
+	Sound                            *string `json:"sound"`
+}
+
+func (p *SendNotificationEntry) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SendNotificationEntry{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SendNotificationEntry{}
+	} else {
+		*p = SendNotificationEntry{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["issuer"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Issuer = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Issuer = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Issuer = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Issuer = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Issuer = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Issuer)
+				}
+			}
+		}
+		if v, ok := d["subject"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Subject = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Subject = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Subject = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Subject = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Subject = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Subject)
+				}
+			}
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+		if v, ok := d["enableTransferMobileNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableTransferMobileNotification)
+		}
+		if v, ok := d["sound"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Sound = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Sound = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Sound = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Sound)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSendNotificationEntryFromJson(data string) SendNotificationEntry {
+	req := SendNotificationEntry{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewSendNotificationEntryFromDict(data map[string]interface{}) SendNotificationEntry {
+	return SendNotificationEntry{
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Issuer: func() *string {
+			v, ok := data["issuer"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["issuer"])
+		}(),
+		Subject: func() *string {
+			v, ok := data["subject"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["subject"])
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
+	}
+}
+
+func (p SendNotificationEntry) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.Issuer != nil {
+		m["issuer"] = p.Issuer
+	}
+	if p.Subject != nil {
+		m["subject"] = p.Subject
+	}
+	if p.Payload != nil {
+		m["payload"] = p.Payload
+	}
+	if p.EnableTransferMobileNotification != nil {
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
+	}
+	if p.Sound != nil {
+		m["sound"] = p.Sound
+	}
+	return m
+}
+
+func (p SendNotificationEntry) Pointer() *SendNotificationEntry {
+	return &p
+}
+
+func CastSendNotificationEntries(data []interface{}) []SendNotificationEntry {
+	v := make([]SendNotificationEntry, 0)
+	for _, d := range data {
+		v = append(v, NewSendNotificationEntryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSendNotificationEntriesFromDict(data []SendNotificationEntry) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
