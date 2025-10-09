@@ -2248,7 +2248,9 @@ func (p BatchExecuteApiResult) Pointer() *BatchExecuteApiResult {
 }
 
 type IfExpressionByUserIdResult struct {
-	Metadata *core.ResultMetadata `json:"metadata"`
+	Item             *TransactionResult   `json:"item"`
+	ExpressionResult *bool                `json:"expressionResult"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type IfExpressionByUserIdAsyncResult struct {
@@ -2264,6 +2266,20 @@ func NewIfExpressionByUserIdResultFromJson(data string) IfExpressionByUserIdResu
 
 func NewIfExpressionByUserIdResultFromDict(data map[string]interface{}) IfExpressionByUserIdResult {
 	return IfExpressionByUserIdResult{
+		Item: func() *TransactionResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		ExpressionResult: func() *bool {
+			v, ok := data["expressionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["expressionResult"])
+		}(),
 		Metadata: func() *core.ResultMetadata {
 			if data["metadata"] == nil {
 				return nil
@@ -2276,6 +2292,13 @@ func NewIfExpressionByUserIdResultFromDict(data map[string]interface{}) IfExpres
 
 func (p IfExpressionByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"expressionResult": p.ExpressionResult,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
@@ -2374,8 +2397,10 @@ func (p OrExpressionByUserIdResult) Pointer() *OrExpressionByUserIdResult {
 }
 
 type IfExpressionByStampTaskResult struct {
-	NewContextStack *string              `json:"newContextStack"`
-	Metadata        *core.ResultMetadata `json:"metadata"`
+	Item             *TransactionResult   `json:"item"`
+	ExpressionResult *bool                `json:"expressionResult"`
+	NewContextStack  *string              `json:"newContextStack"`
+	Metadata         *core.ResultMetadata `json:"metadata"`
 }
 
 type IfExpressionByStampTaskAsyncResult struct {
@@ -2391,6 +2416,20 @@ func NewIfExpressionByStampTaskResultFromJson(data string) IfExpressionByStampTa
 
 func NewIfExpressionByStampTaskResultFromDict(data map[string]interface{}) IfExpressionByStampTaskResult {
 	return IfExpressionByStampTaskResult{
+		Item: func() *TransactionResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		ExpressionResult: func() *bool {
+			v, ok := data["expressionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["expressionResult"])
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -2410,7 +2449,14 @@ func NewIfExpressionByStampTaskResultFromDict(data map[string]interface{}) IfExp
 
 func (p IfExpressionByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"newContextStack": p.NewContextStack,
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"expressionResult": p.ExpressionResult,
+		"newContextStack":  p.NewContextStack,
 		"metadata": func() map[string]interface{} {
 			if p.Metadata == nil {
 				return nil
