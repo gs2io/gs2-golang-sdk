@@ -158,6 +158,7 @@ type CreateNamespaceRequest struct {
 	Name               *string             `json:"name"`
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	CountUpScript      *ScriptSetting      `json:"countUpScript"`
 	LogSetting         *LogSetting         `json:"logSetting"`
 	DryRun             *bool               `json:"dryRun"`
 }
@@ -233,6 +234,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
+		if v, ok := d["countUpScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CountUpScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -272,6 +276,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		CountUpScript: func() *ScriptSetting {
+			v, ok := data["countUpScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["countUpScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -291,6 +302,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"countUpScript": func() map[string]interface{} {
+			if p.CountUpScript == nil {
+				return nil
+			}
+			return p.CountUpScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -482,6 +499,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName      *string             `json:"namespaceName"`
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	CountUpScript      *ScriptSetting      `json:"countUpScript"`
 	LogSetting         *LogSetting         `json:"logSetting"`
 	DryRun             *bool               `json:"dryRun"`
 }
@@ -557,6 +575,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
+		if v, ok := d["countUpScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CountUpScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -596,6 +617,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		CountUpScript: func() *ScriptSetting {
+			v, ok := data["countUpScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["countUpScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -615,6 +643,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"countUpScript": func() map[string]interface{} {
+			if p.CountUpScript == nil {
+				return nil
+			}
+			return p.CountUpScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
