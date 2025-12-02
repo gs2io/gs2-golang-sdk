@@ -7152,13 +7152,14 @@ func (p FindPlatformIdRequest) Pointer() *FindPlatformIdRequest {
 }
 
 type FindPlatformIdByUserIdRequest struct {
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	UserId          *string `json:"userId"`
-	Type            *int32  `json:"type"`
-	UserIdentifier  *string `json:"userIdentifier"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
-	DryRun          *bool   `json:"dryRun"`
+	ContextStack         *string `json:"contextStack"`
+	NamespaceName        *string `json:"namespaceName"`
+	UserId               *string `json:"userId"`
+	Type                 *int32  `json:"type"`
+	UserIdentifier       *string `json:"userIdentifier"`
+	DontResolveDataOwner *bool   `json:"dontResolveDataOwner"`
+	TimeOffsetToken      *string `json:"timeOffsetToken"`
+	DryRun               *bool   `json:"dryRun"`
 }
 
 func (p *FindPlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7255,6 +7256,9 @@ func (p *FindPlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["dontResolveDataOwner"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DontResolveDataOwner)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -7321,6 +7325,13 @@ func NewFindPlatformIdByUserIdRequestFromDict(data map[string]interface{}) FindP
 			}
 			return core.CastString(data["userIdentifier"])
 		}(),
+		DontResolveDataOwner: func() *bool {
+			v, ok := data["dontResolveDataOwner"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["dontResolveDataOwner"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -7333,11 +7344,12 @@ func NewFindPlatformIdByUserIdRequestFromDict(data map[string]interface{}) FindP
 
 func (p FindPlatformIdByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"type":            p.Type,
-		"userIdentifier":  p.UserIdentifier,
-		"timeOffsetToken": p.TimeOffsetToken,
+		"namespaceName":        p.NamespaceName,
+		"userId":               p.UserId,
+		"type":                 p.Type,
+		"userIdentifier":       p.UserIdentifier,
+		"dontResolveDataOwner": p.DontResolveDataOwner,
+		"timeOffsetToken":      p.TimeOffsetToken,
 	}
 }
 

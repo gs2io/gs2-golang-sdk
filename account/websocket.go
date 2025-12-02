@@ -4630,6 +4630,9 @@ func (p Gs2AccountWebSocketClient) FindPlatformIdByUserIdAsync(
 	if request.UserIdentifier != nil && *request.UserIdentifier != "" {
 		bodies["userIdentifier"] = *request.UserIdentifier
 	}
+	if request.DontResolveDataOwner != nil {
+		bodies["dontResolveDataOwner"] = *request.DontResolveDataOwner
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}

@@ -4805,6 +4805,9 @@ func (p Gs2AccountRestClient) FindPlatformIdByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.DontResolveDataOwner != nil {
+		queryStrings["dontResolveDataOwner"] = core.ToString(*request.DontResolveDataOwner)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
