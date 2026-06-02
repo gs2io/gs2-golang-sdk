@@ -3407,6 +3407,1934 @@ func CastInsightsFromDict(data []Insight) []interface{} {
 	return v
 }
 
+type FacetModel struct {
+	FacetModelId *string `json:"facetModelId"`
+	Field        *string `json:"field"`
+	Type         *string `json:"type"`
+	DisplayName  *string `json:"displayName"`
+	Order        *int32  `json:"order"`
+}
+
+func (p *FacetModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FacetModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FacetModel{}
+	} else {
+		*p = FacetModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["facetModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FacetModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FacetModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FacetModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FacetModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FacetModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FacetModelId)
+				}
+			}
+		}
+		if v, ok := d["field"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Field = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Field = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Field = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Field)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Type = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Type = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Type = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Type)
+				}
+			}
+		}
+		if v, ok := d["displayName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayName)
+				}
+			}
+		}
+		if v, ok := d["order"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Order)
+		}
+	}
+	return nil
+}
+
+func NewFacetModelFromJson(data string) FacetModel {
+	req := FacetModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewFacetModelFromDict(data map[string]interface{}) FacetModel {
+	return FacetModel{
+		FacetModelId: func() *string {
+			v, ok := data["facetModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["facetModelId"])
+		}(),
+		Field: func() *string {
+			v, ok := data["field"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["field"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Order: func() *int32 {
+			v, ok := data["order"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["order"])
+		}(),
+	}
+}
+
+func (p FacetModel) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.FacetModelId != nil {
+		m["facetModelId"] = p.FacetModelId
+	}
+	if p.Field != nil {
+		m["field"] = p.Field
+	}
+	if p.Type != nil {
+		m["type"] = p.Type
+	}
+	if p.DisplayName != nil {
+		m["displayName"] = p.DisplayName
+	}
+	if p.Order != nil {
+		m["order"] = p.Order
+	}
+	return m
+}
+
+func (p FacetModel) Pointer() *FacetModel {
+	return &p
+}
+
+func CastFacetModels(data []interface{}) []FacetModel {
+	v := make([]FacetModel, 0)
+	for _, d := range data {
+		v = append(v, NewFacetModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFacetModelsFromDict(data []FacetModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Dashboard struct {
+	DashboardId *string `json:"dashboardId"`
+	Name        *string `json:"name"`
+	DisplayName *string `json:"displayName"`
+	Description *string `json:"description"`
+	Payload     *string `json:"payload"`
+	CreatedAt   *int64  `json:"createdAt"`
+	UpdatedAt   *int64  `json:"updatedAt"`
+}
+
+func (p *Dashboard) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Dashboard{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Dashboard{}
+	} else {
+		*p = Dashboard{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["dashboardId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DashboardId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DashboardId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DashboardId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DashboardId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DashboardId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DashboardId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["displayName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayName)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+	}
+	return nil
+}
+
+func NewDashboardFromJson(data string) Dashboard {
+	req := Dashboard{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewDashboardFromDict(data map[string]interface{}) Dashboard {
+	return Dashboard{
+		DashboardId: func() *string {
+			v, ok := data["dashboardId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dashboardId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+	}
+}
+
+func (p Dashboard) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.DashboardId != nil {
+		m["dashboardId"] = p.DashboardId
+	}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.DisplayName != nil {
+		m["displayName"] = p.DisplayName
+	}
+	if p.Description != nil {
+		m["description"] = p.Description
+	}
+	if p.Payload != nil {
+		m["payload"] = p.Payload
+	}
+	if p.CreatedAt != nil {
+		m["createdAt"] = p.CreatedAt
+	}
+	if p.UpdatedAt != nil {
+		m["updatedAt"] = p.UpdatedAt
+	}
+	return m
+}
+
+func (p Dashboard) Pointer() *Dashboard {
+	return &p
+}
+
+func CastDashboards(data []interface{}) []Dashboard {
+	v := make([]Dashboard, 0)
+	for _, d := range data {
+		v = append(v, NewDashboardFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDashboardsFromDict(data []Dashboard) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AggregationConfig struct {
+	Type  *string `json:"type"`
+	Field *string `json:"field"`
+}
+
+func (p *AggregationConfig) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AggregationConfig{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AggregationConfig{}
+	} else {
+		*p = AggregationConfig{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Type = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Type = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Type = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Type)
+				}
+			}
+		}
+		if v, ok := d["field"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Field = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Field = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Field = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Field)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAggregationConfigFromJson(data string) AggregationConfig {
+	req := AggregationConfig{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewAggregationConfigFromDict(data map[string]interface{}) AggregationConfig {
+	return AggregationConfig{
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		Field: func() *string {
+			v, ok := data["field"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["field"])
+		}(),
+	}
+}
+
+func (p AggregationConfig) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Type != nil {
+		m["type"] = p.Type
+	}
+	if p.Field != nil {
+		m["field"] = p.Field
+	}
+	return m
+}
+
+func (p AggregationConfig) Pointer() *AggregationConfig {
+	return &p
+}
+
+func CastAggregationConfigs(data []interface{}) []AggregationConfig {
+	v := make([]AggregationConfig, 0)
+	for _, d := range data {
+		v = append(v, NewAggregationConfigFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAggregationConfigsFromDict(data []AggregationConfig) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Facet struct {
+	Field       *string           `json:"field"`
+	Values      []FacetValueCount `json:"values"`
+	Range       *NumericRange     `json:"range"`
+	GlobalRange *NumericRange     `json:"globalRange"`
+}
+
+func (p *Facet) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Facet{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Facet{}
+	} else {
+		*p = Facet{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["field"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Field = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Field = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Field = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Field = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Field)
+				}
+			}
+		}
+		if v, ok := d["values"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Values)
+		}
+		if v, ok := d["range"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Range)
+		}
+		if v, ok := d["globalRange"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GlobalRange)
+		}
+	}
+	return nil
+}
+
+func NewFacetFromJson(data string) Facet {
+	req := Facet{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewFacetFromDict(data map[string]interface{}) Facet {
+	return Facet{
+		Field: func() *string {
+			v, ok := data["field"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["field"])
+		}(),
+		Values: func() []FacetValueCount {
+			if data["values"] == nil {
+				return nil
+			}
+			return CastFacetValueCounts(core.CastArray(data["values"]))
+		}(),
+		Range: func() *NumericRange {
+			v, ok := data["range"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNumericRangeFromDict(core.CastMap(data["range"])).Pointer()
+		}(),
+		GlobalRange: func() *NumericRange {
+			v, ok := data["globalRange"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNumericRangeFromDict(core.CastMap(data["globalRange"])).Pointer()
+		}(),
+	}
+}
+
+func (p Facet) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Field != nil {
+		m["field"] = p.Field
+	}
+	if p.Values != nil {
+		m["values"] = CastFacetValueCountsFromDict(
+			p.Values,
+		)
+	}
+	if p.Range != nil {
+		m["range"] = func() map[string]interface{} {
+			if p.Range == nil {
+				return nil
+			}
+			return p.Range.ToDict()
+		}()
+	}
+	if p.GlobalRange != nil {
+		m["globalRange"] = func() map[string]interface{} {
+			if p.GlobalRange == nil {
+				return nil
+			}
+			return p.GlobalRange.ToDict()
+		}()
+	}
+	return m
+}
+
+func (p Facet) Pointer() *Facet {
+	return &p
+}
+
+func CastFacets(data []interface{}) []Facet {
+	v := make([]Facet, 0)
+	for _, d := range data {
+		v = append(v, NewFacetFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFacetsFromDict(data []Facet) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type FacetValueCount struct {
+	Value *string `json:"value"`
+	Count *int64  `json:"count"`
+}
+
+func (p *FacetValueCount) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FacetValueCount{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FacetValueCount{}
+	} else {
+		*p = FacetValueCount{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewFacetValueCountFromJson(data string) FacetValueCount {
+	req := FacetValueCount{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewFacetValueCountFromDict(data map[string]interface{}) FacetValueCount {
+	return FacetValueCount{
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+	}
+}
+
+func (p FacetValueCount) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Value != nil {
+		m["value"] = p.Value
+	}
+	if p.Count != nil {
+		m["count"] = p.Count
+	}
+	return m
+}
+
+func (p FacetValueCount) Pointer() *FacetValueCount {
+	return &p
+}
+
+func CastFacetValueCounts(data []interface{}) []FacetValueCount {
+	v := make([]FacetValueCount, 0)
+	for _, d := range data {
+		v = append(v, NewFacetValueCountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastFacetValueCountsFromDict(data []FacetValueCount) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Label struct {
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
+}
+
+func (p *Label) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Label{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Label{}
+	} else {
+		*p = Label{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewLabelFromJson(data string) Label {
+	req := Label{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLabelFromDict(data map[string]interface{}) Label {
+	return Label{
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
+	}
+}
+
+func (p Label) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Key != nil {
+		m["key"] = p.Key
+	}
+	if p.Value != nil {
+		m["value"] = p.Value
+	}
+	return m
+}
+
+func (p Label) Pointer() *Label {
+	return &p
+}
+
+func CastLabels(data []interface{}) []Label {
+	v := make([]Label, 0)
+	for _, d := range data {
+		v = append(v, NewLabelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLabelsFromDict(data []Label) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type LogEntry struct {
+	Timestamp *int64  `json:"timestamp"`
+	Status    *string `json:"status"`
+	Duration  *int64  `json:"duration"`
+	Line      *string `json:"line"`
+	Labels    []Label `json:"labels"`
+}
+
+func (p *LogEntry) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LogEntry{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LogEntry{}
+	} else {
+		*p = LogEntry{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
+		if v, ok := d["duration"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Duration)
+		}
+		if v, ok := d["line"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Line = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Line = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Line = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Line = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Line = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Line)
+				}
+			}
+		}
+		if v, ok := d["labels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Labels)
+		}
+	}
+	return nil
+}
+
+func NewLogEntryFromJson(data string) LogEntry {
+	req := LogEntry{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLogEntryFromDict(data map[string]interface{}) LogEntry {
+	return LogEntry{
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		Duration: func() *int64 {
+			v, ok := data["duration"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["duration"])
+		}(),
+		Line: func() *string {
+			v, ok := data["line"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["line"])
+		}(),
+		Labels: func() []Label {
+			if data["labels"] == nil {
+				return nil
+			}
+			return CastLabels(core.CastArray(data["labels"]))
+		}(),
+	}
+}
+
+func (p LogEntry) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Timestamp != nil {
+		m["timestamp"] = p.Timestamp
+	}
+	if p.Status != nil {
+		m["status"] = p.Status
+	}
+	if p.Duration != nil {
+		m["duration"] = p.Duration
+	}
+	if p.Line != nil {
+		m["line"] = p.Line
+	}
+	if p.Labels != nil {
+		m["labels"] = CastLabelsFromDict(
+			p.Labels,
+		)
+	}
+	return m
+}
+
+func (p LogEntry) Pointer() *LogEntry {
+	return &p
+}
+
+func CastLogEntries(data []interface{}) []LogEntry {
+	v := make([]LogEntry, 0)
+	for _, d := range data {
+		v = append(v, NewLogEntryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogEntriesFromDict(data []LogEntry) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type NumericRange struct {
+	Min *float64 `json:"min"`
+	Max *float64 `json:"max"`
+}
+
+func (p *NumericRange) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = NumericRange{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = NumericRange{}
+	} else {
+		*p = NumericRange{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+	}
+	return nil
+}
+
+func NewNumericRangeFromJson(data string) NumericRange {
+	req := NumericRange{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewNumericRangeFromDict(data map[string]interface{}) NumericRange {
+	return NumericRange{
+		Min: func() *float64 {
+			v, ok := data["min"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["min"])
+		}(),
+		Max: func() *float64 {
+			v, ok := data["max"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["max"])
+		}(),
+	}
+}
+
+func (p NumericRange) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Min != nil {
+		m["min"] = p.Min
+	}
+	if p.Max != nil {
+		m["max"] = p.Max
+	}
+	return m
+}
+
+func (p NumericRange) Pointer() *NumericRange {
+	return &p
+}
+
+func CastNumericRanges(data []interface{}) []NumericRange {
+	v := make([]NumericRange, 0)
+	for _, d := range data {
+		v = append(v, NewNumericRangeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastNumericRangesFromDict(data []NumericRange) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TimeseriesMetadata struct {
+	Keys    []*string `json:"keys"`
+	GroupBy []*string `json:"groupBy"`
+}
+
+func (p *TimeseriesMetadata) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TimeseriesMetadata{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TimeseriesMetadata{}
+	} else {
+		*p = TimeseriesMetadata{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["keys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.Keys = l
+			}
+		}
+		if v, ok := d["groupBy"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupBy = l
+			}
+		}
+	}
+	return nil
+}
+
+func NewTimeseriesMetadataFromJson(data string) TimeseriesMetadata {
+	req := TimeseriesMetadata{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTimeseriesMetadataFromDict(data map[string]interface{}) TimeseriesMetadata {
+	return TimeseriesMetadata{
+		Keys: func() []*string {
+			v, ok := data["keys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		GroupBy: func() []*string {
+			v, ok := data["groupBy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p TimeseriesMetadata) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Keys != nil {
+		m["keys"] = core.CastStringsFromDict(
+			p.Keys,
+		)
+	}
+	if p.GroupBy != nil {
+		m["groupBy"] = core.CastStringsFromDict(
+			p.GroupBy,
+		)
+	}
+	return m
+}
+
+func (p TimeseriesMetadata) Pointer() *TimeseriesMetadata {
+	return &p
+}
+
+func CastTimeseriesMetadatas(data []interface{}) []TimeseriesMetadata {
+	v := make([]TimeseriesMetadata, 0)
+	for _, d := range data {
+		v = append(v, NewTimeseriesMetadataFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTimeseriesMetadatasFromDict(data []TimeseriesMetadata) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TimeseriesPoint struct {
+	Timestamp *int64            `json:"timestamp"`
+	Values    []TimeseriesValue `json:"values"`
+}
+
+func (p *TimeseriesPoint) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TimeseriesPoint{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TimeseriesPoint{}
+	} else {
+		*p = TimeseriesPoint{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+		if v, ok := d["values"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Values)
+		}
+	}
+	return nil
+}
+
+func NewTimeseriesPointFromJson(data string) TimeseriesPoint {
+	req := TimeseriesPoint{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTimeseriesPointFromDict(data map[string]interface{}) TimeseriesPoint {
+	return TimeseriesPoint{
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		Values: func() []TimeseriesValue {
+			if data["values"] == nil {
+				return nil
+			}
+			return CastTimeseriesValues(core.CastArray(data["values"]))
+		}(),
+	}
+}
+
+func (p TimeseriesPoint) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Timestamp != nil {
+		m["timestamp"] = p.Timestamp
+	}
+	if p.Values != nil {
+		m["values"] = CastTimeseriesValuesFromDict(
+			p.Values,
+		)
+	}
+	return m
+}
+
+func (p TimeseriesPoint) Pointer() *TimeseriesPoint {
+	return &p
+}
+
+func CastTimeseriesPoints(data []interface{}) []TimeseriesPoint {
+	v := make([]TimeseriesPoint, 0)
+	for _, d := range data {
+		v = append(v, NewTimeseriesPointFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTimeseriesPointsFromDict(data []TimeseriesPoint) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TimeseriesValue struct {
+	Key   *string  `json:"key"`
+	Value *float64 `json:"value"`
+}
+
+func (p *TimeseriesValue) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TimeseriesValue{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TimeseriesValue{}
+	} else {
+		*p = TimeseriesValue{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+	}
+	return nil
+}
+
+func NewTimeseriesValueFromJson(data string) TimeseriesValue {
+	req := TimeseriesValue{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTimeseriesValueFromDict(data map[string]interface{}) TimeseriesValue {
+	return TimeseriesValue{
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *float64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["value"])
+		}(),
+	}
+}
+
+func (p TimeseriesValue) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Key != nil {
+		m["key"] = p.Key
+	}
+	if p.Value != nil {
+		m["value"] = p.Value
+	}
+	return m
+}
+
+func (p TimeseriesValue) Pointer() *TimeseriesValue {
+	return &p
+}
+
+func CastTimeseriesValues(data []interface{}) []TimeseriesValue {
+	v := make([]TimeseriesValue, 0)
+	for _, d := range data {
+		v = append(v, NewTimeseriesValueFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTimeseriesValuesFromDict(data []TimeseriesValue) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Trace struct {
+	TraceId   *string    `json:"traceId"`
+	Spans     []LogEntry `json:"spans"`
+	Truncated *bool      `json:"truncated"`
+}
+
+func (p *Trace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Trace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Trace{}
+	} else {
+		*p = Trace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["traceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TraceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TraceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TraceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TraceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TraceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TraceId)
+				}
+			}
+		}
+		if v, ok := d["spans"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Spans)
+		}
+		if v, ok := d["truncated"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Truncated)
+		}
+	}
+	return nil
+}
+
+func NewTraceFromJson(data string) Trace {
+	req := Trace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTraceFromDict(data map[string]interface{}) Trace {
+	return Trace{
+		TraceId: func() *string {
+			v, ok := data["traceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["traceId"])
+		}(),
+		Spans: func() []LogEntry {
+			if data["spans"] == nil {
+				return nil
+			}
+			return CastLogEntries(core.CastArray(data["spans"]))
+		}(),
+		Truncated: func() *bool {
+			v, ok := data["truncated"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["truncated"])
+		}(),
+	}
+}
+
+func (p Trace) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.TraceId != nil {
+		m["traceId"] = p.TraceId
+	}
+	if p.Spans != nil {
+		m["spans"] = CastLogEntriesFromDict(
+			p.Spans,
+		)
+	}
+	if p.Truncated != nil {
+		m["truncated"] = p.Truncated
+	}
+	return m
+}
+
+func (p Trace) Pointer() *Trace {
+	return &p
+}
+
+func CastTraces(data []interface{}) []Trace {
+	v := make([]Trace, 0)
+	for _, d := range data {
+		v = append(v, NewTraceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTracesFromDict(data []Trace) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type MetricModel struct {
+	Name   *string   `json:"name"`
+	Type   *string   `json:"type"`
+	Labels []*string `json:"labels"`
+}
+
+func (p *MetricModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MetricModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MetricModel{}
+	} else {
+		*p = MetricModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Type = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Type = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Type = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Type)
+				}
+			}
+		}
+		if v, ok := d["labels"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.Labels = l
+			}
+		}
+	}
+	return nil
+}
+
+func NewMetricModelFromJson(data string) MetricModel {
+	req := MetricModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewMetricModelFromDict(data map[string]interface{}) MetricModel {
+	return MetricModel{
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		Labels: func() []*string {
+			v, ok := data["labels"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p MetricModel) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.Type != nil {
+		m["type"] = p.Type
+	}
+	if p.Labels != nil {
+		m["labels"] = core.CastStringsFromDict(
+			p.Labels,
+		)
+	}
+	return m
+}
+
+func (p MetricModel) Pointer() *MetricModel {
+	return &p
+}
+
+func CastMetricModels(data []interface{}) []MetricModel {
+	v := make([]MetricModel, 0)
+	for _, d := range data {
+		v = append(v, NewMetricModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMetricModelsFromDict(data []MetricModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type InGameLogTag struct {
 	Key   *string `json:"key"`
 	Value *string `json:"value"`

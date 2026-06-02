@@ -17,10 +17,10 @@ package core
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -57,144 +57,9 @@ func (p ConnectionBroken) Error() string {
 	return "connection broken"
 }
 
-func readBody(response *http.Response) (string, error) {
-	byteArray, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return "", err
-	}
-	return string(byteArray), nil
-}
-
 type ErrorResult struct {
 	Message  string          `json:"message"`
 	Metadata *ResultMetadata `json:"metadata,omitempty"`
-}
-
-func readErrors(response *http.Response) ([]RequestError, *ResultMetadata, error) {
-	byteArray, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return []RequestError{}, nil, err
-	}
-	var result ErrorResult
-	err = json.Unmarshal(byteArray, &result)
-	if err != nil {
-		return []RequestError{}, nil, err
-	}
-
-	var errors []RequestError
-	err = json.Unmarshal([]byte(result.Message), &errors)
-	if err != nil {
-		return []RequestError{}, nil, err
-	}
-	return errors, result.Metadata, nil
-}
-
-func parseResponse(response *http.Response) (string, error) {
-	if response.StatusCode == 200 {
-		body, err := readBody(response)
-		if err != nil {
-			return "", err
-		}
-		return body, nil
-	}
-	if response.StatusCode == 400 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", BadRequestException{}
-		}
-		return "", BadRequestException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 401 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", UnauthorizedException{}
-		}
-		return "", UnauthorizedException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 402 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", QuotaExceedException{}
-		}
-		return "", QuotaExceedException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 404 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", NotFoundException{}
-		}
-		return "", NotFoundException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 409 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", ConflictException{}
-		}
-		return "", ConflictException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 500 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", InternalServerErrorException{}
-		}
-		return "", InternalServerErrorException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 502 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", BadGatewayException{}
-		}
-		return "", BadGatewayException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 503 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", ServiceUnavailableException{}
-		}
-		return "", ServiceUnavailableException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	if response.StatusCode == 504 {
-		errors, metadata, err := readErrors(response)
-		if err != nil {
-			return "", RequestTimeoutException{}
-		}
-		return "", RequestTimeoutException{
-			Errors:   errors,
-			Metadata: metadata,
-		}
-	}
-	errors, metadata, err := readErrors(response)
-	if err != nil {
-		return "", RequestTimeoutException{}
-	}
-	return "", RequestTimeoutException{
-		Errors:   errors,
-		Metadata: metadata,
-	}
 }
 
 type AsyncResult struct {
@@ -224,10 +89,35 @@ func (p Connection) Client() *http.Client {
 }
 
 type Gs2RestSession struct {
-	Credential   IGs2Credential
-	Region       Region
-	projectToken ProjectToken
-	connection   IConnection
+	Credential                IGs2Credential
+	Region                    Region
+	projectToken              ProjectToken
+	connection                IConnection
+	DisableCompressRequest    bool
+	DisableDecompressResponse bool
+}
+
+func NewGs2RestSession(credential IGs2Credential, region Region) *Gs2RestSession {
+	return &Gs2RestSession{
+		Credential:                credential,
+		Region:                    region,
+		DisableCompressRequest:    false,
+		DisableDecompressResponse: false,
+	}
+}
+
+func compressGzip(data []byte) ([]byte, error) {
+	var buf bytes.Buffer
+	writer := gzip.NewWriter(&buf)
+	_, err := writer.Write(data)
+	if err != nil {
+		return nil, err
+	}
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
 }
 
 func (p Gs2RestSession) EndpointHost(service string, endpointHost *string) Url {
@@ -288,21 +178,26 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		httpUrl += "?" + query.Encode()
 	}
 
-	var reader *strings.Reader = nil
-	if bodies != nil {
-		reader = strings.NewReader(string(bodies))
+	var bodyReader io.Reader = nil
+	compressedRequest := false
+	if job.Method == Post || job.Method == Put {
+		if !p.DisableCompressRequest && len(bodies) > 0 {
+			compressedBody, compressErr := compressGzip(bodies)
+			if compressErr == nil {
+				bodyReader = bytes.NewReader(compressedBody)
+				compressedRequest = true
+			} else {
+				bodyReader = bytes.NewReader(bodies)
+			}
+		} else {
+			bodyReader = bytes.NewReader(bodies)
+		}
 	}
 
 	request, err := http.NewRequest(
 		string(job.Method),
 		httpUrl,
-		func() io.Reader {
-			if job.Method == Post || job.Method == Put {
-				return reader
-			} else {
-				return nil
-			}
-		}(),
+		bodyReader,
 	)
 	if err != nil {
 		err := BadRequestException{}
@@ -316,6 +211,14 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		request.Header.Add(key, value)
 	}
 
+	if compressedRequest {
+		request.Header.Set("Content-Encoding", "gzip")
+	}
+
+	if !p.DisableDecompressResponse {
+		request.Header.Set("Accept-Encoding", "gzip")
+	}
+
 	response, err := p.connection.Client().Do(request)
 	if err != nil {
 		err := UnknownException{}
@@ -325,14 +228,74 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		}
 		return err
 	}
-	payload, err := parseResponse(
-		response,
-	)
+	payload, err := p.parseResponseWithDecompression(response)
 	job.Callback <- AsyncResult{
 		Payload: payload,
 		Err:     err,
 	}
 	return err
+}
+
+func (p Gs2RestSession) parseResponseWithDecompression(response *http.Response) (string, error) {
+	defer response.Body.Close()
+
+	var bodyReader io.Reader = response.Body
+	if !p.DisableDecompressResponse && response.Header.Get("Content-Encoding") == "gzip" {
+		gzipReader, err := gzip.NewReader(response.Body)
+		if err != nil {
+			return "", err
+		}
+		defer gzipReader.Close()
+		bodyReader = gzipReader
+	}
+
+	byteArray, err := io.ReadAll(bodyReader)
+	if err != nil {
+		return "", err
+	}
+
+	if response.StatusCode == 200 {
+		return string(byteArray), nil
+	}
+
+	var result ErrorResult
+	err = json.Unmarshal(byteArray, &result)
+	if err != nil {
+		return "", createExceptionByStatusCode(response.StatusCode, nil, nil)
+	}
+
+	var errors []RequestError
+	err = json.Unmarshal([]byte(result.Message), &errors)
+	if err != nil {
+		return "", createExceptionByStatusCode(response.StatusCode, nil, result.Metadata)
+	}
+
+	return "", createExceptionByStatusCode(response.StatusCode, errors, result.Metadata)
+}
+
+func createExceptionByStatusCode(statusCode int, errors []RequestError, metadata *ResultMetadata) error {
+	switch statusCode {
+	case 400:
+		return BadRequestException{Errors: errors, Metadata: metadata}
+	case 401:
+		return UnauthorizedException{Errors: errors, Metadata: metadata}
+	case 402:
+		return QuotaExceedException{Errors: errors, Metadata: metadata}
+	case 404:
+		return NotFoundException{Errors: errors, Metadata: metadata}
+	case 409:
+		return ConflictException{Errors: errors, Metadata: metadata}
+	case 500:
+		return InternalServerErrorException{Errors: errors, Metadata: metadata}
+	case 502:
+		return BadGatewayException{Errors: errors, Metadata: metadata}
+	case 503:
+		return ServiceUnavailableException{Errors: errors, Metadata: metadata}
+	case 504:
+		return RequestTimeoutException{Errors: errors, Metadata: metadata}
+	default:
+		return RequestTimeoutException{Errors: errors, Metadata: metadata}
+	}
 }
 
 func (p *Gs2RestSession) Send(

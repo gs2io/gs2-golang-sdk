@@ -2518,3 +2518,1956 @@ func (p Gs2LogRestClient) DeleteInsight(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func describeFacetModelsAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeFacetModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeFacetModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeFacetModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeFacetModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFacetModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeFacetModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DescribeFacetModelsAsync(
+	request *DescribeFacetModelsRequest,
+	callback chan<- DescribeFacetModelsAsyncResult,
+) {
+	path := "/{namespaceName}/model/facet"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeFacetModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DescribeFacetModels(
+	request *DescribeFacetModelsRequest,
+) (*DescribeFacetModelsResult, error) {
+	callback := make(chan DescribeFacetModelsAsyncResult, 1)
+	go p.DescribeFacetModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createFacetModelAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateFacetModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateFacetModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateFacetModelResult
+	if asyncResult.Err != nil {
+		callback <- CreateFacetModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateFacetModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CreateFacetModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) CreateFacetModelAsync(
+	request *CreateFacetModelRequest,
+	callback chan<- CreateFacetModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/facet"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Field != nil && *request.Field != "" {
+		bodies["field"] = *request.Field
+	}
+	if request.Type != nil && *request.Type != "" {
+		bodies["type"] = *request.Type
+	}
+	if request.DisplayName != nil && *request.DisplayName != "" {
+		bodies["displayName"] = *request.DisplayName
+	}
+	if request.Order != nil {
+		bodies["order"] = *request.Order
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go createFacetModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) CreateFacetModel(
+	request *CreateFacetModelRequest,
+) (*CreateFacetModelResult, error) {
+	callback := make(chan CreateFacetModelAsyncResult, 1)
+	go p.CreateFacetModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getFacetModelAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetFacetModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetFacetModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetFacetModelResult
+	if asyncResult.Err != nil {
+		callback <- GetFacetModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFacetModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetFacetModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) GetFacetModelAsync(
+	request *GetFacetModelRequest,
+	callback chan<- GetFacetModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/facet/{field}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Field != nil && *request.Field != "" {
+		path = strings.ReplaceAll(path, "{field}", core.ToString(*request.Field))
+	} else {
+		path = strings.ReplaceAll(path, "{field}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getFacetModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) GetFacetModel(
+	request *GetFacetModelRequest,
+) (*GetFacetModelResult, error) {
+	callback := make(chan GetFacetModelAsyncResult, 1)
+	go p.GetFacetModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateFacetModelAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateFacetModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateFacetModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateFacetModelResult
+	if asyncResult.Err != nil {
+		callback <- UpdateFacetModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateFacetModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateFacetModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) UpdateFacetModelAsync(
+	request *UpdateFacetModelRequest,
+	callback chan<- UpdateFacetModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/facet/{field}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Field != nil && *request.Field != "" {
+		path = strings.ReplaceAll(path, "{field}", core.ToString(*request.Field))
+	} else {
+		path = strings.ReplaceAll(path, "{field}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Type != nil && *request.Type != "" {
+		bodies["type"] = *request.Type
+	}
+	if request.DisplayName != nil && *request.DisplayName != "" {
+		bodies["displayName"] = *request.DisplayName
+	}
+	if request.Order != nil {
+		bodies["order"] = *request.Order
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateFacetModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) UpdateFacetModel(
+	request *UpdateFacetModelRequest,
+) (*UpdateFacetModelResult, error) {
+	callback := make(chan UpdateFacetModelAsyncResult, 1)
+	go p.UpdateFacetModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteFacetModelAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteFacetModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteFacetModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteFacetModelResult
+	if asyncResult.Err != nil {
+		callback <- DeleteFacetModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteFacetModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteFacetModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DeleteFacetModelAsync(
+	request *DeleteFacetModelRequest,
+	callback chan<- DeleteFacetModelAsyncResult,
+) {
+	path := "/{namespaceName}/model/facet/{field}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Field != nil && *request.Field != "" {
+		path = strings.ReplaceAll(path, "{field}", core.ToString(*request.Field))
+	} else {
+		path = strings.ReplaceAll(path, "{field}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go deleteFacetModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DeleteFacetModel(
+	request *DeleteFacetModelRequest,
+) (*DeleteFacetModelResult, error) {
+	callback := make(chan DeleteFacetModelAsyncResult, 1)
+	go p.DeleteFacetModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeDashboardsAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeDashboardsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeDashboardsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeDashboardsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeDashboardsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDashboardsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeDashboardsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DescribeDashboardsAsync(
+	request *DescribeDashboardsRequest,
+	callback chan<- DescribeDashboardsAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeDashboardsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DescribeDashboards(
+	request *DescribeDashboardsRequest,
+) (*DescribeDashboardsResult, error) {
+	callback := make(chan DescribeDashboardsAsyncResult, 1)
+	go p.DescribeDashboardsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createDashboardAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateDashboardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateDashboardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateDashboardResult
+	if asyncResult.Err != nil {
+		callback <- CreateDashboardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateDashboardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CreateDashboardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) CreateDashboardAsync(
+	request *CreateDashboardRequest,
+	callback chan<- CreateDashboardAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DisplayName != nil && *request.DisplayName != "" {
+		bodies["displayName"] = *request.DisplayName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go createDashboardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) CreateDashboard(
+	request *CreateDashboardRequest,
+) (*CreateDashboardResult, error) {
+	callback := make(chan CreateDashboardAsyncResult, 1)
+	go p.CreateDashboardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getDashboardAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetDashboardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetDashboardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetDashboardResult
+	if asyncResult.Err != nil {
+		callback <- GetDashboardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDashboardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetDashboardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) GetDashboardAsync(
+	request *GetDashboardRequest,
+	callback chan<- GetDashboardAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard/{dashboardName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.DashboardName != nil && *request.DashboardName != "" {
+		path = strings.ReplaceAll(path, "{dashboardName}", core.ToString(*request.DashboardName))
+	} else {
+		path = strings.ReplaceAll(path, "{dashboardName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getDashboardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) GetDashboard(
+	request *GetDashboardRequest,
+) (*GetDashboardResult, error) {
+	callback := make(chan GetDashboardAsyncResult, 1)
+	go p.GetDashboardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateDashboardAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateDashboardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateDashboardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateDashboardResult
+	if asyncResult.Err != nil {
+		callback <- UpdateDashboardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateDashboardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateDashboardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) UpdateDashboardAsync(
+	request *UpdateDashboardRequest,
+	callback chan<- UpdateDashboardAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard/{dashboardName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.DashboardName != nil && *request.DashboardName != "" {
+		path = strings.ReplaceAll(path, "{dashboardName}", core.ToString(*request.DashboardName))
+	} else {
+		path = strings.ReplaceAll(path, "{dashboardName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DisplayName != nil && *request.DisplayName != "" {
+		bodies["displayName"] = *request.DisplayName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go updateDashboardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) UpdateDashboard(
+	request *UpdateDashboardRequest,
+) (*UpdateDashboardResult, error) {
+	callback := make(chan UpdateDashboardAsyncResult, 1)
+	go p.UpdateDashboardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func duplicateDashboardAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DuplicateDashboardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DuplicateDashboardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DuplicateDashboardResult
+	if asyncResult.Err != nil {
+		callback <- DuplicateDashboardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DuplicateDashboardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DuplicateDashboardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DuplicateDashboardAsync(
+	request *DuplicateDashboardRequest,
+	callback chan<- DuplicateDashboardAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard/{dashboardName}/copy"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.DashboardName != nil && *request.DashboardName != "" {
+		path = strings.ReplaceAll(path, "{dashboardName}", core.ToString(*request.DashboardName))
+	} else {
+		path = strings.ReplaceAll(path, "{dashboardName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go duplicateDashboardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DuplicateDashboard(
+	request *DuplicateDashboardRequest,
+) (*DuplicateDashboardResult, error) {
+	callback := make(chan DuplicateDashboardAsyncResult, 1)
+	go p.DuplicateDashboardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteDashboardAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteDashboardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteDashboardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteDashboardResult
+	if asyncResult.Err != nil {
+		callback <- DeleteDashboardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteDashboardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteDashboardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DeleteDashboardAsync(
+	request *DeleteDashboardRequest,
+	callback chan<- DeleteDashboardAsyncResult,
+) {
+	path := "/{namespaceName}/dashboard/{dashboardName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.DashboardName != nil && *request.DashboardName != "" {
+		path = strings.ReplaceAll(path, "{dashboardName}", core.ToString(*request.DashboardName))
+	} else {
+		path = strings.ReplaceAll(path, "{dashboardName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go deleteDashboardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DeleteDashboard(
+	request *DeleteDashboardRequest,
+) (*DeleteDashboardResult, error) {
+	callback := make(chan DeleteDashboardAsyncResult, 1)
+	go p.DeleteDashboardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func queryLogAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryLogResult
+	if asyncResult.Err != nil {
+		callback <- QueryLogAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryLogAsync(
+	request *QueryLogRequest,
+	callback chan<- QueryLogAsyncResult,
+) {
+	path := "/{namespaceName}/log/v2/query"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.Query != nil && *request.Query != "" {
+		bodies["query"] = *request.Query
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go queryLogAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryLog(
+	request *QueryLogRequest,
+) (*QueryLogResult, error) {
+	callback := make(chan QueryLogAsyncResult, 1)
+	go p.QueryLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getLogAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetLogResult
+	if asyncResult.Err != nil {
+		callback <- GetLogAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) GetLogAsync(
+	request *GetLogRequest,
+	callback chan<- GetLogAsyncResult,
+) {
+	path := "/{namespaceName}/log/v2/query/{logRequestId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.LogRequestId != nil && *request.LogRequestId != "" {
+		path = strings.ReplaceAll(path, "{logRequestId}", core.ToString(*request.LogRequestId))
+	} else {
+		path = strings.ReplaceAll(path, "{logRequestId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getLogAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) GetLog(
+	request *GetLogRequest,
+) (*GetLogResult, error) {
+	callback := make(chan GetLogAsyncResult, 1)
+	go p.GetLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func queryFacetsAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryFacetsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryFacetsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryFacetsResult
+	if asyncResult.Err != nil {
+		callback <- QueryFacetsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryFacetsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryFacetsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryFacetsAsync(
+	request *QueryFacetsRequest,
+	callback chan<- QueryFacetsAsyncResult,
+) {
+	path := "/{namespaceName}/log/v2/query/facet"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.Query != nil && *request.Query != "" {
+		bodies["query"] = *request.Query
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go queryFacetsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryFacets(
+	request *QueryFacetsRequest,
+) (*QueryFacetsResult, error) {
+	callback := make(chan QueryFacetsAsyncResult, 1)
+	go p.QueryFacetsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func queryTimeseriesAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryTimeseriesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryTimeseriesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryTimeseriesResult
+	if asyncResult.Err != nil {
+		callback <- QueryTimeseriesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryTimeseriesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryTimeseriesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryTimeseriesAsync(
+	request *QueryTimeseriesRequest,
+	callback chan<- QueryTimeseriesAsyncResult,
+) {
+	path := "/{namespaceName}/log/v2/timeseries"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.Query != nil && *request.Query != "" {
+		bodies["query"] = *request.Query
+	}
+	if request.GroupBy != nil {
+		var _groupBy []interface{}
+		for _, item := range request.GroupBy {
+			_groupBy = append(_groupBy, item)
+		}
+		bodies["groupBy"] = _groupBy
+	}
+	if request.Aggregation != nil {
+		bodies["aggregation"] = request.Aggregation.ToDict()
+	}
+	if request.Interval != nil {
+		bodies["interval"] = *request.Interval
+	}
+	if request.SeriesLimit != nil {
+		bodies["seriesLimit"] = *request.SeriesLimit
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go queryTimeseriesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryTimeseries(
+	request *QueryTimeseriesRequest,
+) (*QueryTimeseriesResult, error) {
+	callback := make(chan QueryTimeseriesAsyncResult, 1)
+	go p.QueryTimeseriesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getTraceAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetTraceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetTraceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetTraceResult
+	if asyncResult.Err != nil {
+		callback <- GetTraceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTraceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetTraceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) GetTraceAsync(
+	request *GetTraceRequest,
+	callback chan<- GetTraceAsyncResult,
+) {
+	path := "/{namespaceName}/log/v2/trace/{traceId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TraceId != nil && *request.TraceId != "" {
+		path = strings.ReplaceAll(path, "{traceId}", core.ToString(*request.TraceId))
+	} else {
+		path = strings.ReplaceAll(path, "{traceId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getTraceAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) GetTrace(
+	request *GetTraceRequest,
+) (*GetTraceResult, error) {
+	callback := make(chan GetTraceAsyncResult, 1)
+	go p.GetTraceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func queryMetricsTimeseriesAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryMetricsTimeseriesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryMetricsTimeseriesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryMetricsTimeseriesResult
+	if asyncResult.Err != nil {
+		callback <- QueryMetricsTimeseriesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryMetricsTimeseriesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryMetricsTimeseriesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryMetricsTimeseriesAsync(
+	request *QueryMetricsTimeseriesRequest,
+	callback chan<- QueryMetricsTimeseriesAsyncResult,
+) {
+	path := "/{namespaceName}/metrics/timeseries"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.Query != nil && *request.Query != "" {
+		bodies["query"] = *request.Query
+	}
+	if request.GroupBy != nil {
+		var _groupBy []interface{}
+		for _, item := range request.GroupBy {
+			_groupBy = append(_groupBy, item)
+		}
+		bodies["groupBy"] = _groupBy
+	}
+	if request.Aggregations != nil {
+		var _aggregations []interface{}
+		for _, item := range request.Aggregations {
+			_aggregations = append(_aggregations, item)
+		}
+		bodies["aggregations"] = _aggregations
+	}
+	if request.Interval != nil {
+		bodies["interval"] = *request.Interval
+	}
+	if request.SeriesLimit != nil {
+		bodies["seriesLimit"] = *request.SeriesLimit
+	}
+	if request.OrderKey != nil && *request.OrderKey != "" {
+		bodies["orderKey"] = *request.OrderKey
+	}
+	if request.OrderBy != nil && *request.OrderBy != "" {
+		bodies["orderBy"] = *request.OrderBy
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go queryMetricsTimeseriesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryMetricsTimeseries(
+	request *QueryMetricsTimeseriesRequest,
+) (*QueryMetricsTimeseriesResult, error) {
+	callback := make(chan QueryMetricsTimeseriesAsyncResult, 1)
+	go p.QueryMetricsTimeseriesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeMetricsAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeMetricsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeMetricsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeMetricsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeMetricsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeMetricsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DescribeMetricsAsync(
+	request *DescribeMetricsRequest,
+	callback chan<- DescribeMetricsAsyncResult,
+) {
+	path := "/{namespaceName}/model/metrics"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.NamePrefix != nil {
+		queryStrings["namePrefix"] = core.ToString(*request.NamePrefix)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeMetricsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DescribeMetrics(
+	request *DescribeMetricsRequest,
+) (*DescribeMetricsResult, error) {
+	callback := make(chan DescribeMetricsAsyncResult, 1)
+	go p.DescribeMetricsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeLabelValuesAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeLabelValuesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeLabelValuesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeLabelValuesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeLabelValuesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLabelValuesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeLabelValuesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) DescribeLabelValuesAsync(
+	request *DescribeLabelValuesRequest,
+	callback chan<- DescribeLabelValuesAsyncResult,
+) {
+	path := "/{namespaceName}/model/metrics/{metricName}/label"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MetricName != nil && *request.MetricName != "" {
+		path = strings.ReplaceAll(path, "{metricName}", core.ToString(*request.MetricName))
+	} else {
+		path = strings.ReplaceAll(path, "{metricName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.LabelNamePrefix != nil {
+		queryStrings["labelNamePrefix"] = core.ToString(*request.LabelNamePrefix)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go describeLabelValuesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) DescribeLabelValues(
+	request *DescribeLabelValuesRequest,
+) (*DescribeLabelValuesResult, error) {
+	callback := make(chan DescribeLabelValuesAsyncResult, 1)
+	go p.DescribeLabelValuesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

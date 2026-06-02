@@ -464,6 +464,7 @@ type GitHubApiKey struct {
 	ApiKeyId          *string `json:"apiKeyId"`
 	Name              *string `json:"name"`
 	Description       *string `json:"description"`
+	ApiKey            *string `json:"apiKey"`
 	EncryptionKeyName *string `json:"encryptionKeyName"`
 	CreatedAt         *int64  `json:"createdAt"`
 	UpdatedAt         *int64  `json:"updatedAt"`
@@ -561,6 +562,29 @@ func (p *GitHubApiKey) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["apiKey"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApiKey = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApiKey = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApiKey = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKey = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKey = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApiKey)
+				}
+			}
+		}
 		if v, ok := d["encryptionKeyName"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -626,6 +650,13 @@ func NewGitHubApiKeyFromDict(data map[string]interface{}) GitHubApiKey {
 			}
 			return core.CastString(data["description"])
 		}(),
+		ApiKey: func() *string {
+			v, ok := data["apiKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKey"])
+		}(),
 		EncryptionKeyName: func() *string {
 			v, ok := data["encryptionKeyName"]
 			if !ok || v == nil {
@@ -667,6 +698,9 @@ func (p GitHubApiKey) ToDict() map[string]interface{} {
 	}
 	if p.Description != nil {
 		m["description"] = p.Description
+	}
+	if p.ApiKey != nil {
+		m["apiKey"] = p.ApiKey
 	}
 	if p.EncryptionKeyName != nil {
 		m["encryptionKeyName"] = p.EncryptionKeyName

@@ -1539,3 +1539,1145 @@ func (p DeleteInsightResult) ToDict() map[string]interface{} {
 func (p DeleteInsightResult) Pointer() *DeleteInsightResult {
 	return &p
 }
+
+type DescribeFacetModelsResult struct {
+	Items         []FacetModel         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeFacetModelsAsyncResult struct {
+	result *DescribeFacetModelsResult
+	err    error
+}
+
+func NewDescribeFacetModelsResultFromJson(data string) DescribeFacetModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeFacetModelsResultFromDict(dict)
+}
+
+func NewDescribeFacetModelsResultFromDict(data map[string]interface{}) DescribeFacetModelsResult {
+	return DescribeFacetModelsResult{
+		Items: func() []FacetModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFacetModels(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeFacetModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastFacetModelsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeFacetModelsResult) Pointer() *DescribeFacetModelsResult {
+	return &p
+}
+
+type CreateFacetModelResult struct {
+	Item     *FacetModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CreateFacetModelAsyncResult struct {
+	result *CreateFacetModelResult
+	err    error
+}
+
+func NewCreateFacetModelResultFromJson(data string) CreateFacetModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateFacetModelResultFromDict(dict)
+}
+
+func NewCreateFacetModelResultFromDict(data map[string]interface{}) CreateFacetModelResult {
+	return CreateFacetModelResult{
+		Item: func() *FacetModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFacetModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CreateFacetModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CreateFacetModelResult) Pointer() *CreateFacetModelResult {
+	return &p
+}
+
+type GetFacetModelResult struct {
+	Item     *FacetModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetFacetModelAsyncResult struct {
+	result *GetFacetModelResult
+	err    error
+}
+
+func NewGetFacetModelResultFromJson(data string) GetFacetModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetFacetModelResultFromDict(dict)
+}
+
+func NewGetFacetModelResultFromDict(data map[string]interface{}) GetFacetModelResult {
+	return GetFacetModelResult{
+		Item: func() *FacetModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFacetModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetFacetModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetFacetModelResult) Pointer() *GetFacetModelResult {
+	return &p
+}
+
+type UpdateFacetModelResult struct {
+	Item     *FacetModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateFacetModelAsyncResult struct {
+	result *UpdateFacetModelResult
+	err    error
+}
+
+func NewUpdateFacetModelResultFromJson(data string) UpdateFacetModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateFacetModelResultFromDict(dict)
+}
+
+func NewUpdateFacetModelResultFromDict(data map[string]interface{}) UpdateFacetModelResult {
+	return UpdateFacetModelResult{
+		Item: func() *FacetModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFacetModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateFacetModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateFacetModelResult) Pointer() *UpdateFacetModelResult {
+	return &p
+}
+
+type DeleteFacetModelResult struct {
+	Item     *FacetModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteFacetModelAsyncResult struct {
+	result *DeleteFacetModelResult
+	err    error
+}
+
+func NewDeleteFacetModelResultFromJson(data string) DeleteFacetModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteFacetModelResultFromDict(dict)
+}
+
+func NewDeleteFacetModelResultFromDict(data map[string]interface{}) DeleteFacetModelResult {
+	return DeleteFacetModelResult{
+		Item: func() *FacetModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFacetModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteFacetModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteFacetModelResult) Pointer() *DeleteFacetModelResult {
+	return &p
+}
+
+type DescribeDashboardsResult struct {
+	Items         []Dashboard          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeDashboardsAsyncResult struct {
+	result *DescribeDashboardsResult
+	err    error
+}
+
+func NewDescribeDashboardsResultFromJson(data string) DescribeDashboardsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDashboardsResultFromDict(dict)
+}
+
+func NewDescribeDashboardsResultFromDict(data map[string]interface{}) DescribeDashboardsResult {
+	return DescribeDashboardsResult{
+		Items: func() []Dashboard {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDashboards(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeDashboardsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastDashboardsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeDashboardsResult) Pointer() *DescribeDashboardsResult {
+	return &p
+}
+
+type CreateDashboardResult struct {
+	Item     *Dashboard           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CreateDashboardAsyncResult struct {
+	result *CreateDashboardResult
+	err    error
+}
+
+func NewCreateDashboardResultFromJson(data string) CreateDashboardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateDashboardResultFromDict(dict)
+}
+
+func NewCreateDashboardResultFromDict(data map[string]interface{}) CreateDashboardResult {
+	return CreateDashboardResult{
+		Item: func() *Dashboard {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDashboardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CreateDashboardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CreateDashboardResult) Pointer() *CreateDashboardResult {
+	return &p
+}
+
+type GetDashboardResult struct {
+	Item     *Dashboard           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetDashboardAsyncResult struct {
+	result *GetDashboardResult
+	err    error
+}
+
+func NewGetDashboardResultFromJson(data string) GetDashboardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDashboardResultFromDict(dict)
+}
+
+func NewGetDashboardResultFromDict(data map[string]interface{}) GetDashboardResult {
+	return GetDashboardResult{
+		Item: func() *Dashboard {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDashboardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetDashboardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetDashboardResult) Pointer() *GetDashboardResult {
+	return &p
+}
+
+type UpdateDashboardResult struct {
+	Item     *Dashboard           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type UpdateDashboardAsyncResult struct {
+	result *UpdateDashboardResult
+	err    error
+}
+
+func NewUpdateDashboardResultFromJson(data string) UpdateDashboardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateDashboardResultFromDict(dict)
+}
+
+func NewUpdateDashboardResultFromDict(data map[string]interface{}) UpdateDashboardResult {
+	return UpdateDashboardResult{
+		Item: func() *Dashboard {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDashboardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p UpdateDashboardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p UpdateDashboardResult) Pointer() *UpdateDashboardResult {
+	return &p
+}
+
+type DuplicateDashboardResult struct {
+	Item     *Dashboard           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DuplicateDashboardAsyncResult struct {
+	result *DuplicateDashboardResult
+	err    error
+}
+
+func NewDuplicateDashboardResultFromJson(data string) DuplicateDashboardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDuplicateDashboardResultFromDict(dict)
+}
+
+func NewDuplicateDashboardResultFromDict(data map[string]interface{}) DuplicateDashboardResult {
+	return DuplicateDashboardResult{
+		Item: func() *Dashboard {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDashboardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DuplicateDashboardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DuplicateDashboardResult) Pointer() *DuplicateDashboardResult {
+	return &p
+}
+
+type DeleteDashboardResult struct {
+	Item     *Dashboard           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type DeleteDashboardAsyncResult struct {
+	result *DeleteDashboardResult
+	err    error
+}
+
+func NewDeleteDashboardResultFromJson(data string) DeleteDashboardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteDashboardResultFromDict(dict)
+}
+
+func NewDeleteDashboardResultFromDict(data map[string]interface{}) DeleteDashboardResult {
+	return DeleteDashboardResult{
+		Item: func() *Dashboard {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDashboardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DeleteDashboardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DeleteDashboardResult) Pointer() *DeleteDashboardResult {
+	return &p
+}
+
+type QueryLogResult struct {
+	Items           []LogEntry           `json:"items"`
+	TotalEntryCount *int32               `json:"totalEntryCount"`
+	NextPageToken   *string              `json:"nextPageToken"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type QueryLogAsyncResult struct {
+	result *QueryLogResult
+	err    error
+}
+
+func NewQueryLogResultFromJson(data string) QueryLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryLogResultFromDict(dict)
+}
+
+func NewQueryLogResultFromDict(data map[string]interface{}) QueryLogResult {
+	return QueryLogResult{
+		Items: func() []LogEntry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLogEntries(core.CastArray(data["items"]))
+		}(),
+		TotalEntryCount: func() *int32 {
+			v, ok := data["totalEntryCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["totalEntryCount"])
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p QueryLogResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLogEntriesFromDict(
+			p.Items,
+		),
+		"totalEntryCount": p.TotalEntryCount,
+		"nextPageToken":   p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p QueryLogResult) Pointer() *QueryLogResult {
+	return &p
+}
+
+type GetLogResult struct {
+	Item     *LogEntry            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetLogAsyncResult struct {
+	result *GetLogResult
+	err    error
+}
+
+func NewGetLogResultFromJson(data string) GetLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLogResultFromDict(dict)
+}
+
+func NewGetLogResultFromDict(data map[string]interface{}) GetLogResult {
+	return GetLogResult{
+		Item: func() *LogEntry {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogEntryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetLogResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetLogResult) Pointer() *GetLogResult {
+	return &p
+}
+
+type QueryFacetsResult struct {
+	Items    []Facet              `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type QueryFacetsAsyncResult struct {
+	result *QueryFacetsResult
+	err    error
+}
+
+func NewQueryFacetsResultFromJson(data string) QueryFacetsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryFacetsResultFromDict(dict)
+}
+
+func NewQueryFacetsResultFromDict(data map[string]interface{}) QueryFacetsResult {
+	return QueryFacetsResult{
+		Items: func() []Facet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFacets(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p QueryFacetsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastFacetsFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p QueryFacetsResult) Pointer() *QueryFacetsResult {
+	return &p
+}
+
+type QueryTimeseriesResult struct {
+	Items              []TimeseriesPoint    `json:"items"`
+	TimeseriesMetadata *TimeseriesMetadata  `json:"timeseriesMetadata"`
+	NextPageToken      *string              `json:"nextPageToken"`
+	Metadata           *core.ResultMetadata `json:"metadata"`
+}
+
+type QueryTimeseriesAsyncResult struct {
+	result *QueryTimeseriesResult
+	err    error
+}
+
+func NewQueryTimeseriesResultFromJson(data string) QueryTimeseriesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryTimeseriesResultFromDict(dict)
+}
+
+func NewQueryTimeseriesResultFromDict(data map[string]interface{}) QueryTimeseriesResult {
+	return QueryTimeseriesResult{
+		Items: func() []TimeseriesPoint {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastTimeseriesPoints(core.CastArray(data["items"]))
+		}(),
+		TimeseriesMetadata: func() *TimeseriesMetadata {
+			v, ok := data["timeseriesMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeseriesMetadataFromDict(core.CastMap(data["timeseriesMetadata"])).Pointer()
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p QueryTimeseriesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastTimeseriesPointsFromDict(
+			p.Items,
+		),
+		"timeseriesMetadata": func() map[string]interface{} {
+			if p.TimeseriesMetadata == nil {
+				return nil
+			}
+			return p.TimeseriesMetadata.ToDict()
+		}(),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p QueryTimeseriesResult) Pointer() *QueryTimeseriesResult {
+	return &p
+}
+
+type GetTraceResult struct {
+	Trace             *Trace               `json:"trace"`
+	Parallels         []Trace              `json:"parallels"`
+	ParallelTruncated *bool                `json:"parallelTruncated"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
+}
+
+type GetTraceAsyncResult struct {
+	result *GetTraceResult
+	err    error
+}
+
+func NewGetTraceResultFromJson(data string) GetTraceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTraceResultFromDict(dict)
+}
+
+func NewGetTraceResultFromDict(data map[string]interface{}) GetTraceResult {
+	return GetTraceResult{
+		Trace: func() *Trace {
+			v, ok := data["trace"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTraceFromDict(core.CastMap(data["trace"])).Pointer()
+		}(),
+		Parallels: func() []Trace {
+			if data["parallels"] == nil {
+				return nil
+			}
+			return CastTraces(core.CastArray(data["parallels"]))
+		}(),
+		ParallelTruncated: func() *bool {
+			v, ok := data["parallelTruncated"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["parallelTruncated"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetTraceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"trace": func() map[string]interface{} {
+			if p.Trace == nil {
+				return nil
+			}
+			return p.Trace.ToDict()
+		}(),
+		"parallels": CastTracesFromDict(
+			p.Parallels,
+		),
+		"parallelTruncated": p.ParallelTruncated,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetTraceResult) Pointer() *GetTraceResult {
+	return &p
+}
+
+type QueryMetricsTimeseriesResult struct {
+	Items              []TimeseriesPoint    `json:"items"`
+	TimeseriesMetadata *TimeseriesMetadata  `json:"timeseriesMetadata"`
+	Metadata           *core.ResultMetadata `json:"metadata"`
+}
+
+type QueryMetricsTimeseriesAsyncResult struct {
+	result *QueryMetricsTimeseriesResult
+	err    error
+}
+
+func NewQueryMetricsTimeseriesResultFromJson(data string) QueryMetricsTimeseriesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryMetricsTimeseriesResultFromDict(dict)
+}
+
+func NewQueryMetricsTimeseriesResultFromDict(data map[string]interface{}) QueryMetricsTimeseriesResult {
+	return QueryMetricsTimeseriesResult{
+		Items: func() []TimeseriesPoint {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastTimeseriesPoints(core.CastArray(data["items"]))
+		}(),
+		TimeseriesMetadata: func() *TimeseriesMetadata {
+			v, ok := data["timeseriesMetadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeseriesMetadataFromDict(core.CastMap(data["timeseriesMetadata"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p QueryMetricsTimeseriesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastTimeseriesPointsFromDict(
+			p.Items,
+		),
+		"timeseriesMetadata": func() map[string]interface{} {
+			if p.TimeseriesMetadata == nil {
+				return nil
+			}
+			return p.TimeseriesMetadata.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p QueryMetricsTimeseriesResult) Pointer() *QueryMetricsTimeseriesResult {
+	return &p
+}
+
+type DescribeMetricsResult struct {
+	Items         []MetricModel        `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeMetricsAsyncResult struct {
+	result *DescribeMetricsResult
+	err    error
+}
+
+func NewDescribeMetricsResultFromJson(data string) DescribeMetricsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMetricsResultFromDict(dict)
+}
+
+func NewDescribeMetricsResultFromDict(data map[string]interface{}) DescribeMetricsResult {
+	return DescribeMetricsResult{
+		Items: func() []MetricModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMetricModels(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeMetricsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastMetricModelsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeMetricsResult) Pointer() *DescribeMetricsResult {
+	return &p
+}
+
+type DescribeLabelValuesResult struct {
+	Items         []Label              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeLabelValuesAsyncResult struct {
+	result *DescribeLabelValuesResult
+	err    error
+}
+
+func NewDescribeLabelValuesResultFromJson(data string) DescribeLabelValuesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLabelValuesResultFromDict(dict)
+}
+
+func NewDescribeLabelValuesResultFromDict(data map[string]interface{}) DescribeLabelValuesResult {
+	return DescribeLabelValuesResult{
+		Items: func() []Label {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLabels(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeLabelValuesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastLabelsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeLabelValuesResult) Pointer() *DescribeLabelValuesResult {
+	return &p
+}
