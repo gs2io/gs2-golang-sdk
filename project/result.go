@@ -1575,6 +1575,58 @@ func (p DescribeBillingsResult) Pointer() *DescribeBillingsResult {
 	return &p
 }
 
+type GetBillingsResult struct {
+	Items    []Billing            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetBillingsAsyncResult struct {
+	result *GetBillingsResult
+	err    error
+}
+
+func NewGetBillingsResultFromJson(data string) GetBillingsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBillingsResultFromDict(dict)
+}
+
+func NewGetBillingsResultFromDict(data map[string]interface{}) GetBillingsResult {
+	return GetBillingsResult{
+		Items: func() []Billing {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBillings(core.CastArray(data["items"]))
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p GetBillingsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastBillingsFromDict(
+			p.Items,
+		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p GetBillingsResult) Pointer() *GetBillingsResult {
+	return &p
+}
+
 type DescribeDumpProgressesResult struct {
 	Items         []DumpProgress       `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`

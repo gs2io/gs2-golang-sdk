@@ -4067,6 +4067,116 @@ func (p DescribeBillingsRequest) Pointer() *DescribeBillingsRequest {
 	return &p
 }
 
+type GetBillingsRequest struct {
+	ContextStack *string `json:"contextStack"`
+	Year         *int32  `json:"year"`
+	Month        *int32  `json:"month"`
+	Service      *string `json:"service"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *GetBillingsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetBillingsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetBillingsRequest{}
+	} else {
+		*p = GetBillingsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetBillingsRequestFromJson(data string) (GetBillingsRequest, error) {
+	req := GetBillingsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetBillingsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetBillingsRequestFromDict(data map[string]interface{}) GetBillingsRequest {
+	return GetBillingsRequest{
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+	}
+}
+
+func (p GetBillingsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"year":    p.Year,
+		"month":   p.Month,
+		"service": p.Service,
+	}
+}
+
+func (p GetBillingsRequest) Pointer() *GetBillingsRequest {
+	return &p
+}
+
 type DescribeDumpProgressesRequest struct {
 	ContextStack *string `json:"contextStack"`
 	PageToken    *string `json:"pageToken"`
@@ -4257,7 +4367,6 @@ type WaitDumpUserDataRequest struct {
 	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
-	MicroserviceName   *string `json:"microserviceName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -4353,29 +4462,6 @@ func (p *WaitDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["microserviceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.MicroserviceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.MicroserviceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.MicroserviceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.MicroserviceName)
-				}
-			}
-		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4435,13 +4521,6 @@ func NewWaitDumpUserDataRequestFromDict(data map[string]interface{}) WaitDumpUse
 			}
 			return core.CastString(data["userId"])
 		}(),
-		MicroserviceName: func() *string {
-			v, ok := data["microserviceName"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["microserviceName"])
-		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -4454,11 +4533,10 @@ func NewWaitDumpUserDataRequestFromDict(data map[string]interface{}) WaitDumpUse
 
 func (p WaitDumpUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"ownerId":          p.OwnerId,
-		"transactionId":    p.TransactionId,
-		"userId":           p.UserId,
-		"microserviceName": p.MicroserviceName,
-		"timeOffsetToken":  p.TimeOffsetToken,
+		"ownerId":         p.OwnerId,
+		"transactionId":   p.TransactionId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4979,7 +5057,6 @@ type WaitCleanUserDataRequest struct {
 	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
-	MicroserviceName   *string `json:"microserviceName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -5075,29 +5152,6 @@ func (p *WaitCleanUserDataRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["microserviceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.MicroserviceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.MicroserviceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.MicroserviceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.MicroserviceName)
-				}
-			}
-		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5157,13 +5211,6 @@ func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanU
 			}
 			return core.CastString(data["userId"])
 		}(),
-		MicroserviceName: func() *string {
-			v, ok := data["microserviceName"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["microserviceName"])
-		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -5176,11 +5223,10 @@ func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanU
 
 func (p WaitCleanUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"ownerId":          p.OwnerId,
-		"transactionId":    p.TransactionId,
-		"userId":           p.UserId,
-		"microserviceName": p.MicroserviceName,
-		"timeOffsetToken":  p.TimeOffsetToken,
+		"ownerId":         p.OwnerId,
+		"transactionId":   p.TransactionId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -5497,7 +5543,6 @@ type WaitImportUserDataRequest struct {
 	OwnerId            *string `json:"ownerId"`
 	TransactionId      *string `json:"transactionId"`
 	UserId             *string `json:"userId"`
-	MicroserviceName   *string `json:"microserviceName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -5593,29 +5638,6 @@ func (p *WaitImportUserDataRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["microserviceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.MicroserviceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.MicroserviceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.MicroserviceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.MicroserviceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.MicroserviceName)
-				}
-			}
-		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5675,13 +5697,6 @@ func NewWaitImportUserDataRequestFromDict(data map[string]interface{}) WaitImpor
 			}
 			return core.CastString(data["userId"])
 		}(),
-		MicroserviceName: func() *string {
-			v, ok := data["microserviceName"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["microserviceName"])
-		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -5694,11 +5709,10 @@ func NewWaitImportUserDataRequestFromDict(data map[string]interface{}) WaitImpor
 
 func (p WaitImportUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"ownerId":          p.OwnerId,
-		"transactionId":    p.TransactionId,
-		"userId":           p.UserId,
-		"microserviceName": p.MicroserviceName,
-		"timeOffsetToken":  p.TimeOffsetToken,
+		"ownerId":         p.OwnerId,
+		"transactionId":   p.TransactionId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

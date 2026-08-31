@@ -1740,6 +1740,7 @@ type JoinedGuild struct {
 	GuildName      *string `json:"guildName"`
 	UserId         *string `json:"userId"`
 	CreatedAt      *int64  `json:"createdAt"`
+	Revision       *int64  `json:"revision"`
 }
 
 func (p *JoinedGuild) UnmarshalJSON(data []byte) error {
@@ -1859,6 +1860,9 @@ func (p *JoinedGuild) UnmarshalJSON(data []byte) error {
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
 	}
 	return nil
 }
@@ -1906,6 +1910,13 @@ func NewJoinedGuildFromDict(data map[string]interface{}) JoinedGuild {
 			}
 			return core.CastInt64(data["createdAt"])
 		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1925,6 +1936,9 @@ func (p JoinedGuild) ToDict() map[string]interface{} {
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
+	}
+	if p.Revision != nil {
+		m["revision"] = p.Revision
 	}
 	return m
 }
@@ -1952,6 +1966,7 @@ func CastJoinedGuildsFromDict(data []JoinedGuild) []interface{} {
 type LastGuildMasterActivity struct {
 	UserId    *string `json:"userId"`
 	UpdatedAt *int64  `json:"updatedAt"`
+	Revision  *int64  `json:"revision"`
 }
 
 func (p *LastGuildMasterActivity) UnmarshalJSON(data []byte) error {
@@ -2002,6 +2017,9 @@ func (p *LastGuildMasterActivity) UnmarshalJSON(data []byte) error {
 		if v, ok := d["updatedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UpdatedAt)
 		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
 	}
 	return nil
 }
@@ -2028,6 +2046,13 @@ func NewLastGuildMasterActivityFromDict(data map[string]interface{}) LastGuildMa
 			}
 			return core.CastInt64(data["updatedAt"])
 		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2038,6 +2063,9 @@ func (p LastGuildMasterActivity) ToDict() map[string]interface{} {
 	}
 	if p.UpdatedAt != nil {
 		m["updatedAt"] = p.UpdatedAt
+	}
+	if p.Revision != nil {
+		m["revision"] = p.Revision
 	}
 	return m
 }

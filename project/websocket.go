@@ -2578,6 +2578,100 @@ func (p Gs2ProjectWebSocketClient) DescribeBillings(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ProjectWebSocketClient) getBillingsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetBillingsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBillingsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBillingsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBillingsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetBillingsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectWebSocketClient) GetBillingsAsync(
+	request *GetBillingsRequest,
+	callback chan<- GetBillingsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "project",
+			"component":   "billing",
+			"function":    "getBillings",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.Year != nil {
+		bodies["year"] = *request.Year
+	}
+	if request.Month != nil {
+		bodies["month"] = *request.Month
+	}
+	if request.Service != nil && *request.Service != "" {
+		bodies["service"] = *request.Service
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getBillingsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectWebSocketClient) GetBillings(
+	request *GetBillingsRequest,
+) (*GetBillingsResult, error) {
+	callback := make(chan GetBillingsAsyncResult, 1)
+	go p.GetBillingsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ProjectWebSocketClient) describeDumpProgressesAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeDumpProgressesAsyncResult,
@@ -2818,9 +2912,6 @@ func (p Gs2ProjectWebSocketClient) WaitDumpUserDataAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
-	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
@@ -3374,9 +3465,6 @@ func (p Gs2ProjectWebSocketClient) WaitCleanUserDataAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
-	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
@@ -3749,9 +3837,6 @@ func (p Gs2ProjectWebSocketClient) WaitImportUserDataAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
-	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

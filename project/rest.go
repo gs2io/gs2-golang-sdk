@@ -2643,6 +2643,105 @@ func (p Gs2ProjectRestClient) DescribeBillings(
 	return asyncResult.result, asyncResult.err
 }
 
+func getBillingsAsyncHandler(
+	client Gs2ProjectRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetBillingsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetBillingsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetBillingsResult
+	if asyncResult.Err != nil {
+		callback <- GetBillingsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBillingsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetBillingsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectRestClient) GetBillingsAsync(
+	request *GetBillingsRequest,
+	callback chan<- GetBillingsAsyncResult,
+) {
+	path := "/billing/{year}/{month}"
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+	if request.Month != nil {
+		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+	} else {
+		path = strings.ReplaceAll(path, "{month}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Service != nil {
+		queryStrings["service"] = core.ToString(*request.Service)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getBillingsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("project", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectRestClient) GetBillings(
+	request *GetBillingsRequest,
+) (*GetBillingsResult, error) {
+	callback := make(chan GetBillingsAsyncResult, 1)
+	go p.GetBillingsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeDumpProgressesAsyncHandler(
 	client Gs2ProjectRestClient,
 	job *core.NetworkJob,
@@ -2887,9 +2986,6 @@ func (p Gs2ProjectRestClient) WaitDumpUserDataAsync(
 	var bodies = core.Bodies{}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
-	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3463,9 +3559,6 @@ func (p Gs2ProjectRestClient) WaitCleanUserDataAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
-	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3850,9 +3943,6 @@ func (p Gs2ProjectRestClient) WaitImportUserDataAsync(
 	var bodies = core.Bodies{}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
-	}
-	if request.MicroserviceName != nil && *request.MicroserviceName != "" {
-		bodies["microserviceName"] = *request.MicroserviceName
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
