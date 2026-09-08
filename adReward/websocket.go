@@ -187,6 +187,9 @@ func (p Gs2AdRewardWebSocketClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.Admob != nil {
 		bodies["admob"] = request.Admob.ToDict()
 	}
@@ -481,6 +484,9 @@ func (p Gs2AdRewardWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.Admob != nil {
 		bodies["admob"] = request.Admob.ToDict()

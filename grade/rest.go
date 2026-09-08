@@ -187,6 +187,9 @@ func (p Gs2GradeRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.ChangeGradeScript != nil {
 		bodies["changeGradeScript"] = request.ChangeGradeScript.ToDict()
 	}
@@ -471,6 +474,9 @@ func (p Gs2GradeRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.ChangeGradeScript != nil {
 		bodies["changeGradeScript"] = request.ChangeGradeScript.ToDict()

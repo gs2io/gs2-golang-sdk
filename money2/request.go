@@ -154,23 +154,25 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack                         *string              `json:"contextStack"`
-	Name                                 *string              `json:"name"`
-	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
-	Description                          *string              `json:"description"`
-	TransactionSetting                   *TransactionSetting  `json:"transactionSetting"`
-	SharedFreeCurrency                   *bool                `json:"sharedFreeCurrency"`
-	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
-	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
-	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
-	VerifyReceiptScript                  *ScriptSetting       `json:"verifyReceiptScript"`
-	SubscribeScript                      *string              `json:"subscribeScript"`
-	RenewScript                          *string              `json:"renewScript"`
-	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
-	TakeOverScript                       *ScriptSetting       `json:"takeOverScript"`
-	ChangeSubscriptionStatusNotification *NotificationSetting `json:"changeSubscriptionStatusNotification"`
-	LogSetting                           *LogSetting          `json:"logSetting"`
-	DryRun                               *bool                `json:"dryRun"`
+	ContextStack          *string `json:"contextStack"`
+	Name                  *string `json:"name"`
+	CurrencyUsagePriority *string `json:"currencyUsagePriority"`
+	Description           *string `json:"description"`
+	// Deprecated: should not be used
+	TransactionSetting                   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2                 *TransactionSettingV2 `json:"transactionSettingV2"`
+	SharedFreeCurrency                   *bool                 `json:"sharedFreeCurrency"`
+	PlatformSetting                      *PlatformSetting      `json:"platformSetting"`
+	DepositBalanceScript                 *ScriptSetting        `json:"depositBalanceScript"`
+	WithdrawBalanceScript                *ScriptSetting        `json:"withdrawBalanceScript"`
+	VerifyReceiptScript                  *ScriptSetting        `json:"verifyReceiptScript"`
+	SubscribeScript                      *string               `json:"subscribeScript"`
+	RenewScript                          *string               `json:"renewScript"`
+	UnsubscribeScript                    *string               `json:"unsubscribeScript"`
+	TakeOverScript                       *ScriptSetting        `json:"takeOverScript"`
+	ChangeSubscriptionStatusNotification *NotificationSetting  `json:"changeSubscriptionStatusNotification"`
+	LogSetting                           *LogSetting           `json:"logSetting"`
+	DryRun                               *bool                 `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -266,6 +268,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["sharedFreeCurrency"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.SharedFreeCurrency)
@@ -403,6 +408,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		SharedFreeCurrency: func() *bool {
 			v, ok := data["sharedFreeCurrency"]
 			if !ok || v == nil {
@@ -493,6 +505,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"sharedFreeCurrency": p.SharedFreeCurrency,
 		"platformSetting": func() map[string]interface{} {
@@ -720,22 +738,24 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack                         *string              `json:"contextStack"`
-	NamespaceName                        *string              `json:"namespaceName"`
-	CurrencyUsagePriority                *string              `json:"currencyUsagePriority"`
-	Description                          *string              `json:"description"`
-	TransactionSetting                   *TransactionSetting  `json:"transactionSetting"`
-	PlatformSetting                      *PlatformSetting     `json:"platformSetting"`
-	DepositBalanceScript                 *ScriptSetting       `json:"depositBalanceScript"`
-	WithdrawBalanceScript                *ScriptSetting       `json:"withdrawBalanceScript"`
-	VerifyReceiptScript                  *ScriptSetting       `json:"verifyReceiptScript"`
-	SubscribeScript                      *string              `json:"subscribeScript"`
-	RenewScript                          *string              `json:"renewScript"`
-	UnsubscribeScript                    *string              `json:"unsubscribeScript"`
-	TakeOverScript                       *ScriptSetting       `json:"takeOverScript"`
-	ChangeSubscriptionStatusNotification *NotificationSetting `json:"changeSubscriptionStatusNotification"`
-	LogSetting                           *LogSetting          `json:"logSetting"`
-	DryRun                               *bool                `json:"dryRun"`
+	ContextStack          *string `json:"contextStack"`
+	NamespaceName         *string `json:"namespaceName"`
+	CurrencyUsagePriority *string `json:"currencyUsagePriority"`
+	Description           *string `json:"description"`
+	// Deprecated: should not be used
+	TransactionSetting                   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2                 *TransactionSettingV2 `json:"transactionSettingV2"`
+	PlatformSetting                      *PlatformSetting      `json:"platformSetting"`
+	DepositBalanceScript                 *ScriptSetting        `json:"depositBalanceScript"`
+	WithdrawBalanceScript                *ScriptSetting        `json:"withdrawBalanceScript"`
+	VerifyReceiptScript                  *ScriptSetting        `json:"verifyReceiptScript"`
+	SubscribeScript                      *string               `json:"subscribeScript"`
+	RenewScript                          *string               `json:"renewScript"`
+	UnsubscribeScript                    *string               `json:"unsubscribeScript"`
+	TakeOverScript                       *ScriptSetting        `json:"takeOverScript"`
+	ChangeSubscriptionStatusNotification *NotificationSetting  `json:"changeSubscriptionStatusNotification"`
+	LogSetting                           *LogSetting           `json:"logSetting"`
+	DryRun                               *bool                 `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -831,6 +851,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["platformSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PlatformSetting)
@@ -965,6 +988,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		PlatformSetting: func() *PlatformSetting {
 			v, ok := data["platformSetting"]
 			if !ok || v == nil {
@@ -1048,6 +1078,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"platformSetting": func() map[string]interface{} {
 			if p.PlatformSetting == nil {

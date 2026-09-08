@@ -154,16 +154,18 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack              *string             `json:"contextStack"`
-	Name                      *string             `json:"name"`
-	Description               *string             `json:"description"`
-	EnableAwaitExchange       *bool               `json:"enableAwaitExchange"`
-	EnableDirectExchange      *bool               `json:"enableDirectExchange"`
-	TransactionSetting        *TransactionSetting `json:"transactionSetting"`
-	ExchangeScript            *ScriptSetting      `json:"exchangeScript"`
-	IncrementalExchangeScript *ScriptSetting      `json:"incrementalExchangeScript"`
-	AcquireAwaitScript        *ScriptSetting      `json:"acquireAwaitScript"`
-	LogSetting                *LogSetting         `json:"logSetting"`
+	ContextStack         *string `json:"contextStack"`
+	Name                 *string `json:"name"`
+	Description          *string `json:"description"`
+	EnableAwaitExchange  *bool   `json:"enableAwaitExchange"`
+	EnableDirectExchange *bool   `json:"enableDirectExchange"`
+	// Deprecated: should not be used
+	TransactionSetting        *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2      *TransactionSettingV2 `json:"transactionSettingV2"`
+	ExchangeScript            *ScriptSetting        `json:"exchangeScript"`
+	IncrementalExchangeScript *ScriptSetting        `json:"incrementalExchangeScript"`
+	AcquireAwaitScript        *ScriptSetting        `json:"acquireAwaitScript"`
+	LogSetting                *LogSetting           `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -247,6 +249,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["exchangeScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExchangeScript)
@@ -356,6 +361,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ExchangeScript: func() *ScriptSetting {
 			v, ok := data["exchangeScript"]
 			if !ok || v == nil {
@@ -412,6 +424,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"exchangeScript": func() map[string]interface{} {
 			if p.ExchangeScript == nil {
@@ -619,16 +637,18 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack              *string             `json:"contextStack"`
-	NamespaceName             *string             `json:"namespaceName"`
-	Description               *string             `json:"description"`
-	EnableAwaitExchange       *bool               `json:"enableAwaitExchange"`
-	EnableDirectExchange      *bool               `json:"enableDirectExchange"`
-	TransactionSetting        *TransactionSetting `json:"transactionSetting"`
-	ExchangeScript            *ScriptSetting      `json:"exchangeScript"`
-	IncrementalExchangeScript *ScriptSetting      `json:"incrementalExchangeScript"`
-	AcquireAwaitScript        *ScriptSetting      `json:"acquireAwaitScript"`
-	LogSetting                *LogSetting         `json:"logSetting"`
+	ContextStack         *string `json:"contextStack"`
+	NamespaceName        *string `json:"namespaceName"`
+	Description          *string `json:"description"`
+	EnableAwaitExchange  *bool   `json:"enableAwaitExchange"`
+	EnableDirectExchange *bool   `json:"enableDirectExchange"`
+	// Deprecated: should not be used
+	TransactionSetting        *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2      *TransactionSettingV2 `json:"transactionSettingV2"`
+	ExchangeScript            *ScriptSetting        `json:"exchangeScript"`
+	IncrementalExchangeScript *ScriptSetting        `json:"incrementalExchangeScript"`
+	AcquireAwaitScript        *ScriptSetting        `json:"acquireAwaitScript"`
+	LogSetting                *LogSetting           `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -712,6 +732,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["exchangeScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExchangeScript)
@@ -821,6 +844,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ExchangeScript: func() *ScriptSetting {
 			v, ok := data["exchangeScript"]
 			if !ok || v == nil {
@@ -877,6 +907,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"exchangeScript": func() map[string]interface{} {
 			if p.ExchangeScript == nil {

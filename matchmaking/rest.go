@@ -187,6 +187,9 @@ func (p Gs2MatchmakingRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.EnableRating != nil {
 		bodies["enableRating"] = *request.EnableRating
 	}
@@ -519,6 +522,9 @@ func (p Gs2MatchmakingRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.EnableRating != nil {
 		bodies["enableRating"] = *request.EnableRating

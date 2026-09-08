@@ -187,6 +187,9 @@ func (p Gs2ShowcaseWebSocketClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.BuyScript != nil {
 		bodies["buyScript"] = request.BuyScript.ToDict()
 	}
@@ -468,6 +471,9 @@ func (p Gs2ShowcaseWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.BuyScript != nil {
 		bodies["buyScript"] = request.BuyScript.ToDict()

@@ -154,17 +154,19 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack                *string             `json:"contextStack"`
-	Name                        *string             `json:"name"`
-	Description                 *string             `json:"description"`
-	SupportSpeculativeExecution *string             `json:"supportSpeculativeExecution"`
-	TransactionSetting          *TransactionSetting `json:"transactionSetting"`
-	StartScript                 *ScriptSetting      `json:"startScript"`
-	PassScript                  *ScriptSetting      `json:"passScript"`
-	ErrorScript                 *ScriptSetting      `json:"errorScript"`
-	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
-	LogSetting                  *LogSetting         `json:"logSetting"`
-	DryRun                      *bool               `json:"dryRun"`
+	ContextStack                *string `json:"contextStack"`
+	Name                        *string `json:"name"`
+	Description                 *string `json:"description"`
+	SupportSpeculativeExecution *string `json:"supportSpeculativeExecution"`
+	// Deprecated: should not be used
+	TransactionSetting        *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2      *TransactionSettingV2 `json:"transactionSettingV2"`
+	StartScript               *ScriptSetting        `json:"startScript"`
+	PassScript                *ScriptSetting        `json:"passScript"`
+	ErrorScript               *ScriptSetting        `json:"errorScript"`
+	LowestStateMachineVersion *int64                `json:"lowestStateMachineVersion"`
+	LogSetting                *LogSetting           `json:"logSetting"`
+	DryRun                    *bool                 `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -261,6 +263,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
+		}
 		if v, ok := d["startScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.StartScript)
 		}
@@ -319,6 +324,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		StartScript: func() *ScriptSetting {
 			v, ok := data["startScript"]
 			if !ok || v == nil {
@@ -367,6 +379,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"startScript": func() map[string]interface{} {
 			if p.StartScript == nil {
@@ -573,17 +591,19 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack                *string             `json:"contextStack"`
-	NamespaceName               *string             `json:"namespaceName"`
-	Description                 *string             `json:"description"`
-	SupportSpeculativeExecution *string             `json:"supportSpeculativeExecution"`
-	TransactionSetting          *TransactionSetting `json:"transactionSetting"`
-	StartScript                 *ScriptSetting      `json:"startScript"`
-	PassScript                  *ScriptSetting      `json:"passScript"`
-	ErrorScript                 *ScriptSetting      `json:"errorScript"`
-	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
-	LogSetting                  *LogSetting         `json:"logSetting"`
-	DryRun                      *bool               `json:"dryRun"`
+	ContextStack                *string `json:"contextStack"`
+	NamespaceName               *string `json:"namespaceName"`
+	Description                 *string `json:"description"`
+	SupportSpeculativeExecution *string `json:"supportSpeculativeExecution"`
+	// Deprecated: should not be used
+	TransactionSetting        *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2      *TransactionSettingV2 `json:"transactionSettingV2"`
+	StartScript               *ScriptSetting        `json:"startScript"`
+	PassScript                *ScriptSetting        `json:"passScript"`
+	ErrorScript               *ScriptSetting        `json:"errorScript"`
+	LowestStateMachineVersion *int64                `json:"lowestStateMachineVersion"`
+	LogSetting                *LogSetting           `json:"logSetting"`
+	DryRun                    *bool                 `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -680,6 +700,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
+		}
 		if v, ok := d["startScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.StartScript)
 		}
@@ -738,6 +761,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		StartScript: func() *ScriptSetting {
 			v, ok := data["startScript"]
 			if !ok || v == nil {
@@ -786,6 +816,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"startScript": func() map[string]interface{} {
 			if p.StartScript == nil {

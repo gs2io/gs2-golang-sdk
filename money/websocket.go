@@ -187,6 +187,9 @@ func (p Gs2MoneyWebSocketClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.Priority != nil && *request.Priority != "" {
 		bodies["priority"] = *request.Priority
 	}
@@ -486,6 +489,9 @@ func (p Gs2MoneyWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.Priority != nil && *request.Priority != "" {
 		bodies["priority"] = *request.Priority

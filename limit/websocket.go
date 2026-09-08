@@ -187,6 +187,9 @@ func (p Gs2LimitWebSocketClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.CountUpScript != nil {
 		bodies["countUpScript"] = request.CountUpScript.ToDict()
 	}
@@ -462,6 +465,9 @@ func (p Gs2LimitWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.CountUpScript != nil {
 		bodies["countUpScript"] = request.CountUpScript.ToDict()

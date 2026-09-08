@@ -186,6 +186,9 @@ func (p Gs2FriendRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.FollowScript != nil {
 		bodies["followScript"] = request.FollowScript.ToDict()
 	}
@@ -509,6 +512,9 @@ func (p Gs2FriendRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.FollowScript != nil {
 		bodies["followScript"] = request.FollowScript.ToDict()

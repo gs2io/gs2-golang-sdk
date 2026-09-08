@@ -187,6 +187,9 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.ChangeNotification != nil {
 		bodies["changeNotification"] = request.ChangeNotification.ToDict()
 	}
@@ -510,6 +513,9 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.ChangeNotification != nil {
 		bodies["changeNotification"] = request.ChangeNotification.ToDict()

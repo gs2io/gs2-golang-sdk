@@ -187,6 +187,9 @@ func (p Gs2BuffRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.ApplyBuffScript != nil {
 		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()
 	}
@@ -471,6 +474,9 @@ func (p Gs2BuffRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.ApplyBuffScript != nil {
 		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()

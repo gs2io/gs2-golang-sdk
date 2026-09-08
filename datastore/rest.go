@@ -186,6 +186,9 @@ func (p Gs2DatastoreRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -470,6 +473,9 @@ func (p Gs2DatastoreRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

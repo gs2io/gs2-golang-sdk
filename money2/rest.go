@@ -190,6 +190,9 @@ func (p Gs2Money2RestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.SharedFreeCurrency != nil {
 		bodies["sharedFreeCurrency"] = *request.SharedFreeCurrency
 	}
@@ -504,6 +507,9 @@ func (p Gs2Money2RestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.PlatformSetting != nil {
 		bodies["platformSetting"] = request.PlatformSetting.ToDict()

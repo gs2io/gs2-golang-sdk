@@ -187,6 +187,9 @@ func (p Gs2InventoryRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.AcquireScript != nil {
 		bodies["acquireScript"] = request.AcquireScript.ToDict()
 	}
@@ -489,6 +492,9 @@ func (p Gs2InventoryRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.AcquireScript != nil {
 		bodies["acquireScript"] = request.AcquireScript.ToDict()

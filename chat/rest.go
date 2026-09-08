@@ -187,6 +187,9 @@ func (p Gs2ChatRestClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
+	}
 	if request.AllowCreateRoom != nil {
 		bodies["allowCreateRoom"] = *request.AllowCreateRoom
 	}
@@ -492,6 +495,9 @@ func (p Gs2ChatRestClient) UpdateNamespaceAsync(
 	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.TransactionSettingV2 != nil {
+		bodies["transactionSettingV2"] = request.TransactionSettingV2.ToDict()
 	}
 	if request.AllowCreateRoom != nil {
 		bodies["allowCreateRoom"] = *request.AllowCreateRoom

@@ -154,15 +154,17 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack       *string              `json:"contextStack"`
-	Name               *string              `json:"name"`
-	Description        *string              `json:"description"`
-	TransactionSetting *TransactionSetting  `json:"transactionSetting"`
-	ServerType         *string              `json:"serverType"`
-	ServerSpec         *string              `json:"serverSpec"`
-	CreateNotification *NotificationSetting `json:"createNotification"`
-	LogSetting         *LogSetting          `json:"logSetting"`
-	DryRun             *bool                `json:"dryRun"`
+	ContextStack *string `json:"contextStack"`
+	Name         *string `json:"name"`
+	Description  *string `json:"description"`
+	// Deprecated: should not be used
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ServerType           *string               `json:"serverType"`
+	ServerSpec           *string               `json:"serverSpec"`
+	CreateNotification   *NotificationSetting  `json:"createNotification"`
+	LogSetting           *LogSetting           `json:"logSetting"`
+	DryRun               *bool                 `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -235,6 +237,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["serverType"]; ok && v != nil {
 			var temp interface{}
@@ -324,6 +329,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ServerType: func() *string {
 			v, ok := data["serverType"]
 			if !ok || v == nil {
@@ -364,6 +376,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"serverType": p.ServerType,
 		"serverSpec": p.ServerSpec,
@@ -559,15 +577,17 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack       *string              `json:"contextStack"`
-	NamespaceName      *string              `json:"namespaceName"`
-	Description        *string              `json:"description"`
-	TransactionSetting *TransactionSetting  `json:"transactionSetting"`
-	ServerType         *string              `json:"serverType"`
-	ServerSpec         *string              `json:"serverSpec"`
-	CreateNotification *NotificationSetting `json:"createNotification"`
-	LogSetting         *LogSetting          `json:"logSetting"`
-	DryRun             *bool                `json:"dryRun"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Description   *string `json:"description"`
+	// Deprecated: should not be used
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ServerType           *string               `json:"serverType"`
+	ServerSpec           *string               `json:"serverSpec"`
+	CreateNotification   *NotificationSetting  `json:"createNotification"`
+	LogSetting           *LogSetting           `json:"logSetting"`
+	DryRun               *bool                 `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -640,6 +660,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["serverType"]; ok && v != nil {
 			var temp interface{}
@@ -729,6 +752,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ServerType: func() *string {
 			v, ok := data["serverType"]
 			if !ok || v == nil {
@@ -769,6 +799,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"serverType": p.ServerType,
 		"serverSpec": p.ServerSpec,

@@ -24,15 +24,17 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId        *string             `json:"namespaceId"`
-	Name               *string             `json:"name"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	ChangeGradeScript  *ScriptSetting      `json:"changeGradeScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
-	CreatedAt          *int64              `json:"createdAt"`
-	UpdatedAt          *int64              `json:"updatedAt"`
-	Revision           *int64              `json:"revision"`
+	NamespaceId *string `json:"namespaceId"`
+	Name        *string `json:"name"`
+	Description *string `json:"description"`
+	// Deprecated: should not be used
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ChangeGradeScript    *ScriptSetting        `json:"changeGradeScript"`
+	LogSetting           *LogSetting           `json:"logSetting"`
+	CreatedAt            *int64                `json:"createdAt"`
+	UpdatedAt            *int64                `json:"updatedAt"`
+	Revision             *int64                `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -129,6 +131,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
+		}
 		if v, ok := d["changeGradeScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangeGradeScript)
 		}
@@ -183,6 +188,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 				return nil
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
 		}(),
 		ChangeGradeScript: func() *ScriptSetting {
 			v, ok := data["changeGradeScript"]
@@ -239,6 +251,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}()
+	}
+	if p.TransactionSettingV2 != nil {
+		m["transactionSettingV2"] = func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}()
 	}
 	if p.ChangeGradeScript != nil {
@@ -3172,6 +3192,7 @@ type TransactionSetting struct {
 	TransactionUseDistributor          *bool   `json:"transactionUseDistributor"`
 	CommitScriptResultInUseDistributor *bool   `json:"commitScriptResultInUseDistributor"`
 	AcquireActionUseJobQueue           *bool   `json:"acquireActionUseJobQueue"`
+	EnableSequentialExecution          *bool   `json:"enableSequentialExecution"`
 	DistributorNamespaceId             *string `json:"distributorNamespaceId"`
 	// Deprecated: should not be used
 	KeyId            *string `json:"keyId"`
@@ -3214,6 +3235,9 @@ func (p *TransactionSetting) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["acquireActionUseJobQueue"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActionUseJobQueue)
+		}
+		if v, ok := d["enableSequentialExecution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableSequentialExecution)
 		}
 		if v, ok := d["distributorNamespaceId"]; ok && v != nil {
 			var temp interface{}
@@ -3331,6 +3355,13 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 			}
 			return core.CastBool(data["acquireActionUseJobQueue"])
 		}(),
+		EnableSequentialExecution: func() *bool {
+			v, ok := data["enableSequentialExecution"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableSequentialExecution"])
+		}(),
 		DistributorNamespaceId: func() *string {
 			v, ok := data["distributorNamespaceId"]
 			if !ok || v == nil {
@@ -3372,6 +3403,9 @@ func (p TransactionSetting) ToDict() map[string]interface{} {
 	if p.AcquireActionUseJobQueue != nil {
 		m["acquireActionUseJobQueue"] = p.AcquireActionUseJobQueue
 	}
+	if p.EnableSequentialExecution != nil {
+		m["enableSequentialExecution"] = p.EnableSequentialExecution
+	}
 	if p.DistributorNamespaceId != nil {
 		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
@@ -3397,6 +3431,119 @@ func CastTransactionSettings(data []interface{}) []TransactionSetting {
 }
 
 func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TransactionSettingV2 struct {
+	DistributorNamespaceId  *string `json:"distributorNamespaceId"`
+	EnableParallelExecution *bool   `json:"enableParallelExecution"`
+}
+
+func (p *TransactionSettingV2) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TransactionSettingV2{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TransactionSettingV2{}
+	} else {
+		*p = TransactionSettingV2{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["distributorNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DistributorNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DistributorNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DistributorNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DistributorNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["enableParallelExecution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableParallelExecution)
+		}
+	}
+	return nil
+}
+
+func NewTransactionSettingV2FromJson(data string) TransactionSettingV2 {
+	req := TransactionSettingV2{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTransactionSettingV2FromDict(data map[string]interface{}) TransactionSettingV2 {
+	return TransactionSettingV2{
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		EnableParallelExecution: func() *bool {
+			v, ok := data["enableParallelExecution"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableParallelExecution"])
+		}(),
+	}
+}
+
+func (p TransactionSettingV2) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.DistributorNamespaceId != nil {
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
+	}
+	if p.EnableParallelExecution != nil {
+		m["enableParallelExecution"] = p.EnableParallelExecution
+	}
+	return m
+}
+
+func (p TransactionSettingV2) Pointer() *TransactionSettingV2 {
+	return &p
+}
+
+func CastTransactionSettingV2s(data []interface{}) []TransactionSettingV2 {
+	v := make([]TransactionSettingV2, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionSettingV2FromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionSettingV2sFromDict(data []TransactionSettingV2) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

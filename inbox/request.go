@@ -154,16 +154,18 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	ContextStack               *string              `json:"contextStack"`
-	Name                       *string              `json:"name"`
-	Description                *string              `json:"description"`
-	IsAutomaticDeletingEnabled *bool                `json:"isAutomaticDeletingEnabled"`
-	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
-	ReceiveMessageScript       *ScriptSetting       `json:"receiveMessageScript"`
-	ReadMessageScript          *ScriptSetting       `json:"readMessageScript"`
-	DeleteMessageScript        *ScriptSetting       `json:"deleteMessageScript"`
-	ReceiveNotification        *NotificationSetting `json:"receiveNotification"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
+	ContextStack               *string `json:"contextStack"`
+	Name                       *string `json:"name"`
+	Description                *string `json:"description"`
+	IsAutomaticDeletingEnabled *bool   `json:"isAutomaticDeletingEnabled"`
+	// Deprecated: should not be used
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ReceiveMessageScript *ScriptSetting        `json:"receiveMessageScript"`
+	ReadMessageScript    *ScriptSetting        `json:"readMessageScript"`
+	DeleteMessageScript  *ScriptSetting        `json:"deleteMessageScript"`
+	ReceiveNotification  *NotificationSetting  `json:"receiveNotification"`
+	LogSetting           *LogSetting           `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -244,6 +246,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["receiveMessageScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveMessageScript)
@@ -349,6 +354,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ReceiveMessageScript: func() *ScriptSetting {
 			v, ok := data["receiveMessageScript"]
 			if !ok || v == nil {
@@ -411,6 +423,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"receiveMessageScript": func() map[string]interface{} {
 			if p.ReceiveMessageScript == nil {
@@ -624,16 +642,18 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	ContextStack               *string              `json:"contextStack"`
-	NamespaceName              *string              `json:"namespaceName"`
-	Description                *string              `json:"description"`
-	IsAutomaticDeletingEnabled *bool                `json:"isAutomaticDeletingEnabled"`
-	TransactionSetting         *TransactionSetting  `json:"transactionSetting"`
-	ReceiveMessageScript       *ScriptSetting       `json:"receiveMessageScript"`
-	ReadMessageScript          *ScriptSetting       `json:"readMessageScript"`
-	DeleteMessageScript        *ScriptSetting       `json:"deleteMessageScript"`
-	ReceiveNotification        *NotificationSetting `json:"receiveNotification"`
-	LogSetting                 *LogSetting          `json:"logSetting"`
+	ContextStack               *string `json:"contextStack"`
+	NamespaceName              *string `json:"namespaceName"`
+	Description                *string `json:"description"`
+	IsAutomaticDeletingEnabled *bool   `json:"isAutomaticDeletingEnabled"`
+	// Deprecated: should not be used
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ReceiveMessageScript *ScriptSetting        `json:"receiveMessageScript"`
+	ReadMessageScript    *ScriptSetting        `json:"readMessageScript"`
+	DeleteMessageScript  *ScriptSetting        `json:"deleteMessageScript"`
+	ReceiveNotification  *NotificationSetting  `json:"receiveNotification"`
+	LogSetting           *LogSetting           `json:"logSetting"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -714,6 +734,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["transactionSettingV2"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSettingV2)
 		}
 		if v, ok := d["receiveMessageScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveMessageScript)
@@ -819,6 +842,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
 		}(),
+		TransactionSettingV2: func() *TransactionSettingV2 {
+			v, ok := data["transactionSettingV2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingV2FromDict(core.CastMap(data["transactionSettingV2"])).Pointer()
+		}(),
 		ReceiveMessageScript: func() *ScriptSetting {
 			v, ok := data["receiveMessageScript"]
 			if !ok || v == nil {
@@ -881,6 +911,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
+		}(),
+		"transactionSettingV2": func() map[string]interface{} {
+			if p.TransactionSettingV2 == nil {
+				return nil
+			}
+			return p.TransactionSettingV2.ToDict()
 		}(),
 		"receiveMessageScript": func() map[string]interface{} {
 			if p.ReceiveMessageScript == nil {
