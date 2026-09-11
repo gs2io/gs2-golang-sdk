@@ -160,9 +160,11 @@ type CreateNamespaceRequest struct {
 	// Deprecated: should not be used
 	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
 	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
-	FirebaseSecret       *string               `json:"firebaseSecret"`
-	LogSetting           *LogSetting           `json:"logSetting"`
-	DryRun               *bool                 `json:"dryRun"`
+	// Deprecated: should not be used
+	FirebaseSecret    *string     `json:"firebaseSecret"`
+	FirebaseProjectId *string     `json:"firebaseProjectId"`
+	LogSetting        *LogSetting `json:"logSetting"`
+	DryRun            *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -262,6 +264,29 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firebaseProjectId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirebaseProjectId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirebaseProjectId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirebaseProjectId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirebaseProjectId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -315,6 +340,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return core.CastString(data["firebaseSecret"])
 		}(),
+		FirebaseProjectId: func() *string {
+			v, ok := data["firebaseProjectId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firebaseProjectId"])
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -341,7 +373,8 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.TransactionSettingV2.ToDict()
 		}(),
-		"firebaseSecret": p.FirebaseSecret,
+		"firebaseSecret":    p.FirebaseSecret,
+		"firebaseProjectId": p.FirebaseProjectId,
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
@@ -534,9 +567,11 @@ type UpdateNamespaceRequest struct {
 	// Deprecated: should not be used
 	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
 	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
-	FirebaseSecret       *string               `json:"firebaseSecret"`
-	LogSetting           *LogSetting           `json:"logSetting"`
-	DryRun               *bool                 `json:"dryRun"`
+	// Deprecated: should not be used
+	FirebaseSecret    *string     `json:"firebaseSecret"`
+	FirebaseProjectId *string     `json:"firebaseProjectId"`
+	LogSetting        *LogSetting `json:"logSetting"`
+	DryRun            *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -636,6 +671,29 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firebaseProjectId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirebaseProjectId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirebaseProjectId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirebaseProjectId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirebaseProjectId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -689,6 +747,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return core.CastString(data["firebaseSecret"])
 		}(),
+		FirebaseProjectId: func() *string {
+			v, ok := data["firebaseProjectId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firebaseProjectId"])
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -715,7 +780,8 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 			}
 			return p.TransactionSettingV2.ToDict()
 		}(),
-		"firebaseSecret": p.FirebaseSecret,
+		"firebaseSecret":    p.FirebaseSecret,
+		"firebaseProjectId": p.FirebaseProjectId,
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
@@ -2997,6 +3063,7 @@ type SetFirebaseTokenRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	Token              *string `json:"token"`
+	Locale             *string `json:"locale"`
 	DryRun             *bool   `json:"dryRun"`
 }
 
@@ -3091,6 +3158,29 @@ func (p *SetFirebaseTokenRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["locale"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Locale = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Locale = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Locale = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Locale)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -3127,6 +3217,13 @@ func NewSetFirebaseTokenRequestFromDict(data map[string]interface{}) SetFirebase
 			}
 			return core.CastString(data["token"])
 		}(),
+		Locale: func() *string {
+			v, ok := data["locale"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["locale"])
+		}(),
 	}
 }
 
@@ -3135,6 +3232,7 @@ func (p SetFirebaseTokenRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"token":         p.Token,
+		"locale":        p.Locale,
 	}
 }
 
@@ -3148,6 +3246,7 @@ type SetFirebaseTokenByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Token              *string `json:"token"`
+	Locale             *string `json:"locale"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 	DryRun             *bool   `json:"dryRun"`
 }
@@ -3243,6 +3342,29 @@ func (p *SetFirebaseTokenByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["locale"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Locale = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Locale = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Locale = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Locale)
+				}
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3302,6 +3424,13 @@ func NewSetFirebaseTokenByUserIdRequestFromDict(data map[string]interface{}) Set
 			}
 			return core.CastString(data["token"])
 		}(),
+		Locale: func() *string {
+			v, ok := data["locale"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["locale"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -3317,6 +3446,7 @@ func (p SetFirebaseTokenByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"userId":          p.UserId,
 		"token":           p.Token,
+		"locale":          p.Locale,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

@@ -30,11 +30,13 @@ type Namespace struct {
 	// Deprecated: should not be used
 	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
 	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
-	FirebaseSecret       *string               `json:"firebaseSecret"`
-	LogSetting           *LogSetting           `json:"logSetting"`
-	CreatedAt            *int64                `json:"createdAt"`
-	UpdatedAt            *int64                `json:"updatedAt"`
-	Revision             *int64                `json:"revision"`
+	// Deprecated: should not be used
+	FirebaseSecret    *string     `json:"firebaseSecret"`
+	FirebaseProjectId *string     `json:"firebaseProjectId"`
+	LogSetting        *LogSetting `json:"logSetting"`
+	CreatedAt         *int64      `json:"createdAt"`
+	UpdatedAt         *int64      `json:"updatedAt"`
+	Revision          *int64      `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -157,6 +159,29 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["firebaseProjectId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FirebaseProjectId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FirebaseProjectId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FirebaseProjectId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FirebaseProjectId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FirebaseProjectId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -223,6 +248,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["firebaseSecret"])
 		}(),
+		FirebaseProjectId: func() *string {
+			v, ok := data["firebaseProjectId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firebaseProjectId"])
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -283,6 +315,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	if p.FirebaseSecret != nil {
 		m["firebaseSecret"] = p.FirebaseSecret
+	}
+	if p.FirebaseProjectId != nil {
+		m["firebaseProjectId"] = p.FirebaseProjectId
 	}
 	if p.LogSetting != nil {
 		m["logSetting"] = func() map[string]interface{} {
@@ -605,6 +640,7 @@ type FirebaseToken struct {
 	FirebaseTokenId *string `json:"firebaseTokenId"`
 	UserId          *string `json:"userId"`
 	Token           *string `json:"token"`
+	Locale          *string `json:"locale"`
 	CreatedAt       *int64  `json:"createdAt"`
 	UpdatedAt       *int64  `json:"updatedAt"`
 	Revision        *int64  `json:"revision"`
@@ -701,6 +737,29 @@ func (p *FirebaseToken) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["locale"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Locale = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Locale = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Locale = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Locale)
+				}
+			}
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -743,6 +802,13 @@ func NewFirebaseTokenFromDict(data map[string]interface{}) FirebaseToken {
 			}
 			return core.CastString(data["token"])
 		}(),
+		Locale: func() *string {
+			v, ok := data["locale"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["locale"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -777,6 +843,9 @@ func (p FirebaseToken) ToDict() map[string]interface{} {
 	}
 	if p.Token != nil {
 		m["token"] = p.Token
+	}
+	if p.Locale != nil {
+		m["locale"] = p.Locale
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt

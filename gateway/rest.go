@@ -192,6 +192,9 @@ func (p Gs2GatewayRestClient) CreateNamespaceAsync(
 	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
 		bodies["firebaseSecret"] = *request.FirebaseSecret
 	}
+	if request.FirebaseProjectId != nil && *request.FirebaseProjectId != "" {
+		bodies["firebaseProjectId"] = *request.FirebaseProjectId
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -479,6 +482,9 @@ func (p Gs2GatewayRestClient) UpdateNamespaceAsync(
 	}
 	if request.FirebaseSecret != nil && *request.FirebaseSecret != "" {
 		bodies["firebaseSecret"] = *request.FirebaseSecret
+	}
+	if request.FirebaseProjectId != nil && *request.FirebaseProjectId != "" {
+		bodies["firebaseProjectId"] = *request.FirebaseProjectId
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -2149,6 +2155,9 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenAsync(
 	if request.Token != nil && *request.Token != "" {
 		bodies["token"] = *request.Token
 	}
+	if request.Locale != nil && *request.Locale != "" {
+		bodies["locale"] = *request.Locale
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2253,6 +2262,9 @@ func (p Gs2GatewayRestClient) SetFirebaseTokenByUserIdAsync(
 	var bodies = core.Bodies{}
 	if request.Token != nil && *request.Token != "" {
 		bodies["token"] = *request.Token
+	}
+	if request.Locale != nil && *request.Locale != "" {
+		bodies["locale"] = *request.Locale
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
