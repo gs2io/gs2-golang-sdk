@@ -1132,10 +1132,11 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 }
 
 type NotificationSetting struct {
-	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
-	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-	Sound                            *string `json:"sound"`
-	Enable                           *string `json:"enable"`
+	GatewayNamespaceId               *string                     `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool                       `json:"enableTransferMobileNotification"`
+	Sound                            *string                     `json:"sound"`
+	MobileNotificationMessages       []MobileNotificationMessage `json:"mobileNotificationMessages"`
+	Enable                           *string                     `json:"enable"`
 }
 
 func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
@@ -1209,6 +1210,9 @@ func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mobileNotificationMessages"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MobileNotificationMessages)
+		}
 		if v, ok := d["enable"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1265,6 +1269,12 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 			}
 			return core.CastString(data["sound"])
 		}(),
+		MobileNotificationMessages: func() []MobileNotificationMessage {
+			if data["mobileNotificationMessages"] == nil {
+				return nil
+			}
+			return CastMobileNotificationMessages(core.CastArray(data["mobileNotificationMessages"]))
+		}(),
 		Enable: func() *string {
 			v, ok := data["enable"]
 			if !ok || v == nil {
@@ -1286,6 +1296,11 @@ func (p NotificationSetting) ToDict() map[string]interface{} {
 	if p.Sound != nil {
 		m["sound"] = p.Sound
 	}
+	if p.MobileNotificationMessages != nil {
+		m["mobileNotificationMessages"] = CastMobileNotificationMessagesFromDict(
+			p.MobileNotificationMessages,
+		)
+	}
 	if p.Enable != nil {
 		m["enable"] = p.Enable
 	}
@@ -1305,6 +1320,173 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type MobileNotificationMessage struct {
+	Locale  *string `json:"locale"`
+	Title   *string `json:"title"`
+	Message *string `json:"message"`
+}
+
+func (p *MobileNotificationMessage) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MobileNotificationMessage{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MobileNotificationMessage{}
+	} else {
+		*p = MobileNotificationMessage{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["locale"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Locale = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Locale = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Locale = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Locale = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Locale)
+				}
+			}
+		}
+		if v, ok := d["title"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Title = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Title = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Title = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Title = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Title = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Title)
+				}
+			}
+		}
+		if v, ok := d["message"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Message = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Message = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Message = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Message = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Message = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Message)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewMobileNotificationMessageFromJson(data string) MobileNotificationMessage {
+	req := MobileNotificationMessage{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewMobileNotificationMessageFromDict(data map[string]interface{}) MobileNotificationMessage {
+	return MobileNotificationMessage{
+		Locale: func() *string {
+			v, ok := data["locale"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["locale"])
+		}(),
+		Title: func() *string {
+			v, ok := data["title"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["title"])
+		}(),
+		Message: func() *string {
+			v, ok := data["message"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["message"])
+		}(),
+	}
+}
+
+func (p MobileNotificationMessage) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Locale != nil {
+		m["locale"] = p.Locale
+	}
+	if p.Title != nil {
+		m["title"] = p.Title
+	}
+	if p.Message != nil {
+		m["message"] = p.Message
+	}
+	return m
+}
+
+func (p MobileNotificationMessage) Pointer() *MobileNotificationMessage {
+	return &p
+}
+
+func CastMobileNotificationMessages(data []interface{}) []MobileNotificationMessage {
+	v := make([]MobileNotificationMessage, 0)
+	for _, d := range data {
+		v = append(v, NewMobileNotificationMessageFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMobileNotificationMessagesFromDict(data []MobileNotificationMessage) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

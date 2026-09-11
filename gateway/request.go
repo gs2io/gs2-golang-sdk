@@ -2562,16 +2562,17 @@ func (p SetUserIdByUserIdRequest) Pointer() *SetUserIdByUserIdRequest {
 }
 
 type SendNotificationRequest struct {
-	ContextStack                     *string `json:"contextStack"`
-	DuplicationAvoider               *string `json:"duplicationAvoider"`
-	NamespaceName                    *string `json:"namespaceName"`
-	UserId                           *string `json:"userId"`
-	Subject                          *string `json:"subject"`
-	Payload                          *string `json:"payload"`
-	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
-	Sound                            *string `json:"sound"`
-	TimeOffsetToken                  *string `json:"timeOffsetToken"`
-	DryRun                           *bool   `json:"dryRun"`
+	ContextStack                     *string                     `json:"contextStack"`
+	DuplicationAvoider               *string                     `json:"duplicationAvoider"`
+	NamespaceName                    *string                     `json:"namespaceName"`
+	UserId                           *string                     `json:"userId"`
+	Subject                          *string                     `json:"subject"`
+	Payload                          *string                     `json:"payload"`
+	EnableTransferMobileNotification *bool                       `json:"enableTransferMobileNotification"`
+	Sound                            *string                     `json:"sound"`
+	MobileNotificationMessages       []MobileNotificationMessage `json:"mobileNotificationMessages"`
+	TimeOffsetToken                  *string                     `json:"timeOffsetToken"`
+	DryRun                           *bool                       `json:"dryRun"`
 }
 
 func (p *SendNotificationRequest) UnmarshalJSON(data []byte) error {
@@ -2714,6 +2715,9 @@ func (p *SendNotificationRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["mobileNotificationMessages"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MobileNotificationMessages)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2794,6 +2798,12 @@ func NewSendNotificationRequestFromDict(data map[string]interface{}) SendNotific
 			}
 			return core.CastString(data["sound"])
 		}(),
+		MobileNotificationMessages: func() []MobileNotificationMessage {
+			if data["mobileNotificationMessages"] == nil {
+				return nil
+			}
+			return CastMobileNotificationMessages(core.CastArray(data["mobileNotificationMessages"]))
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -2812,7 +2822,10 @@ func (p SendNotificationRequest) ToDict() map[string]interface{} {
 		"payload":                          p.Payload,
 		"enableTransferMobileNotification": p.EnableTransferMobileNotification,
 		"sound":                            p.Sound,
-		"timeOffsetToken":                  p.TimeOffsetToken,
+		"mobileNotificationMessages": CastMobileNotificationMessagesFromDict(
+			p.MobileNotificationMessages,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3994,15 +4007,16 @@ func (p DeleteFirebaseTokenByUserIdRequest) Pointer() *DeleteFirebaseTokenByUser
 }
 
 type SendMobileNotificationByUserIdRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	Subject            *string `json:"subject"`
-	Payload            *string `json:"payload"`
-	Sound              *string `json:"sound"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack               *string                     `json:"contextStack"`
+	DuplicationAvoider         *string                     `json:"duplicationAvoider"`
+	NamespaceName              *string                     `json:"namespaceName"`
+	UserId                     *string                     `json:"userId"`
+	Subject                    *string                     `json:"subject"`
+	Payload                    *string                     `json:"payload"`
+	Sound                      *string                     `json:"sound"`
+	MobileNotificationMessages []MobileNotificationMessage `json:"mobileNotificationMessages"`
+	TimeOffsetToken            *string                     `json:"timeOffsetToken"`
+	DryRun                     *bool                       `json:"dryRun"`
 }
 
 func (p *SendMobileNotificationByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4142,6 +4156,9 @@ func (p *SendMobileNotificationByUserIdRequest) UnmarshalJSON(data []byte) error
 				}
 			}
 		}
+		if v, ok := d["mobileNotificationMessages"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MobileNotificationMessages)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -4215,6 +4232,12 @@ func NewSendMobileNotificationByUserIdRequestFromDict(data map[string]interface{
 			}
 			return core.CastString(data["sound"])
 		}(),
+		MobileNotificationMessages: func() []MobileNotificationMessage {
+			if data["mobileNotificationMessages"] == nil {
+				return nil
+			}
+			return CastMobileNotificationMessages(core.CastArray(data["mobileNotificationMessages"]))
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -4227,11 +4250,14 @@ func NewSendMobileNotificationByUserIdRequestFromDict(data map[string]interface{
 
 func (p SendMobileNotificationByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"subject":         p.Subject,
-		"payload":         p.Payload,
-		"sound":           p.Sound,
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"subject":       p.Subject,
+		"payload":       p.Payload,
+		"sound":         p.Sound,
+		"mobileNotificationMessages": CastMobileNotificationMessagesFromDict(
+			p.MobileNotificationMessages,
+		),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

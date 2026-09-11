@@ -1812,6 +1812,13 @@ func (p Gs2GatewayWebSocketClient) SendNotificationAsync(
 	if request.Sound != nil && *request.Sound != "" {
 		bodies["sound"] = *request.Sound
 	}
+	if request.MobileNotificationMessages != nil {
+		var _mobileNotificationMessages []interface{}
+		for _, item := range request.MobileNotificationMessages {
+			_mobileNotificationMessages = append(_mobileNotificationMessages, item)
+		}
+		bodies["mobileNotificationMessages"] = _mobileNotificationMessages
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
@@ -2690,6 +2697,13 @@ func (p Gs2GatewayWebSocketClient) SendMobileNotificationByUserIdAsync(
 	}
 	if request.Sound != nil && *request.Sound != "" {
 		bodies["sound"] = *request.Sound
+	}
+	if request.MobileNotificationMessages != nil {
+		var _mobileNotificationMessages []interface{}
+		for _, item := range request.MobileNotificationMessages {
+			_mobileNotificationMessages = append(_mobileNotificationMessages, item)
+		}
+		bodies["mobileNotificationMessages"] = _mobileNotificationMessages
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

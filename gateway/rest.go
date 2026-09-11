@@ -1862,6 +1862,13 @@ func (p Gs2GatewayRestClient) SendNotificationAsync(
 	if request.Sound != nil && *request.Sound != "" {
 		bodies["sound"] = *request.Sound
 	}
+	if request.MobileNotificationMessages != nil {
+		var _mobileNotificationMessages []interface{}
+		for _, item := range request.MobileNotificationMessages {
+			_mobileNotificationMessages = append(_mobileNotificationMessages, item)
+		}
+		bodies["mobileNotificationMessages"] = _mobileNotificationMessages
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2768,6 +2775,13 @@ func (p Gs2GatewayRestClient) SendMobileNotificationByUserIdAsync(
 	}
 	if request.Sound != nil && *request.Sound != "" {
 		bodies["sound"] = *request.Sound
+	}
+	if request.MobileNotificationMessages != nil {
+		var _mobileNotificationMessages []interface{}
+		for _, item := range request.MobileNotificationMessages {
+			_mobileNotificationMessages = append(_mobileNotificationMessages, item)
+		}
+		bodies["mobileNotificationMessages"] = _mobileNotificationMessages
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
