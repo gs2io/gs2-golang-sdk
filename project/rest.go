@@ -1219,6 +1219,9 @@ func (p Gs2ProjectRestClient) CreateProjectAsync(
 	if request.EventBridgeAwsRegion != nil && *request.EventBridgeAwsRegion != "" {
 		bodies["eventBridgeAwsRegion"] = *request.EventBridgeAwsRegion
 	}
+	if request.DataStoreKeyScheme != nil && *request.DataStoreKeyScheme != "" {
+		bodies["dataStoreKeyScheme"] = *request.DataStoreKeyScheme
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

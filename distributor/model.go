@@ -1835,6 +1835,207 @@ func CastBatchResultPayloadsFromDict(data []BatchResultPayload) []interface{} {
 	return v
 }
 
+type UserDataEntry struct {
+	Service       *string `json:"service"`
+	NamespaceName *string `json:"namespaceName"`
+	Kind          *string `json:"kind"`
+	Payload       *string `json:"payload"`
+}
+
+func (p *UserDataEntry) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UserDataEntry{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UserDataEntry{}
+	} else {
+		*p = UserDataEntry{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["kind"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Kind = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Kind = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Kind = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Kind = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Kind = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Kind)
+				}
+			}
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUserDataEntryFromJson(data string) UserDataEntry {
+	req := UserDataEntry{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUserDataEntryFromDict(data map[string]interface{}) UserDataEntry {
+	return UserDataEntry{
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Kind: func() *string {
+			v, ok := data["kind"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["kind"])
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
+	}
+}
+
+func (p UserDataEntry) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Service != nil {
+		m["service"] = p.Service
+	}
+	if p.NamespaceName != nil {
+		m["namespaceName"] = p.NamespaceName
+	}
+	if p.Kind != nil {
+		m["kind"] = p.Kind
+	}
+	if p.Payload != nil {
+		m["payload"] = p.Payload
+	}
+	return m
+}
+
+func (p UserDataEntry) Pointer() *UserDataEntry {
+	return &p
+}
+
+func CastUserDataEntries(data []interface{}) []UserDataEntry {
+	v := make([]UserDataEntry, 0)
+	for _, d := range data {
+		v = append(v, NewUserDataEntryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUserDataEntriesFromDict(data []UserDataEntry) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`

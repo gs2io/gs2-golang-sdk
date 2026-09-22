@@ -385,6 +385,7 @@ type Project struct {
 	Currency                *string     `json:"currency"`
 	EventBridgeAwsAccountId *string     `json:"eventBridgeAwsAccountId"`
 	EventBridgeAwsRegion    *string     `json:"eventBridgeAwsRegion"`
+	DataStoreKeyScheme      *string     `json:"dataStoreKeyScheme"`
 	CreatedAt               *int64      `json:"createdAt"`
 	UpdatedAt               *int64      `json:"updatedAt"`
 }
@@ -644,6 +645,29 @@ func (p *Project) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["dataStoreKeyScheme"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DataStoreKeyScheme = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DataStoreKeyScheme = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DataStoreKeyScheme = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DataStoreKeyScheme = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DataStoreKeyScheme = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DataStoreKeyScheme)
+				}
+			}
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -738,6 +762,13 @@ func NewProjectFromDict(data map[string]interface{}) Project {
 			}
 			return core.CastString(data["eventBridgeAwsRegion"])
 		}(),
+		DataStoreKeyScheme: func() *string {
+			v, ok := data["dataStoreKeyScheme"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dataStoreKeyScheme"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -791,6 +822,9 @@ func (p Project) ToDict() map[string]interface{} {
 	}
 	if p.EventBridgeAwsRegion != nil {
 		m["eventBridgeAwsRegion"] = p.EventBridgeAwsRegion
+	}
+	if p.DataStoreKeyScheme != nil {
+		m["dataStoreKeyScheme"] = p.DataStoreKeyScheme
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt

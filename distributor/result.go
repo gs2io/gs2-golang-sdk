@@ -2247,6 +2247,128 @@ func (p BatchExecuteApiResult) Pointer() *BatchExecuteApiResult {
 	return &p
 }
 
+type DescribeUserDataResult struct {
+	Items         []UserDataEntry      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeUserDataAsyncResult struct {
+	result *DescribeUserDataResult
+	err    error
+}
+
+func NewDescribeUserDataResultFromJson(data string) DescribeUserDataResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUserDataResultFromDict(dict)
+}
+
+func NewDescribeUserDataResultFromDict(data map[string]interface{}) DescribeUserDataResult {
+	return DescribeUserDataResult{
+		Items: func() []UserDataEntry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastUserDataEntries(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeUserDataResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastUserDataEntriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeUserDataResult) Pointer() *DescribeUserDataResult {
+	return &p
+}
+
+type DescribeUserDataByUserIdResult struct {
+	Items         []UserDataEntry      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
+}
+
+type DescribeUserDataByUserIdAsyncResult struct {
+	result *DescribeUserDataByUserIdResult
+	err    error
+}
+
+func NewDescribeUserDataByUserIdResultFromJson(data string) DescribeUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUserDataByUserIdResultFromDict(dict)
+}
+
+func NewDescribeUserDataByUserIdResultFromDict(data map[string]interface{}) DescribeUserDataByUserIdResult {
+	return DescribeUserDataByUserIdResult{
+		Items: func() []UserDataEntry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastUserDataEntries(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p DescribeUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastUserDataEntriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p DescribeUserDataByUserIdResult) Pointer() *DescribeUserDataByUserIdResult {
+	return &p
+}
+
 type IfExpressionByUserIdResult struct {
 	Item             *TransactionResult   `json:"item"`
 	ExpressionResult *bool                `json:"expressionResult"`

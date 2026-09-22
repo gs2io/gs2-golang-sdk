@@ -95,6 +95,10 @@ type Gs2RestSession struct {
 	connection                IConnection
 	DisableCompressRequest    bool
 	DisableDecompressResponse bool
+	// SteadyEndpoint は Steady（専用フリート）の基点（https://<host>）。空なら共有クラウド。
+	// Connect の前に設定する（core/steady.go の説明）。設定すると全サービスの接続先が
+	// <SteadyEndpoint>/<service> になり、接続段階に上限と 1 回の再送が付く。
+	SteadyEndpoint string
 }
 
 func NewGs2RestSession(credential IGs2Credential, region Region) *Gs2RestSession {
@@ -121,10 +125,15 @@ func compressGzip(data []byte) ([]byte, error) {
 }
 
 func (p Gs2RestSession) EndpointHost(service string, endpointHost *string) Url {
-	if endpointHost == nil {
-		endpointHost = &EndpointHost
+	// 優先順: サービスごとの override ＞ SteadyEndpoint ＞ 共有クラウドの EndpointHost。
+	// SteadyEndpoint が空なら結果は従来と同じ文字列になる。
+	template := EndpointHost
+	if endpointHost != nil {
+		template = *endpointHost
+	} else if t := steadyRestTemplate(p.SteadyEndpoint); t != "" {
+		template = t
 	}
-	return Url(strings.ReplaceAll(strings.ReplaceAll(*endpointHost, "{service}", service), "{region}", string(p.Region)))
+	return Url(strings.ReplaceAll(strings.ReplaceAll(template, "{service}", service), "{region}", string(p.Region)))
 }
 
 func (p Gs2RestSession) CreateAuthorizationHeader() map[string]string {
@@ -178,27 +187,42 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		httpUrl += "?" + query.Encode()
 	}
 
-	var bodyReader io.Reader = nil
+	var bodyBytes []byte = nil
 	compressedRequest := false
 	if job.Method == Post || job.Method == Put {
+		bodyBytes = bodies
 		if !p.DisableCompressRequest && len(bodies) > 0 {
 			compressedBody, compressErr := compressGzip(bodies)
 			if compressErr == nil {
-				bodyReader = bytes.NewReader(compressedBody)
+				bodyBytes = compressedBody
 				compressedRequest = true
-			} else {
-				bodyReader = bytes.NewReader(bodies)
 			}
-		} else {
-			bodyReader = bytes.NewReader(bodies)
 		}
 	}
 
-	request, err := http.NewRequest(
-		string(job.Method),
-		httpUrl,
-		bodyReader,
-	)
+	// ★本文は []byte で持ち、要求ごとに Reader を作り直す（Steady の再送で同じ要求をもう一度組むため）。
+	buildRequest := func() (*http.Request, error) {
+		var bodyReader io.Reader = nil
+		if bodyBytes != nil {
+			bodyReader = bytes.NewReader(bodyBytes)
+		}
+		request, err := http.NewRequest(string(job.Method), httpUrl, bodyReader)
+		if err != nil {
+			return nil, err
+		}
+		for key, value := range job.Headers {
+			request.Header.Add(key, value)
+		}
+		if compressedRequest {
+			request.Header.Set("Content-Encoding", "gzip")
+		}
+		if !p.DisableDecompressResponse {
+			request.Header.Set("Accept-Encoding", "gzip")
+		}
+		return request, nil
+	}
+
+	request, err := buildRequest()
 	if err != nil {
 		err := BadRequestException{}
 		job.Callback <- AsyncResult{
@@ -207,19 +231,16 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		}
 		return err
 	}
-	for key, value := range job.Headers {
-		request.Header.Add(key, value)
-	}
-
-	if compressedRequest {
-		request.Header.Set("Content-Encoding", "gzip")
-	}
-
-	if !p.DisableDecompressResponse {
-		request.Header.Set("Accept-Encoding", "gzip")
-	}
 
 	response, err := p.connection.Client().Do(request)
+	if err != nil && isSteadyUrl(p.SteadyEndpoint, httpUrl) && isConnectFailure(err) {
+		// ★Steady の再送: 基点への**接続段階**の失敗（DNS / dial / TLS。1 バイトも送っていない）だけ、
+		// 同じ要求をもう 1 回だけ送る。フリートが手放した IP に当たったとき、名前を引き直して
+		// 別のノードへ着く機会を 1 回だけ作る。送信後の失敗は届いたかもしれないので再送しない。
+		if retry, buildErr := buildRequest(); buildErr == nil {
+			response, err = p.connection.Client().Do(retry)
+		}
+	}
 	if err != nil {
 		err := UnknownException{}
 		job.Callback <- AsyncResult{
@@ -339,7 +360,7 @@ func (p *Gs2RestSession) connectWithCustomConnectionAsync(
 		return
 	} else {
 		job := NetworkJob{
-			Url:    Url(strings.ReplaceAll(strings.ReplaceAll(EndpointHost, "{service}", "identifier"), "{region}", string(p.Region))).AppendPath("/projectToken/login", nil),
+			Url:    p.EndpointHost("identifier", nil).AppendPath("/projectToken/login", nil),
 			Method: Post,
 			Bodies: map[string]interface{}{
 				"client_id":     p.Credential.GetClientId(),
@@ -368,7 +389,7 @@ func connectAsyncHandler(
 	connectWithCustomConnectionAsyncHandler(
 		func() IConnection {
 			return &Connection{
-				client: new(http.Client),
+				client: newHTTPClient(session.SteadyEndpoint),
 			}
 		},
 		callback,

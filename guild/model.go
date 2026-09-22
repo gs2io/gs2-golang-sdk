@@ -2773,10 +2773,11 @@ func CastReceiveMemberRequestsFromDict(data []ReceiveMemberRequest) []interface{
 }
 
 type SendMemberRequest struct {
-	UserId          *string `json:"userId"`
-	TargetGuildName *string `json:"targetGuildName"`
-	Metadata        *string `json:"metadata"`
-	CreatedAt       *int64  `json:"createdAt"`
+	UserId               *string `json:"userId"`
+	TargetGuildModelName *string `json:"targetGuildModelName"`
+	TargetGuildName      *string `json:"targetGuildName"`
+	Metadata             *string `json:"metadata"`
+	CreatedAt            *int64  `json:"createdAt"`
 }
 
 func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
@@ -2821,6 +2822,29 @@ func (p *SendMemberRequest) UnmarshalJSON(data []byte) error {
 					p.UserId = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["targetGuildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetGuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetGuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetGuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetGuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetGuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetGuildModelName)
 				}
 			}
 		}
@@ -2892,6 +2916,13 @@ func NewSendMemberRequestFromDict(data map[string]interface{}) SendMemberRequest
 			}
 			return core.CastString(data["userId"])
 		}(),
+		TargetGuildModelName: func() *string {
+			v, ok := data["targetGuildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildModelName"])
+		}(),
 		TargetGuildName: func() *string {
 			v, ok := data["targetGuildName"]
 			if !ok || v == nil {
@@ -2920,6 +2951,9 @@ func (p SendMemberRequest) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
 	if p.UserId != nil {
 		m["userId"] = p.UserId
+	}
+	if p.TargetGuildModelName != nil {
+		m["targetGuildModelName"] = p.TargetGuildModelName
 	}
 	if p.TargetGuildName != nil {
 		m["targetGuildName"] = p.TargetGuildName

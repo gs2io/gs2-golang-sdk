@@ -1461,6 +1461,7 @@ type CreateProjectRequest struct {
 	EnableEventBridge       *string `json:"enableEventBridge"`
 	EventBridgeAwsAccountId *string `json:"eventBridgeAwsAccountId"`
 	EventBridgeAwsRegion    *string `json:"eventBridgeAwsRegion"`
+	DataStoreKeyScheme      *string `json:"dataStoreKeyScheme"`
 	DryRun                  *bool   `json:"dryRun"`
 }
 
@@ -1716,6 +1717,29 @@ func (p *CreateProjectRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["dataStoreKeyScheme"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DataStoreKeyScheme = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DataStoreKeyScheme = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DataStoreKeyScheme = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DataStoreKeyScheme = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DataStoreKeyScheme = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DataStoreKeyScheme)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1801,6 +1825,13 @@ func NewCreateProjectRequestFromDict(data map[string]interface{}) CreateProjectR
 			}
 			return core.CastString(data["eventBridgeAwsRegion"])
 		}(),
+		DataStoreKeyScheme: func() *string {
+			v, ok := data["dataStoreKeyScheme"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dataStoreKeyScheme"])
+		}(),
 	}
 }
 
@@ -1816,6 +1847,7 @@ func (p CreateProjectRequest) ToDict() map[string]interface{} {
 		"enableEventBridge":       p.EnableEventBridge,
 		"eventBridgeAwsAccountId": p.EventBridgeAwsAccountId,
 		"eventBridgeAwsRegion":    p.EventBridgeAwsRegion,
+		"dataStoreKeyScheme":      p.DataStoreKeyScheme,
 	}
 }
 
