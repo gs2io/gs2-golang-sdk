@@ -5031,298 +5031,6 @@ func (p BatchExecuteApiRequest) Pointer() *BatchExecuteApiRequest {
 	return &p
 }
 
-type DescribeUserDataRequest struct {
-	ContextStack *string `json:"contextStack"`
-	AccessToken  *string `json:"accessToken"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
-	DryRun       *bool   `json:"dryRun"`
-}
-
-func (p *DescribeUserDataRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = DescribeUserDataRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = DescribeUserDataRequest{}
-	} else {
-		*p = DescribeUserDataRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["accessToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.AccessToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.AccessToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.AccessToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.AccessToken)
-				}
-			}
-		}
-		if v, ok := d["pageToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.PageToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.PageToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.PageToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.PageToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.PageToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.PageToken)
-				}
-			}
-		}
-		if v, ok := d["limit"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Limit)
-		}
-	}
-	return nil
-}
-
-func NewDescribeUserDataRequestFromJson(data string) (DescribeUserDataRequest, error) {
-	req := DescribeUserDataRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return DescribeUserDataRequest{}, err
-	}
-	return req, nil
-}
-
-func NewDescribeUserDataRequestFromDict(data map[string]interface{}) DescribeUserDataRequest {
-	return DescribeUserDataRequest{
-		AccessToken: func() *string {
-			v, ok := data["accessToken"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["accessToken"])
-		}(),
-		PageToken: func() *string {
-			v, ok := data["pageToken"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["pageToken"])
-		}(),
-		Limit: func() *int32 {
-			v, ok := data["limit"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["limit"])
-		}(),
-	}
-}
-
-func (p DescribeUserDataRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"accessToken": p.AccessToken,
-		"pageToken":   p.PageToken,
-		"limit":       p.Limit,
-	}
-}
-
-func (p DescribeUserDataRequest) Pointer() *DescribeUserDataRequest {
-	return &p
-}
-
-type DescribeUserDataByUserIdRequest struct {
-	ContextStack    *string `json:"contextStack"`
-	UserId          *string `json:"userId"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
-	DryRun          *bool   `json:"dryRun"`
-}
-
-func (p *DescribeUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = DescribeUserDataByUserIdRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = DescribeUserDataByUserIdRequest{}
-	} else {
-		*p = DescribeUserDataByUserIdRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.UserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.UserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.UserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.UserId)
-				}
-			}
-		}
-		if v, ok := d["pageToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.PageToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.PageToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.PageToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.PageToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.PageToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.PageToken)
-				}
-			}
-		}
-		if v, ok := d["limit"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Limit)
-		}
-		if v, ok := d["timeOffsetToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TimeOffsetToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TimeOffsetToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TimeOffsetToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func NewDescribeUserDataByUserIdRequestFromJson(data string) (DescribeUserDataByUserIdRequest, error) {
-	req := DescribeUserDataByUserIdRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return DescribeUserDataByUserIdRequest{}, err
-	}
-	return req, nil
-}
-
-func NewDescribeUserDataByUserIdRequestFromDict(data map[string]interface{}) DescribeUserDataByUserIdRequest {
-	return DescribeUserDataByUserIdRequest{
-		UserId: func() *string {
-			v, ok := data["userId"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["userId"])
-		}(),
-		PageToken: func() *string {
-			v, ok := data["pageToken"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["pageToken"])
-		}(),
-		Limit: func() *int32 {
-			v, ok := data["limit"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt32(data["limit"])
-		}(),
-		TimeOffsetToken: func() *string {
-			v, ok := data["timeOffsetToken"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastString(data["timeOffsetToken"])
-		}(),
-	}
-}
-
-func (p DescribeUserDataByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"userId":          p.UserId,
-		"pageToken":       p.PageToken,
-		"limit":           p.Limit,
-		"timeOffsetToken": p.TimeOffsetToken,
-	}
-}
-
-func (p DescribeUserDataByUserIdRequest) Pointer() *DescribeUserDataByUserIdRequest {
-	return &p
-}
-
 type IfExpressionByUserIdRequest struct {
 	ContextStack                    *string         `json:"contextStack"`
 	DuplicationAvoider              *string         `json:"duplicationAvoider"`
@@ -6540,6 +6248,298 @@ func (p GetStampSheetResultByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p GetStampSheetResultByUserIdRequest) Pointer() *GetStampSheetResultByUserIdRequest {
+	return &p
+}
+
+type DescribeUserDataRequest struct {
+	ContextStack *string `json:"contextStack"`
+	AccessToken  *string `json:"accessToken"`
+	PageToken    *string `json:"pageToken"`
+	Limit        *int32  `json:"limit"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *DescribeUserDataRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeUserDataRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeUserDataRequest{}
+	} else {
+		*p = DescribeUserDataRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeUserDataRequestFromJson(data string) (DescribeUserDataRequest, error) {
+	req := DescribeUserDataRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeUserDataRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeUserDataRequestFromDict(data map[string]interface{}) DescribeUserDataRequest {
+	return DescribeUserDataRequest{
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+	}
+}
+
+func (p DescribeUserDataRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"accessToken": p.AccessToken,
+		"pageToken":   p.PageToken,
+		"limit":       p.Limit,
+	}
+}
+
+func (p DescribeUserDataRequest) Pointer() *DescribeUserDataRequest {
+	return &p
+}
+
+type DescribeUserDataByUserIdRequest struct {
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *DescribeUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeUserDataByUserIdRequest{}
+	} else {
+		*p = DescribeUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeUserDataByUserIdRequestFromJson(data string) (DescribeUserDataByUserIdRequest, error) {
+	req := DescribeUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeUserDataByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeUserDataByUserIdRequestFromDict(data map[string]interface{}) DescribeUserDataByUserIdRequest {
+	return DescribeUserDataByUserIdRequest{
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p DescribeUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p DescribeUserDataByUserIdRequest) Pointer() *DescribeUserDataByUserIdRequest {
 	return &p
 }
 
