@@ -2154,6 +2154,9 @@ func openMessageAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
+			}
 		}
 		callback <- OpenMessageAsyncResult{
 			err: asyncResult.Err,
@@ -2261,6 +2264,9 @@ func openMessageByUserIdAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
 			}
 		}
 		callback <- OpenMessageByUserIdAsyncResult{
@@ -2482,6 +2488,9 @@ func readMessageAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
+			}
 		}
 		callback <- ReadMessageAsyncResult{
 			err: asyncResult.Err,
@@ -2596,6 +2605,9 @@ func readMessageByUserIdAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
 			}
 		}
 		callback <- ReadMessageByUserIdAsyncResult{
@@ -2717,6 +2729,9 @@ func batchReadMessagesAsyncHandler(
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
 			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
+			}
 		}
 		callback <- BatchReadMessagesAsyncResult{
 			err: asyncResult.Err,
@@ -2833,6 +2848,9 @@ func batchReadMessagesByUserIdAsyncHandler(
 		if ok {
 			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
 				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.alreadyRead" {
+				asyncResult.Err = gs2err.SetClientError(MessageAlreadyRead{})
 			}
 		}
 		callback <- BatchReadMessagesByUserIdAsyncResult{

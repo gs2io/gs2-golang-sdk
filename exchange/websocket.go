@@ -4385,6 +4385,12 @@ func (p Gs2ExchangeWebSocketClient) acquireAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "exchange.await.locked" {
+				asyncResult.Err = gs2err.SetClientError(AwaitNotReady{})
+			}
+		}
 	}
 	callback <- AcquireAsyncResult{
 		result: &result,
@@ -4492,6 +4498,12 @@ func (p Gs2ExchangeWebSocketClient) acquireByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "exchange.await.locked" {
+				asyncResult.Err = gs2err.SetClientError(AwaitNotReady{})
+			}
+		}
 	}
 	callback <- AcquireByUserIdAsyncResult{
 		result: &result,

@@ -5867,6 +5867,12 @@ func setFormAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetFormResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetFormAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -5981,6 +5987,12 @@ func setFormByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetFormByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetFormByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -6100,6 +6112,12 @@ func setFormWithSignatureAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetFormWithSignatureResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetFormWithSignatureAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -7389,6 +7407,12 @@ func setPropertyFormAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetPropertyFormResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetPropertyFormAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -7503,6 +7527,12 @@ func setPropertyFormByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetPropertyFormByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetPropertyFormByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -7622,6 +7652,12 @@ func setPropertyFormWithSignatureAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetPropertyFormWithSignatureResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 		callback <- SetPropertyFormWithSignatureAsyncResult{
 			err: asyncResult.Err,
 		}

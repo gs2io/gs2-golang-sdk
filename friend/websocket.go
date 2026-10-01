@@ -2423,6 +2423,12 @@ func (p Gs2FriendWebSocketClient) registerBlackListAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.blackList.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyInBlackList{})
+			}
+		}
 	}
 	callback <- RegisterBlackListAsyncResult{
 		result: &result,
@@ -2523,6 +2529,12 @@ func (p Gs2FriendWebSocketClient) registerBlackListByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.blackList.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyInBlackList{})
+			}
+		}
 	}
 	callback <- RegisterBlackListByUserIdAsyncResult{
 		result: &result,
@@ -3229,6 +3241,12 @@ func (p Gs2FriendWebSocketClient) followAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.followUser.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFollowing{})
+			}
+		}
 	}
 	callback <- FollowAsyncResult{
 		result: &result,
@@ -3329,6 +3347,12 @@ func (p Gs2FriendWebSocketClient) followByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.followUser.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFollowing{})
+			}
+		}
 	}
 	callback <- FollowByUserIdAsyncResult{
 		result: &result,
@@ -3829,6 +3853,12 @@ func (p Gs2FriendWebSocketClient) addFriendAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 	}
 	callback <- AddFriendAsyncResult{
 		result: &result,
@@ -3929,6 +3959,12 @@ func (p Gs2FriendWebSocketClient) addFriendByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 	}
 	callback <- AddFriendByUserIdAsyncResult{
 		result: &result,
@@ -4635,6 +4671,18 @@ func (p Gs2FriendWebSocketClient) sendRequestAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.self" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestToSelf{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.capacity.full" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestCapacityFull{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(DuplicateFriendRequest{})
+			}
+		}
 	}
 	callback <- SendRequestAsyncResult{
 		result: &result,
@@ -4738,6 +4786,18 @@ func (p Gs2FriendWebSocketClient) sendRequestByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.self" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestToSelf{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.capacity.full" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestCapacityFull{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(DuplicateFriendRequest{})
+			}
+		}
 	}
 	callback <- SendRequestByUserIdAsyncResult{
 		result: &result,
@@ -5447,6 +5507,12 @@ func (p Gs2FriendWebSocketClient) acceptRequestAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 	}
 	callback <- AcceptRequestAsyncResult{
 		result: &result,
@@ -5547,6 +5613,12 @@ func (p Gs2FriendWebSocketClient) acceptRequestByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 	}
 	callback <- AcceptRequestByUserIdAsyncResult{
 		result: &result,

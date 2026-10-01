@@ -2478,6 +2478,15 @@ func (p Gs2AccountWebSocketClient) createTakeOverAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 	}
 	callback <- CreateTakeOverAsyncResult{
 		result: &result,
@@ -2584,6 +2593,15 @@ func (p Gs2AccountWebSocketClient) createTakeOverByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 	}
 	callback <- CreateTakeOverByUserIdAsyncResult{
 		result: &result,
@@ -2690,6 +2708,15 @@ func (p Gs2AccountWebSocketClient) createTakeOverOpenIdConnectAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 	}
 	callback <- CreateTakeOverOpenIdConnectAsyncResult{
 		result: &result,
@@ -2793,6 +2820,15 @@ func (p Gs2AccountWebSocketClient) createTakeOverOpenIdConnectAndByUserIdAsyncHa
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 	}
 	callback <- CreateTakeOverOpenIdConnectAndByUserIdAsyncResult{
 		result: &result,

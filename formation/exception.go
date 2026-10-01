@@ -1,4 +1,4 @@
-package inbox
+package formation
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -16,24 +16,13 @@ express or implied. See the License for the specific language governing
 permissions and limitations under the License.
 */
 
-type MessageExpired struct {
+type PropertyIdNotMatchRegex struct {
 }
 
-func (p MessageExpired) Type() string {
-	return "InboxMessageExpired"
+func (p PropertyIdNotMatchRegex) Type() string {
+	return "FormationPropertyIdNotMatchRegex"
 }
 
-func (p MessageExpired) Code() string {
-	return "inbox.message.expired"
-}
-
-type MessageAlreadyRead struct {
-}
-
-func (p MessageAlreadyRead) Type() string {
-	return "InboxMessageAlreadyRead"
-}
-
-func (p MessageAlreadyRead) Code() string {
-	return "inbox.message.alreadyRead"
+func (p PropertyIdNotMatchRegex) Code() string {
+	return "formation.slot.propertyId.notMatchRegex"
 }

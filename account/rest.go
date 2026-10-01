@@ -2559,6 +2559,15 @@ func createTakeOverAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateTakeOverResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 		callback <- CreateTakeOverAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2665,6 +2674,15 @@ func createTakeOverByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateTakeOverByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 		callback <- CreateTakeOverByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2776,6 +2794,15 @@ func createTakeOverOpenIdConnectAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateTakeOverOpenIdConnectResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 		callback <- CreateTakeOverOpenIdConnectAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2879,6 +2906,15 @@ func createTakeOverOpenIdConnectAndByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateTakeOverOpenIdConnectAndByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.alreadyExists" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverAlreadyExists{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.takeOver.userIdentifier.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(TakeOverIdentifierAlreadyUsed{})
+			}
+		}
 		callback <- CreateTakeOverOpenIdConnectAndByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

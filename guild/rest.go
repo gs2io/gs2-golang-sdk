@@ -2528,6 +2528,12 @@ func createGuildAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateGuildResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- CreateGuildAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2667,6 +2673,12 @@ func createGuildByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateGuildByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "user.joinedGuild.tooMany" {
+				asyncResult.Err = gs2err.SetClientError(MaximumJoinedGuildsReached{})
+			}
+		}
 		callback <- CreateGuildByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

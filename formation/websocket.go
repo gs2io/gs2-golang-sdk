@@ -5620,6 +5620,12 @@ func (p Gs2FormationWebSocketClient) setFormAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetFormAsyncResult{
 		result: &result,
@@ -5730,6 +5736,12 @@ func (p Gs2FormationWebSocketClient) setFormByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetFormByUserIdAsyncResult{
 		result: &result,
@@ -5840,6 +5852,12 @@ func (p Gs2FormationWebSocketClient) setFormWithSignatureAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetFormWithSignatureAsyncResult{
 		result: &result,
@@ -7066,6 +7084,12 @@ func (p Gs2FormationWebSocketClient) setPropertyFormAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetPropertyFormAsyncResult{
 		result: &result,
@@ -7176,6 +7200,12 @@ func (p Gs2FormationWebSocketClient) setPropertyFormByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetPropertyFormByUserIdAsyncResult{
 		result: &result,
@@ -7286,6 +7316,12 @@ func (p Gs2FormationWebSocketClient) setPropertyFormWithSignatureAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "formation.slot.propertyId.notMatchRegex" {
+				asyncResult.Err = gs2err.SetClientError(PropertyIdNotMatchRegex{})
+			}
+		}
 	}
 	callback <- SetPropertyFormWithSignatureAsyncResult{
 		result: &result,

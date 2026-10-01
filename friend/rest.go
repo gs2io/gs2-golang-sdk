@@ -2481,6 +2481,12 @@ func registerBlackListAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RegisterBlackListResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.blackList.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyInBlackList{})
+			}
+		}
 		callback <- RegisterBlackListAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2583,6 +2589,12 @@ func registerBlackListByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RegisterBlackListByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.blackList.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyInBlackList{})
+			}
+		}
 		callback <- RegisterBlackListByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3319,6 +3331,12 @@ func followAsyncHandler(
 	asyncResult := <-internalCallback
 	var result FollowResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.followUser.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFollowing{})
+			}
+		}
 		callback <- FollowAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3421,6 +3439,12 @@ func followByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result FollowByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.followUser.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFollowing{})
+			}
+		}
 		callback <- FollowByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -3946,6 +3970,12 @@ func addFriendAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddFriendResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 		callback <- AddFriendAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -4048,6 +4078,12 @@ func addFriendByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddFriendByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 		callback <- AddFriendByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -4784,6 +4820,18 @@ func sendRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.self" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestToSelf{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.capacity.full" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestCapacityFull{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(DuplicateFriendRequest{})
+			}
+		}
 		callback <- SendRequestAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -4886,6 +4934,18 @@ func sendRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SendRequestByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.self" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestToSelf{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.capacity.full" {
+				asyncResult.Err = gs2err.SetClientError(SendRequestCapacityFull{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.sendFriendRequest.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(DuplicateFriendRequest{})
+			}
+		}
 		callback <- SendRequestByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -5622,6 +5682,12 @@ func acceptRequestAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 		callback <- AcceptRequestAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -5724,6 +5790,12 @@ func acceptRequestByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptRequestByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "friend.friend.targetUserId.duplicate" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyFriend{})
+			}
+		}
 		callback <- AcceptRequestByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

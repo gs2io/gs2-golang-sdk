@@ -37,3 +37,25 @@ func (p BannedInfinity) Type() string {
 func (p BannedInfinity) Code() string {
 	return "account.banned.infinity"
 }
+
+type TakeOverAlreadyExists struct {
+}
+
+func (p TakeOverAlreadyExists) Type() string {
+	return "AccountTakeOverAlreadyExists"
+}
+
+func (p TakeOverAlreadyExists) Code() string {
+	return "account.takeOver.alreadyExists"
+}
+
+type TakeOverIdentifierAlreadyUsed struct {
+}
+
+func (p TakeOverIdentifierAlreadyUsed) Type() string {
+	return "AccountTakeOverIdentifierAlreadyUsed"
+}
+
+func (p TakeOverIdentifierAlreadyUsed) Code() string {
+	return "account.takeOver.userIdentifier.duplicate"
+}

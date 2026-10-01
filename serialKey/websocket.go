@@ -2333,6 +2333,15 @@ func (p Gs2SerialKeyWebSocketClient) useByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.status.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AlreadyUsed{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.code.notFound" {
+				asyncResult.Err = gs2err.SetClientError(CodeNotFound{})
+			}
+		}
 	}
 	callback <- UseByUserIdAsyncResult{
 		result: &result,

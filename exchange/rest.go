@@ -4563,6 +4563,12 @@ func acquireAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcquireResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "exchange.await.locked" {
+				asyncResult.Err = gs2err.SetClientError(AwaitNotReady{})
+			}
+		}
 		callback <- AcquireAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -4672,6 +4678,12 @@ func acquireByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcquireByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "exchange.await.locked" {
+				asyncResult.Err = gs2err.SetClientError(AwaitNotReady{})
+			}
+		}
 		callback <- AcquireByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}

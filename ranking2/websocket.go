@@ -3507,6 +3507,21 @@ func (p Gs2Ranking2WebSocketClient) receiveGlobalRankingReceivedRewardAsyncHandl
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.inSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotEnded{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(RewardAlreadyReceived{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.noRewards" {
+				asyncResult.Err = gs2err.SetClientError(NoRankingReward{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.outOfSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotStarted{})
+			}
+		}
 	}
 	callback <- ReceiveGlobalRankingReceivedRewardAsyncResult{
 		result: &result,
@@ -3617,6 +3632,21 @@ func (p Gs2Ranking2WebSocketClient) receiveGlobalRankingReceivedRewardByUserIdAs
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.inSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotEnded{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(RewardAlreadyReceived{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.noRewards" {
+				asyncResult.Err = gs2err.SetClientError(NoRankingReward{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.outOfSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotStarted{})
+			}
+		}
 	}
 	callback <- ReceiveGlobalRankingReceivedRewardByUserIdAsyncResult{
 		result: &result,
@@ -5465,6 +5495,12 @@ func (p Gs2Ranking2WebSocketClient) putClusterRankingScoreAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.cluster.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedInCluster{})
+			}
+		}
 	}
 	callback <- PutClusterRankingScoreAsyncResult{
 		result: &result,
@@ -5574,6 +5610,12 @@ func (p Gs2Ranking2WebSocketClient) putClusterRankingScoreByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.cluster.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NotIncludedInCluster{})
+			}
+		}
 	}
 	callback <- PutClusterRankingScoreByUserIdAsyncResult{
 		result: &result,
@@ -6746,6 +6788,21 @@ func (p Gs2Ranking2WebSocketClient) receiveClusterRankingReceivedRewardAsyncHand
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.inSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotEnded{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(RewardAlreadyReceived{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.noRewards" {
+				asyncResult.Err = gs2err.SetClientError(NoRankingReward{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.outOfSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotStarted{})
+			}
+		}
 	}
 	callback <- ReceiveClusterRankingReceivedRewardAsyncResult{
 		result: &result,
@@ -6859,6 +6916,21 @@ func (p Gs2Ranking2WebSocketClient) receiveClusterRankingReceivedRewardByUserIdA
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.inSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotEnded{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.alreadyReceived" {
+				asyncResult.Err = gs2err.SetClientError(RewardAlreadyReceived{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.noRewards" {
+				asyncResult.Err = gs2err.SetClientError(NoRankingReward{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "ranking2.rankingReward.outOfSchedule" {
+				asyncResult.Err = gs2err.SetClientError(SeasonNotStarted{})
+			}
+		}
 	}
 	callback <- ReceiveClusterRankingReceivedRewardByUserIdAsyncResult{
 		result: &result,
