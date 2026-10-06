@@ -1225,6 +1225,7 @@ type UnleashRateModel struct {
 	Metadata               *string                 `json:"metadata"`
 	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
 	GradeModelId           *string                 `json:"gradeModelId"`
+	GroupKeyHierarchy      []*string               `json:"groupKeyHierarchy"`
 	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
 }
 
@@ -1388,6 +1389,32 @@ func (p *UnleashRateModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["groupKeyHierarchy"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupKeyHierarchy = l
+			}
+		}
 		if v, ok := d["gradeEntries"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.GradeEntries)
 		}
@@ -1445,6 +1472,13 @@ func NewUnleashRateModelFromDict(data map[string]interface{}) UnleashRateModel {
 			}
 			return core.CastString(data["gradeModelId"])
 		}(),
+		GroupKeyHierarchy: func() []*string {
+			v, ok := data["groupKeyHierarchy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		GradeEntries: func() []UnleashRateEntryModel {
 			if data["gradeEntries"] == nil {
 				return nil
@@ -1473,6 +1507,11 @@ func (p UnleashRateModel) ToDict() map[string]interface{} {
 	}
 	if p.GradeModelId != nil {
 		m["gradeModelId"] = p.GradeModelId
+	}
+	if p.GroupKeyHierarchy != nil {
+		m["groupKeyHierarchy"] = core.CastStringsFromDict(
+			p.GroupKeyHierarchy,
+		)
 	}
 	if p.GradeEntries != nil {
 		m["gradeEntries"] = CastUnleashRateEntryModelsFromDict(
@@ -1509,6 +1548,7 @@ type UnleashRateModelMaster struct {
 	Metadata               *string                 `json:"metadata"`
 	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
 	GradeModelId           *string                 `json:"gradeModelId"`
+	GroupKeyHierarchy      []*string               `json:"groupKeyHierarchy"`
 	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
 	CreatedAt              *int64                  `json:"createdAt"`
 	UpdatedAt              *int64                  `json:"updatedAt"`
@@ -1675,6 +1715,32 @@ func (p *UnleashRateModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["groupKeyHierarchy"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupKeyHierarchy = l
+			}
+		}
 		if v, ok := d["gradeEntries"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.GradeEntries)
 		}
@@ -1741,6 +1807,13 @@ func NewUnleashRateModelMasterFromDict(data map[string]interface{}) UnleashRateM
 			}
 			return core.CastString(data["gradeModelId"])
 		}(),
+		GroupKeyHierarchy: func() []*string {
+			v, ok := data["groupKeyHierarchy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		GradeEntries: func() []UnleashRateEntryModel {
 			if data["gradeEntries"] == nil {
 				return nil
@@ -1790,6 +1863,11 @@ func (p UnleashRateModelMaster) ToDict() map[string]interface{} {
 	}
 	if p.GradeModelId != nil {
 		m["gradeModelId"] = p.GradeModelId
+	}
+	if p.GroupKeyHierarchy != nil {
+		m["groupKeyHierarchy"] = core.CastStringsFromDict(
+			p.GroupKeyHierarchy,
+		)
 	}
 	if p.GradeEntries != nil {
 		m["gradeEntries"] = CastUnleashRateEntryModelsFromDict(
@@ -2473,8 +2551,10 @@ func CastMaterialsFromDict(data []Material) []interface{} {
 }
 
 type UnleashRateEntryModel struct {
-	GradeValue *int64 `json:"gradeValue"`
-	NeedCount  *int32 `json:"needCount"`
+	GradeValue *int64          `json:"gradeValue"`
+	Type       *string         `json:"type"`
+	NeedCount  *int32          `json:"needCount"`
+	Recipes    []UnleashRecipe `json:"recipes"`
 }
 
 func (p *UnleashRateEntryModel) UnmarshalJSON(data []byte) error {
@@ -2502,8 +2582,34 @@ func (p *UnleashRateEntryModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["gradeValue"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.GradeValue)
 		}
+		if v, ok := d["type"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Type = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Type = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Type = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Type = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Type)
+				}
+			}
+		}
 		if v, ok := d["needCount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.NeedCount)
+		}
+		if v, ok := d["recipes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Recipes)
 		}
 	}
 	return nil
@@ -2524,12 +2630,25 @@ func NewUnleashRateEntryModelFromDict(data map[string]interface{}) UnleashRateEn
 			}
 			return core.CastInt64(data["gradeValue"])
 		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
 		NeedCount: func() *int32 {
 			v, ok := data["needCount"]
 			if !ok || v == nil {
 				return nil
 			}
 			return core.CastInt32(data["needCount"])
+		}(),
+		Recipes: func() []UnleashRecipe {
+			if data["recipes"] == nil {
+				return nil
+			}
+			return CastUnleashRecipes(core.CastArray(data["recipes"]))
 		}(),
 	}
 }
@@ -2539,8 +2658,16 @@ func (p UnleashRateEntryModel) ToDict() map[string]interface{} {
 	if p.GradeValue != nil {
 		m["gradeValue"] = p.GradeValue
 	}
+	if p.Type != nil {
+		m["type"] = p.Type
+	}
 	if p.NeedCount != nil {
 		m["needCount"] = p.NeedCount
+	}
+	if p.Recipes != nil {
+		m["recipes"] = CastUnleashRecipesFromDict(
+			p.Recipes,
+		)
 	}
 	return m
 }
@@ -2558,6 +2685,844 @@ func CastUnleashRateEntryModels(data []interface{}) []UnleashRateEntryModel {
 }
 
 func CastUnleashRateEntryModelsFromDict(data []UnleashRateEntryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashRecipe struct {
+	Name            *string           `json:"name"`
+	Metadata        *string           `json:"metadata"`
+	TargetGroupKeys []*string         `json:"targetGroupKeys"`
+	Materials       []UnleashMaterial `json:"materials"`
+}
+
+func (p *UnleashRecipe) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnleashRecipe{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnleashRecipe{}
+	} else {
+		*p = UnleashRecipe{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["targetGroupKeys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.TargetGroupKeys = l
+			}
+		}
+		if v, ok := d["materials"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Materials)
+		}
+	}
+	return nil
+}
+
+func NewUnleashRecipeFromJson(data string) UnleashRecipe {
+	req := UnleashRecipe{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnleashRecipeFromDict(data map[string]interface{}) UnleashRecipe {
+	return UnleashRecipe{
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TargetGroupKeys: func() []*string {
+			v, ok := data["targetGroupKeys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		Materials: func() []UnleashMaterial {
+			if data["materials"] == nil {
+				return nil
+			}
+			return CastUnleashMaterials(core.CastArray(data["materials"]))
+		}(),
+	}
+}
+
+func (p UnleashRecipe) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.Metadata != nil {
+		m["metadata"] = p.Metadata
+	}
+	if p.TargetGroupKeys != nil {
+		m["targetGroupKeys"] = core.CastStringsFromDict(
+			p.TargetGroupKeys,
+		)
+	}
+	if p.Materials != nil {
+		m["materials"] = CastUnleashMaterialsFromDict(
+			p.Materials,
+		)
+	}
+	return m
+}
+
+func (p UnleashRecipe) Pointer() *UnleashRecipe {
+	return &p
+}
+
+func CastUnleashRecipes(data []interface{}) []UnleashRecipe {
+	v := make([]UnleashRecipe, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashRecipeFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashRecipesFromDict(data []UnleashRecipe) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashMaterial struct {
+	Name              *string                           `json:"name"`
+	MaterialType      *string                           `json:"materialType"`
+	IndividualSetting *UnleashIndividualMaterialSetting `json:"individualSetting"`
+	QuantitySetting   *UnleashQuantityMaterialSetting   `json:"quantitySetting"`
+}
+
+func (p *UnleashMaterial) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnleashMaterial{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnleashMaterial{}
+	} else {
+		*p = UnleashMaterial{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["materialType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MaterialType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MaterialType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MaterialType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MaterialType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MaterialType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MaterialType)
+				}
+			}
+		}
+		if v, ok := d["individualSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IndividualSetting)
+		}
+		if v, ok := d["quantitySetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.QuantitySetting)
+		}
+	}
+	return nil
+}
+
+func NewUnleashMaterialFromJson(data string) UnleashMaterial {
+	req := UnleashMaterial{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnleashMaterialFromDict(data map[string]interface{}) UnleashMaterial {
+	return UnleashMaterial{
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		MaterialType: func() *string {
+			v, ok := data["materialType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["materialType"])
+		}(),
+		IndividualSetting: func() *UnleashIndividualMaterialSetting {
+			v, ok := data["individualSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUnleashIndividualMaterialSettingFromDict(core.CastMap(data["individualSetting"])).Pointer()
+		}(),
+		QuantitySetting: func() *UnleashQuantityMaterialSetting {
+			v, ok := data["quantitySetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUnleashQuantityMaterialSettingFromDict(core.CastMap(data["quantitySetting"])).Pointer()
+		}(),
+	}
+}
+
+func (p UnleashMaterial) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.MaterialType != nil {
+		m["materialType"] = p.MaterialType
+	}
+	if p.IndividualSetting != nil {
+		m["individualSetting"] = func() map[string]interface{} {
+			if p.IndividualSetting == nil {
+				return nil
+			}
+			return p.IndividualSetting.ToDict()
+		}()
+	}
+	if p.QuantitySetting != nil {
+		m["quantitySetting"] = func() map[string]interface{} {
+			if p.QuantitySetting == nil {
+				return nil
+			}
+			return p.QuantitySetting.ToDict()
+		}()
+	}
+	return m
+}
+
+func (p UnleashMaterial) Pointer() *UnleashMaterial {
+	return &p
+}
+
+func CastUnleashMaterials(data []interface{}) []UnleashMaterial {
+	v := make([]UnleashMaterial, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashMaterialFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashMaterialsFromDict(data []UnleashMaterial) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashIndividualMaterialSetting struct {
+	MatchType      *string `json:"matchType"`
+	GradeCondition *string `json:"gradeCondition"`
+	GradeValue     *int64  `json:"gradeValue"`
+	Count          *int32  `json:"count"`
+}
+
+func (p *UnleashIndividualMaterialSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnleashIndividualMaterialSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnleashIndividualMaterialSetting{}
+	} else {
+		*p = UnleashIndividualMaterialSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["matchType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MatchType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MatchType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MatchType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MatchType)
+				}
+			}
+		}
+		if v, ok := d["gradeCondition"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GradeCondition = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GradeCondition = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GradeCondition = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GradeCondition = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GradeCondition = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GradeCondition)
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GradeValue)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewUnleashIndividualMaterialSettingFromJson(data string) UnleashIndividualMaterialSetting {
+	req := UnleashIndividualMaterialSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnleashIndividualMaterialSettingFromDict(data map[string]interface{}) UnleashIndividualMaterialSetting {
+	return UnleashIndividualMaterialSetting{
+		MatchType: func() *string {
+			v, ok := data["matchType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchType"])
+		}(),
+		GradeCondition: func() *string {
+			v, ok := data["gradeCondition"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gradeCondition"])
+		}(),
+		GradeValue: func() *int64 {
+			v, ok := data["gradeValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["gradeValue"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+	}
+}
+
+func (p UnleashIndividualMaterialSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.MatchType != nil {
+		m["matchType"] = p.MatchType
+	}
+	if p.GradeCondition != nil {
+		m["gradeCondition"] = p.GradeCondition
+	}
+	if p.GradeValue != nil {
+		m["gradeValue"] = p.GradeValue
+	}
+	if p.Count != nil {
+		m["count"] = p.Count
+	}
+	return m
+}
+
+func (p UnleashIndividualMaterialSetting) Pointer() *UnleashIndividualMaterialSetting {
+	return &p
+}
+
+func CastUnleashIndividualMaterialSettings(data []interface{}) []UnleashIndividualMaterialSetting {
+	v := make([]UnleashIndividualMaterialSetting, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashIndividualMaterialSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashIndividualMaterialSettingsFromDict(data []UnleashIndividualMaterialSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashQuantityMaterialSetting struct {
+	MatchType                *string `json:"matchType"`
+	MaterialInventoryModelId *string `json:"materialInventoryModelId"`
+	ItemModelId              *string `json:"itemModelId"`
+	Count                    *int32  `json:"count"`
+}
+
+func (p *UnleashQuantityMaterialSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnleashQuantityMaterialSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnleashQuantityMaterialSetting{}
+	} else {
+		*p = UnleashQuantityMaterialSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["matchType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MatchType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MatchType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MatchType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MatchType)
+				}
+			}
+		}
+		if v, ok := d["materialInventoryModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MaterialInventoryModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MaterialInventoryModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MaterialInventoryModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MaterialInventoryModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MaterialInventoryModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MaterialInventoryModelId)
+				}
+			}
+		}
+		if v, ok := d["itemModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemModelId)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewUnleashQuantityMaterialSettingFromJson(data string) UnleashQuantityMaterialSetting {
+	req := UnleashQuantityMaterialSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnleashQuantityMaterialSettingFromDict(data map[string]interface{}) UnleashQuantityMaterialSetting {
+	return UnleashQuantityMaterialSetting{
+		MatchType: func() *string {
+			v, ok := data["matchType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchType"])
+		}(),
+		MaterialInventoryModelId: func() *string {
+			v, ok := data["materialInventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["materialInventoryModelId"])
+		}(),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+	}
+}
+
+func (p UnleashQuantityMaterialSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.MatchType != nil {
+		m["matchType"] = p.MatchType
+	}
+	if p.MaterialInventoryModelId != nil {
+		m["materialInventoryModelId"] = p.MaterialInventoryModelId
+	}
+	if p.ItemModelId != nil {
+		m["itemModelId"] = p.ItemModelId
+	}
+	if p.Count != nil {
+		m["count"] = p.Count
+	}
+	return m
+}
+
+func (p UnleashQuantityMaterialSetting) Pointer() *UnleashQuantityMaterialSetting {
+	return &p
+}
+
+func CastUnleashQuantityMaterialSettings(data []interface{}) []UnleashQuantityMaterialSetting {
+	v := make([]UnleashQuantityMaterialSetting, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashQuantityMaterialSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashQuantityMaterialSettingsFromDict(data []UnleashQuantityMaterialSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashMaterialSelection struct {
+	Name       *string   `json:"name"`
+	ItemSetIds []*string `json:"itemSetIds"`
+}
+
+func (p *UnleashMaterialSelection) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnleashMaterialSelection{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnleashMaterialSelection{}
+	} else {
+		*p = UnleashMaterialSelection{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["itemSetIds"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.ItemSetIds = l
+			}
+		}
+	}
+	return nil
+}
+
+func NewUnleashMaterialSelectionFromJson(data string) UnleashMaterialSelection {
+	req := UnleashMaterialSelection{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnleashMaterialSelectionFromDict(data map[string]interface{}) UnleashMaterialSelection {
+	return UnleashMaterialSelection{
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		ItemSetIds: func() []*string {
+			v, ok := data["itemSetIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p UnleashMaterialSelection) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Name != nil {
+		m["name"] = p.Name
+	}
+	if p.ItemSetIds != nil {
+		m["itemSetIds"] = core.CastStringsFromDict(
+			p.ItemSetIds,
+		)
+	}
+	return m
+}
+
+func (p UnleashMaterialSelection) Pointer() *UnleashMaterialSelection {
+	return &p
+}
+
+func CastUnleashMaterialSelections(data []interface{}) []UnleashMaterialSelection {
+	v := make([]UnleashMaterialSelection, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashMaterialSelectionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashMaterialSelectionsFromDict(data []UnleashMaterialSelection) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

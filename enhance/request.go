@@ -3581,6 +3581,7 @@ type CreateUnleashRateModelMasterRequest struct {
 	Metadata               *string                 `json:"metadata"`
 	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
 	GradeModelId           *string                 `json:"gradeModelId"`
+	GroupKeyHierarchy      []*string               `json:"groupKeyHierarchy"`
 	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
 	DryRun                 *bool                   `json:"dryRun"`
 }
@@ -3745,6 +3746,32 @@ func (p *CreateUnleashRateModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["groupKeyHierarchy"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupKeyHierarchy = l
+			}
+		}
 		if v, ok := d["gradeEntries"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.GradeEntries)
 		}
@@ -3805,6 +3832,13 @@ func NewCreateUnleashRateModelMasterRequestFromDict(data map[string]interface{})
 			}
 			return core.CastString(data["gradeModelId"])
 		}(),
+		GroupKeyHierarchy: func() []*string {
+			v, ok := data["groupKeyHierarchy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		GradeEntries: func() []UnleashRateEntryModel {
 			if data["gradeEntries"] == nil {
 				return nil
@@ -3822,6 +3856,9 @@ func (p CreateUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":               p.Metadata,
 		"targetInventoryModelId": p.TargetInventoryModelId,
 		"gradeModelId":           p.GradeModelId,
+		"groupKeyHierarchy": core.CastStringsFromDict(
+			p.GroupKeyHierarchy,
+		),
 		"gradeEntries": CastUnleashRateEntryModelsFromDict(
 			p.GradeEntries,
 		),
@@ -3958,6 +3995,7 @@ type UpdateUnleashRateModelMasterRequest struct {
 	Metadata               *string                 `json:"metadata"`
 	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
 	GradeModelId           *string                 `json:"gradeModelId"`
+	GroupKeyHierarchy      []*string               `json:"groupKeyHierarchy"`
 	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
 	DryRun                 *bool                   `json:"dryRun"`
 }
@@ -4122,6 +4160,32 @@ func (p *UpdateUnleashRateModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["groupKeyHierarchy"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupKeyHierarchy = l
+			}
+		}
 		if v, ok := d["gradeEntries"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.GradeEntries)
 		}
@@ -4182,6 +4246,13 @@ func NewUpdateUnleashRateModelMasterRequestFromDict(data map[string]interface{})
 			}
 			return core.CastString(data["gradeModelId"])
 		}(),
+		GroupKeyHierarchy: func() []*string {
+			v, ok := data["groupKeyHierarchy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		GradeEntries: func() []UnleashRateEntryModel {
 			if data["gradeEntries"] == nil {
 				return nil
@@ -4199,6 +4270,9 @@ func (p UpdateUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":               p.Metadata,
 		"targetInventoryModelId": p.TargetInventoryModelId,
 		"gradeModelId":           p.GradeModelId,
+		"groupKeyHierarchy": core.CastStringsFromDict(
+			p.GroupKeyHierarchy,
+		),
 		"gradeEntries": CastUnleashRateEntryModelsFromDict(
 			p.GradeEntries,
 		),
@@ -4896,15 +4970,17 @@ func (p DirectEnhanceByStampSheetRequest) Pointer() *DirectEnhanceByStampSheetRe
 }
 
 type UnleashRequest struct {
-	ContextStack       *string   `json:"contextStack"`
-	DuplicationAvoider *string   `json:"duplicationAvoider"`
-	NamespaceName      *string   `json:"namespaceName"`
-	RateName           *string   `json:"rateName"`
-	AccessToken        *string   `json:"accessToken"`
-	TargetItemSetId    *string   `json:"targetItemSetId"`
-	Materials          []*string `json:"materials"`
-	Config             []Config  `json:"config"`
-	DryRun             *bool     `json:"dryRun"`
+	ContextStack       *string                    `json:"contextStack"`
+	DuplicationAvoider *string                    `json:"duplicationAvoider"`
+	NamespaceName      *string                    `json:"namespaceName"`
+	RateName           *string                    `json:"rateName"`
+	AccessToken        *string                    `json:"accessToken"`
+	TargetItemSetId    *string                    `json:"targetItemSetId"`
+	Materials          []*string                  `json:"materials"`
+	RecipeName         *string                    `json:"recipeName"`
+	RecipeMaterials    []UnleashMaterialSelection `json:"recipeMaterials"`
+	Config             []Config                   `json:"config"`
+	DryRun             *bool                      `json:"dryRun"`
 }
 
 func (p *UnleashRequest) UnmarshalJSON(data []byte) error {
@@ -5047,6 +5123,32 @@ func (p *UnleashRequest) UnmarshalJSON(data []byte) error {
 				p.Materials = l
 			}
 		}
+		if v, ok := d["recipeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RecipeName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RecipeName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RecipeName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RecipeName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RecipeName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RecipeName)
+				}
+			}
+		}
+		if v, ok := d["recipeMaterials"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RecipeMaterials)
+		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
 		}
@@ -5100,6 +5202,19 @@ func NewUnleashRequestFromDict(data map[string]interface{}) UnleashRequest {
 			}
 			return core.CastStrings(core.CastArray(v))
 		}(),
+		RecipeName: func() *string {
+			v, ok := data["recipeName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recipeName"])
+		}(),
+		RecipeMaterials: func() []UnleashMaterialSelection {
+			if data["recipeMaterials"] == nil {
+				return nil
+			}
+			return CastUnleashMaterialSelections(core.CastArray(data["recipeMaterials"]))
+		}(),
 		Config: func() []Config {
 			if data["config"] == nil {
 				return nil
@@ -5118,6 +5233,10 @@ func (p UnleashRequest) ToDict() map[string]interface{} {
 		"materials": core.CastStringsFromDict(
 			p.Materials,
 		),
+		"recipeName": p.RecipeName,
+		"recipeMaterials": CastUnleashMaterialSelectionsFromDict(
+			p.RecipeMaterials,
+		),
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
@@ -5129,16 +5248,18 @@ func (p UnleashRequest) Pointer() *UnleashRequest {
 }
 
 type UnleashByUserIdRequest struct {
-	ContextStack       *string   `json:"contextStack"`
-	DuplicationAvoider *string   `json:"duplicationAvoider"`
-	NamespaceName      *string   `json:"namespaceName"`
-	RateName           *string   `json:"rateName"`
-	UserId             *string   `json:"userId"`
-	TargetItemSetId    *string   `json:"targetItemSetId"`
-	Materials          []*string `json:"materials"`
-	Config             []Config  `json:"config"`
-	TimeOffsetToken    *string   `json:"timeOffsetToken"`
-	DryRun             *bool     `json:"dryRun"`
+	ContextStack       *string                    `json:"contextStack"`
+	DuplicationAvoider *string                    `json:"duplicationAvoider"`
+	NamespaceName      *string                    `json:"namespaceName"`
+	RateName           *string                    `json:"rateName"`
+	UserId             *string                    `json:"userId"`
+	TargetItemSetId    *string                    `json:"targetItemSetId"`
+	Materials          []*string                  `json:"materials"`
+	RecipeName         *string                    `json:"recipeName"`
+	RecipeMaterials    []UnleashMaterialSelection `json:"recipeMaterials"`
+	Config             []Config                   `json:"config"`
+	TimeOffsetToken    *string                    `json:"timeOffsetToken"`
+	DryRun             *bool                      `json:"dryRun"`
 }
 
 func (p *UnleashByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5281,6 +5402,32 @@ func (p *UnleashByUserIdRequest) UnmarshalJSON(data []byte) error {
 				p.Materials = l
 			}
 		}
+		if v, ok := d["recipeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RecipeName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RecipeName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RecipeName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RecipeName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RecipeName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RecipeName)
+				}
+			}
+		}
+		if v, ok := d["recipeMaterials"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RecipeMaterials)
+		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
 		}
@@ -5357,6 +5504,19 @@ func NewUnleashByUserIdRequestFromDict(data map[string]interface{}) UnleashByUse
 			}
 			return core.CastStrings(core.CastArray(v))
 		}(),
+		RecipeName: func() *string {
+			v, ok := data["recipeName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recipeName"])
+		}(),
+		RecipeMaterials: func() []UnleashMaterialSelection {
+			if data["recipeMaterials"] == nil {
+				return nil
+			}
+			return CastUnleashMaterialSelections(core.CastArray(data["recipeMaterials"]))
+		}(),
 		Config: func() []Config {
 			if data["config"] == nil {
 				return nil
@@ -5381,6 +5541,10 @@ func (p UnleashByUserIdRequest) ToDict() map[string]interface{} {
 		"targetItemSetId": p.TargetItemSetId,
 		"materials": core.CastStringsFromDict(
 			p.Materials,
+		),
+		"recipeName": p.RecipeName,
+		"recipeMaterials": CastUnleashMaterialSelectionsFromDict(
+			p.RecipeMaterials,
 		),
 		"config": CastConfigsFromDict(
 			p.Config,

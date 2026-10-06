@@ -57,24 +57,15 @@ type Gs2WebSocketSession struct {
 	Region       Region
 	projectToken ProjectToken
 	connection   *WebsocketConnection
-	// Jobs は応答待ちの要求。★send と receive が別の goroutine から触るので jobsMu で守り、
-	// 応答が来たもの・接続が切れたものは取り除く（以前は増え続けていた）。
-	Jobs []*WebSocketNetworkJob
-	// jobsMu は Jobs と connection を守る。★ポインタで持つ（構造体リテラルで作られ、値レシーバの
-	// メソッドもあるので、値として複製されても同じ錠を指すように）。初期化は mu() で遅延して行う。
-	jobsMu *sync.Mutex
+	Jobs         []*WebSocketNetworkJob
+	jobsMu       *sync.Mutex
 
 	notificationHandler []func(message Notification)
 
-	// SteadyEndpoint は Steady（専用フリート）の基点（https://<host>）。空なら共有クラウド。
-	// 接続先は wss://<host>/ になり、handshake に上限（SteadyConnectTimeout）が付く。
 	SteadyEndpoint string
-	// DialContext は省略可。指定すると WebSocket の TCP 接続にこれを使う（プロキシや
-	// 名前解決の差し替え、試験でのアドレス選択など）。TLS の SNI と検証は URL のホストのまま。
-	DialContext func(ctx context.Context, network, addr string) (net.Conn, error)
+	DialContext    func(ctx context.Context, network, addr string) (net.Conn, error)
 }
 
-// webSocketUrl は接続先。SteadyEndpoint ＞ WsEndpointHost。
 func (p *Gs2WebSocketSession) webSocketUrl() string {
 	if u := steadyWebSocketUrl(p.SteadyEndpoint); u != "" {
 		return u
@@ -82,7 +73,6 @@ func (p *Gs2WebSocketSession) webSocketUrl() string {
 	return strings.ReplaceAll(WsEndpointHost, "{region}", string(p.Region))
 }
 
-// dialer は Steady のときだけ handshake に上限を置く。共有クラウドは従来どおり DefaultDialer。
 func (p *Gs2WebSocketSession) dialer() *websocket.Dialer {
 	if normalizeSteadyEndpoint(p.SteadyEndpoint) == "" && p.DialContext == nil {
 		return websocket.DefaultDialer
@@ -218,13 +208,6 @@ func parseWebSocketResponse(response WebSocketMessageContainer) (string, error) 
 	}
 }
 
-// receive は接続から読み続け、応答を待ち中の要求へ配る。
-//
-// ★接続が切れたら（読み取りの誤り）、**待ち中の要求すべてに ConnectionBroken を返して**
-// 抜ける。以前は誤りを記録して読み続け、次の読み取りで gorilla が panic する経路に入り、
-// 待ち中の呼び出し（SetUserId 等の同期呼び出し）が永久に返らなかった。
-// サーバーが応答の前に接続を閉じた場合（gateway の setUserId が自分自身の接続を切る形、
-// ノードの停止、ネットワーク断）に当たる。
 func (p *Gs2WebSocketSession) receive(connection *WebsocketConnection) {
 	for {
 		_, payload, err := connection.client.ReadMessage()
@@ -266,10 +249,8 @@ func (p *Gs2WebSocketSession) receive(connection *WebsocketConnection) {
 	}
 }
 
-// sessionLocks は jobsMu の遅延初期化を守る（全セッション共通。持つのは一瞬）。
 var sessionLocks sync.Mutex
 
-// mu は Jobs / connection を守る錠（無ければ作る）。
 func (p *Gs2WebSocketSession) mu() *sync.Mutex {
 	sessionLocks.Lock()
 	defer sessionLocks.Unlock()
@@ -279,7 +260,6 @@ func (p *Gs2WebSocketSession) mu() *sync.Mutex {
 	return p.jobsMu
 }
 
-// takeJob は requestId の要求を待ち行列から外して返す（無ければ nil）。
 func (p *Gs2WebSocketSession) takeJob(requestId WebSocketRequestId) *WebSocketNetworkJob {
 	p.mu().Lock()
 	defer p.mu().Unlock()
@@ -292,8 +272,6 @@ func (p *Gs2WebSocketSession) takeJob(requestId WebSocketRequestId) *WebSocketNe
 	return nil
 }
 
-// dropConnection は切れた接続を捨て、待ち中の要求すべてに ConnectionBroken を返す。
-// ★既に別の接続に差し替わっていたら（Disconnect → Connect の後）、何もしない。
 func (p *Gs2WebSocketSession) dropConnection(connection *WebsocketConnection, cause error) {
 	p.mu().Lock()
 	if p.connection != connection {
@@ -342,12 +320,10 @@ func (p *Gs2WebSocketSession) send(
 		return err
 	}
 
-	// ★gorilla の WriteMessage は並行に呼べない（1 本の接続に書くのは 1 goroutine まで）。
 	connection.writeMu.Lock()
 	err = connection.client.WriteMessage(websocket.TextMessage, jsonText)
 	connection.writeMu.Unlock()
 	if err != nil {
-		// 書けなかった要求は届いていないので、待ち行列から外してその場で返す。
 		if p.takeJob(job.RequestId) != nil {
 			job.Callback <- AsyncResult{
 				Payload: "",
@@ -505,7 +481,6 @@ func (p *Gs2WebSocketSession) Connect() error {
 	return nil
 }
 
-// Disconnect は接続を閉じる。待ち中の要求には ConnectionBroken が返る。
 func (p *Gs2WebSocketSession) Disconnect() {
 	p.mu().Lock()
 	connection := p.connection

@@ -2471,6 +2471,13 @@ func (p Gs2EnhanceRestClient) CreateUnleashRateModelMasterAsync(
 	if request.GradeModelId != nil && *request.GradeModelId != "" {
 		bodies["gradeModelId"] = *request.GradeModelId
 	}
+	if request.GroupKeyHierarchy != nil {
+		var _groupKeyHierarchy []interface{}
+		for _, item := range request.GroupKeyHierarchy {
+			_groupKeyHierarchy = append(_groupKeyHierarchy, item)
+		}
+		bodies["groupKeyHierarchy"] = _groupKeyHierarchy
+	}
 	if request.GradeEntries != nil {
 		var _gradeEntries []interface{}
 		for _, item := range request.GradeEntries {
@@ -2681,6 +2688,13 @@ func (p Gs2EnhanceRestClient) UpdateUnleashRateModelMasterAsync(
 	}
 	if request.GradeModelId != nil && *request.GradeModelId != "" {
 		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GroupKeyHierarchy != nil {
+		var _groupKeyHierarchy []interface{}
+		for _, item := range request.GroupKeyHierarchy {
+			_groupKeyHierarchy = append(_groupKeyHierarchy, item)
+		}
+		bodies["groupKeyHierarchy"] = _groupKeyHierarchy
 	}
 	if request.GradeEntries != nil {
 		var _gradeEntries []interface{}
@@ -3226,6 +3240,16 @@ func (p Gs2EnhanceRestClient) UnleashAsync(
 		}
 		bodies["materials"] = _materials
 	}
+	if request.RecipeName != nil && *request.RecipeName != "" {
+		bodies["recipeName"] = *request.RecipeName
+	}
+	if request.RecipeMaterials != nil {
+		var _recipeMaterials []interface{}
+		for _, item := range request.RecipeMaterials {
+			_recipeMaterials = append(_recipeMaterials, item)
+		}
+		bodies["recipeMaterials"] = _recipeMaterials
+	}
 	if request.Config != nil {
 		var _config []interface{}
 		for _, item := range request.Config {
@@ -3349,6 +3373,16 @@ func (p Gs2EnhanceRestClient) UnleashByUserIdAsync(
 			_materials = append(_materials, item)
 		}
 		bodies["materials"] = _materials
+	}
+	if request.RecipeName != nil && *request.RecipeName != "" {
+		bodies["recipeName"] = *request.RecipeName
+	}
+	if request.RecipeMaterials != nil {
+		var _recipeMaterials []interface{}
+		for _, item := range request.RecipeMaterials {
+			_recipeMaterials = append(_recipeMaterials, item)
+		}
+		bodies["recipeMaterials"] = _recipeMaterials
 	}
 	if request.Config != nil {
 		var _config []interface{}

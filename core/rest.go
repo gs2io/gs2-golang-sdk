@@ -95,10 +95,7 @@ type Gs2RestSession struct {
 	connection                IConnection
 	DisableCompressRequest    bool
 	DisableDecompressResponse bool
-	// SteadyEndpoint は Steady（専用フリート）の基点（https://<host>）。空なら共有クラウド。
-	// Connect の前に設定する（core/steady.go の説明）。設定すると全サービスの接続先が
-	// <SteadyEndpoint>/<service> になり、接続段階に上限と 1 回の再送が付く。
-	SteadyEndpoint string
+	SteadyEndpoint            string
 }
 
 func NewGs2RestSession(credential IGs2Credential, region Region) *Gs2RestSession {
@@ -125,8 +122,6 @@ func compressGzip(data []byte) ([]byte, error) {
 }
 
 func (p Gs2RestSession) EndpointHost(service string, endpointHost *string) Url {
-	// 優先順: サービスごとの override ＞ SteadyEndpoint ＞ 共有クラウドの EndpointHost。
-	// SteadyEndpoint が空なら結果は従来と同じ文字列になる。
 	template := EndpointHost
 	if endpointHost != nil {
 		template = *endpointHost
@@ -200,7 +195,6 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		}
 	}
 
-	// ★本文は []byte で持ち、要求ごとに Reader を作り直す（Steady の再送で同じ要求をもう一度組むため）。
 	buildRequest := func() (*http.Request, error) {
 		var bodyReader io.Reader = nil
 		if bodyBytes != nil {
@@ -234,9 +228,6 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 
 	response, err := p.connection.Client().Do(request)
 	if err != nil && isSteadyUrl(p.SteadyEndpoint, httpUrl) && isConnectFailure(err) {
-		// ★Steady の再送: 基点への**接続段階**の失敗（DNS / dial / TLS。1 バイトも送っていない）だけ、
-		// 同じ要求をもう 1 回だけ送る。フリートが手放した IP に当たったとき、名前を引き直して
-		// 別のノードへ着く機会を 1 回だけ作る。送信後の失敗は届いたかもしれないので再送しない。
 		if retry, buildErr := buildRequest(); buildErr == nil {
 			response, err = p.connection.Client().Do(retry)
 		}
