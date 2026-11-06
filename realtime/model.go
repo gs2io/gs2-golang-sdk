@@ -28,15 +28,18 @@ type Namespace struct {
 	Name        *string `json:"name"`
 	Description *string `json:"description"`
 	// Deprecated: should not be used
-	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
-	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
-	ServerType           *string               `json:"serverType"`
-	ServerSpec           *string               `json:"serverSpec"`
-	CreateNotification   *NotificationSetting  `json:"createNotification"`
-	LogSetting           *LogSetting           `json:"logSetting"`
-	CreatedAt            *int64                `json:"createdAt"`
-	UpdatedAt            *int64                `json:"updatedAt"`
-	Revision             *int64                `json:"revision"`
+	TransactionSetting      *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2    *TransactionSettingV2 `json:"transactionSettingV2"`
+	ServerType              *string               `json:"serverType"`
+	ServerSpec              *string               `json:"serverSpec"`
+	ObjectCatalog           *string               `json:"objectCatalog"`
+	StateMachineNamespaceId *string               `json:"stateMachineNamespaceId"`
+	StateMachineVersion     *int64                `json:"stateMachineVersion"`
+	CreateNotification      *NotificationSetting  `json:"createNotification"`
+	LogSetting              *LogSetting           `json:"logSetting"`
+	CreatedAt               *int64                `json:"createdAt"`
+	UpdatedAt               *int64                `json:"updatedAt"`
+	Revision                *int64                `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -182,6 +185,55 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["objectCatalog"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ObjectCatalog = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ObjectCatalog = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ObjectCatalog = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ObjectCatalog = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ObjectCatalog = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ObjectCatalog)
+				}
+			}
+		}
+		if v, ok := d["stateMachineNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StateMachineNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StateMachineNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StateMachineNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StateMachineNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["stateMachineVersion"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StateMachineVersion)
+		}
 		if v, ok := d["createNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateNotification)
 		}
@@ -258,6 +310,27 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["serverSpec"])
 		}(),
+		ObjectCatalog: func() *string {
+			v, ok := data["objectCatalog"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["objectCatalog"])
+		}(),
+		StateMachineNamespaceId: func() *string {
+			v, ok := data["stateMachineNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stateMachineNamespaceId"])
+		}(),
+		StateMachineVersion: func() *int64 {
+			v, ok := data["stateMachineVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stateMachineVersion"])
+		}(),
 		CreateNotification: func() *NotificationSetting {
 			v, ok := data["createNotification"]
 			if !ok || v == nil {
@@ -328,6 +401,15 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	if p.ServerSpec != nil {
 		m["serverSpec"] = p.ServerSpec
+	}
+	if p.ObjectCatalog != nil {
+		m["objectCatalog"] = p.ObjectCatalog
+	}
+	if p.StateMachineNamespaceId != nil {
+		m["stateMachineNamespaceId"] = p.StateMachineNamespaceId
+	}
+	if p.StateMachineVersion != nil {
+		m["stateMachineVersion"] = p.StateMachineVersion
 	}
 	if p.CreateNotification != nil {
 		m["createNotification"] = func() map[string]interface{} {
