@@ -196,14 +196,11 @@ func (p Gs2RealtimeWebSocketClient) CreateNamespaceAsync(
 	if request.ServerSpec != nil && *request.ServerSpec != "" {
 		bodies["serverSpec"] = *request.ServerSpec
 	}
-	if request.ObjectCatalog != nil && *request.ObjectCatalog != "" {
-		bodies["objectCatalog"] = *request.ObjectCatalog
+	if request.SyncSetting != nil {
+		bodies["syncSetting"] = request.SyncSetting.ToDict()
 	}
-	if request.StateMachineNamespaceId != nil && *request.StateMachineNamespaceId != "" {
-		bodies["stateMachineNamespaceId"] = *request.StateMachineNamespaceId
-	}
-	if request.StateMachineVersion != nil {
-		bodies["stateMachineVersion"] = *request.StateMachineVersion
+	if request.StateMachineSetting != nil {
+		bodies["stateMachineSetting"] = request.StateMachineSetting.ToDict()
 	}
 	if request.CreateNotification != nil {
 		bodies["createNotification"] = request.CreateNotification.ToDict()
@@ -490,14 +487,11 @@ func (p Gs2RealtimeWebSocketClient) UpdateNamespaceAsync(
 	if request.ServerSpec != nil && *request.ServerSpec != "" {
 		bodies["serverSpec"] = *request.ServerSpec
 	}
-	if request.ObjectCatalog != nil && *request.ObjectCatalog != "" {
-		bodies["objectCatalog"] = *request.ObjectCatalog
+	if request.SyncSetting != nil {
+		bodies["syncSetting"] = request.SyncSetting.ToDict()
 	}
-	if request.StateMachineNamespaceId != nil && *request.StateMachineNamespaceId != "" {
-		bodies["stateMachineNamespaceId"] = *request.StateMachineNamespaceId
-	}
-	if request.StateMachineVersion != nil {
-		bodies["stateMachineVersion"] = *request.StateMachineVersion
+	if request.StateMachineSetting != nil {
+		bodies["stateMachineSetting"] = request.StateMachineSetting.ToDict()
 	}
 	if request.CreateNotification != nil {
 		bodies["createNotification"] = request.CreateNotification.ToDict()

@@ -28,18 +28,17 @@ type Namespace struct {
 	Name        *string `json:"name"`
 	Description *string `json:"description"`
 	// Deprecated: should not be used
-	TransactionSetting      *TransactionSetting   `json:"transactionSetting"`
-	TransactionSettingV2    *TransactionSettingV2 `json:"transactionSettingV2"`
-	ServerType              *string               `json:"serverType"`
-	ServerSpec              *string               `json:"serverSpec"`
-	ObjectCatalog           *string               `json:"objectCatalog"`
-	StateMachineNamespaceId *string               `json:"stateMachineNamespaceId"`
-	StateMachineVersion     *int64                `json:"stateMachineVersion"`
-	CreateNotification      *NotificationSetting  `json:"createNotification"`
-	LogSetting              *LogSetting           `json:"logSetting"`
-	CreatedAt               *int64                `json:"createdAt"`
-	UpdatedAt               *int64                `json:"updatedAt"`
-	Revision                *int64                `json:"revision"`
+	TransactionSetting   *TransactionSetting   `json:"transactionSetting"`
+	TransactionSettingV2 *TransactionSettingV2 `json:"transactionSettingV2"`
+	ServerType           *string               `json:"serverType"`
+	ServerSpec           *string               `json:"serverSpec"`
+	SyncSetting          *SyncSetting          `json:"syncSetting"`
+	StateMachineSetting  *StateMachineSetting  `json:"stateMachineSetting"`
+	CreateNotification   *NotificationSetting  `json:"createNotification"`
+	LogSetting           *LogSetting           `json:"logSetting"`
+	CreatedAt            *int64                `json:"createdAt"`
+	UpdatedAt            *int64                `json:"updatedAt"`
+	Revision             *int64                `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -185,54 +184,11 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["objectCatalog"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ObjectCatalog = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ObjectCatalog = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ObjectCatalog = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ObjectCatalog = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ObjectCatalog = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ObjectCatalog)
-				}
-			}
+		if v, ok := d["syncSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SyncSetting)
 		}
-		if v, ok := d["stateMachineNamespaceId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.StateMachineNamespaceId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.StateMachineNamespaceId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.StateMachineNamespaceId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.StateMachineNamespaceId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.StateMachineNamespaceId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.StateMachineNamespaceId)
-				}
-			}
-		}
-		if v, ok := d["stateMachineVersion"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.StateMachineVersion)
+		if v, ok := d["stateMachineSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StateMachineSetting)
 		}
 		if v, ok := d["createNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateNotification)
@@ -310,26 +266,19 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["serverSpec"])
 		}(),
-		ObjectCatalog: func() *string {
-			v, ok := data["objectCatalog"]
+		SyncSetting: func() *SyncSetting {
+			v, ok := data["syncSetting"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastString(data["objectCatalog"])
+			return NewSyncSettingFromDict(core.CastMap(data["syncSetting"])).Pointer()
 		}(),
-		StateMachineNamespaceId: func() *string {
-			v, ok := data["stateMachineNamespaceId"]
+		StateMachineSetting: func() *StateMachineSetting {
+			v, ok := data["stateMachineSetting"]
 			if !ok || v == nil {
 				return nil
 			}
-			return core.CastString(data["stateMachineNamespaceId"])
-		}(),
-		StateMachineVersion: func() *int64 {
-			v, ok := data["stateMachineVersion"]
-			if !ok || v == nil {
-				return nil
-			}
-			return core.CastInt64(data["stateMachineVersion"])
+			return NewStateMachineSettingFromDict(core.CastMap(data["stateMachineSetting"])).Pointer()
 		}(),
 		CreateNotification: func() *NotificationSetting {
 			v, ok := data["createNotification"]
@@ -402,14 +351,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ServerSpec != nil {
 		m["serverSpec"] = p.ServerSpec
 	}
-	if p.ObjectCatalog != nil {
-		m["objectCatalog"] = p.ObjectCatalog
+	if p.SyncSetting != nil {
+		m["syncSetting"] = func() map[string]interface{} {
+			if p.SyncSetting == nil {
+				return nil
+			}
+			return p.SyncSetting.ToDict()
+		}()
 	}
-	if p.StateMachineNamespaceId != nil {
-		m["stateMachineNamespaceId"] = p.StateMachineNamespaceId
-	}
-	if p.StateMachineVersion != nil {
-		m["stateMachineVersion"] = p.StateMachineVersion
+	if p.StateMachineSetting != nil {
+		m["stateMachineSetting"] = func() map[string]interface{} {
+			if p.StateMachineSetting == nil {
+				return nil
+			}
+			return p.StateMachineSetting.ToDict()
+		}()
 	}
 	if p.CreateNotification != nil {
 		m["createNotification"] = func() map[string]interface{} {
@@ -1575,6 +1531,218 @@ func CastTransactionSettingV2s(data []interface{}) []TransactionSettingV2 {
 }
 
 func CastTransactionSettingV2sFromDict(data []TransactionSettingV2) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type SyncSetting struct {
+	ObjectCatalog *string `json:"objectCatalog"`
+}
+
+func (p *SyncSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SyncSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SyncSetting{}
+	} else {
+		*p = SyncSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["objectCatalog"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ObjectCatalog = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ObjectCatalog = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ObjectCatalog = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ObjectCatalog = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ObjectCatalog = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ObjectCatalog)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSyncSettingFromJson(data string) SyncSetting {
+	req := SyncSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewSyncSettingFromDict(data map[string]interface{}) SyncSetting {
+	return SyncSetting{
+		ObjectCatalog: func() *string {
+			v, ok := data["objectCatalog"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["objectCatalog"])
+		}(),
+	}
+}
+
+func (p SyncSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ObjectCatalog != nil {
+		m["objectCatalog"] = p.ObjectCatalog
+	}
+	return m
+}
+
+func (p SyncSetting) Pointer() *SyncSetting {
+	return &p
+}
+
+func CastSyncSettings(data []interface{}) []SyncSetting {
+	v := make([]SyncSetting, 0)
+	for _, d := range data {
+		v = append(v, NewSyncSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastSyncSettingsFromDict(data []SyncSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type StateMachineSetting struct {
+	NamespaceId *string `json:"namespaceId"`
+	Version     *int64  `json:"version"`
+}
+
+func (p *StateMachineSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StateMachineSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StateMachineSetting{}
+	} else {
+		*p = StateMachineSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["version"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Version)
+		}
+	}
+	return nil
+}
+
+func NewStateMachineSettingFromJson(data string) StateMachineSetting {
+	req := StateMachineSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewStateMachineSettingFromDict(data map[string]interface{}) StateMachineSetting {
+	return StateMachineSetting{
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Version: func() *int64 {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["version"])
+		}(),
+	}
+}
+
+func (p StateMachineSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.NamespaceId != nil {
+		m["namespaceId"] = p.NamespaceId
+	}
+	if p.Version != nil {
+		m["version"] = p.Version
+	}
+	return m
+}
+
+func (p StateMachineSetting) Pointer() *StateMachineSetting {
+	return &p
+}
+
+func CastStateMachineSettings(data []interface{}) []StateMachineSetting {
+	v := make([]StateMachineSetting, 0)
+	for _, d := range data {
+		v = append(v, NewStateMachineSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastStateMachineSettingsFromDict(data []StateMachineSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
