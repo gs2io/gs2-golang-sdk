@@ -387,6 +387,7 @@ type SalesItemMaster struct {
 	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+	Bonuses        []Bonus         `json:"bonuses"`
 	CreatedAt      *int64          `json:"createdAt"`
 	UpdatedAt      *int64          `json:"updatedAt"`
 	Revision       *int64          `json:"revision"`
@@ -515,6 +516,9 @@ func (p *SalesItemMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["bonuses"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Bonuses)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -582,6 +586,12 @@ func NewSalesItemMasterFromDict(data map[string]interface{}) SalesItemMaster {
 			}
 			return CastAcquireActions(core.CastArray(data["acquireActions"]))
 		}(),
+		Bonuses: func() []Bonus {
+			if data["bonuses"] == nil {
+				return nil
+			}
+			return CastBonuses(core.CastArray(data["bonuses"]))
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -633,6 +643,11 @@ func (p SalesItemMaster) ToDict() map[string]interface{} {
 	if p.AcquireActions != nil {
 		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
+		)
+	}
+	if p.Bonuses != nil {
+		m["bonuses"] = CastBonusesFromDict(
+			p.Bonuses,
 		)
 	}
 	if p.CreatedAt != nil {
@@ -1380,6 +1395,7 @@ type SalesItem struct {
 	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+	Bonuses        []Bonus         `json:"bonuses"`
 }
 
 func (p *SalesItem) UnmarshalJSON(data []byte) error {
@@ -1459,6 +1475,9 @@ func (p *SalesItem) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["bonuses"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Bonuses)
+		}
 	}
 	return nil
 }
@@ -1503,6 +1522,12 @@ func NewSalesItemFromDict(data map[string]interface{}) SalesItem {
 			}
 			return CastAcquireActions(core.CastArray(data["acquireActions"]))
 		}(),
+		Bonuses: func() []Bonus {
+			if data["bonuses"] == nil {
+				return nil
+			}
+			return CastBonuses(core.CastArray(data["bonuses"]))
+		}(),
 	}
 }
 
@@ -1527,6 +1552,11 @@ func (p SalesItem) ToDict() map[string]interface{} {
 	if p.AcquireActions != nil {
 		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
+		)
+	}
+	if p.Bonuses != nil {
+		m["bonuses"] = CastBonusesFromDict(
+			p.Bonuses,
 		)
 	}
 	return m
@@ -3913,6 +3943,120 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Bonus struct {
+	RouteKey       *string         `json:"routeKey"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func (p *Bonus) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Bonus{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Bonus{}
+	} else {
+		*p = Bonus{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["routeKey"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RouteKey = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RouteKey = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RouteKey = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RouteKey = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RouteKey = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RouteKey)
+				}
+			}
+		}
+		if v, ok := d["acquireActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireActions)
+		}
+	}
+	return nil
+}
+
+func NewBonusFromJson(data string) Bonus {
+	req := Bonus{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewBonusFromDict(data map[string]interface{}) Bonus {
+	return Bonus{
+		RouteKey: func() *string {
+			v, ok := data["routeKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["routeKey"])
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+	}
+}
+
+func (p Bonus) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.RouteKey != nil {
+		m["routeKey"] = p.RouteKey
+	}
+	if p.AcquireActions != nil {
+		m["acquireActions"] = CastAcquireActionsFromDict(
+			p.AcquireActions,
+		)
+	}
+	return m
+}
+
+func (p Bonus) Pointer() *Bonus {
+	return &p
+}
+
+func CastBonuses(data []interface{}) []Bonus {
+	v := make([]Bonus, 0)
+	for _, d := range data {
+		v = append(v, NewBonusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBonusesFromDict(data []Bonus) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

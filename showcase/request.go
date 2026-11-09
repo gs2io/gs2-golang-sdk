@@ -2030,6 +2030,7 @@ type CreateSalesItemMasterRequest struct {
 	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+	Bonuses        []Bonus         `json:"bonuses"`
 	DryRun         *bool           `json:"dryRun"`
 }
 
@@ -2156,6 +2157,9 @@ func (p *CreateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["bonuses"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Bonuses)
+		}
 	}
 	return nil
 }
@@ -2217,6 +2221,12 @@ func NewCreateSalesItemMasterRequestFromDict(data map[string]interface{}) Create
 			}
 			return CastAcquireActions(core.CastArray(data["acquireActions"]))
 		}(),
+		Bonuses: func() []Bonus {
+			if data["bonuses"] == nil {
+				return nil
+			}
+			return CastBonuses(core.CastArray(data["bonuses"]))
+		}(),
 	}
 }
 
@@ -2234,6 +2244,9 @@ func (p CreateSalesItemMasterRequest) ToDict() map[string]interface{} {
 		),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
+		),
+		"bonuses": CastBonusesFromDict(
+			p.Bonuses,
 		),
 	}
 }
@@ -2369,6 +2382,7 @@ type UpdateSalesItemMasterRequest struct {
 	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
+	Bonuses        []Bonus         `json:"bonuses"`
 	DryRun         *bool           `json:"dryRun"`
 }
 
@@ -2495,6 +2509,9 @@ func (p *UpdateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["bonuses"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Bonuses)
+		}
 	}
 	return nil
 }
@@ -2556,6 +2573,12 @@ func NewUpdateSalesItemMasterRequestFromDict(data map[string]interface{}) Update
 			}
 			return CastAcquireActions(core.CastArray(data["acquireActions"]))
 		}(),
+		Bonuses: func() []Bonus {
+			if data["bonuses"] == nil {
+				return nil
+			}
+			return CastBonuses(core.CastArray(data["bonuses"]))
+		}(),
 	}
 }
 
@@ -2573,6 +2596,9 @@ func (p UpdateSalesItemMasterRequest) ToDict() map[string]interface{} {
 		),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
+		),
+		"bonuses": CastBonusesFromDict(
+			p.Bonuses,
 		),
 	}
 }
@@ -5747,6 +5773,7 @@ type BuyByUserIdRequest struct {
 	UserId             *string  `json:"userId"`
 	Quantity           *int32   `json:"quantity"`
 	Config             []Config `json:"config"`
+	RouteKey           *string  `json:"routeKey"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 	DryRun             *bool    `json:"dryRun"`
 }
@@ -5871,6 +5898,29 @@ func (p *BuyByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
 		}
+		if v, ok := d["routeKey"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RouteKey = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RouteKey = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RouteKey = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RouteKey = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RouteKey = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RouteKey)
+				}
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5950,6 +6000,13 @@ func NewBuyByUserIdRequestFromDict(data map[string]interface{}) BuyByUserIdReque
 			}
 			return CastConfigs(core.CastArray(data["config"]))
 		}(),
+		RouteKey: func() *string {
+			v, ok := data["routeKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["routeKey"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -5970,6 +6027,7 @@ func (p BuyByUserIdRequest) ToDict() map[string]interface{} {
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
+		"routeKey":        p.RouteKey,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

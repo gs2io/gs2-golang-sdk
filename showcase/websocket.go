@@ -1518,6 +1518,13 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemMasterAsync(
 		}
 		bodies["acquireActions"] = _acquireActions
 	}
+	if request.Bonuses != nil {
+		var _bonuses []interface{}
+		for _, item := range request.Bonuses {
+			_bonuses = append(_bonuses, item)
+		}
+		bodies["bonuses"] = _bonuses
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1726,6 +1733,13 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemMasterAsync(
 			_acquireActions = append(_acquireActions, item)
 		}
 		bodies["acquireActions"] = _acquireActions
+	}
+	if request.Bonuses != nil {
+		var _bonuses []interface{}
+		for _, item := range request.Bonuses {
+			_bonuses = append(_bonuses, item)
+		}
+		bodies["bonuses"] = _bonuses
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3851,6 +3865,9 @@ func (p Gs2ShowcaseWebSocketClient) BuyByUserIdAsync(
 			_config = append(_config, item)
 		}
 		bodies["config"] = _config
+	}
+	if request.RouteKey != nil && *request.RouteKey != "" {
+		bodies["routeKey"] = *request.RouteKey
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
