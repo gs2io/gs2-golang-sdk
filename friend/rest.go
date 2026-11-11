@@ -4871,6 +4871,9 @@ func (p Gs2FriendRestClient) SendRequestAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.WithProfile != nil {
+		bodies["withProfile"] = *request.WithProfile
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4990,6 +4993,9 @@ func (p Gs2FriendRestClient) SendRequestByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.WithProfile != nil {
+		bodies["withProfile"] = *request.WithProfile
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
