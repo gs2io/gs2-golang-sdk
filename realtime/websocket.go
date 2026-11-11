@@ -202,6 +202,9 @@ func (p Gs2RealtimeWebSocketClient) CreateNamespaceAsync(
 	if request.StateMachineSetting != nil {
 		bodies["stateMachineSetting"] = request.StateMachineSetting.ToDict()
 	}
+	if request.ParticipantSetting != nil {
+		bodies["participantSetting"] = request.ParticipantSetting.ToDict()
+	}
 	if request.CreateNotification != nil {
 		bodies["createNotification"] = request.CreateNotification.ToDict()
 	}
@@ -492,6 +495,9 @@ func (p Gs2RealtimeWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.StateMachineSetting != nil {
 		bodies["stateMachineSetting"] = request.StateMachineSetting.ToDict()
+	}
+	if request.ParticipantSetting != nil {
+		bodies["participantSetting"] = request.ParticipantSetting.ToDict()
 	}
 	if request.CreateNotification != nil {
 		bodies["createNotification"] = request.CreateNotification.ToDict()

@@ -34,6 +34,7 @@ type Namespace struct {
 	ServerSpec           *string               `json:"serverSpec"`
 	SyncSetting          *SyncSetting          `json:"syncSetting"`
 	StateMachineSetting  *StateMachineSetting  `json:"stateMachineSetting"`
+	ParticipantSetting   *ParticipantSetting   `json:"participantSetting"`
 	CreateNotification   *NotificationSetting  `json:"createNotification"`
 	LogSetting           *LogSetting           `json:"logSetting"`
 	CreatedAt            *int64                `json:"createdAt"`
@@ -190,6 +191,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["stateMachineSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.StateMachineSetting)
 		}
+		if v, ok := d["participantSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ParticipantSetting)
+		}
 		if v, ok := d["createNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateNotification)
 		}
@@ -280,6 +284,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return NewStateMachineSettingFromDict(core.CastMap(data["stateMachineSetting"])).Pointer()
 		}(),
+		ParticipantSetting: func() *ParticipantSetting {
+			v, ok := data["participantSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewParticipantSettingFromDict(core.CastMap(data["participantSetting"])).Pointer()
+		}(),
 		CreateNotification: func() *NotificationSetting {
 			v, ok := data["createNotification"]
 			if !ok || v == nil {
@@ -365,6 +376,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.StateMachineSetting.ToDict()
+		}()
+	}
+	if p.ParticipantSetting != nil {
+		m["participantSetting"] = func() map[string]interface{} {
+			if p.ParticipantSetting == nil {
+				return nil
+			}
+			return p.ParticipantSetting.ToDict()
 		}()
 	}
 	if p.CreateNotification != nil {
@@ -1743,6 +1762,139 @@ func CastStateMachineSettings(data []interface{}) []StateMachineSetting {
 }
 
 func CastStateMachineSettingsFromDict(data []StateMachineSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ParticipantSetting struct {
+	UserId   *string `json:"userId"`
+	ScriptId *string `json:"scriptId"`
+}
+
+func (p *ParticipantSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ParticipantSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ParticipantSetting{}
+	} else {
+		*p = ParticipantSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["scriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScriptId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewParticipantSettingFromJson(data string) ParticipantSetting {
+	req := ParticipantSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewParticipantSettingFromDict(data map[string]interface{}) ParticipantSetting {
+	return ParticipantSetting{
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+	}
+}
+
+func (p ParticipantSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.UserId != nil {
+		m["userId"] = p.UserId
+	}
+	if p.ScriptId != nil {
+		m["scriptId"] = p.ScriptId
+	}
+	return m
+}
+
+func (p ParticipantSetting) Pointer() *ParticipantSetting {
+	return &p
+}
+
+func CastParticipantSettings(data []interface{}) []ParticipantSetting {
+	v := make([]ParticipantSetting, 0)
+	for _, d := range data {
+		v = append(v, NewParticipantSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastParticipantSettingsFromDict(data []ParticipantSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

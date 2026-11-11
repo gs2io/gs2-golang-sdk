@@ -164,6 +164,7 @@ type CreateNamespaceRequest struct {
 	ServerSpec           *string               `json:"serverSpec"`
 	SyncSetting          *SyncSetting          `json:"syncSetting"`
 	StateMachineSetting  *StateMachineSetting  `json:"stateMachineSetting"`
+	ParticipantSetting   *ParticipantSetting   `json:"participantSetting"`
 	CreateNotification   *NotificationSetting  `json:"createNotification"`
 	LogSetting           *LogSetting           `json:"logSetting"`
 	DryRun               *bool                 `json:"dryRun"`
@@ -295,6 +296,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["stateMachineSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.StateMachineSetting)
 		}
+		if v, ok := d["participantSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ParticipantSetting)
+		}
 		if v, ok := d["createNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateNotification)
 		}
@@ -372,6 +376,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewStateMachineSettingFromDict(core.CastMap(data["stateMachineSetting"])).Pointer()
 		}(),
+		ParticipantSetting: func() *ParticipantSetting {
+			v, ok := data["participantSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewParticipantSettingFromDict(core.CastMap(data["participantSetting"])).Pointer()
+		}(),
 		CreateNotification: func() *NotificationSetting {
 			v, ok := data["createNotification"]
 			if !ok || v == nil {
@@ -418,6 +429,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.StateMachineSetting.ToDict()
+		}(),
+		"participantSetting": func() map[string]interface{} {
+			if p.ParticipantSetting == nil {
+				return nil
+			}
+			return p.ParticipantSetting.ToDict()
 		}(),
 		"createNotification": func() map[string]interface{} {
 			if p.CreateNotification == nil {
@@ -621,6 +638,7 @@ type UpdateNamespaceRequest struct {
 	ServerSpec           *string               `json:"serverSpec"`
 	SyncSetting          *SyncSetting          `json:"syncSetting"`
 	StateMachineSetting  *StateMachineSetting  `json:"stateMachineSetting"`
+	ParticipantSetting   *ParticipantSetting   `json:"participantSetting"`
 	CreateNotification   *NotificationSetting  `json:"createNotification"`
 	LogSetting           *LogSetting           `json:"logSetting"`
 	DryRun               *bool                 `json:"dryRun"`
@@ -752,6 +770,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["stateMachineSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.StateMachineSetting)
 		}
+		if v, ok := d["participantSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ParticipantSetting)
+		}
 		if v, ok := d["createNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateNotification)
 		}
@@ -829,6 +850,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewStateMachineSettingFromDict(core.CastMap(data["stateMachineSetting"])).Pointer()
 		}(),
+		ParticipantSetting: func() *ParticipantSetting {
+			v, ok := data["participantSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewParticipantSettingFromDict(core.CastMap(data["participantSetting"])).Pointer()
+		}(),
 		CreateNotification: func() *NotificationSetting {
 			v, ok := data["createNotification"]
 			if !ok || v == nil {
@@ -875,6 +903,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.StateMachineSetting.ToDict()
+		}(),
+		"participantSetting": func() map[string]interface{} {
+			if p.ParticipantSetting == nil {
+				return nil
+			}
+			return p.ParticipantSetting.ToDict()
 		}(),
 		"createNotification": func() map[string]interface{} {
 			if p.CreateNotification == nil {
