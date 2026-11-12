@@ -214,6 +214,18 @@ func (p Gs2AccountRestClient) CreateNamespaceAsync(
 	if request.UnBanScript != nil {
 		bodies["unBanScript"] = request.UnBanScript.ToDict()
 	}
+	if request.AccountDeletionSetting != nil {
+		bodies["accountDeletionSetting"] = request.AccountDeletionSetting.ToDict()
+	}
+	if request.RequestDeletionScript != nil {
+		bodies["requestDeletionScript"] = request.RequestDeletionScript.ToDict()
+	}
+	if request.CancelDeletionScript != nil {
+		bodies["cancelDeletionScript"] = request.CancelDeletionScript.ToDict()
+	}
+	if request.ExecuteDeletionScript != nil {
+		bodies["executeDeletionScript"] = request.ExecuteDeletionScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -519,6 +531,18 @@ func (p Gs2AccountRestClient) UpdateNamespaceAsync(
 	}
 	if request.UnBanScript != nil {
 		bodies["unBanScript"] = request.UnBanScript.ToDict()
+	}
+	if request.AccountDeletionSetting != nil {
+		bodies["accountDeletionSetting"] = request.AccountDeletionSetting.ToDict()
+	}
+	if request.RequestDeletionScript != nil {
+		bodies["requestDeletionScript"] = request.RequestDeletionScript.ToDict()
+	}
+	if request.CancelDeletionScript != nil {
+		bodies["cancelDeletionScript"] = request.CancelDeletionScript.ToDict()
+	}
+	if request.ExecuteDeletionScript != nil {
+		bodies["executeDeletionScript"] = request.ExecuteDeletionScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -2327,6 +2351,520 @@ func (p Gs2AccountRestClient) Authentication(
 ) (*AuthenticationResult, error) {
 	callback := make(chan AuthenticationAsyncResult, 1)
 	go p.AuthenticationAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func requestDeletionAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- RequestDeletionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RequestDeletionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RequestDeletionResult
+	if asyncResult.Err != nil {
+		callback <- RequestDeletionAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RequestDeletionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- RequestDeletionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) RequestDeletionAsync(
+	request *RequestDeletionRequest,
+	callback chan<- RequestDeletionAsyncResult,
+) {
+	path := "/{namespaceName}/account/me/deletion"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go requestDeletionAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) RequestDeletion(
+	request *RequestDeletionRequest,
+) (*RequestDeletionResult, error) {
+	callback := make(chan RequestDeletionAsyncResult, 1)
+	go p.RequestDeletionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func requestDeletionByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- RequestDeletionByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RequestDeletionByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RequestDeletionByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- RequestDeletionByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RequestDeletionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- RequestDeletionByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) RequestDeletionByUserIdAsync(
+	request *RequestDeletionByUserIdRequest,
+	callback chan<- RequestDeletionByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/deletion"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go requestDeletionByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) RequestDeletionByUserId(
+	request *RequestDeletionByUserIdRequest,
+) (*RequestDeletionByUserIdResult, error) {
+	callback := make(chan RequestDeletionByUserIdAsyncResult, 1)
+	go p.RequestDeletionByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func cancelDeletionAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- CancelDeletionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CancelDeletionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CancelDeletionResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+			}
+		}
+		callback <- CancelDeletionAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CancelDeletionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CancelDeletionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) CancelDeletionAsync(
+	request *CancelDeletionRequest,
+	callback chan<- CancelDeletionAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/deletion/cancel"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Password != nil && *request.Password != "" {
+		bodies["password"] = *request.Password
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go cancelDeletionAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) CancelDeletion(
+	request *CancelDeletionRequest,
+) (*CancelDeletionResult, error) {
+	callback := make(chan CancelDeletionAsyncResult, 1)
+	go p.CancelDeletionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func cancelDeletionByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- CancelDeletionByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CancelDeletionByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CancelDeletionByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CancelDeletionByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CancelDeletionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CancelDeletionByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) CancelDeletionByUserIdAsync(
+	request *CancelDeletionByUserIdRequest,
+	callback chan<- CancelDeletionByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/deletion"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go cancelDeletionByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) CancelDeletionByUserId(
+	request *CancelDeletionByUserIdRequest,
+) (*CancelDeletionByUserIdResult, error) {
+	callback := make(chan CancelDeletionByUserIdAsyncResult, 1)
+	go p.CancelDeletionByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func executeDeletionByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- ExecuteDeletionByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ExecuteDeletionByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ExecuteDeletionByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ExecuteDeletionByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExecuteDeletionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ExecuteDeletionByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) ExecuteDeletionByUserIdAsync(
+	request *ExecuteDeletionByUserIdRequest,
+	callback chan<- ExecuteDeletionByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/deletion/execute"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go executeDeletionByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) ExecuteDeletionByUserId(
+	request *ExecuteDeletionByUserIdRequest,
+) (*ExecuteDeletionByUserIdResult, error) {
+	callback := make(chan ExecuteDeletionByUserIdAsyncResult, 1)
+	go p.ExecuteDeletionByUserIdAsync(
 		request,
 		callback,
 	)

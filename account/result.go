@@ -1276,6 +1276,286 @@ func (p AuthenticationResult) Pointer() *AuthenticationResult {
 	return &p
 }
 
+type RequestDeletionResult struct {
+	Item     *Account             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type RequestDeletionAsyncResult struct {
+	result *RequestDeletionResult
+	err    error
+}
+
+func NewRequestDeletionResultFromJson(data string) RequestDeletionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRequestDeletionResultFromDict(dict)
+}
+
+func NewRequestDeletionResultFromDict(data map[string]interface{}) RequestDeletionResult {
+	return RequestDeletionResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p RequestDeletionResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p RequestDeletionResult) Pointer() *RequestDeletionResult {
+	return &p
+}
+
+type RequestDeletionByUserIdResult struct {
+	Item     *Account             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type RequestDeletionByUserIdAsyncResult struct {
+	result *RequestDeletionByUserIdResult
+	err    error
+}
+
+func NewRequestDeletionByUserIdResultFromJson(data string) RequestDeletionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRequestDeletionByUserIdResultFromDict(dict)
+}
+
+func NewRequestDeletionByUserIdResultFromDict(data map[string]interface{}) RequestDeletionByUserIdResult {
+	return RequestDeletionByUserIdResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p RequestDeletionByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p RequestDeletionByUserIdResult) Pointer() *RequestDeletionByUserIdResult {
+	return &p
+}
+
+type CancelDeletionResult struct {
+	Item     *Account             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CancelDeletionAsyncResult struct {
+	result *CancelDeletionResult
+	err    error
+}
+
+func NewCancelDeletionResultFromJson(data string) CancelDeletionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCancelDeletionResultFromDict(dict)
+}
+
+func NewCancelDeletionResultFromDict(data map[string]interface{}) CancelDeletionResult {
+	return CancelDeletionResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CancelDeletionResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CancelDeletionResult) Pointer() *CancelDeletionResult {
+	return &p
+}
+
+type CancelDeletionByUserIdResult struct {
+	Item     *Account             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type CancelDeletionByUserIdAsyncResult struct {
+	result *CancelDeletionByUserIdResult
+	err    error
+}
+
+func NewCancelDeletionByUserIdResultFromJson(data string) CancelDeletionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCancelDeletionByUserIdResultFromDict(dict)
+}
+
+func NewCancelDeletionByUserIdResultFromDict(data map[string]interface{}) CancelDeletionByUserIdResult {
+	return CancelDeletionByUserIdResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p CancelDeletionByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p CancelDeletionByUserIdResult) Pointer() *CancelDeletionByUserIdResult {
+	return &p
+}
+
+type ExecuteDeletionByUserIdResult struct {
+	Item     *Account             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type ExecuteDeletionByUserIdAsyncResult struct {
+	result *ExecuteDeletionByUserIdResult
+	err    error
+}
+
+func NewExecuteDeletionByUserIdResultFromJson(data string) ExecuteDeletionByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExecuteDeletionByUserIdResultFromDict(dict)
+}
+
+func NewExecuteDeletionByUserIdResultFromDict(data map[string]interface{}) ExecuteDeletionByUserIdResult {
+	return ExecuteDeletionByUserIdResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p ExecuteDeletionByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p ExecuteDeletionByUserIdResult) Pointer() *ExecuteDeletionByUserIdResult {
+	return &p
+}
+
 type DescribeTakeOversResult struct {
 	Items         []TakeOver           `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`

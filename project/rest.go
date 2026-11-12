@@ -3562,6 +3562,13 @@ func (p Gs2ProjectRestClient) WaitCleanUserDataAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.ExcludeMicroservices != nil {
+		var _excludeMicroservices []interface{}
+		for _, item := range request.ExcludeMicroservices {
+			_excludeMicroservices = append(_excludeMicroservices, item)
+		}
+		bodies["excludeMicroservices"] = _excludeMicroservices
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3659,6 +3666,13 @@ func (p Gs2ProjectRestClient) CleanUserDataAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.ExcludeMicroservices != nil {
+		var _excludeMicroservices []interface{}
+		for _, item := range request.ExcludeMicroservices {
+			_excludeMicroservices = append(_excludeMicroservices, item)
+		}
+		bodies["excludeMicroservices"] = _excludeMicroservices
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

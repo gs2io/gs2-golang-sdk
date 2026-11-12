@@ -28,20 +28,24 @@ type Namespace struct {
 	Name        *string `json:"name"`
 	Description *string `json:"description"`
 	// Deprecated: should not be used
-	TransactionSetting                      *TransactionSetting   `json:"transactionSetting"`
-	TransactionSettingV2                    *TransactionSettingV2 `json:"transactionSettingV2"`
-	ChangePasswordIfTakeOver                *bool                 `json:"changePasswordIfTakeOver"`
-	DifferentUserIdForLoginAndDataRetention *bool                 `json:"differentUserIdForLoginAndDataRetention"`
-	CreateAccountScript                     *ScriptSetting        `json:"createAccountScript"`
-	AuthenticationScript                    *ScriptSetting        `json:"authenticationScript"`
-	CreateTakeOverScript                    *ScriptSetting        `json:"createTakeOverScript"`
-	DoTakeOverScript                        *ScriptSetting        `json:"doTakeOverScript"`
-	BanScript                               *ScriptSetting        `json:"banScript"`
-	UnBanScript                             *ScriptSetting        `json:"unBanScript"`
-	LogSetting                              *LogSetting           `json:"logSetting"`
-	CreatedAt                               *int64                `json:"createdAt"`
-	UpdatedAt                               *int64                `json:"updatedAt"`
-	Revision                                *int64                `json:"revision"`
+	TransactionSetting                      *TransactionSetting     `json:"transactionSetting"`
+	TransactionSettingV2                    *TransactionSettingV2   `json:"transactionSettingV2"`
+	ChangePasswordIfTakeOver                *bool                   `json:"changePasswordIfTakeOver"`
+	DifferentUserIdForLoginAndDataRetention *bool                   `json:"differentUserIdForLoginAndDataRetention"`
+	CreateAccountScript                     *ScriptSetting          `json:"createAccountScript"`
+	AuthenticationScript                    *ScriptSetting          `json:"authenticationScript"`
+	CreateTakeOverScript                    *ScriptSetting          `json:"createTakeOverScript"`
+	DoTakeOverScript                        *ScriptSetting          `json:"doTakeOverScript"`
+	BanScript                               *ScriptSetting          `json:"banScript"`
+	UnBanScript                             *ScriptSetting          `json:"unBanScript"`
+	AccountDeletionSetting                  *AccountDeletionSetting `json:"accountDeletionSetting"`
+	RequestDeletionScript                   *ScriptSetting          `json:"requestDeletionScript"`
+	CancelDeletionScript                    *ScriptSetting          `json:"cancelDeletionScript"`
+	ExecuteDeletionScript                   *ScriptSetting          `json:"executeDeletionScript"`
+	LogSetting                              *LogSetting             `json:"logSetting"`
+	CreatedAt                               *int64                  `json:"createdAt"`
+	UpdatedAt                               *int64                  `json:"updatedAt"`
+	Revision                                *int64                  `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -165,6 +169,18 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["unBanScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UnBanScript)
 		}
+		if v, ok := d["accountDeletionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AccountDeletionSetting)
+		}
+		if v, ok := d["requestDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RequestDeletionScript)
+		}
+		if v, ok := d["cancelDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CancelDeletionScript)
+		}
+		if v, ok := d["executeDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExecuteDeletionScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -280,6 +296,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["unBanScript"])).Pointer()
 		}(),
+		AccountDeletionSetting: func() *AccountDeletionSetting {
+			v, ok := data["accountDeletionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountDeletionSettingFromDict(core.CastMap(data["accountDeletionSetting"])).Pointer()
+		}(),
+		RequestDeletionScript: func() *ScriptSetting {
+			v, ok := data["requestDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["requestDeletionScript"])).Pointer()
+		}(),
+		CancelDeletionScript: func() *ScriptSetting {
+			v, ok := data["cancelDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["cancelDeletionScript"])).Pointer()
+		}(),
+		ExecuteDeletionScript: func() *ScriptSetting {
+			v, ok := data["executeDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["executeDeletionScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -392,6 +436,38 @@ func (p Namespace) ToDict() map[string]interface{} {
 			return p.UnBanScript.ToDict()
 		}()
 	}
+	if p.AccountDeletionSetting != nil {
+		m["accountDeletionSetting"] = func() map[string]interface{} {
+			if p.AccountDeletionSetting == nil {
+				return nil
+			}
+			return p.AccountDeletionSetting.ToDict()
+		}()
+	}
+	if p.RequestDeletionScript != nil {
+		m["requestDeletionScript"] = func() map[string]interface{} {
+			if p.RequestDeletionScript == nil {
+				return nil
+			}
+			return p.RequestDeletionScript.ToDict()
+		}()
+	}
+	if p.CancelDeletionScript != nil {
+		m["cancelDeletionScript"] = func() map[string]interface{} {
+			if p.CancelDeletionScript == nil {
+				return nil
+			}
+			return p.CancelDeletionScript.ToDict()
+		}()
+	}
+	if p.ExecuteDeletionScript != nil {
+		m["executeDeletionScript"] = func() map[string]interface{} {
+			if p.ExecuteDeletionScript == nil {
+				return nil
+			}
+			return p.ExecuteDeletionScript.ToDict()
+		}()
+	}
 	if p.LogSetting != nil {
 		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -440,6 +516,8 @@ type Account struct {
 	BanStatuses         []BanStatus `json:"banStatuses"`
 	Banned              *bool       `json:"banned"`
 	LastAuthenticatedAt *int64      `json:"lastAuthenticatedAt"`
+	DeletionRequestedAt *int64      `json:"deletionRequestedAt"`
+	DeletionScheduledAt *int64      `json:"deletionScheduledAt"`
 	CreatedAt           *int64      `json:"createdAt"`
 	Revision            *int64      `json:"revision"`
 }
@@ -547,6 +625,12 @@ func (p *Account) UnmarshalJSON(data []byte) error {
 		if v, ok := d["lastAuthenticatedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LastAuthenticatedAt)
 		}
+		if v, ok := d["deletionRequestedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeletionRequestedAt)
+		}
+		if v, ok := d["deletionScheduledAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeletionScheduledAt)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -613,6 +697,20 @@ func NewAccountFromDict(data map[string]interface{}) Account {
 			}
 			return core.CastInt64(data["lastAuthenticatedAt"])
 		}(),
+		DeletionRequestedAt: func() *int64 {
+			v, ok := data["deletionRequestedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deletionRequestedAt"])
+		}(),
+		DeletionScheduledAt: func() *int64 {
+			v, ok := data["deletionScheduledAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["deletionScheduledAt"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -654,6 +752,12 @@ func (p Account) ToDict() map[string]interface{} {
 	}
 	if p.LastAuthenticatedAt != nil {
 		m["lastAuthenticatedAt"] = p.LastAuthenticatedAt
+	}
+	if p.DeletionRequestedAt != nil {
+		m["deletionRequestedAt"] = p.DeletionRequestedAt
+	}
+	if p.DeletionScheduledAt != nil {
+		m["deletionScheduledAt"] = p.DeletionScheduledAt
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
@@ -3252,6 +3356,153 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AccountDeletionSetting struct {
+	GracePeriodMinutes     *int32  `json:"gracePeriodMinutes"`
+	LoginDuringGracePeriod *string `json:"loginDuringGracePeriod"`
+	CleanUserDataScope     *string `json:"cleanUserDataScope"`
+}
+
+func (p *AccountDeletionSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountDeletionSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountDeletionSetting{}
+	} else {
+		*p = AccountDeletionSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["gracePeriodMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GracePeriodMinutes)
+		}
+		if v, ok := d["loginDuringGracePeriod"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LoginDuringGracePeriod = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LoginDuringGracePeriod = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LoginDuringGracePeriod = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LoginDuringGracePeriod = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LoginDuringGracePeriod = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LoginDuringGracePeriod)
+				}
+			}
+		}
+		if v, ok := d["cleanUserDataScope"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CleanUserDataScope = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CleanUserDataScope = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CleanUserDataScope = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CleanUserDataScope = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CleanUserDataScope = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CleanUserDataScope)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAccountDeletionSettingFromJson(data string) AccountDeletionSetting {
+	req := AccountDeletionSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewAccountDeletionSettingFromDict(data map[string]interface{}) AccountDeletionSetting {
+	return AccountDeletionSetting{
+		GracePeriodMinutes: func() *int32 {
+			v, ok := data["gracePeriodMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["gracePeriodMinutes"])
+		}(),
+		LoginDuringGracePeriod: func() *string {
+			v, ok := data["loginDuringGracePeriod"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loginDuringGracePeriod"])
+		}(),
+		CleanUserDataScope: func() *string {
+			v, ok := data["cleanUserDataScope"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cleanUserDataScope"])
+		}(),
+	}
+}
+
+func (p AccountDeletionSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.GracePeriodMinutes != nil {
+		m["gracePeriodMinutes"] = p.GracePeriodMinutes
+	}
+	if p.LoginDuringGracePeriod != nil {
+		m["loginDuringGracePeriod"] = p.LoginDuringGracePeriod
+	}
+	if p.CleanUserDataScope != nil {
+		m["cleanUserDataScope"] = p.CleanUserDataScope
+	}
+	return m
+}
+
+func (p AccountDeletionSetting) Pointer() *AccountDeletionSetting {
+	return &p
+}
+
+func CastAccountDeletionSettings(data []interface{}) []AccountDeletionSetting {
+	v := make([]AccountDeletionSetting, 0)
+	for _, d := range data {
+		v = append(v, NewAccountDeletionSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAccountDeletionSettingsFromDict(data []AccountDeletionSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

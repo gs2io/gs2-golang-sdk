@@ -158,18 +158,22 @@ type CreateNamespaceRequest struct {
 	Name         *string `json:"name"`
 	Description  *string `json:"description"`
 	// Deprecated: should not be used
-	TransactionSetting                      *TransactionSetting   `json:"transactionSetting"`
-	TransactionSettingV2                    *TransactionSettingV2 `json:"transactionSettingV2"`
-	ChangePasswordIfTakeOver                *bool                 `json:"changePasswordIfTakeOver"`
-	DifferentUserIdForLoginAndDataRetention *bool                 `json:"differentUserIdForLoginAndDataRetention"`
-	CreateAccountScript                     *ScriptSetting        `json:"createAccountScript"`
-	AuthenticationScript                    *ScriptSetting        `json:"authenticationScript"`
-	CreateTakeOverScript                    *ScriptSetting        `json:"createTakeOverScript"`
-	DoTakeOverScript                        *ScriptSetting        `json:"doTakeOverScript"`
-	BanScript                               *ScriptSetting        `json:"banScript"`
-	UnBanScript                             *ScriptSetting        `json:"unBanScript"`
-	LogSetting                              *LogSetting           `json:"logSetting"`
-	DryRun                                  *bool                 `json:"dryRun"`
+	TransactionSetting                      *TransactionSetting     `json:"transactionSetting"`
+	TransactionSettingV2                    *TransactionSettingV2   `json:"transactionSettingV2"`
+	ChangePasswordIfTakeOver                *bool                   `json:"changePasswordIfTakeOver"`
+	DifferentUserIdForLoginAndDataRetention *bool                   `json:"differentUserIdForLoginAndDataRetention"`
+	CreateAccountScript                     *ScriptSetting          `json:"createAccountScript"`
+	AuthenticationScript                    *ScriptSetting          `json:"authenticationScript"`
+	CreateTakeOverScript                    *ScriptSetting          `json:"createTakeOverScript"`
+	DoTakeOverScript                        *ScriptSetting          `json:"doTakeOverScript"`
+	BanScript                               *ScriptSetting          `json:"banScript"`
+	UnBanScript                             *ScriptSetting          `json:"unBanScript"`
+	AccountDeletionSetting                  *AccountDeletionSetting `json:"accountDeletionSetting"`
+	RequestDeletionScript                   *ScriptSetting          `json:"requestDeletionScript"`
+	CancelDeletionScript                    *ScriptSetting          `json:"cancelDeletionScript"`
+	ExecuteDeletionScript                   *ScriptSetting          `json:"executeDeletionScript"`
+	LogSetting                              *LogSetting             `json:"logSetting"`
+	DryRun                                  *bool                   `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -269,6 +273,18 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["unBanScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UnBanScript)
+		}
+		if v, ok := d["accountDeletionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AccountDeletionSetting)
+		}
+		if v, ok := d["requestDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RequestDeletionScript)
+		}
+		if v, ok := d["cancelDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CancelDeletionScript)
+		}
+		if v, ok := d["executeDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExecuteDeletionScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -372,6 +388,34 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["unBanScript"])).Pointer()
 		}(),
+		AccountDeletionSetting: func() *AccountDeletionSetting {
+			v, ok := data["accountDeletionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountDeletionSettingFromDict(core.CastMap(data["accountDeletionSetting"])).Pointer()
+		}(),
+		RequestDeletionScript: func() *ScriptSetting {
+			v, ok := data["requestDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["requestDeletionScript"])).Pointer()
+		}(),
+		CancelDeletionScript: func() *ScriptSetting {
+			v, ok := data["cancelDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["cancelDeletionScript"])).Pointer()
+		}(),
+		ExecuteDeletionScript: func() *ScriptSetting {
+			v, ok := data["executeDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["executeDeletionScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -435,6 +479,30 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.UnBanScript.ToDict()
+		}(),
+		"accountDeletionSetting": func() map[string]interface{} {
+			if p.AccountDeletionSetting == nil {
+				return nil
+			}
+			return p.AccountDeletionSetting.ToDict()
+		}(),
+		"requestDeletionScript": func() map[string]interface{} {
+			if p.RequestDeletionScript == nil {
+				return nil
+			}
+			return p.RequestDeletionScript.ToDict()
+		}(),
+		"cancelDeletionScript": func() map[string]interface{} {
+			if p.CancelDeletionScript == nil {
+				return nil
+			}
+			return p.CancelDeletionScript.ToDict()
+		}(),
+		"executeDeletionScript": func() map[string]interface{} {
+			if p.ExecuteDeletionScript == nil {
+				return nil
+			}
+			return p.ExecuteDeletionScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -626,17 +694,21 @@ type UpdateNamespaceRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	Description   *string `json:"description"`
 	// Deprecated: should not be used
-	TransactionSetting       *TransactionSetting   `json:"transactionSetting"`
-	TransactionSettingV2     *TransactionSettingV2 `json:"transactionSettingV2"`
-	ChangePasswordIfTakeOver *bool                 `json:"changePasswordIfTakeOver"`
-	CreateAccountScript      *ScriptSetting        `json:"createAccountScript"`
-	AuthenticationScript     *ScriptSetting        `json:"authenticationScript"`
-	CreateTakeOverScript     *ScriptSetting        `json:"createTakeOverScript"`
-	DoTakeOverScript         *ScriptSetting        `json:"doTakeOverScript"`
-	BanScript                *ScriptSetting        `json:"banScript"`
-	UnBanScript              *ScriptSetting        `json:"unBanScript"`
-	LogSetting               *LogSetting           `json:"logSetting"`
-	DryRun                   *bool                 `json:"dryRun"`
+	TransactionSetting       *TransactionSetting     `json:"transactionSetting"`
+	TransactionSettingV2     *TransactionSettingV2   `json:"transactionSettingV2"`
+	ChangePasswordIfTakeOver *bool                   `json:"changePasswordIfTakeOver"`
+	CreateAccountScript      *ScriptSetting          `json:"createAccountScript"`
+	AuthenticationScript     *ScriptSetting          `json:"authenticationScript"`
+	CreateTakeOverScript     *ScriptSetting          `json:"createTakeOverScript"`
+	DoTakeOverScript         *ScriptSetting          `json:"doTakeOverScript"`
+	BanScript                *ScriptSetting          `json:"banScript"`
+	UnBanScript              *ScriptSetting          `json:"unBanScript"`
+	AccountDeletionSetting   *AccountDeletionSetting `json:"accountDeletionSetting"`
+	RequestDeletionScript    *ScriptSetting          `json:"requestDeletionScript"`
+	CancelDeletionScript     *ScriptSetting          `json:"cancelDeletionScript"`
+	ExecuteDeletionScript    *ScriptSetting          `json:"executeDeletionScript"`
+	LogSetting               *LogSetting             `json:"logSetting"`
+	DryRun                   *bool                   `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -734,6 +806,18 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["unBanScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UnBanScript)
 		}
+		if v, ok := d["accountDeletionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AccountDeletionSetting)
+		}
+		if v, ok := d["requestDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RequestDeletionScript)
+		}
+		if v, ok := d["cancelDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CancelDeletionScript)
+		}
+		if v, ok := d["executeDeletionScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExecuteDeletionScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -829,6 +913,34 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["unBanScript"])).Pointer()
 		}(),
+		AccountDeletionSetting: func() *AccountDeletionSetting {
+			v, ok := data["accountDeletionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountDeletionSettingFromDict(core.CastMap(data["accountDeletionSetting"])).Pointer()
+		}(),
+		RequestDeletionScript: func() *ScriptSetting {
+			v, ok := data["requestDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["requestDeletionScript"])).Pointer()
+		}(),
+		CancelDeletionScript: func() *ScriptSetting {
+			v, ok := data["cancelDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["cancelDeletionScript"])).Pointer()
+		}(),
+		ExecuteDeletionScript: func() *ScriptSetting {
+			v, ok := data["executeDeletionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["executeDeletionScript"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -891,6 +1003,30 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.UnBanScript.ToDict()
+		}(),
+		"accountDeletionSetting": func() map[string]interface{} {
+			if p.AccountDeletionSetting == nil {
+				return nil
+			}
+			return p.AccountDeletionSetting.ToDict()
+		}(),
+		"requestDeletionScript": func() map[string]interface{} {
+			if p.RequestDeletionScript == nil {
+				return nil
+			}
+			return p.RequestDeletionScript.ToDict()
+		}(),
+		"cancelDeletionScript": func() map[string]interface{} {
+			if p.CancelDeletionScript == nil {
+				return nil
+			}
+			return p.CancelDeletionScript.ToDict()
+		}(),
+		"executeDeletionScript": func() map[string]interface{} {
+			if p.ExecuteDeletionScript == nil {
+				return nil
+			}
+			return p.ExecuteDeletionScript.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -3351,6 +3487,761 @@ func (p AuthenticationRequest) ToDict() map[string]interface{} {
 }
 
 func (p AuthenticationRequest) Pointer() *AuthenticationRequest {
+	return &p
+}
+
+type RequestDeletionRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *RequestDeletionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RequestDeletionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RequestDeletionRequest{}
+	} else {
+		*p = RequestDeletionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRequestDeletionRequestFromJson(data string) (RequestDeletionRequest, error) {
+	req := RequestDeletionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RequestDeletionRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRequestDeletionRequestFromDict(data map[string]interface{}) RequestDeletionRequest {
+	return RequestDeletionRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+	}
+}
+
+func (p RequestDeletionRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+	}
+}
+
+func (p RequestDeletionRequest) Pointer() *RequestDeletionRequest {
+	return &p
+}
+
+type RequestDeletionByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *RequestDeletionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RequestDeletionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RequestDeletionByUserIdRequest{}
+	} else {
+		*p = RequestDeletionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRequestDeletionByUserIdRequestFromJson(data string) (RequestDeletionByUserIdRequest, error) {
+	req := RequestDeletionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RequestDeletionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRequestDeletionByUserIdRequestFromDict(data map[string]interface{}) RequestDeletionByUserIdRequest {
+	return RequestDeletionByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p RequestDeletionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p RequestDeletionByUserIdRequest) Pointer() *RequestDeletionByUserIdRequest {
+	return &p
+}
+
+type CancelDeletionRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Password           *string `json:"password"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *CancelDeletionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CancelDeletionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CancelDeletionRequest{}
+	} else {
+		*p = CancelDeletionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["password"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCancelDeletionRequestFromJson(data string) (CancelDeletionRequest, error) {
+	req := CancelDeletionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CancelDeletionRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCancelDeletionRequestFromDict(data map[string]interface{}) CancelDeletionRequest {
+	return CancelDeletionRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p CancelDeletionRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"password":        p.Password,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p CancelDeletionRequest) Pointer() *CancelDeletionRequest {
+	return &p
+}
+
+type CancelDeletionByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *CancelDeletionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CancelDeletionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CancelDeletionByUserIdRequest{}
+	} else {
+		*p = CancelDeletionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCancelDeletionByUserIdRequestFromJson(data string) (CancelDeletionByUserIdRequest, error) {
+	req := CancelDeletionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CancelDeletionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCancelDeletionByUserIdRequestFromDict(data map[string]interface{}) CancelDeletionByUserIdRequest {
+	return CancelDeletionByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p CancelDeletionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p CancelDeletionByUserIdRequest) Pointer() *CancelDeletionByUserIdRequest {
+	return &p
+}
+
+type ExecuteDeletionByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *ExecuteDeletionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExecuteDeletionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExecuteDeletionByUserIdRequest{}
+	} else {
+		*p = ExecuteDeletionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExecuteDeletionByUserIdRequestFromJson(data string) (ExecuteDeletionByUserIdRequest, error) {
+	req := ExecuteDeletionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExecuteDeletionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewExecuteDeletionByUserIdRequestFromDict(data map[string]interface{}) ExecuteDeletionByUserIdRequest {
+	return ExecuteDeletionByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p ExecuteDeletionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p ExecuteDeletionByUserIdRequest) Pointer() *ExecuteDeletionByUserIdRequest {
 	return &p
 }
 

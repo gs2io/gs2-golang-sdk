@@ -3468,6 +3468,13 @@ func (p Gs2ProjectWebSocketClient) WaitCleanUserDataAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.ExcludeMicroservices != nil {
+		var _excludeMicroservices []interface{}
+		for _, item := range request.ExcludeMicroservices {
+			_excludeMicroservices = append(_excludeMicroservices, item)
+		}
+		bodies["excludeMicroservices"] = _excludeMicroservices
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
@@ -3561,6 +3568,13 @@ func (p Gs2ProjectWebSocketClient) CleanUserDataAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.ExcludeMicroservices != nil {
+		var _excludeMicroservices []interface{}
+		for _, item := range request.ExcludeMicroservices {
+			_excludeMicroservices = append(_excludeMicroservices, item)
+		}
+		bodies["excludeMicroservices"] = _excludeMicroservices
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

@@ -5084,13 +5084,14 @@ func (p GetCleanProgressRequest) Pointer() *GetCleanProgressRequest {
 }
 
 type WaitCleanUserDataRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	OwnerId            *string `json:"ownerId"`
-	TransactionId      *string `json:"transactionId"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack         *string   `json:"contextStack"`
+	DuplicationAvoider   *string   `json:"duplicationAvoider"`
+	OwnerId              *string   `json:"ownerId"`
+	TransactionId        *string   `json:"transactionId"`
+	UserId               *string   `json:"userId"`
+	ExcludeMicroservices []*string `json:"excludeMicroservices"`
+	TimeOffsetToken      *string   `json:"timeOffsetToken"`
+	DryRun               *bool     `json:"dryRun"`
 }
 
 func (p *WaitCleanUserDataRequest) UnmarshalJSON(data []byte) error {
@@ -5184,6 +5185,32 @@ func (p *WaitCleanUserDataRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["excludeMicroservices"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.ExcludeMicroservices = l
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5243,6 +5270,13 @@ func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanU
 			}
 			return core.CastString(data["userId"])
 		}(),
+		ExcludeMicroservices: func() []*string {
+			v, ok := data["excludeMicroservices"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -5255,9 +5289,12 @@ func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanU
 
 func (p WaitCleanUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"ownerId":         p.OwnerId,
-		"transactionId":   p.TransactionId,
-		"userId":          p.UserId,
+		"ownerId":       p.OwnerId,
+		"transactionId": p.TransactionId,
+		"userId":        p.UserId,
+		"excludeMicroservices": core.CastStringsFromDict(
+			p.ExcludeMicroservices,
+		),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -5267,11 +5304,12 @@ func (p WaitCleanUserDataRequest) Pointer() *WaitCleanUserDataRequest {
 }
 
 type CleanUserDataRequest struct {
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-	DryRun             *bool   `json:"dryRun"`
+	ContextStack         *string   `json:"contextStack"`
+	DuplicationAvoider   *string   `json:"duplicationAvoider"`
+	UserId               *string   `json:"userId"`
+	ExcludeMicroservices []*string `json:"excludeMicroservices"`
+	TimeOffsetToken      *string   `json:"timeOffsetToken"`
+	DryRun               *bool     `json:"dryRun"`
 }
 
 func (p *CleanUserDataRequest) UnmarshalJSON(data []byte) error {
@@ -5319,6 +5357,32 @@ func (p *CleanUserDataRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["excludeMicroservices"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.ExcludeMicroservices = l
+			}
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -5364,6 +5428,13 @@ func NewCleanUserDataRequestFromDict(data map[string]interface{}) CleanUserDataR
 			}
 			return core.CastString(data["userId"])
 		}(),
+		ExcludeMicroservices: func() []*string {
+			v, ok := data["excludeMicroservices"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -5376,7 +5447,10 @@ func NewCleanUserDataRequestFromDict(data map[string]interface{}) CleanUserDataR
 
 func (p CleanUserDataRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":          p.UserId,
+		"userId": p.UserId,
+		"excludeMicroservices": core.CastStringsFromDict(
+			p.ExcludeMicroservices,
+		),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
