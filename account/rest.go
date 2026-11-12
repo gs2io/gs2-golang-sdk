@@ -2358,6 +2358,222 @@ func (p Gs2AccountRestClient) Authentication(
 	return asyncResult.result, asyncResult.err
 }
 
+func previewTakeOverAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreviewTakeOverAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreviewTakeOverAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreviewTakeOverResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+			}
+		}
+		callback <- PreviewTakeOverAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreviewTakeOverAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreviewTakeOverAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) PreviewTakeOverAsync(
+	request *PreviewTakeOverRequest,
+	callback chan<- PreviewTakeOverAsyncResult,
+) {
+	path := "/{namespaceName}/takeover/type/{type}/preview"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UserIdentifier != nil && *request.UserIdentifier != "" {
+		bodies["userIdentifier"] = *request.UserIdentifier
+	}
+	if request.Password != nil && *request.Password != "" {
+		bodies["password"] = *request.Password
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go previewTakeOverAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) PreviewTakeOver(
+	request *PreviewTakeOverRequest,
+) (*PreviewTakeOverResult, error) {
+	callback := make(chan PreviewTakeOverAsyncResult, 1)
+	go p.PreviewTakeOverAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func previewTakeOverOpenIdConnectAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- PreviewTakeOverOpenIdConnectAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreviewTakeOverOpenIdConnectResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+			}
+		}
+		callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) PreviewTakeOverOpenIdConnectAsync(
+	request *PreviewTakeOverOpenIdConnectRequest,
+	callback chan<- PreviewTakeOverOpenIdConnectAsyncResult,
+) {
+	path := "/{namespaceName}/takeover/type/{type}/openIdConnect/preview"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.IdToken != nil && *request.IdToken != "" {
+		bodies["idToken"] = *request.IdToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go previewTakeOverOpenIdConnectAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) PreviewTakeOverOpenIdConnect(
+	request *PreviewTakeOverOpenIdConnectRequest,
+) (*PreviewTakeOverOpenIdConnectResult, error) {
+	callback := make(chan PreviewTakeOverOpenIdConnectAsyncResult, 1)
+	go p.PreviewTakeOverOpenIdConnectAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func requestDeletionAsyncHandler(
 	client Gs2AccountRestClient,
 	job *core.NetworkJob,

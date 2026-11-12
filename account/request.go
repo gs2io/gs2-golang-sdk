@@ -3490,6 +3490,298 @@ func (p AuthenticationRequest) Pointer() *AuthenticationRequest {
 	return &p
 }
 
+type PreviewTakeOverRequest struct {
+	ContextStack   *string `json:"contextStack"`
+	NamespaceName  *string `json:"namespaceName"`
+	Type           *int32  `json:"type"`
+	UserIdentifier *string `json:"userIdentifier"`
+	Password       *string `json:"password"`
+	DryRun         *bool   `json:"dryRun"`
+}
+
+func (p *PreviewTakeOverRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreviewTakeOverRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreviewTakeOverRequest{}
+	} else {
+		*p = PreviewTakeOverRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["userIdentifier"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserIdentifier = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserIdentifier = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserIdentifier = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserIdentifier)
+				}
+			}
+		}
+		if v, ok := d["password"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPreviewTakeOverRequestFromJson(data string) (PreviewTakeOverRequest, error) {
+	req := PreviewTakeOverRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreviewTakeOverRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreviewTakeOverRequestFromDict(data map[string]interface{}) PreviewTakeOverRequest {
+	return PreviewTakeOverRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Type: func() *int32 {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["type"])
+		}(),
+		UserIdentifier: func() *string {
+			v, ok := data["userIdentifier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userIdentifier"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+	}
+}
+
+func (p PreviewTakeOverRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"type":           p.Type,
+		"userIdentifier": p.UserIdentifier,
+		"password":       p.Password,
+	}
+}
+
+func (p PreviewTakeOverRequest) Pointer() *PreviewTakeOverRequest {
+	return &p
+}
+
+type PreviewTakeOverOpenIdConnectRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	Type          *int32  `json:"type"`
+	IdToken       *string `json:"idToken"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *PreviewTakeOverOpenIdConnectRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PreviewTakeOverOpenIdConnectRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PreviewTakeOverOpenIdConnectRequest{}
+	} else {
+		*p = PreviewTakeOverOpenIdConnectRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["idToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.IdToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.IdToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.IdToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.IdToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPreviewTakeOverOpenIdConnectRequestFromJson(data string) (PreviewTakeOverOpenIdConnectRequest, error) {
+	req := PreviewTakeOverOpenIdConnectRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PreviewTakeOverOpenIdConnectRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPreviewTakeOverOpenIdConnectRequestFromDict(data map[string]interface{}) PreviewTakeOverOpenIdConnectRequest {
+	return PreviewTakeOverOpenIdConnectRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Type: func() *int32 {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["type"])
+		}(),
+		IdToken: func() *string {
+			v, ok := data["idToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["idToken"])
+		}(),
+	}
+}
+
+func (p PreviewTakeOverOpenIdConnectRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+		"idToken":       p.IdToken,
+	}
+}
+
+func (p PreviewTakeOverOpenIdConnectRequest) Pointer() *PreviewTakeOverOpenIdConnectRequest {
+	return &p
+}
+
 type RequestDeletionRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`

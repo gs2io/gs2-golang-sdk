@@ -2274,6 +2274,212 @@ func (p Gs2AccountWebSocketClient) Authentication(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AccountWebSocketClient) previewTakeOverAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreviewTakeOverAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreviewTakeOverAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreviewTakeOverResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreviewTakeOverAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+			}
+		}
+	}
+	callback <- PreviewTakeOverAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) PreviewTakeOverAsync(
+	request *PreviewTakeOverRequest,
+	callback chan<- PreviewTakeOverAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "account",
+			"function":    "previewTakeOver",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.UserIdentifier != nil && *request.UserIdentifier != "" {
+		bodies["userIdentifier"] = *request.UserIdentifier
+	}
+	if request.Password != nil && *request.Password != "" {
+		bodies["password"] = *request.Password
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.previewTakeOverAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) PreviewTakeOver(
+	request *PreviewTakeOverRequest,
+) (*PreviewTakeOverResult, error) {
+	callback := make(chan PreviewTakeOverAsyncResult, 1)
+	go p.PreviewTakeOverAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AccountWebSocketClient) previewTakeOverOpenIdConnectAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PreviewTakeOverOpenIdConnectAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PreviewTakeOverOpenIdConnectResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "account.banned.infinity" {
+				asyncResult.Err = gs2err.SetClientError(BannedInfinity{})
+			}
+		}
+	}
+	callback <- PreviewTakeOverOpenIdConnectAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) PreviewTakeOverOpenIdConnectAsync(
+	request *PreviewTakeOverOpenIdConnectRequest,
+	callback chan<- PreviewTakeOverOpenIdConnectAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "account",
+			"function":    "previewTakeOverOpenIdConnect",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.IdToken != nil && *request.IdToken != "" {
+		bodies["idToken"] = *request.IdToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.previewTakeOverOpenIdConnectAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) PreviewTakeOverOpenIdConnect(
+	request *PreviewTakeOverOpenIdConnectRequest,
+) (*PreviewTakeOverOpenIdConnectResult, error) {
+	callback := make(chan PreviewTakeOverOpenIdConnectAsyncResult, 1)
+	go p.PreviewTakeOverOpenIdConnectAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AccountWebSocketClient) requestDeletionAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- RequestDeletionAsyncResult,

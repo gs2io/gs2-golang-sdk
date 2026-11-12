@@ -1276,6 +1276,174 @@ func (p AuthenticationResult) Pointer() *AuthenticationResult {
 	return &p
 }
 
+type PreviewTakeOverResult struct {
+	Item        *Account             `json:"item"`
+	BanStatuses []BanStatus          `json:"banStatuses"`
+	Token       *string              `json:"token"`
+	Expire      *int64               `json:"expire"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreviewTakeOverAsyncResult struct {
+	result *PreviewTakeOverResult
+	err    error
+}
+
+func NewPreviewTakeOverResultFromJson(data string) PreviewTakeOverResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreviewTakeOverResultFromDict(dict)
+}
+
+func NewPreviewTakeOverResultFromDict(data map[string]interface{}) PreviewTakeOverResult {
+	return PreviewTakeOverResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		BanStatuses: func() []BanStatus {
+			if data["banStatuses"] == nil {
+				return nil
+			}
+			return CastBanStatuses(core.CastArray(data["banStatuses"]))
+		}(),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		Expire: func() *int64 {
+			v, ok := data["expire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expire"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreviewTakeOverResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"banStatuses": CastBanStatusesFromDict(
+			p.BanStatuses,
+		),
+		"token":  p.Token,
+		"expire": p.Expire,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreviewTakeOverResult) Pointer() *PreviewTakeOverResult {
+	return &p
+}
+
+type PreviewTakeOverOpenIdConnectResult struct {
+	Item        *Account             `json:"item"`
+	BanStatuses []BanStatus          `json:"banStatuses"`
+	Token       *string              `json:"token"`
+	Expire      *int64               `json:"expire"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
+}
+
+type PreviewTakeOverOpenIdConnectAsyncResult struct {
+	result *PreviewTakeOverOpenIdConnectResult
+	err    error
+}
+
+func NewPreviewTakeOverOpenIdConnectResultFromJson(data string) PreviewTakeOverOpenIdConnectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPreviewTakeOverOpenIdConnectResultFromDict(dict)
+}
+
+func NewPreviewTakeOverOpenIdConnectResultFromDict(data map[string]interface{}) PreviewTakeOverOpenIdConnectResult {
+	return PreviewTakeOverOpenIdConnectResult{
+		Item: func() *Account {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAccountFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		BanStatuses: func() []BanStatus {
+			if data["banStatuses"] == nil {
+				return nil
+			}
+			return CastBanStatuses(core.CastArray(data["banStatuses"]))
+		}(),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		Expire: func() *int64 {
+			v, ok := data["expire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expire"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p PreviewTakeOverOpenIdConnectResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"banStatuses": CastBanStatusesFromDict(
+			p.BanStatuses,
+		),
+		"token":  p.Token,
+		"expire": p.Expire,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p PreviewTakeOverOpenIdConnectResult) Pointer() *PreviewTakeOverOpenIdConnectResult {
+	return &p
+}
+
 type RequestDeletionResult struct {
 	Item     *Account             `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
