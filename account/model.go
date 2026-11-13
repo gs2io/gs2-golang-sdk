@@ -795,6 +795,8 @@ type TakeOver struct {
 	UserIdentifier *string `json:"userIdentifier"`
 	Password       *string `json:"password"`
 	CreatedAt      *int64  `json:"createdAt"`
+	ExpiresAt      *int64  `json:"expiresAt"`
+	FailedAttempts *int32  `json:"failedAttempts"`
 	Revision       *int64  `json:"revision"`
 }
 
@@ -918,6 +920,12 @@ func (p *TakeOver) UnmarshalJSON(data []byte) error {
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
+		if v, ok := d["expiresAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExpiresAt)
+		}
+		if v, ok := d["failedAttempts"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.FailedAttempts)
+		}
 		if v, ok := d["revision"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Revision)
 		}
@@ -975,6 +983,20 @@ func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
 			}
 			return core.CastInt64(data["createdAt"])
 		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		FailedAttempts: func() *int32 {
+			v, ok := data["failedAttempts"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["failedAttempts"])
+		}(),
 		Revision: func() *int64 {
 			v, ok := data["revision"]
 			if !ok || v == nil {
@@ -1004,6 +1026,12 @@ func (p TakeOver) ToDict() map[string]interface{} {
 	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
+	}
+	if p.ExpiresAt != nil {
+		m["expiresAt"] = p.ExpiresAt
+	}
+	if p.FailedAttempts != nil {
+		m["failedAttempts"] = p.FailedAttempts
 	}
 	if p.Revision != nil {
 		m["revision"] = p.Revision
@@ -1439,7 +1467,9 @@ type TakeOverTypeModel struct {
 	TakeOverTypeModelId  *string               `json:"takeOverTypeModelId"`
 	Type                 *int32                `json:"type"`
 	Metadata             *string               `json:"metadata"`
+	TakeOverMethod       *string               `json:"takeOverMethod"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	IssuedCodeSetting    *IssuedCodeSetting    `json:"issuedCodeSetting"`
 }
 
 func (p *TakeOverTypeModel) UnmarshalJSON(data []byte) error {
@@ -1513,8 +1543,34 @@ func (p *TakeOverTypeModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["takeOverMethod"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverMethod = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverMethod = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverMethod = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverMethod)
+				}
+			}
+		}
 		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+		if v, ok := d["issuedCodeSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IssuedCodeSetting)
 		}
 	}
 	return nil
@@ -1549,12 +1605,26 @@ func NewTakeOverTypeModelFromDict(data map[string]interface{}) TakeOverTypeModel
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		TakeOverMethod: func() *string {
+			v, ok := data["takeOverMethod"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["takeOverMethod"])
+		}(),
 		OpenIdConnectSetting: func() *OpenIdConnectSetting {
 			v, ok := data["openIdConnectSetting"]
 			if !ok || v == nil {
 				return nil
 			}
 			return NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer()
+		}(),
+		IssuedCodeSetting: func() *IssuedCodeSetting {
+			v, ok := data["issuedCodeSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIssuedCodeSettingFromDict(core.CastMap(data["issuedCodeSetting"])).Pointer()
 		}(),
 	}
 }
@@ -1570,12 +1640,23 @@ func (p TakeOverTypeModel) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
 	}
+	if p.TakeOverMethod != nil {
+		m["takeOverMethod"] = p.TakeOverMethod
+	}
 	if p.OpenIdConnectSetting != nil {
 		m["openIdConnectSetting"] = func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
+		}()
+	}
+	if p.IssuedCodeSetting != nil {
+		m["issuedCodeSetting"] = func() map[string]interface{} {
+			if p.IssuedCodeSetting == nil {
+				return nil
+			}
+			return p.IssuedCodeSetting.ToDict()
 		}()
 	}
 	return m
@@ -1606,7 +1687,9 @@ type TakeOverTypeModelMaster struct {
 	Type                 *int32                `json:"type"`
 	Description          *string               `json:"description"`
 	Metadata             *string               `json:"metadata"`
+	TakeOverMethod       *string               `json:"takeOverMethod"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	IssuedCodeSetting    *IssuedCodeSetting    `json:"issuedCodeSetting"`
 	CreatedAt            *int64                `json:"createdAt"`
 	UpdatedAt            *int64                `json:"updatedAt"`
 	Revision             *int64                `json:"revision"`
@@ -1706,8 +1789,34 @@ func (p *TakeOverTypeModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["takeOverMethod"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverMethod = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverMethod = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverMethod = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverMethod)
+				}
+			}
+		}
 		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+		if v, ok := d["issuedCodeSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IssuedCodeSetting)
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
@@ -1758,12 +1867,26 @@ func NewTakeOverTypeModelMasterFromDict(data map[string]interface{}) TakeOverTyp
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		TakeOverMethod: func() *string {
+			v, ok := data["takeOverMethod"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["takeOverMethod"])
+		}(),
 		OpenIdConnectSetting: func() *OpenIdConnectSetting {
 			v, ok := data["openIdConnectSetting"]
 			if !ok || v == nil {
 				return nil
 			}
 			return NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer()
+		}(),
+		IssuedCodeSetting: func() *IssuedCodeSetting {
+			v, ok := data["issuedCodeSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIssuedCodeSettingFromDict(core.CastMap(data["issuedCodeSetting"])).Pointer()
 		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
@@ -1803,12 +1926,23 @@ func (p TakeOverTypeModelMaster) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		m["metadata"] = p.Metadata
 	}
+	if p.TakeOverMethod != nil {
+		m["takeOverMethod"] = p.TakeOverMethod
+	}
 	if p.OpenIdConnectSetting != nil {
 		m["openIdConnectSetting"] = func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
+		}()
+	}
+	if p.IssuedCodeSetting != nil {
+		m["issuedCodeSetting"] = func() map[string]interface{} {
+			if p.IssuedCodeSetting == nil {
+				return nil
+			}
+			return p.IssuedCodeSetting.ToDict()
 		}()
 	}
 	if p.CreatedAt != nil {
@@ -2326,6 +2460,113 @@ func CastOpenIdConnectSettings(data []interface{}) []OpenIdConnectSetting {
 }
 
 func CastOpenIdConnectSettingsFromDict(data []OpenIdConnectSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type IssuedCodeSetting struct {
+	ExpiresDays       *int32 `json:"expiresDays"`
+	MaxFailedAttempts *int32 `json:"maxFailedAttempts"`
+	DeleteOnUse       *bool  `json:"deleteOnUse"`
+}
+
+func (p *IssuedCodeSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IssuedCodeSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IssuedCodeSetting{}
+	} else {
+		*p = IssuedCodeSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["expiresDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExpiresDays)
+		}
+		if v, ok := d["maxFailedAttempts"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxFailedAttempts)
+		}
+		if v, ok := d["deleteOnUse"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteOnUse)
+		}
+	}
+	return nil
+}
+
+func NewIssuedCodeSettingFromJson(data string) IssuedCodeSetting {
+	req := IssuedCodeSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewIssuedCodeSettingFromDict(data map[string]interface{}) IssuedCodeSetting {
+	return IssuedCodeSetting{
+		ExpiresDays: func() *int32 {
+			v, ok := data["expiresDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["expiresDays"])
+		}(),
+		MaxFailedAttempts: func() *int32 {
+			v, ok := data["maxFailedAttempts"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxFailedAttempts"])
+		}(),
+		DeleteOnUse: func() *bool {
+			v, ok := data["deleteOnUse"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["deleteOnUse"])
+		}(),
+	}
+}
+
+func (p IssuedCodeSetting) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.ExpiresDays != nil {
+		m["expiresDays"] = p.ExpiresDays
+	}
+	if p.MaxFailedAttempts != nil {
+		m["maxFailedAttempts"] = p.MaxFailedAttempts
+	}
+	if p.DeleteOnUse != nil {
+		m["deleteOnUse"] = p.DeleteOnUse
+	}
+	return m
+}
+
+func (p IssuedCodeSetting) Pointer() *IssuedCodeSetting {
+	return &p
+}
+
+func CastIssuedCodeSettings(data []interface{}) []IssuedCodeSetting {
+	v := make([]IssuedCodeSetting, 0)
+	for _, d := range data {
+		v = append(v, NewIssuedCodeSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastIssuedCodeSettingsFromDict(data []IssuedCodeSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

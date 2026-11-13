@@ -3528,6 +3528,209 @@ func (p Gs2AccountRestClient) CreateTakeOverByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func issueTakeOverCodeAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- IssueTakeOverCodeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTakeOverCodeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTakeOverCodeResult
+	if asyncResult.Err != nil {
+		callback <- IssueTakeOverCodeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTakeOverCodeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- IssueTakeOverCodeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) IssueTakeOverCodeAsync(
+	request *IssueTakeOverCodeRequest,
+	callback chan<- IssueTakeOverCodeAsyncResult,
+) {
+	path := "/{namespaceName}/account/me/takeover/type/{type}/issue"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go issueTakeOverCodeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) IssueTakeOverCode(
+	request *IssueTakeOverCodeRequest,
+) (*IssueTakeOverCodeResult, error) {
+	callback := make(chan IssueTakeOverCodeAsyncResult, 1)
+	go p.IssueTakeOverCodeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func issueTakeOverCodeByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- IssueTakeOverCodeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTakeOverCodeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTakeOverCodeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- IssueTakeOverCodeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTakeOverCodeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- IssueTakeOverCodeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) IssueTakeOverCodeByUserIdAsync(
+	request *IssueTakeOverCodeByUserIdRequest,
+	callback chan<- IssueTakeOverCodeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/takeover/type/{type}/issue"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go issueTakeOverCodeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("account", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) IssueTakeOverCodeByUserId(
+	request *IssueTakeOverCodeByUserIdRequest,
+) (*IssueTakeOverCodeByUserIdResult, error) {
+	callback := make(chan IssueTakeOverCodeByUserIdAsyncResult, 1)
+	go p.IssueTakeOverCodeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func createTakeOverOpenIdConnectAsyncHandler(
 	client Gs2AccountRestClient,
 	job *core.NetworkJob,
@@ -6613,8 +6816,14 @@ func (p Gs2AccountRestClient) CreateTakeOverTypeModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.TakeOverMethod != nil && *request.TakeOverMethod != "" {
+		bodies["takeOverMethod"] = *request.TakeOverMethod
+	}
 	if request.OpenIdConnectSetting != nil {
 		bodies["openIdConnectSetting"] = request.OpenIdConnectSetting.ToDict()
+	}
+	if request.IssuedCodeSetting != nil {
+		bodies["issuedCodeSetting"] = request.IssuedCodeSetting.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -6814,8 +7023,14 @@ func (p Gs2AccountRestClient) UpdateTakeOverTypeModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.TakeOverMethod != nil && *request.TakeOverMethod != "" {
+		bodies["takeOverMethod"] = *request.TakeOverMethod
+	}
 	if request.OpenIdConnectSetting != nil {
 		bodies["openIdConnectSetting"] = request.OpenIdConnectSetting.ToDict()
+	}
+	if request.IssuedCodeSetting != nil {
+		bodies["issuedCodeSetting"] = request.IssuedCodeSetting.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

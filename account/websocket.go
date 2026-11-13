@@ -3404,6 +3404,200 @@ func (p Gs2AccountWebSocketClient) CreateTakeOverByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AccountWebSocketClient) issueTakeOverCodeAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IssueTakeOverCodeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTakeOverCodeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTakeOverCodeResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTakeOverCodeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- IssueTakeOverCodeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) IssueTakeOverCodeAsync(
+	request *IssueTakeOverCodeRequest,
+	callback chan<- IssueTakeOverCodeAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "takeOver",
+			"function":    "issueTakeOverCode",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.issueTakeOverCodeAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) IssueTakeOverCode(
+	request *IssueTakeOverCodeRequest,
+) (*IssueTakeOverCodeResult, error) {
+	callback := make(chan IssueTakeOverCodeAsyncResult, 1)
+	go p.IssueTakeOverCodeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AccountWebSocketClient) issueTakeOverCodeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IssueTakeOverCodeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTakeOverCodeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTakeOverCodeByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTakeOverCodeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- IssueTakeOverCodeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) IssueTakeOverCodeByUserIdAsync(
+	request *IssueTakeOverCodeByUserIdRequest,
+	callback chan<- IssueTakeOverCodeByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "takeOver",
+			"function":    "issueTakeOverCodeByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.issueTakeOverCodeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) IssueTakeOverCodeByUserId(
+	request *IssueTakeOverCodeByUserIdRequest,
+) (*IssueTakeOverCodeByUserIdResult, error) {
+	callback := make(chan IssueTakeOverCodeByUserIdAsyncResult, 1)
+	go p.IssueTakeOverCodeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AccountWebSocketClient) createTakeOverOpenIdConnectAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- CreateTakeOverOpenIdConnectAsyncResult,
@@ -6363,8 +6557,14 @@ func (p Gs2AccountWebSocketClient) CreateTakeOverTypeModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.TakeOverMethod != nil && *request.TakeOverMethod != "" {
+		bodies["takeOverMethod"] = *request.TakeOverMethod
+	}
 	if request.OpenIdConnectSetting != nil {
 		bodies["openIdConnectSetting"] = request.OpenIdConnectSetting.ToDict()
+	}
+	if request.IssuedCodeSetting != nil {
+		bodies["issuedCodeSetting"] = request.IssuedCodeSetting.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -6554,8 +6754,14 @@ func (p Gs2AccountWebSocketClient) UpdateTakeOverTypeModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.TakeOverMethod != nil && *request.TakeOverMethod != "" {
+		bodies["takeOverMethod"] = *request.TakeOverMethod
+	}
 	if request.OpenIdConnectSetting != nil {
 		bodies["openIdConnectSetting"] = request.OpenIdConnectSetting.ToDict()
+	}
+	if request.IssuedCodeSetting != nil {
+		bodies["issuedCodeSetting"] = request.IssuedCodeSetting.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

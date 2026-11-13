@@ -1958,6 +1958,136 @@ func (p CreateTakeOverByUserIdResult) Pointer() *CreateTakeOverByUserIdResult {
 	return &p
 }
 
+type IssueTakeOverCodeResult struct {
+	Item     *TakeOver            `json:"item"`
+	Password *string              `json:"password"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type IssueTakeOverCodeAsyncResult struct {
+	result *IssueTakeOverCodeResult
+	err    error
+}
+
+func NewIssueTakeOverCodeResultFromJson(data string) IssueTakeOverCodeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueTakeOverCodeResultFromDict(dict)
+}
+
+func NewIssueTakeOverCodeResultFromDict(data map[string]interface{}) IssueTakeOverCodeResult {
+	return IssueTakeOverCodeResult{
+		Item: func() *TakeOver {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTakeOverFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"password": p.Password,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeResult) Pointer() *IssueTakeOverCodeResult {
+	return &p
+}
+
+type IssueTakeOverCodeByUserIdResult struct {
+	Item     *TakeOver            `json:"item"`
+	Password *string              `json:"password"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type IssueTakeOverCodeByUserIdAsyncResult struct {
+	result *IssueTakeOverCodeByUserIdResult
+	err    error
+}
+
+func NewIssueTakeOverCodeByUserIdResultFromJson(data string) IssueTakeOverCodeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueTakeOverCodeByUserIdResultFromDict(dict)
+}
+
+func NewIssueTakeOverCodeByUserIdResultFromDict(data map[string]interface{}) IssueTakeOverCodeByUserIdResult {
+	return IssueTakeOverCodeByUserIdResult{
+		Item: func() *TakeOver {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTakeOverFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"password": p.Password,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeByUserIdResult) Pointer() *IssueTakeOverCodeByUserIdResult {
+	return &p
+}
+
 type CreateTakeOverOpenIdConnectResult struct {
 	Item     *TakeOver            `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`

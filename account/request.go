@@ -5315,6 +5315,298 @@ func (p CreateTakeOverByUserIdRequest) Pointer() *CreateTakeOverByUserIdRequest 
 	return &p
 }
 
+type IssueTakeOverCodeRequest struct {
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	Type          *int32  `json:"type"`
+	DryRun        *bool   `json:"dryRun"`
+}
+
+func (p *IssueTakeOverCodeRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IssueTakeOverCodeRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IssueTakeOverCodeRequest{}
+	} else {
+		*p = IssueTakeOverCodeRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
+func NewIssueTakeOverCodeRequestFromJson(data string) (IssueTakeOverCodeRequest, error) {
+	req := IssueTakeOverCodeRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return IssueTakeOverCodeRequest{}, err
+	}
+	return req, nil
+}
+
+func NewIssueTakeOverCodeRequestFromDict(data map[string]interface{}) IssueTakeOverCodeRequest {
+	return IssueTakeOverCodeRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Type: func() *int32 {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["type"])
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"type":          p.Type,
+	}
+}
+
+func (p IssueTakeOverCodeRequest) Pointer() *IssueTakeOverCodeRequest {
+	return &p
+}
+
+type IssueTakeOverCodeByUserIdRequest struct {
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	Type            *int32  `json:"type"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *IssueTakeOverCodeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IssueTakeOverCodeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IssueTakeOverCodeByUserIdRequest{}
+	} else {
+		*p = IssueTakeOverCodeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewIssueTakeOverCodeByUserIdRequestFromJson(data string) (IssueTakeOverCodeByUserIdRequest, error) {
+	req := IssueTakeOverCodeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return IssueTakeOverCodeByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewIssueTakeOverCodeByUserIdRequestFromDict(data map[string]interface{}) IssueTakeOverCodeByUserIdRequest {
+	return IssueTakeOverCodeByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Type: func() *int32 {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["type"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p IssueTakeOverCodeByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"type":            p.Type,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p IssueTakeOverCodeByUserIdRequest) Pointer() *IssueTakeOverCodeByUserIdRequest {
+	return &p
+}
+
 type CreateTakeOverOpenIdConnectRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -9837,7 +10129,9 @@ type CreateTakeOverTypeModelMasterRequest struct {
 	Type                 *int32                `json:"type"`
 	Description          *string               `json:"description"`
 	Metadata             *string               `json:"metadata"`
+	TakeOverMethod       *string               `json:"takeOverMethod"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	IssuedCodeSetting    *IssuedCodeSetting    `json:"issuedCodeSetting"`
 	DryRun               *bool                 `json:"dryRun"`
 }
 
@@ -9935,8 +10229,34 @@ func (p *CreateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error 
 				}
 			}
 		}
+		if v, ok := d["takeOverMethod"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverMethod = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverMethod = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverMethod = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverMethod)
+				}
+			}
+		}
 		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+		if v, ok := d["issuedCodeSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IssuedCodeSetting)
 		}
 	}
 	return nil
@@ -9981,6 +10301,13 @@ func NewCreateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		TakeOverMethod: func() *string {
+			v, ok := data["takeOverMethod"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["takeOverMethod"])
+		}(),
 		OpenIdConnectSetting: func() *OpenIdConnectSetting {
 			v, ok := data["openIdConnectSetting"]
 			if !ok || v == nil {
@@ -9988,20 +10315,34 @@ func NewCreateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer()
 		}(),
+		IssuedCodeSetting: func() *IssuedCodeSetting {
+			v, ok := data["issuedCodeSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIssuedCodeSettingFromDict(core.CastMap(data["issuedCodeSetting"])).Pointer()
+		}(),
 	}
 }
 
 func (p CreateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"type":          p.Type,
-		"description":   p.Description,
-		"metadata":      p.Metadata,
+		"namespaceName":  p.NamespaceName,
+		"type":           p.Type,
+		"description":    p.Description,
+		"metadata":       p.Metadata,
+		"takeOverMethod": p.TakeOverMethod,
 		"openIdConnectSetting": func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
+		}(),
+		"issuedCodeSetting": func() map[string]interface{} {
+			if p.IssuedCodeSetting == nil {
+				return nil
+			}
+			return p.IssuedCodeSetting.ToDict()
 		}(),
 	}
 }
@@ -10114,7 +10455,9 @@ type UpdateTakeOverTypeModelMasterRequest struct {
 	Type                 *int32                `json:"type"`
 	Description          *string               `json:"description"`
 	Metadata             *string               `json:"metadata"`
+	TakeOverMethod       *string               `json:"takeOverMethod"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	IssuedCodeSetting    *IssuedCodeSetting    `json:"issuedCodeSetting"`
 	DryRun               *bool                 `json:"dryRun"`
 }
 
@@ -10212,8 +10555,34 @@ func (p *UpdateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error 
 				}
 			}
 		}
+		if v, ok := d["takeOverMethod"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverMethod = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverMethod = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverMethod = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverMethod = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverMethod)
+				}
+			}
+		}
 		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+		if v, ok := d["issuedCodeSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IssuedCodeSetting)
 		}
 	}
 	return nil
@@ -10258,6 +10627,13 @@ func NewUpdateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return core.CastString(data["metadata"])
 		}(),
+		TakeOverMethod: func() *string {
+			v, ok := data["takeOverMethod"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["takeOverMethod"])
+		}(),
 		OpenIdConnectSetting: func() *OpenIdConnectSetting {
 			v, ok := data["openIdConnectSetting"]
 			if !ok || v == nil {
@@ -10265,20 +10641,34 @@ func NewUpdateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 			}
 			return NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer()
 		}(),
+		IssuedCodeSetting: func() *IssuedCodeSetting {
+			v, ok := data["issuedCodeSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIssuedCodeSettingFromDict(core.CastMap(data["issuedCodeSetting"])).Pointer()
+		}(),
 	}
 }
 
 func (p UpdateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"type":          p.Type,
-		"description":   p.Description,
-		"metadata":      p.Metadata,
+		"namespaceName":  p.NamespaceName,
+		"type":           p.Type,
+		"description":    p.Description,
+		"metadata":       p.Metadata,
+		"takeOverMethod": p.TakeOverMethod,
 		"openIdConnectSetting": func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
+		}(),
+		"issuedCodeSetting": func() map[string]interface{} {
+			if p.IssuedCodeSetting == nil {
+				return nil
+			}
+			return p.IssuedCodeSetting.ToDict()
 		}(),
 	}
 }
