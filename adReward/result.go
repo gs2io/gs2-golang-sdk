@@ -1019,6 +1019,118 @@ func (p ConsumePointByUserIdResult) Pointer() *ConsumePointByUserIdResult {
 	return &p
 }
 
+type VerifyPointResult struct {
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyPointAsyncResult struct {
+	result *VerifyPointResult
+	err    error
+}
+
+func NewVerifyPointResultFromJson(data string) VerifyPointResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyPointResultFromDict(dict)
+}
+
+func NewVerifyPointResultFromDict(data map[string]interface{}) VerifyPointResult {
+	return VerifyPointResult{
+		Item: func() *Point {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPointFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyPointResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyPointResult) Pointer() *VerifyPointResult {
+	return &p
+}
+
+type VerifyPointByUserIdResult struct {
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyPointByUserIdAsyncResult struct {
+	result *VerifyPointByUserIdResult
+	err    error
+}
+
+func NewVerifyPointByUserIdResultFromJson(data string) VerifyPointByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyPointByUserIdResultFromDict(dict)
+}
+
+func NewVerifyPointByUserIdResultFromDict(data map[string]interface{}) VerifyPointByUserIdResult {
+	return VerifyPointByUserIdResult{
+		Item: func() *Point {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPointFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyPointByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyPointByUserIdResult) Pointer() *VerifyPointByUserIdResult {
+	return &p
+}
+
 type DeletePointByUserIdResult struct {
 	Item     *Point               `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -1137,6 +1249,71 @@ func (p ConsumePointByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumePointByStampTaskResult) Pointer() *ConsumePointByStampTaskResult {
+	return &p
+}
+
+type VerifyPointByStampTaskResult struct {
+	Item            *Point               `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyPointByStampTaskAsyncResult struct {
+	result *VerifyPointByStampTaskResult
+	err    error
+}
+
+func NewVerifyPointByStampTaskResultFromJson(data string) VerifyPointByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyPointByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyPointByStampTaskResultFromDict(data map[string]interface{}) VerifyPointByStampTaskResult {
+	return VerifyPointByStampTaskResult{
+		Item: func() *Point {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPointFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyPointByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyPointByStampTaskResult) Pointer() *VerifyPointByStampTaskResult {
 	return &p
 }
 
