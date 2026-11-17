@@ -6576,6 +6576,218 @@ func (p Gs2MatchmakingWebSocketClient) GetRatingByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MatchmakingWebSocketClient) verifyRatingAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyRatingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyRatingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRatingAsync(
+	request *VerifyRatingRequest,
+	callback chan<- VerifyRatingAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "rating",
+			"function":    "verifyRating",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		bodies["ratingName"] = *request.RatingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.RateValue != nil {
+		bodies["rateValue"] = *request.RateValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyRatingAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRating(
+	request *VerifyRatingRequest,
+) (*VerifyRatingResult, error) {
+	callback := make(chan VerifyRatingAsyncResult, 1)
+	go p.VerifyRatingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) verifyRatingByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyRatingByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyRatingByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRatingByUserIdAsync(
+	request *VerifyRatingByUserIdRequest,
+	callback chan<- VerifyRatingByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "rating",
+			"function":    "verifyRatingByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		bodies["ratingName"] = *request.RatingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.RateValue != nil {
+		bodies["rateValue"] = *request.RateValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyRatingByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRatingByUserId(
+	request *VerifyRatingByUserIdRequest,
+) (*VerifyRatingByUserIdResult, error) {
+	callback := make(chan VerifyRatingByUserIdAsyncResult, 1)
+	go p.VerifyRatingByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MatchmakingWebSocketClient) putResultAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- PutResultAsyncResult,
@@ -6767,6 +6979,97 @@ func (p Gs2MatchmakingWebSocketClient) DeleteRating(
 ) (*DeleteRatingResult, error) {
 	callback := make(chan DeleteRatingAsyncResult, 1)
 	go p.DeleteRatingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) verifyRatingByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyRatingByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyRatingByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRatingByStampTaskAsync(
+	request *VerifyRatingByStampTaskRequest,
+	callback chan<- VerifyRatingByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "rating",
+			"function":    "verifyRatingByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyRatingByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyRatingByStampTask(
+	request *VerifyRatingByStampTaskRequest,
+) (*VerifyRatingByStampTaskResult, error) {
+	callback := make(chan VerifyRatingByStampTaskAsyncResult, 1)
+	go p.VerifyRatingByStampTaskAsync(
 		request,
 		callback,
 	)

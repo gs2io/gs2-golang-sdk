@@ -6886,6 +6886,231 @@ func (p Gs2MatchmakingRestClient) GetRatingByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyRatingAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRatingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRatingAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRatingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRatingAsync(
+	request *VerifyRatingRequest,
+	callback chan<- VerifyRatingAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/rating/{ratingName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RateValue != nil {
+		bodies["rateValue"] = *request.RateValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyRatingAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRating(
+	request *VerifyRatingRequest,
+) (*VerifyRatingResult, error) {
+	callback := make(chan VerifyRatingAsyncResult, 1)
+	go p.VerifyRatingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRatingByUserIdAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRatingByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRatingByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRatingByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRatingByUserIdAsync(
+	request *VerifyRatingByUserIdRequest,
+	callback chan<- VerifyRatingByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/rating/{ratingName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.RatingName != nil && *request.RatingName != "" {
+		path = strings.ReplaceAll(path, "{ratingName}", core.ToString(*request.RatingName))
+	} else {
+		path = strings.ReplaceAll(path, "{ratingName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RateValue != nil {
+		bodies["rateValue"] = *request.RateValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyRatingByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRatingByUserId(
+	request *VerifyRatingByUserIdRequest,
+) (*VerifyRatingByUserIdResult, error) {
+	callback := make(chan VerifyRatingByUserIdAsyncResult, 1)
+	go p.VerifyRatingByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func putResultAsyncHandler(
 	client Gs2MatchmakingRestClient,
 	job *core.NetworkJob,
@@ -7089,6 +7314,98 @@ func (p Gs2MatchmakingRestClient) DeleteRating(
 ) (*DeleteRatingResult, error) {
 	callback := make(chan DeleteRatingAsyncResult, 1)
 	go p.DeleteRatingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRatingByStampTaskAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRatingByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRatingByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRatingByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRatingByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRatingByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRatingByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRatingByStampTaskAsync(
+	request *VerifyRatingByStampTaskRequest,
+	callback chan<- VerifyRatingByStampTaskAsyncResult,
+) {
+	path := "/stamp/rating/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyRatingByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyRatingByStampTask(
+	request *VerifyRatingByStampTaskRequest,
+) (*VerifyRatingByStampTaskResult, error) {
+	callback := make(chan VerifyRatingByStampTaskAsyncResult, 1)
+	go p.VerifyRatingByStampTaskAsync(
 		request,
 		callback,
 	)

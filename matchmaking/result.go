@@ -3746,6 +3746,118 @@ func (p GetRatingByUserIdResult) Pointer() *GetRatingByUserIdResult {
 	return &p
 }
 
+type VerifyRatingResult struct {
+	Item     *Rating              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyRatingAsyncResult struct {
+	result *VerifyRatingResult
+	err    error
+}
+
+func NewVerifyRatingResultFromJson(data string) VerifyRatingResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRatingResultFromDict(dict)
+}
+
+func NewVerifyRatingResultFromDict(data map[string]interface{}) VerifyRatingResult {
+	return VerifyRatingResult{
+		Item: func() *Rating {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRatingFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyRatingResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyRatingResult) Pointer() *VerifyRatingResult {
+	return &p
+}
+
+type VerifyRatingByUserIdResult struct {
+	Item     *Rating              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyRatingByUserIdAsyncResult struct {
+	result *VerifyRatingByUserIdResult
+	err    error
+}
+
+func NewVerifyRatingByUserIdResultFromJson(data string) VerifyRatingByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRatingByUserIdResultFromDict(dict)
+}
+
+func NewVerifyRatingByUserIdResultFromDict(data map[string]interface{}) VerifyRatingByUserIdResult {
+	return VerifyRatingByUserIdResult{
+		Item: func() *Rating {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRatingFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyRatingByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyRatingByUserIdResult) Pointer() *VerifyRatingByUserIdResult {
+	return &p
+}
+
 type PutResultResult struct {
 	Items    []Rating             `json:"items"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -3851,6 +3963,71 @@ func (p DeleteRatingResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteRatingResult) Pointer() *DeleteRatingResult {
+	return &p
+}
+
+type VerifyRatingByStampTaskResult struct {
+	Item            *Rating              `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyRatingByStampTaskAsyncResult struct {
+	result *VerifyRatingByStampTaskResult
+	err    error
+}
+
+func NewVerifyRatingByStampTaskResultFromJson(data string) VerifyRatingByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRatingByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyRatingByStampTaskResultFromDict(data map[string]interface{}) VerifyRatingByStampTaskResult {
+	return VerifyRatingByStampTaskResult{
+		Item: func() *Rating {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRatingFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyRatingByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyRatingByStampTaskResult) Pointer() *VerifyRatingByStampTaskResult {
 	return &p
 }
 
