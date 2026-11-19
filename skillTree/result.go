@@ -2030,6 +2030,118 @@ func (p GetStatusByUserIdResult) Pointer() *GetStatusByUserIdResult {
 	return &p
 }
 
+type VerifyStatusResult struct {
+	Item     *Status              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStatusAsyncResult struct {
+	result *VerifyStatusResult
+	err    error
+}
+
+func NewVerifyStatusResultFromJson(data string) VerifyStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStatusResultFromDict(dict)
+}
+
+func NewVerifyStatusResultFromDict(data map[string]interface{}) VerifyStatusResult {
+	return VerifyStatusResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStatusResult) Pointer() *VerifyStatusResult {
+	return &p
+}
+
+type VerifyStatusByUserIdResult struct {
+	Item     *Status              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStatusByUserIdAsyncResult struct {
+	result *VerifyStatusByUserIdResult
+	err    error
+}
+
+func NewVerifyStatusByUserIdResultFromJson(data string) VerifyStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStatusByUserIdResultFromDict(dict)
+}
+
+func NewVerifyStatusByUserIdResultFromDict(data map[string]interface{}) VerifyStatusByUserIdResult {
+	return VerifyStatusByUserIdResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStatusByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStatusByUserIdResult) Pointer() *VerifyStatusByUserIdResult {
+	return &p
+}
+
 type ResetResult struct {
 	Item                      *Status                 `json:"item"`
 	TransactionId             *string                 `json:"transactionId"`
@@ -2396,6 +2508,71 @@ func (p MarkRestrainByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p MarkRestrainByStampTaskResult) Pointer() *MarkRestrainByStampTaskResult {
+	return &p
+}
+
+type VerifyStatusByStampTaskResult struct {
+	Item            *Status              `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyStatusByStampTaskAsyncResult struct {
+	result *VerifyStatusByStampTaskResult
+	err    error
+}
+
+func NewVerifyStatusByStampTaskResultFromJson(data string) VerifyStatusByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyStatusByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyStatusByStampTaskResultFromDict(data map[string]interface{}) VerifyStatusByStampTaskResult {
+	return VerifyStatusByStampTaskResult{
+		Item: func() *Status {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyStatusByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyStatusByStampTaskResult) Pointer() *VerifyStatusByStampTaskResult {
 	return &p
 }
 

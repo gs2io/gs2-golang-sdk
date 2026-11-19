@@ -3318,6 +3318,235 @@ func (p Gs2SkillTreeRestClient) GetStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyStatusAsyncHandler(
+	client Gs2SkillTreeRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStatusResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatusAsync(
+	request *VerifyStatusRequest,
+	callback chan<- VerifyStatusAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/{propertyId}/node/{nodeModelName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+	if request.NodeModelName != nil && *request.NodeModelName != "" {
+		path = strings.ReplaceAll(path, "{nodeModelName}", core.ToString(*request.NodeModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{nodeModelName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStatusAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatus(
+	request *VerifyStatusRequest,
+) (*VerifyStatusResult, error) {
+	callback := make(chan VerifyStatusAsyncResult, 1)
+	go p.VerifyStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStatusByUserIdAsyncHandler(
+	client Gs2SkillTreeRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStatusByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatusByUserIdAsync(
+	request *VerifyStatusByUserIdRequest,
+	callback chan<- VerifyStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/node/{nodeModelName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+	if request.NodeModelName != nil && *request.NodeModelName != "" {
+		path = strings.ReplaceAll(path, "{nodeModelName}", core.ToString(*request.NodeModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{nodeModelName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatusByUserId(
+	request *VerifyStatusByUserIdRequest,
+) (*VerifyStatusByUserIdResult, error) {
+	callback := make(chan VerifyStatusByUserIdAsyncResult, 1)
+	go p.VerifyStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func resetAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
@@ -3711,6 +3940,98 @@ func (p Gs2SkillTreeRestClient) MarkRestrainByStampTask(
 ) (*MarkRestrainByStampTaskResult, error) {
 	callback := make(chan MarkRestrainByStampTaskAsyncResult, 1)
 	go p.MarkRestrainByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyStatusByStampTaskAsyncHandler(
+	client Gs2SkillTreeRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyStatusByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyStatusByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyStatusByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyStatusByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyStatusByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyStatusByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatusByStampTaskAsync(
+	request *VerifyStatusByStampTaskRequest,
+	callback chan<- VerifyStatusByStampTaskAsyncResult,
+) {
+	path := "/stamp/status/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyStatusByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("skill-tree", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeRestClient) VerifyStatusByStampTask(
+	request *VerifyStatusByStampTaskRequest,
+) (*VerifyStatusByStampTaskResult, error) {
+	callback := make(chan VerifyStatusByStampTaskAsyncResult, 1)
+	go p.VerifyStatusByStampTaskAsync(
 		request,
 		callback,
 	)
