@@ -1,4 +1,4 @@
-[⇒日本語のREADMEへ](README.md)
+[日本語](README.md) | **English** | [한국어](README-ko.md)
 
 # gs2-golang-sdk
 
@@ -35,4 +35,4 @@ For information on the initialization process, please refer to the
 
  [⇒API Reference - Initialization process](https://docs.gs2.io/en/api_reference/initialize/) page.
 
-*All code in this project is auto-generated except for gs2-java-sdk-core, so we cannot respond to individual Pull-Requests. *
+*All code in this project is auto-generated except for gs2-golang-sdk-core, so we cannot respond to individual Pull-Requests. *
