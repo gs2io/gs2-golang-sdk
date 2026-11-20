@@ -4490,6 +4490,218 @@ func (p Gs2QuestWebSocketClient) GetCompletedQuestListByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2QuestWebSocketClient) verifyCompletedQuestListAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCompletedQuestListAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCompletedQuestListAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestListAsync(
+	request *VerifyCompletedQuestListRequest,
+	callback chan<- VerifyCompletedQuestListAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "quest",
+			"component":   "completedQuestList",
+			"function":    "verifyCompletedQuestList",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		bodies["questGroupName"] = *request.QuestGroupName
+	}
+	if request.QuestName != nil && *request.QuestName != "" {
+		bodies["questName"] = *request.QuestName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyCompletedQuestListAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestList(
+	request *VerifyCompletedQuestListRequest,
+) (*VerifyCompletedQuestListResult, error) {
+	callback := make(chan VerifyCompletedQuestListAsyncResult, 1)
+	go p.VerifyCompletedQuestListAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2QuestWebSocketClient) verifyCompletedQuestListByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCompletedQuestListByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestListByUserIdAsync(
+	request *VerifyCompletedQuestListByUserIdRequest,
+	callback chan<- VerifyCompletedQuestListByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "quest",
+			"component":   "completedQuestList",
+			"function":    "verifyCompletedQuestListByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		bodies["questGroupName"] = *request.QuestGroupName
+	}
+	if request.QuestName != nil && *request.QuestName != "" {
+		bodies["questName"] = *request.QuestName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyCompletedQuestListByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestListByUserId(
+	request *VerifyCompletedQuestListByUserIdRequest,
+) (*VerifyCompletedQuestListByUserIdResult, error) {
+	callback := make(chan VerifyCompletedQuestListByUserIdAsyncResult, 1)
+	go p.VerifyCompletedQuestListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2QuestWebSocketClient) deleteCompletedQuestListByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteCompletedQuestListByUserIdAsyncResult,
@@ -4583,6 +4795,97 @@ func (p Gs2QuestWebSocketClient) DeleteCompletedQuestListByUserId(
 ) (*DeleteCompletedQuestListByUserIdResult, error) {
 	callback := make(chan DeleteCompletedQuestListByUserIdAsyncResult, 1)
 	go p.DeleteCompletedQuestListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2QuestWebSocketClient) verifyCompletedQuestListByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCompletedQuestListByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestListByStampTaskAsync(
+	request *VerifyCompletedQuestListByStampTaskRequest,
+	callback chan<- VerifyCompletedQuestListByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "quest",
+			"component":   "completedQuestList",
+			"function":    "verifyCompletedQuestListByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyCompletedQuestListByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestWebSocketClient) VerifyCompletedQuestListByStampTask(
+	request *VerifyCompletedQuestListByStampTaskRequest,
+) (*VerifyCompletedQuestListByStampTaskResult, error) {
+	callback := make(chan VerifyCompletedQuestListByStampTaskAsyncResult, 1)
+	go p.VerifyCompletedQuestListByStampTaskAsync(
 		request,
 		callback,
 	)

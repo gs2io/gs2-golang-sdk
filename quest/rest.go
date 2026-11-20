@@ -4681,6 +4681,235 @@ func (p Gs2QuestRestClient) GetCompletedQuestListByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyCompletedQuestListAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompletedQuestListAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompletedQuestListAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompletedQuestListAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestListAsync(
+	request *VerifyCompletedQuestListRequest,
+	callback chan<- VerifyCompletedQuestListAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/completed/group/{questGroupName}/quest/{questName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{questGroupName}", "null")
+	}
+	if request.QuestName != nil && *request.QuestName != "" {
+		path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
+	} else {
+		path = strings.ReplaceAll(path, "{questName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyCompletedQuestListAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestList(
+	request *VerifyCompletedQuestListRequest,
+) (*VerifyCompletedQuestListResult, error) {
+	callback := make(chan VerifyCompletedQuestListAsyncResult, 1)
+	go p.VerifyCompletedQuestListAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCompletedQuestListByUserIdAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompletedQuestListByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompletedQuestListByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestListByUserIdAsync(
+	request *VerifyCompletedQuestListByUserIdRequest,
+	callback chan<- VerifyCompletedQuestListByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/completed/group/{questGroupName}/quest/{questName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{questGroupName}", "null")
+	}
+	if request.QuestName != nil && *request.QuestName != "" {
+		path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
+	} else {
+		path = strings.ReplaceAll(path, "{questName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyCompletedQuestListByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestListByUserId(
+	request *VerifyCompletedQuestListByUserIdRequest,
+) (*VerifyCompletedQuestListByUserIdResult, error) {
+	callback := make(chan VerifyCompletedQuestListByUserIdAsyncResult, 1)
+	go p.VerifyCompletedQuestListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteCompletedQuestListByUserIdAsyncHandler(
 	client Gs2QuestRestClient,
 	job *core.NetworkJob,
@@ -4781,6 +5010,98 @@ func (p Gs2QuestRestClient) DeleteCompletedQuestListByUserId(
 ) (*DeleteCompletedQuestListByUserIdResult, error) {
 	callback := make(chan DeleteCompletedQuestListByUserIdAsyncResult, 1)
 	go p.DeleteCompletedQuestListByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCompletedQuestListByStampTaskAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompletedQuestListByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompletedQuestListByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompletedQuestListByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestListByStampTaskAsync(
+	request *VerifyCompletedQuestListByStampTaskRequest,
+	callback chan<- VerifyCompletedQuestListByStampTaskAsyncResult,
+) {
+	path := "/stamp/completed/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyCompletedQuestListByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("quest", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) VerifyCompletedQuestListByStampTask(
+	request *VerifyCompletedQuestListByStampTaskRequest,
+) (*VerifyCompletedQuestListByStampTaskResult, error) {
+	callback := make(chan VerifyCompletedQuestListByStampTaskAsyncResult, 1)
+	go p.VerifyCompletedQuestListByStampTaskAsync(
 		request,
 		callback,
 	)

@@ -2813,6 +2813,118 @@ func (p GetCompletedQuestListByUserIdResult) Pointer() *GetCompletedQuestListByU
 	return &p
 }
 
+type VerifyCompletedQuestListResult struct {
+	Item     *CompletedQuestList  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyCompletedQuestListAsyncResult struct {
+	result *VerifyCompletedQuestListResult
+	err    error
+}
+
+func NewVerifyCompletedQuestListResultFromJson(data string) VerifyCompletedQuestListResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompletedQuestListResultFromDict(dict)
+}
+
+func NewVerifyCompletedQuestListResultFromDict(data map[string]interface{}) VerifyCompletedQuestListResult {
+	return VerifyCompletedQuestListResult{
+		Item: func() *CompletedQuestList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListResult) Pointer() *VerifyCompletedQuestListResult {
+	return &p
+}
+
+type VerifyCompletedQuestListByUserIdResult struct {
+	Item     *CompletedQuestList  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyCompletedQuestListByUserIdAsyncResult struct {
+	result *VerifyCompletedQuestListByUserIdResult
+	err    error
+}
+
+func NewVerifyCompletedQuestListByUserIdResultFromJson(data string) VerifyCompletedQuestListByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompletedQuestListByUserIdResultFromDict(dict)
+}
+
+func NewVerifyCompletedQuestListByUserIdResultFromDict(data map[string]interface{}) VerifyCompletedQuestListByUserIdResult {
+	return VerifyCompletedQuestListByUserIdResult{
+		Item: func() *CompletedQuestList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListByUserIdResult) Pointer() *VerifyCompletedQuestListByUserIdResult {
+	return &p
+}
+
 type DeleteCompletedQuestListByUserIdResult struct {
 	Item     *CompletedQuestList  `json:"item"`
 	Metadata *core.ResultMetadata `json:"metadata"`
@@ -2866,6 +2978,71 @@ func (p DeleteCompletedQuestListByUserIdResult) ToDict() map[string]interface{} 
 }
 
 func (p DeleteCompletedQuestListByUserIdResult) Pointer() *DeleteCompletedQuestListByUserIdResult {
+	return &p
+}
+
+type VerifyCompletedQuestListByStampTaskResult struct {
+	Item            *CompletedQuestList  `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyCompletedQuestListByStampTaskAsyncResult struct {
+	result *VerifyCompletedQuestListByStampTaskResult
+	err    error
+}
+
+func NewVerifyCompletedQuestListByStampTaskResultFromJson(data string) VerifyCompletedQuestListByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompletedQuestListByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyCompletedQuestListByStampTaskResultFromDict(data map[string]interface{}) VerifyCompletedQuestListByStampTaskResult {
+	return VerifyCompletedQuestListByStampTaskResult{
+		Item: func() *CompletedQuestList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCompletedQuestListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyCompletedQuestListByStampTaskResult) Pointer() *VerifyCompletedQuestListByStampTaskResult {
 	return &p
 }
 
