@@ -2043,6 +2043,118 @@ func (p GetBalanceParameterStatusByUserIdResult) Pointer() *GetBalanceParameterS
 	return &p
 }
 
+type VerifyBalanceParameterStatusResult struct {
+	Item     *BalanceParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
+}
+
+type VerifyBalanceParameterStatusAsyncResult struct {
+	result *VerifyBalanceParameterStatusResult
+	err    error
+}
+
+func NewVerifyBalanceParameterStatusResultFromJson(data string) VerifyBalanceParameterStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBalanceParameterStatusResultFromDict(dict)
+}
+
+func NewVerifyBalanceParameterStatusResultFromDict(data map[string]interface{}) VerifyBalanceParameterStatusResult {
+	return VerifyBalanceParameterStatusResult{
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusResult) Pointer() *VerifyBalanceParameterStatusResult {
+	return &p
+}
+
+type VerifyBalanceParameterStatusByUserIdResult struct {
+	Item     *BalanceParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
+}
+
+type VerifyBalanceParameterStatusByUserIdAsyncResult struct {
+	result *VerifyBalanceParameterStatusByUserIdResult
+	err    error
+}
+
+func NewVerifyBalanceParameterStatusByUserIdResultFromJson(data string) VerifyBalanceParameterStatusByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBalanceParameterStatusByUserIdResultFromDict(dict)
+}
+
+func NewVerifyBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) VerifyBalanceParameterStatusByUserIdResult {
+	return VerifyBalanceParameterStatusByUserIdResult{
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByUserIdResult) Pointer() *VerifyBalanceParameterStatusByUserIdResult {
+	return &p
+}
+
 type DeleteBalanceParameterStatusByUserIdResult struct {
 	Item     *BalanceParameterStatus `json:"item"`
 	Metadata *core.ResultMetadata    `json:"metadata"`
@@ -2376,6 +2488,71 @@ func (p SetBalanceParameterStatusByStampSheetResult) ToDict() map[string]interfa
 }
 
 func (p SetBalanceParameterStatusByStampSheetResult) Pointer() *SetBalanceParameterStatusByStampSheetResult {
+	return &p
+}
+
+type VerifyBalanceParameterStatusByStampTaskResult struct {
+	Item            *BalanceParameterStatus `json:"item"`
+	NewContextStack *string                 `json:"newContextStack"`
+	Metadata        *core.ResultMetadata    `json:"metadata"`
+}
+
+type VerifyBalanceParameterStatusByStampTaskAsyncResult struct {
+	result *VerifyBalanceParameterStatusByStampTaskResult
+	err    error
+}
+
+func NewVerifyBalanceParameterStatusByStampTaskResultFromJson(data string) VerifyBalanceParameterStatusByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBalanceParameterStatusByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyBalanceParameterStatusByStampTaskResultFromDict(data map[string]interface{}) VerifyBalanceParameterStatusByStampTaskResult {
+	return VerifyBalanceParameterStatusByStampTaskResult{
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByStampTaskResult) Pointer() *VerifyBalanceParameterStatusByStampTaskResult {
 	return &p
 }
 

@@ -3536,6 +3536,230 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2EnchantWebSocketClient) verifyBalanceParameterStatusAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBalanceParameterStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBalanceParameterStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatusAsync(
+	request *VerifyBalanceParameterStatusRequest,
+	callback chan<- VerifyBalanceParameterStatusAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "verifyBalanceParameterStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ParameterValue != nil {
+		bodies["parameterValue"] = *request.ParameterValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyBalanceParameterStatusAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatus(
+	request *VerifyBalanceParameterStatusRequest,
+) (*VerifyBalanceParameterStatusResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnchantWebSocketClient) verifyBalanceParameterStatusByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBalanceParameterStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatusByUserIdAsync(
+	request *VerifyBalanceParameterStatusByUserIdRequest,
+	callback chan<- VerifyBalanceParameterStatusByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "verifyBalanceParameterStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		bodies["parameterName"] = *request.ParameterName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ParameterValue != nil {
+		bodies["parameterValue"] = *request.ParameterValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyBalanceParameterStatusByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatusByUserId(
+	request *VerifyBalanceParameterStatusByUserIdRequest,
+) (*VerifyBalanceParameterStatusByUserIdResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusByUserIdAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2EnchantWebSocketClient) deleteBalanceParameterStatusByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteBalanceParameterStatusByUserIdAsyncResult,
@@ -4034,6 +4258,97 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByStampSheet(
 ) (*SetBalanceParameterStatusByStampSheetResult, error) {
 	callback := make(chan SetBalanceParameterStatusByStampSheetAsyncResult, 1)
 	go p.SetBalanceParameterStatusByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnchantWebSocketClient) verifyBalanceParameterStatusByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBalanceParameterStatusByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatusByStampTaskAsync(
+	request *VerifyBalanceParameterStatusByStampTaskRequest,
+	callback chan<- VerifyBalanceParameterStatusByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enchant",
+			"component":   "balanceParameterStatus",
+			"function":    "verifyBalanceParameterStatusByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyBalanceParameterStatusByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantWebSocketClient) VerifyBalanceParameterStatusByStampTask(
+	request *VerifyBalanceParameterStatusByStampTaskRequest,
+) (*VerifyBalanceParameterStatusByStampTaskResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusByStampTaskAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusByStampTaskAsync(
 		request,
 		callback,
 	)

@@ -3699,6 +3699,247 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyBalanceParameterStatusAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBalanceParameterStatusAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBalanceParameterStatusAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBalanceParameterStatusAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatusAsync(
+	request *VerifyBalanceParameterStatusRequest,
+	callback chan<- VerifyBalanceParameterStatusAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/balance/{parameterName}/{propertyId}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+	} else {
+		path = strings.ReplaceAll(path, "{parameterName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.ParameterValue != nil {
+		bodies["parameterValue"] = *request.ParameterValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyBalanceParameterStatusAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatus(
+	request *VerifyBalanceParameterStatusRequest,
+) (*VerifyBalanceParameterStatusResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyBalanceParameterStatusByUserIdAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBalanceParameterStatusByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBalanceParameterStatusByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatusByUserIdAsync(
+	request *VerifyBalanceParameterStatusByUserIdRequest,
+	callback chan<- VerifyBalanceParameterStatusByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/balance/{parameterName}/{propertyId}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.ParameterName != nil && *request.ParameterName != "" {
+		path = strings.ReplaceAll(path, "{parameterName}", core.ToString(*request.ParameterName))
+	} else {
+		path = strings.ReplaceAll(path, "{parameterName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ParameterValueName != nil && *request.ParameterValueName != "" {
+		bodies["parameterValueName"] = *request.ParameterValueName
+	}
+	if request.ParameterValue != nil {
+		bodies["parameterValue"] = *request.ParameterValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyBalanceParameterStatusByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatusByUserId(
+	request *VerifyBalanceParameterStatusByUserIdRequest,
+) (*VerifyBalanceParameterStatusByUserIdResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusByUserIdAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteBalanceParameterStatusByUserIdAsyncHandler(
 	client Gs2EnchantRestClient,
 	job *core.NetworkJob,
@@ -4226,6 +4467,98 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByStampSheet(
 ) (*SetBalanceParameterStatusByStampSheetResult, error) {
 	callback := make(chan SetBalanceParameterStatusByStampSheetAsyncResult, 1)
 	go p.SetBalanceParameterStatusByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyBalanceParameterStatusByStampTaskAsyncHandler(
+	client Gs2EnchantRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBalanceParameterStatusByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBalanceParameterStatusByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBalanceParameterStatusByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatusByStampTaskAsync(
+	request *VerifyBalanceParameterStatusByStampTaskRequest,
+	callback chan<- VerifyBalanceParameterStatusByStampTaskAsyncResult,
+) {
+	path := "/stamp/balance/parameter/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyBalanceParameterStatusByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enchant", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnchantRestClient) VerifyBalanceParameterStatusByStampTask(
+	request *VerifyBalanceParameterStatusByStampTaskRequest,
+) (*VerifyBalanceParameterStatusByStampTaskResult, error) {
+	callback := make(chan VerifyBalanceParameterStatusByStampTaskAsyncResult, 1)
+	go p.VerifyBalanceParameterStatusByStampTaskAsync(
 		request,
 		callback,
 	)

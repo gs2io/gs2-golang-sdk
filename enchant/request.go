@@ -5142,6 +5142,556 @@ func (p GetBalanceParameterStatusByUserIdRequest) Pointer() *GetBalanceParameter
 	return &p
 }
 
+type VerifyBalanceParameterStatusRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	ParameterName      *string `json:"parameterName"`
+	PropertyId         *string `json:"propertyId"`
+	ParameterValueName *string `json:"parameterValueName"`
+	VerifyType         *string `json:"verifyType"`
+	ParameterValue     *int64  `json:"parameterValue"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *VerifyBalanceParameterStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyBalanceParameterStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyBalanceParameterStatusRequest{}
+	} else {
+		*p = VerifyBalanceParameterStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["parameterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ParameterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ParameterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ParameterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ParameterName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["parameterValueName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ParameterValueName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ParameterValueName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ParameterValueName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterValueName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterValueName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ParameterValueName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["parameterValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ParameterValue)
+		}
+	}
+	return nil
+}
+
+func NewVerifyBalanceParameterStatusRequestFromJson(data string) (VerifyBalanceParameterStatusRequest, error) {
+	req := VerifyBalanceParameterStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyBalanceParameterStatusRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyBalanceParameterStatusRequestFromDict(data map[string]interface{}) VerifyBalanceParameterStatusRequest {
+	return VerifyBalanceParameterStatusRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValueName: func() *string {
+			v, ok := data["parameterValueName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterValueName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ParameterValue: func() *int64 {
+			v, ok := data["parameterValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["parameterValue"])
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":      p.NamespaceName,
+		"accessToken":        p.AccessToken,
+		"parameterName":      p.ParameterName,
+		"propertyId":         p.PropertyId,
+		"parameterValueName": p.ParameterValueName,
+		"verifyType":         p.VerifyType,
+		"parameterValue":     p.ParameterValue,
+	}
+}
+
+func (p VerifyBalanceParameterStatusRequest) Pointer() *VerifyBalanceParameterStatusRequest {
+	return &p
+}
+
+type VerifyBalanceParameterStatusByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	ParameterName      *string `json:"parameterName"`
+	PropertyId         *string `json:"propertyId"`
+	ParameterValueName *string `json:"parameterValueName"`
+	VerifyType         *string `json:"verifyType"`
+	ParameterValue     *int64  `json:"parameterValue"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *VerifyBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyBalanceParameterStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyBalanceParameterStatusByUserIdRequest{}
+	} else {
+		*p = VerifyBalanceParameterStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["parameterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ParameterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ParameterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ParameterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ParameterName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["parameterValueName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ParameterValueName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ParameterValueName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ParameterValueName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterValueName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ParameterValueName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ParameterValueName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["parameterValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ParameterValue)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyBalanceParameterStatusByUserIdRequestFromJson(data string) (VerifyBalanceParameterStatusByUserIdRequest, error) {
+	req := VerifyBalanceParameterStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyBalanceParameterStatusByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) VerifyBalanceParameterStatusByUserIdRequest {
+	return VerifyBalanceParameterStatusByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValueName: func() *string {
+			v, ok := data["parameterValueName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterValueName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ParameterValue: func() *int64 {
+			v, ok := data["parameterValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["parameterValue"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":      p.NamespaceName,
+		"userId":             p.UserId,
+		"parameterName":      p.ParameterName,
+		"propertyId":         p.PropertyId,
+		"parameterValueName": p.ParameterValueName,
+		"verifyType":         p.VerifyType,
+		"parameterValue":     p.ParameterValue,
+		"timeOffsetToken":    p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyBalanceParameterStatusByUserIdRequest) Pointer() *VerifyBalanceParameterStatusByUserIdRequest {
+	return &p
+}
+
 type DeleteBalanceParameterStatusByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -6070,6 +6620,124 @@ func (p SetBalanceParameterStatusByStampSheetRequest) ToDict() map[string]interf
 }
 
 func (p SetBalanceParameterStatusByStampSheetRequest) Pointer() *SetBalanceParameterStatusByStampSheetRequest {
+	return &p
+}
+
+type VerifyBalanceParameterStatusByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyBalanceParameterStatusByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyBalanceParameterStatusByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyBalanceParameterStatusByStampTaskRequest{}
+	} else {
+		*p = VerifyBalanceParameterStatusByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyBalanceParameterStatusByStampTaskRequestFromJson(data string) (VerifyBalanceParameterStatusByStampTaskRequest, error) {
+	req := VerifyBalanceParameterStatusByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyBalanceParameterStatusByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyBalanceParameterStatusByStampTaskRequestFromDict(data map[string]interface{}) VerifyBalanceParameterStatusByStampTaskRequest {
+	return VerifyBalanceParameterStatusByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyBalanceParameterStatusByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyBalanceParameterStatusByStampTaskRequest) Pointer() *VerifyBalanceParameterStatusByStampTaskRequest {
 	return &p
 }
 
