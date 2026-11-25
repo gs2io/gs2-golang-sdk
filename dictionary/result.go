@@ -1960,6 +1960,141 @@ func (p VerifyEntryByStampTaskResult) Pointer() *VerifyEntryByStampTaskResult {
 	return &p
 }
 
+type VerifyEntryCountResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyEntryCountAsyncResult struct {
+	result *VerifyEntryCountResult
+	err    error
+}
+
+func NewVerifyEntryCountResultFromJson(data string) VerifyEntryCountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryCountResultFromDict(dict)
+}
+
+func NewVerifyEntryCountResultFromDict(data map[string]interface{}) VerifyEntryCountResult {
+	return VerifyEntryCountResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyEntryCountResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyEntryCountResult) Pointer() *VerifyEntryCountResult {
+	return &p
+}
+
+type VerifyEntryCountByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyEntryCountByUserIdAsyncResult struct {
+	result *VerifyEntryCountByUserIdResult
+	err    error
+}
+
+func NewVerifyEntryCountByUserIdResultFromJson(data string) VerifyEntryCountByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryCountByUserIdResultFromDict(dict)
+}
+
+func NewVerifyEntryCountByUserIdResultFromDict(data map[string]interface{}) VerifyEntryCountByUserIdResult {
+	return VerifyEntryCountByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyEntryCountByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyEntryCountByUserIdResult) Pointer() *VerifyEntryCountByUserIdResult {
+	return &p
+}
+
+type VerifyEntryCountByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyEntryCountByStampTaskAsyncResult struct {
+	result *VerifyEntryCountByStampTaskResult
+	err    error
+}
+
+func NewVerifyEntryCountByStampTaskResultFromJson(data string) VerifyEntryCountByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryCountByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyEntryCountByStampTaskResultFromDict(data map[string]interface{}) VerifyEntryCountByStampTaskResult {
+	return VerifyEntryCountByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyEntryCountByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyEntryCountByStampTaskResult) Pointer() *VerifyEntryCountByStampTaskResult {
+	return &p
+}
+
 type DescribeLikesResult struct {
 	Items         []Like               `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`

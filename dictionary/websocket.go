@@ -3463,6 +3463,317 @@ func (p Gs2DictionaryWebSocketClient) VerifyEntryByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DictionaryWebSocketClient) verifyEntryCountAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyEntryCountAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryCountAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryCountResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryCountAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyEntryCountAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCountAsync(
+	request *VerifyEntryCountRequest,
+	callback chan<- VerifyEntryCountAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "dictionary",
+			"component":   "entry",
+			"function":    "verifyEntryCount",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.EntryModelNames != nil {
+		var _entryModelNames []interface{}
+		for _, item := range request.EntryModelNames {
+			_entryModelNames = append(_entryModelNames, item)
+		}
+		bodies["entryModelNames"] = _entryModelNames
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyEntryCountAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCount(
+	request *VerifyEntryCountRequest,
+) (*VerifyEntryCountResult, error) {
+	callback := make(chan VerifyEntryCountAsyncResult, 1)
+	go p.VerifyEntryCountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DictionaryWebSocketClient) verifyEntryCountByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyEntryCountByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryCountByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryCountByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryCountByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyEntryCountByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCountByUserIdAsync(
+	request *VerifyEntryCountByUserIdRequest,
+	callback chan<- VerifyEntryCountByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "dictionary",
+			"component":   "entry",
+			"function":    "verifyEntryCountByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.EntryModelNames != nil {
+		var _entryModelNames []interface{}
+		for _, item := range request.EntryModelNames {
+			_entryModelNames = append(_entryModelNames, item)
+		}
+		bodies["entryModelNames"] = _entryModelNames
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyEntryCountByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCountByUserId(
+	request *VerifyEntryCountByUserIdRequest,
+) (*VerifyEntryCountByUserIdResult, error) {
+	callback := make(chan VerifyEntryCountByUserIdAsyncResult, 1)
+	go p.VerifyEntryCountByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DictionaryWebSocketClient) verifyEntryCountByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyEntryCountByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryCountByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryCountByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryCountByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyEntryCountByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCountByStampTaskAsync(
+	request *VerifyEntryCountByStampTaskRequest,
+	callback chan<- VerifyEntryCountByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "dictionary",
+			"component":   "entry",
+			"function":    "verifyEntryCountByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.verifyEntryCountByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryWebSocketClient) VerifyEntryCountByStampTask(
+	request *VerifyEntryCountByStampTaskRequest,
+) (*VerifyEntryCountByStampTaskResult, error) {
+	callback := make(chan VerifyEntryCountByStampTaskAsyncResult, 1)
+	go p.VerifyEntryCountByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DictionaryWebSocketClient) describeLikesAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeLikesAsyncResult,
