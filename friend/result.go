@@ -1075,6 +1075,141 @@ func (p UpdateProfileByStampSheetResult) Pointer() *UpdateProfileByStampSheetRes
 	return &p
 }
 
+type VerifyFollowResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFollowAsyncResult struct {
+	result *VerifyFollowResult
+	err    error
+}
+
+func NewVerifyFollowResultFromJson(data string) VerifyFollowResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFollowResultFromDict(dict)
+}
+
+func NewVerifyFollowResultFromDict(data map[string]interface{}) VerifyFollowResult {
+	return VerifyFollowResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFollowResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFollowResult) Pointer() *VerifyFollowResult {
+	return &p
+}
+
+type VerifyFollowByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFollowByUserIdAsyncResult struct {
+	result *VerifyFollowByUserIdResult
+	err    error
+}
+
+func NewVerifyFollowByUserIdResultFromJson(data string) VerifyFollowByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFollowByUserIdResultFromDict(dict)
+}
+
+func NewVerifyFollowByUserIdResultFromDict(data map[string]interface{}) VerifyFollowByUserIdResult {
+	return VerifyFollowByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFollowByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFollowByUserIdResult) Pointer() *VerifyFollowByUserIdResult {
+	return &p
+}
+
+type VerifyFollowByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFollowByStampTaskAsyncResult struct {
+	result *VerifyFollowByStampTaskResult
+	err    error
+}
+
+func NewVerifyFollowByStampTaskResultFromJson(data string) VerifyFollowByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFollowByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyFollowByStampTaskResultFromDict(data map[string]interface{}) VerifyFollowByStampTaskResult {
+	return VerifyFollowByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFollowByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFollowByStampTaskResult) Pointer() *VerifyFollowByStampTaskResult {
+	return &p
+}
+
 type DescribeFriendsResult struct {
 	Items         []FriendUser         `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
@@ -1194,6 +1329,276 @@ func (p DescribeFriendsByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult {
+	return &p
+}
+
+type VerifyFriendResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendAsyncResult struct {
+	result *VerifyFriendResult
+	err    error
+}
+
+func NewVerifyFriendResultFromJson(data string) VerifyFriendResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendResultFromDict(dict)
+}
+
+func NewVerifyFriendResultFromDict(data map[string]interface{}) VerifyFriendResult {
+	return VerifyFriendResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendResult) Pointer() *VerifyFriendResult {
+	return &p
+}
+
+type VerifyFriendByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendByUserIdAsyncResult struct {
+	result *VerifyFriendByUserIdResult
+	err    error
+}
+
+func NewVerifyFriendByUserIdResultFromJson(data string) VerifyFriendByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendByUserIdResultFromDict(dict)
+}
+
+func NewVerifyFriendByUserIdResultFromDict(data map[string]interface{}) VerifyFriendByUserIdResult {
+	return VerifyFriendByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendByUserIdResult) Pointer() *VerifyFriendByUserIdResult {
+	return &p
+}
+
+type VerifyFriendByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendByStampTaskAsyncResult struct {
+	result *VerifyFriendByStampTaskResult
+	err    error
+}
+
+func NewVerifyFriendByStampTaskResultFromJson(data string) VerifyFriendByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyFriendByStampTaskResultFromDict(data map[string]interface{}) VerifyFriendByStampTaskResult {
+	return VerifyFriendByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendByStampTaskResult) Pointer() *VerifyFriendByStampTaskResult {
+	return &p
+}
+
+type VerifyFriendCountResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendCountAsyncResult struct {
+	result *VerifyFriendCountResult
+	err    error
+}
+
+func NewVerifyFriendCountResultFromJson(data string) VerifyFriendCountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendCountResultFromDict(dict)
+}
+
+func NewVerifyFriendCountResultFromDict(data map[string]interface{}) VerifyFriendCountResult {
+	return VerifyFriendCountResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendCountResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendCountResult) Pointer() *VerifyFriendCountResult {
+	return &p
+}
+
+type VerifyFriendCountByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendCountByUserIdAsyncResult struct {
+	result *VerifyFriendCountByUserIdResult
+	err    error
+}
+
+func NewVerifyFriendCountByUserIdResultFromJson(data string) VerifyFriendCountByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendCountByUserIdResultFromDict(dict)
+}
+
+func NewVerifyFriendCountByUserIdResultFromDict(data map[string]interface{}) VerifyFriendCountByUserIdResult {
+	return VerifyFriendCountByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendCountByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendCountByUserIdResult) Pointer() *VerifyFriendCountByUserIdResult {
+	return &p
+}
+
+type VerifyFriendCountByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFriendCountByStampTaskAsyncResult struct {
+	result *VerifyFriendCountByStampTaskResult
+	err    error
+}
+
+func NewVerifyFriendCountByStampTaskResultFromJson(data string) VerifyFriendCountByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFriendCountByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyFriendCountByStampTaskResultFromDict(data map[string]interface{}) VerifyFriendCountByStampTaskResult {
+	return VerifyFriendCountByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFriendCountByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFriendCountByStampTaskResult) Pointer() *VerifyFriendCountByStampTaskResult {
 	return &p
 }
 
