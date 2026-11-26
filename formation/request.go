@@ -10045,6 +10045,762 @@ func (p SetFormByStampSheetRequest) Pointer() *SetFormByStampSheetRequest {
 	return &p
 }
 
+type VerifyFormRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	MoldModelName      *string `json:"moldModelName"`
+	Index              *int32  `json:"index"`
+	SlotName           *string `json:"slotName"`
+	PropertyIdRegex    *string `json:"propertyIdRegex"`
+	CountType          *string `json:"countType"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int32  `json:"count"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *VerifyFormRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyFormRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyFormRequest{}
+	} else {
+		*p = VerifyFormRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["index"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Index)
+		}
+		if v, ok := d["slotName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SlotName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SlotName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SlotName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SlotName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SlotName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SlotName)
+				}
+			}
+		}
+		if v, ok := d["propertyIdRegex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyIdRegex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyIdRegex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyIdRegex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyIdRegex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyIdRegex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyIdRegex)
+				}
+			}
+		}
+		if v, ok := d["countType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CountType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CountType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CountType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CountType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CountType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CountType)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewVerifyFormRequestFromJson(data string) (VerifyFormRequest, error) {
+	req := VerifyFormRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyFormRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyFormRequestFromDict(data map[string]interface{}) VerifyFormRequest {
+	return VerifyFormRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		SlotName: func() *string {
+			v, ok := data["slotName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["slotName"])
+		}(),
+		PropertyIdRegex: func() *string {
+			v, ok := data["propertyIdRegex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyIdRegex"])
+		}(),
+		CountType: func() *string {
+			v, ok := data["countType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["countType"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+	}
+}
+
+func (p VerifyFormRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"accessToken":     p.AccessToken,
+		"moldModelName":   p.MoldModelName,
+		"index":           p.Index,
+		"slotName":        p.SlotName,
+		"propertyIdRegex": p.PropertyIdRegex,
+		"countType":       p.CountType,
+		"verifyType":      p.VerifyType,
+		"count":           p.Count,
+	}
+}
+
+func (p VerifyFormRequest) Pointer() *VerifyFormRequest {
+	return &p
+}
+
+type VerifyFormByUserIdRequest struct {
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	MoldModelName      *string `json:"moldModelName"`
+	Index              *int32  `json:"index"`
+	SlotName           *string `json:"slotName"`
+	PropertyIdRegex    *string `json:"propertyIdRegex"`
+	CountType          *string `json:"countType"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int32  `json:"count"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *VerifyFormByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyFormByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyFormByUserIdRequest{}
+	} else {
+		*p = VerifyFormByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["index"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Index)
+		}
+		if v, ok := d["slotName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SlotName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SlotName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SlotName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SlotName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SlotName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SlotName)
+				}
+			}
+		}
+		if v, ok := d["propertyIdRegex"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyIdRegex = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyIdRegex = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyIdRegex = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyIdRegex = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyIdRegex = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyIdRegex)
+				}
+			}
+		}
+		if v, ok := d["countType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CountType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CountType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CountType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CountType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CountType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CountType)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyFormByUserIdRequestFromJson(data string) (VerifyFormByUserIdRequest, error) {
+	req := VerifyFormByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyFormByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyFormByUserIdRequestFromDict(data map[string]interface{}) VerifyFormByUserIdRequest {
+	return VerifyFormByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		SlotName: func() *string {
+			v, ok := data["slotName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["slotName"])
+		}(),
+		PropertyIdRegex: func() *string {
+			v, ok := data["propertyIdRegex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyIdRegex"])
+		}(),
+		CountType: func() *string {
+			v, ok := data["countType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["countType"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyFormByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"index":           p.Index,
+		"slotName":        p.SlotName,
+		"propertyIdRegex": p.PropertyIdRegex,
+		"countType":       p.CountType,
+		"verifyType":      p.VerifyType,
+		"count":           p.Count,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyFormByUserIdRequest) Pointer() *VerifyFormByUserIdRequest {
+	return &p
+}
+
+type VerifyFormByStampTaskRequest struct {
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+	DryRun       *bool   `json:"dryRun"`
+}
+
+func (p *VerifyFormByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyFormByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyFormByStampTaskRequest{}
+	} else {
+		*p = VerifyFormByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyFormByStampTaskRequestFromJson(data string) (VerifyFormByStampTaskRequest, error) {
+	req := VerifyFormByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyFormByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyFormByStampTaskRequestFromDict(data map[string]interface{}) VerifyFormByStampTaskRequest {
+	return VerifyFormByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyFormByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyFormByStampTaskRequest) Pointer() *VerifyFormByStampTaskRequest {
+	return &p
+}
+
 type DescribePropertyFormsRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`

@@ -6740,6 +6740,351 @@ func (p Gs2FormationRestClient) SetFormByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyFormAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyFormAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyFormAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyFormResult
+	if asyncResult.Err != nil {
+		callback <- VerifyFormAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyFormAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyFormAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) VerifyFormAsync(
+	request *VerifyFormRequest,
+	callback chan<- VerifyFormAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/mold/{moldModelName}/form/{index}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.SlotName != nil && *request.SlotName != "" {
+		bodies["slotName"] = *request.SlotName
+	}
+	if request.PropertyIdRegex != nil && *request.PropertyIdRegex != "" {
+		bodies["propertyIdRegex"] = *request.PropertyIdRegex
+	}
+	if request.CountType != nil && *request.CountType != "" {
+		bodies["countType"] = *request.CountType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyFormAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) VerifyForm(
+	request *VerifyFormRequest,
+) (*VerifyFormResult, error) {
+	callback := make(chan VerifyFormAsyncResult, 1)
+	go p.VerifyFormAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyFormByUserIdAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyFormByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyFormByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyFormByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyFormByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyFormByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyFormByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) VerifyFormByUserIdAsync(
+	request *VerifyFormByUserIdRequest,
+	callback chan<- VerifyFormByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/mold/{moldModelName}/form/{index}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldModelName}", "null")
+	}
+	if request.Index != nil {
+		path = strings.ReplaceAll(path, "{index}", core.ToString(*request.Index))
+	} else {
+		path = strings.ReplaceAll(path, "{index}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.SlotName != nil && *request.SlotName != "" {
+		bodies["slotName"] = *request.SlotName
+	}
+	if request.PropertyIdRegex != nil && *request.PropertyIdRegex != "" {
+		bodies["propertyIdRegex"] = *request.PropertyIdRegex
+	}
+	if request.CountType != nil && *request.CountType != "" {
+		bodies["countType"] = *request.CountType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyFormByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) VerifyFormByUserId(
+	request *VerifyFormByUserIdRequest,
+) (*VerifyFormByUserIdResult, error) {
+	callback := make(chan VerifyFormByUserIdAsyncResult, 1)
+	go p.VerifyFormByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyFormByStampTaskAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyFormByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyFormByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyFormByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyFormByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyFormByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyFormByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) VerifyFormByStampTaskAsync(
+	request *VerifyFormByStampTaskRequest,
+	callback chan<- VerifyFormByStampTaskAsyncResult,
+) {
+	path := "/stamp/form/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go verifyFormByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation", EndpointHost).AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) VerifyFormByStampTask(
+	request *VerifyFormByStampTaskRequest,
+) (*VerifyFormByStampTaskResult, error) {
+	callback := make(chan VerifyFormByStampTaskAsyncResult, 1)
+	go p.VerifyFormByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describePropertyFormsAsyncHandler(
 	client Gs2FormationRestClient,
 	job *core.NetworkJob,

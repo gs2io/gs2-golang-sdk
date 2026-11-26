@@ -4465,6 +4465,141 @@ func (p SetFormByStampSheetResult) Pointer() *SetFormByStampSheetResult {
 	return &p
 }
 
+type VerifyFormResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFormAsyncResult struct {
+	result *VerifyFormResult
+	err    error
+}
+
+func NewVerifyFormResultFromJson(data string) VerifyFormResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFormResultFromDict(dict)
+}
+
+func NewVerifyFormResultFromDict(data map[string]interface{}) VerifyFormResult {
+	return VerifyFormResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFormResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFormResult) Pointer() *VerifyFormResult {
+	return &p
+}
+
+type VerifyFormByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFormByUserIdAsyncResult struct {
+	result *VerifyFormByUserIdResult
+	err    error
+}
+
+func NewVerifyFormByUserIdResultFromJson(data string) VerifyFormByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFormByUserIdResultFromDict(dict)
+}
+
+func NewVerifyFormByUserIdResultFromDict(data map[string]interface{}) VerifyFormByUserIdResult {
+	return VerifyFormByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFormByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFormByUserIdResult) Pointer() *VerifyFormByUserIdResult {
+	return &p
+}
+
+type VerifyFormByStampTaskResult struct {
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
+}
+
+type VerifyFormByStampTaskAsyncResult struct {
+	result *VerifyFormByStampTaskResult
+	err    error
+}
+
+func NewVerifyFormByStampTaskResultFromJson(data string) VerifyFormByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyFormByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyFormByStampTaskResultFromDict(data map[string]interface{}) VerifyFormByStampTaskResult {
+	return VerifyFormByStampTaskResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
+}
+
+func (p VerifyFormByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyFormByStampTaskResult) Pointer() *VerifyFormByStampTaskResult {
+	return &p
+}
+
 type DescribePropertyFormsResult struct {
 	Items         []PropertyForm       `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
