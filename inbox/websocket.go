@@ -3956,6 +3956,13 @@ func (p Gs2InboxWebSocketClient) CreateGlobalMessageMasterAsync(
 	if request.MessageReceptionPeriodEventId != nil && *request.MessageReceptionPeriodEventId != "" {
 		bodies["messageReceptionPeriodEventId"] = *request.MessageReceptionPeriodEventId
 	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4156,6 +4163,13 @@ func (p Gs2InboxWebSocketClient) UpdateGlobalMessageMasterAsync(
 	}
 	if request.MessageReceptionPeriodEventId != nil && *request.MessageReceptionPeriodEventId != "" {
 		bodies["messageReceptionPeriodEventId"] = *request.MessageReceptionPeriodEventId
+	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

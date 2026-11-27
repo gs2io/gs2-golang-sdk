@@ -5840,9 +5840,10 @@ type CreateGlobalMessageMasterRequest struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	// Deprecated: should not be used
-	ExpiresAt                     *int64  `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
-	DryRun                        *bool   `json:"dryRun"`
+	ExpiresAt                     *int64         `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string        `json:"messageReceptionPeriodEventId"`
+	VerifyActions                 []VerifyAction `json:"verifyActions"`
+	DryRun                        *bool          `json:"dryRun"`
 }
 
 func (p *CreateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5968,6 +5969,9 @@ func (p *CreateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 	}
 	return nil
 }
@@ -6031,6 +6035,12 @@ func NewCreateGlobalMessageMasterRequestFromDict(data map[string]interface{}) Cr
 			}
 			return core.CastString(data["messageReceptionPeriodEventId"])
 		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
 	}
 }
 
@@ -6050,6 +6060,9 @@ func (p CreateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		}(),
 		"expiresAt":                     p.ExpiresAt,
 		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
+		),
 	}
 }
 
@@ -6183,9 +6196,10 @@ type UpdateGlobalMessageMasterRequest struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	// Deprecated: should not be used
-	ExpiresAt                     *int64  `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
-	DryRun                        *bool   `json:"dryRun"`
+	ExpiresAt                     *int64         `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string        `json:"messageReceptionPeriodEventId"`
+	VerifyActions                 []VerifyAction `json:"verifyActions"`
+	DryRun                        *bool          `json:"dryRun"`
 }
 
 func (p *UpdateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
@@ -6311,6 +6325,9 @@ func (p *UpdateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 	}
 	return nil
 }
@@ -6374,6 +6391,12 @@ func NewUpdateGlobalMessageMasterRequestFromDict(data map[string]interface{}) Up
 			}
 			return core.CastString(data["messageReceptionPeriodEventId"])
 		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
 	}
 }
 
@@ -6393,6 +6416,9 @@ func (p UpdateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		}(),
 		"expiresAt":                     p.ExpiresAt,
 		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
+		),
 	}
 }
 

@@ -876,10 +876,11 @@ type GlobalMessageMaster struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	// Deprecated: should not be used
-	ExpiresAt                     *int64  `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
-	CreatedAt                     *int64  `json:"createdAt"`
-	Revision                      *int64  `json:"revision"`
+	ExpiresAt                     *int64         `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string        `json:"messageReceptionPeriodEventId"`
+	VerifyActions                 []VerifyAction `json:"verifyActions"`
+	CreatedAt                     *int64         `json:"createdAt"`
+	Revision                      *int64         `json:"revision"`
 }
 
 func (p *GlobalMessageMaster) UnmarshalJSON(data []byte) error {
@@ -1005,6 +1006,9 @@ func (p *GlobalMessageMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -1071,6 +1075,12 @@ func NewGlobalMessageMasterFromDict(data map[string]interface{}) GlobalMessageMa
 			}
 			return core.CastString(data["messageReceptionPeriodEventId"])
 		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -1118,6 +1128,11 @@ func (p GlobalMessageMaster) ToDict() map[string]interface{} {
 	if p.MessageReceptionPeriodEventId != nil {
 		m["messageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
 	}
+	if p.VerifyActions != nil {
+		m["verifyActions"] = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
+	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
 	}
@@ -1154,8 +1169,9 @@ type GlobalMessage struct {
 	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
 	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
 	// Deprecated: should not be used
-	ExpiresAt                     *int64  `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
+	ExpiresAt                     *int64         `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string        `json:"messageReceptionPeriodEventId"`
+	VerifyActions                 []VerifyAction `json:"verifyActions"`
 }
 
 func (p *GlobalMessage) UnmarshalJSON(data []byte) error {
@@ -1281,6 +1297,9 @@ func (p *GlobalMessage) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 	}
 	return nil
 }
@@ -1341,6 +1360,12 @@ func NewGlobalMessageFromDict(data map[string]interface{}) GlobalMessage {
 			}
 			return core.CastString(data["messageReceptionPeriodEventId"])
 		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
 	}
 }
 
@@ -1373,6 +1398,11 @@ func (p GlobalMessage) ToDict() map[string]interface{} {
 	}
 	if p.MessageReceptionPeriodEventId != nil {
 		m["messageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
+	}
+	if p.VerifyActions != nil {
+		m["verifyActions"] = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
 	}
 	return m
 }
@@ -1844,6 +1874,139 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Action != nil {
+		m["action"] = p.Action
+	}
+	if p.Request != nil {
+		m["request"] = p.Request
+	}
+	return m
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
